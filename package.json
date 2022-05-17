@@ -1,0 +1,33 @@
+{
+  "name": "young",
+  "version": "0.0.0",
+  "description": "my personal npm packages",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/BluesYoung-web/young.git"
+  },
+  "keywords": [
+    "npm",
+    "node",
+    "cli"
+  ],
+  "author": "BluesYoung-web",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BluesYoung-web/young/issues"
+  },
+  "homepage": "https://github.com/BluesYoung-web/young#readme",
+  "devDependencies": {
+    "@types/node": "16",
+    "bumpp": "^7.1.1",
+    "happy-dom": "^3.2.2",
+    "tsup": "^5.12.8",
+    "typescript": "^4.6.4",
+    "vite": "^2.9.9",
+    "vitest": "^0.12.6"
+  }
+}

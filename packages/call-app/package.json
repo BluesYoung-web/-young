@@ -1,0 +1,40 @@
+{
+  "name": "@young/call-app",
+  "version": "0.0.0",
+  "description": "try call app",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "browser": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
+  "jsdelivr": "dist/index.umd.js",
+  "scripts": {
+    "test": "vitest",
+    "build": "vite build && tsup",
+    "release": "bumpp --commit --tag --push && pnpm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/BluesYoung-web/young.git"
+  },
+  "keywords": [
+    "call-app",
+    "scheme"
+  ],
+  "author": "BluesYoung-web",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BluesYoung-web/young/issues"
+  },
+  "homepage": "https://github.com/BluesYoung-web/young#readme",
+  "dependencies": {
+    "@young/share-dom": "workspace:^0.0.0"
+  }
+}
