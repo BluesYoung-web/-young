@@ -22,28 +22,28 @@ importers:
 
   packages/call-app:
     specifiers:
-      '@young/share-dom': workspace:^0.0.0
+      '@bluesyoung/share-dom': workspace:^0.0.0
     dependencies:
-      '@young/share-dom': link:../share-dom
+      '@bluesyoung/share-dom': link:../share-dom
 
   playground:
     specifiers:
-      '@young/call-app': workspace:^0.0.0
-      '@young/casdoor-auth': workspace:^0.0.0
+      '@bluesyoung/call-app': workspace:^0.0.0
+      '@bluesyoung/casdoor-auth': workspace:^0.0.0
     dependencies:
-      '@young/call-app': link:../packages/call-app
-      '@young/casdoor-auth': link:../packages/casdoor-auth
+      '@bluesyoung/call-app': link:../packages/call-app
+      '@bluesyoung/casdoor-auth': link:../packages/casdoor-auth
 
   playground/call-app-demo:
     specifiers:
+      '@bluesyoung/call-app': workspace:^0.0.0
       '@vitejs/plugin-vue': ^2.3.3
-      '@young/call-app': workspace:^0.0.0
       typescript: ^4.5.4
       vite: ^2.9.9
       vue: ^3.2.25
       vue-tsc: ^0.34.7
     dependencies:
-      '@young/call-app': link:../../packages/call-app
+      '@bluesyoung/call-app': link:../../packages/call-app
       vue: 3.2.33
     devDependencies:
       '@vitejs/plugin-vue': 2.3.3_vite@2.9.9+vue@3.2.33

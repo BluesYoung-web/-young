@@ -4,7 +4,7 @@
  * @LastEditTime: 2022-05-17 11:57:24
  * @Description: 
  */
-import { copy, detector } from '@young/share-dom';
+import { copy, detector } from '@bluesyoung/share-dom';
 import type { Options, Config } from './types';
 
 const isIos = detector.os.name === 'ios';

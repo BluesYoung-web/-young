@@ -1,5 +1,5 @@
 {
-  "name": "@young/call-app",
+  "name": "@bluesyoung/call-app",
   "version": "0.0.0",
   "description": "try call app",
   "main": "dist/index.cjs.js",
@@ -18,7 +18,7 @@
   "scripts": {
     "test": "vitest",
     "build": "vite build && tsup",
-    "release": "bumpp --commit --tag --push && pnpm publish"
+    "release": "bumpp --commit --tag --push && pnpm publish --access public"
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,6 @@
   },
   "homepage": "https://github.com/BluesYoung-web/young#readme",
   "dependencies": {
-    "@young/share-dom": "workspace:^0.0.0"
+    "@bluesyoung/share-dom": "workspace:^0.0.0"
   }
 }

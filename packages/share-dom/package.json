@@ -1,5 +1,5 @@
 {
-  "name": "@young/share-dom",
+  "name": "@bluesyoung/share-dom",
   "version": "0.0.0",
   "description": "DOM 相关操作的共享工具库",
   "main": "dist/index.cjs.js",
@@ -18,7 +18,7 @@
   "scripts": {
     "test": "vitest",
     "build": "vite build && tsup",
-    "release": "bumpp --commit --tag --push && pnpm publish"
+    "release": "bumpp --commit --tag --push && pnpm publish --access public"
   },
   "repository": {
     "type": "git",

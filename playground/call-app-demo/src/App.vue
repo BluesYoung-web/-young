@@ -5,7 +5,7 @@
  * @Description: 
 -->
 <script setup lang="ts">
-import YoungCallApp from '@young/call-app';
+import YoungCallApp from '@bluesyoung/call-app';
 const callApp = new YoungCallApp({
   android_shceme: 'com.test.app',
   ios_shceme: 'com.test-apple.app',
