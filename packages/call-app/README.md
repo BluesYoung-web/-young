@@ -86,9 +86,9 @@ const openHandler = () => callApp.call()
 
 ```html
 <!-- 国内推荐使用 jsdelivr -->
-<script src="//cdn.jsdelivr.net/npm/@bluesyoung/call-app/dist/index.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/@bluesyoung/call-app"></script>
 <!-- or -->
-<script src="//unpkg/@bluesyoung/call-app/dist/index.umd.js"></script>
+<script src="//unpkg.com/@bluesyoung/call-app"></script>
 
 <script>
 const callApp = new window.YoungCallApp(config, options);
