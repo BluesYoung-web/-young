@@ -22,7 +22,7 @@ __export(src_exports, {
   default: () => src_default
 });
 module.exports = __toCommonJS(src_exports);
-var import_share_dom = require("@young/share-dom");
+var import_share_dom = require("@bluesyoung/share-dom");
 var isIos = import_share_dom.detector.os.name === "ios";
 var inWeixin = import_share_dom.detector.browser.name === "micromessenger";
 var defaultOptions = {

@@ -22,7 +22,7 @@ importers:
 
   packages/call-app:
     specifiers:
-      '@bluesyoung/share-dom': workspace:^0.0.1
+      '@bluesyoung/share-dom': workspace:^0.0.2
     dependencies:
       '@bluesyoung/share-dom': link:../share-dom
 
