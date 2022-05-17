@@ -4,7 +4,7 @@
 
 ## 使用
 
-[vue demo](./playground/src/App.vue)
+[vue demo](../../playground/call-app-demo/src/App.vue)
 
 ### 使用包管理器
 
