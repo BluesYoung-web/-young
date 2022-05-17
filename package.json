@@ -1,11 +1,10 @@
 {
-  "name": "young",
+  "name": "bluesyoung",
   "version": "0.0.1",
   "description": "my personal npm packages",
   "main": "index.js",
   "scripts": {
-    "test": "vitest",
-    "release": "bumpp package.json packages/*/package.json --commit --tag"
+    "test": "vitest"
   },
   "repository": {
     "type": "git",

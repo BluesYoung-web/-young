@@ -18,7 +18,8 @@
   "scripts": {
     "test": "vitest",
     "build": "vite build && tsup",
-    "release": "bumpp --commit --tag --push && pnpm publish --access public"
+    "release": "pnpm build && bumpp --commit",
+    "push": "pnpm publish --access public"
   },
   "repository": {
     "type": "git",
