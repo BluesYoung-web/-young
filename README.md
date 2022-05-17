@@ -7,3 +7,7 @@
 ## @bluesyoung/call-app
 
 [浏览器唤端](./packages/call-app/README.md)
+
+## @bluesyoung/casdoor-auth
+
+[基于 Casdoor 官方 SDK 二次封装的 SDK](./packages/casdoor-auth/README.md)
