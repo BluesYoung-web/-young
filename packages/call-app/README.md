@@ -11,18 +11,18 @@
 ```bash
 # 选择一个你喜欢的包管理器
 # NPM
-$ npm install young-call-app --save
+$ npm install @young/call-app --save
 
 # Yarn
-$ yarn add young-call-app
+$ yarn add @young/call-app
 
 # pnpm
-$ pnpm add young-call-app
+$ pnpm add @young/call-app
 ```
 
 ```html
 <script setup lang="ts">
-import YoungCallApp from 'young-call-app';
+import YoungCallApp from '@young/call-app';
 /**
  * 极简形态
  */
@@ -86,9 +86,9 @@ const openHandler = () => callApp.call()
 
 ```html
 <!-- 国内推荐使用 jsdelivr -->
-<script src="//cdn.jsdelivr.net/npm/young-call-app"></script>
+<script src="//cdn.jsdelivr.net/npm/@young/call-app"></script>
 <!-- or -->
-<script src="//unpkg/young-call-app"></script>
+<script src="//unpkg/@young/call-app"></script>
 
 <script>
 const callApp = new window.YoungCallApp(config, options);
