@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 10:42:47
- * @LastEditTime: 2022-05-23 14:53:00
+ * @LastEditTime: 2022-05-23 15:40:40
  * @Description: 
  */
 import { createItem, getPosition } from './core';
@@ -16,9 +16,13 @@ type CurrStep = {
 
 export class YoungBeginnerGuid extends HTMLElement {
   public root: ShadowRoot;
+  public zIndex = '3000';
   public snap: {
     el: Selector;
-    style: string;
+    style: {
+      border: string;
+      zIndex: string;
+    };
   };
   constructor(public handler: YoungBeginnerGuidController) {
     super();
@@ -82,14 +86,20 @@ export class YoungBeginnerGuid extends HTMLElement {
     const el = document.querySelector(item.step.el) as HTMLElement;
     this.snap = {
       el: item.step.el,
-      style: el.style.border
+      style: {
+        border: el.style.border,
+        zIndex: el.style.zIndex
+      }
     };
-
+    el.style.zIndex = `${+this.zIndex + 2}`;
     el.style.border = '2px solid red';
   }
   restoreSnap() {
     const el = document.querySelector(this.snap?.el) as HTMLElement;
-    el && (el.style.border = this.snap.style);
+    if (el) {
+      el.style.border = this.snap.style.border;
+      el.style.zIndex = this.snap.style.zIndex;
+    }
   }
 
   render(item: CurrStep) {

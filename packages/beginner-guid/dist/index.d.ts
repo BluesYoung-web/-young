@@ -25,9 +25,13 @@ declare type CurrStep = {
 declare class YoungBeginnerGuid extends HTMLElement {
     handler: YoungBeginnerGuidController;
     root: ShadowRoot;
+    zIndex: string;
     snap: {
         el: Selector;
-        style: string;
+        style: {
+            border: string;
+            zIndex: string;
+        };
     };
     constructor(handler: YoungBeginnerGuidController);
     changeVisiable(item: CurrStep): void;

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 16:33:38
- * @LastEditTime: 2022-05-23 11:09:00
+ * @LastEditTime: 2022-05-23 15:39:26
  * @Description: 
  */
 /// <reference types="vite/client" />
@@ -16,7 +16,7 @@ export const createEL = (attrs: Record<string, string> = {}, tag: keyof HTMLElem
   return el;
 };
 
-export const createItem = (handler: YoungBeginnerGuidController, zIndex: number = 3000) => {
+export const createItem = (handler: YoungBeginnerGuidController, zIndex: string = '3000') => {
   const mask = createEL({ id: 'mask' });
   const dialog = document.createElement('div');
   dialog.setAttribute('id', 'dialog');

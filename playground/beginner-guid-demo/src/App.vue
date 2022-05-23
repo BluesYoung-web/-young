@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-05-17 12:19:18
- * @LastEditTime: 2022-05-23 15:11:36
+ * @LastEditTime: 2022-05-23 15:36:29
  * @Description: 
 -->
 <script setup lang="ts">
@@ -73,8 +73,6 @@ const guid = new YoungBeginnerGuidController([
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: antiquewhite;
-  
 }
 .items {
   width: 100vw;

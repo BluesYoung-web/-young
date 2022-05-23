@@ -7,7 +7,7 @@ const createEL = (attrs = {}, tag = "div") => {
   });
   return el;
 };
-const createItem = (handler, zIndex = 3e3) => {
+const createItem = (handler, zIndex = "3000") => {
   const mask = createEL({ id: "mask" });
   const dialog = document.createElement("div");
   dialog.setAttribute("id", "dialog");
@@ -79,6 +79,7 @@ class YoungBeginnerGuid extends HTMLElement {
   constructor(handler) {
     super();
     this.handler = handler;
+    this.zIndex = "3000";
     const mask = createItem(handler);
     const shadowRoot = this.attachShadow({ mode: "closed" });
     shadowRoot.appendChild(mask);
@@ -129,14 +130,21 @@ class YoungBeginnerGuid extends HTMLElement {
     const el = document.querySelector(item.step.el);
     this.snap = {
       el: item.step.el,
-      style: el.style.border
+      style: {
+        border: el.style.border,
+        zIndex: el.style.zIndex
+      }
     };
+    el.style.zIndex = `${+this.zIndex + 2}`;
     el.style.border = "2px solid red";
   }
   restoreSnap() {
     var _a;
     const el = document.querySelector((_a = this.snap) == null ? void 0 : _a.el);
-    el && (el.style.border = this.snap.style);
+    if (el) {
+      el.style.border = this.snap.style.border;
+      el.style.zIndex = this.snap.style.zIndex;
+    }
   }
   render(item) {
     var _a, _b;
