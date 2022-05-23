@@ -1,6 +1,6 @@
 # 新手引导组件
 
-基于 Web Components 实现
+基于 Web Components 实现([更加复杂的操作可以使用 shepherd](https://github.com/shipshapecode/shepherd))
 ## 使用
 
 [vue demo](../../playground/beginner-guid-demo/src/App.vue)

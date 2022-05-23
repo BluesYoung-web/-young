@@ -25,11 +25,17 @@ declare type CurrStep = {
 declare class YoungBeginnerGuid extends HTMLElement {
     handler: YoungBeginnerGuidController;
     root: ShadowRoot;
+    snap: {
+        el: Selector;
+        style: string;
+    };
     constructor(handler: YoungBeginnerGuidController);
     changeVisiable(item: CurrStep): void;
     changeDialog(item: CurrStep, dialog: HTMLElement): void;
     changeContent(item: CurrStep, dialog: HTMLElement): void;
     changeButton(item: CurrStep, dialog: HTMLElement): void;
+    saveSnapAndChange(item: CurrStep): void;
+    restoreSnap(): void;
     render(item: CurrStep): void;
 }
 declare class YoungBeginnerGuidController {

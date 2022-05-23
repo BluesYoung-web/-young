@@ -159,11 +159,25 @@ var YoungBeginnerGuid = class extends HTMLElement {
       next.innerHTML = "\u4E0B\u4E00\u6B65";
     }
   }
+  saveSnapAndChange(item) {
+    const el = document.querySelector(item.step.el);
+    this.snap = {
+      el: item.step.el,
+      style: el.style.border
+    };
+    el.style.border = "2px solid red";
+  }
+  restoreSnap() {
+    var _a;
+    const el = document.querySelector((_a = this.snap) == null ? void 0 : _a.el);
+    el && (el.style.border = this.snap.style);
+  }
   render(item) {
     var _a, _b;
     if ((_b = (_a = globalThis == null ? void 0 : globalThis.process) == null ? void 0 : _a.env) == null ? void 0 : _b.TEST) {
       return;
     }
+    this.saveSnapAndChange(item);
     this.changeVisiable(item);
     const dialog = this.root.querySelector("#dialog");
     this.changeDialog(item, dialog);
@@ -191,6 +205,7 @@ var YoungBeginnerGuidController = class {
       document.body.appendChild(this.el);
     }
     this.index = index;
+    this.el.restoreSnap();
     this.el.render({
       visible,
       index,
@@ -211,10 +226,12 @@ var YoungBeginnerGuidController = class {
   }
   hide() {
     this.show(this.index, false);
+    this.el.restoreSnap();
   }
   destory() {
     this.index = 0;
     document.body.removeChild(this.el);
+    this.el.restoreSnap();
   }
 };
 // Annotate the CommonJS export names for ESM import in node:

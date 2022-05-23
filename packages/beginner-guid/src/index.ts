@@ -1,11 +1,11 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 10:42:47
- * @LastEditTime: 2022-05-23 11:13:30
+ * @LastEditTime: 2022-05-23 14:19:12
  * @Description: 
  */
 import { createItem, getPosition } from './core';
-import type { GuidItem, GuidOptions } from './type';
+import type { GuidItem, GuidOptions, Selector } from './type';
 import { defautOptions } from './type';
 
 type CurrStep = {
@@ -16,6 +16,10 @@ type CurrStep = {
 
 export class YoungBeginnerGuid extends HTMLElement {
   public root: ShadowRoot;
+  public snap: {
+    el: Selector;
+    style: string;
+  };
   constructor(public handler: YoungBeginnerGuidController) {
     super();
     const mask = createItem(handler);
@@ -68,11 +72,29 @@ export class YoungBeginnerGuid extends HTMLElement {
     }
   }
 
+  saveSnapAndChange(item: CurrStep) {
+    const el = document.querySelector(item.step.el) as HTMLElement;
+    this.snap = {
+      el: item.step.el,
+      style: el.style.border
+    };
+
+    el.style.border = '2px solid red';
+  }
+  restoreSnap() {
+    const el = document.querySelector(this.snap?.el) as HTMLElement;
+    el && (el.style.border = this.snap.style);
+  }
+
   render(item: CurrStep) {
     // hack vitest
     if (globalThis?.process?.env?.TEST) {
       return;
     }
+    // 对 mask 使用 clip-path: polygon 效果更好，但是需要进行复杂的计算
+    // 修改样式并保存现场，此处简化为给目标元素加边框
+    this.saveSnapAndChange(item);
+
     this.changeVisiable(item);
 
     const dialog = this.root.querySelector('#dialog') as HTMLElement;
@@ -111,6 +133,9 @@ export class YoungBeginnerGuidController {
     }
 
     this.index = index;
+    // 恢复现场
+    this.el.restoreSnap();
+    // 开始渲染
     this.el.render({
       visible,
       index,
@@ -134,10 +159,14 @@ export class YoungBeginnerGuidController {
 
   hide() {
     this.show(this.index, false);
+    // 恢复现场
+    this.el.restoreSnap();
   }
 
   destory() {
     this.index = 0;
     document.body.removeChild(this.el);
+    // 恢复现场
+    this.el.restoreSnap();
   }
 }
