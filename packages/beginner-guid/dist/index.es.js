@@ -1,34 +1,52 @@
-const createMask = (zIndex) => {
-  const mask = document.createElement("div");
-  mask.setAttribute("id", "mask");
-  mask.setAttribute("style", `
-    width: 100vw;
-    height: 100vh;
-    background-color: gray;
-    opacity: 0.6;
-    position: fixed;
-    top: 0;
-    z-index: ${zIndex};
-  `);
-  return mask;
+var cssContent = "#mask {\n  width: 100vw;\n  height: 100vh;\n  background-color: gray;\n  opacity: 0.6;\n  position: fixed;\n  top: 0;\n}\n#dialog {\n  width: 400px;\n  height: 300px;\n  background-color: #fff;\n  position: fixed;\n  top: 0;\n}\n#dialog .title {\n  text-align: center;\n}\n\n#dialog .content {\n  text-align: center;\n}\n\n#dialog .btns {\n  position: absolute;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  bottom: 0;\n  width: 100%;\n  padding: 10%;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n#dialog .btns button {\n  cursor: pointer;\n}\n\n#dialog-close {\n  position: absolute;\n  right: 0;\n  top: 0;\n  padding: 0.6rem;\n  cursor: pointer;\n}";
+var closeIcon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ion" width="24" height="24" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M331.3 308.7L278.6 256l52.7-52.7c6.2-6.2 6.2-16.4 0-22.6-6.2-6.2-16.4-6.2-22.6 0L256 233.4l-52.7-52.7c-6.2-6.2-15.6-7.1-22.6 0-7.1 7.1-6 16.6 0 22.6l52.7 52.7-52.7 52.7c-6.7 6.7-6.4 16.3 0 22.6 6.4 6.4 16.4 6.2 22.6 0l52.7-52.7 52.7 52.7c6.2 6.2 16.4 6.2 22.6 0 6.3-6.2 6.3-16.4 0-22.6z" fill="#434343"></path><path d="M256 76c48.1 0 93.3 18.7 127.3 52.7S436 207.9 436 256s-18.7 93.3-52.7 127.3S304.1 436 256 436c-48.1 0-93.3-18.7-127.3-52.7S76 304.1 76 256s18.7-93.3 52.7-127.3S207.9 76 256 76m0-28C141.1 48 48 141.1 48 256s93.1 208 208 208 208-93.1 208-208S370.9 48 256 48z" fill="currentColor"></path></svg>';
+const createEL = (attrs = {}, tag = "div") => {
+  const el = document.createElement(tag);
+  Object.entries(attrs).forEach(([key, value]) => {
+    el.setAttribute(key, value);
+  });
+  return el;
 };
-const createDialog = (zIndex) => {
+const createItem = (handler, zIndex = 3e3) => {
+  const mask = createEL({ id: "mask" });
   const dialog = document.createElement("div");
   dialog.setAttribute("id", "dialog");
-  dialog.setAttribute("style", `
-    width: 400px;
-    height: 300px;
-    background-color: #fff;
-    position: fixed;
-    top: 0;
+  dialog.innerHTML = `
+  ${!handler.force ? `<div id="dialog-close" title="\u5173\u95ED\u65B0\u624B\u5F15\u5BFC">${closeIcon}</div>` : ""}
+  <div class="btns">
+    <button id="prev" type="button">\u4E0A\u4E00\u6B65</button>
+    <button id="next" type="button">\u4E0B\u4E00\u6B65</button>
+  </div>
+  `;
+  dialog.querySelector("#prev").addEventListener("click", () => handler.prev());
+  dialog.querySelector("#next").addEventListener("click", () => {
+    if (handler.index === handler.guids.length - 1) {
+      handler.hide();
+    } else {
+      handler.next();
+    }
+  });
+  !handler.force && dialog.querySelector("#dialog-close").addEventListener("click", () => handler.hide());
+  const title = createEL({ class: "title" }, "h3");
+  title.setAttribute("slot", "title");
+  title.innerText = `lallallalallalla`;
+  const content = createEL({ class: "content" });
+  content.setAttribute("slot", "content");
+  content.innerText = `hhhhhhhhhhhhhhhhhhhhh`;
+  dialog.prepend(content);
+  dialog.prepend(title);
+  const container = createEL();
+  const styles = createEL({}, "style");
+  styles.innerHTML = `
+  #mask {
     z-index: ${zIndex};
-  `);
-  return dialog;
-};
-const createItem = (zIndex = 3e3) => {
-  const mask = createMask(zIndex);
-  const dialog = createDialog(zIndex + 1);
-  const container = document.createElement("div");
+  }
+  #dialog {
+    z-index: ${zIndex + 1};
+  }
+  ${cssContent}
+  `;
+  container.prepend(styles);
   container.appendChild(mask);
   container.appendChild(dialog);
   return container;
@@ -60,30 +78,54 @@ const defautOptions = {
   force: false
 };
 class YoungBeginnerGuid extends HTMLElement {
-  constructor(nums, force) {
+  constructor(handler) {
     super();
-    this.nums = nums;
-    this.force = force;
-    const mask = createItem();
+    this.handler = handler;
+    const mask = createItem(handler);
     const shadowRoot = this.attachShadow({ mode: "closed" });
     shadowRoot.appendChild(mask);
     this.root = shadowRoot;
   }
-  render(item) {
+  changeVisiable(item) {
     if (item.visible) {
       this.style.display = "block";
     } else {
       this.style.display = "none";
     }
+  }
+  changeDialog(item, dialog) {
     const {
       x,
       y,
       positionX,
       positionY
     } = getPosition(item.step.el);
-    const dialog = this.root.querySelector("#dialog");
     dialog.style[positionX] = x + "px";
     dialog.style[positionY] = y + "px";
+  }
+  changeButton(item, dialog) {
+    const prev = dialog.querySelector("#prev");
+    const next = dialog.querySelector("#next");
+    if (item.index === 0) {
+      prev.setAttribute("disabled", "disabled");
+    } else {
+      prev.removeAttribute("disabled");
+    }
+    if (item.index === this.handler.guids.length - 1) {
+      next.innerHTML = "\u5173\u95ED";
+    } else {
+      next.innerHTML = "\u4E0B\u4E00\u6B65";
+    }
+  }
+  render(item) {
+    var _a, _b;
+    if ((_b = (_a = globalThis == null ? void 0 : globalThis.process) == null ? void 0 : _a.env) == null ? void 0 : _b.TEST) {
+      return;
+    }
+    this.changeVisiable(item);
+    const dialog = this.root.querySelector("#dialog");
+    this.changeDialog(item, dialog);
+    this.changeButton(item, dialog);
   }
 }
 window.customElements.get("young-beginner-guid") || window.customElements.define("young-beginner-guid", YoungBeginnerGuid);
@@ -96,8 +138,10 @@ class YoungBeginnerGuidController {
     options = Object.assign(defautOptions, options);
     this.immdiate = options.immdiate;
     this.force = options.force;
-    this.el = new YoungBeginnerGuid(this.guids.length, this.force);
-    this.immdiate && this.show();
+    this.el = new YoungBeginnerGuid(this);
+    window.addEventListener("load", () => {
+      this.immdiate && this.show();
+    });
   }
   show(index = 0, visible = true) {
     if (!this.el.isConnected) {

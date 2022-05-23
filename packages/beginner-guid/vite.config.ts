@@ -1,17 +1,17 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-04-28 16:27:49
- * @LastEditTime: 2022-05-20 11:00:09
+ * @LastEditTime: 2022-05-23 10:43:35
  * @Description: 
  */
 /// <reference types="vitest" />
-import path from 'path';
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
+      entry: resolve(__dirname, 'src/index.ts'),
       name: 'YoungBeginnerGuid',
       formats: ['es', 'umd', 'cjs'],
       fileName: (format) => `index.${format}.js`

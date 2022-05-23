@@ -24,10 +24,12 @@ declare type CurrStep = {
     step: GuidItem;
 };
 declare class YoungBeginnerGuid extends HTMLElement {
-    nums: number;
-    force: boolean;
+    handler: YoungBeginnerGuidController;
     root: ShadowRoot;
-    constructor(nums: number, force: boolean);
+    constructor(handler: YoungBeginnerGuidController);
+    changeVisiable(item: CurrStep): void;
+    changeDialog(item: CurrStep, dialog: HTMLElement): void;
+    changeButton(item: CurrStep, dialog: HTMLElement): void;
     render(item: CurrStep): void;
 }
 declare class YoungBeginnerGuidController {

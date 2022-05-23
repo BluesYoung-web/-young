@@ -1,43 +1,70 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 16:33:38
- * @LastEditTime: 2022-05-20 17:44:54
+ * @LastEditTime: 2022-05-23 10:49:15
  * @Description: 
  */
-export const createMask = (zIndex: number) => {
-  const mask = document.createElement('div');
-  mask.setAttribute('id', 'mask');
-  mask.setAttribute('style', `
-    width: 100vw;
-    height: 100vh;
-    background-color: gray;
-    opacity: 0.6;
-    position: fixed;
-    top: 0;
-    z-index: ${zIndex};
-  `);
-  return mask;
+/// <reference types="vite/client" />
+import type { YoungBeginnerGuidController } from '../index';
+import cssContent from '../styles/index.css?raw';
+import closeIcon from '../styles/close-icon.svg?raw';
+export const createEL = (attrs: Record<string, string> = {}, tag: keyof HTMLElementTagNameMap = 'div') => {
+  const el = document.createElement(tag);
+  Object.entries(attrs).forEach(([key, value]) => {
+    el.setAttribute(key, value);
+  });
+  return el;
 };
 
-export const createDialog = (zIndex: number) => {
+export const createItem = (handler: YoungBeginnerGuidController, zIndex: number = 3000) => {
+  const mask = createEL({ id: 'mask' });
   const dialog = document.createElement('div');
   dialog.setAttribute('id', 'dialog');
-  dialog.setAttribute('style', `
-    width: 400px;
-    height: 300px;
-    background-color: #fff;
-    position: fixed;
-    top: 0;
-    z-index: ${zIndex};
-  `);
-  return dialog;
-};
+  dialog.innerHTML = `
+  ${!handler.force
+    ? `<div id="dialog-close" title="关闭新手引导">${closeIcon}</div>`
+    : ''
+  }
+  <div class="btns">
+    <button id="prev" type="button">上一步</button>
+    <button id="next" type="button">下一步</button>
+  </div>
+  `;
+  dialog.querySelector('#prev').addEventListener('click', () => handler.prev());
+  dialog.querySelector('#next').addEventListener('click', () => {
+    if (handler.index === handler.guids.length - 1) {
+      handler.hide();
+    } else {
+      handler.next();
+    }
+  });
+  !handler.force && dialog.querySelector('#dialog-close').addEventListener('click', () => handler.hide());
 
-export const createItem = (zIndex: number = 3000) => {
-  const mask = createMask(zIndex);
-  const dialog = createDialog(zIndex + 1);
+  const title = createEL({ class: 'title' }, 'h3');
+  title.setAttribute('slot', 'title');
+  title.innerText = `lallallalallalla`;
   
-  const container = document.createElement('div');
+  const content = createEL({ class: 'content' });
+  content.setAttribute('slot', 'content');
+  content.innerText = `hhhhhhhhhhhhhhhhhhhhh`;
+
+  dialog.prepend(content);
+  dialog.prepend(title);
+  
+  const container = createEL();
+
+  const styles = createEL({}, 'style');
+  styles.innerHTML = `
+  #mask {
+    z-index: ${zIndex};
+  }
+  #dialog {
+    z-index: ${zIndex + 1};
+  }
+  ${cssContent}
+  `;
+
+  container.prepend(styles);
   container.appendChild(mask);
   container.appendChild(dialog);
 

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 10:42:47
- * @LastEditTime: 2022-05-20 17:43:41
+ * @LastEditTime: 2022-05-23 10:48:17
  * @Description: 
  */
 import { createItem, getPosition } from './core';
@@ -16,34 +16,60 @@ type CurrStep = {
 
 export default class YoungBeginnerGuid extends HTMLElement {
   public root: ShadowRoot;
-
-  constructor(
-    public nums: number,
-    public force: boolean
-  ) {
+  constructor(public handler: YoungBeginnerGuidController) {
     super();
-    const mask = createItem();
+    const mask = createItem(handler);
     const shadowRoot = this.attachShadow({ mode: 'closed' });
     shadowRoot.appendChild(mask);
 
     this.root = shadowRoot;
   }
 
-  render(item: CurrStep) {
+  changeVisiable(item: CurrStep) {
     if (item.visible) {
       this.style.display = 'block';
     } else {
       this.style.display = 'none';
     }
+  }
+
+  changeDialog(item: CurrStep, dialog: HTMLElement) {
     const {
       x,
       y,
       positionX,
       positionY
     } = getPosition(item.step.el);
-    const dialog = this.root.querySelector('#dialog') as HTMLElement;
     dialog.style[positionX] = x + 'px';
     dialog.style[positionY] = y + 'px';
+  }
+
+  changeButton(item: CurrStep, dialog: HTMLElement) {
+    const prev = dialog.querySelector('#prev');
+    const next = dialog.querySelector('#next');
+    if (item.index === 0) {
+      prev.setAttribute('disabled', 'disabled');
+    } else {
+      prev.removeAttribute('disabled');
+    }
+
+    if (item.index === this.handler.guids.length - 1) {
+      next.innerHTML = '关闭';
+    } else {
+      next.innerHTML = '下一步';
+    }
+  }
+
+  render(item: CurrStep) {
+    // hack vitest
+    if (globalThis?.process?.env?.TEST) {
+      return;
+    }
+    this.changeVisiable(item);
+
+    const dialog = this.root.querySelector('#dialog') as HTMLElement;
+    this.changeDialog(item, dialog);
+    this.changeButton(item, dialog);
   }
 };
 window.customElements.get('young-beginner-guid') ||
@@ -63,9 +89,11 @@ export class YoungBeginnerGuidController {
     this.immdiate = options.immdiate;
     this.force = options.force;
 
-    this.el = new YoungBeginnerGuid(this.guids.length, this.force);
+    this.el = new YoungBeginnerGuid(this);
 
-    this.immdiate && this.show();
+    window.addEventListener('load', () => {
+      this.immdiate && this.show();
+    });
   }
 
   show(index = 0, visible = true) {

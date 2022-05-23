@@ -1,0 +1,49 @@
+#mask {
+  width: 100vw;
+  height: 100vh;
+  background-color: gray;
+  opacity: 0.6;
+  position: fixed;
+  top: 0;
+}
+#dialog {
+  width: 400px;
+  height: 300px;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+}
+#dialog .title {
+  text-align: center;
+}
+
+#dialog .content {
+  text-align: center;
+}
+
+#dialog .btns {
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  bottom: 0;
+  width: 100%;
+  padding: 10%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+#dialog .btns button {
+  cursor: pointer;
+}
+
+#dialog-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0.6rem;
+  cursor: pointer;
+}

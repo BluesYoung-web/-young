@@ -1,11 +1,10 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-05-17 12:19:18
- * @LastEditTime: 2022-05-20 17:47:01
+ * @LastEditTime: 2022-05-23 11:01:55
  * @Description: 
 -->
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import { YoungBeginnerGuidController } from '@bluesyoung/beginner-guid';
 // import { YoungBeginnerGuidController } from '../../../packages/beginner-guid/src/index';
 
@@ -23,28 +22,14 @@ const guid = new YoungBeginnerGuidController([
     des: 'test3'
   }
 ]);
-onMounted(() => {
-  guid.show();
-  // guid.hide();
-  [1, 2, 3].forEach((i) => {
-    setTimeout(() => {
-      guid.next();
-    }, 1500 * i)
-  })
-  setTimeout(() => {
-    [1, 2, 3].forEach((i) => {
-      setTimeout(() => {
-        guid.prev();
-      }, 1500 * i)
-    })
-  }, 10000)
-});
+
 </script>
 
 <template>
   <div id="step1">111111</div>
   <div id="step2">222222</div>
   <div id="step3">333333</div>
+  <button type="button" class="btn" @click="guid.show()">开始引导</button>
 </template>
 
 <style>
@@ -67,5 +52,12 @@ onMounted(() => {
   justify-items: center;
   align-items: stretch;
   justify-content: start;
+}
+.btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
 }
 </style>
