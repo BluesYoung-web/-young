@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 11:50:46
- * @LastEditTime: 2022-05-23 11:14:26
+ * @LastEditTime: 2022-05-23 16:56:08
  * @Description: 
  */
 import { describe, it, expect } from 'vitest';
@@ -65,5 +65,9 @@ describe('基础逻辑', () => {
     });
     expect(g2.force).toBe(true);
     expect(g2.immdiate).toBe(true);
+  });
+
+  it('expect error', () => {
+    expect(() => new YoungBeginnerGuidController([])).toThrowErrorMatchingInlineSnapshot('"guids array can\'t be null"');
   });
 });

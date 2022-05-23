@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 10:42:47
- * @LastEditTime: 2022-05-23 15:40:40
+ * @LastEditTime: 2022-05-23 16:53:02
  * @Description: 
  */
 import { createItem, getPosition } from './core';
@@ -22,6 +22,7 @@ export class YoungBeginnerGuid extends HTMLElement {
     style: {
       border: string;
       zIndex: string;
+      position: string;
     };
   };
   constructor(public handler: YoungBeginnerGuidController) {
@@ -88,25 +89,24 @@ export class YoungBeginnerGuid extends HTMLElement {
       el: item.step.el,
       style: {
         border: el.style.border,
-        zIndex: el.style.zIndex
+        zIndex: el.style.zIndex,
+        position: el.style.position
       }
     };
     el.style.zIndex = `${+this.zIndex + 2}`;
     el.style.border = '2px solid red';
+    el.style.position = 'relative';
   }
   restoreSnap() {
     const el = document.querySelector(this.snap?.el) as HTMLElement;
     if (el) {
       el.style.border = this.snap.style.border;
       el.style.zIndex = this.snap.style.zIndex;
+      el.style.position = this.snap.style.position;
     }
   }
 
   render(item: CurrStep) {
-    // hack vitest
-    if (globalThis?.process?.env?.TEST) {
-      return;
-    }
     // 对 mask 使用 clip-path: polygon 效果更好，但是需要进行复杂的计算
     // 修改样式并保存现场，此处简化为给目标元素加边框
     this.saveSnapAndChange(item);
@@ -131,6 +131,9 @@ export class YoungBeginnerGuidController {
   public el: YoungBeginnerGuid;
 
   constructor(guids: GuidItem[], options: GuidOptions = {}) {
+    if (!guids.length) {
+      throw new Error('guids array can\'t be null');
+    }
     this.guids = guids;
     options = Object.assign(defautOptions, options);
     this.immdiate = options.immdiate;
@@ -149,6 +152,11 @@ export class YoungBeginnerGuidController {
     }
 
     this.index = index;
+
+    // hack vitest
+    if (globalThis?.process?.env?.TEST) {
+      return;
+    }
     // 恢复现场
     this.el.restoreSnap();
     // 开始渲染

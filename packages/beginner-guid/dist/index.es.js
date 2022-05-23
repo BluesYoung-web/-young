@@ -132,11 +132,13 @@ class YoungBeginnerGuid extends HTMLElement {
       el: item.step.el,
       style: {
         border: el.style.border,
-        zIndex: el.style.zIndex
+        zIndex: el.style.zIndex,
+        position: el.style.position
       }
     };
     el.style.zIndex = `${+this.zIndex + 2}`;
     el.style.border = "2px solid red";
+    el.style.position = "relative";
   }
   restoreSnap() {
     var _a;
@@ -144,13 +146,10 @@ class YoungBeginnerGuid extends HTMLElement {
     if (el) {
       el.style.border = this.snap.style.border;
       el.style.zIndex = this.snap.style.zIndex;
+      el.style.position = this.snap.style.position;
     }
   }
   render(item) {
-    var _a, _b;
-    if ((_b = (_a = globalThis == null ? void 0 : globalThis.process) == null ? void 0 : _a.env) == null ? void 0 : _b.TEST) {
-      return;
-    }
     this.saveSnapAndChange(item);
     this.changeVisiable(item);
     const dialog = this.root.querySelector("#dialog");
@@ -165,6 +164,9 @@ class YoungBeginnerGuidController {
     this.index = 0;
     this.immdiate = false;
     this.force = false;
+    if (!guids.length) {
+      throw new Error("guids array can't be null");
+    }
     this.guids = guids;
     options = Object.assign(defautOptions, options);
     this.immdiate = options.immdiate;
@@ -175,10 +177,14 @@ class YoungBeginnerGuidController {
     });
   }
   show(index = 0, visible = true) {
+    var _a, _b;
     if (!this.el.isConnected) {
       document.body.appendChild(this.el);
     }
     this.index = index;
+    if ((_b = (_a = globalThis == null ? void 0 : globalThis.process) == null ? void 0 : _a.env) == null ? void 0 : _b.TEST) {
+      return;
+    }
     this.el.restoreSnap();
     this.el.render({
       visible,

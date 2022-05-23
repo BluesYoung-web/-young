@@ -31,6 +31,7 @@ declare class YoungBeginnerGuid extends HTMLElement {
         style: {
             border: string;
             zIndex: string;
+            position: string;
         };
     };
     constructor(handler: YoungBeginnerGuidController);
