@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-05-17 12:19:18
- * @LastEditTime: 2022-05-23 14:59:34
+ * @LastEditTime: 2022-05-23 15:11:36
  * @Description: 
 -->
 <script setup lang="ts">
@@ -38,6 +38,11 @@ const guid = new YoungBeginnerGuidController([
     el: '#step6',
     content: 'test6',
     title: '<span style="color: red;">fdakjfadkjgsfd</span>'
+  },
+  {
+    el: '.btn',
+    content: 'test---button',
+    title: '<span style="color: red;">bye!</span>'
   }
 ]);
 

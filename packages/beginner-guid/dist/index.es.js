@@ -58,7 +58,7 @@ const getPosition = (selector) => {
   let y = top;
   if (window.innerWidth - right < 400) {
     positionX = "right";
-    x = left + 50;
+    x = window.innerWidth - left + 50;
   }
   if (window.innerHeight - top < 300) {
     positionY = "bottom";
