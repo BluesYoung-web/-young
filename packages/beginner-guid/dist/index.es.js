@@ -29,10 +29,8 @@ const createItem = (handler, zIndex = 3e3) => {
   !handler.force && dialog.querySelector("#dialog-close").addEventListener("click", () => handler.hide());
   const title = createEL({ class: "title" }, "h3");
   title.setAttribute("slot", "title");
-  title.innerText = `lallallalallalla`;
   const content = createEL({ class: "content" });
   content.setAttribute("slot", "content");
-  content.innerText = `hhhhhhhhhhhhhhhhhhhhh`;
   dialog.prepend(content);
   dialog.prepend(title);
   const container = createEL();
@@ -103,6 +101,12 @@ class YoungBeginnerGuid extends HTMLElement {
     dialog.style[positionX] = x + "px";
     dialog.style[positionY] = y + "px";
   }
+  changeContent(item, dialog) {
+    const title = dialog.querySelector(".title");
+    const content = dialog.querySelector(".content");
+    title.innerHTML = item.step.title;
+    content.innerHTML = item.step.content;
+  }
   changeButton(item, dialog) {
     const prev = dialog.querySelector("#prev");
     const next = dialog.querySelector("#next");
@@ -125,6 +129,7 @@ class YoungBeginnerGuid extends HTMLElement {
     this.changeVisiable(item);
     const dialog = this.root.querySelector("#dialog");
     this.changeDialog(item, dialog);
+    this.changeContent(item, dialog);
     this.changeButton(item, dialog);
   }
 }
@@ -174,5 +179,5 @@ class YoungBeginnerGuidController {
     document.body.removeChild(this.el);
   }
 }
-export { YoungBeginnerGuidController, YoungBeginnerGuid as default };
+export { YoungBeginnerGuid, YoungBeginnerGuidController };
 //# sourceMappingURL=index.es.js.map

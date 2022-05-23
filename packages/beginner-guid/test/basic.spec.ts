@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 11:50:46
- * @LastEditTime: 2022-05-20 16:17:31
+ * @LastEditTime: 2022-05-23 11:14:26
  * @Description: 
  */
 import { describe, it, expect } from 'vitest';
@@ -11,15 +11,18 @@ describe('基础逻辑', () => {
   const guid = new YoungBeginnerGuidController([
     {
       el: '#step1',
-      des: 'test1'
+      content: 'test1',
+      title: 't1'
     },
     {
       el: '#step2',
-      des: 'test2'
+      content: 'test2',
+      title: 't2'
     },
     {
       el: '#step3',
-      des: 'test3'
+      content: 'test3',
+      title: 't3'
     }
   ]);
 
@@ -48,11 +51,13 @@ describe('基础逻辑', () => {
     const g2 = new YoungBeginnerGuidController([
       {
         el: '#step1',
-        des: 'test1'
+        content: 'test1',
+        title: 't1'
       },
       {
         el: '#step2',
-        des: 'test2'
+        content: 'test2',
+        title: 't2'
       }
     ], {
       immdiate: true,

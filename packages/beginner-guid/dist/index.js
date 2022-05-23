@@ -19,8 +19,8 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
-  YoungBeginnerGuidController: () => YoungBeginnerGuidController,
-  default: () => YoungBeginnerGuid
+  YoungBeginnerGuid: () => YoungBeginnerGuid,
+  YoungBeginnerGuidController: () => YoungBeginnerGuidController
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -60,10 +60,8 @@ var createItem = (handler, zIndex = 3e3) => {
   !handler.force && dialog.querySelector("#dialog-close").addEventListener("click", () => handler.hide());
   const title = createEL({ class: "title" }, "h3");
   title.setAttribute("slot", "title");
-  title.innerText = `lallallalallalla`;
   const content = createEL({ class: "content" });
   content.setAttribute("slot", "content");
-  content.innerText = `hhhhhhhhhhhhhhhhhhhhh`;
   dialog.prepend(content);
   dialog.prepend(title);
   const container = createEL();
@@ -141,6 +139,12 @@ var YoungBeginnerGuid = class extends HTMLElement {
     dialog.style[positionX] = x + "px";
     dialog.style[positionY] = y + "px";
   }
+  changeContent(item, dialog) {
+    const title = dialog.querySelector(".title");
+    const content = dialog.querySelector(".content");
+    title.innerHTML = item.step.title;
+    content.innerHTML = item.step.content;
+  }
   changeButton(item, dialog) {
     const prev = dialog.querySelector("#prev");
     const next = dialog.querySelector("#next");
@@ -163,6 +167,7 @@ var YoungBeginnerGuid = class extends HTMLElement {
     this.changeVisiable(item);
     const dialog = this.root.querySelector("#dialog");
     this.changeDialog(item, dialog);
+    this.changeContent(item, dialog);
     this.changeButton(item, dialog);
   }
 };
@@ -214,5 +219,6 @@ var YoungBeginnerGuidController = class {
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  YoungBeginnerGuid,
   YoungBeginnerGuidController
 });

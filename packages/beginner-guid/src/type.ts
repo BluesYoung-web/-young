@@ -1,11 +1,9 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 10:43:29
- * @LastEditTime: 2022-05-20 17:08:00
+ * @LastEditTime: 2022-05-23 11:03:57
  * @Description: 
  */
-type VNode = any;
-
 export type Position = 
 | 'left'
 | 'right'
@@ -14,11 +12,10 @@ export type Position =
 
 export type Selector = keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap | `.${string}` | `#${string}` | `[${string}]`;
 
-export type Content = string | (() => VNode);
-
 export type GuidItem = {
   el: Selector;
-  des: Content;
+  title: string;
+  content: string;
 };
 document.querySelector
 export type GuidOptions = {

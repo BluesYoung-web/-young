@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 10:42:47
- * @LastEditTime: 2022-05-23 10:48:17
+ * @LastEditTime: 2022-05-23 11:13:30
  * @Description: 
  */
 import { createItem, getPosition } from './core';
@@ -14,7 +14,7 @@ type CurrStep = {
   step: GuidItem;
 }
 
-export default class YoungBeginnerGuid extends HTMLElement {
+export class YoungBeginnerGuid extends HTMLElement {
   public root: ShadowRoot;
   constructor(public handler: YoungBeginnerGuidController) {
     super();
@@ -44,6 +44,14 @@ export default class YoungBeginnerGuid extends HTMLElement {
     dialog.style[positionY] = y + 'px';
   }
 
+  changeContent(item: CurrStep, dialog: HTMLElement) {
+    const title = dialog.querySelector('.title');
+    const content = dialog.querySelector('.content');
+
+    title.innerHTML = item.step.title;
+    content.innerHTML = item.step.content;
+  }
+
   changeButton(item: CurrStep, dialog: HTMLElement) {
     const prev = dialog.querySelector('#prev');
     const next = dialog.querySelector('#next');
@@ -69,6 +77,7 @@ export default class YoungBeginnerGuid extends HTMLElement {
 
     const dialog = this.root.querySelector('#dialog') as HTMLElement;
     this.changeDialog(item, dialog);
+    this.changeContent(item, dialog);
     this.changeButton(item, dialog);
   }
 };

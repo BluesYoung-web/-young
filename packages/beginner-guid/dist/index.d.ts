@@ -1,9 +1,8 @@
-declare type VNode = any;
 declare type Selector = keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap | `.${string}` | `#${string}` | `[${string}]`;
-declare type Content = string | (() => VNode);
 declare type GuidItem = {
     el: Selector;
-    des: Content;
+    title: string;
+    content: string;
 };
 declare type GuidOptions = {
     /**
@@ -29,6 +28,7 @@ declare class YoungBeginnerGuid extends HTMLElement {
     constructor(handler: YoungBeginnerGuidController);
     changeVisiable(item: CurrStep): void;
     changeDialog(item: CurrStep, dialog: HTMLElement): void;
+    changeContent(item: CurrStep, dialog: HTMLElement): void;
     changeButton(item: CurrStep, dialog: HTMLElement): void;
     render(item: CurrStep): void;
 }
@@ -46,4 +46,4 @@ declare class YoungBeginnerGuidController {
     destory(): void;
 }
 
-export { YoungBeginnerGuidController, YoungBeginnerGuid as default };
+export { YoungBeginnerGuid, YoungBeginnerGuidController };

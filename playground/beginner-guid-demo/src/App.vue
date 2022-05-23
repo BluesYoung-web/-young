@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-05-17 12:19:18
- * @LastEditTime: 2022-05-23 11:01:55
+ * @LastEditTime: 2022-05-23 11:15:06
  * @Description: 
 -->
 <script setup lang="ts">
@@ -11,15 +11,18 @@ import { YoungBeginnerGuidController } from '@bluesyoung/beginner-guid';
 const guid = new YoungBeginnerGuidController([
   {
     el: '#step1',
-    des: 'test1'
+    content: 'test1',
+    title: 'llllll'
   },
   {
     el: '#step2',
-    des: 'test2'
+    content: 'test2',
+    title: 'mmmmmmmmmmmm'
   },
   {
     el: '#step3',
-    des: 'test3'
+    content: 'test3',
+    title: '<span style="color: red;">fdakjfadkjgsfd</span>'
   }
 ]);
 
