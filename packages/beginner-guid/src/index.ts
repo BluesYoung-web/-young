@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 10:42:47
- * @LastEditTime: 2022-05-23 14:19:12
+ * @LastEditTime: 2022-05-23 14:53:00
  * @Description: 
  */
 import { createItem, getPosition } from './core';
@@ -44,6 +44,12 @@ export class YoungBeginnerGuid extends HTMLElement {
       positionX,
       positionY
     } = getPosition(item.step.el);
+    // 清除之前残留的样式
+    dialog.style.top = null;
+    dialog.style.bottom = null;
+    dialog.style.left = null;
+    dialog.style.right = null;
+
     dialog.style[positionX] = x + 'px';
     dialog.style[positionY] = y + 'px';
   }

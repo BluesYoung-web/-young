@@ -58,7 +58,7 @@ const getPosition = (selector) => {
   let y = top;
   if (window.innerWidth - right < 400) {
     positionX = "right";
-    x = left - 50;
+    x = left + 50;
   }
   if (window.innerHeight - top < 300) {
     positionY = "bottom";
@@ -98,6 +98,10 @@ class YoungBeginnerGuid extends HTMLElement {
       positionX,
       positionY
     } = getPosition(item.step.el);
+    dialog.style.top = null;
+    dialog.style.bottom = null;
+    dialog.style.left = null;
+    dialog.style.right = null;
     dialog.style[positionX] = x + "px";
     dialog.style[positionY] = y + "px";
   }

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 17:00:04
- * @LastEditTime: 2022-05-20 17:45:06
+ * @LastEditTime: 2022-05-23 14:45:29
  * @Description: 
  */
 import type { Position, Selector } from './../type';
@@ -17,7 +17,7 @@ export const getPosition = (selector: Selector) => {
 
   if (window.innerWidth - right < 400) {
     positionX = 'right';
-    x = left - 50;
+    x = left + 50;
   }
 
   if (window.innerHeight - top < 300) {
