@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 16:33:38
- * @LastEditTime: 2022-05-23 15:39:26
+ * @LastEditTime: 2022-05-23 15:47:24
  * @Description: 
  */
 /// <reference types="vite/client" />
@@ -57,7 +57,7 @@ export const createItem = (handler: YoungBeginnerGuidController, zIndex: string 
     z-index: ${zIndex};
   }
   #dialog {
-    z-index: ${zIndex + 1};
+    z-index: ${+zIndex + 1};
   }
   ${cssContent}
   `;

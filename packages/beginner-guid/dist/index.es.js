@@ -40,7 +40,7 @@ const createItem = (handler, zIndex = "3000") => {
     z-index: ${zIndex};
   }
   #dialog {
-    z-index: ${zIndex + 1};
+    z-index: ${+zIndex + 1};
   }
   ${cssContent}
   `;
