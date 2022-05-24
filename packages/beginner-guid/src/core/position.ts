@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 17:00:04
- * @LastEditTime: 2022-05-24 15:10:15
+ * @LastEditTime: 2022-05-24 15:20:26
  * @Description: 
  */
 import type { Position, Selector } from './../type';
@@ -24,7 +24,7 @@ export const getPosition = (selector: Selector) => {
     x = window.innerWidth - left + offset;
 
     // 左侧宽度也不够，放到下面
-    if (x < dw + offset) {
+    if (srcX < dw + offset) {
       positionX = 'left';
       x = srcX;
       positionY = 'top';

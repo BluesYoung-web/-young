@@ -62,7 +62,7 @@ const getPosition = (selector) => {
   if (window.innerWidth - right < dw + offset) {
     positionX = "right";
     x = window.innerWidth - left + offset;
-    if (x < dw + offset) {
+    if (srcX < dw + offset) {
       positionX = "left";
       x = srcX;
       positionY = "top";
