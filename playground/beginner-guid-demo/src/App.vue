@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-05-17 12:19:18
- * @LastEditTime: 2022-05-23 15:36:29
+ * @LastEditTime: 2022-05-24 15:10:23
  * @Description: 
 -->
 <script setup lang="ts">
@@ -43,6 +43,11 @@ const guid = new YoungBeginnerGuidController([
     el: '.btn',
     content: 'test---button',
     title: '<span style="color: red;">bye!</span>'
+  },
+  {
+    el: 'h1',
+    content: 'test---full',
+    title: '<span style="color: red;">来了老弟!</span>'
   }
 ]);
 
@@ -57,6 +62,7 @@ const guid = new YoungBeginnerGuidController([
       <div id="step4">444444</div>
       <div id="step5">555555</div>
       <div id="step6">666666</div>
+      <h1>啦啦啦啦</h1>
     </div>
     <button type="button" class="btn" @click="guid.show()">开始引导</button>
   </div>

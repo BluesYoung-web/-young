@@ -51,18 +51,29 @@ const createItem = (handler, zIndex = "3000") => {
 };
 const getPosition = (selector) => {
   const el = document.querySelector(selector);
-  const { left, top, right, bottom, x: srcX, y: srcY, width, height } = el.getBoundingClientRect();
+  const { left, top, right, x: srcX, y: srcY, width, height } = el.getBoundingClientRect();
+  const offset = 10;
+  const dw = 400;
+  const dh = 300;
   let positionX = "left";
   let positionY = "top";
-  let x = right + 50;
-  let y = top;
-  if (window.innerWidth - right < 400) {
+  let x = right + offset;
+  let y = top + offset;
+  if (window.innerWidth - right < dw + offset) {
     positionX = "right";
-    x = window.innerWidth - left + 50;
+    x = window.innerWidth - left + offset;
+    if (x < dw + offset) {
+      positionX = "left";
+      x = srcX;
+      positionY = "top";
+      y = srcY + height + offset;
+    }
   }
-  if (window.innerHeight - top < 300) {
-    positionY = "bottom";
-    y = bottom;
+  if (window.innerHeight - y < dh) {
+    positionX = "left";
+    positionY = "top";
+    x = window.innerWidth - dw >> 1;
+    y = window.innerHeight - dh >> 1;
   }
   return {
     x,

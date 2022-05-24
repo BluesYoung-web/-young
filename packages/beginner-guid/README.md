@@ -5,6 +5,10 @@
 
 [vue demo](../../playground/beginner-guid-demo/src/App.vue)
 
+## 注意
+
+**底层依赖 `webcomponents` 和 `css clip-path`**，特殊环境请自行 `polyfill`
+
 ### 使用包管理器
 
 ```bash
