@@ -51,7 +51,7 @@ const createItem = (handler, zIndex = "3000") => {
 };
 const getPosition = (selector) => {
   const el = document.querySelector(selector);
-  const { left, top, right, bottom } = el.getBoundingClientRect();
+  const { left, top, right, bottom, x: srcX, y: srcY, width, height } = el.getBoundingClientRect();
   let positionX = "left";
   let positionY = "top";
   let x = right + 50;
@@ -67,9 +67,24 @@ const getPosition = (selector) => {
   return {
     x,
     y,
+    srcX,
+    srcY,
+    width,
+    height,
     positionX,
     positionY
   };
+};
+const generateClipPathStr = (x, y, w, h) => {
+  const fullWith = window.innerWidth;
+  const fullHeight = window.innerHeight;
+  const wx = x + w;
+  const hy = y + h;
+  const line1 = `M 0 0 H 0 V ${fullHeight} H ${x} V ${fullHeight} H${x} V 0 Z`;
+  const line2 = `M ${x} 0 H ${x} V ${y} H ${fullWith} V ${y} H ${fullWith} V ${hy} H ${fullWith} V 0 Z`;
+  const line3 = `M ${x} ${hy} H ${x} V ${fullHeight} H ${fullWith} V ${fullHeight} H ${fullWith} V ${hy} Z`;
+  const line4 = `M ${wx} ${y} H ${wx} V ${hy} H ${fullWith} V ${hy} H ${fullWith} V ${y} Z`;
+  return `${line1} ${line2} ${line3} ${line4}`;
 };
 const defautOptions = {
   immdiate: false,
@@ -92,12 +107,16 @@ class YoungBeginnerGuid extends HTMLElement {
       this.style.display = "none";
     }
   }
-  changeDialog(item, dialog) {
+  changeDialog(item, dialog, mask) {
     const {
       x,
       y,
       positionX,
-      positionY
+      positionY,
+      srcX,
+      srcY,
+      width,
+      height
     } = getPosition(item.step.el);
     dialog.style.top = null;
     dialog.style.bottom = null;
@@ -105,6 +124,8 @@ class YoungBeginnerGuid extends HTMLElement {
     dialog.style.right = null;
     dialog.style[positionX] = x + "px";
     dialog.style[positionY] = y + "px";
+    const pathStr = generateClipPathStr(srcX, srcY, width, height);
+    mask.style.clipPath = `path('${pathStr}')`;
   }
   changeContent(item, dialog) {
     const title = dialog.querySelector(".title");
@@ -128,17 +149,17 @@ class YoungBeginnerGuid extends HTMLElement {
   }
   saveSnapAndChange(item) {
     const el = document.querySelector(item.step.el);
-    this.snap = {
-      el: item.step.el,
-      style: {
-        border: el.style.border,
-        zIndex: el.style.zIndex,
-        position: el.style.position
-      }
-    };
-    el.style.zIndex = `${+this.zIndex + 2}`;
-    el.style.border = "2px solid red";
-    el.style.position = "relative";
+    if (el) {
+      this.snap = {
+        el: item.step.el,
+        style: {
+          border: el.style.border,
+          zIndex: el.style.zIndex
+        }
+      };
+      el.style.zIndex = `${+this.zIndex + 2}`;
+      el.style.border = "2px solid red";
+    }
   }
   restoreSnap() {
     var _a;
@@ -146,16 +167,18 @@ class YoungBeginnerGuid extends HTMLElement {
     if (el) {
       el.style.border = this.snap.style.border;
       el.style.zIndex = this.snap.style.zIndex;
-      el.style.position = this.snap.style.position;
     }
   }
   render(item) {
     this.saveSnapAndChange(item);
     this.changeVisiable(item);
     const dialog = this.root.querySelector("#dialog");
-    this.changeDialog(item, dialog);
-    this.changeContent(item, dialog);
-    this.changeButton(item, dialog);
+    const mask = this.root.querySelector("#mask");
+    if (dialog && mask) {
+      this.changeDialog(item, dialog, mask);
+      this.changeContent(item, dialog);
+      this.changeButton(item, dialog);
+    }
   }
 }
 window.customElements.get("young-beginner-guid") || window.customElements.define("young-beginner-guid", YoungBeginnerGuid);

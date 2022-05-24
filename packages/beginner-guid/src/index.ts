@@ -1,10 +1,10 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 10:42:47
- * @LastEditTime: 2022-05-23 16:53:02
+ * @LastEditTime: 2022-05-24 14:28:36
  * @Description: 
  */
-import { createItem, getPosition } from './core';
+import { createItem, getPosition, generateClipPathStr } from './core';
 import type { GuidItem, GuidOptions, Selector } from './type';
 import { defautOptions } from './type';
 
@@ -22,7 +22,6 @@ export class YoungBeginnerGuid extends HTMLElement {
     style: {
       border: string;
       zIndex: string;
-      position: string;
     };
   };
   constructor(public handler: YoungBeginnerGuidController) {
@@ -42,12 +41,16 @@ export class YoungBeginnerGuid extends HTMLElement {
     }
   }
 
-  changeDialog(item: CurrStep, dialog: HTMLElement) {
+  changeDialog(item: CurrStep, dialog: HTMLElement, mask: HTMLElement) {
     const {
       x,
       y,
       positionX,
-      positionY
+      positionY,
+      srcX,
+      srcY,
+      width,
+      height
     } = getPosition(item.step.el);
     // 清除之前残留的样式
     dialog.style.top = null;
@@ -57,6 +60,9 @@ export class YoungBeginnerGuid extends HTMLElement {
 
     dialog.style[positionX] = x + 'px';
     dialog.style[positionY] = y + 'px';
+
+    const pathStr = generateClipPathStr(srcX, srcY, width, height);
+    mask.style.clipPath = `path('${pathStr}')`;
   }
 
   changeContent(item: CurrStep, dialog: HTMLElement) {
@@ -85,24 +91,23 @@ export class YoungBeginnerGuid extends HTMLElement {
 
   saveSnapAndChange(item: CurrStep) {
     const el = document.querySelector(item.step.el) as HTMLElement;
-    this.snap = {
-      el: item.step.el,
-      style: {
-        border: el.style.border,
-        zIndex: el.style.zIndex,
-        position: el.style.position
-      }
-    };
-    el.style.zIndex = `${+this.zIndex + 2}`;
-    el.style.border = '2px solid red';
-    el.style.position = 'relative';
+    if (el) {
+      this.snap = {
+        el: item.step.el,
+        style: {
+          border: el.style.border,
+          zIndex: el.style.zIndex
+        }
+      };
+      el.style.zIndex = `${+this.zIndex + 2}`;
+      el.style.border = '2px solid red';
+    }
   }
   restoreSnap() {
     const el = document.querySelector(this.snap?.el) as HTMLElement;
     if (el) {
       el.style.border = this.snap.style.border;
       el.style.zIndex = this.snap.style.zIndex;
-      el.style.position = this.snap.style.position;
     }
   }
 
@@ -114,9 +119,12 @@ export class YoungBeginnerGuid extends HTMLElement {
     this.changeVisiable(item);
 
     const dialog = this.root.querySelector('#dialog') as HTMLElement;
-    this.changeDialog(item, dialog);
-    this.changeContent(item, dialog);
-    this.changeButton(item, dialog);
+    const mask = this.root.querySelector('#mask') as HTMLElement;
+    if (dialog && mask) {
+      this.changeDialog(item, dialog, mask);
+      this.changeContent(item, dialog);
+      this.changeButton(item, dialog);
+    }
   }
 };
 window.customElements.get('young-beginner-guid') ||

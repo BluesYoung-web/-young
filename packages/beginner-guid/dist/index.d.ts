@@ -31,12 +31,11 @@ declare class YoungBeginnerGuid extends HTMLElement {
         style: {
             border: string;
             zIndex: string;
-            position: string;
         };
     };
     constructor(handler: YoungBeginnerGuidController);
     changeVisiable(item: CurrStep): void;
-    changeDialog(item: CurrStep, dialog: HTMLElement): void;
+    changeDialog(item: CurrStep, dialog: HTMLElement, mask: HTMLElement): void;
     changeContent(item: CurrStep, dialog: HTMLElement): void;
     changeButton(item: CurrStep, dialog: HTMLElement): void;
     saveSnapAndChange(item: CurrStep): void;
