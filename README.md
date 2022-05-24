@@ -14,6 +14,6 @@
 
 ## @bluesyoung/beginner-guid
 
-🚧 努力开发中...
-
 [新手引导-基于 Web Components 实现](./packages/beginner-guid/README.md)
+
+基本可用，后续有机会再优化
