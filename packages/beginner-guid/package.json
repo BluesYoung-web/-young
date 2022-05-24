@@ -1,6 +1,6 @@
 {
   "name": "@bluesyoung/beginner-guid",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "新手引导",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
