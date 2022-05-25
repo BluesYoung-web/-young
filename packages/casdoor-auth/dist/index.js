@@ -19,7 +19,10 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
-  YoungAuth: () => YoungAuth
+  Master: () => Master,
+  Slave: () => Slave,
+  YoungAuth: () => YoungAuth,
+  defaultCmd: () => defaultCmd
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -68,6 +71,41 @@ var Sdk = class {
 };
 var casdoor_sdk_default = Sdk;
 
+// src/no-login/master.ts
+var defaultCmd = "I want to login";
+var Master = class {
+  constructor(conf, cmd = defaultCmd) {
+    const onMessage = async (e) => {
+      if (e.data.cmd === cmd) {
+        conf.onmsg_cbk(e);
+      }
+    };
+    window.addEventListener("message", onMessage);
+  }
+};
+
+// src/no-login/slave.ts
+var Slave = class {
+  constructor(conf, cmd = defaultCmd) {
+    this.cmd = cmd;
+    const onMessage = async (e) => {
+      if (e.origin === conf.master_url) {
+        await conf.onmsg_cbk(e.data);
+      }
+    };
+    window.addEventListener("message", onMessage);
+  }
+  init(fallback) {
+    if (window.opener) {
+      window.opener.postMessage({
+        cmd: this.cmd
+      }, "*");
+    } else {
+      fallback == null ? void 0 : fallback();
+    }
+  }
+};
+
 // src/index.ts
 var defaultConf = {
   serverUrl: "https://door.casdoor.com",
@@ -101,5 +139,8 @@ var YoungAuth = class {
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  YoungAuth
+  Master,
+  Slave,
+  YoungAuth,
+  defaultCmd
 });
