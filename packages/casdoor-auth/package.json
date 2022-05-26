@@ -23,7 +23,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/BluesYoung-web/young.git"
+    "url": "git+ssh://git@github.com/BluesYoung-web/young.git",
+    "directory": "packages/casdoor-auth"
   },
   "author": "BluesYoung-web",
   "license": "MIT",
