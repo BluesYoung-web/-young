@@ -1,6 +1,6 @@
 {
   "name": "@bluesyoung/unplugin-json-conf",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "packageManager": "pnpm@7.1.1",
   "description": "在运行/打包过程中，加载指定位置的JSON文件的内容作为虚拟模块的默认导出内容",
   "keywords": [
@@ -59,11 +59,9 @@
     "dev": "tsup --watch src",
     "build:fix": "esno scripts/postbuild.ts",
     "lint": "eslint .",
-    "play": "npm -C playground run dev",
-    "prepublishOnly": "npm run build",
-    "release": "bumpp --commit --push --tag && pnpm publish",
-    "start": "esno src/index.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "release": "bumpp --commit",
+    "push": "pnpm publish --access public"
   },
   "dependencies": {
     "unplugin": "^0.6.3"
