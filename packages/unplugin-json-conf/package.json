@@ -1,6 +1,6 @@
 {
   "name": "@bluesyoung/unplugin-json-conf",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "pnpm@7.1.1",
   "description": "在运行/打包过程中，加载指定位置的JSON文件的内容作为虚拟模块的默认导出内容",
   "keywords": [
