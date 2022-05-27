@@ -7,13 +7,13 @@
 ```bash
 # 选择一个你喜欢的包管理器
 # NPM
-$ npm install @bluesyoung/casdoor-auth --save
+$ npm install @bluesyoung/unplugin-json-conf --save
 
 # Yarn
-$ yarn add @bluesyoung/casdoor-auth
+$ yarn add @bluesyoung/unplugin-json-conf
 
 # pnpm
-$ pnpm add @bluesyoung/casdoor-auth
+$ pnpm add @bluesyoung/unplugin-json-conf
 ```
 
 ## 使用
