@@ -17,3 +17,7 @@
 [新手引导-基于 Web Components 实现](./packages/beginner-guid/README.md)
 
 基本可用，后续有机会再优化
+
+## @bluesyoung/unplugin-json-conf
+
+在[unplugin-starter](https://github.com/antfu/unplugin-starter#readme)基础上开发的[将外部 JSON 文件导入为虚拟模块的插件](./packages/unplugin-json-conf/README.md)
