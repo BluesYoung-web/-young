@@ -1,0 +1,53 @@
+{
+  "name": "@bluesyoung/editor",
+  "version": "0.0.0",
+  "description": "基于 @aomao/engine 的框架无关的富文本编辑器",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "browser": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
+  "jsdelivr": "dist/index.umd.js",
+  "scripts": {
+    "test": "vitest",
+    "dev": "vite build --watch",
+    "dev:css": "unocss src/index.ts",
+    "build": "vite build && tsup",
+    "release": "bumpp --commit",
+    "push": "pnpm publish --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/BluesYoung-web/young.git",
+    "directory": "packages/editor"
+  },
+  "keywords": [
+    "rich editor",
+    "@aomao/engin",
+    "framework independent"
+  ],
+  "author": "BluesYoung-web",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BluesYoung-web/young/issues"
+  },
+  "homepage": "https://github.com/BluesYoung-web/young#readme",
+  "devDependencies": {
+    "unocss": "^0.34.1"
+  },
+  "dependencies": {
+    "@aomao/engine": "^2.9.8",
+    "@aomao/plugin-bold": "^2.9.9",
+    "@aomao/plugin-paintformat": "^2.9.9",
+    "@aomao/plugin-redo": "^2.9.9",
+    "@aomao/plugin-undo": "^2.9.9",
+    "@unocss/cli": "^0.34.1"
+  }
+}
