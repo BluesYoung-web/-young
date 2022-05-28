@@ -18,7 +18,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/unplugin-starter.git"
+    "url": "git+https://github.com/antfu/unplugin-starter.git",
+    "directory": "packages/unplugin-json-conf"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
