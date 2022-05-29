@@ -15,7 +15,7 @@ import ImageComponent, { ImageValue } from './component';
 import ImageUploader from './uploader';
 import { ImageUploaderOptions } from './uploader';
 import locales from './locales';
-import { ImageOptions } from './types';
+import { cssUnits, ImageOptions } from './types';
 
 const PARSE_HTML = 'parse:html';
 
@@ -143,8 +143,18 @@ export default class<T extends ImageOptions = ImageOptions> extends Plugin<T> {
 				img.attributes('src', src);
 				img.css('visibility', 'visible');
 				const size = value.size;
-				if (size?.width) img.css('width', `${size.width}px`);
-				if (size?.height) img.css('height', `${size.height}px`);
+				if (cssUnits.some((u) => size.width.toString().endsWith(u))) {
+					img.css('width', size.width);
+				} else {
+					size.width && img.css('width', `${size.width}px`);
+				}
+
+				if (size.height && typeof size.height === 'number') {
+					img.css('height', `${size.height}px`);
+				} else {
+					img.css('height', 'auto');
+				}
+				
 				img.removeAttributes('class');
 				img.attributes('data-type', type);
 				if (callback) {

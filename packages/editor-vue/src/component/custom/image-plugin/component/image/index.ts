@@ -1,4 +1,4 @@
-import type { ImageOptions, PswpInterface } from '../../types';
+import { cssUnits, PswpInterface } from '../../types';
 import type { EditorInterface, NodeInterface } from '@aomao/engine';
 import {
 	$,
@@ -18,8 +18,8 @@ import './index.css';
 export type Status = 'uploading' | 'done' | 'error';
 
 export type Size = {
-	width: number;
-	height: number;
+	width: number | string;
+	height: number | string;
 	naturalWidth: number;
 	naturalHeight: number;
 };
@@ -323,12 +323,12 @@ class Image {
 		let { width, height } = this.size;
 
 		if (!height) {
-			height = Math.round(this.rate * width);
+			height = Math.round(this.rate * +width);
 		} else if (!width) {
-			width = Math.round(height / this.rate);
+			width = Math.round(+height / this.rate);
 		} else if (width && height) {
 			// 修正非正常的比例
-			height = Math.round(this.rate * width);
+			height = Math.round(this.rate * +width);
 			this.size.height = height;
 		} else {
 			const { clientWidth, clientHeight } = img;
@@ -354,33 +354,37 @@ class Image {
 		}
 	}
 
-	changeSize(width: number, height: number) {
-		if (width < 24) {
-			width = 24;
-			height = width * this.rate;
+	changeSize(width: number | string, height = 24) {
+		if (typeof width === 'string' && cssUnits.some((u) => width.toString().endsWith(u))) {
+			this.size.width = width;
+			this.size.height = 'auto';
+			this.image.css({ width, height: 'auto' });
+		} else {
+			if (width < 24) {
+				width = 24;
+				height = width * this.rate;
+			}
+			if (width > this.maxWidth) {
+				width = this.maxWidth;
+				height = width * this.rate;
+			}
+	
+			if (height < 24) {
+				height = 24;
+				width = height / this.rate;
+			}
+	
+			width = Math.round(+width);
+			height = Math.round(height);
+			this.size.width = width;
+			this.size.height = height;
+			this.image.css({
+				width: `${width}px`,
+			});
 		}
-
-		if (width > this.maxWidth) {
-			width = this.maxWidth;
-			height = width * this.rate;
-		}
-
-		if (height < 24) {
-			height = 24;
-			width = height / this.rate;
-		}
-
-		width = Math.round(width);
-		height = Math.round(height);
-		this.size.width = width;
-		this.size.height = height;
-		this.image.css({
-			width: `${width}px`,
-			//height: `${height}px`,
-		});
 
 		const { onChange } = this.options;
-		if (onChange) onChange(this.size);
+		onChange?.(this.size);
 
 		this.destroyEditor();
 		this.renderEditor();
@@ -563,7 +567,7 @@ class Image {
 		if ((width && height) || !this.src) {
 			if (width > this.maxWidth) {
 				width = this.maxWidth;
-				height = Math.round((width * height) / this.size.width);
+				height = Math.round((width * +height) / +this.size.width);
 			} else if (!this.src && !width && !height) {
 				width = this.maxWidth;
 				height = this.maxWidth / 2;

@@ -1,4 +1,4 @@
-import type { ImageOptions } from '../types';
+import { cssUnits, ImageOptions } from '../types';
 import {
 	Card,
 	CardToolbarItemOptions,
@@ -52,11 +52,11 @@ export interface ImageValue extends CardValue {
 		/**
 		 * 图片展示宽度
 		 */
-		width: number;
+		width: number | string;
 		/**
 		 * 图片展示高度
 		 */
-		height: number;
+		height: number | string;
 		/**
 		 * 图片真实宽度
 		 */
@@ -118,18 +118,19 @@ class ImageComponent<T extends ImageValue = ImageValue> extends Card<T> {
 	onInputChange(width: string | number, height: string | number) {
 		const value = this.getValue();
 		if (typeof width === 'string') {
-			if (!/^[1-9]+(\d+)?$/.test(width) && this.widthInput) {
+			if (cssUnits.some((u) => width.toString().endsWith(u))) {
+				this.image?.changeSize(width);
+				return;
+			} else if (!/^[1-9]+(\d+)?$/.test(width) && this.widthInput) {
 				width = value?.size?.width || value?.size?.naturalWidth || 0;
-				this.widthInput.get<HTMLInputElement>()!.value =
-					width.toString();
+				this.widthInput.get<HTMLInputElement>()!.value = width.toString();
 			}
 			width = parseInt(width.toString(), 10);
 		}
 		if (typeof height === 'string') {
 			if (!/^[1-9]+(\d+)?$/.test(height) && this.heightInput) {
 				height = value?.size?.height || value?.size?.naturalHeight || 0;
-				this.heightInput.get<HTMLInputElement>()!.value =
-					height.toString();
+				this.heightInput.get<HTMLInputElement>()!.value =	height.toString();
 			}
 			height = parseInt(height.toString(), 10);
 		}
@@ -179,30 +180,34 @@ class ImageComponent<T extends ImageValue = ImageValue> extends Card<T> {
 						this.widthInput = node.find('input[type=input]');
 					},
 					onChange: (value) => {
-						const height = Math.round(
-							parseInt(value, 10) * (this.image?.rate || 1),
-						);
-						this.onInputChange(value, height);
+						if (cssUnits.some((u) => value.endsWith(u))) {
+							this.onInputChange(value, 0);
+						} else {
+							const height = Math.round(
+								parseInt(value, 10) * (this.image?.rate || 1),
+							);
+							this.onInputChange(value, height);
+						}
 					},
 				},
-				{
-					key: 'height',
-					type: 'input',
-					placeholder: language
-						.get('image', 'toolbbarHeightTitle')
-						.toString(),
-					prefix: 'H:',
-					value: value?.size?.height || 0,
-					didMount: (node) => {
-						this.heightInput = node.find('input[type=input]');
-					},
-					onChange: (value) => {
-						const width = Math.round(
-							parseInt(value, 10) / (this.image?.rate || 1),
-						);
-						this.onInputChange(width, value);
-					},
-				},
+				// {
+				// 	key: 'height',
+				// 	type: 'input',
+				// 	placeholder: language
+				// 		.get('image', 'toolbbarHeightTitle')
+				// 		.toString(),
+				// 	prefix: 'H:',
+				// 	value: value?.size?.height || 0,
+				// 	didMount: (node) => {
+				// 		this.heightInput = node.find('input[type=input]');
+				// 	},
+				// 	onChange: (value) => {
+				// 		const width = Math.round(
+				// 			parseInt(value, 10) / (this.image?.rate || 1),
+				// 		);
+				// 		this.onInputChange(width, value);
+				// 	},
+				// },
 				{
 					key: 'resize',
 					type: 'button',

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-29 18:35:42
- * @LastEditTime: 2022-05-29 18:40:46
+ * @LastEditTime: 2022-05-29 19:32:49
  * @Description: 
  */
 import {
@@ -68,3 +68,9 @@ export interface ImageOptions extends PluginOptions {
 		items: (ToolbarItemOptions | CardToolbarItemOptions)[],
 	) => (ToolbarItemOptions | CardToolbarItemOptions)[];
 }
+
+export const cssUnits = [
+	'%',
+	'vw',
+	'vh'
+];
