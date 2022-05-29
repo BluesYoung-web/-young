@@ -1,33 +1,31 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-28 16:14:03
- * @LastEditTime: 2022-05-28 20:14:57
+ * @LastEditTime: 2022-05-29 09:29:41
  * @Description: 
  */
-// @unocss-include
+
 import Engine from '@aomao/engine';
-import Bold from '@aomao/plugin-bold';
-import Undo from '@aomao/plugin-undo';
-import Redo from '@aomao/plugin-redo';
-import FormatPaint from '@aomao/plugin-paintformat';
+import { createEL } from './core/create';
+import { createToolBar, ToolBarPlugins } from './toolbar';
+// import Bold from '@aomao/plugin-bold';
 
 export default class YoungEditor {
   public engine: Engine;
   constructor(target: string) {
     const container = document.querySelector(target) as HTMLDivElement;
 
-    const el = document.createElement('div');
-    el.setAttribute('class', 'm-0 p-10');
-
-    const toolbar = document.createElement('div');
-    toolbar.setAttribute('class', 'flex children:m-1 bg-blue-200');
-
-    container.appendChild(toolbar);
+    const el = createEL({
+      class: 'm-0 p-10'
+    });
     container.appendChild(el);
 
     const engine = new Engine(el, {
-      plugins: [Bold, Undo, Redo, FormatPaint]
+      plugins: [...ToolBarPlugins]
     });
+    
+    const toolbar = createToolBar(engine);
+    container.prepend(toolbar);
 
     engine.setValue('<h1>来了老弟</h1>')
 
@@ -37,36 +35,11 @@ export default class YoungEditor {
 			console.log(`value:${value}`);
 		});
 
-    const boldBtn = document.createElement('button');
-    boldBtn.type = 'button';
-    boldBtn.innerText = 'B';
-    boldBtn.title = '加粗';
-    boldBtn.addEventListener('click', () => engine.command.execute('bold'));
-
-    const unDoBtn = document.createElement('button');
-    unDoBtn.type = 'button';
-    unDoBtn.innerText = '撤销';
-    unDoBtn.title = '撤销';
-    unDoBtn.addEventListener('click', () => engine.command.execute('undo'));
-
-    const reDoBtn = document.createElement('button');
-    reDoBtn.type = 'button';
-    reDoBtn.innerText = '恢复';
-    reDoBtn.title = '恢复';
-    reDoBtn.addEventListener('click', () => engine.command.execute('redo'));
-
-
-    const fmtBtn = document.createElement('button');
-    fmtBtn.type = 'button';
-    fmtBtn.innerText = '格式刷';
-    fmtBtn.title = '格式刷';
-    fmtBtn.addEventListener('click', () => engine.command.execute('paintformat'));
-
-
-    toolbar.appendChild(boldBtn);
-    toolbar.appendChild(unDoBtn);
-    toolbar.appendChild(reDoBtn);
-    toolbar.appendChild(fmtBtn);
+    // const boldBtn = document.createElement('button');
+    // boldBtn.type = 'button';
+    // boldBtn.innerText = 'B';
+    // boldBtn.title = '加粗';
+    // boldBtn.addEventListener('click', () => engine.command.execute('bold'));
 
     this.engine = engine;
   }
