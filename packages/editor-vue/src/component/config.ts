@@ -1,14 +1,13 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-29 14:50:31
- * @LastEditTime: 2022-05-29 15:16:28
+ * @LastEditTime: 2022-05-29 19:23:51
  * @Description: 
  */
 import type { CardEntry, NodeInterface, PluginEntry, PluginOptions } from '@aomao/engine';
 import Codeblock, { CodeBlockComponent } from '@aomao/plugin-codeblock-vue';
 import File, { FileComponent, FileUploader } from '@aomao/plugin-file';
 import Hr, { HrComponent } from '@aomao/plugin-hr';
-import Image, { ImageComponent, ImageUploader } from '@aomao/plugin-image';
 import Math, { MathComponent } from '@aomao/plugin-math';
 import Mention, { MentionComponent } from '@aomao/plugin-mention';
 import Status, { StatusComponent } from '@aomao/plugin-status';
@@ -50,6 +49,9 @@ import Underline from '@aomao/plugin-underline';
 import Undo from '@aomao/plugin-undo';
 import Unorderedlist from '@aomao/plugin-unorderedlist';
 import { createApp } from 'vue';
+
+// 自定义插件(魔改)
+import Image, { ImageComponent, ImageUploader } from './custom/image-plugin';
 
 const DOMAIN = 'https://editor.aomao.com/api'
 
@@ -195,7 +197,7 @@ export const pluginConfig: { [key: string]: PluginOptions } = {
         return url;
       };
       return url + `?token=12323`;
-    },
+    }
   },
   [ImageUploader.pluginName]: {
     file: {
