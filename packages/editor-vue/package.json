@@ -1,0 +1,85 @@
+{
+  "name": "@bluesyoung/editor-vue",
+  "version": "0.0.0",
+  "description": "基于 @aomao/engine 的富文本编辑器(Vue3 组件封装版本)",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "browser": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
+  "jsdelivr": "dist/index.umd.js",
+  "scripts": {
+    "dev": "vite",
+    "test": "vitest",
+    "build": "vite build && tsup",
+    "release": "bumpp --commit",
+    "push": "pnpm publish --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/BluesYoung-web/young.git",
+    "directory": "packages/editor"
+  },
+  "keywords": [
+    "rich editor",
+    "@aomao/engin",
+    "vue3 component"
+  ],
+  "author": "BluesYoung-web",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BluesYoung-web/young/issues"
+  },
+  "homepage": "https://github.com/BluesYoung-web/young#readme",
+  "dependencies": {
+    "@aomao/engine": "^2.9.9",
+    "@aomao/plugin-alignment": "^2.6.16",
+    "@aomao/plugin-backcolor": "^2.6.16",
+    "@aomao/plugin-bold": "^2.6.16",
+    "@aomao/plugin-code": "^2.6.16",
+    "@aomao/plugin-codeblock-vue": "^2.6.16",
+    "@aomao/plugin-file": "^2.6.16",
+    "@aomao/plugin-fontcolor": "^2.6.16",
+    "@aomao/plugin-fontfamily": "^2.6.16",
+    "@aomao/plugin-fontsize": "^2.6.16",
+    "@aomao/plugin-heading": "^2.6.16",
+    "@aomao/plugin-hr": "^2.6.16",
+    "@aomao/plugin-image": "^2.6.16",
+    "@aomao/plugin-indent": "^2.6.16",
+    "@aomao/plugin-italic": "^2.6.16",
+    "@aomao/plugin-line-height": "^2.6.16",
+    "@aomao/plugin-link-vue": "^2.6.16",
+    "@aomao/plugin-mark": "^2.6.16",
+    "@aomao/plugin-math": "^2.6.16",
+    "@aomao/plugin-mention": "^2.6.16",
+    "@aomao/plugin-orderedlist": "^2.6.16",
+    "@aomao/plugin-paintformat": "^2.6.16",
+    "@aomao/plugin-quote": "^2.6.16",
+    "@aomao/plugin-redo": "^2.6.16",
+    "@aomao/plugin-removeformat": "^2.6.16",
+    "@aomao/plugin-selectall": "^2.6.16",
+    "@aomao/plugin-status": "^2.6.16",
+    "@aomao/plugin-strikethrough": "^2.6.16",
+    "@aomao/plugin-sub": "^2.6.16",
+    "@aomao/plugin-sup": "^2.6.16",
+    "@aomao/plugin-table": "^2.6.16",
+    "@aomao/plugin-tasklist": "^2.6.16",
+    "@aomao/plugin-underline": "^2.6.16",
+    "@aomao/plugin-undo": "^2.6.16",
+    "@aomao/plugin-unorderedlist": "^2.6.16",
+    "@aomao/plugin-video": "^2.6.16",
+    "@aomao/toolbar-vue": "~2.7.33"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "vite-plugin-vue-setup-extend": "~0.4.0",
+    "vue": "^3.2.36"
+  }
+}
