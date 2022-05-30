@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-29 14:50:31
- * @LastEditTime: 2022-05-29 19:23:51
+ * @LastEditTime: 2022-05-30 09:08:09
  * @Description: 
  */
 import type { CardEntry, NodeInterface, PluginEntry, PluginOptions } from '@aomao/engine';
@@ -32,9 +32,9 @@ import Indent from '@aomao/plugin-indent';
 import Italic from '@aomao/plugin-italic';
 import LineHeight from '@aomao/plugin-line-height';
 import Link from '@aomao/plugin-link-vue';
-import Loading from './loading.vue';
+import Loading from './Loading.vue';
 import Mark from '@aomao/plugin-mark';
-import MentionPopover from './mention.vue';
+import MentionPopover from './Mention.vue';
 import Orderedlist from '@aomao/plugin-orderedlist';
 import PaintFormat from '@aomao/plugin-paintformat';
 import Quote from '@aomao/plugin-quote';

@@ -1,9 +1,10 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-04-28 16:27:49
- * @LastEditTime: 2022-05-29 15:29:54
+ * @LastEditTime: 2022-05-30 09:05:27
  * @Description: 
  */
+/// <reference types="vite/client" />
 /// <reference types="vitest" />
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
