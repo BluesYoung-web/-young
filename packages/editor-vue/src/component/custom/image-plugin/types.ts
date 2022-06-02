@@ -1,10 +1,10 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-29 18:35:42
- * @LastEditTime: 2022-05-29 19:32:49
+ * @LastEditTime: 2022-06-02 14:56:06
  * @Description: 
  */
-import {
+import type {
 	CardToolbarItemOptions,
 	CardType,
 	NodeInterface,

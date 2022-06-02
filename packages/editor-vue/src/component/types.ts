@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-29 14:44:54
- * @LastEditTime: 2022-05-29 14:47:33
+ * @LastEditTime: 2022-05-30 12:04:07
  * @Description: 
  */
 export type {
@@ -9,8 +9,8 @@ export type {
   NodeInterface,
   RangeInterface,
 } from '@aomao/engine';
-import { EngineInterface } from '@aomao/engine';
-import { Ref } from 'vue';
+import type { EngineInterface } from '@aomao/engine';
+import type { Ref } from 'vue';
 
 
 export type { Ref, EngineInterface };

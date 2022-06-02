@@ -18,7 +18,7 @@ import {
 } from '@aomao/engine';
 import type MarkdownIt from 'markdown-it';
 import type { RequestData, RequestHeaders } from '@aomao/engine';
-import { ImageOptions } from './index';
+import type { ImageOptions } from './index';
 import ImageComponent, { ImageValue } from './component';
 export interface ImageUploaderOptions extends PluginOptions {
 	/**

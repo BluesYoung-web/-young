@@ -1,4 +1,4 @@
-import { PswpInterface } from '@/types';
+import type { PswpInterface } from '../../types';
 import { $, EditorInterface, Tooltip } from '@aomao/engine';
 
 class Zoom {
