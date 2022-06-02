@@ -1,17 +1,17 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-05-29 14:37:34
- * @LastEditTime: 2022-05-29 15:22:40
+ * @LastEditTime: 2022-06-02 16:00:01
  * @Description: 
 -->
 <script lang="ts" setup name="YoungEditor">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 
-import Engine, { $, EngineInterface, ChangeInterface, isMobile } from '@aomao/engine';
-import Toolbar, { GroupItemProps } from '@aomao/toolbar-vue';
+import Engine, { $, type EngineInterface, type ChangeInterface, isMobile } from '@aomao/engine';
+import Toolbar, { type GroupItemProps } from '@aomao/toolbar-vue';
 import { cards, plugins, pluginConfig } from './config';
 import { defaultContent, getDefaultToolbarItems, getDefaultStyle } from './default';
-import { StyleOption, NODES, Message, ChangePayload } from './types';
+import type { StyleOption, NODES, Message, ChangePayload } from './types';
 
 type Props = {
   modelValue?: string;
@@ -37,7 +37,7 @@ const styles = computed(() => {
 const toolbarItems = computed(() => {
   return [
     ...props.items,
-    ...props.customToolbarItems
+    props.customToolbarItems
   ];
 });
 
@@ -132,7 +132,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div>
+  <div v-bind="$attrs" relative>
     <Toolbar v-if="engine" :engine="engine" :items="toolbarItems" />
     <div :class="['editor-wrapper', { 'editor-mobile': isMobile }]">
       <div class="editor-container text-left">
@@ -163,7 +163,8 @@ onUnmounted(() => {
 }
 
 .editor-toolbar {
-  position: fixed;
+  position: absolute;
+  top: 0;
   width: 100%;
   background: #ffffff;
   /* transition: box-shadow 0.3s ease-in-out;

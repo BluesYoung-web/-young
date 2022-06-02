@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-29 14:48:12
- * @LastEditTime: 2022-05-29 14:50:13
+ * @LastEditTime: 2022-06-02 15:59:13
  * @Description: 
  */
 import type { GroupItemProps } from '@aomao/toolbar-vue';
@@ -9,15 +9,15 @@ import type { GroupItemProps } from '@aomao/toolbar-vue';
 export const defaultContent = '<h1>Hello Wolrd from YoungEditor !</h1>';
 
 export const getDefaultStyle = () => ({
-  height: '1123px',
-  width: '794px',
-  margin: '60px 0 0 0',
+  height: '480px',
+  width: '800px',
+  margin: '50px',
   padding: '0',
-  background: '#fff',
-  border: 'none',
+  background: 'rgb(249, 249, 249)',
+  border: '1px solid #ccc',
   overflowY: 'auto',
   boxShadow: 'rgba(158, 161, 165, 0.4) 0px 2px 12px 0px',
-  minHeight: 'calc(100vh - 36px)',
+  minHeight: '480px',
   fontFamily: 'SimSun, 宋体, "Songti SC", NSimSun, STSong, serif'
 });
 
