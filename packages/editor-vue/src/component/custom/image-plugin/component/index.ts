@@ -79,7 +79,7 @@ class ImageComponent<T extends ImageValue = ImageValue> extends Card<T> {
 	}
 
 	static get cardType() {
-		return CardType.INLINE;
+		return CardType.BLOCK;
 	}
 
 	static get collab() {
@@ -106,12 +106,10 @@ class ImageComponent<T extends ImageValue = ImageValue> extends Card<T> {
 		if (!loaded || !value.size || !value.size.height || !value.size.width)
 			this.setValue({ size } as T);
 		if (this.widthInput) {
-			this.widthInput.get<HTMLInputElement>()!.value =
-				size.width.toString();
+			this.widthInput.get<HTMLInputElement>()!.value = size.width.toString();
 		}
 		if (this.heightInput) {
-			this.heightInput.get<HTMLInputElement>()!.value =
-				size.height.toString();
+			this.heightInput.get<HTMLInputElement>()!.value = size.height.toString();
 		}
 	}
 
@@ -169,45 +167,29 @@ class ImageComponent<T extends ImageValue = ImageValue> extends Card<T> {
 				| ToolbarItemOptions
 			)[] = [
 				{
-					key: 'width',
-					type: 'input',
-					placeholder: language
-						.get('image', 'toolbbarWidthTitle')
-						.toString(),
-					prefix: 'W:',
-					value: value?.size?.width || 0,
-					didMount: (node) => {
-						this.widthInput = node.find('input[type=input]');
-					},
-					onChange: (value) => {
-						if (cssUnits.some((u) => value.endsWith(u))) {
-							this.onInputChange(value, 0);
-						} else {
-							const height = Math.round(
-								parseInt(value, 10) * (this.image?.rate || 1),
-							);
-							this.onInputChange(value, height);
-						}
-					},
+					key: 'w30',
+					type: 'button',
+					content: '30%',
+					onClick: () => {
+						this.onInputChange('30%', 0);
+					}
 				},
-				// {
-				// 	key: 'height',
-				// 	type: 'input',
-				// 	placeholder: language
-				// 		.get('image', 'toolbbarHeightTitle')
-				// 		.toString(),
-				// 	prefix: 'H:',
-				// 	value: value?.size?.height || 0,
-				// 	didMount: (node) => {
-				// 		this.heightInput = node.find('input[type=input]');
-				// 	},
-				// 	onChange: (value) => {
-				// 		const width = Math.round(
-				// 			parseInt(value, 10) / (this.image?.rate || 1),
-				// 		);
-				// 		this.onInputChange(width, value);
-				// 	},
-				// },
+				{
+					key: 'w50',
+					type: 'button',
+					content: '50%',
+					onClick: () => {
+						this.onInputChange('50%', 0);
+					}
+				},
+				{
+					key: 'w100',
+					type: 'button',
+					content: '100%',
+					onClick: () => {
+						this.onInputChange('100%', 0);
+					}
+				},
 				{
 					key: 'resize',
 					type: 'button',
@@ -308,8 +290,7 @@ class ImageComponent<T extends ImageValue = ImageValue> extends Card<T> {
 				message: value.message,
 				enableResizer: imagePlugin?.options?.enableResizer,
 				onBeforeRender: (status, src) => {
-					const imagePlugin =
-						editor.plugin.findPlugin<ImageOptions>('image');
+					const imagePlugin =	editor.plugin.findPlugin<ImageOptions>('image');
 					if (imagePlugin) {
 						const { onBeforeRender } = imagePlugin.options || {};
 						if (onBeforeRender) return onBeforeRender(status, src);

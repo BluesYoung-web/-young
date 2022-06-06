@@ -16,7 +16,7 @@
   "unpkg": "dist/index.umd.js",
   "jsdelivr": "dist/index.umd.js",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "test": "vitest",
     "build": "vite build && tsup",
     "release": "bumpp --commit",
