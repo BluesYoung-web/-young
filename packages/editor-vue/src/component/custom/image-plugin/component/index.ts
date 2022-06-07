@@ -159,7 +159,7 @@ class ImageComponent<T extends ImageValue = ImageValue> extends Card<T> {
 				{
 					key: 'delete',
 					type: 'delete',
-				},
+				}
 			];
 			if (isMobile) return items;
 			const resizerItems: (
@@ -206,6 +206,21 @@ class ImageComponent<T extends ImageValue = ImageValue> extends Card<T> {
 							value?.size?.naturalHeight || 0,
 						);
 					},
+				},
+				{
+					key: 'link',
+					type: 'input',
+					prefix: 'link:',
+					placeholder: '(可选)',
+					value: value?.link?.href ?? '',
+					onChange: (e) => {
+						this.image?.root?.find('img')?.attributes?.('data-url', e);
+						this.setValue({
+							link: {
+								href: e
+							}
+						} as Partial<T>);
+					}
 				},
 			];
 			const typeItems: (CardToolbarItemOptions | ToolbarItemOptions)[] = [
