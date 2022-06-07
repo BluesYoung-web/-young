@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-29 14:50:31
- * @LastEditTime: 2022-05-30 09:08:09
+ * @LastEditTime: 2022-06-07 15:36:14
  * @Description: 
  */
 import type { CardEntry, NodeInterface, PluginEntry, PluginOptions } from '@aomao/engine';
@@ -203,11 +203,7 @@ export const pluginConfig: { [key: string]: PluginOptions } = {
     file: {
       action: `${DOMAIN}/upload/image`,
       headers: { Authorization: 213434 },
-    },
-    remote: {
-      action: `${DOMAIN}/upload/image`,
-    },
-    isRemote: (src: string) => src.indexOf(DOMAIN) < 0,
+    }
   },
   /**
    * 文件上传相关的配置
