@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 10:43:29
- * @LastEditTime: 2022-05-23 11:03:57
+ * @LastEditTime: 2022-06-08 18:45:13
  * @Description: 
  */
 export type Position = 
@@ -16,6 +16,8 @@ export type GuidItem = {
   el: Selector;
   title: string;
   content: string;
+  style_title?: string;
+  style_content?: string;
 };
 document.querySelector
 export type GuidOptions = {

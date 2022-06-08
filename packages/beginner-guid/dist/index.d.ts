@@ -1,8 +1,13 @@
+import * as lit from 'lit';
+import { LitElement } from 'lit';
+
 declare type Selector = keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap | `.${string}` | `#${string}` | `[${string}]`;
 declare type GuidItem = {
     el: Selector;
     title: string;
     content: string;
+    style_title?: string;
+    style_content?: string;
 };
 declare type GuidOptions = {
     /**
@@ -16,6 +21,36 @@ declare type GuidOptions = {
      */
     force?: boolean;
 };
+
+declare type CurrStep$1 = {
+    index: number;
+    step: GuidItem;
+};
+declare class YoungBeginnerGuidNext extends LitElement {
+    curr: CurrStep$1;
+    visible: boolean;
+    handler: YoungBeginnerGuidControllerNext;
+    zIndex: string;
+    static styles: lit.CSSResult;
+    constructor(handler: YoungBeginnerGuidControllerNext, zIndex?: string);
+    closeHandler(): void;
+    prevHandler(): void;
+    nextHandler(): void;
+    render(): lit.TemplateResult<1>;
+}
+declare class YoungBeginnerGuidControllerNext {
+    index: number;
+    immdiate: boolean;
+    force: boolean;
+    guids: GuidItem[];
+    el: YoungBeginnerGuidNext;
+    constructor(guids: GuidItem[], options?: GuidOptions);
+    show(index?: number, visible?: boolean): void;
+    next(): void;
+    prev(): void;
+    hide(): void;
+    destory(): void;
+}
 
 declare type CurrStep = {
     visible: boolean;
@@ -56,4 +91,4 @@ declare class YoungBeginnerGuidController {
     destory(): void;
 }
 
-export { YoungBeginnerGuid, YoungBeginnerGuidController };
+export { CurrStep, YoungBeginnerGuid, YoungBeginnerGuidController, YoungBeginnerGuidControllerNext, YoungBeginnerGuidNext };

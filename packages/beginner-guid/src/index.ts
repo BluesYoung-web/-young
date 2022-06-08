@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-20 10:42:47
- * @LastEditTime: 2022-05-24 14:28:36
+ * @LastEditTime: 2022-06-08 18:50:46
  * @Description: 
  */
 import { createItem, getPosition, generateClipPathStr } from './core';
@@ -112,8 +112,6 @@ export class YoungBeginnerGuid extends HTMLElement {
   }
 
   render(item: CurrStep) {
-    // 对 mask 使用 clip-path: polygon 效果更好，但是需要进行复杂的计算
-    // 修改样式并保存现场，此处简化为给目标元素加边框
     this.saveSnapAndChange(item);
 
     this.changeVisiable(item);
@@ -202,3 +200,5 @@ export class YoungBeginnerGuidController {
     this.el.restoreSnap();
   }
 }
+
+export * from './next';

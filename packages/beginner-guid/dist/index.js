@@ -15,12 +15,23 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __decorateClass = (decorators, target, key, kind) => {
+  var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
+  for (var i = decorators.length - 1, decorator; i >= 0; i--)
+    if (decorator = decorators[i])
+      result = (kind ? decorator(target, key, result) : decorator(result)) || result;
+  if (kind && result)
+    __defProp(target, key, result);
+  return result;
+};
 
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
   YoungBeginnerGuid: () => YoungBeginnerGuid,
-  YoungBeginnerGuidController: () => YoungBeginnerGuidController
+  YoungBeginnerGuidController: () => YoungBeginnerGuidController,
+  YoungBeginnerGuidControllerNext: () => YoungBeginnerGuidControllerNext,
+  YoungBeginnerGuidNext: () => YoungBeginnerGuidNext
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -136,6 +147,164 @@ document.querySelector;
 var defautOptions = {
   immdiate: false,
   force: false
+};
+
+// src/next/index.ts
+var import_lit = require("lit");
+var import_decorators = require("lit/decorators.js");
+var YoungBeginnerGuidNext = class extends import_lit.LitElement {
+  constructor(handler, zIndex = "3000") {
+    super();
+    this.visible = false;
+    this.handler = handler;
+    this.zIndex = zIndex;
+    this.curr = {
+      index: 0,
+      step: this.handler.guids[0]
+    };
+  }
+  closeHandler() {
+    this.handler.hide();
+  }
+  prevHandler() {
+    this.handler.prev();
+  }
+  nextHandler() {
+    if (this.handler.index === this.handler.guids.length - 1) {
+      this.handler.hide();
+    } else {
+      this.handler.next();
+    }
+  }
+  render() {
+    var _a, _b, _c, _d;
+    if ((_b = (_a = globalThis == null ? void 0 : globalThis.process) == null ? void 0 : _a.env) == null ? void 0 : _b.TEST) {
+      return;
+    }
+    const {
+      x,
+      y,
+      positionX,
+      positionY,
+      srcX,
+      srcY,
+      width,
+      height
+    } = getPosition(this.curr.step.el);
+    const pathStr = generateClipPathStr(srcX, srcY, width, height);
+    return import_lit.html`
+    <style>
+    :host {
+      display: ${this.visible ? "block" : "none"};
+    }
+    #mask {
+      z-index: ${this.zIndex};
+      clip-path: path('${pathStr}');
+    }
+    #dialog {
+      z-index: ${+this.zIndex + 1};
+      ${positionX}: ${x}px !important;
+      ${positionY}: ${y}px !important;
+    }
+    #prev {
+      ${this.curr.index === 0 ? `
+          opacity: 0.5;
+          cursor: not-allowed !important;
+        ` : ""}
+    }
+    </style>
+    <div id="mask"></div>
+    <div id="dialog">
+      ${!this.handler.force ? import_lit.html`<div id="dialog-close" title="关闭新手引导" @click="${this.closeHandler}">
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ion" width="24" height="24" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M331.3 308.7L278.6 256l52.7-52.7c6.2-6.2 6.2-16.4 0-22.6-6.2-6.2-16.4-6.2-22.6 0L256 233.4l-52.7-52.7c-6.2-6.2-15.6-7.1-22.6 0-7.1 7.1-6 16.6 0 22.6l52.7 52.7-52.7 52.7c-6.7 6.7-6.4 16.3 0 22.6 6.4 6.4 16.4 6.2 22.6 0l52.7-52.7 52.7 52.7c6.2 6.2 16.4 6.2 22.6 0 6.3-6.2 6.3-16.4 0-22.6z" fill="#434343"></path><path d="M256 76c48.1 0 93.3 18.7 127.3 52.7S436 207.9 436 256s-18.7 93.3-52.7 127.3S304.1 436 256 436c-48.1 0-93.3-18.7-127.3-52.7S76 304.1 76 256s18.7-93.3 52.7-127.3S207.9 76 256 76m0-28C141.1 48 48 141.1 48 256s93.1 208 208 208 208-93.1 208-208S370.9 48 256 48z" fill="currentColor"></path></svg>
+                </div>` : ""}
+      <h3 class="title" style="${(_c = this.curr.step.style_title) != null ? _c : ""}">${this.curr.step.title}</h3>
+      <div class="content" style="${(_d = this.curr.step.style_content) != null ? _d : ""}">${this.curr.step.content}</div>
+      <div class="btns">
+        <button
+          id="prev"
+          type="button"
+          @click="${this.prevHandler}"
+        >上一步</button>
+        <button
+          id="next"
+          type="button"
+          @click="${this.nextHandler}"
+        >${this.curr.index === this.handler.guids.length - 1 ? "\u5173\u95ED" : "\u4E0B\u4E00\u6B65"}</button>
+      </div>
+    </div>
+    `;
+  }
+};
+YoungBeginnerGuidNext.styles = import_lit.css`
+    ${(0, import_lit.unsafeCSS)(_default)}
+  `;
+__decorateClass([
+  (0, import_decorators.property)()
+], YoungBeginnerGuidNext.prototype, "curr", 2);
+__decorateClass([
+  (0, import_decorators.property)()
+], YoungBeginnerGuidNext.prototype, "visible", 2);
+__decorateClass([
+  (0, import_decorators.property)()
+], YoungBeginnerGuidNext.prototype, "handler", 2);
+__decorateClass([
+  (0, import_decorators.property)()
+], YoungBeginnerGuidNext.prototype, "zIndex", 2);
+YoungBeginnerGuidNext = __decorateClass([
+  (0, import_decorators.customElement)("young-beginner-guid-next")
+], YoungBeginnerGuidNext);
+var YoungBeginnerGuidControllerNext = class {
+  constructor(guids, options = {}) {
+    this.index = 0;
+    this.immdiate = false;
+    this.force = false;
+    if (!guids.length) {
+      throw new Error("guids array can't be null");
+    }
+    this.guids = guids;
+    options = Object.assign(defautOptions, options);
+    this.immdiate = options.immdiate;
+    this.force = options.force;
+    this.el = new YoungBeginnerGuidNext(this);
+    window.addEventListener("load", () => {
+      this.immdiate && this.show();
+    });
+  }
+  show(index = 0, visible = true) {
+    var _a, _b;
+    if (!this.el.isConnected) {
+      document.body.appendChild(this.el);
+    }
+    this.index = index;
+    if ((_b = (_a = globalThis == null ? void 0 : globalThis.process) == null ? void 0 : _a.env) == null ? void 0 : _b.TEST) {
+      return;
+    }
+    this.el.curr = {
+      index,
+      step: this.guids[index]
+    };
+    this.el.visible = visible;
+  }
+  next() {
+    if (this.index < this.guids.length - 1) {
+      this.index++;
+      this.show(this.index);
+    }
+  }
+  prev() {
+    if (this.index > 0) {
+      this.index--;
+      this.show(this.index);
+    }
+  }
+  hide() {
+    this.show(this.index, false);
+  }
+  destory() {
+    this.index = 0;
+    document.body.removeChild(this.el);
+  }
 };
 
 // src/index.ts
@@ -289,5 +458,7 @@ var YoungBeginnerGuidController = class {
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   YoungBeginnerGuid,
-  YoungBeginnerGuidController
+  YoungBeginnerGuidController,
+  YoungBeginnerGuidControllerNext,
+  YoungBeginnerGuidNext
 });

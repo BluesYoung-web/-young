@@ -1,14 +1,15 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-05-17 12:19:18
- * @LastEditTime: 2022-05-24 15:10:23
+ * @LastEditTime: 2022-06-08 18:50:14
  * @Description: 
 -->
 <script setup lang="ts">
-import { YoungBeginnerGuidController } from '@bluesyoung/beginner-guid';
-// import { YoungBeginnerGuidController } from '../../../packages/beginner-guid/src/index';
+// import { YoungBeginnerGuidController } from '@bluesyoung/beginner-guid';
+import { YoungBeginnerGuidControllerNext } from '../../../packages/beginner-guid/src/index';
 
-const guid = new YoungBeginnerGuidController([
+// const guid = new YoungBeginnerGuidController([
+const guid = new YoungBeginnerGuidControllerNext([
   {
     el: '#step1',
     content: 'test1',
@@ -22,32 +23,34 @@ const guid = new YoungBeginnerGuidController([
   {
     el: '#step3',
     content: 'test3',
-    title: '<span style="color: red;">fdakjfadkjgsfd</span>'
+    title: 'fdakjfadkjgsfd',
+    style_title: `color: red;`
   },
   {
     el: '#step4',
     content: 'test4',
-    title: '<span style="color: red;">fdakjfadkjgsfd</span>'
+    title: 'fdakjfadkjgsfd',
   },
   {
     el: '#step5',
     content: 'test5',
-    title: '<span style="color: red;">fdakjfadkjgsfd</span>'
+    title: 'fdakjfadkjgsfd',
   },
   {
     el: '#step6',
     content: 'test6',
-    title: '<span style="color: red;">fdakjfadkjgsfd</span>'
+    title: 'fdakjfadkjgsfd',
   },
   {
     el: '.btn',
     content: 'test---button',
-    title: '<span style="color: red;">bye!</span>'
+    title: 'fdakjfadkjgsfd',
   },
   {
     el: 'h1',
     content: 'test---full',
-    title: '<span style="color: red;">来了老弟!</span>'
+    title: 'fdakjfadkjgsfd',
+    style_content: 'background-color: skyblue;'
   }
 ]);
 
