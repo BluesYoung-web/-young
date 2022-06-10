@@ -1,12 +1,12 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-05-17 12:19:18
- * @LastEditTime: 2022-06-08 18:50:14
+ * @LastEditTime: 2022-06-10 10:55:56
  * @Description: 
 -->
 <script setup lang="ts">
-// import { YoungBeginnerGuidController } from '@bluesyoung/beginner-guid';
-import { YoungBeginnerGuidControllerNext } from '../../../packages/beginner-guid/src/index';
+import { YoungBeginnerGuidControllerNext } from '@bluesyoung/beginner-guid';
+// import { YoungBeginnerGuidControllerNext } from '../../../packages/beginner-guid/src/index';
 
 // const guid = new YoungBeginnerGuidController([
 const guid = new YoungBeginnerGuidControllerNext([
