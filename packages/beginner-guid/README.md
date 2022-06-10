@@ -25,7 +25,8 @@ $ pnpm add @bluesyoung/beginner-guid
 
 ```html
 <script setup lang="ts">
-import { YoungBeginnerGuidController } from '@bluesyoung/beginner-guid';
+import { YoungBeginnerGuidController, YoungBeginnerGuidControllerNext } from '@bluesyoung/beginner-guid';
+// 原生 webcomponent
 /**
  * 极简形态
  */
@@ -72,6 +73,28 @@ const guid = new YoungBeginnerGuidController([
   // 禁止中途关闭
   force: true
 });
+
+// 全新版本，基于 Lit 开发，代码更加简洁
+// 样式外部化为 style_title 和 style_content
+const guid = new YoungBeginnerGuidControllerNext([
+  {
+    el: '#step1',
+    content: 'test1',
+    title: 'llllll'
+  },
+  {
+    el: '#step2',
+    content: 'test2',
+    title: 'mmmmmmmmmmmm'
+  },
+  {
+    el: '#step3',
+    content: 'test3',
+    title: 'fdakjfadkjgsfd',
+    style_title: `color: red;`,
+    style_content: `background-color: skyblue;`
+  }
+]);
 </script>
 
 <template>
@@ -82,7 +105,7 @@ const guid = new YoungBeginnerGuidController([
 ### 浏览器直接引入
 
 ```html
-<!-- 国内推荐使用 jsdelivr -->
+<!-- 国内推荐使用 jsdelivr(现在挂了，不知道什么时候能恢复) -->
 <script src="//cdn.jsdelivr.net/npm/@bluesyoung/beginner-guid"></script>
 <!-- or -->
 <script src="//unpkg.com/@bluesyoung/beginner-guid"></script>
@@ -99,7 +122,7 @@ guid.show();
 
 ```bash
 node: 16.13.1
-pnpm: 6.26.1
+pnpm: 7.1.9
 ```
 
 ## 开发
