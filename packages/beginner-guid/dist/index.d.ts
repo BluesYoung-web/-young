@@ -91,4 +91,4 @@ declare class YoungBeginnerGuidController {
     destory(): void;
 }
 
-export { CurrStep, YoungBeginnerGuid, YoungBeginnerGuidController, YoungBeginnerGuidControllerNext, YoungBeginnerGuidNext };
+export { YoungBeginnerGuid, YoungBeginnerGuidController, YoungBeginnerGuidControllerNext, YoungBeginnerGuidNext };
