@@ -40,24 +40,25 @@
   },
   "homepage": "https://github.com/BluesYoung-web/young#readme",
   "devDependencies": {
-    "@iconify/json": "^2.1.53",
-    "unocss": "^0.34.1"
+    "@iconify/json": "^2.1.62",
+    "unocss": "^0.39.0"
   },
   "dependencies": {
-    "@aomao/engine": "^2.9.9",
-    "@aomao/plugin-bold": "^2.9.9",
-    "@aomao/plugin-fontfamily": "^2.9.9",
-    "@aomao/plugin-fontsize": "^2.9.9",
-    "@aomao/plugin-heading": "^2.9.9",
-    "@aomao/plugin-italic": "^2.9.9",
-    "@aomao/plugin-paintformat": "^2.9.9",
-    "@aomao/plugin-redo": "^2.9.9",
-    "@aomao/plugin-removeformat": "^2.9.9",
-    "@aomao/plugin-strikethrough": "^2.9.9",
-    "@aomao/plugin-sub": "^2.9.9",
-    "@aomao/plugin-sup": "^2.9.9",
-    "@aomao/plugin-underline": "^2.9.9",
-    "@aomao/plugin-undo": "^2.9.9",
-    "@unocss/cli": "^0.34.1"
+    "@aomao/engine": "^2.9.20",
+    "@aomao/plugin-bold": "^2.9.20",
+    "@aomao/plugin-fontfamily": "^2.9.20",
+    "@aomao/plugin-fontsize": "^2.9.20",
+    "@aomao/plugin-heading": "^2.9.20",
+    "@aomao/plugin-italic": "^2.9.20",
+    "@aomao/plugin-paintformat": "^2.9.20",
+    "@aomao/plugin-redo": "^2.9.20",
+    "@aomao/plugin-removeformat": "^2.9.20",
+    "@aomao/plugin-strikethrough": "^2.9.20",
+    "@aomao/plugin-sub": "^2.9.20",
+    "@aomao/plugin-sup": "^2.9.20",
+    "@aomao/plugin-underline": "^2.9.20",
+    "@aomao/plugin-undo": "^2.9.20",
+    "@unocss/cli": "^0.39.0",
+    "lit": "^2.2.6"
   }
 }
