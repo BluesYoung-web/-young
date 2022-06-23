@@ -1,6 +1,6 @@
 {
   "name": "@bluesyoung/slide-verify",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "滑块验证",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
