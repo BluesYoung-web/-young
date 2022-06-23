@@ -245,6 +245,23 @@ importers:
       vite: 2.9.9
       vue-tsc: 0.34.15_typescript@4.6.4
 
+  playground/slide-verify-demo:
+    specifiers:
+      '@bluesyoung/slide-verify': workspace:^0.0.0
+      '@vitejs/plugin-vue': ^2.3.3
+      typescript: ^4.5.4
+      vite: ^2.9.9
+      vue: ^3.2.25
+      vue-tsc: ^0.34.7
+    dependencies:
+      '@bluesyoung/slide-verify': link:../../packages/slide-verify
+      vue: 3.2.37
+    devDependencies:
+      '@vitejs/plugin-vue': 2.3.3_vite@2.9.12+vue@3.2.37
+      typescript: 4.7.3
+      vite: 2.9.12
+      vue-tsc: 0.34.16_typescript@4.7.3
+
   playground/unplugin-json-conf-demo:
     specifiers:
       '@bluesyoung/unplugin-json-conf': workspace:^0.0.2
@@ -1356,6 +1373,17 @@ packages:
       '@unocss/scope': 0.39.0
       '@unocss/transformer-directives': 0.39.0
       magic-string: 0.26.2
+    dev: true
+
+  /@vitejs/plugin-vue/2.3.3_vite@2.9.12+vue@3.2.37:
+    resolution: {integrity: sha512-SmQLDyhz+6lGJhPELsBdzXGc+AcaT8stgkbiTFGpXPe8Tl1tJaBw1A6pxDqDuRsVkD8uscrkx3hA7QDOoKYtyw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      vite: ^2.5.10
+      vue: ^3.2.25
+    dependencies:
+      vite: 2.9.12
+      vue: 3.2.37
     dev: true
 
   /@vitejs/plugin-vue/2.3.3_vite@2.9.9+vue@3.2.33:
@@ -6419,6 +6447,16 @@ packages:
     dependencies:
       '@volar/vue-typescript': 0.34.16
       typescript: 4.7.2
+    dev: true
+
+  /vue-tsc/0.34.16_typescript@4.7.3:
+    resolution: {integrity: sha512-9tYBQIOyl3Tz8ZrlYUKtftu5m/wXHfxCalyjR22QzSaUJoBJmZeNOoVs/QEllc0z4ideEZxvvU+pBFdoY3O16A==}
+    hasBin: true
+    peerDependencies:
+      typescript: '*'
+    dependencies:
+      '@volar/vue-typescript': 0.34.16
+      typescript: 4.7.3
     dev: true
 
   /vue-types/3.0.2_vue@3.2.37:
