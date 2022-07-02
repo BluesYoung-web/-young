@@ -1,11 +1,11 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-07-02 14:57:48
- * @LastEditTime: 2022-07-02 19:47:10
+ * @LastEditTime: 2022-07-02 20:00:15
  * @Description: 
  */
 import { GetParamsSign, Young } from '../../typings';
-import { SHAKE_HANDS_MSG, SHAKE_HANDS_MSG_RETURN } from './share';
+import { SHAKE_HANDS_MSG } from './share';
 
 type MasterCbk<R extends Record<string, any>, T extends keyof R = keyof R> = (params: GetParamsSign<R[T]>) => any | Promise<any>;
 type MasterHandlers<R extends Record<string, any>, T extends keyof R = keyof R> = Partial<Record<T, MasterCbk<R, T>>>;
@@ -33,19 +33,13 @@ export class YoungRPCMaster<R extends Record<string, any>, T extends keyof R = k
         this.port.onmessageerror = (e) => {
           console.error('🚀 ~ YoungRPCMaster ~ ', e);
         };
-        this.open();
+        console.log('🚀🚀🚀 master app is ready 🚀🚀🚀');
       }
     });
   }
 
   public setHandler(cmd: T, cbk: MasterCbk<R, T>) {
     this.handlersMap[cmd] = cbk;
-  }
-
-  public open() {
-    // 信道建立完成
-    this.port.postMessage(SHAKE_HANDS_MSG_RETURN);
-    console.log('🚀🚀🚀 master app is ready 🚀🚀🚀');
   }
 
   public close() {

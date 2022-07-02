@@ -1,17 +1,16 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-07-02 14:57:53
- * @LastEditTime: 2022-07-02 19:39:12
+ * @LastEditTime: 2022-07-02 19:58:42
  * @Description: 
  */
 import { GetParamsSign, Young } from '../../typings';
-import { SHAKE_HANDS_MSG, SHAKE_HANDS_MSG_RETURN } from './share';
+import { SHAKE_HANDS_MSG } from './share';
 
 type SlaveHandlers<T extends string | number | symbol> = Partial<Record<T, (args: Young.MasterReturnParams) => Promise<void>>>;
 
 export class YoungRPCSlave<R extends Record<string, any>, T extends keyof R = keyof R> {
   public port: MessagePort;
-  public isReady = false;
   private masterWindow: Window;
 
   private handlersMap: SlaveHandlers<T> = {};
@@ -37,11 +36,7 @@ export class YoungRPCSlave<R extends Record<string, any>, T extends keyof R = ke
     this.port.onmessage = (e) => {
       const { data, isTrusted } = e;
       if (isTrusted && data) {
-        if (typeof data === 'string' && data === SHAKE_HANDS_MSG_RETURN) {
-          // 信道建立完成，可以正式调用了
-          this.isReady = true;
-          console.log('🚀🚀🚀 slave app is ready 🚀🚀🚀');
-        } else if (data.cmd && typeof data.cmd === 'string' && data.cmd as T) {
+        if (data.cmd && typeof data.cmd === 'string' && data.cmd as T) {
           // 已知的消息类型
           this.handlersMap[data.cmd]?.(data);
         }  else {
@@ -58,9 +53,6 @@ export class YoungRPCSlave<R extends Record<string, any>, T extends keyof R = ke
   }
 
   public trigger(cmd: T, params: Record<string, any> = {}) {
-    if (!this.isReady) {
-      throw new Error('the message channel has not established !');
-    }
     this.port.postMessage({ cmd, params });
   }
 
