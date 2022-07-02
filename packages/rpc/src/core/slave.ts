@@ -1,14 +1,21 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-07-02 14:57:53
- * @LastEditTime: 2022-07-02 16:09:20
+ * @LastEditTime: 2022-07-02 19:39:12
  * @Description: 
  */
+import { GetParamsSign, Young } from '../../typings';
 import { SHAKE_HANDS_MSG, SHAKE_HANDS_MSG_RETURN } from './share';
-export class YoungRPCSlave {
+
+type SlaveHandlers<T extends string | number | symbol> = Partial<Record<T, (args: Young.MasterReturnParams) => Promise<void>>>;
+
+export class YoungRPCSlave<R extends Record<string, any>, T extends keyof R = keyof R> {
   public port: MessagePort;
   public isReady = false;
   private masterWindow: Window;
+
+  private handlersMap: SlaveHandlers<T> = {};
+
   constructor() {
     if (window.opener && window.opener !== window) {
       // 由父窗口通过 window.open 打开的
@@ -21,7 +28,7 @@ export class YoungRPCSlave {
     this.shakeHands();
   }
 
-  shakeHands() {
+  public shakeHands() {
     if (!this.masterWindow) {
       throw new Error('YoungRPCSlave can only be used in sub window');
     }
@@ -29,14 +36,14 @@ export class YoungRPCSlave {
     this.port = channel.port1;
     this.port.onmessage = (e) => {
       const { data, isTrusted } = e;
-      if (isTrusted) {
+      if (isTrusted && data) {
         if (typeof data === 'string' && data === SHAKE_HANDS_MSG_RETURN) {
           // 信道建立完成，可以正式调用了
           this.isReady = true;
           console.log('🚀🚀🚀 slave app is ready 🚀🚀🚀');
-        } else if (data.cmd) {
+        } else if (data.cmd && typeof data.cmd === 'string' && data.cmd as T) {
           // 已知的消息类型
-          
+          this.handlersMap[data.cmd]?.(data);
         }  else {
           // 未知的消息类型
           console.warn('🚀unknown msg', data);
@@ -50,10 +57,21 @@ export class YoungRPCSlave {
     this.masterWindow.postMessage(SHAKE_HANDS_MSG, '*', [channel.port2]);
   }
 
-  trigger() {
+  public trigger(cmd: T, params: Record<string, any> = {}) {
     if (!this.isReady) {
       throw new Error('the message channel has not established !');
     }
-    
+    this.port.postMessage({ cmd, params });
+  }
+
+  public setHandler(cmd: T, { success, fail }: Young.Cbk) {
+    this.handlersMap[cmd] = async ({ ok, data }) => {
+      if (ok) {
+        await success?.(data);
+      } else {
+        await fail?.(data);
+      }
+    };
+    return this.trigger.bind(this, cmd) as (params?: GetParamsSign<R[T]>) => void;
   }
 };
