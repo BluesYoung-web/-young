@@ -1,0 +1,40 @@
+{
+  "name": "@bluesyoung/rpc",
+  "version": "0.0.0",
+  "description": "基于 postMessage(MessageChannel) 的远程调用库",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "browser": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
+  "jsdelivr": "dist/index.umd.js",
+  "scripts": {
+    "test": "vitest",
+    "build": "vite build && tsup",
+    "release": "bumpp --commit",
+    "push": "pnpm publish --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/BluesYoung-web/young.git",
+    "directory": "packages/casdoor-auth"
+  },
+  "author": "BluesYoung-web",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BluesYoung-web/young/issues"
+  },
+  "homepage": "https://github.com/BluesYoung-web/young#readme",
+  "keywords": [
+    "rpc",
+    "postMessage",
+    "MessageChannel"
+  ]
+}
