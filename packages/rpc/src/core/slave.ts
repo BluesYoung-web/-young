@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-07-02 14:57:53
- * @LastEditTime: 2022-07-02 19:58:42
+ * @LastEditTime: 2022-07-03 09:12:37
  * @Description: 
  */
 import { GetParamsSign, Young } from '../../typings';
@@ -36,9 +36,9 @@ export class YoungRPCSlave<R extends Record<string, any>, T extends keyof R = ke
     this.port.onmessage = (e) => {
       const { data, isTrusted } = e;
       if (isTrusted && data) {
-        if (data.cmd && typeof data.cmd === 'string' && data.cmd as T) {
+        if (data.cmd && typeof data.cmd === 'string' && this.handlersMap[data.cmd as T]) {
           // 已知的消息类型
-          this.handlersMap[data.cmd]?.(data);
+          this.handlersMap[data.cmd](data as Young.MasterReturnParams);
         }  else {
           // 未知的消息类型
           console.warn('🚀unknown msg', data);

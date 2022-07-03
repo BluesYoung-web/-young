@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-07-02 14:57:48
- * @LastEditTime: 2022-07-02 20:00:15
+ * @LastEditTime: 2022-07-03 09:49:56
  * @Description: 
  */
 import { GetParamsSign, Young } from '../../typings';
@@ -14,16 +14,16 @@ export class YoungRPCMaster<R extends Record<string, any>, T extends keyof R = k
   private port: MessagePort;
   private handlersMap: MasterHandlers<R, T> = {};
   constructor() {
-    window.addEventListener('message', (e) => {
+    window.addEventListener('message', async (e) => {
       if (e.data === SHAKE_HANDS_MSG) {
         this.port = e.ports[0];
         this.port.onmessage = (e) => {
           const { data, isTrusted } = e;
           if (isTrusted && data) {
             // 可以正式处理消息了
-            if (data.cmd && typeof data.cmd === 'string' && data.cmd as T) {
+            if (data.cmd && typeof data.cmd === 'string' && this.handlersMap[data.cmd as T]) {
               // 已知的消息类型
-              this.handlersMap[data.cmd as T]?.(data.params as GetParamsSign<R[T]>);
+              this.handlersMap[data.cmd](data.params as GetParamsSign<R[T]>);
             }  else {
               // 未知的消息类型
               console.warn('🚀unknown msg', data);
