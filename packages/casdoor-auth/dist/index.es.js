@@ -40,37 +40,6 @@ class Sdk {
     }).then((res) => res.json());
   }
 }
-const defaultCmd = "I want to login";
-class Master {
-  constructor(conf, cmd = defaultCmd) {
-    const onMessage = async (e) => {
-      if (e.data.cmd === cmd) {
-        conf.onmsg_cbk(e);
-      }
-    };
-    window.addEventListener("message", onMessage);
-  }
-}
-class Slave {
-  constructor(conf, cmd = defaultCmd) {
-    this.cmd = cmd;
-    const onMessage = async (e) => {
-      if (e.origin === conf.master_url) {
-        await conf.onmsg_cbk(e.data);
-      }
-    };
-    window.addEventListener("message", onMessage);
-  }
-  init(fallback) {
-    if (window.opener) {
-      window.opener.postMessage({
-        cmd: this.cmd
-      }, "*");
-    } else {
-      fallback == null ? void 0 : fallback();
-    }
-  }
-}
 const defaultConf = {
   serverUrl: "https://door.casdoor.com",
   clientId: "014ae4bd048734ca2dea",
@@ -101,5 +70,5 @@ class YoungAuth {
     window.location.href = url;
   }
 }
-export { Master, Slave, YoungAuth, defaultCmd };
+export { YoungAuth };
 //# sourceMappingURL=index.es.js.map
