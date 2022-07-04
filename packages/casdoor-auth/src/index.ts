@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-17 17:09:04
- * @LastEditTime: 2022-05-25 12:08:50
+ * @LastEditTime: 2022-07-04 08:27:01
  * @Description: 
  */
 import Casdoor from './casdoor-sdk';
@@ -45,6 +45,3 @@ export class YoungAuth {
     window.location.href = url;
   }
 };
-
-export * from './no-login/master';
-export * from './no-login/slave';
