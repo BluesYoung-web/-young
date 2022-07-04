@@ -21,3 +21,11 @@
 ## @bluesyoung/unplugin-json-conf
 
 在[unplugin-starter](https://github.com/antfu/unplugin-starter#readme)基础上开发的[将外部 JSON 文件导入为虚拟模块的插件](./packages/unplugin-json-conf/README.md)
+
+## @bluesyoung/slide-verify
+
+[基于 lit + css 实现的纯前端滑块验证组件](./packages/slide-verify/README.md)
+
+## @bluesyoung/rpc
+
+[基于 postMessage + MessageChannel 实现的父子页面(window.open | iframe)通信框架](./packages/rpc/README.md)
