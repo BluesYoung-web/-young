@@ -167,6 +167,12 @@ importers:
       vite-plugin-vue-setup-extend: 0.4.0
       vue: 3.2.37
 
+  packages/priview-gallary:
+    specifiers:
+      lit: ^2.2.7
+    dependencies:
+      lit: 2.2.7
+
   packages/share-dom:
     specifiers: {}
 
@@ -4623,6 +4629,14 @@ packages:
 
   /lit/2.2.6:
     resolution: {integrity: sha512-K2vkeGABfSJSfkhqHy86ujchJs3NR9nW1bEEiV+bXDkbiQ60Tv5GUausYN2mXigZn8lC1qXuc46ArQRKYmumZw==}
+    dependencies:
+      '@lit/reactive-element': 1.3.2
+      lit-element: 3.2.0
+      lit-html: 2.2.6
+    dev: false
+
+  /lit/2.2.7:
+    resolution: {integrity: sha512-WXYujlKFwme5ZqXOZoWuRVZQAwy7scbcVT3wCbAOHefOxyscqjywWGlF2e6nnC9E64yP9l2ZQlN8wZcRlrjUMQ==}
     dependencies:
       '@lit/reactive-element': 1.3.2
       lit-element: 3.2.0
