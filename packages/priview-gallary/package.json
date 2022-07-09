@@ -1,6 +1,6 @@
 {
   "name": "@bluesyoung/preview-gallary",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "图片/视频预览",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
