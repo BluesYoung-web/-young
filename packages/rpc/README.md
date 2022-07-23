@@ -8,7 +8,7 @@
 
 🌟 **无视跨域限制，拥有安全限制，阻隔恶意消息**
 
-🌟 `100% TypeScript`，拥有**完美的类型提示**
+🌟 `100% TypeScript`，拥有**良好的类型提示**
 
 🌟 `esm | cjs | umd`，各种环境一应俱全
 
@@ -38,7 +38,7 @@ $ pnpm add @bluesyoung/rpc
 <!-- jsdelivr -->
 <script src="//cdn.jsdelivr.net/npm/@bluesyoung/rpc"></script>
 <script>
-const { YoungRPCMaster, YoungRPCSlave } = new window.YoungRPC;
+const { YoungRPCMaster, YoungRPCSlave } = window.YoungRPC;
 </script>
 ```
 
