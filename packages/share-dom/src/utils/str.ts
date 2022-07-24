@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-05-19 14:44:29
- * @LastEditTime: 2022-05-19 16:47:04
+ * @LastEditTime: 2022-07-24 13:52:36
  * @Description: 字符串处理
  */
 /**
@@ -10,7 +10,7 @@
  * ===>
  * '⚓️ 规则之外'
  */
-const parseUnicode = (str: string) => {
+export const parseUnicode = (str: string) => {
   const srcArr = str.match(/(\\u[0-9A-F]+\s?)+/img) || [];
   for (const name of srcArr) {
     const tp = name.split(/\s/);

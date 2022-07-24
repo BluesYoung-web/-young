@@ -22,6 +22,9 @@ __export(src_exports, {
   Detector: () => Detector,
   copy: () => copy,
   detector: () => d,
+  disableScroll: () => disableScroll,
+  enableScroll: () => enableScroll,
+  parseUnicode: () => parseUnicode,
   ua: () => ua
 });
 module.exports = __toCommonJS(src_exports);
@@ -319,10 +322,59 @@ var detector = new Detector({
 });
 var ua = navigator.userAgent + " " + navigator.appVersion + " " + navigator.vendor;
 var d = detector.parse(ua);
+
+// src/utils/disableScroll.ts
+function preventKeyScroll(e) {
+  const keys = [
+    "ArrowUp",
+    "ArrowDown",
+    "PageUp",
+    "PageDown",
+    "Home",
+    "End",
+    "Tab"
+  ];
+  if (keys.includes(e.key)) {
+    e.preventDefault();
+  }
+}
+function preventWheelScroll(e) {
+  e.preventDefault();
+}
+var disableScroll = () => {
+  window.addEventListener("wheel", preventWheelScroll, { passive: false });
+  window.addEventListener("keyup", preventKeyScroll);
+  window.addEventListener("keydown", preventKeyScroll);
+  window.addEventListener("keypress", preventKeyScroll);
+};
+var enableScroll = () => {
+  window.removeEventListener("wheel", preventWheelScroll);
+  window.removeEventListener("keyup", preventKeyScroll);
+  window.removeEventListener("keydown", preventKeyScroll);
+  window.removeEventListener("keypress", preventKeyScroll);
+};
+
+// src/utils/str.ts
+var parseUnicode = (str) => {
+  const srcArr = str.match(/(\\u[0-9A-F]+\s?)+/img) || [];
+  for (const name of srcArr) {
+    const tp = name.split(/\s/);
+    let s = "";
+    for (const char of tp) {
+      s += String.fromCharCode(...char.split("\\u").filter((c) => c).map((c) => +`0x${c}`));
+    }
+    str = str.replace(name, s);
+    console.log(str);
+  }
+  return str;
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Detector,
   copy,
   detector,
+  disableScroll,
+  enableScroll,
+  parseUnicode,
   ua
 });

@@ -288,5 +288,47 @@ const detector = new Detector({
 });
 const ua = navigator.userAgent + " " + navigator.appVersion + " " + navigator.vendor;
 const d = detector.parse(ua);
-export { Detector, copy, d as detector, ua };
+function preventKeyScroll(e) {
+  const keys = [
+    "ArrowUp",
+    "ArrowDown",
+    "PageUp",
+    "PageDown",
+    "Home",
+    "End",
+    "Tab"
+  ];
+  if (keys.includes(e.key)) {
+    e.preventDefault();
+  }
+}
+function preventWheelScroll(e) {
+  e.preventDefault();
+}
+const disableScroll = () => {
+  window.addEventListener("wheel", preventWheelScroll, { passive: false });
+  window.addEventListener("keyup", preventKeyScroll);
+  window.addEventListener("keydown", preventKeyScroll);
+  window.addEventListener("keypress", preventKeyScroll);
+};
+const enableScroll = () => {
+  window.removeEventListener("wheel", preventWheelScroll);
+  window.removeEventListener("keyup", preventKeyScroll);
+  window.removeEventListener("keydown", preventKeyScroll);
+  window.removeEventListener("keypress", preventKeyScroll);
+};
+const parseUnicode = (str) => {
+  const srcArr = str.match(/(\\u[0-9A-F]+\s?)+/img) || [];
+  for (const name of srcArr) {
+    const tp = name.split(/\s/);
+    let s = "";
+    for (const char of tp) {
+      s += String.fromCharCode(...char.split("\\u").filter((c) => c).map((c) => +`0x${c}`));
+    }
+    str = str.replace(name, s);
+    console.log(str);
+  }
+  return str;
+};
+export { Detector, copy, d as detector, disableScroll, enableScroll, parseUnicode, ua };
 //# sourceMappingURL=index.es.js.map

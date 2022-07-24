@@ -21,4 +21,15 @@ declare class Detector {
 declare const ua: string;
 declare const d: any;
 
-export { Detector, copy, d as detector, ua };
+declare const disableScroll: () => void;
+declare const enableScroll: () => void;
+
+/**
+ * 解析转义之后的字符
+ * "\\u2693\\uFE0F \\u89C4\\u5219\\u4E4B\\u5916"
+ * ===>
+ * '⚓️ 规则之外'
+ */
+declare const parseUnicode: (str: string) => string;
+
+export { Detector, copy, d as detector, disableScroll, enableScroll, parseUnicode, ua };
