@@ -7,3 +7,11 @@
 ## detect
 
 根据 User-Agent 信息判断浏览器的宿主环境
+
+## disableScroll
+
+禁用窗口滚动
+
+## str
+
+字符串处理相关
