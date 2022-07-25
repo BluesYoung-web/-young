@@ -15,7 +15,9 @@ declare type AuthConfig = {
     scope?: 'snsapi_base' | 'snsapi_userinfo';
 };
 declare class export_default{
+    auth_url: string;
     constructor(conf: AuthConfig);
+    getCode(): string;
 }
 
 export { export_default as default };

@@ -5,13 +5,16 @@ const defaultConfig = {
 class index {
   constructor(conf) {
     conf = Object.assign(defaultConfig, conf);
+    this.auth_url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${conf.appid}&redirect_uri=${encodeURIComponent(location.href)}&response_type=code&scope=${conf.scope}&state=${conf.state}#wechat_redirect`;
+  }
+  getCode() {
     const args = new URLSearchParams(location.search);
     const code = args.get("code");
     const state = args.get("state");
     if (state) {
       return code;
     } else {
-      location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${conf.appid}&redirect_uri=${encodeURIComponent(location.href)}&response_type=code&scope=${conf.scope}&state=${conf.state}#wechat_redirect`;
+      location.href = this.auth_url;
     }
   }
 }
