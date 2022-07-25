@@ -28,7 +28,7 @@ importers:
 
   packages/call-app:
     specifiers:
-      '@bluesyoung/share-dom': workspace:^0.0.2
+      '@bluesyoung/share-dom': workspace:^0.0.3
     dependencies:
       '@bluesyoung/share-dom': link:../share-dom
 
@@ -173,6 +173,9 @@ importers:
     dependencies:
       lit: 2.2.7
 
+  packages/rpc:
+    specifiers: {}
+
   packages/share-dom:
     specifiers: {}
 
@@ -216,6 +219,9 @@ importers:
       vite: 2.9.9
       vitest: 0.12.6
       webpack: 5.72.1
+
+  packages/wechat-auth:
+    specifiers: {}
 
   playground/beginner-guid-demo:
     specifiers:
