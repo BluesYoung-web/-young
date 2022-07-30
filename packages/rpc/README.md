@@ -135,3 +135,17 @@ masterApp.setHandler('getUsers', async () => {
   }
 });
 ```
+
+### 多实例
+
+```ts
+// 主页
+const masterApp1 = new YoungRPCMaster<T1>('rpc-shakehands-001');
+const masterApp2 = new YoungRPCMaster<T2>('rpc-shakehands-002');
+
+// 子页1
+const slaveApp1 = new YoungRPCSlave<T1>('rpc-shakehands-001');
+
+// 子页2
+const slaveApp2 = new YoungRPCSlave<T2>('rpc-shakehands-002');
+```
