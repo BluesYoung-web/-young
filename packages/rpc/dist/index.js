@@ -29,7 +29,8 @@ var SHAKE_HANDS_MSG = "---young-rpc-shake-hands-message-request---";
 
 // src/core/slave.ts
 var YoungRPCSlave = class {
-  constructor() {
+  constructor(shakeHandsMsg = SHAKE_HANDS_MSG) {
+    this.shakeHandsMsg = shakeHandsMsg;
     this.handlersMap = {};
     if (window.opener && window.opener !== window) {
       this.masterWindow = window.opener;
@@ -57,7 +58,7 @@ var YoungRPCSlave = class {
     this.port.onmessageerror = (e) => {
       console.error("\u{1F680} ~ YoungRPCSlave ~ e", e);
     };
-    this.masterWindow.postMessage(SHAKE_HANDS_MSG, "*", [channel.port2]);
+    this.masterWindow.postMessage(this.shakeHandsMsg, "*", [channel.port2]);
   }
   trigger(cmd, params = {}) {
     this.port.postMessage({ cmd, params });
@@ -76,10 +77,10 @@ var YoungRPCSlave = class {
 
 // src/core/master.ts
 var YoungRPCMaster = class {
-  constructor() {
+  constructor(shakeHandsMsg = SHAKE_HANDS_MSG) {
     this.handlersMap = {};
     window.addEventListener("message", async (e) => {
-      if (e.data === SHAKE_HANDS_MSG) {
+      if (e.data === shakeHandsMsg) {
         this.port = e.ports[0];
         this.port.onmessage = (e2) => {
           const { data, isTrusted } = e2;
@@ -94,7 +95,7 @@ var YoungRPCMaster = class {
         this.port.onmessageerror = (e2) => {
           console.error("\u{1F680} ~ YoungRPCMaster ~ ", e2);
         };
-        console.log("\u{1F680}\u{1F680}\u{1F680} master app is ready \u{1F680}\u{1F680}\u{1F680}");
+        console.log("\u{1F680}\u{1F680}\u{1F680} master app is ready \u{1F680}\u{1F680}\u{1F680}, shakeHandsMsg: ", shakeHandsMsg);
       }
     });
   }

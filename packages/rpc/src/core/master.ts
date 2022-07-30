@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-07-02 14:57:48
- * @LastEditTime: 2022-07-03 09:49:56
+ * @LastEditTime: 2022-07-30 15:37:33
  * @Description: 
  */
 import { GetParamsSign, Young } from '../../typings';
@@ -13,9 +13,9 @@ type MasterHandlers<R extends Record<string, any>, T extends keyof R = keyof R> 
 export class YoungRPCMaster<R extends Record<string, any>, T extends keyof R = keyof R> {
   private port: MessagePort;
   private handlersMap: MasterHandlers<R, T> = {};
-  constructor() {
+  constructor(shakeHandsMsg = SHAKE_HANDS_MSG) {
     window.addEventListener('message', async (e) => {
-      if (e.data === SHAKE_HANDS_MSG) {
+      if (e.data === shakeHandsMsg) {
         this.port = e.ports[0];
         this.port.onmessage = (e) => {
           const { data, isTrusted } = e;
@@ -33,7 +33,7 @@ export class YoungRPCMaster<R extends Record<string, any>, T extends keyof R = k
         this.port.onmessageerror = (e) => {
           console.error('🚀 ~ YoungRPCMaster ~ ', e);
         };
-        console.log('🚀🚀🚀 master app is ready 🚀🚀🚀');
+        console.log('🚀🚀🚀 master app is ready 🚀🚀🚀, shakeHandsMsg: ', shakeHandsMsg);
       }
     });
   }

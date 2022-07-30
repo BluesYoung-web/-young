@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-07-02 14:57:53
- * @LastEditTime: 2022-07-03 09:12:37
+ * @LastEditTime: 2022-07-30 15:30:13
  * @Description: 
  */
 import { GetParamsSign, Young } from '../../typings';
@@ -12,10 +12,9 @@ type SlaveHandlers<T extends string | number | symbol> = Partial<Record<T, (args
 export class YoungRPCSlave<R extends Record<string, any>, T extends keyof R = keyof R> {
   public port: MessagePort;
   private masterWindow: Window;
-
   private handlersMap: SlaveHandlers<T> = {};
 
-  constructor() {
+  constructor(private shakeHandsMsg = SHAKE_HANDS_MSG) {
     if (window.opener && window.opener !== window) {
       // 由父窗口通过 window.open 打开的
       this.masterWindow = window.opener;
@@ -49,7 +48,7 @@ export class YoungRPCSlave<R extends Record<string, any>, T extends keyof R = ke
       console.error('🚀 ~ YoungRPCSlave ~ e', e);
     };
     
-    this.masterWindow.postMessage(SHAKE_HANDS_MSG, '*', [channel.port2]);
+    this.masterWindow.postMessage(this.shakeHandsMsg, '*', [channel.port2]);
   }
 
   public trigger(cmd: T, params: Record<string, any> = {}) {

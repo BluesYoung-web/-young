@@ -11,10 +11,11 @@ declare namespace Young {
 }
 
 declare class YoungRPCSlave<R extends Record<string, any>, T extends keyof R = keyof R> {
+    private shakeHandsMsg;
     port: MessagePort;
     private masterWindow;
     private handlersMap;
-    constructor();
+    constructor(shakeHandsMsg?: string);
     shakeHands(): void;
     trigger(cmd: T, params?: Record<string, any>): void;
     setHandler(cmd: T, { success, fail }: Young.Cbk): (params?: GetParamsSign<R[T]>) => void;
@@ -24,7 +25,7 @@ declare type MasterCbk<R extends Record<string, any>, T extends keyof R = keyof 
 declare class YoungRPCMaster<R extends Record<string, any>, T extends keyof R = keyof R> {
     private port;
     private handlersMap;
-    constructor();
+    constructor(shakeHandsMsg?: string);
     setHandler(cmd: T, cbk: MasterCbk<R, T>): void;
     close(): void;
     sendMsg(data: Young.MasterReturnParams & {
