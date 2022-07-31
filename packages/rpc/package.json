@@ -1,6 +1,6 @@
 {
   "name": "@bluesyoung/rpc",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "基于 postMessage(MessageChannel) 的远程调用库",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
