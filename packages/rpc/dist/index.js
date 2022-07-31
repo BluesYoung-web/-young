@@ -63,7 +63,7 @@ var YoungRPCSlave = class {
   trigger(cmd, params = {}) {
     this.port.postMessage({ cmd, params });
   }
-  setHandler(cmd, { success, fail }) {
+  setHandler(cmd, { success, fail } = {}) {
     this.handlersMap[cmd] = async ({ ok, data }) => {
       if (ok) {
         await (success == null ? void 0 : success(data));

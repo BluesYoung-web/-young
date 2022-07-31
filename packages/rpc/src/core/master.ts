@@ -1,18 +1,20 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-07-02 14:57:48
- * @LastEditTime: 2022-07-30 15:37:33
+ * @LastEditTime: 2022-07-31 15:11:45
  * @Description: 
  */
 import { GetParamsSign, Young } from '../../typings';
 import { SHAKE_HANDS_MSG } from './share';
 
-type MasterCbk<R extends Record<string, any>, T extends keyof R = keyof R> = (params: GetParamsSign<R[T]>) => any | Promise<any>;
-type MasterHandlers<R extends Record<string, any>, T extends keyof R = keyof R> = Partial<Record<T, MasterCbk<R, T>>>;
+type MasterCbk<R extends Record<string, any>, T extends keyof R> = (params: GetParamsSign<R[T]>) => any | Promise<any>;
+type MasterHandlers<R extends Record<string, any>> = {
+  [P in keyof R]?: MasterCbk<R, P>;
+};
 
-export class YoungRPCMaster<R extends Record<string, any>, T extends keyof R = keyof R> {
+export class YoungRPCMaster<R extends Record<string, any>> {
   private port: MessagePort;
-  private handlersMap: MasterHandlers<R, T> = {};
+  private handlersMap: MasterHandlers<R> = {};
   constructor(shakeHandsMsg = SHAKE_HANDS_MSG) {
     window.addEventListener('message', async (e) => {
       if (e.data === shakeHandsMsg) {
@@ -21,9 +23,9 @@ export class YoungRPCMaster<R extends Record<string, any>, T extends keyof R = k
           const { data, isTrusted } = e;
           if (isTrusted && data) {
             // 可以正式处理消息了
-            if (data.cmd && typeof data.cmd === 'string' && this.handlersMap[data.cmd as T]) {
+            if (data.cmd && typeof data.cmd === 'string' && this.handlersMap[data.cmd as keyof R]) {
               // 已知的消息类型
-              this.handlersMap[data.cmd](data.params as GetParamsSign<R[T]>);
+              this.handlersMap[data.cmd](data.params);
             }  else {
               // 未知的消息类型
               console.warn('🚀unknown msg', data);
@@ -38,7 +40,7 @@ export class YoungRPCMaster<R extends Record<string, any>, T extends keyof R = k
     });
   }
 
-  public setHandler(cmd: T, cbk: MasterCbk<R, T>) {
+  public setHandler<T extends keyof R>(cmd: T, cbk: MasterHandlers<R>[T]) {
     this.handlersMap[cmd] = cbk;
   }
 
@@ -47,7 +49,7 @@ export class YoungRPCMaster<R extends Record<string, any>, T extends keyof R = k
     this.port.close();
   }
 
-  public sendMsg(data: Young.MasterReturnParams & { cmd: T }) {
+  public sendMsg(data: Young.MasterReturnParams & { cmd: keyof R }) {
     this.port.postMessage(data);
   }
 };
