@@ -9,15 +9,16 @@ declare type AuthConfig = {
      */
     state?: string;
     /**
-     * 授权类型
-     * @default 'snsapi_base'
+     * 重定向的地址
+     * @default location.href
      */
-    scope?: 'snsapi_base' | 'snsapi_userinfo';
+    redirect?: string;
 };
 declare class export_default{
     auth_url: string;
+    login_url: string;
     constructor(conf: AuthConfig);
-    getCode(): string;
+    getCode(type?: 'base' | 'login'): string;
 }
 
 export { export_default as default };

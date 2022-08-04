@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-07-02 14:36:13
- * @LastEditTime: 2022-07-25 09:07:04
+ * @LastEditTime: 2022-08-04 15:53:07
  * @Description: 
  */
 type AuthConfig = {
@@ -15,33 +15,47 @@ type AuthConfig = {
    */
   state?: string;
   /**
-   * 授权类型
-   * @default 'snsapi_base'
+   * 重定向的地址
+   * @default location.href
    */
-  scope?: 'snsapi_base' | 'snsapi_userinfo';
+  redirect?: string;
 };
 
-const defaultConfig: Partial<AuthConfig> = {
+const defaultConfig: Omit<Required<AuthConfig>, 'appid'> = {
   state: 'young_wechat_auth',
-  scope: 'snsapi_base'
+  redirect: location.href
 };
 
 export default class {
   public auth_url: string;
+  public login_url: string;
 
   constructor(conf: AuthConfig) {
     conf = Object.assign(defaultConfig, conf);
-    this.auth_url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${conf.appid}&redirect_uri=${encodeURIComponent(location.href)}&response_type=code&scope=${conf.scope}&state=${conf.state}#wechat_redirect`;
+    this.auth_url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${conf.appid}&redirect_uri=${encodeURIComponent(conf.redirect)}&response_type=code&scope=snsapi_base&state=${conf.state}#wechat_redirect`;
+    
+    const isWeChat = /MicroMessenger/img.test(navigator.userAgent);
+    if (isWeChat) {
+      // 微信内，执行网页授权
+      this.login_url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${conf.appid}&redirect_uri=${encodeURIComponent(conf.redirect)}&response_type=code&scope=snsapi_userinfo&state=${conf.state}#wechat_redirect`;
+    } else {
+      // 微信外，扫码登录
+      this.login_url = `https://open.weixin.qq.com/connect/qrconnect?appid=${conf.appid}&redirect_uri=${encodeURIComponent(conf.redirect)}&response_type=code&scope=snsapi_login&state=${conf.state}#wechat_redirect`;
+    }
   }
   
-  getCode() {
+  getCode(type: 'base' | 'login' = 'base') {
     const args = new URLSearchParams(location.search);
     const code = args.get('code');
     const state = args.get('state');
     if (state) {
       return code;
     } else {
-      location.href = this.auth_url;
+      if (type === 'base') {
+        location.href = this.auth_url;  
+      } else {
+        location.href = this.login_url;
+      }
     }
   }
 }
