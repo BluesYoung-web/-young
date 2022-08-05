@@ -45,6 +45,8 @@ const code = new YoungWechatAuth({
 // 网页授权登录，微信外扫码，微信内网页授权登陆(snsapi_userinfo)
 const code = new YoungWechatAuth({
   appid: 'wx520c15f417810387',
+  // 微信开放平台-应用 appid，扫码登录必传
+  open_appid: 'wxbdc5610cc59c1631',
   // state: 'young_wechat_auth',
   // redirect: location.href
 }).getCode('login');
