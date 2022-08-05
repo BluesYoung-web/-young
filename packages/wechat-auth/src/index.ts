@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-07-02 14:36:13
- * @LastEditTime: 2022-08-04 15:53:07
+ * @LastEditTime: 2022-08-05 08:18:56
  * @Description: 
  */
 type AuthConfig = {
@@ -9,6 +9,10 @@ type AuthConfig = {
    * 微信公众号 appid
    */
   appid: string;
+  /**
+   * 微信开放平台-应用 appid，扫码登录必传
+   */
+  open_appid?: string;
   /**
    * state 标志位的内容
    * @default 'young_wechat_auth'
@@ -21,7 +25,7 @@ type AuthConfig = {
   redirect?: string;
 };
 
-const defaultConfig: Omit<Required<AuthConfig>, 'appid'> = {
+const defaultConfig: Omit<Required<AuthConfig>, 'appid' | 'open_appid'> = {
   state: 'young_wechat_auth',
   redirect: location.href
 };
@@ -40,7 +44,7 @@ export default class {
       this.login_url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${conf.appid}&redirect_uri=${encodeURIComponent(conf.redirect)}&response_type=code&scope=snsapi_userinfo&state=${conf.state}#wechat_redirect`;
     } else {
       // 微信外，扫码登录
-      this.login_url = `https://open.weixin.qq.com/connect/qrconnect?appid=${conf.appid}&redirect_uri=${encodeURIComponent(conf.redirect)}&response_type=code&scope=snsapi_login&state=${conf.state}#wechat_redirect`;
+      this.login_url = `https://open.weixin.qq.com/connect/qrconnect?appid=${conf.open_appid}&redirect_uri=${encodeURIComponent(conf.redirect)}&response_type=code&scope=snsapi_login&state=${conf.state}#wechat_redirect`;
     }
   }
   

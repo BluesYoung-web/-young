@@ -4,6 +4,10 @@ declare type AuthConfig = {
      */
     appid: string;
     /**
+     * 微信开放平台-应用 appid，扫码登录必传
+     */
+    open_appid?: string;
+    /**
      * state 标志位的内容
      * @default 'young_wechat_auth'
      */

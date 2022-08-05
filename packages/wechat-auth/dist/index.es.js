@@ -10,7 +10,7 @@ class index {
     if (isWeChat) {
       this.login_url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${conf.appid}&redirect_uri=${encodeURIComponent(conf.redirect)}&response_type=code&scope=snsapi_userinfo&state=${conf.state}#wechat_redirect`;
     } else {
-      this.login_url = `https://open.weixin.qq.com/connect/qrconnect?appid=${conf.appid}&redirect_uri=${encodeURIComponent(conf.redirect)}&response_type=code&scope=snsapi_login&state=${conf.state}#wechat_redirect`;
+      this.login_url = `https://open.weixin.qq.com/connect/qrconnect?appid=${conf.open_appid}&redirect_uri=${encodeURIComponent(conf.redirect)}&response_type=code&scope=snsapi_login&state=${conf.state}#wechat_redirect`;
     }
   }
   getCode(type = "base") {
