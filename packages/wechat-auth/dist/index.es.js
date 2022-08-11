@@ -5,6 +5,7 @@ const defaultConfig = {
 class index {
   constructor(conf) {
     conf = Object.assign(defaultConfig, conf);
+    this.state = conf.state;
     this.auth_url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${conf.appid}&redirect_uri=${encodeURIComponent(conf.redirect)}&response_type=code&scope=snsapi_base&state=${conf.state}#wechat_redirect`;
     const isWeChat = /MicroMessenger/img.test(navigator.userAgent);
     if (isWeChat) {
@@ -17,7 +18,7 @@ class index {
     const args = new URLSearchParams(location.search);
     const code = args.get("code");
     const state = args.get("state");
-    if (state) {
+    if (state === this.state) {
       return code;
     } else {
       if (type === "base") {

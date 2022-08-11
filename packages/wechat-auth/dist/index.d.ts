@@ -21,6 +21,7 @@ declare type AuthConfig = {
 declare class export_default{
     auth_url: string;
     login_url: string;
+    state: string;
     constructor(conf: AuthConfig);
     getCode(type?: 'base' | 'login'): string;
 }
