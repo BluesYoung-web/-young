@@ -1,6 +1,6 @@
 {
   "name": "@bluesyoung/qrcode-with-logo",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "generate qrcode with logo",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
