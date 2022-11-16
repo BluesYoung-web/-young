@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-11-15 11:46:28
- * @LastEditTime: 2022-11-16 10:14:16
+ * @LastEditTime: 2022-11-16 16:04:00
  * @Description: 
  */
 import type { BaseOptions } from './types';
@@ -49,7 +49,13 @@ export const drawLogo = async ({ canvas, logo }: BaseOptions) => {
 
   // logo
   const image = new Image();
-  image.setAttribute('crossOrigin', crossOrigin || 'anonymous');
+  if (crossOrigin) {
+    if (typeof crossOrigin === 'string') {
+      image.setAttribute('crossorigin', crossOrigin);
+    } else {
+      image.setAttribute('crossorigin', 'anonymous');
+    }
+  }
   image.src = logoSrc;
 
   // 使用image绘制可以避免某些跨域情况

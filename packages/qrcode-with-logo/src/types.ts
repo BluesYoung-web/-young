@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-11-15 11:37:45
- * @LastEditTime: 2022-11-15 11:37:45
+ * @LastEditTime: 2022-11-16 16:03:07
  * @Description: 
  */
 export interface Logo {
@@ -12,7 +12,10 @@ export interface Logo {
   borderColor?: string;
   borderSize?: number;
   bgColor?: string;
-  crossOrigin?: string;
+  /**
+   * 是否启用跨域
+   */
+  crossOrigin?: string | boolean;
 }
 
 export interface NodeQrCodeOptions {

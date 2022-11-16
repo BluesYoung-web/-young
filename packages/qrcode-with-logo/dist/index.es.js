@@ -2050,7 +2050,13 @@ const drawLogo = async ({ canvas: canvas2, logo }) => {
   ctx.fillStyle = bgColor;
   ctx.fill();
   const image = new Image();
-  image.setAttribute("crossOrigin", crossOrigin || "anonymous");
+  if (crossOrigin) {
+    if (typeof crossOrigin === "string") {
+      image.setAttribute("crossorigin", crossOrigin);
+    } else {
+      image.setAttribute("crossorigin", "anonymous");
+    }
+  }
   image.src = logoSrc;
   const drawLogoWithImage = (image2) => {
     ctx.drawImage(image2, logoXY, logoXY, logoWidth, logoWidth);
@@ -2151,7 +2157,7 @@ const saveImage = (image, name) => {
   link.href = dataURL;
   link.dispatchEvent(new MouseEvent("click"));
 };
-const version = "0.0.1";
+const version = "0.0.2";
 class YoungQRCodeLogo {
   constructor(option) {
     this.ifCanvasDrawed = false;

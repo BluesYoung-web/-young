@@ -6,7 +6,10 @@ interface Logo {
     borderColor?: string;
     borderSize?: number;
     bgColor?: string;
-    crossOrigin?: string;
+    /**
+     * 是否启用跨域
+     */
+    crossOrigin?: string | boolean;
 }
 interface NodeQrCodeOptions {
     margin?: number;

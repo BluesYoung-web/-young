@@ -76,7 +76,13 @@ var drawLogo = async ({ canvas, logo }) => {
   ctx.fillStyle = bgColor;
   ctx.fill();
   const image = new Image();
-  image.setAttribute("crossOrigin", crossOrigin || "anonymous");
+  if (crossOrigin) {
+    if (typeof crossOrigin === "string") {
+      image.setAttribute("crossorigin", crossOrigin);
+    } else {
+      image.setAttribute("crossorigin", "anonymous");
+    }
+  }
   image.src = logoSrc;
   const drawLogoWithImage = (image2) => {
     ctx.drawImage(image2, logoXY, logoXY, logoWidth, logoWidth);
@@ -181,7 +187,7 @@ var saveImage = (image, name) => {
 };
 
 // package.json
-var version = "0.0.1";
+var version = "0.0.2";
 
 // src/index.ts
 var YoungQRCodeLogo = class {
