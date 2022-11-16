@@ -1,21 +1,21 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-11-15 11:46:28
- * @LastEditTime: 2022-11-15 11:47:54
+ * @LastEditTime: 2022-11-16 10:14:16
  * @Description: 
  */
-import type { Logo, BaseOptions } from './types';
+import type { BaseOptions } from './types';
 
-export const drawLogo = ({ canvas, logo }: BaseOptions): Promise<void> => {
+export const drawLogo = async ({ canvas, logo }: BaseOptions) => {
 
-  if (!logo) return Promise.resolve();
-
-  if (logo === '') return Promise.resolve();
+  if (!logo) {
+    return;
+  }
 
   const canvasWidth = canvas.width;
 
   if (typeof logo === 'string') {
-    logo = { src: logo } as Logo;
+    logo = { src: logo };
   }
   
   const {
@@ -25,10 +25,10 @@ export const drawLogo = ({ canvas, logo }: BaseOptions): Promise<void> => {
     borderSize = 0.05,
     crossOrigin,
     borderRadius = 8,
-    logoRadius = 0
-  } = logo as Logo;
+    logoRadius = 0,
+    src: logoSrc
+  } = logo;
 
-  let logoSrc = typeof logo === 'string' ? logo : logo.src;
   let logoWidth = canvasWidth * logoSize;
   let logoXY = (canvasWidth * (1 - logoSize)) / 2;
   let logoBgWidth = canvasWidth * (logoSize + borderSize);
@@ -76,11 +76,13 @@ export const drawLogo = ({ canvas, logo }: BaseOptions): Promise<void> => {
 
   // 将 logo绘制到 canvas上
   // Draw the logo on the canvas
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     image.onload = () => {
       logoRadius ? drawLogoWithCanvas(image) : drawLogoWithImage(image);
-      resolve();
+      resolve(true);
     };
+
+    image.onerror = reject;
   });
 };
 

@@ -1216,7 +1216,9 @@ KanjiData.prototype.write = function(bitBuffer2) {
     } else if (value >= 57408 && value <= 60351) {
       value -= 49472;
     } else {
-      throw new Error("Invalid SJIS character: " + this.data[i] + "\nMake sure your charset is UTF-8");
+      throw new Error(
+        "Invalid SJIS character: " + this.data[i] + "\nMake sure your charset is UTF-8"
+      );
     }
     value = (value >>> 8 & 255) * 192 + (value & 255);
     bitBuffer2.put(value, 13);
@@ -1271,7 +1273,10 @@ var dijkstra = { exports: {} };
     },
     find_path: function(graph, s, d) {
       var predecessors = dijkstra2.single_source_shortest_paths(graph, s, d);
-      return dijkstra2.extract_shortest_path_from_predecessor_list(predecessors, d);
+      return dijkstra2.extract_shortest_path_from_predecessor_list(
+        predecessors,
+        d
+      );
     },
     PriorityQueue: {
       make: function(opts) {
@@ -1484,7 +1489,9 @@ var dijkstra = { exports: {} };
     return exports.fromArray(mergeSegments(optimizedSegs));
   };
   exports.rawSplit = function rawSplit(data) {
-    return exports.fromArray(getSegmentsFromString(data, Utils2.isKanjiModeEnabled()));
+    return exports.fromArray(
+      getSegmentsFromString(data, Utils2.isKanjiModeEnabled())
+    );
   };
 })(segments);
 const Utils$1 = utils$1;
@@ -1697,7 +1704,9 @@ function createSymbol(data, version2, errorCorrectionLevel2, maskPattern2) {
   if (!version2) {
     version2 = bestVersion;
   } else if (version2 < bestVersion) {
-    throw new Error("\nThe chosen QR Code version cannot contain this amount of data.\nMinimum version required to store current data is: " + bestVersion + ".\n");
+    throw new Error(
+      "\nThe chosen QR Code version cannot contain this amount of data.\nMinimum version required to store current data is: " + bestVersion + ".\n"
+    );
   }
   const dataBits = createData(version2, errorCorrectionLevel2, segments2);
   const moduleCount = Utils$1.getSymbolSize(version2);
@@ -1711,7 +1720,10 @@ function createSymbol(data, version2, errorCorrectionLevel2, maskPattern2) {
   }
   setupData(modules, dataBits);
   if (isNaN(maskPattern2)) {
-    maskPattern2 = MaskPattern.getBestMask(modules, setupFormatInfo.bind(null, modules, errorCorrectionLevel2));
+    maskPattern2 = MaskPattern.getBestMask(
+      modules,
+      setupFormatInfo.bind(null, modules, errorCorrectionLevel2)
+    );
   }
   MaskPattern.applyMask(maskPattern2, modules);
   setupFormatInfo(modules, errorCorrectionLevel2, maskPattern2);
@@ -2005,11 +2017,10 @@ const promisify = (f) => {
     });
   };
 };
-const drawLogo = ({ canvas: canvas2, logo }) => {
-  if (!logo)
-    return Promise.resolve();
-  if (logo === "")
-    return Promise.resolve();
+const drawLogo = async ({ canvas: canvas2, logo }) => {
+  if (!logo) {
+    return;
+  }
   const canvasWidth = canvas2.width;
   if (typeof logo === "string") {
     logo = { src: logo };
@@ -2021,15 +2032,21 @@ const drawLogo = ({ canvas: canvas2, logo }) => {
     borderSize = 0.05,
     crossOrigin,
     borderRadius = 8,
-    logoRadius = 0
+    logoRadius = 0,
+    src: logoSrc
   } = logo;
-  let logoSrc = typeof logo === "string" ? logo : logo.src;
   let logoWidth = canvasWidth * logoSize;
   let logoXY = canvasWidth * (1 - logoSize) / 2;
   let logoBgWidth = canvasWidth * (logoSize + borderSize);
   let logoBgXY = canvasWidth * (1 - logoSize - borderSize) / 2;
   const ctx = canvas2.getContext("2d");
-  canvasRoundRect(ctx)(logoBgXY, logoBgXY, logoBgWidth, logoBgWidth, borderRadius);
+  canvasRoundRect(ctx)(
+    logoBgXY,
+    logoBgXY,
+    logoBgWidth,
+    logoBgWidth,
+    borderRadius
+  );
   ctx.fillStyle = bgColor;
   ctx.fill();
   const image = new Image();
@@ -2047,11 +2064,12 @@ const drawLogo = ({ canvas: canvas2, logo }) => {
     ctx.fillStyle = ctx.createPattern(canvasImage, "no-repeat");
     ctx.fill();
   };
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     image.onload = () => {
       logoRadius ? drawLogoWithCanvas(image) : drawLogoWithImage(image);
-      resolve();
+      resolve(true);
     };
+    image.onerror = reject;
   });
 };
 const canvasRoundRect = (ctx) => (x, y, w, h, r) => {
@@ -2094,8 +2112,9 @@ const getErrorCorrectionLevel = (content) => {
     return "H";
   }
 };
-const toCanvas = (options) => {
-  return renderQrCode(options).then(() => drawLogo(options));
+const toCanvas = async (options) => {
+  await renderQrCode(options);
+  return drawLogo(options);
 };
 const toImage = async function(options) {
   const { canvas: canvas2 } = options;
@@ -2105,13 +2124,14 @@ const toImage = async function(options) {
     }
     options.logo.crossOrigin = "Anonymous";
   }
-  if (!this.ifCanvasDrawed)
+  if (!this.ifCanvasDrawed) {
     await toCanvas(options);
+  }
   const { image, downloadName = "qr-code" } = options;
   let { download } = options;
-  if (canvas2.toDataURL())
+  if (canvas2.toDataURL()) {
     image.src = canvas2.toDataURL();
-  else {
+  } else {
     throw new Error("Can not get the canvas DataURL");
   }
   this.ifImageCreated = true;
@@ -2123,7 +2143,6 @@ const toImage = async function(options) {
     saveImage(image, downloadName);
   };
   download && download(startDownload);
-  return Promise.resolve();
 };
 const saveImage = (image, name) => {
   const dataURL = image.src;
@@ -2132,7 +2151,7 @@ const saveImage = (image, name) => {
   link.href = dataURL;
   link.dispatchEvent(new MouseEvent("click"));
 };
-const version = "0.0.0";
+const version = "0.0.1";
 class YoungQRCodeLogo {
   constructor(option) {
     this.ifCanvasDrawed = false;
@@ -2154,6 +2173,9 @@ class YoungQRCodeLogo {
     return toCanvas.call(this, this.option).then(() => {
       this.ifCanvasDrawed = true;
       return Promise.resolve();
+    }).catch(() => {
+      this.ifCanvasDrawed = false;
+      return Promise.reject();
     });
   }
   toImage() {

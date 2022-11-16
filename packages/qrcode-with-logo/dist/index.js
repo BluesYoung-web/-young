@@ -43,11 +43,10 @@ var promisify = (f) => {
 };
 
 // src/draw-logo.ts
-var drawLogo = ({ canvas, logo }) => {
-  if (!logo)
-    return Promise.resolve();
-  if (logo === "")
-    return Promise.resolve();
+var drawLogo = async ({ canvas, logo }) => {
+  if (!logo) {
+    return;
+  }
   const canvasWidth = canvas.width;
   if (typeof logo === "string") {
     logo = { src: logo };
@@ -59,15 +58,21 @@ var drawLogo = ({ canvas, logo }) => {
     borderSize = 0.05,
     crossOrigin,
     borderRadius = 8,
-    logoRadius = 0
+    logoRadius = 0,
+    src: logoSrc
   } = logo;
-  let logoSrc = typeof logo === "string" ? logo : logo.src;
   let logoWidth = canvasWidth * logoSize;
   let logoXY = canvasWidth * (1 - logoSize) / 2;
   let logoBgWidth = canvasWidth * (logoSize + borderSize);
   let logoBgXY = canvasWidth * (1 - logoSize - borderSize) / 2;
   const ctx = canvas.getContext("2d");
-  canvasRoundRect(ctx)(logoBgXY, logoBgXY, logoBgWidth, logoBgWidth, borderRadius);
+  canvasRoundRect(ctx)(
+    logoBgXY,
+    logoBgXY,
+    logoBgWidth,
+    logoBgWidth,
+    borderRadius
+  );
   ctx.fillStyle = bgColor;
   ctx.fill();
   const image = new Image();
@@ -85,11 +90,12 @@ var drawLogo = ({ canvas, logo }) => {
     ctx.fillStyle = ctx.createPattern(canvasImage, "no-repeat");
     ctx.fill();
   };
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     image.onload = () => {
       logoRadius ? drawLogoWithCanvas(image) : drawLogoWithImage(image);
-      resolve();
+      resolve(true);
     };
+    image.onerror = reject;
   });
 };
 var canvasRoundRect = (ctx) => (x, y, w, h, r) => {
@@ -134,8 +140,9 @@ var getErrorCorrectionLevel = (content) => {
     return "H";
   }
 };
-var toCanvas = (options) => {
-  return renderQrCode(options).then(() => drawLogo(options));
+var toCanvas = async (options) => {
+  await renderQrCode(options);
+  return drawLogo(options);
 };
 var toImage = async function(options) {
   const { canvas } = options;
@@ -145,13 +152,14 @@ var toImage = async function(options) {
     }
     options.logo.crossOrigin = "Anonymous";
   }
-  if (!this.ifCanvasDrawed)
+  if (!this.ifCanvasDrawed) {
     await toCanvas(options);
+  }
   const { image, downloadName = "qr-code" } = options;
   let { download } = options;
-  if (canvas.toDataURL())
+  if (canvas.toDataURL()) {
     image.src = canvas.toDataURL();
-  else {
+  } else {
     throw new Error("Can not get the canvas DataURL");
   }
   this.ifImageCreated = true;
@@ -163,7 +171,6 @@ var toImage = async function(options) {
     saveImage(image, downloadName);
   };
   download && download(startDownload);
-  return Promise.resolve();
 };
 var saveImage = (image, name) => {
   const dataURL = image.src;
@@ -174,7 +181,7 @@ var saveImage = (image, name) => {
 };
 
 // package.json
-var version = "0.0.0";
+var version = "0.0.1";
 
 // src/index.ts
 var YoungQRCodeLogo = class {
@@ -198,6 +205,9 @@ var YoungQRCodeLogo = class {
     return toCanvas.call(this, this.option).then(() => {
       this.ifCanvasDrawed = true;
       return Promise.resolve();
+    }).catch(() => {
+      this.ifCanvasDrawed = false;
+      return Promise.reject();
     });
   }
   toImage() {

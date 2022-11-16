@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-11-15 11:40:25
- * @LastEditTime: 2022-11-15 14:19:34
+ * @LastEditTime: 2022-11-16 10:19:45
  * @Description: 
  */
 import type { BaseOptions, Logo, NodeQrCodeOptions } from './types';
@@ -53,8 +53,9 @@ const getErrorCorrectionLevel = (content: string): string => {
 };
 
 
-export const toCanvas = (options: BaseOptions): Promise<void> => {
-  return renderQrCode(options).then(() => drawLogo(options));
+export const toCanvas = async (options: BaseOptions) => {
+  await renderQrCode(options);
+  return drawLogo(options);
 };
 
 export const toImage = async function (options: BaseOptions) {
@@ -63,16 +64,19 @@ export const toImage = async function (options: BaseOptions) {
     if (typeof options.logo === 'string') {
       options.logo = { src: options.logo } as Logo;
     }
-    (options.logo as Logo).crossOrigin = 'Anonymous';
+    options.logo.crossOrigin = 'Anonymous';
   }
 
-  if (!this.ifCanvasDrawed) await toCanvas(options)
+  if (!this.ifCanvasDrawed) {
+    await toCanvas(options);
+  }
 
   const { image, downloadName = 'qr-code' } = options;
   let { download } = options;
 
-  if (canvas.toDataURL()) image.src = canvas.toDataURL();
-  else {
+  if (canvas.toDataURL()) {
+    image.src = canvas.toDataURL();
+  } else {
     throw new Error('Can not get the canvas DataURL')
   }
 
@@ -84,13 +88,11 @@ export const toImage = async function (options: BaseOptions) {
   
   download = download === true ? (start: Function) => start() : download;
 
-  const startDownload: Function = () => {
+  const startDownload = () => {
     saveImage(image, downloadName);
   };
 
   download && download(startDownload);
-
-  return Promise.resolve();
 };
 
 export const saveImage = (image: HTMLImageElement, name: string): void => {

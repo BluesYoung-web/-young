@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-04-28 14:22:04
- * @LastEditTime: 2022-11-15 11:57:07
+ * @LastEditTime: 2022-11-16 10:20:24
  * @Description: 
  */
 import { toCanvas, toImage, saveImage } from './draw-canvas';
@@ -36,6 +36,9 @@ class YoungQRCodeLogo {
     return toCanvas.call(this, this.option).then(() => {
       this.ifCanvasDrawed = true;
       return Promise.resolve();
+    }).catch(() => {
+      this.ifCanvasDrawed = false;
+      return Promise.reject();
     });
   };
   public toImage(): Promise<void> {
