@@ -24,7 +24,7 @@ $ pnpm add @bluesyoung/qrcode-with-logo
 
 ```html
 <script setup lang="ts">
-import { YoungQRCodeLogo } from '@bluesyoung/qrcode-with-logo';
+import YoungQRCodeLogo from '@bluesyoung/qrcode-with-logo';
 const qrcode_src = await (await new YoungQRCodeLogo({
   content: '链接目标地址',
   logo: {
