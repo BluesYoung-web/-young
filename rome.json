@@ -1,0 +1,22 @@
+{
+  "formatter": {
+    "ignore": [
+      "dist/*",
+      "*.html",
+      "yarn.lock",
+      "*.json",
+      "*.md"
+    ],
+    "indentStyle": "space",
+    "indentSize": 2,
+    "lineWidth": 100
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "linter": {
+    "enabled": false
+  }
+}
