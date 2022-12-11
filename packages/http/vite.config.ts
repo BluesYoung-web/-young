@@ -1,8 +1,8 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-04-28 16:27:49
- * @LastEditTime: 2022-10-19 15:36:54
- * @Description: 
+ * @LastEditTime: 2022-12-11 15:30:50
+ * @Description:
  */
 /// <reference types="vitest" />
 import { resolve } from 'path';
@@ -13,11 +13,11 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format}.js`
+      fileName: (format) => `index.${format}.js`,
     },
-    sourcemap: true
+    sourcemap: true,
   },
   test: {
-    environment: 'happy-dom'
-  }
-})
+    environment: 'happy-dom',
+  },
+});

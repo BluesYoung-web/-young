@@ -169,11 +169,14 @@ importers:
 
   packages/http:
     specifiers:
+      '@vitest/ui': ^0.25.7
       axios: ^1.2.1
       defu: ^6.1.1
     dependencies:
       axios: 1.2.1
       defu: 6.1.1
+    devDependencies:
+      '@vitest/ui': 0.25.7
 
   packages/priview-gallary:
     specifiers:
@@ -1451,6 +1454,12 @@ packages:
       vue: ^3.2.25
     dependencies:
       vue: 3.2.37
+    dev: true
+
+  /@vitest/ui/0.25.7:
+    resolution: {integrity: sha512-mL/7SbXE11jMaSq/ynQuQvmR63amQ9/u60ZXgg9zFGJ3glTkfGfKIKSsGB64Z4vNEh8hf6MeF3vDfErlbJo0xA==}
+    dependencies:
+      sirv: 2.0.2
     dev: true
 
   /@volar/code-gen/0.34.15:

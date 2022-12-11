@@ -14,7 +14,7 @@
     }
   },
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --ui",
     "build": "vite build && tsup",
     "release": "pnpm build && bumpp --commit",
     "push": "pnpm publish --access public"
@@ -38,5 +38,8 @@
   "bugs": {
     "url": "https://github.com/BluesYoung-web/young/issues"
   },
-  "homepage": "https://github.com/BluesYoung-web/young#readme"
+  "homepage": "https://github.com/BluesYoung-web/young#readme",
+  "devDependencies": {
+    "@vitest/ui": "^0.25.7"
+  }
 }

@@ -83,16 +83,17 @@ var useHttp = (config = {}) => {
   });
   net.interceptors.response.use((response) => {
     loading.end();
-    if (checkFn(response)) {
-      return response.data;
+    const data = response.data;
+    if (checkFn(data)) {
+      return data;
     } else {
-      fail(response.data);
-      throw new Error(response.data);
+      fail(data);
+      throw new Error(data);
     }
   }, (error) => {
     loading.end();
     fail(error.message);
-    throw error;
+    throw new Error(error.message);
   });
   return {
     get: void 0,

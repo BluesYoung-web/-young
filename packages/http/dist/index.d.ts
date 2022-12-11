@@ -1,4 +1,4 @@
-import { Method, AxiosResponse, AxiosAdapter, AxiosInstance } from 'axios';
+import { Method, AxiosAdapter, AxiosInstance } from 'axios';
 
 declare type Simplify<T> = {
     [P in keyof T]: T[P];
@@ -47,22 +47,25 @@ interface DefaultHttpConfig<Msg extends any = any> {
      * 接受各种抛出的错误
      * @default console.error
      */
-    fail: (err: string | number | Error | Msg) => void;
+    fail: (err: string | number | Error) => void;
     /**
      * 结果校验，判断此次请求是否正常
      * 不传则默认使用标准 http 状态码作为判断结果
+     * @default () => true
      */
-    checkFn: (res: AxiosResponse) => boolean;
+    checkFn: (res: Msg) => boolean;
     /**
      * 请求头
      */
     headers: {
         /**
          * 生成公共请求头
+         * @default () => {}
          */
         getCommonHeaders?: () => Headers;
         /**
          * 生成鉴权请求头
+         * @default () => {}
          */
         getAuthHeaders?: () => Headers;
     };
@@ -72,6 +75,6 @@ interface DefaultHttpConfig<Msg extends any = any> {
      */
     adapter?: AxiosAdapter;
 }
-declare const useHttp: <Fns extends Cbks, Msg extends Record<string, any> = Record<string, any>>(config?: Partial<DefaultHttpConfig<Msg>>) => Handlers<Fns> & Prototype;
+declare const useHttp: <Msg extends Record<string, any> = Record<string, any>, Fns extends Cbks = Cbks>(config?: Partial<DefaultHttpConfig<Msg>>) => Handlers<Fns> & Prototype;
 
 export { AllMethod, Cbks, DefaultHttpConfig, Fn, UsefulContentTypes, useHttp };
