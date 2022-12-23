@@ -21,12 +21,12 @@ import { useHttp } from '@bluesyoung/http';
 
 const httpInstance = useHttp();
 
-const useGetRequest = (http: typeof httpInstance) => {
+const useGetRequest = () => {
   const method = 'get';
 
   return {
     userInfo: async () => {
-      return http.freeReq({
+      return httpInstance.freeReq({
         url: '/user_info',
         method
       });
@@ -34,7 +34,7 @@ const useGetRequest = (http: typeof httpInstance) => {
   };
 };
 
-const usePostRequest = (http: typeof httpInstance) => {
+const usePostRequest = () => {
   const method = 'post';
 
   return {
@@ -42,7 +42,7 @@ const usePostRequest = (http: typeof httpInstance) => {
       old_pwd: string,
       new_pwd: string,
     }) => {
-      return http.authReq({
+      return httpInstance.authReq({
         url: '/pwd',
         method,
         data
@@ -52,8 +52,8 @@ const usePostRequest = (http: typeof httpInstance) => {
 };
 
 const apis = httpInstance.__mixin__({
-  get: useGetRequest(httpInstance),
-  post: usePostRequest(httpInstance),
+  get: useGetRequest(),
+  post: usePostRequest(),
   // ...
 });
 
