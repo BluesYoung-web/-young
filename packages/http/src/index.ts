@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2022-12-11 16:16:10
+ * @LastEditTime: 2022-12-20 10:37:38
  * @Description:
  */
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, Method, AxiosAdapter } from 'axios';
@@ -71,7 +71,7 @@ export interface DefaultHttpConfig<Msg extends any = any> {
    * 接受各种抛出的错误
    * @default console.error
    */
-  fail: (err: string | number | Error) => void;
+  fail: (err: string | number | Error | Msg) => void;
   /**
    * 结果校验，判断此次请求是否正常
    * 不传则默认使用标准 http 状态码作为判断结果
