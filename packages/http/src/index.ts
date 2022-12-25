@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2022-12-20 10:37:38
+ * @LastEditTime: 2022-12-25 10:57:46
  * @Description:
  */
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, Method, AxiosAdapter } from 'axios';
@@ -51,9 +51,14 @@ export enum UsefulContentTypes {
 export interface DefaultHttpConfig<Msg extends any = any> {
   /**
    * 基础地址
-   * @default '/api'
+   * @default /api
    */
   baseURL: string;
+  /**
+   * 默认方法
+   * @default post
+   */
+  method: AllMethod;
   /**
    * 超时时间
    * @default 5e3 5s
@@ -102,6 +107,7 @@ export interface DefaultHttpConfig<Msg extends any = any> {
 
 const defaultConfig: DefaultHttpConfig = {
   baseURL: '/api',
+  method: 'post',
   timeout: 5e3,
   loading: {
     start: console.log.bind(null, '🚀 ~ http loading start'),
@@ -123,10 +129,11 @@ export const useHttp = <
 ) => {
   const finalConfig = defu(config, defaultConfig);
 
-  const { baseURL, timeout, headers, checkFn, adapter, loading, fail } = finalConfig;
+  const { baseURL, method, timeout, headers, checkFn, adapter, loading, fail } = finalConfig;
 
   const net = axios.create({
     baseURL,
+    method,
     timeout,
     headers: headers.getCommonHeaders(),
     adapter,

@@ -35,7 +35,6 @@ const useGetRequest = () => {
 };
 
 const usePostRequest = () => {
-  const method = 'post';
 
   return {
     pwd: async (data: {
@@ -44,7 +43,6 @@ const usePostRequest = () => {
     }) => {
       return httpInstance.authReq({
         url: '/pwd',
-        method,
         data
       });
     }
@@ -71,6 +69,7 @@ apis.post.pwd({ old_pwd: '111111', new_pwd: '123456' });
  */
 const defaultConfig: DefaultHttpConfig = {
   baseURL: '/api',
+  method: 'post',
   timeout: 5e3,
   loading: {
     start: console.log.bind(null, '🚀 ~ http loading start'),

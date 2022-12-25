@@ -53,6 +53,7 @@ var UsefulContentTypes = /* @__PURE__ */ ((UsefulContentTypes2) => {
 })(UsefulContentTypes || {});
 var defaultConfig = {
   baseURL: "/api",
+  method: "post",
   timeout: 5e3,
   loading: {
     start: console.log.bind(null, "\u{1F680} ~ http loading start"),
@@ -67,9 +68,10 @@ var defaultConfig = {
 };
 var useHttp = (config = {}) => {
   const finalConfig = (0, import_defu.defu)(config, defaultConfig);
-  const { baseURL, timeout, headers, checkFn, adapter, loading, fail } = finalConfig;
+  const { baseURL, method, timeout, headers, checkFn, adapter, loading, fail } = finalConfig;
   const net = import_axios.default.create({
     baseURL,
+    method,
     timeout,
     headers: headers.getCommonHeaders(),
     adapter
@@ -108,11 +110,11 @@ var useHttp = (config = {}) => {
     unlink: void 0,
     __instance__: net,
     __mixin__(extentions) {
-      for (const method in extentions) {
-        if (Object.prototype.hasOwnProperty.call(extentions, method)) {
-          const originFns = this[method] || {};
-          const fns = extentions[method];
-          this[method] = __spreadValues(__spreadValues({}, originFns), fns);
+      for (const method2 in extentions) {
+        if (Object.prototype.hasOwnProperty.call(extentions, method2)) {
+          const originFns = this[method2] || {};
+          const fns = extentions[method2];
+          this[method2] = __spreadValues(__spreadValues({}, originFns), fns);
         }
       }
       return this;

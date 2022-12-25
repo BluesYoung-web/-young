@@ -27,9 +27,14 @@ declare enum UsefulContentTypes {
 interface DefaultHttpConfig<Msg extends any = any> {
     /**
      * 基础地址
-     * @default '/api'
+     * @default /api
      */
     baseURL: string;
+    /**
+     * 默认方法
+     * @default post
+     */
+    method: AllMethod;
     /**
      * 超时时间
      * @default 5e3 5s
