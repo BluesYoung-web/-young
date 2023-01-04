@@ -1812,7 +1812,7 @@ const defaultConfig = {
     end: console.log.bind(null, "\u{1F680} ~ http loading end")
   },
   fail: console.error.bind(null, "\u{1F680} ~ http loading error"),
-  checkFn: () => true,
+  checkFn: (res) => res,
   headers: {
     getCommonHeaders: () => ({}),
     getAuthHeaders: () => ({})
@@ -1838,16 +1838,10 @@ const useHttp = (config = {}) => {
   net.interceptors.response.use((response) => {
     loading.end();
     const data = response.data;
-    if (checkFn(data)) {
-      return data;
-    } else {
-      fail(data);
-      throw new Error(data);
-    }
+    return checkFn(data);
   }, (error) => {
     loading.end();
-    fail(error.message);
-    throw new Error(error.message);
+    fail(error);
   });
   return {
     get: void 0,

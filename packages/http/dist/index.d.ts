@@ -24,7 +24,12 @@ declare enum UsefulContentTypes {
     URLEncoded = "application/x-www-form-urlencoded; charset=UTF-8",
     FormData = "multipart/form-data; charset=UTF-8"
 }
-interface DefaultHttpConfig<Msg extends any = any> {
+declare type DefaultMsg = {
+    code: number;
+    msg: string;
+    data: any;
+};
+interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
     /**
      * 基础地址
      * @default /api
@@ -48,17 +53,17 @@ interface DefaultHttpConfig<Msg extends any = any> {
         end: () => void;
     };
     /**
-     * 错误处理函数
+     * 错误处理函数，进行错误处理或继续抛出错误
      * 接受各种抛出的错误
      * @default console.error
      */
     fail: (err: string | number | Error | Msg) => void;
     /**
-     * 结果校验，判断此次请求是否正常
-     * 不传则默认使用标准 http 状态码作为判断结果
-     * @default () => true
+     * 结果校验 + 数据解析，判断此次请求是否正常，正常则返回解包数据，否则抛出异常
+     * 不传则默认使用标准 http 状态码作为判断结果，并原样返回
+     * @default () => any | never
      */
-    checkFn: (res: Msg) => boolean;
+    checkFn: (res: Msg) => any | never;
     /**
      * 请求头
      */
@@ -80,6 +85,6 @@ interface DefaultHttpConfig<Msg extends any = any> {
      */
     adapter?: AxiosAdapter;
 }
-declare const useHttp: <Msg extends Record<string, any> = Record<string, any>, Fns extends Cbks = Cbks>(config?: Partial<DefaultHttpConfig<Msg>>) => Handlers<Fns> & Prototype;
+declare const useHttp: <Msg extends Record<string, any> = DefaultMsg, Fns extends Cbks = Cbks>(config?: Partial<DefaultHttpConfig<Msg>>) => Handlers<Fns> & Prototype;
 
-export { AllMethod, Cbks, DefaultHttpConfig, Fn, UsefulContentTypes, useHttp };
+export { AllMethod, Cbks, DefaultHttpConfig, DefaultMsg, Fn, UsefulContentTypes, useHttp };
