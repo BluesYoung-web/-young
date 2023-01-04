@@ -1,10 +1,10 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2022-12-25 10:57:46
+ * @LastEditTime: 2023-01-04 11:05:37
  * @Description:
  */
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, Method, AxiosAdapter } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, Method, AxiosAdapter } from 'axios';
 import axios from 'axios';
 import { defu } from 'defu';
 
@@ -48,7 +48,13 @@ export enum UsefulContentTypes {
   FormData = `multipart/form-data; charset=UTF-8`,
 }
 
-export interface DefaultHttpConfig<Msg extends any = any> {
+export type DefaultMsg = {
+  code: number;
+  msg: string;
+  data: any;
+};
+
+export interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
   /**
    * 基础地址
    * @default /api
@@ -72,17 +78,17 @@ export interface DefaultHttpConfig<Msg extends any = any> {
     end: () => void;
   };
   /**
-   * 错误处理函数
+   * 错误处理函数，进行错误处理或继续抛出错误
    * 接受各种抛出的错误
    * @default console.error
    */
   fail: (err: string | number | Error | Msg) => void;
   /**
-   * 结果校验，判断此次请求是否正常
-   * 不传则默认使用标准 http 状态码作为判断结果
-   * @default () => true
+   * 结果校验 + 数据解析，判断此次请求是否正常，正常则返回解包数据，否则抛出异常
+   * 不传则默认使用标准 http 状态码作为判断结果，并原样返回
+   * @default () => any | never
    */
-  checkFn: (res: Msg) => boolean;
+  checkFn: (res: Msg) => any | never;
   /**
    * 请求头
    */
@@ -114,17 +120,14 @@ const defaultConfig: DefaultHttpConfig = {
     end: console.log.bind(null, '🚀 ~ http loading end'),
   },
   fail: console.error.bind(null, '🚀 ~ http loading error'),
-  checkFn: () => true,
+  checkFn: (res) => res,
   headers: {
     getCommonHeaders: () => ({}),
     getAuthHeaders: () => ({}),
   },
 };
 
-export const useHttp = <
-  Msg extends Record<string, any> = Record<string, any>,
-  Fns extends Cbks = Cbks,
->(
+export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extends Cbks = Cbks>(
   config: Partial<DefaultHttpConfig<Msg>> = {},
 ) => {
   const finalConfig = defu(config, defaultConfig);
@@ -153,20 +156,13 @@ export const useHttp = <
   net.interceptors.response.use(
     (response) => {
       loading.end();
-
       const data = response.data;
 
-      if (checkFn(data)) {
-        return data;
-      } else {
-        fail(data);
-        throw new Error(data);
-      }
+      return checkFn(data);
     },
     (error: Error) => {
       loading.end();
-      fail(error.message);
-      throw new Error(error.message);
+      fail(error);
     },
   );
 
