@@ -76,7 +76,7 @@ const defaultConfig: DefaultHttpConfig = {
     end: console.log.bind(null, '🚀 ~ http loading end'),
   },
   fail: console.error.bind(null, '🚀 ~ http loading error'),
-  checkFn: () => true,
+  checkFn: (res) => res,
   headers: {
     getCommonHeaders: () => ({}),
     getAuthHeaders: () => ({}),

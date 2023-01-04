@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 14:39:52
- * @LastEditTime: 2022-12-11 16:20:02
+ * @LastEditTime: 2023-01-04 11:03:42
  * @Description:
  */
 import { describe, it, expect } from 'vitest';
@@ -126,11 +126,7 @@ describe('useHttp demos', () => {
 
     expect(await apis.get.getA()).toMatchInlineSnapshot(`
       {
-        "code": 0,
-        "data": {
-          "name": "张强",
-        },
-        "msg": "success",
+        "name": "张强",
       }
     `);
 
