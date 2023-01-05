@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-01-04 11:05:37
+ * @LastEditTime: 2023-01-04 11:56:22
  * @Description:
  */
 import type { AxiosInstance, AxiosRequestConfig, Method, AxiosAdapter } from 'axios';
@@ -158,10 +158,16 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
       loading.end();
       const data = response.data;
 
-      return checkFn(data);
+      try {
+        return checkFn(data);
+      } catch (err) {
+        // 应用逻辑异常
+        fail(err);
+      }
     },
     (error: Error) => {
       loading.end();
+      // http 异常
       fail(error);
     },
   );
