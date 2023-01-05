@@ -1,0 +1,41 @@
+{
+  "name": "@bluesyoung/ui-vue3",
+  "version": "0.0.0",
+  "description": "vue3 ui components",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "vite build && tsup",
+    "release": "pnpm build && bumpp --commit",
+    "push": "pnpm publish --access public"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue-jsx": "^2.1.1",
+    "@vueuse/core": "^9.10.0",
+    "vue": "^3.2.45"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/BluesYoung-web/young.git",
+    "directory": "packages/ui-vue3"
+  },
+  "keywords": [
+    "ui components",
+    "vue3"
+  ],
+  "author": "BluesYoung-web",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BluesYoung-web/young/issues"
+  },
+  "homepage": "https://github.com/BluesYoung-web/young#readme"
+}
