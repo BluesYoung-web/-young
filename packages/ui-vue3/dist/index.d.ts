@@ -1,6 +1,7 @@
 import * as vue from 'vue';
+import { PropType } from 'vue';
 
-declare const _default$1: vue.DefineComponent<{
+declare const _default$2: vue.DefineComponent<{
     zIndex: {
         type: NumberConstructor;
         default: number;
@@ -16,11 +17,11 @@ declare const _default$1: vue.DefineComponent<{
 
 declare namespace YoungCmdPopup {
   export {
-    _default$1 as default,
+    _default$2 as default,
   };
 }
 
-declare const _default: vue.DefineComponent<{
+declare const _default$1: vue.DefineComponent<{
     titleStyle: {
         type: ObjectConstructor;
         default: () => {};
@@ -60,8 +61,41 @@ declare const _default: vue.DefineComponent<{
 
 declare namespace YoungTab {
   export {
+    _default$1 as default,
+  };
+}
+
+interface ContextMenuItem {
+    handlerName: string;
+    title: string;
+}
+declare const _default: vue.DefineComponent<{
+    modelValue: {
+        type: BooleanConstructor;
+        required: true;
+    };
+    menuList: {
+        type: PropType<ContextMenuItem[]>;
+        required: true;
+    };
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("update:modelValue" | "clickItem")[], "update:modelValue" | "clickItem", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+    modelValue: {
+        type: BooleanConstructor;
+        required: true;
+    };
+    menuList: {
+        type: PropType<ContextMenuItem[]>;
+        required: true;
+    };
+}>> & {
+    "onUpdate:modelValue"?: (...args: any[]) => any;
+    onClickItem?: (...args: any[]) => any;
+}, {}>;
+
+declare namespace YoungContextMenu {
+  export {
     _default as default,
   };
 }
 
-export { YoungCmdPopup, YoungTab };
+export { YoungCmdPopup, YoungContextMenu, YoungTab };
