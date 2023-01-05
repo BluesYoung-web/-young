@@ -15,12 +15,6 @@ declare const _default$2: vue.DefineComponent<{
     zIndex: number;
 }>;
 
-declare namespace YoungCmdPopup {
-  export {
-    _default$2 as default,
-  };
-}
-
 declare const _default$1: vue.DefineComponent<{
     titleStyle: {
         type: ObjectConstructor;
@@ -59,12 +53,6 @@ declare const _default$1: vue.DefineComponent<{
     titleStyle: Record<string, any>;
 }>;
 
-declare namespace YoungTab {
-  export {
-    _default$1 as default,
-  };
-}
-
 interface ContextMenuItem {
     handlerName: string;
     title: string;
@@ -92,10 +80,4 @@ declare const _default: vue.DefineComponent<{
     onClickItem?: (...args: any[]) => any;
 }, {}>;
 
-declare namespace YoungContextMenu {
-  export {
-    _default as default,
-  };
-}
-
-export { YoungCmdPopup, YoungContextMenu, YoungTab };
+export { _default$2 as YoungCmdPopup, _default as YoungContextMenu, _default$1 as YoungTab };

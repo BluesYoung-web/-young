@@ -13691,17 +13691,11 @@ var require_vue = __commonJS({
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
-  YoungCmdPopup: () => YoungCmdPopup_exports,
-  YoungContextMenu: () => YoungContextMenu_exports,
-  YoungTab: () => YoungTab_exports
+  YoungCmdPopup: () => YoungCmdPopup_default,
+  YoungContextMenu: () => YoungContextMenu_default,
+  YoungTab: () => YoungTab_default
 });
 module.exports = __toCommonJS(src_exports);
-
-// src/components/YoungCmdPopup.tsx
-var YoungCmdPopup_exports = {};
-__export(YoungCmdPopup_exports, {
-  default: () => YoungCmdPopup_default
-});
 
 // ../../node_modules/.pnpm/vue@3.2.45/node_modules/vue/index.mjs
 var vue_exports = {};
@@ -13786,10 +13780,6 @@ var YoungCmdPopup_default = (0, vue_exports.defineComponent)({
 });
 
 // src/components/YoungTab.tsx
-var YoungTab_exports = {};
-__export(YoungTab_exports, {
-  default: () => YoungTab_default
-});
 var YoungTab_default = (0, vue_exports.defineComponent)({
   props: {
     titleStyle: {
@@ -13826,12 +13816,6 @@ var YoungTab_default = (0, vue_exports.defineComponent)({
       }, title))), (_a3 = slots[`index_${activeIndex.value}`]) == null ? void 0 : _a3.call(slots));
     };
   }
-});
-
-// src/components/YoungContextMenu.tsx
-var YoungContextMenu_exports = {};
-__export(YoungContextMenu_exports, {
-  default: () => YoungContextMenu_default
 });
 
 // ../../node_modules/.pnpm/vue-demi@0.13.11_vue@3.2.45/node_modules/vue-demi/lib/index.mjs

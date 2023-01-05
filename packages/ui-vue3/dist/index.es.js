@@ -1,6 +1,6 @@
-import { defineComponent as f, ref as c, onMounted as C, onUnmounted as j, createVNode as t, Teleport as w, nextTick as k, Fragment as _, watch as T } from "vue";
-import { useMouse as M } from "@vueuse/core";
-const O = f({
+import { defineComponent as f, ref as s, onMounted as C, onUnmounted as I, createVNode as t, Teleport as w, nextTick as k, Fragment as j, watch as T } from "vue";
+import { useMouse as z } from "@vueuse/core";
+const q = f({
   props: {
     zIndex: {
       type: Number,
@@ -8,31 +8,31 @@ const O = f({
     }
   },
   setup(o, {
-    expose: r,
-    slots: a
+    expose: a,
+    slots: r
   }) {
-    const l = c(!1), u = () => l.value = !0, n = () => l.value = !1, p = (e) => {
+    const l = s(!1), i = () => l.value = !0, n = () => l.value = !1, c = (e) => {
       e.composedPath()[0] === e.currentTarget && n();
     };
-    r({
-      show: u,
+    a({
+      show: i,
       hide: n
     });
-    const s = c(), g = (e) => {
-      e.ctrlKey && e.key.toLocaleLowerCase() === "k" && (e.preventDefault(), l.value ? n() : (u(), k(() => {
+    const p = s(), y = (e) => {
+      e.ctrlKey && e.key.toLocaleLowerCase() === "k" && (e.preventDefault(), l.value ? n() : (i(), k(() => {
         var d;
-        (d = s.value) == null || d.focus();
+        (d = p.value) == null || d.focus();
       })));
     };
     return C(() => {
-      window.addEventListener("keydown", g);
-    }), j(() => {
-      window.removeEventListener("keydown", g);
+      window.addEventListener("keydown", y);
+    }), I(() => {
+      window.removeEventListener("keydown", y);
     }), () => t(w, {
       to: "body"
     }, {
       default: () => [t("div", {
-        onClick: (e) => p(e),
+        onClick: (e) => c(e),
         style: {
           display: l.value ? "block" : "none",
           backgroundColor: "rgba(0, 0, 0, 0.6)",
@@ -58,18 +58,15 @@ const O = f({
           padding: "2rem",
           boxShadow: "rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0, 0 4px 6px -1px rgb(0 0 0/0.1), 0 2px 4px -2px rgb(0 0 0/0.1)"
         }
-      }, [a.default ? a.default({
-        el: s
+      }, [r.default ? r.default({
+        el: p
       }) : t("input", {
-        ref: s,
+        ref: p,
         type: "text"
       }, null)])])]
     });
   }
-}), L = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: O
-}, Symbol.toStringTag, { value: "Module" })), z = f({
+}), M = f({
   props: {
     titleStyle: {
       type: Object,
@@ -89,29 +86,26 @@ const O = f({
     }
   },
   setup(o, {
-    slots: r
+    slots: a
   }) {
-    const a = c(0);
+    const r = s(0);
     return () => {
       var l;
-      return t(_, null, [t("div", {
+      return t(j, null, [t("div", {
         style: {
           display: "flex",
           width: "100%",
           justifyContent: "space-between",
           ...o.titleStyle
         }
-      }, [o.titles.map((u, n) => t("div", {
+      }, [o.titles.map((i, n) => t("div", {
         key: n + "adjhskse",
-        style: n === a.value ? o.activeStyle : o.inactiveStyle,
-        onClick: () => a.value = n
-      }, [u]))]), (l = r[`index_${a.value}`]) == null ? void 0 : l.call(r)]);
+        style: n === r.value ? o.activeStyle : o.inactiveStyle,
+        onClick: () => r.value = n
+      }, [i]))]), (l = a[`index_${r.value}`]) == null ? void 0 : l.call(a)]);
     };
   }
-}), V = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: z
-}, Symbol.toStringTag, { value: "Module" })), P = f({
+}), H = f({
   props: {
     modelValue: {
       type: Boolean,
@@ -124,29 +118,29 @@ const O = f({
   },
   emits: ["update:modelValue", "clickItem"],
   setup(o, {
-    emit: r
+    emit: a
   }) {
     const {
-      x: a,
+      x: r,
       y: l
-    } = M(), u = c(0), n = c(0), p = c();
+    } = z(), i = s(0), n = s(0), c = s();
     T(() => o.modelValue, (e, d) => {
       e && !d && k(() => {
-        console.log(p.value);
+        console.log(c.value);
         const {
-          width: i,
+          width: u,
           height: S
-        } = window.getComputedStyle(p.value), {
-          innerWidth: y,
-          innerHeight: b
-        } = window, v = a.value, m = l.value, x = parseFloat(i), h = parseFloat(S);
-        u.value = y - v > x ? v : y - x, n.value = b - m > h ? m : b - h;
+        } = window.getComputedStyle(c.value), {
+          innerWidth: v,
+          innerHeight: g
+        } = window, x = r.value, b = l.value, m = parseFloat(u), h = parseFloat(S);
+        i.value = v - x > m ? x : v - m, n.value = g - b > h ? b : g - h;
       });
     });
-    const s = (e) => {
-      r("clickItem", e);
-    }, g = () => {
-      r("update:modelValue", !1);
+    const p = (e) => {
+      a("clickItem", e);
+    }, y = () => {
+      a("update:modelValue", !1);
     };
     return () => t(w, {
       to: "body"
@@ -160,11 +154,11 @@ const O = f({
           top: 0,
           zIndex: 1001
         },
-        onClick: () => g()
+        onClick: () => y()
       }, [t("ul", {
-        ref: p,
+        ref: c,
         style: {
-          left: u.value + "px",
+          left: i.value + "px",
           top: n.value + "px",
           margin: 0,
           background: "#fff",
@@ -185,21 +179,18 @@ const O = f({
           padding: "7px 16px",
           cursor: "pointer"
         },
-        onClick: (i) => {
-          i.stopPropagation(), s(e.handlerName);
+        onClick: (u) => {
+          u.stopPropagation(), p(e.handlerName);
         },
-        onMouseover: (i) => i.currentTarget.style.background = "#eee",
-        onMouseleave: (i) => i.currentTarget.style.background = "#fff"
+        onMouseover: (u) => u.currentTarget.style.background = "#eee",
+        onMouseleave: (u) => u.currentTarget.style.background = "#fff"
       }, [e.title]))])])]
     });
   }
-}), q = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: P
-}, Symbol.toStringTag, { value: "Module" }));
+});
 export {
-  L as YoungCmdPopup,
-  q as YoungContextMenu,
-  V as YoungTab
+  q as YoungCmdPopup,
+  H as YoungContextMenu,
+  M as YoungTab
 };
 //# sourceMappingURL=index.es.js.map
