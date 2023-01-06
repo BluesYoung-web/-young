@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
- * @LastEditTime: 2023-01-05 17:44:40
+ * @LastEditTime: 2023-01-06 11:54:28
  * @Description: 
  */
 import { nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -119,7 +119,7 @@ export default defineComponent({
                 },
                 default: (scope) => {
                   if (head.render) {
-                    return <component is={head.render(scope.row)} />
+                    return head.render(scope.row);
                   } else {
                     return <span>{scope.row[head.prop]}</span>
                   }

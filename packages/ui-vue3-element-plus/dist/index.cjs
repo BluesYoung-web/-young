@@ -65802,9 +65802,7 @@ var YoungTable_default = (0, vue_exports.defineComponent)({
           },
           default: (scope) => {
             if (head.render) {
-              return /* @__PURE__ */ React.createElement("component", {
-                is: head.render(scope.row)
-              });
+              return head.render(scope.row);
             } else {
               return /* @__PURE__ */ React.createElement("span", null, scope.row[head.prop]);
             }
@@ -65866,8 +65864,8 @@ var YoungPagination_default = (0, vue_exports.defineComponent)({
       layout: props.layout,
       pageSizes: props.pageSizes,
       total: props.total,
-      "onSize-change": (v2) => sizeChange(v2),
-      "onCurrent-change": (v2) => pageChange(v2)
+      "onUpdate:page-size": (v2) => sizeChange(v2),
+      "onUpdate:current-page": (v2) => pageChange(v2)
     })));
   }
 });

@@ -1,8 +1,8 @@
-import { defineComponent as w, ref as d, onActivated as P, nextTick as h, watchEffect as M, createVNode as s, mergeProps as x, Fragment as z, resolveComponent as q, computed as F, Teleport as H } from "vue";
-import { deepClone as m } from "@bluesyoung/utils";
-import { ElTable as O, ElTableColumn as j, ElTooltip as C, ElPagination as N, ElDialog as _, ElButton as V, ElMessageBox as D } from "element-plus";
+import { defineComponent as w, ref as c, onActivated as P, nextTick as h, watchEffect as M, createVNode as s, mergeProps as x, Fragment as z, computed as F, Teleport as q } from "vue";
+import { deepClone as y } from "@bluesyoung/utils";
+import { ElTable as H, ElTableColumn as O, ElTooltip as j, ElPagination as N, ElDialog as _, ElButton as V, ElMessageBox as D } from "element-plus";
 import { useIntersectionObserver as Y } from "@vueuse/core";
-const W = w({
+const Q = w({
   props: {
     tableData: {
       type: Object,
@@ -23,32 +23,32 @@ const W = w({
     attrs: g,
     slots: a
   }) {
-    const r = d(null);
+    const r = c(null);
     P(() => {
       h(() => {
         r.value.doLayout();
       });
     });
-    const t = d([]), c = d([]);
+    const t = c([]), d = c([]);
     return M(() => {
       const o = e.tableData, l = e.tableHead, u = o.length;
       h(() => {
-        c.value = l.filter((i) => !i.only_export);
-        const v = 50;
-        if (u <= v)
-          t.value = m(o);
+        d.value = l.filter((i) => !i.only_export);
+        const f = 50;
+        if (u <= f)
+          t.value = y(o);
         else {
           const {
             elArr: i,
-            load: y
-          } = $(t, d(o), v);
+            load: m
+          } = $(t, c(o), f);
           let p = 0;
-          t.value = o.slice(p, v), h(() => {
-            i.value = r.value.$el.querySelector("tbody").children, y();
+          t.value = o.slice(p, f), h(() => {
+            i.value = r.value.$el.querySelector("tbody").children, m();
           });
         }
       });
-    }), () => s(O, x(g, {
+    }), () => s(H, x(g, {
       ref: r,
       data: t.value,
       style: "width: 100%",
@@ -57,8 +57,8 @@ const W = w({
     }), {
       default: () => {
         var o, l;
-        return [c.value.map((u, v) => s(j, {
-          key: v,
+        return [d.value.map((u, f) => s(O, {
+          key: f,
           prop: u.prop,
           label: u.label,
           width: u.width || "",
@@ -66,14 +66,12 @@ const W = w({
           fixed: u.fixed || !1,
           align: u.aligin || "left"
         }, {
-          header: (i) => c.value[i.$index].tool_content ? s(z, null, [s("span", null, [i.column.label]), s(C, {
+          header: (i) => d.value[i.$index].tool_content ? s(z, null, [s("span", null, [i.column.label]), s(j, {
             placement: "bottom"
           }, {
-            content: () => c.value[i.$index].tool_content
+            content: () => d.value[i.$index].tool_content
           })]) : s("span", null, [i.column.label]),
-          default: (i) => u.render ? s(q("component"), {
-            is: u.render(i.row)
-          }, null) : s("span", null, [i.row[u.prop]])
+          default: (i) => u.render ? u.render(i.row) : s("span", null, [i.row[u.prop]])
         })), (o = a.switch) == null ? void 0 : o.call(a), (l = a.operate) == null ? void 0 : l.call(a)];
       }
     });
@@ -81,7 +79,7 @@ const W = w({
 }), b = {
   type: Number,
   required: !0
-}, X = w({
+}, W = w({
   props: {
     total: b,
     page: b,
@@ -126,11 +124,11 @@ const W = w({
       layout: e.layout,
       pageSizes: e.pageSizes,
       total: e.total,
-      "onSize-change": (t) => a(t),
-      "onCurrent-change": (t) => r(t)
+      "onUpdate:page-size": (t) => a(t),
+      "onUpdate:current-page": (t) => r(t)
     }), null)]);
   }
-}), Z = w({
+}), X = w({
   props: {
     modelValue: Boolean,
     realTitle: String,
@@ -167,7 +165,7 @@ const W = w({
     }), t = F({
       get: () => e.isAdd || e.isMore || e.isEdit,
       set: (l) => null
-    }), c = async () => {
+    }), d = async () => {
       if (!(e.sureFn && await e.sureFn() === !1)) {
         if (e.isMore) {
           n("clear");
@@ -184,7 +182,7 @@ const W = w({
         n("update:modelValue", !1), n("clear");
       }).catch(() => null);
     };
-    return () => s(H, {
+    return () => s(q, {
       to: "body"
     }, {
       default: () => [s(_, x(g, {
@@ -199,14 +197,14 @@ const W = w({
           return (l = a.body) == null ? void 0 : l.call(a);
         },
         footer: () => {
-          var l, u, v;
+          var l, u, f;
           return s(z, null, [(l = a.button) == null ? void 0 : l.call(a), e.showCancel && s(V, {
             onClick: () => o()
           }, {
             default: () => [e.cancelText]
-          }), (u = a.step1) == null ? void 0 : u.call(a), (v = a.step2) == null ? void 0 : v.call(a), e.showSure && s(V, {
+          }), (u = a.step1) == null ? void 0 : u.call(a), (f = a.step2) == null ? void 0 : f.call(a), e.showSure && s(V, {
             type: "primary",
-            onClick: () => c()
+            onClick: () => d()
           }, {
             default: () => [e.sureText]
           })]);
@@ -214,8 +212,8 @@ const W = w({
       })]
     });
   }
-}), $ = (e, n, g = 10, a = d(!1)) => {
-  const r = d([]), t = d(!1), c = d(1), o = () => {
+}), $ = (e, n, g = 10, a = c(!1)) => {
+  const r = c([]), t = c(!1), d = c(1), o = () => {
     const { stop: l } = Y(
       r.value[e.value.length - 1],
       ([{ isIntersecting: u }]) => {
@@ -227,8 +225,8 @@ const W = w({
     if (!a.value && t.value) {
       if (e.value.length === n.value.length)
         return;
-      c.value++;
-      const l = n.value.slice(g * (c.value - 1), g * c.value);
+      d.value++;
+      const l = n.value.slice(g * (d.value - 1), g * d.value);
       if (l.length === 0)
         return;
       e.value.push(...l), t.value = !1, await h(), o();
@@ -236,37 +234,37 @@ const W = w({
   }), {
     elArr: r,
     touchEndEl: t,
-    page: c,
+    page: d,
     load: o
   };
-}, E = (e, { addCbk: n, modCbk: g, delCbk: a, cpEffect: r, cgEffect: t, disableclear: c }, o = "\u786E\u8BA4\u5220\u9664\u8BE5\u6761\u6570\u636E\uFF1F") => {
-  const l = d(!1), u = d(!1), v = d(!1), i = d(m(e)), y = d(), p = async () => await new Promise((S) => {
+}, Z = (e, { addCbk: n, modCbk: g, delCbk: a, cpEffect: r, cgEffect: t, disableclear: d }, o = "\u786E\u8BA4\u5220\u9664\u8BE5\u6761\u6570\u636E\uFF1F") => {
+  const l = c(!1), u = c(!1), f = c(!1), i = c(y(e)), m = c(), p = async () => await new Promise((S) => {
     var T;
-    (T = y.value) == null || T.validate(async (A) => {
+    (T = m.value) == null || T.validate(async (A) => {
       A && S(!0);
     }).catch((A) => {
       S(!1);
     });
   }), B = () => {
-    l.value = !1, u.value = !1, v.value = !1, i.value = m(e);
+    l.value = !1, u.value = !1, f.value = !1, i.value = y(e);
   };
   return {
     isAdd: l,
     isEdit: u,
-    isMore: v,
+    isMore: f,
     clear: B,
-    edit: (f) => {
-      r == null || r(f), i.value = m(f), u.value = !0;
+    edit: (v) => {
+      r == null || r(v), i.value = y(v), u.value = !0;
     },
-    more: (f) => {
-      r == null || r(f), i.value = m(f), v.value = !0;
+    more: (v) => {
+      r == null || r(v), i.value = y(v), f.value = !0;
     },
     form: i,
-    del: (f) => {
+    del: (v) => {
       D.confirm(o, "\u63D0\u793A", {
         type: "warning"
       }).then(async () => {
-        await (a == null ? void 0 : a(f)), t == null || t();
+        await (a == null ? void 0 : a(v)), t == null || t();
       }).catch(() => null);
     },
     sure: async () => {
@@ -275,17 +273,17 @@ const W = w({
           return;
       } else if (await (g == null ? void 0 : g()) === !1)
         return;
-      !c && B(), t == null || t();
+      !d && B(), t == null || t();
     },
-    formRef: y,
+    formRef: m,
     validForm: p
   };
 };
 export {
-  Z as YoungDialog,
-  X as YoungPagination,
-  W as YoungTable,
+  X as YoungDialog,
+  W as YoungPagination,
+  Q as YoungTable,
   $ as useAutoLoad,
-  E as useFormMode
+  Z as useFormMode
 };
 //# sourceMappingURL=index.es.js.map

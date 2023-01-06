@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:51:59
- * @LastEditTime: 2023-01-05 18:02:01
+ * @LastEditTime: 2023-01-06 12:03:47
  * @Description: 
  */
 import { ElPagination } from 'element-plus';
@@ -60,8 +60,8 @@ export default defineComponent({
           layout={props.layout}
           pageSizes={props.pageSizes}
           total={props.total}
-          onSize-change={(v) => sizeChange(v)}
-          onCurrent-change={(v) => pageChange(v)}
+          onUpdate:page-size={(v) => sizeChange(v)}
+          onUpdate:current-page={(v) => pageChange(v)}
         />
       </div>
     );
