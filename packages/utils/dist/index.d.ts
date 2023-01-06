@@ -466,4 +466,28 @@ declare type RepeatString<T extends string, C extends number, R extends string =
  */
 declare type ToNumber<T extends string, S extends any[] = [], L extends number = S['length']> = `${L}` extends T ? L : ToNumber<T, [...S, 1]>;
 
-export { AppendArgument, Chainable, ConditionalPick, Curry, Exclusive, FirstAsArray, GetUnionLast, HSBToRGB, HSLToRGB, Head, Includes, IsEqual, IsNever, IsUnion, JoinStrArray, Merge, Mutable, NaiveFlat, NotEmpty, OptionalKeys, Prepend, Push, RGBToHSB, RGBToHSL, RGBToHex, RemoveIndexSignature, Repeat, RepeatString, RequireAtLeastOne, Reverse, SetOptional, Shift, Simplify, Split, Str2Tuple, Tail, ToNumber, ToPath, Trim, TrimLeft, TrimRight, TupleToIntersection, UnionToInterFunction, UnionToIntersection, UnionToTuple, Unshift, deepClone, disableScroll, enableScroll, encodedStrParse, exitFullscreen, extendHex, formatCurrency, formatDate, formatUrl, getClientHeight, getDateRange, hexToRGB, idMasaike, isAndroid, isArray, isArrayBuffer, isBoolean, isChinese, isCurrencyStr, isDate, isDecimal, isDisabledDate, isEmail, isFunction, isHttpUrl, isISODate, isIdCard, isInteger, isJsonStr, isLandline, isLetter, isLicensePlate, isMap, isMobile, isNull, isNumber, isObject, isRegExp, isSet, isString, isSymbol, isUndefined, isWeChat, isWeakMap, isWeakSet, isWebSocketUrl, isiOS, lastMonthDay, nameMasaike, nextDay, randomHexColorCode, recentDay, recentMonth, safeJsonParse, scrollToBottom, scrollToTop, setRequired, shortcuts, sleep, smoothScroll, telMasaike, thisMonth, thisMonthDay, toFullScreen, toRGBArray, toRGBObject, ymdParse };
+declare abstract class YoungStorage {
+    /**
+     * 存储
+     * @param key 键名
+     * @param value 键值
+     * @param exp 过期时间(天)，默认 1 天后
+     */
+    abstract set<T>(key: string, value: T, exp?: number): void;
+    abstract remove(key: string): void;
+    abstract get<T>(key: string): T | undefined;
+}
+
+declare class YoungLocalStorage extends YoungStorage {
+    /**
+     * 存储
+     * @param key 键名
+     * @param value 键值
+     * @param exp 过期时间(天)，默认 1 天后
+     */
+    set<T>(key: string, value: T, exp?: number): void;
+    remove(key: string): void;
+    get<T>(key: string): T | undefined;
+}
+
+export { AppendArgument, Chainable, ConditionalPick, Curry, Exclusive, FirstAsArray, GetUnionLast, HSBToRGB, HSLToRGB, Head, Includes, IsEqual, IsNever, IsUnion, JoinStrArray, Merge, Mutable, NaiveFlat, NotEmpty, OptionalKeys, Prepend, Push, RGBToHSB, RGBToHSL, RGBToHex, RemoveIndexSignature, Repeat, RepeatString, RequireAtLeastOne, Reverse, SetOptional, Shift, Simplify, Split, Str2Tuple, Tail, ToNumber, ToPath, Trim, TrimLeft, TrimRight, TupleToIntersection, UnionToInterFunction, UnionToIntersection, UnionToTuple, Unshift, YoungLocalStorage, YoungStorage, deepClone, disableScroll, enableScroll, encodedStrParse, exitFullscreen, extendHex, formatCurrency, formatDate, formatUrl, getClientHeight, getDateRange, hexToRGB, idMasaike, isAndroid, isArray, isArrayBuffer, isBoolean, isChinese, isCurrencyStr, isDate, isDecimal, isDisabledDate, isEmail, isFunction, isHttpUrl, isISODate, isIdCard, isInteger, isJsonStr, isLandline, isLetter, isLicensePlate, isMap, isMobile, isNull, isNumber, isObject, isRegExp, isSet, isString, isSymbol, isUndefined, isWeChat, isWeakMap, isWeakSet, isWebSocketUrl, isiOS, lastMonthDay, nameMasaike, nextDay, randomHexColorCode, recentDay, recentMonth, safeJsonParse, scrollToBottom, scrollToTop, setRequired, shortcuts, sleep, smoothScroll, telMasaike, thisMonth, thisMonthDay, toFullScreen, toRGBArray, toRGBObject, ymdParse };

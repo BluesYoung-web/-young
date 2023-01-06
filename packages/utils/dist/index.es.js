@@ -1,7 +1,7 @@
-const c = (e, t) => Object.prototype.toString.call(e) === `[object ${t.name}]`, h = (e) => c(e, Array), g = (e) => c(e, Object), b = (e) => c(e, Number), D = (e) => c(e, String), A = (e) => c(e, Boolean), F = (e) => c(e, Map), v = (e) => c(e, WeakMap), x = (e) => c(e, Set), H = (e) => c(e, WeakSet), k = (e) => c(e, ArrayBuffer), E = (e) => c(e, RegExp), T = (e) => c(e, Function), $ = (e) => c(e, Symbol), C = (e) => e === null, N = (e) => e === void 0, R = (e) => {
+const a = (e, t) => Object.prototype.toString.call(e) === `[object ${t.name}]`, m = (e) => a(e, Array), g = (e) => a(e, Object), b = (e) => a(e, Number), D = (e) => a(e, String), x = (e) => a(e, Boolean), A = (e) => a(e, Map), F = (e) => a(e, WeakMap), H = (e) => a(e, Set), T = (e) => a(e, WeakSet), E = (e) => a(e, ArrayBuffer), k = (e) => a(e, RegExp), $ = (e) => a(e, Function), C = (e) => a(e, Symbol), N = (e) => e === null, R = (e) => e === void 0, O = (e) => {
   if ([null, void 0, NaN, !1].includes(e) || typeof e != "object")
     return e;
-  const t = h(e) ? [] : {}, n = [
+  const t = m(e) ? [] : {}, n = [
     {
       parent: t,
       key: void 0,
@@ -10,17 +10,17 @@ const c = (e, t) => Object.prototype.toString.call(e) === `[object ${t.name}]`, 
   ];
   for (; n.length; ) {
     const { parent: s, key: o, data: r } = n.pop();
-    let a = s;
-    typeof o < "u" && (a = s[o] = h(r) ? [] : {});
+    let c = s;
+    typeof o < "u" && (c = s[o] = m(r) ? [] : {});
     for (let [d, l] of Object.entries(r))
       typeof l == "object" && l !== null && ![Date, RegExp, Function].some((p) => l instanceof p) ? n.push({
-        parent: a,
+        parent: c,
         key: d,
         data: l
-      }) : a[d] = l;
+      }) : c[d] = l;
   }
   return t;
-}, O = (e, t = !1) => {
+}, L = (e, t = !1) => {
   if (e) {
     if (e = e.toString().replace(/\$|\,/g, ""), e === "" || isNaN(+e))
       return "Not a Number !";
@@ -39,7 +39,7 @@ const c = (e, t) => Object.prototype.toString.call(e) === `[object ${t.name}]`, 
   e = String(e);
   const n = e.substring(0, 3), s = e.substring(7, 11);
   return n + t + s;
-}, L = (e, t = "*") => {
+}, I = (e, t = "*") => {
   const n = e.length;
   return n <= 2 ? e[0] + t : e[0] + t + e[n - 1];
 }, P = (e, t = "********") => `${e.substr(0, 6)}${t}${e.substr(-4)}`;
@@ -71,7 +71,7 @@ const y = () => {
 }, j = (e = 0, t = 0, n = 0) => {
   const s = new Date();
   return s.setDate(s.getDate() + 1), s.setHours(e, t, n), s;
-}, I = [
+}, J = [
   {
     text: "\u4ECA\u5929",
     value: (() => {
@@ -97,8 +97,8 @@ const y = () => {
   {
     text: "\u4E0A\u5468",
     value: (() => {
-      let e = new Date(), t = new Date(e.getTime() - 7 * 24 * 3600 * 1e3), n = new Date(e.getTime() - 7 * 24 * 3600 * 1e3), s = t.getDay(), o = t.getDate() - s + (s === 0 ? -6 : 1), r = new Date(t.setDate(o)), a = new Date(n.setDate(o + 6));
-      return [r, a];
+      let e = new Date(), t = new Date(e.getTime() - 7 * 24 * 3600 * 1e3), n = new Date(e.getTime() - 7 * 24 * 3600 * 1e3), s = t.getDay(), o = t.getDate() - s + (s === 0 ? -6 : 1), r = new Date(t.setDate(o)), c = new Date(n.setDate(o + 6));
+      return [r, c];
     })()
   },
   {
@@ -129,16 +129,16 @@ const y = () => {
       return t.setTime(t.getTime() - 3600 * 1e3 * 24 * 30), [t, e];
     })()
   }
-], z = (e) => {
+], Y = (e) => {
   const t = new Date().setHours(23, 59, 59);
   return e.getTime() > t;
-}, G = (e, t) => {
+}, z = (e, t) => {
   let n = new Date(e, t - 1, 1), s = new Date(e, t, 0);
   return [
     n.getDate().toString().padStart(2, "0"),
     s.getDate().toString().padStart(2, "0")
   ];
-}, J = async (e) => new Promise((t) => setTimeout(t, e * 1e3)), m = (e, t = "%") => {
+}, G = async (e) => new Promise((t) => setTimeout(t, e * 1e3)), h = (e, t = "%") => {
   const n = [];
   return e.split(t).map((s) => {
     if (s) {
@@ -146,7 +146,7 @@ const y = () => {
       o.length > 6 ? n.push(String.fromCharCode(+o.substr(0, 6)), decodeURIComponent(o.slice(6))) : o.length === 6 ? n.push(String.fromCharCode(+o)) : n.push(decodeURIComponent(o));
     }
   }), n.join("");
-}, Y = (e) => e.includes("%u") ? m(e, "%") : e.includes("\\u") ? m(e, "\\") : decodeURIComponent(e), K = (e, t = {}) => {
+}, K = (e) => e.includes("%u") ? h(e, "%") : e.includes("\\u") ? h(e, "\\") : decodeURIComponent(e), X = (e, t = {}) => {
   if (D(e))
     try {
       const n = JSON.parse(e);
@@ -155,10 +155,10 @@ const y = () => {
       return t;
     }
   return t;
-}, X = (e) => e.indexOf("http") !== -1 ? e : `//${e}`, V = (e) => /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(e), Q = (e) => /^1[23456789]\d{9}$/.test(e), _ = (e) => /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/.test(e), ee = (e) => /ws(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/.test(e), te = (e) => !/Invalid|NaN/.test(new Date(e).toString()), ne = (e) => /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(new Date(e).toString()), se = (e) => /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(e + ""), oe = (e) => /^\d+$/.test(e + ""), re = (e) => /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(e + ""), ce = (e) => {
+}, V = (e) => e.indexOf("http") !== -1 ? e : `//${e}`, Q = (e) => /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(e), _ = (e) => /^1[23456789]\d{9}$/.test(e), ee = (e) => /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/.test(e), te = (e) => /ws(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/.test(e), ne = (e) => !/Invalid|NaN/.test(new Date(e).toString()), se = (e) => /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(new Date(e).toString()), oe = (e) => /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(e + ""), re = (e) => /^\d+$/.test(e + ""), ae = (e) => /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(e + ""), ce = (e) => {
   const t = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/, n = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
   return e.length === 7 ? n.test(e) : e.length === 8 ? t.test(e) : !1;
-}, ae = (e) => /^[\u4e00-\u9fa5]+$/gi.test(e), ie = (e) => /^[a-zA-Z]+$/.test(e), le = (e) => /^\d{3,4}-\d{7,8}(-\d{3,4})?$/.test(e), ue = (e) => {
+}, ie = (e) => /^[\u4e00-\u9fa5]+$/gi.test(e), le = (e) => /^[a-zA-Z]+$/.test(e), ue = (e) => /^\d{3,4}-\d{7,8}(-\d{3,4})?$/.test(e), de = (e) => {
   if (D(e))
     try {
       const t = JSON.parse(e);
@@ -167,26 +167,26 @@ const y = () => {
       return !1;
     }
   return !1;
-}, de = (e) => /^-?\d{1,3}(,\d{3})*(\.\d+)?$/.test(e), he = () => /MicroMessenger/gim.test(navigator.userAgent), me = () => !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), ge = () => {
+}, me = (e) => /^-?\d{1,3}(,\d{3})*(\.\d+)?$/.test(e), he = () => /MicroMessenger/gim.test(navigator.userAgent), ge = () => !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), De = () => {
   const e = navigator.userAgent;
   return e.indexOf("Android") > -1 || e.indexOf("Adr") > -1;
 }, M = () => {
   const e = document.documentElement.scrollTop || document.body.scrollTop;
   e > 0 && (window.requestAnimationFrame(M), window.scrollTo(0, e - e / 8));
-}, De = () => {
+}, fe = () => {
   window.scrollTo(0, document.documentElement.clientHeight);
-}, fe = (e) => {
+}, we = (e) => {
   var t;
   (t = document.querySelector(e)) == null || t.scrollIntoView({
     behavior: "smooth"
   });
-}, we = () => {
+}, pe = () => {
   let e = 0, t = 0;
   return e = (document.compatMode == "BackCompat" ? document.body : document.documentElement).clientWidth, document.body.clientHeight && document.documentElement.clientHeight ? t = document.body.clientHeight < document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight : t = document.body.clientHeight > document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight, [e, t];
-}, pe = async () => {
+}, ye = async () => {
   let e = document.body;
   e.requestFullscreen ? await e.requestFullscreen() : e.mozRequestFullScreen ? await e.mozRequestFullScreen() : e.msRequestFullscreen ? await e.msRequestFullscreen() : e.webkitRequestFullscreen && await e.webkitRequestFullScreen();
-}, ye = async () => {
+}, Se = async () => {
   document.exitFullscreen ? document.exitFullscreen() : document.msExitFullscreen ? document.msExitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
 };
 function i(e) {
@@ -195,29 +195,29 @@ function i(e) {
 function w(e) {
   e.preventDefault();
 }
-const Se = (e = window) => {
+const Me = (e = window) => {
   e.addEventListener("wheel", w, { passive: !1 }), e.addEventListener("keyup", i), e.addEventListener("keydown", i), e.addEventListener("keypress", i);
-}, Me = (e = window) => {
+}, ve = (e = window) => {
   e.removeEventListener("wheel", w), e.removeEventListener("keyup", i), e.removeEventListener("keydown", i), e.removeEventListener("keypress", i);
-}, be = () => "#" + (Math.random() * 1048575 * 1e6).toString(16).slice(0, 6), Ae = (e, t, n) => ((e << 16) + (t << 8) + n).toString(16).padStart(6, "0"), Fe = (e) => {
+}, be = () => "#" + (Math.random() * 1048575 * 1e6).toString(16).slice(0, 6), xe = (e, t, n) => ((e << 16) + (t << 8) + n).toString(16).padStart(6, "0"), Ae = (e) => {
   let t = !1, n = e.slice(e.startsWith("#") ? 1 : 0);
   return n.length === 3 ? n = [...n].map((s) => s + s).join("") : n.length === 8 && (t = !0), n = parseInt(n, 16), `rgb${t ? "a" : ""}(${n >>> (t ? 24 : 16)}, ${(n & (t ? 16711680 : 65280)) >>> (t ? 16 : 8)}, ${(n & (t ? 65280 : 255)) >>> (t ? 8 : 0)}${t ? `, ${n & 255}` : ""})`;
-}, ve = (e) => "#" + e.slice(e.length === 4 ? 1 : 0).split("").map((t) => t + t).join(""), xe = (e) => {
+}, Fe = (e) => "#" + e.slice(e.length === 4 ? 1 : 0).split("").map((t) => t + t).join(""), He = (e) => {
   var o, r;
-  const [t, n, s] = (r = (o = e.match(/\d+/g)) == null ? void 0 : o.map((a) => +a)) != null ? r : [0, 0, 0];
+  const [t, n, s] = (r = (o = e.match(/\d+/g)) == null ? void 0 : o.map((c) => +c)) != null ? r : [0, 0, 0];
   return { red: t, green: n, blue: s };
-}, He = (e) => {
+}, Te = (e) => {
   var t, n;
   return (n = (t = e.match(/\d+/g)) == null ? void 0 : t.map((s) => +s)) != null ? n : [0, 0, 0];
-}, ke = (e, t, n) => {
+}, Ee = (e, t, n) => {
   e /= 255, t /= 255, n /= 255;
   const s = Math.max(e, t, n), o = s - Math.min(e, t, n), r = o === 0 ? 0 : o && s === e ? (t - n) / o : s === t ? 2 + (n - e) / o : 4 + (e - t) / o;
   return [60 * (r < 0 ? r + 6 : r), s && o / s * 100, s * 100];
-}, Ee = (e, t, n) => {
+}, ke = (e, t, n) => {
   t /= 100, n /= 100;
   const s = (r) => (r + e / 60) % 6, o = (r) => n * (1 - t * Math.max(0, Math.min(s(r), 4 - s(r), 1)));
   return [255 * o(5), 255 * o(3), 255 * o(1)];
-}, Te = (e, t, n) => {
+}, $e = (e, t, n) => {
   e /= 255, t /= 255, n /= 255;
   const s = Math.max(e, t, n), o = s - Math.min(e, t, n), r = o ? s === e ? (t - n) / o : s === t ? 2 + (n - e) / o : 4 + (e - t) / o : 0;
   return [
@@ -225,82 +225,114 @@ const Se = (e = window) => {
     100 * (o ? s <= 0.5 ? o / (2 * s - o) : o / (2 - (2 * s - o)) : 0),
     100 * (2 * s - o) / 2
   ];
-}, $e = (e, t, n) => {
+}, Ce = (e, t, n) => {
   t /= 100, n /= 100;
-  const s = (a) => (a + e / 30) % 12, o = t * Math.min(n, 1 - n), r = (a) => n - o * Math.max(-1, Math.min(s(a) - 3, Math.min(9 - s(a), 1)));
+  const s = (c) => (c + e / 30) % 12, o = t * Math.min(n, 1 - n), r = (c) => n - o * Math.max(-1, Math.min(s(c) - 3, Math.min(9 - s(c), 1)));
   return [255 * r(0), 255 * r(8), 255 * r(4)];
 };
+class v {
+}
+class Ne extends v {
+  set(t, n, s = 1) {
+    localStorage.setItem(
+      t,
+      JSON.stringify({
+        exp: new Date(Date.now() + 1e3 * 3600 * 24 * s).getTime(),
+        data: n
+      })
+    );
+  }
+  remove(t) {
+    localStorage.removeItem(t);
+  }
+  get(t) {
+    const n = localStorage.getItem(t);
+    if (!!n)
+      try {
+        const { exp: s, data: o } = JSON.parse(n);
+        if (Date.now() < s)
+          return o;
+        this.remove(t);
+        return;
+      } catch {
+        this.remove(t);
+        return;
+      }
+  }
+}
 export {
-  Ee as HSBToRGB,
-  $e as HSLToRGB,
-  ke as RGBToHSB,
-  Te as RGBToHSL,
-  Ae as RGBToHex,
-  R as deepClone,
-  Se as disableScroll,
-  Me as enableScroll,
-  Y as encodedStrParse,
-  ye as exitFullscreen,
-  ve as extendHex,
-  O as formatCurrency,
+  ke as HSBToRGB,
+  Ce as HSLToRGB,
+  Ee as RGBToHSB,
+  $e as RGBToHSL,
+  xe as RGBToHex,
+  Ne as YoungLocalStorage,
+  v as YoungStorage,
+  O as deepClone,
+  Me as disableScroll,
+  ve as enableScroll,
+  K as encodedStrParse,
+  Se as exitFullscreen,
+  Fe as extendHex,
+  L as formatCurrency,
   U as formatDate,
-  X as formatUrl,
-  we as getClientHeight,
-  G as getDateRange,
-  Fe as hexToRGB,
+  V as formatUrl,
+  pe as getClientHeight,
+  z as getDateRange,
+  Ae as hexToRGB,
   P as idMasaike,
-  ge as isAndroid,
-  h as isArray,
-  k as isArrayBuffer,
-  A as isBoolean,
-  ae as isChinese,
-  de as isCurrencyStr,
-  te as isDate,
-  se as isDecimal,
-  z as isDisabledDate,
-  V as isEmail,
-  T as isFunction,
-  _ as isHttpUrl,
-  ne as isISODate,
-  re as isIdCard,
-  oe as isInteger,
-  ue as isJsonStr,
-  le as isLandline,
-  ie as isLetter,
+  De as isAndroid,
+  m as isArray,
+  E as isArrayBuffer,
+  x as isBoolean,
+  ie as isChinese,
+  me as isCurrencyStr,
+  ne as isDate,
+  oe as isDecimal,
+  Y as isDisabledDate,
+  Q as isEmail,
+  $ as isFunction,
+  ee as isHttpUrl,
+  se as isISODate,
+  ae as isIdCard,
+  re as isInteger,
+  de as isJsonStr,
+  ue as isLandline,
+  le as isLetter,
   ce as isLicensePlate,
-  F as isMap,
-  Q as isMobile,
-  C as isNull,
+  A as isMap,
+  _ as isMobile,
+  N as isNull,
   b as isNumber,
   g as isObject,
-  E as isRegExp,
-  x as isSet,
+  k as isRegExp,
+  H as isSet,
   D as isString,
-  $ as isSymbol,
-  N as isUndefined,
+  C as isSymbol,
+  R as isUndefined,
   he as isWeChat,
-  v as isWeakMap,
-  H as isWeakSet,
-  ee as isWebSocketUrl,
-  me as isiOS,
+  F as isWeakMap,
+  T as isWeakSet,
+  te as isWebSocketUrl,
+  ge as isiOS,
   y as lastMonthDay,
-  L as nameMasaike,
+  I as nameMasaike,
   j as nextDay,
   be as randomHexColorCode,
   f as recentDay,
   Z as recentMonth,
-  K as safeJsonParse,
-  De as scrollToBottom,
+  X as safeJsonParse,
+  fe as scrollToBottom,
   M as scrollToTop,
-  I as shortcuts,
-  J as sleep,
-  fe as smoothScroll,
+  J as shortcuts,
+  G as sleep,
+  we as smoothScroll,
   B as telMasaike,
   q as thisMonth,
   S as thisMonthDay,
-  pe as toFullScreen,
-  He as toRGBArray,
-  xe as toRGBObject,
+  ye as toFullScreen,
+  Te as toRGBArray,
+  He as toRGBObject,
   W as ymdParse
 };
 //# sourceMappingURL=index.es.js.map

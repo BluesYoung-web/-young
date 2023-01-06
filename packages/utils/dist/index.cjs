@@ -24,6 +24,8 @@ __export(src_exports, {
   RGBToHSB: () => RGBToHSB,
   RGBToHSL: () => RGBToHSL,
   RGBToHex: () => RGBToHex,
+  YoungLocalStorage: () => YoungLocalStorage,
+  YoungStorage: () => YoungStorage,
   deepClone: () => deepClone,
   disableScroll: () => disableScroll,
   enableScroll: () => enableScroll,
@@ -585,6 +587,41 @@ var HSLToRGB = (h, s, l) => {
   const f = (n) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
   return [255 * f(0), 255 * f(8), 255 * f(4)];
 };
+
+// src/storage/base.ts
+var YoungStorage = class {
+};
+
+// src/storage/localStorage.ts
+var YoungLocalStorage = class extends YoungStorage {
+  set(key, value, exp = 1) {
+    localStorage.setItem(key, JSON.stringify({
+      exp: new Date(Date.now() + 1e3 * 3600 * 24 * exp).getTime(),
+      data: value
+    }));
+  }
+  remove(key) {
+    localStorage.removeItem(key);
+  }
+  get(key) {
+    const res = localStorage.getItem(key);
+    if (!res) {
+      return void 0;
+    }
+    try {
+      const { exp, data } = JSON.parse(res);
+      if (Date.now() < exp) {
+        return data;
+      } else {
+        this.remove(key);
+        return void 0;
+      }
+    } catch (error) {
+      this.remove(key);
+      return void 0;
+    }
+  }
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   HSBToRGB,
@@ -592,6 +629,8 @@ var HSLToRGB = (h, s, l) => {
   RGBToHSB,
   RGBToHSL,
   RGBToHex,
+  YoungLocalStorage,
+  YoungStorage,
   deepClone,
   disableScroll,
   enableScroll,

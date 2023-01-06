@@ -1,10 +1,11 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-10-19 10:48:36
- * @LastEditTime: 2023-01-05 16:34:01
+ * @LastEditTime: 2023-01-06 17:23:13
  * @Description:
  */
 /// <reference types="vite/client" />
+/// <reference types="vitest" />
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 export default defineConfig({
@@ -20,5 +21,8 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     sourcemap: true,
+  },
+  test: {
+    environment: 'happy-dom',
   },
 });
