@@ -13,7 +13,7 @@ declare type Handlers<R extends Cbks> = {
     [P in keyof R]?: R[P];
 };
 declare type Headers = Record<string, string>;
-declare type Req = (config: AxiosRequestConfig<unknown>) => Promise<any>;
+declare type Req = <X extends any = any>(config: AxiosRequestConfig<unknown>) => Promise<X>;
 declare type Prototype = {
     __instance__: AxiosInstance;
     __mixin__<T extends Cbks>(extentions: Handlers<T>): SetRequired<Handlers<T>, keyof T> & ThisType<Handlers<T>>;

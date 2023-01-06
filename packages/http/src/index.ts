@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-01-06 14:37:59
+ * @LastEditTime: 2023-01-06 14:42:47
  * @Description:
  */
 import type { AxiosInstance, AxiosRequestConfig, Method, AxiosAdapter } from 'axios';
@@ -32,7 +32,7 @@ type Handlers<R extends Cbks> = {
 
 type Headers = Record<string, string>;
 
-type Req = (config: AxiosRequestConfig<unknown>) => Promise<any>;
+type Req = <X extends any = any>(config: AxiosRequestConfig<unknown>) => Promise<X>;
 
 type Prototype = {
   __instance__: AxiosInstance;
