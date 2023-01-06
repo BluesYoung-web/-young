@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-01-04 11:56:22
+ * @LastEditTime: 2023-01-06 14:37:59
  * @Description:
  */
 import type { AxiosInstance, AxiosRequestConfig, Method, AxiosAdapter } from 'axios';
@@ -21,7 +21,7 @@ type SetRequired<T, K extends keyof T> = Simplify<
 >;
 
 export type AllMethod = Lowercase<Method>;
-export type Fn<T extends any = any, R extends any = any> = (args: T) => Promise<R>;
+export type Fn<T extends any = any, R extends any = any> = (...args: T[]) => Promise<R>;
 export type Cbks = {
   [k in AllMethod]?: Record<string, Fn>;
 };
@@ -32,14 +32,16 @@ type Handlers<R extends Cbks> = {
 
 type Headers = Record<string, string>;
 
+type Req = (config: AxiosRequestConfig<unknown>) => Promise<any>;
+
 type Prototype = {
   __instance__: AxiosInstance;
   __mixin__<T extends Cbks>(
     extentions: Handlers<T>,
   ): SetRequired<Handlers<T>, keyof T> & ThisType<Handlers<T>>;
 
-  freeReq: AxiosInstance['request'];
-  authReq: AxiosInstance['request'];
+  freeReq: Req;
+  authReq: Req;
 };
 
 export enum UsefulContentTypes {

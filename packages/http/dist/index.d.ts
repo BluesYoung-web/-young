@@ -1,11 +1,11 @@
-import { Method, AxiosAdapter, AxiosInstance } from 'axios';
+import { Method, AxiosAdapter, AxiosInstance, AxiosRequestConfig } from 'axios';
 
 declare type Simplify<T> = {
     [P in keyof T]: T[P];
 };
 declare type SetRequired<T, K extends keyof T> = Simplify<Required<Pick<T, K>> & Pick<T, Exclude<keyof T, K>>>;
 declare type AllMethod = Lowercase<Method>;
-declare type Fn<T extends any = any, R extends any = any> = (args: T) => Promise<R>;
+declare type Fn<T extends any = any, R extends any = any> = (...args: T[]) => Promise<R>;
 declare type Cbks = {
     [k in AllMethod]?: Record<string, Fn>;
 };
@@ -13,11 +13,12 @@ declare type Handlers<R extends Cbks> = {
     [P in keyof R]?: R[P];
 };
 declare type Headers = Record<string, string>;
+declare type Req = (config: AxiosRequestConfig<unknown>) => Promise<any>;
 declare type Prototype = {
     __instance__: AxiosInstance;
     __mixin__<T extends Cbks>(extentions: Handlers<T>): SetRequired<Handlers<T>, keyof T> & ThisType<Handlers<T>>;
-    freeReq: AxiosInstance['request'];
-    authReq: AxiosInstance['request'];
+    freeReq: Req;
+    authReq: Req;
 };
 declare enum UsefulContentTypes {
     JSON = "application/json; charset=UTF-8",
