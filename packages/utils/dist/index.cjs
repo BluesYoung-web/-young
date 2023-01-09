@@ -77,6 +77,7 @@ __export(src_exports, {
   nameMasaike: () => nameMasaike,
   nextDay: () => nextDay,
   randomHexColorCode: () => randomHexColorCode,
+  randomId: () => randomId,
   recentDay: () => recentDay,
   recentMonth: () => recentMonth,
   safeJsonParse: () => safeJsonParse,
@@ -403,6 +404,7 @@ var safeJsonParse = (str, exp = {}) => {
   return exp;
 };
 var formatUrl = (url) => url.indexOf("http") !== -1 ? url : `//${url}`;
+var randomId = () => Math.random().toString(36).slice(8);
 
 // src/core/valid.ts
 var isEmail = (email) => /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(email);
@@ -682,6 +684,7 @@ var YoungLocalStorage = class extends YoungStorage {
   nameMasaike,
   nextDay,
   randomHexColorCode,
+  randomId,
   recentDay,
   recentMonth,
   safeJsonParse,

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2021-07-03 15:05:07
- * @LastEditTime: 2023-01-05 16:21:30
+ * @LastEditTime: 2023-01-09 09:51:58
  * @Description: 自定义工具函数
  */
 import { isObject, isString } from './isType';
@@ -59,4 +59,12 @@ export const safeJsonParse = <T extends any = any>(str: string, exp: any = {}): 
   return exp;
 };
 
+/**
+ * 链接地址兼容
+ */
 export const formatUrl = (url: string) => (url.indexOf('http') !== -1 ? url : `//${url}`);
+
+/**
+ * 基于随机数的 uuid，极简
+ */
+export const randomId = () => Math.random().toString(36).slice(8);

@@ -155,10 +155,10 @@ const y = () => {
       return t;
     }
   return t;
-}, V = (e) => e.indexOf("http") !== -1 ? e : `//${e}`, Q = (e) => /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(e), _ = (e) => /^1[23456789]\d{9}$/.test(e), ee = (e) => /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/.test(e), te = (e) => /ws(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/.test(e), ne = (e) => !/Invalid|NaN/.test(new Date(e).toString()), se = (e) => /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(new Date(e).toString()), oe = (e) => /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(e + ""), re = (e) => /^\d+$/.test(e + ""), ae = (e) => /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(e + ""), ce = (e) => {
+}, V = (e) => e.indexOf("http") !== -1 ? e : `//${e}`, Q = () => Math.random().toString(36).slice(8), _ = (e) => /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(e), ee = (e) => /^1[23456789]\d{9}$/.test(e), te = (e) => /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/.test(e), ne = (e) => /ws(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/.test(e), se = (e) => !/Invalid|NaN/.test(new Date(e).toString()), oe = (e) => /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(new Date(e).toString()), re = (e) => /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(e + ""), ae = (e) => /^\d+$/.test(e + ""), ce = (e) => /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(e + ""), ie = (e) => {
   const t = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/, n = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
   return e.length === 7 ? n.test(e) : e.length === 8 ? t.test(e) : !1;
-}, ie = (e) => /^[\u4e00-\u9fa5]+$/gi.test(e), le = (e) => /^[a-zA-Z]+$/.test(e), ue = (e) => /^\d{3,4}-\d{7,8}(-\d{3,4})?$/.test(e), de = (e) => {
+}, le = (e) => /^[\u4e00-\u9fa5]+$/gi.test(e), ue = (e) => /^[a-zA-Z]+$/.test(e), de = (e) => /^\d{3,4}-\d{7,8}(-\d{3,4})?$/.test(e), me = (e) => {
   if (D(e))
     try {
       const t = JSON.parse(e);
@@ -167,26 +167,26 @@ const y = () => {
       return !1;
     }
   return !1;
-}, me = (e) => /^-?\d{1,3}(,\d{3})*(\.\d+)?$/.test(e), he = () => /MicroMessenger/gim.test(navigator.userAgent), ge = () => !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), De = () => {
+}, he = (e) => /^-?\d{1,3}(,\d{3})*(\.\d+)?$/.test(e), ge = () => /MicroMessenger/gim.test(navigator.userAgent), De = () => !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), fe = () => {
   const e = navigator.userAgent;
   return e.indexOf("Android") > -1 || e.indexOf("Adr") > -1;
 }, M = () => {
   const e = document.documentElement.scrollTop || document.body.scrollTop;
   e > 0 && (window.requestAnimationFrame(M), window.scrollTo(0, e - e / 8));
-}, fe = () => {
+}, we = () => {
   window.scrollTo(0, document.documentElement.clientHeight);
-}, we = (e) => {
+}, pe = (e) => {
   var t;
   (t = document.querySelector(e)) == null || t.scrollIntoView({
     behavior: "smooth"
   });
-}, pe = () => {
+}, ye = () => {
   let e = 0, t = 0;
   return e = (document.compatMode == "BackCompat" ? document.body : document.documentElement).clientWidth, document.body.clientHeight && document.documentElement.clientHeight ? t = document.body.clientHeight < document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight : t = document.body.clientHeight > document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight, [e, t];
-}, ye = async () => {
+}, Se = async () => {
   let e = document.body;
   e.requestFullscreen ? await e.requestFullscreen() : e.mozRequestFullScreen ? await e.mozRequestFullScreen() : e.msRequestFullscreen ? await e.msRequestFullscreen() : e.webkitRequestFullscreen && await e.webkitRequestFullScreen();
-}, Se = async () => {
+}, Me = async () => {
   document.exitFullscreen ? document.exitFullscreen() : document.msExitFullscreen ? document.msExitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
 };
 function i(e) {
@@ -195,29 +195,29 @@ function i(e) {
 function w(e) {
   e.preventDefault();
 }
-const Me = (e = window) => {
+const ve = (e = window) => {
   e.addEventListener("wheel", w, { passive: !1 }), e.addEventListener("keyup", i), e.addEventListener("keydown", i), e.addEventListener("keypress", i);
-}, ve = (e = window) => {
+}, be = (e = window) => {
   e.removeEventListener("wheel", w), e.removeEventListener("keyup", i), e.removeEventListener("keydown", i), e.removeEventListener("keypress", i);
-}, be = () => "#" + (Math.random() * 1048575 * 1e6).toString(16).slice(0, 6), xe = (e, t, n) => ((e << 16) + (t << 8) + n).toString(16).padStart(6, "0"), Ae = (e) => {
+}, xe = () => "#" + (Math.random() * 1048575 * 1e6).toString(16).slice(0, 6), Ae = (e, t, n) => ((e << 16) + (t << 8) + n).toString(16).padStart(6, "0"), Fe = (e) => {
   let t = !1, n = e.slice(e.startsWith("#") ? 1 : 0);
   return n.length === 3 ? n = [...n].map((s) => s + s).join("") : n.length === 8 && (t = !0), n = parseInt(n, 16), `rgb${t ? "a" : ""}(${n >>> (t ? 24 : 16)}, ${(n & (t ? 16711680 : 65280)) >>> (t ? 16 : 8)}, ${(n & (t ? 65280 : 255)) >>> (t ? 8 : 0)}${t ? `, ${n & 255}` : ""})`;
-}, Fe = (e) => "#" + e.slice(e.length === 4 ? 1 : 0).split("").map((t) => t + t).join(""), He = (e) => {
+}, He = (e) => "#" + e.slice(e.length === 4 ? 1 : 0).split("").map((t) => t + t).join(""), Te = (e) => {
   var o, r;
   const [t, n, s] = (r = (o = e.match(/\d+/g)) == null ? void 0 : o.map((c) => +c)) != null ? r : [0, 0, 0];
   return { red: t, green: n, blue: s };
-}, Te = (e) => {
+}, Ee = (e) => {
   var t, n;
   return (n = (t = e.match(/\d+/g)) == null ? void 0 : t.map((s) => +s)) != null ? n : [0, 0, 0];
-}, Ee = (e, t, n) => {
+}, ke = (e, t, n) => {
   e /= 255, t /= 255, n /= 255;
   const s = Math.max(e, t, n), o = s - Math.min(e, t, n), r = o === 0 ? 0 : o && s === e ? (t - n) / o : s === t ? 2 + (n - e) / o : 4 + (e - t) / o;
   return [60 * (r < 0 ? r + 6 : r), s && o / s * 100, s * 100];
-}, ke = (e, t, n) => {
+}, $e = (e, t, n) => {
   t /= 100, n /= 100;
   const s = (r) => (r + e / 60) % 6, o = (r) => n * (1 - t * Math.max(0, Math.min(s(r), 4 - s(r), 1)));
   return [255 * o(5), 255 * o(3), 255 * o(1)];
-}, $e = (e, t, n) => {
+}, Ce = (e, t, n) => {
   e /= 255, t /= 255, n /= 255;
   const s = Math.max(e, t, n), o = s - Math.min(e, t, n), r = o ? s === e ? (t - n) / o : s === t ? 2 + (n - e) / o : 4 + (e - t) / o : 0;
   return [
@@ -225,14 +225,14 @@ const Me = (e = window) => {
     100 * (o ? s <= 0.5 ? o / (2 * s - o) : o / (2 - (2 * s - o)) : 0),
     100 * (2 * s - o) / 2
   ];
-}, Ce = (e, t, n) => {
+}, Ne = (e, t, n) => {
   t /= 100, n /= 100;
   const s = (c) => (c + e / 30) % 12, o = t * Math.min(n, 1 - n), r = (c) => n - o * Math.max(-1, Math.min(s(c) - 3, Math.min(9 - s(c), 1)));
   return [255 * r(0), 255 * r(8), 255 * r(4)];
 };
 class v {
 }
-class Ne extends v {
+class Re extends v {
   set(t, n, s = 1) {
     localStorage.setItem(
       t,
@@ -261,47 +261,47 @@ class Ne extends v {
   }
 }
 export {
-  ke as HSBToRGB,
-  Ce as HSLToRGB,
-  Ee as RGBToHSB,
-  $e as RGBToHSL,
-  xe as RGBToHex,
-  Ne as YoungLocalStorage,
+  $e as HSBToRGB,
+  Ne as HSLToRGB,
+  ke as RGBToHSB,
+  Ce as RGBToHSL,
+  Ae as RGBToHex,
+  Re as YoungLocalStorage,
   v as YoungStorage,
   O as deepClone,
-  Me as disableScroll,
-  ve as enableScroll,
+  ve as disableScroll,
+  be as enableScroll,
   K as encodedStrParse,
-  Se as exitFullscreen,
-  Fe as extendHex,
+  Me as exitFullscreen,
+  He as extendHex,
   L as formatCurrency,
   U as formatDate,
   V as formatUrl,
-  pe as getClientHeight,
+  ye as getClientHeight,
   z as getDateRange,
-  Ae as hexToRGB,
+  Fe as hexToRGB,
   P as idMasaike,
-  De as isAndroid,
+  fe as isAndroid,
   m as isArray,
   E as isArrayBuffer,
   x as isBoolean,
-  ie as isChinese,
-  me as isCurrencyStr,
-  ne as isDate,
-  oe as isDecimal,
+  le as isChinese,
+  he as isCurrencyStr,
+  se as isDate,
+  re as isDecimal,
   Y as isDisabledDate,
-  Q as isEmail,
+  _ as isEmail,
   $ as isFunction,
-  ee as isHttpUrl,
-  se as isISODate,
-  ae as isIdCard,
-  re as isInteger,
-  de as isJsonStr,
-  ue as isLandline,
-  le as isLetter,
-  ce as isLicensePlate,
+  te as isHttpUrl,
+  oe as isISODate,
+  ce as isIdCard,
+  ae as isInteger,
+  me as isJsonStr,
+  de as isLandline,
+  ue as isLetter,
+  ie as isLicensePlate,
   A as isMap,
-  _ as isMobile,
+  ee as isMobile,
   N as isNull,
   b as isNumber,
   g as isObject,
@@ -310,29 +310,30 @@ export {
   D as isString,
   C as isSymbol,
   R as isUndefined,
-  he as isWeChat,
+  ge as isWeChat,
   F as isWeakMap,
   T as isWeakSet,
-  te as isWebSocketUrl,
-  ge as isiOS,
+  ne as isWebSocketUrl,
+  De as isiOS,
   y as lastMonthDay,
   I as nameMasaike,
   j as nextDay,
-  be as randomHexColorCode,
+  xe as randomHexColorCode,
+  Q as randomId,
   f as recentDay,
   Z as recentMonth,
   X as safeJsonParse,
-  fe as scrollToBottom,
+  we as scrollToBottom,
   M as scrollToTop,
   J as shortcuts,
   G as sleep,
-  we as smoothScroll,
+  pe as smoothScroll,
   B as telMasaike,
   q as thisMonth,
   S as thisMonthDay,
-  ye as toFullScreen,
-  Te as toRGBArray,
-  He as toRGBObject,
+  Se as toFullScreen,
+  Ee as toRGBArray,
+  Te as toRGBObject,
   W as ymdParse
 };
 //# sourceMappingURL=index.es.js.map
