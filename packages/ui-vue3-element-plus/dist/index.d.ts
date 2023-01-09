@@ -3,15 +3,46 @@ import { VNode, PropType, Ref } from 'vue';
 
 declare type TableHeadAligin = 'left' | 'center' | 'right' | undefined;
 interface TableHeadItem<T extends any = any> {
+    /**
+     * 参数名
+     */
     prop: keyof T;
+    /**
+     * 展示标题
+     */
     label: string;
+    /**
+     * 列宽
+     */
     width?: string;
+    /**
+     * 是否可排序
+     */
     sortable?: boolean;
+    /**
+     * 是否固定表头
+     */
     fixed?: boolean;
+    /**
+     * 表格位置
+     */
     aligin?: TableHeadAligin;
+    /**
+     * 表头提示
+     */
     tool_content?: string;
+    /**
+     * 仅导出，不展示
+     */
     only_export?: boolean;
+    /**
+     * 仅展示，不导出
+     */
     only_display?: boolean;
+    /**
+     * 渲染函数
+     * @param row 当前行的数据
+     */
     render?: (row: T) => VNode;
     [x: string]: any;
 }
@@ -189,19 +220,19 @@ declare const _default$1: vue.DefineComponent<{
     isMore: boolean;
 }>;
 
-declare type SelectOptionItem<T extends any = any> = {
+declare type SelectOptionItem<T extends unknown = number> = {
     label: string;
     value: T;
     children?: SelectOptionItem<T>[];
 };
 declare const _default: vue.DefineComponent<{
     options: {
-        type: PropType<SelectOptionItem<any>[]>;
+        type: PropType<SelectOptionItem<number>[]>;
         required: true;
     };
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, {}, string, vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     options: {
-        type: PropType<SelectOptionItem<any>[]>;
+        type: PropType<SelectOptionItem<number>[]>;
         required: true;
     };
 }>>, {}>;
@@ -236,4 +267,23 @@ declare const useFormMode: <T>(FORM_TEMP: T, { addCbk, modCbk, delCbk, cpEffect,
     validForm: ValidFn;
 };
 
-export { SelectOptionItem, TableDataItem, TableHeadItem, _default$1 as YoungDialog, _default$2 as YoungPagination, _default as YoungSelect, _default$3 as YoungTable, useAutoLoad, useFormMode };
+interface ExportParams {
+    /**
+     * 导出的文件名，不需要带扩展名
+     */
+    filename: string;
+    /**
+     * 表头
+     */
+    tableHead: TableHeadItem[];
+    /**
+     * 表格数据
+     */
+    tableData: TableDataItem[];
+}
+/**
+ * 表格数据导出为 Excel
+ */
+declare const useExport2Excel: ({ filename, tableHead, tableData }: ExportParams) => Promise<unknown>;
+
+export { SelectOptionItem, TableDataItem, TableHeadItem, _default$1 as YoungDialog, _default$2 as YoungPagination, _default as YoungSelect, _default$3 as YoungTable, useAutoLoad, useExport2Excel, useFormMode };

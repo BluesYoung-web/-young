@@ -625,12 +625,12 @@ function createConditionalExpression(test, consequent, alternate, newline = true
     loc: locStub
   };
 }
-function createCacheExpression(index, value, isVNode16 = false) {
+function createCacheExpression(index, value, isVNode17 = false) {
   return {
     type: 20,
     index,
     value,
-    isVNode: isVNode16,
+    isVNode: isVNode17,
     loc: locStub
   };
 }
@@ -1921,8 +1921,8 @@ function createTransformContext(root2, { filename = "", prefixIdentifiers = fals
       identifier.hoisted = exp;
       return identifier;
     },
-    cache(exp, isVNode16 = false) {
-      return createCacheExpression(context.cached++, exp, isVNode16);
+    cache(exp, isVNode17 = false) {
+      return createCacheExpression(context.cached++, exp, isVNode17);
     }
   };
   {
@@ -8673,7 +8673,7 @@ function createAppContext() {
   };
 }
 function createAppAPI(render5, hydrate2) {
-  return function createApp3(rootComponent, rootProps = null) {
+  return function createApp4(rootComponent, rootProps = null) {
     if (!isFunction(rootComponent)) {
       rootComponent = Object.assign({}, rootComponent);
     }
@@ -14336,6 +14336,7 @@ __export(src_exports, {
   YoungSelect: () => YoungSelect_default,
   YoungTable: () => YoungTable_default,
   useAutoLoad: () => useAutoLoad,
+  useExport2Excel: () => useExport2Excel,
   useFormMode: () => useFormMode
 });
 module.exports = __toCommonJS(src_exports);
@@ -66095,6 +66096,525 @@ var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, disa
     validForm
   };
 };
+
+// ../../node_modules/.pnpm/@vue+server-renderer@3.2.45_vue@3.2.45/node_modules/@vue/server-renderer/dist/server-renderer.esm-bundler.js
+init_shared_esm_bundler();
+var shouldIgnoreProp = makeMap(`,key,ref,innerHTML,textContent,ref_key,ref_for`);
+function ssrRenderAttrs(props, tag) {
+  let ret = "";
+  for (const key in props) {
+    if (shouldIgnoreProp(key) || isOn(key) || tag === "textarea" && key === "value") {
+      continue;
+    }
+    const value = props[key];
+    if (key === "class") {
+      ret += ` class="${ssrRenderClass(value)}"`;
+    } else if (key === "style") {
+      ret += ` style="${ssrRenderStyle(value)}"`;
+    } else {
+      ret += ssrRenderDynamicAttr(key, value, tag);
+    }
+  }
+  return ret;
+}
+function ssrRenderDynamicAttr(key, value, tag) {
+  if (!isRenderableValue(value)) {
+    return ``;
+  }
+  const attrKey = tag && (tag.indexOf("-") > 0 || isSVGTag(tag)) ? key : propsToAttrMap[key] || key.toLowerCase();
+  if (isBooleanAttr(attrKey)) {
+    return includeBooleanAttr(value) ? ` ${attrKey}` : ``;
+  } else if (isSSRSafeAttrName(attrKey)) {
+    return value === "" ? ` ${attrKey}` : ` ${attrKey}="${escapeHtml(value)}"`;
+  } else {
+    console.warn(`[@vue/server-renderer] Skipped rendering unsafe attribute name: ${attrKey}`);
+    return ``;
+  }
+}
+function isRenderableValue(value) {
+  if (value == null) {
+    return false;
+  }
+  const type4 = typeof value;
+  return type4 === "string" || type4 === "number" || type4 === "boolean";
+}
+function ssrRenderClass(raw) {
+  return escapeHtml(normalizeClass(raw));
+}
+function ssrRenderStyle(raw) {
+  if (!raw) {
+    return "";
+  }
+  if (isString(raw)) {
+    return escapeHtml(raw);
+  }
+  const styles = normalizeStyle(raw);
+  return escapeHtml(stringifyStyle(styles));
+}
+function ssrCompile(template, instance) {
+  {
+    throw new Error(`On-the-fly template compilation is not supported in the ESM build of @vue/server-renderer. All templates must be pre-compiled into render functions.`);
+  }
+}
+function ssrRenderTeleport(parentPush, contentRenderFn, target, disabled, parentComponent) {
+  parentPush("<!--teleport start-->");
+  const context = parentComponent.appContext.provides[vue_exports.ssrContextKey];
+  const teleportBuffers = context.__teleportBuffers || (context.__teleportBuffers = {});
+  const targetBuffer = teleportBuffers[target] || (teleportBuffers[target] = []);
+  const bufferIndex = targetBuffer.length;
+  let teleportContent;
+  if (disabled) {
+    contentRenderFn(parentPush);
+    teleportContent = `<!--teleport anchor-->`;
+  } else {
+    const { getBuffer, push } = createBuffer();
+    contentRenderFn(push);
+    push(`<!--teleport anchor-->`);
+    teleportContent = getBuffer();
+  }
+  targetBuffer.splice(bufferIndex, 0, teleportContent);
+  parentPush("<!--teleport end-->");
+}
+var { createComponentInstance: createComponentInstance2, setCurrentRenderingInstance: setCurrentRenderingInstance2, setupComponent: setupComponent2, renderComponentRoot: renderComponentRoot2, normalizeVNode: normalizeVNode2 } = vue_exports.ssrUtils;
+function createBuffer() {
+  let appendable = false;
+  const buffer2 = [];
+  return {
+    getBuffer() {
+      return buffer2;
+    },
+    push(item) {
+      const isStringItem = isString(item);
+      if (appendable && isStringItem) {
+        buffer2[buffer2.length - 1] += item;
+      } else {
+        buffer2.push(item);
+      }
+      appendable = isStringItem;
+      if (isPromise(item) || isArray(item) && item.hasAsync) {
+        buffer2.hasAsync = true;
+      }
+    }
+  };
+}
+function renderComponentVNode(vnode, parentComponent = null, slotScopeId) {
+  const instance = createComponentInstance2(vnode, parentComponent, null);
+  const res = setupComponent2(instance, true);
+  const hasAsyncSetup = isPromise(res);
+  const prefetches = instance.sp;
+  if (hasAsyncSetup || prefetches) {
+    let p3 = hasAsyncSetup ? res : Promise.resolve();
+    if (prefetches) {
+      p3 = p3.then(() => Promise.all(prefetches.map((prefetch) => prefetch.call(instance.proxy)))).catch(() => {
+      });
+    }
+    return p3.then(() => renderComponentSubTree(instance, slotScopeId));
+  } else {
+    return renderComponentSubTree(instance, slotScopeId);
+  }
+}
+function renderComponentSubTree(instance, slotScopeId) {
+  const comp = instance.type;
+  const { getBuffer, push } = createBuffer();
+  if (isFunction(comp)) {
+    let root2 = renderComponentRoot2(instance);
+    if (!comp.props) {
+      for (const key in instance.attrs) {
+        if (key.startsWith(`data-v-`)) {
+          (root2.props || (root2.props = {}))[key] = ``;
+        }
+      }
+    }
+    renderVNode(push, instance.subTree = root2, instance, slotScopeId);
+  } else {
+    if ((!instance.render || instance.render === NOOP) && !instance.ssrRender && !comp.ssrRender && isString(comp.template)) {
+      comp.ssrRender = ssrCompile(comp.template);
+    }
+    for (const e of instance.scope.effects) {
+      if (e.computed)
+        e.computed._cacheable = true;
+    }
+    const ssrRender = instance.ssrRender || comp.ssrRender;
+    if (ssrRender) {
+      let attrs = instance.inheritAttrs !== false ? instance.attrs : void 0;
+      let hasCloned = false;
+      let cur = instance;
+      while (true) {
+        const scopeId = cur.vnode.scopeId;
+        if (scopeId) {
+          if (!hasCloned) {
+            attrs = __spreadValues({}, attrs);
+            hasCloned = true;
+          }
+          attrs[scopeId] = "";
+        }
+        const parent = cur.parent;
+        if (parent && parent.subTree && parent.subTree === cur.vnode) {
+          cur = parent;
+        } else {
+          break;
+        }
+      }
+      if (slotScopeId) {
+        if (!hasCloned)
+          attrs = __spreadValues({}, attrs);
+        attrs[slotScopeId.trim()] = "";
+      }
+      const prev = setCurrentRenderingInstance2(instance);
+      try {
+        ssrRender(instance.proxy, push, instance, attrs, instance.props, instance.setupState, instance.data, instance.ctx);
+      } finally {
+        setCurrentRenderingInstance2(prev);
+      }
+    } else if (instance.render && instance.render !== NOOP) {
+      renderVNode(push, instance.subTree = renderComponentRoot2(instance), instance, slotScopeId);
+    } else {
+      const componentName2 = comp.name || comp.__file || `<Anonymous>`;
+      (0, vue_exports.warn)(`Component ${componentName2} is missing template or render function.`);
+      push(`<!---->`);
+    }
+  }
+  return getBuffer();
+}
+function renderVNode(push, vnode, parentComponent, slotScopeId) {
+  const { type: type4, shapeFlag, children } = vnode;
+  switch (type4) {
+    case vue_exports.Text:
+      push(escapeHtml(children));
+      break;
+    case vue_exports.Comment:
+      push(children ? `<!--${escapeHtmlComment(children)}-->` : `<!---->`);
+      break;
+    case vue_exports.Static:
+      push(children);
+      break;
+    case vue_exports.Fragment:
+      if (vnode.slotScopeIds) {
+        slotScopeId = (slotScopeId ? slotScopeId + " " : "") + vnode.slotScopeIds.join(" ");
+      }
+      push(`<!--[-->`);
+      renderVNodeChildren(push, children, parentComponent, slotScopeId);
+      push(`<!--]-->`);
+      break;
+    default:
+      if (shapeFlag & 1) {
+        renderElementVNode(push, vnode, parentComponent, slotScopeId);
+      } else if (shapeFlag & 6) {
+        push(renderComponentVNode(vnode, parentComponent, slotScopeId));
+      } else if (shapeFlag & 64) {
+        renderTeleportVNode(push, vnode, parentComponent, slotScopeId);
+      } else if (shapeFlag & 128) {
+        renderVNode(push, vnode.ssContent, parentComponent, slotScopeId);
+      } else {
+        (0, vue_exports.warn)("[@vue/server-renderer] Invalid VNode type:", type4, `(${typeof type4})`);
+      }
+  }
+}
+function renderVNodeChildren(push, children, parentComponent, slotScopeId) {
+  for (let i = 0; i < children.length; i++) {
+    renderVNode(push, normalizeVNode2(children[i]), parentComponent, slotScopeId);
+  }
+}
+function renderElementVNode(push, vnode, parentComponent, slotScopeId) {
+  const tag = vnode.type;
+  let { props, children, shapeFlag, scopeId, dirs } = vnode;
+  let openTag = `<${tag}`;
+  if (dirs) {
+    props = applySSRDirectives(vnode, props, dirs);
+  }
+  if (props) {
+    openTag += ssrRenderAttrs(props, tag);
+  }
+  if (scopeId) {
+    openTag += ` ${scopeId}`;
+  }
+  let curParent = parentComponent;
+  let curVnode = vnode;
+  while (curParent && curVnode === curParent.subTree) {
+    curVnode = curParent.vnode;
+    if (curVnode.scopeId) {
+      openTag += ` ${curVnode.scopeId}`;
+    }
+    curParent = curParent.parent;
+  }
+  if (slotScopeId) {
+    openTag += ` ${slotScopeId}`;
+  }
+  push(openTag + `>`);
+  if (!isVoidTag(tag)) {
+    let hasChildrenOverride = false;
+    if (props) {
+      if (props.innerHTML) {
+        hasChildrenOverride = true;
+        push(props.innerHTML);
+      } else if (props.textContent) {
+        hasChildrenOverride = true;
+        push(escapeHtml(props.textContent));
+      } else if (tag === "textarea" && props.value) {
+        hasChildrenOverride = true;
+        push(escapeHtml(props.value));
+      }
+    }
+    if (!hasChildrenOverride) {
+      if (shapeFlag & 8) {
+        push(escapeHtml(children));
+      } else if (shapeFlag & 16) {
+        renderVNodeChildren(push, children, parentComponent, slotScopeId);
+      }
+    }
+    push(`</${tag}>`);
+  }
+}
+function applySSRDirectives(vnode, rawProps, dirs) {
+  const toMerge = [];
+  for (let i = 0; i < dirs.length; i++) {
+    const binding = dirs[i];
+    const { dir: { getSSRProps } } = binding;
+    if (getSSRProps) {
+      const props = getSSRProps(binding, vnode);
+      if (props)
+        toMerge.push(props);
+    }
+  }
+  return (0, vue_exports.mergeProps)(rawProps || {}, ...toMerge);
+}
+function renderTeleportVNode(push, vnode, parentComponent, slotScopeId) {
+  const target = vnode.props && vnode.props.to;
+  const disabled = vnode.props && vnode.props.disabled;
+  if (!target) {
+    if (!disabled) {
+      (0, vue_exports.warn)(`[@vue/server-renderer] Teleport is missing target prop.`);
+    }
+    return [];
+  }
+  if (!isString(target)) {
+    (0, vue_exports.warn)(`[@vue/server-renderer] Teleport target must be a query selector string.`);
+    return [];
+  }
+  ssrRenderTeleport(push, (push2) => {
+    renderVNodeChildren(push2, vnode.children, parentComponent, slotScopeId);
+  }, target, disabled || disabled === "", parentComponent);
+}
+var { isVNode: isVNode16 } = vue_exports.ssrUtils;
+async function unrollBuffer(buffer2) {
+  if (buffer2.hasAsync) {
+    let ret = "";
+    for (let i = 0; i < buffer2.length; i++) {
+      let item = buffer2[i];
+      if (isPromise(item)) {
+        item = await item;
+      }
+      if (isString(item)) {
+        ret += item;
+      } else {
+        ret += await unrollBuffer(item);
+      }
+    }
+    return ret;
+  } else {
+    return unrollBufferSync(buffer2);
+  }
+}
+function unrollBufferSync(buffer2) {
+  let ret = "";
+  for (let i = 0; i < buffer2.length; i++) {
+    let item = buffer2[i];
+    if (isString(item)) {
+      ret += item;
+    } else {
+      ret += unrollBufferSync(item);
+    }
+  }
+  return ret;
+}
+async function renderToString(input, context = {}) {
+  if (isVNode16(input)) {
+    return renderToString((0, vue_exports.createApp)({ render: () => input }), context);
+  }
+  const vnode = (0, vue_exports.createVNode)(input._component, input._props);
+  vnode.appContext = input._context;
+  input.provide(vue_exports.ssrContextKey, context);
+  const buffer2 = await renderComponentVNode(vnode);
+  const result = await unrollBuffer(buffer2);
+  await resolveTeleports(context);
+  if (context.__watcherHandles) {
+    for (const unwatch of context.__watcherHandles) {
+      unwatch();
+    }
+  }
+  return result;
+}
+async function resolveTeleports(context) {
+  if (context.__teleportBuffers) {
+    context.teleports = context.teleports || {};
+    for (const key in context.__teleportBuffers) {
+      context.teleports[key] = await unrollBuffer(await Promise.all([context.__teleportBuffers[key]]));
+    }
+  }
+}
+var { isVNode: isVNode$1 } = vue_exports.ssrUtils;
+(0, vue_exports.initDirectivesForSSR)();
+
+// src/hooks/tools/export2excel.ts
+var import_file_saver = require("file-saver");
+var import_xlsx = require("xlsx");
+function sheet_from_array_of_arrays(data) {
+  const ws = {};
+  const range4 = {
+    s: {
+      c: 1e7,
+      r: 1e7
+    },
+    e: {
+      c: 0,
+      r: 0
+    }
+  };
+  for (let R2 = 0; R2 != data.length; ++R2) {
+    for (let C2 = 0; C2 != data[R2].length; ++C2) {
+      if (range4.s.r > R2)
+        range4.s.r = R2;
+      if (range4.s.c > C2)
+        range4.s.c = C2;
+      if (range4.e.r < R2)
+        range4.e.r = R2;
+      if (range4.e.c < C2)
+        range4.e.c = C2;
+      const cell = {
+        v: data[R2][C2]
+      };
+      if (cell.v == null)
+        continue;
+      const cell_ref = import_xlsx.utils.encode_cell({
+        c: C2,
+        r: R2
+      });
+      if (typeof cell.v === "number") {
+        cell.t = "n";
+      } else if (typeof cell.v === "boolean") {
+        cell.t = "b";
+      } else {
+        cell.t = "s";
+      }
+      ws[cell_ref] = cell;
+    }
+  }
+  if (range4.s.c < 1e7) {
+    ws["!ref"] = import_xlsx.utils.encode_range(range4);
+  }
+  return ws;
+}
+var Workbook = class {
+  SheetNames = [];
+  Sheets = {};
+};
+var s2ab = (s2) => {
+  const buf = new ArrayBuffer(s2.length);
+  const view = new Uint8Array(buf);
+  for (let i = 0; i < s2.length; ++i) {
+    view[i] = s2.charCodeAt(i) & 255;
+  }
+  return buf;
+};
+var export_json_to_excel = ({ header, data, filename }) => {
+  data = O(data);
+  data.unshift(header);
+  const ws_name = "SheetJS";
+  const wb = new Workbook();
+  const ws = sheet_from_array_of_arrays(data);
+  const colWidth = data.map((row) => {
+    return row.map((val) => {
+      if (val == null) {
+        return {
+          wch: 10
+        };
+      } else if (val.toString().charCodeAt(0) > 255) {
+        return {
+          wch: val.toString().length * 2
+        };
+      } else {
+        return {
+          wch: val.toString().length
+        };
+      }
+    });
+  });
+  let result = colWidth[0];
+  for (let i = 1; i < colWidth.length; i++) {
+    for (let j = 0; j < colWidth[i].length; j++) {
+      if (result[j]["wch"] < colWidth[i][j]["wch"]) {
+        result[j]["wch"] = colWidth[i][j]["wch"];
+      }
+    }
+  }
+  ws["!cols"] = result;
+  wb.SheetNames.push(ws_name);
+  wb.Sheets[ws_name] = ws;
+  const wbout = (0, import_xlsx.write)(wb, {
+    bookType: "xlsx",
+    bookSST: false,
+    type: "binary"
+  });
+  (0, import_file_saver.saveAs)(new Blob([s2ab(wbout)], {
+    type: "application/octet-stream"
+  }), `${filename}.xlsx`);
+};
+
+// src/hooks/useExport.ts
+var useExport2Excel = async ({ filename, tableHead, tableData }) => {
+  const tagReplace = (htmlText) => {
+    let reg = /<\/?.+?\/?>/g;
+    if (reg.test(htmlText)) {
+      return htmlText.replace(reg, "");
+    } else {
+      return htmlText;
+    }
+  };
+  const formatJson = async (tableHead2, tableData2) => {
+    const arr = [];
+    for (const it2 of tableData2) {
+      const row = [];
+      for (const item of tableHead2) {
+        let r = it2[item.prop];
+        if (item.render) {
+          const vnode = item.render(it2);
+          if (vnode && Array.isArray(vnode.children) && vnode.children.length > 1) {
+            vnode.children.forEach((v2) => {
+              if (v2 && typeof v2.children === "string") {
+                v2.children += "\n";
+              }
+            });
+          }
+          r = await renderToString(vnode);
+        }
+        r = tagReplace(r);
+        row.push(r);
+      }
+      arr.push(row);
+    }
+    return arr;
+  };
+  const ths = tableHead.filter((item) => !item.only_display);
+  const header = ths.map((item) => item.label);
+  const loading = Loading({
+    lock: true,
+    text: "\u6570\u636E\u5BFC\u51FA\u4E2D...",
+    background: "rgba(0, 0, 0, 0.7)"
+  });
+  return new Promise((resolve2) => {
+    setTimeout(async () => {
+      const data = await formatJson(ths, tableData);
+      await export_json_to_excel({
+        header,
+        data,
+        filename
+      });
+      loading.close();
+      ElMessage.success("\u5BFC\u51FA\u6210\u529F\uFF01");
+      resolve2(true);
+    }, 500);
+  });
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   YoungDialog,
@@ -66102,6 +66622,7 @@ var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, disa
   YoungSelect,
   YoungTable,
   useAutoLoad,
+  useExport2Excel,
   useFormMode
 });
 /*!

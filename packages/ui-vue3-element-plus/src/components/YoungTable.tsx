@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
- * @LastEditTime: 2023-01-06 11:54:28
+ * @LastEditTime: 2023-01-09 11:02:51
  * @Description: 
  */
 import { nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -13,15 +13,46 @@ import { useAutoLoad } from '..';
 export type TableHeadAligin = 'left' | 'center' | 'right' | undefined;
 
 export interface TableHeadItem<T extends any = any> {
+  /**
+   * 参数名
+   */
   prop: keyof T;
+  /**
+   * 展示标题
+   */
   label: string;
+  /**
+   * 列宽
+   */
   width?: string;
+  /**
+   * 是否可排序
+   */
   sortable?: boolean;
+  /**
+   * 是否固定表头
+   */
   fixed?: boolean;
+  /**
+   * 表格位置
+   */
   aligin?: TableHeadAligin;
+  /**
+   * 表头提示
+   */
   tool_content?: string;
+  /**
+   * 仅导出，不展示
+   */
   only_export?: boolean;
+  /**
+   * 仅展示，不导出
+   */
   only_display?: boolean;
+  /**
+   * 渲染函数
+   * @param row 当前行的数据
+   */
   render?: (row: T) => VNode;
   [x: string]: any;
 };
