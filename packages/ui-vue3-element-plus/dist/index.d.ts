@@ -220,9 +220,10 @@ declare const _default$1: vue.DefineComponent<{
     isMore: boolean;
 }>;
 
-declare type SelectOptionItem<T extends unknown = number> = {
+declare type SelectOptionItem<T extends any = number> = {
     label: string;
     value: T;
+    disabled?: boolean;
     children?: SelectOptionItem<T>[];
 };
 declare const _default: vue.DefineComponent<{
