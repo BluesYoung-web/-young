@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-09 09:41:37
- * @LastEditTime: 2023-01-09 11:23:26
+ * @LastEditTime: 2023-01-09 11:36:10
  * @Description: 
  */
 import { defineComponent } from 'vue';
@@ -9,7 +9,7 @@ import type { PropType } from 'vue';
 import { ElSelect, ElOption } from 'element-plus';
 import { randomId } from '@bluesyoung/utils';
 
-export type SelectOptionItem<T extends any = number> = {
+export type SelectOptionItem<T extends any = any> = {
   label: string;
   value: T;
   disabled?: boolean;

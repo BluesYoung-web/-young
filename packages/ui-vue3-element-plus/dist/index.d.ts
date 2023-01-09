@@ -220,7 +220,7 @@ declare const _default$1: vue.DefineComponent<{
     isMore: boolean;
 }>;
 
-declare type SelectOptionItem<T extends any = number> = {
+declare type SelectOptionItem<T extends any = any> = {
     label: string;
     value: T;
     disabled?: boolean;
@@ -228,12 +228,12 @@ declare type SelectOptionItem<T extends any = number> = {
 };
 declare const _default: vue.DefineComponent<{
     options: {
-        type: PropType<SelectOptionItem<number>[]>;
+        type: PropType<SelectOptionItem<any>[]>;
         required: true;
     };
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, {}, string, vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     options: {
-        type: PropType<SelectOptionItem<number>[]>;
+        type: PropType<SelectOptionItem<any>[]>;
         required: true;
     };
 }>>, {}>;
