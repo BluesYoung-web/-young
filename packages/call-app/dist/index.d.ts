@@ -7,7 +7,14 @@ declare enum QuickCall {
  * 快捷唤端的配置
  */
 declare type QuickCallConfig = {
+    /**
+     * 快速唤起的类型
+     */
     quickType: QuickCall;
+    /**
+     * 需要复制到剪切板的文本
+     */
+    copyInfo?: string;
 };
 /**
  * 基本唤端配置
@@ -80,7 +87,6 @@ declare class YoungCallApp {
      */
     generateScheme(conf: CommonCallConfig): void;
     call(): void;
-    copyInfo(): void;
     fallback(): void;
 }
 

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-04-28 14:22:04
- * @LastEditTime: 2023-02-02 09:42:23
+ * @LastEditTime: 2023-02-02 09:54:34
  * @Description:
  */
 import { copy, detector } from '@bluesyoung/share-dom';
@@ -21,7 +21,14 @@ enum QuickCall {
  * 快捷唤端的配置
  */
 type QuickCallConfig = {
+  /**
+   * 快速唤起的类型
+   */
   quickType: QuickCall;
+  /**
+   * 需要复制到剪切板的文本
+   */
+  copyInfo?: string;
 };
 /**
  * 基本唤端配置
@@ -105,6 +112,7 @@ class YoungCallApp {
     this.options = defu(options, defaultOptions);
     if (conf.quickType) {
       this.scheme = conf.quickType;
+      this.info = conf?.copyInfo || '';
     } else {
       this.generateScheme(conf);
     }
@@ -155,15 +163,11 @@ class YoungCallApp {
       mask.wechat();
       return;
     }
-    this.copyInfo();
+    copy(this.info);
     startCall?.();
     // 开始唤端
     window.location.href = this.scheme;
     this.fallback();
-  }
-
-  copyInfo() {
-    copy(this.info);
   }
 
   fallback() {

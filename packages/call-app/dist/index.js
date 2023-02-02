@@ -43,6 +43,7 @@ var YoungCallApp = class {
     this.options = (0, import_defu.defu)(options, defaultOptions);
     if (conf.quickType) {
       this.scheme = conf.quickType;
+      this.info = (conf == null ? void 0 : conf.copyInfo) || "";
     } else {
       this.generateScheme(conf);
     }
@@ -86,13 +87,10 @@ var YoungCallApp = class {
       mask.wechat();
       return;
     }
-    this.copyInfo();
+    (0, import_share_dom.copy)(this.info);
     startCall == null ? void 0 : startCall();
     window.location.href = this.scheme;
     this.fallback();
-  }
-  copyInfo() {
-    (0, import_share_dom.copy)(this.info);
   }
   fallback() {
     const t = setTimeout(() => {
