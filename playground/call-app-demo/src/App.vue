@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-05-17 12:19:18
- * @LastEditTime: 2022-05-17 12:21:50
+ * @LastEditTime: 2023-02-02 09:42:33
  * @Description: 
 -->
 <script setup lang="ts">
@@ -38,10 +38,17 @@ const callApp = new YoungCallApp({
 });
 
 const openHandler = () => callApp.call();
+
+const quickOpen = (type: any) => {
+  new YoungCallApp({
+    quickType: type
+  }).call()
+};
 </script>
 
 <template>
   <button class="btn" @click="openHandler">唤端测试</button>
+  <button class="btn" @click="quickOpen(YoungCallApp.QuickCall.wechat)">wx</button>
 </template>
 
 <style>
