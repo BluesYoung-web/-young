@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
- * @LastEditTime: 2023-02-08 08:40:34
+ * @LastEditTime: 2023-02-08 09:00:03
  * @Description: 
  */
 import { nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -54,6 +54,10 @@ export interface TableHeadItem<T extends any = any> {
    * @param row 当前行的数据
    */
   render?: (row: T, index: number) => VNode;
+  /**
+   * 当内容过长时，hover 展示全部
+   */
+  show_overflow_tooltip?: boolean;
   [x: string]: any;
 };
 
@@ -75,9 +79,13 @@ export default defineComponent({
     tableHeight: {
       type: Number,
       default: 600
+    },
+    selectable: {
+      type: Boolean,
+      default: false
     }
   },
-  emits: ['sort-change'],
+  emits: ['sort-change', 'selection-change'],
   setup(props, { emit, attrs, slots }) {
     /**
      * 引用表格元素
@@ -124,7 +132,10 @@ export default defineComponent({
 
     return () => (
       // @ts-ignore
-      <ElTable {...attrs} ref={tableRef} data={tableData_1.value} style="width: 100%" height={props.tableHeight} onSortChange={(e) => emit('sort-change', e)}>
+      <ElTable {...attrs} ref={tableRef} data={tableData_1.value} style="width: 100%" height={props.tableHeight} onSortChange={(e) => emit('sort-change', e)} onSelectionChange={(e) => emit('selection-change', e)}>
+        {
+          props.selectable && <ElTableColumn type="selection" width="55" />
+        }
         {
           tableHead_1.value.map((head, index) =>
             <ElTableColumn
@@ -135,6 +146,7 @@ export default defineComponent({
               sortable={head.sortable || false}
               fixed={head.fixed || false}
               align={head.aligin || 'left'}
+              showOverflowTooltip={head.show_overflow_tooltip || false}
               v-slots={{
                 header: (scope) => {
                   if (tableHead_1.value[scope.$index].tool_content) {

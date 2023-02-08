@@ -65667,9 +65667,13 @@ var YoungTable_default = (0, vue_exports.defineComponent)({
     tableHeight: {
       type: Number,
       default: 600
+    },
+    selectable: {
+      type: Boolean,
+      default: false
     }
   },
-  emits: ["sort-change"],
+  emits: ["sort-change", "selection-change"],
   setup(props, { emit: emit2, attrs, slots }) {
     const tableRef = (0, vue_exports.ref)(null);
     (0, vue_exports.onActivated)(() => {
@@ -65709,7 +65713,11 @@ var YoungTable_default = (0, vue_exports.defineComponent)({
         data: tableData_1.value,
         style: "width: 100%",
         height: props.tableHeight,
-        onSortChange: (e) => emit2("sort-change", e)
+        onSortChange: (e) => emit2("sort-change", e),
+        onSelectionChange: (e) => emit2("selection-change", e)
+      }), props.selectable && /* @__PURE__ */ React.createElement(ElTableColumn2, {
+        type: "selection",
+        width: "55"
       }), tableHead_1.value.map((head, index) => /* @__PURE__ */ React.createElement(ElTableColumn2, {
         key: index,
         prop: head.prop,
@@ -65718,6 +65726,7 @@ var YoungTable_default = (0, vue_exports.defineComponent)({
         sortable: head.sortable || false,
         fixed: head.fixed || false,
         align: head.aligin || "left",
+        showOverflowTooltip: head.show_overflow_tooltip || false,
         "v-slots": {
           header: (scope) => {
             if (tableHead_1.value[scope.$index].tool_content) {

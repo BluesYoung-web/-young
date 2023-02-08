@@ -44,6 +44,10 @@ interface TableHeadItem<T extends any = any> {
      * @param row 当前行的数据
      */
     render?: (row: T, index: number) => VNode;
+    /**
+     * 当内容过长时，hover 展示全部
+     */
+    show_overflow_tooltip?: boolean;
     [x: string]: any;
 }
 declare type TableDataItem<T extends any = any> = {
@@ -62,7 +66,11 @@ declare const _default$3: vue.DefineComponent<{
         type: NumberConstructor;
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, "sort-change"[], "sort-change", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+    selectable: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("sort-change" | "selection-change")[], "sort-change" | "selection-change", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     tableData: {
         type: PropType<TableDataItem<any>[]>;
         required: true;
@@ -75,10 +83,16 @@ declare const _default$3: vue.DefineComponent<{
         type: NumberConstructor;
         default: number;
     };
+    selectable: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }>> & {
     "onSort-change"?: (...args: any[]) => any;
+    "onSelection-change"?: (...args: any[]) => any;
 }, {
     tableHeight: number;
+    selectable: boolean;
 }>;
 
 declare const _default$2: vue.DefineComponent<{
