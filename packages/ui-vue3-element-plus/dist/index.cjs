@@ -65729,10 +65729,10 @@ var YoungTable_default = (0, vue_exports.defineComponent)({
         showOverflowTooltip: head.show_overflow_tooltip || false,
         "v-slots": {
           header: (scope) => {
-            if (tableHead_1.value[scope.$index].tool_content) {
+            if (tableHead_1.value[index].tool_content) {
               return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", null, scope.column.label), /* @__PURE__ */ React.createElement(ElTooltip, {
                 placement: "bottom",
-                "v-slots": { content: () => tableHead_1.value[scope.$index].tool_content }
+                "v-slots": { content: () => tableHead_1.value[index].tool_content }
               }));
             } else {
               return /* @__PURE__ */ React.createElement("span", null, scope.column.label);

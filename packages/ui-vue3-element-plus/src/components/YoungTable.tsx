@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
- * @LastEditTime: 2023-02-08 09:00:03
+ * @LastEditTime: 2023-02-08 09:17:10
  * @Description: 
  */
 import { nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -149,11 +149,11 @@ export default defineComponent({
               showOverflowTooltip={head.show_overflow_tooltip || false}
               v-slots={{
                 header: (scope) => {
-                  if (tableHead_1.value[scope.$index].tool_content) {
+                  if (tableHead_1.value[index].tool_content) {
                     return (
                       <>
                         <span>{scope.column.label}</span>
-                        <ElTooltip placement='bottom' v-slots={{ content: () => tableHead_1.value[scope.$index].tool_content }}
+                        <ElTooltip placement='bottom' v-slots={{ content: () => tableHead_1.value[index].tool_content }}
                         />
                       </>);
                   } else {
