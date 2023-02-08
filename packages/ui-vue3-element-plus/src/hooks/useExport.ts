@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-09 10:45:53
- * @LastEditTime: 2023-01-09 11:00:55
+ * @LastEditTime: 2023-02-08 08:45:00
  * @Description:
  */
 import { ElMessage } from 'element-plus';
@@ -54,10 +54,12 @@ export const useExport2Excel = async ({ filename, tableHead, tableData }: Export
     const arr: string[][] = [];
     for (const it of tableData) {
       const row: string[] = [];
-      for (const item of tableHead) {
+      const len = tableHead.length;
+      for (let i = 0; i < len; i++) {
+        const item = tableHead[i];
         let r = it[item.prop as string];
         if (item.render) {
-          const vnode = item.render(it);
+          const vnode = item.render(it, i);
           if (vnode && Array.isArray(vnode.children) && vnode.children.length > 1) {
             vnode.children.forEach((v: any) => {
               if (v && typeof v.children === 'string') {

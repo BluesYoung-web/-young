@@ -22,7 +22,7 @@ interface TableHeadItem<T extends any = any> {
     /**
      * 是否固定表头
      */
-    fixed?: boolean;
+    fixed?: boolean | 'left' | 'right';
     /**
      * 表格位置
      */
@@ -43,7 +43,7 @@ interface TableHeadItem<T extends any = any> {
      * 渲染函数
      * @param row 当前行的数据
      */
-    render?: (row: T) => VNode;
+    render?: (row: T, index: number) => VNode;
     [x: string]: any;
 }
 declare type TableDataItem<T extends any = any> = {

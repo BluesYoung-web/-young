@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
- * @LastEditTime: 2023-01-09 11:02:51
+ * @LastEditTime: 2023-02-08 08:40:34
  * @Description: 
  */
 import { nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -32,7 +32,7 @@ export interface TableHeadItem<T extends any = any> {
   /**
    * 是否固定表头
    */
-  fixed?: boolean;
+  fixed?: boolean | 'left' | 'right';
   /**
    * 表格位置
    */
@@ -53,7 +53,7 @@ export interface TableHeadItem<T extends any = any> {
    * 渲染函数
    * @param row 当前行的数据
    */
-  render?: (row: T) => VNode;
+  render?: (row: T, index: number) => VNode;
   [x: string]: any;
 };
 
@@ -150,7 +150,7 @@ export default defineComponent({
                 },
                 default: (scope) => {
                   if (head.render) {
-                    return head.render(scope.row);
+                    return head.render(scope.row, scope.$index);
                   } else {
                     return <span>{scope.row[head.prop]}</span>
                   }
