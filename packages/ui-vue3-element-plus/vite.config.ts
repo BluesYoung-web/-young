@@ -23,7 +23,7 @@ export default defineConfig({
     },
     sourcemap: true,
     rollupOptions: {
-      external: ['vue', '@vueuse/core', 'element-plus', '@bluesyoung/utils'],
+      external: ['vue', '@vueuse/core', 'element-plus', '@bluesyoung/utils', '@vue/shared'],
     },
   },
 });
