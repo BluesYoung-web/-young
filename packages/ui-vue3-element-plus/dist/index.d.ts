@@ -263,7 +263,7 @@ declare type Cbk<T> = {
     addCbk?: () => Promise<void | boolean>;
     modCbk?: () => Promise<void | boolean>;
     delCbk?: (row: T) => void;
-    cpEffect?: (row: T) => void;
+    cpEffect?: (row: T) => Promise<void>;
     cgEffect?: () => void;
     disableclear?: boolean;
 };
@@ -273,8 +273,8 @@ declare const useFormMode: <T>(FORM_TEMP: T, { addCbk, modCbk, delCbk, cpEffect,
     isEdit: vue.Ref<boolean>;
     isMore: vue.Ref<boolean>;
     clear: () => void;
-    edit: (row: any) => void;
-    more: (row: any) => void;
+    edit: (row: any) => Promise<void>;
+    more: (row: any) => Promise<void>;
     form: vue.Ref<vue.UnwrapRef<T>>;
     del: (row: any) => void;
     sure: () => Promise<void>;

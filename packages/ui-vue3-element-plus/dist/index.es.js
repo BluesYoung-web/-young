@@ -290,11 +290,11 @@ const F2 = vn({
     isEdit: o,
     isMore: c,
     clear: _,
-    edit: (A) => {
-      a == null || a(A), u.value = it(A), o.value = !0;
+    edit: async (A) => {
+      await (a == null ? void 0 : a(A)), u.value = it(A), o.value = !0;
     },
-    more: (A) => {
-      a == null || a(A), u.value = it(A), c.value = !0;
+    more: async (A) => {
+      await (a == null ? void 0 : a(A)), u.value = it(A), c.value = !0;
     },
     form: u,
     del: (A) => {
