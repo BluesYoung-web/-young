@@ -291,10 +291,12 @@ const F2 = vn({
     isMore: c,
     clear: _,
     edit: async (A) => {
-      await (a == null ? void 0 : a(A)), u.value = it(A), o.value = !0;
+      const B = await (a == null ? void 0 : a(A));
+      u.value = it(B || A), o.value = !0;
     },
     more: async (A) => {
-      await (a == null ? void 0 : a(A)), u.value = it(A), c.value = !0;
+      const B = await (a == null ? void 0 : a(A));
+      u.value = it(B || A), c.value = !0;
     },
     form: u,
     del: (A) => {

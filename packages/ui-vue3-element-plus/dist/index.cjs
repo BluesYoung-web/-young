@@ -66008,13 +66008,13 @@ var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, disa
     cgEffect == null ? void 0 : cgEffect();
   };
   const edit = async (row) => {
-    await (cpEffect == null ? void 0 : cpEffect(row));
-    form.value = O(row);
+    const res = await (cpEffect == null ? void 0 : cpEffect(row));
+    form.value = O(res || row);
     isEdit.value = true;
   };
   const more = async (row) => {
-    await (cpEffect == null ? void 0 : cpEffect(row));
-    form.value = O(row);
+    const res = await (cpEffect == null ? void 0 : cpEffect(row));
+    form.value = O(res || row);
     isMore.value = true;
   };
   return {

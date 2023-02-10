@@ -12,7 +12,7 @@ type Cbk<T> = {
   addCbk?: () => Promise<void | boolean>;
   modCbk?: () => Promise<void | boolean>;
   delCbk?: (row: T) => void;
-  cpEffect?: (row: T) => Promise<void>;
+  cpEffect?: (row: T) => Promise<void | T>;
   cgEffect?: () => void;
   disableclear?: boolean;
 };
@@ -79,13 +79,13 @@ export const useFormMode = <T>(
   };
 
   const edit = async (row: any) => {
-    await cpEffect?.(row);
-    form.value = deepClone(row);
+    const res = await cpEffect?.(row);
+    form.value = deepClone(res || row);
     isEdit.value = true;
   };
   const more = async (row: any) => {
-    await cpEffect?.(row);
-    form.value = deepClone(row);
+    const res = await cpEffect?.(row);
+    form.value = deepClone(res || row);
     isMore.value = true;
   };
   return {
