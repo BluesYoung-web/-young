@@ -14335,6 +14335,7 @@ __export(src_exports, {
   YoungPagination: () => YoungPagination_default,
   YoungSelect: () => YoungSelect_default,
   YoungTable: () => YoungTable_default,
+  YoungWeekday: () => YoungWeekday_default,
   useAutoLoad: () => useAutoLoad,
   useExport2Excel: () => useExport2Excel,
   useFormMode: () => useFormMode
@@ -65918,6 +65919,28 @@ var YoungSelect_default = (0, vue_exports.defineComponent)({
   }
 });
 
+// src/components/YoungWeekday.tsx
+var Weeks = ["\u5468\u4E00", "\u5468\u4E8C", "\u5468\u4E09", "\u5468\u56DB", "\u5468\u4E94", "\u5468\u516D", "\u5468\u65E5"];
+var YoungWeekday_default = (0, vue_exports.defineComponent)({
+  props: {
+    modelValue: {
+      type: Object,
+      required: true
+    }
+  },
+  emits: ["update:modelValue"],
+  setup(props, { attrs, emit: emit2 }) {
+    const randomSeed = Q();
+    return () => /* @__PURE__ */ React.createElement(ElCheckboxGroup, __spreadProps(__spreadValues({}, attrs), {
+      modelValue: props.modelValue,
+      onChange: (v2) => emit2("update:modelValue", v2)
+    }), Weeks.map((w2, i) => /* @__PURE__ */ React.createElement(ElCheckbox, {
+      label: i + 1,
+      key: i + randomSeed
+    }, w2)));
+  }
+});
+
 // src/hooks/useAutoLoad.ts
 var useAutoLoad = (list, allData, pageSize = 10, pause = (0, vue_exports.ref)(false)) => {
   const elArr = (0, vue_exports.ref)([]);
@@ -66558,6 +66581,7 @@ var useExport2Excel = async ({ filename, tableHead, tableData }) => {
   YoungPagination,
   YoungSelect,
   YoungTable,
+  YoungWeekday,
   useAutoLoad,
   useExport2Excel,
   useFormMode

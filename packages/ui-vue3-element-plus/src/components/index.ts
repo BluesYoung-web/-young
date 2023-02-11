@@ -10,3 +10,4 @@ export { default as YoungPagination } from './YoungPagination';
 export { default as YoungDialog } from './YoungDialog';
 export type { SelectOptionItem } from './YoungSelect';
 export { default as YoungSelect } from './YoungSelect';
+export { default as YoungWeekday } from './YoungWeekday';

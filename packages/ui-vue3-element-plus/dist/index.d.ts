@@ -53,7 +53,7 @@ interface TableHeadItem<T extends any = any> {
 declare type TableDataItem<T extends any = any> = {
     [key in keyof T]: T[key];
 } & Record<string, any>;
-declare const _default$3: vue.DefineComponent<{
+declare const _default$4: vue.DefineComponent<{
     tableData: {
         type: PropType<TableDataItem<any>[]>;
         required: true;
@@ -95,7 +95,7 @@ declare const _default$3: vue.DefineComponent<{
     selectable: boolean;
 }>;
 
-declare const _default$2: vue.DefineComponent<{
+declare const _default$3: vue.DefineComponent<{
     total: {
         readonly type: NumberConstructor;
         readonly required: true;
@@ -173,7 +173,7 @@ declare const _default$2: vue.DefineComponent<{
     hidden: boolean;
 }>;
 
-declare const _default$1: vue.DefineComponent<{
+declare const _default$2: vue.DefineComponent<{
     modelValue: BooleanConstructor;
     realTitle: StringConstructor;
     sureText: {
@@ -240,7 +240,7 @@ declare type SelectOptionItem<T extends any = any> = {
     disabled?: boolean;
     children?: SelectOptionItem<T>[];
 };
-declare const _default: vue.DefineComponent<{
+declare const _default$1: vue.DefineComponent<{
     options: {
         type: PropType<SelectOptionItem<any>[]>;
         required: true;
@@ -251,6 +251,20 @@ declare const _default: vue.DefineComponent<{
         required: true;
     };
 }>>, {}>;
+
+declare const _default: vue.DefineComponent<{
+    modelValue: {
+        type: PropType<number[]>;
+        required: true;
+    };
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+    modelValue: {
+        type: PropType<number[]>;
+        required: true;
+    };
+}>> & {
+    "onUpdate:modelValue"?: (...args: any[]) => any;
+}, {}>;
 
 declare const useAutoLoad: <T>(list: Ref<T[]>, allData: Ref<T[]>, pageSize?: number, pause?: Ref<boolean>) => {
     elArr: Ref<HTMLDivElement[]>;
@@ -301,4 +315,4 @@ interface ExportParams {
  */
 declare const useExport2Excel: ({ filename, tableHead, tableData }: ExportParams) => Promise<unknown>;
 
-export { SelectOptionItem, TableDataItem, TableHeadItem, _default$1 as YoungDialog, _default$2 as YoungPagination, _default as YoungSelect, _default$3 as YoungTable, useAutoLoad, useExport2Excel, useFormMode };
+export { SelectOptionItem, TableDataItem, TableHeadItem, _default$2 as YoungDialog, _default$3 as YoungPagination, _default$1 as YoungSelect, _default$4 as YoungTable, _default as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode };
