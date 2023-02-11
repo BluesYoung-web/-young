@@ -263,7 +263,7 @@ declare type Cbk<T> = {
     addCbk?: () => Promise<void | boolean>;
     modCbk?: () => Promise<void | boolean>;
     delCbk?: (row: T) => void;
-    cpEffect?: (row: T) => Promise<void | T>;
+    cpEffect?: (row: T) => void | Promise<void | T>;
     cgEffect?: () => void;
     disableclear?: boolean;
 };
