@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-02-11 11:06:39
- * @LastEditTime: 2023-02-11 13:54:25
+ * @LastEditTime: 2023-02-11 14:01:12
  * @Description:
  */
 import { defineComponent, ref, watchEffect } from 'vue';
@@ -41,7 +41,7 @@ export default defineComponent({
         emit('update:start', undefined);
         emit('update:end', undefined);
       } else {
-        const [start, end] = datePicker.value;
+        const [start, end] = e;
         if (props.unix) {
           emit('update:start', Math.floor(start.getTime() / 1000));
           emit('update:end', Math.floor(end.getTime() / 1000));

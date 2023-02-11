@@ -66030,7 +66030,7 @@ var YoungDateRange_default = (0, vue_exports.defineComponent)({
         emit2("update:start", void 0);
         emit2("update:end", void 0);
       } else {
-        const [start, end2] = datePicker.value;
+        const [start, end2] = e;
         if (props.unix) {
           emit2("update:start", Math.floor(start.getTime() / 1e3));
           emit2("update:end", Math.floor(end2.getTime() / 1e3));
