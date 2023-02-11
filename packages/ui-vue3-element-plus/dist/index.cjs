@@ -14335,6 +14335,7 @@ __export(src_exports, {
   YoungPagination: () => YoungPagination_default,
   YoungSelect: () => YoungSelect_default,
   YoungTable: () => YoungTable_default,
+  YoungTimeRange: () => YoungTimeRange_default,
   YoungWeekday: () => YoungWeekday_default,
   useAutoLoad: () => useAutoLoad,
   useExport2Excel: () => useExport2Excel,
@@ -65941,6 +65942,54 @@ var YoungWeekday_default = (0, vue_exports.defineComponent)({
   }
 });
 
+// src/components/YoungTimeRange.tsx
+var YoungTimeRange_default = (0, vue_exports.defineComponent)({
+  props: {
+    start: {
+      type: String,
+      required: true
+    },
+    end: {
+      type: String,
+      required: true
+    },
+    startTime: {
+      type: String,
+      default: "00:00"
+    },
+    endTime: {
+      type: String,
+      default: "23:59"
+    },
+    step: {
+      type: String,
+      default: "00:01"
+    }
+  },
+  emits: ["update:start", "update:end"],
+  setup(props, { attrs, emit: emit2 }) {
+    return () => /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(ElTimeSelect, __spreadProps(__spreadValues({}, attrs), {
+      modelValue: props.start,
+      class: "w-120px mr-2",
+      maxTime: props.end,
+      placeholder: "\u5F00\u59CB\u65F6\u95F4",
+      start: props.startTime,
+      step: props.step,
+      end: props.endTime,
+      "onUpdate:modelValue": (v2) => emit2("update:start", v2)
+    })), "- \xA0", /* @__PURE__ */ React.createElement(ElTimeSelect, __spreadProps(__spreadValues({}, attrs), {
+      modelValue: props.end,
+      class: "w-120px",
+      minTime: props.start,
+      placeholder: "\u7ED3\u675F\u65F6\u95F4",
+      start: props.startTime,
+      step: props.step,
+      end: props.endTime,
+      "onUpdate:modelValue": (v2) => emit2("update:end", v2)
+    })));
+  }
+});
+
 // src/hooks/useAutoLoad.ts
 var useAutoLoad = (list, allData, pageSize = 10, pause = (0, vue_exports.ref)(false)) => {
   const elArr = (0, vue_exports.ref)([]);
@@ -66581,6 +66630,7 @@ var useExport2Excel = async ({ filename, tableHead, tableData }) => {
   YoungPagination,
   YoungSelect,
   YoungTable,
+  YoungTimeRange,
   YoungWeekday,
   useAutoLoad,
   useExport2Excel,
