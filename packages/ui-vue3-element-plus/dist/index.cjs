@@ -66023,12 +66023,15 @@ var YoungDateRange_default = (0, vue_exports.defineComponent)({
         } else {
           datePicker.value = [new Date(props.start), new Date(props.end)];
         }
+      } else {
+        datePicker.value = null;
       }
     });
     const update = (e) => {
       if (!e) {
         emit2("update:start", void 0);
         emit2("update:end", void 0);
+        datePicker.value = null;
       } else {
         const [start, end2] = e;
         if (props.unix) {

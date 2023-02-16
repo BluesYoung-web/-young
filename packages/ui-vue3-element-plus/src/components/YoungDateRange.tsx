@@ -33,6 +33,8 @@ export default defineComponent({
         } else {
           datePicker.value = [new Date(props.start), new Date(props.end)];
         }
+      } else {
+        datePicker.value = null;
       }
     });
 
@@ -40,6 +42,7 @@ export default defineComponent({
       if (!e) {
         emit('update:start', undefined);
         emit('update:end', undefined);
+        datePicker.value = null;
       } else {
         const [start, end] = e;
         if (props.unix) {

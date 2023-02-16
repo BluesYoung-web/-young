@@ -351,11 +351,11 @@ const xf = ["\u5468\u4E00", "\u5468\u4E8C", "\u5468\u4E09", "\u5468\u56DB", "\u5
   }) {
     const n = qe();
     jn(() => {
-      e.start && e.end && (e.unix ? n.value = [new Date(+e.start * 1e3), new Date(+e.end * 1e3)] : n.value = [new Date(e.start), new Date(e.end)]);
+      e.start && e.end ? e.unix ? n.value = [new Date(+e.start * 1e3), new Date(+e.end * 1e3)] : n.value = [new Date(e.start), new Date(e.end)] : n.value = null;
     });
     const a = (i) => {
       if (!i)
-        r("update:start", void 0), r("update:end", void 0);
+        r("update:start", void 0), r("update:end", void 0), n.value = null;
       else {
         const [s, f] = i;
         e.unix ? (r("update:start", Math.floor(s.getTime() / 1e3)), r("update:end", Math.floor(f.getTime() / 1e3))) : (r("update:start", s.getTime()), r("update:end", f.getTime()));
