@@ -201,7 +201,7 @@ const D2 = Jr({
       default: () => [we(Vs, Rr(r, {
         modelValue: e.modelValue || i.value,
         title: e.realTitle || a.value,
-        closeOnClickModal: !1,
+        closeOnClickModal: !0,
         closeOnPressEscape: !1,
         beforeClose: f
       }), {

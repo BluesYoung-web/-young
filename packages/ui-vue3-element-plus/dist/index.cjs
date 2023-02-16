@@ -65889,7 +65889,7 @@ var YoungDialog_default = (0, vue_exports.defineComponent)({
     }, /* @__PURE__ */ React.createElement(ElDialog, __spreadProps(__spreadValues({}, attrs), {
       modelValue: props.modelValue || showDialog.value,
       title: props.realTitle || title.value,
-      closeOnClickModal: false,
+      closeOnClickModal: true,
       closeOnPressEscape: false,
       beforeClose,
       "v-slots": {

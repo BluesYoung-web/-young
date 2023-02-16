@@ -2,7 +2,7 @@
  * @Author: zhangyang
  * @Date: 2023-01-05 18:03:54
  * @LastEditTime: 2023-01-05 18:09:45
- * @Description: 
+ * @Description:
  */
 import { ElButton, ElDialog, ElMessageBox } from 'element-plus';
 import { Teleport, computed, defineComponent } from 'vue';
@@ -13,24 +13,24 @@ export default defineComponent({
     realTitle: String,
     sureText: {
       type: String,
-      default: '确定'
+      default: '确定',
     },
     cancelText: {
       type: String,
-      default: '取消'
+      default: '取消',
     },
     showSure: {
       type: Boolean,
-      default: true
+      default: true,
     },
     showCancel: {
       type: Boolean,
-      default: true
+      default: true,
     },
     isAdd: Boolean,
     isEdit: Boolean,
     isMore: Boolean,
-    sureFn: Function
+    sureFn: Function,
   },
   emits: ['sure', 'clear', 'update:modelValue'],
   setup(props, { emit, attrs, slots }) {
@@ -47,7 +47,7 @@ export default defineComponent({
 
     const showDialog = computed({
       get: () => props.isAdd || props.isMore || props.isEdit,
-      set: (v) => null
+      set: (v) => null,
     });
 
     const sure = async () => {
@@ -71,10 +71,12 @@ export default defineComponent({
         emit('update:modelValue', false);
         return;
       }
-      ElMessageBox.confirm('数据未保存，关闭将丢失数据，确认关闭？', '提示').then(() => {
-        emit('update:modelValue', false);
-        emit('clear');
-      }).catch(() => null);
+      ElMessageBox.confirm('数据未保存，关闭将丢失数据，确认关闭？', '提示')
+        .then(() => {
+          emit('update:modelValue', false);
+          emit('clear');
+        })
+        .catch(() => null);
     };
 
     return () => (
@@ -83,7 +85,7 @@ export default defineComponent({
           {...attrs}
           modelValue={props.modelValue || showDialog.value}
           title={props.realTitle || title.value}
-          closeOnClickModal={false}
+          closeOnClickModal={true}
           closeOnPressEscape={false}
           beforeClose={beforeClose}
           v-slots={{
@@ -91,27 +93,23 @@ export default defineComponent({
             footer: () => {
               return (
                 <>
-                  {
-                    slots.button?.()
-                  }
-                  {
-                    props.showCancel && <ElButton onClick={() => beforeClose()}>{props.cancelText}</ElButton>
-                  }
-                  {
-                    slots.step1?.()
-                  }
-                  {
-                    slots.step2?.()
-                  }
-                  {
-                    props.showSure && <ElButton type='primary' onClick={() => sure()}>{props.sureText}</ElButton>
-                  }
+                  {slots.button?.()}
+                  {props.showCancel && (
+                    <ElButton onClick={() => beforeClose()}>{props.cancelText}</ElButton>
+                  )}
+                  {slots.step1?.()}
+                  {slots.step2?.()}
+                  {props.showSure && (
+                    <ElButton type='primary' onClick={() => sure()}>
+                      {props.sureText}
+                    </ElButton>
+                  )}
                 </>
-              )
-            }
+              );
+            },
           }}
         />
       </Teleport>
     );
-  }
+  },
 });
