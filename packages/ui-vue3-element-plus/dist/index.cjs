@@ -66096,7 +66096,7 @@ var useAutoLoad = (list, allData, pageSize = 10, pause = (0, vue_exports.ref)(fa
 };
 
 // src/hooks/useFormMode.ts
-var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, disableclear }, tip = "\u786E\u8BA4\u5220\u9664\u8BE5\u6761\u6570\u636E\uFF1F") => {
+var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, clearEffect, disableclear }, tip = "\u786E\u8BA4\u5220\u9664\u8BE5\u6761\u6570\u636E\uFF1F") => {
   const isAdd = (0, vue_exports.ref)(false);
   const isEdit = (0, vue_exports.ref)(false);
   const isMore = (0, vue_exports.ref)(false);
@@ -66119,6 +66119,7 @@ var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, disa
     isAdd.value = false;
     isEdit.value = false;
     isMore.value = false;
+    clearEffect == null ? void 0 : clearEffect();
     form.value = O(FORM_TEMP);
   };
   const del2 = (row) => {

@@ -14,13 +14,14 @@ type Cbk<T> = {
   delCbk?: (row: T) => void;
   cpEffect?: (row: T) => void | Promise<void | T>;
   cgEffect?: () => void;
+  clearEffect?: () => void;
   disableclear?: boolean;
 };
 type ValidFn = () => Promise<boolean>;
 
 export const useFormMode = <T>(
   FORM_TEMP: T,
-  { addCbk, modCbk, delCbk, cpEffect, cgEffect, disableclear }: Cbk<T>,
+  { addCbk, modCbk, delCbk, cpEffect, cgEffect, clearEffect, disableclear }: Cbk<T>,
   tip = '确认删除该条数据？',
 ) => {
   const isAdd = ref(false);
@@ -47,6 +48,7 @@ export const useFormMode = <T>(
     isAdd.value = false;
     isEdit.value = false;
     isMore.value = false;
+    clearEffect?.();
     // @ts-ignore
     form.value = deepClone(FORM_TEMP);
   };

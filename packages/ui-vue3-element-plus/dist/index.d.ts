@@ -365,10 +365,11 @@ declare type Cbk<T> = {
     delCbk?: (row: T) => void;
     cpEffect?: (row: T) => void | Promise<void | T>;
     cgEffect?: () => void;
+    clearEffect?: () => void;
     disableclear?: boolean;
 };
 declare type ValidFn = () => Promise<boolean>;
-declare const useFormMode: <T>(FORM_TEMP: T, { addCbk, modCbk, delCbk, cpEffect, cgEffect, disableclear }: Cbk<T>, tip?: string) => {
+declare const useFormMode: <T>(FORM_TEMP: T, { addCbk, modCbk, delCbk, cpEffect, cgEffect, clearEffect, disableclear }: Cbk<T>, tip?: string) => {
     isAdd: vue.Ref<boolean>;
     isEdit: vue.Ref<boolean>;
     isMore: vue.Ref<boolean>;
