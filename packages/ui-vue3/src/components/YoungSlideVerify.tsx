@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-02 14:12:40
- * @LastEditTime: 2023-03-02 19:03:45
+ * @LastEditTime: 2023-03-02 19:47:28
  * @Description: 
  */
 import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
@@ -659,6 +659,122 @@ export default defineComponent({
         onTouchstart={onCloseMouseDown}
         onTouchend={onCloseMouseUp}
       >
+        <style>
+          {
+            `
+            @keyframes load {
+              0% {
+                opacity: 1;
+                transform: scale(1.3);
+              }
+              100% {
+                opacity: 0.2;
+                transform: scale(0.3);
+              }
+            }
+            .loading_item {
+              display: inline-block;
+              width: 5px;
+              height: 100%;
+              margin-left: 2px;
+              border-radius: 50%;
+              background-color: #888;
+              animation: load 1.04s ease infinite;
+            }
+            .reset_ {
+              position: absolute;
+              top: 2px;
+              right: 2px;
+              width: 35px;
+              height: auto;
+              z-index: 12;
+              cursor: pointer;
+              transition: transform 200ms;
+              transform: rotate(0deg);
+            }
+            .reset_:hover {
+              transform: rotate(-90deg);
+            }
+
+            .auth-control_ .range-box {
+              position: relative;
+              width: 100%;
+              background-color: #eef1f8;
+              margin-top: 20px;
+              border-radius: 3px;
+              box-shadow: 0 0 8px rgba(240, 240, 240, 0.6) inset;
+            }
+
+            .auth-control_ .range-text {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              font-size: 14px;
+              color: #b7bcd1;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              text-align: center;
+              width: 100%;
+            }
+            .auth-control_ .range-slider {
+              position: absolute;
+              height: 100%;
+              width: 50px;
+              background-color: rgba(106, 160, 255, 0.8);
+              border-radius: 3px;
+            }
+            .vue-puzzle-overflow {
+              overflow: hidden !important;
+            }
+            .range-slider .range-btn {
+              position: absolute;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              right: 0;
+              width: 50px;
+              height: 100%;
+              background-color: #fff;
+              border-radius: 3px;
+              box-shadow: 0 0 4px #ccc;
+              cursor: pointer;
+            }
+
+            .range-slider .range-btn > div {
+              width: 0;
+              height: 40%;
+              transition: all 200ms;
+              border: solid 1px #6aa0ff;
+            }
+
+            .range-slider .range-btn > div:nth-child(2) {
+              margin: 0 4px;
+            }
+
+            .range-slider .range-btn:hover > div:nth-child(1), .range-slider .range-btn.isDown > div:nth-child(1) {
+              border: solid 4px transparent;
+              height: 0;
+              border-right-color: #6aa0ff;
+            }
+
+            .range-slider .range-btn:hover > div:nth-child(2), .range-slider .range-btn.isDown > div:nth-child(2) {
+              border-width: 3px;
+              height: 0;
+              border-radius: 3px;
+              margin: 0 6px;
+              border-right-color: #6aa0ff;
+            }
+
+            .range-slider .range-btn:hover > div:nth-child(3), .range-slider .range-btn.isDown > div:nth-child(3) {
+              border: solid 4px transparent;
+              height: 0;
+              border-left-color: #6aa0ff;
+            }
+            `
+          }
+        </style>
         <div
           style={{
             position: 'absolute',
@@ -741,31 +857,6 @@ export default defineComponent({
                 justifyContent: 'center',
               }}
             >
-              <style>
-                {
-                  `
-                  @keyframes load {
-                    0% {
-                      opacity: 1;
-                      transform: scale(1.3);
-                    }
-                    100% {
-                      opacity: 0.2;
-                      transform: scale(0.3);
-                    }
-                  }
-                  .loading_item {
-                    display: inline-block;
-                    width: 5px;
-                    height: 100%;
-                    margin-left: 2px;
-                    border-radius: 50%;
-                    background-color: #888;
-                    animation: load 1.04s ease infinite;
-                  }
-                  `
-                }
-              </style>
               <div
                 style={{
                   flex: 'none',
@@ -817,59 +908,6 @@ export default defineComponent({
                 transition: state.isSuccess ? 'transform 600ms' : ''
               }}
             />
-            <style>
-              {
-                `
-                .reset_ {
-                  position: absolute;
-                  top: 2px;
-                  right: 2px;
-                  width: 35px;
-                  height: auto;
-                  z-index: 12;
-                  cursor: pointer;
-                  transition: transform 200ms;
-                  transform: rotate(0deg);
-                }
-                .reset_:hover {
-                  transform: rotate(-90deg);
-                }
-
-                .auth-control_.range-box {
-                  position: relative;
-                  width: 100%;
-                  background-color: #eef1f8;
-                  margin-top: 20px;
-                  border-radius: 3px;
-                  box-shadow: 0 0 8px rgba(240, 240, 240, 0.6) inset;
-                }
-
-                .auth-control_.range-text {
-                  position: absolute;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
-                  font-size: 14px;
-                  color: #b7bcd1;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  text-align: center;
-                  width: 100%;
-                }
-                .auth-control_.range-slider {
-                  position: absolute;
-                  height: 100%;
-                  width: 50px;
-                  background-color: rgba(106, 160, 255, 0.8);
-                  border-radius: 3px;
-                }
-                .vue-puzzle-overflow {
-                  overflow: hidden !important;
-                }
-                `
-              }
-            </style>
             <img
               class="reset_"
               title="刷新"
@@ -883,32 +921,17 @@ export default defineComponent({
               <div
                 ref={rangeSlider}
                 class="range-slider"
-                style={{
-                  width: `${styleWidth.value}px`
-                }}
+                style={{ width: `${styleWidth.value}px` }}
               >
                 <div
-                  style={{
-                    width: `${sliderBaseSize.value}px`,
-                    position: 'absolute',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    right: 0,
-                    height: '100%',
-                    backgroundColor: '#fff',
-                    borderRadius: '3px',
-                    boxShadow: '0 0 4px #ccc',
-                    cursor: 'pointer',
-                  }}
+                  class={`${state.mouseDown ? 'range-btn isDown' : 'range-btn'}`}
+                  style={{ width: `${sliderBaseSize.value}px` }}
                   onMousedown={onRangeMouseDown}
                   onTouchstart={onRangeMouseDown}
-                  onMouseenter={() => state.mouseDown = true}
-                  onMouseleave={() => state.mouseDown = false}
                 >
-                  <div style={{ width: 0, height: state.mouseDown ? 0 : '40%', transition: 'all 200ms', border: state.mouseDown ? '4px solid transparent' : '1px solid #6aa0ff', borderRightColor: state.mouseDown ? '#6aa0ff' : '' }} />
-                  <div style={{ width: 0, height: state.mouseDown ? 0 : '40%', transition: 'all 200ms', border: '1px solid #6aa0ff', margin: state.mouseDown ? '0 6px' : '0 4px', borderRightColor: state.mouseDown ? '#6aa0ff' : '', borderWidth: state.mouseDown ? '3px' : '', borderRadius: state.mouseDown ? '3px' : '' }} />
-                  <div style={{ width: 0, height: state.mouseDown ? 0 : '40%', transition: 'all 200ms', border: state.mouseDown ? '4px solid transparent' : '1px solid #6aa0ff', borderLeftColor: state.mouseDown ? '#6aa0ff' : '' }} />
+                  <div />
+                  <div />
+                  <div />
                 </div>
               </div>
             </div>
