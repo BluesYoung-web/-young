@@ -2,7 +2,7 @@
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
  * @LastEditTime: 2023-02-08 09:17:10
- * @Description: 
+ * @Description:
  */
 import { nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
 import type { PropType, VNode } from 'vue';
@@ -59,31 +59,30 @@ export interface TableHeadItem<T extends any = any> {
    */
   show_overflow_tooltip?: boolean;
   [x: string]: any;
-};
+}
 
 export type TableDataItem<T extends any = any> = {
   [key in keyof T]: T[key];
 } & Record<string, any>;
 
-
 export default defineComponent({
   props: {
     tableData: {
       type: Object as PropType<TableDataItem[]>,
-      required: true
+      required: true,
     },
     tableHead: {
       type: Object as PropType<TableDataItem[]>,
-      required: true
+      required: true,
     },
     tableHeight: {
       type: Number,
-      default: 600
+      default: 600,
     },
     selectable: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   emits: ['sort-change', 'selection-change'],
   setup(props, { emit, attrs, slots }) {
@@ -114,10 +113,7 @@ export default defineComponent({
         if (len <= step) {
           tableData_1.value = deepClone(t1);
         } else {
-          const {
-            elArr,
-            load
-          } = useAutoLoad(tableData_1, ref(t1), step);
+          const { elArr, load } = useAutoLoad(tableData_1, ref(t1), step);
 
           let n = 0;
           tableData_1.value = t1.slice(n, step);
@@ -132,52 +128,57 @@ export default defineComponent({
 
     return () => (
       // @ts-ignore
-      <ElTable {...attrs} ref={tableRef} data={tableData_1.value} style="width: 100%" height={props.tableHeight} onSortChange={(e) => emit('sort-change', e)} onSelectionChange={(e) => emit('selection-change', e)}>
-        {
-          props.selectable && <ElTableColumn type="selection" width="55" />
-        }
-        {
-          tableHead_1.value.map((head, index) =>
-            <ElTableColumn
-              key={index}
-              prop={head.prop as string}
-              label={head.label}
-              width={head.width || ''}
-              sortable={head.sortable || false}
-              fixed={head.fixed || false}
-              align={head.aligin || 'left'}
-              showOverflowTooltip={head.show_overflow_tooltip || false}
-              v-slots={{
-                header: (scope) => {
-                  if (tableHead_1.value[index].tool_content) {
-                    return (
-                      <>
-                        <span>{scope.column.label}</span>
-                        <ElTooltip placement='bottom' v-slots={{ content: () => tableHead_1.value[index].tool_content }}
-                        />
-                      </>);
-                  } else {
-                    return <span>{scope.column.label}</span>;
-                  }
-                },
-                default: (scope) => {
-                  if (head.render) {
-                    return head.render(scope.row, scope.$index);
-                  } else {
-                    return <span>{scope.row[head.prop]}</span>
-                  }
+      <ElTable
+        {...attrs}
+        ref={tableRef}
+        data={tableData_1.value}
+        style="width: 100%"
+        height={props.tableHeight}
+        onSortChange={(e) => emit('sort-change', e)}
+        onSelectionChange={(e) => emit('selection-change', e)}
+      >
+        {props.selectable && <ElTableColumn type="selection" width="55" />}
+        {tableHead_1.value.map((head, index) => (
+          <ElTableColumn
+            key={index}
+            prop={head.prop as string}
+            label={head.label}
+            width={head.width || ''}
+            sortable={head.sortable || false}
+            fixed={head.fixed || false}
+            align={head.aligin || 'left'}
+            showOverflowTooltip={head.show_overflow_tooltip ?? true}
+            v-slots={{
+              header: (scope) => {
+                if (tableHead_1.value[index].tool_content) {
+                  return (
+                    <>
+                      <span>{scope.column.label}</span>
+                      <ElTooltip
+                        placement='bottom'
+                        v-slots={{ content: () => tableHead_1.value[index].tool_content }}
+                      >
+                        ？
+                      </ElTooltip>
+                    </>
+                  );
+                } else {
+                  return <span>{scope.column.label}</span>;
                 }
-              }}
-            />
-          )
-        }
-        {
-          slots.switch?.()
-        }
-        {
-          slots.operate?.()
-        }
+              },
+              default: (scope) => {
+                if (head.render) {
+                  return head.render(scope.row, scope.$index);
+                } else {
+                  return <span>{scope.row[head.prop]}</span>;
+                }
+              },
+            }}
+          />
+        ))}
+        {slots.switch?.()}
+        {slots.operate?.()}
       </ElTable>
-    )
-  }
+    );
+  },
 });
