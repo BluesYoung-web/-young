@@ -1,6 +1,8 @@
 var __create = Object.create;
 var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
@@ -18,6 +20,7 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
@@ -5593,32 +5596,32 @@ function markRaw(value) {
   def(value, "__v_skip", true);
   return value;
 }
-function trackRefValue(ref7) {
+function trackRefValue(ref8) {
   if (shouldTrack && activeEffect) {
-    ref7 = toRaw(ref7);
+    ref8 = toRaw(ref8);
     if (process.env.NODE_ENV !== "production") {
-      trackEffects(ref7.dep || (ref7.dep = createDep()), {
-        target: ref7,
+      trackEffects(ref8.dep || (ref8.dep = createDep()), {
+        target: ref8,
         type: "get",
         key: "value"
       });
     } else {
-      trackEffects(ref7.dep || (ref7.dep = createDep()));
+      trackEffects(ref8.dep || (ref8.dep = createDep()));
     }
   }
 }
-function triggerRefValue(ref7, newVal) {
-  ref7 = toRaw(ref7);
-  if (ref7.dep) {
+function triggerRefValue(ref8, newVal) {
+  ref8 = toRaw(ref8);
+  if (ref8.dep) {
     if (process.env.NODE_ENV !== "production") {
-      triggerEffects(ref7.dep, {
-        target: ref7,
+      triggerEffects(ref8.dep, {
+        target: ref8,
         type: "set",
         key: "value",
         newValue: newVal
       });
     } else {
-      triggerEffects(ref7.dep);
+      triggerEffects(ref8.dep);
     }
   }
 }
@@ -5637,11 +5640,11 @@ function createRef(rawValue, shallow) {
   }
   return new RefImpl(rawValue, shallow);
 }
-function triggerRef(ref7) {
-  triggerRefValue(ref7, process.env.NODE_ENV !== "production" ? ref7.value : void 0);
+function triggerRef(ref8) {
+  triggerRefValue(ref8, process.env.NODE_ENV !== "production" ? ref8.value : void 0);
 }
-function unref(ref7) {
-  return isRef(ref7) ? ref7.value : ref7;
+function unref(ref8) {
+  return isRef(ref8) ? ref8.value : ref8;
 }
 function proxyRefs(objectWithRefs) {
   return isReactive(objectWithRefs) ? objectWithRefs : new Proxy(objectWithRefs, shallowUnwrapHandlers);
@@ -7617,9 +7620,9 @@ function defineAsyncComponent(source) {
   });
 }
 function createInnerComp(comp, parent) {
-  const { ref: ref7, props, children, ce } = parent.vnode;
+  const { ref: ref8, props, children, ce } = parent.vnode;
   const vnode = createVNode(comp, props, children);
-  vnode.ref = ref7;
+  vnode.ref = ref8;
   vnode.ce = ce;
   delete parent.vnode.ce;
   return vnode;
@@ -8801,7 +8804,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   }
   const refValue = vnode.shapeFlag & 4 ? getExposeProxy(vnode.component) || vnode.component.proxy : vnode.el;
   const value = isUnmount ? null : refValue;
-  const { i: owner, r: ref7 } = rawRef;
+  const { i: owner, r: ref8 } = rawRef;
   if (process.env.NODE_ENV !== "production" && !owner) {
     warn2(`Missing ref owner context. ref cannot be used on hoisted vnodes. A vnode with ref must be created inside the render function.`);
     return;
@@ -8809,7 +8812,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   const oldRef = oldRawRef && oldRawRef.r;
   const refs = owner.refs === EMPTY_OBJ ? owner.refs = {} : owner.refs;
   const setupState = owner.setupState;
-  if (oldRef != null && oldRef !== ref7) {
+  if (oldRef != null && oldRef !== ref8) {
     if (isString(oldRef)) {
       refs[oldRef] = null;
       if (hasOwn(setupState, oldRef)) {
@@ -8819,44 +8822,44 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
       oldRef.value = null;
     }
   }
-  if (isFunction(ref7)) {
-    callWithErrorHandling(ref7, owner, 12, [value, refs]);
+  if (isFunction(ref8)) {
+    callWithErrorHandling(ref8, owner, 12, [value, refs]);
   } else {
-    const _isString = isString(ref7);
-    const _isRef = isRef(ref7);
+    const _isString = isString(ref8);
+    const _isRef = isRef(ref8);
     if (_isString || _isRef) {
       const doSet = () => {
         if (rawRef.f) {
-          const existing = _isString ? hasOwn(setupState, ref7) ? setupState[ref7] : refs[ref7] : ref7.value;
+          const existing = _isString ? hasOwn(setupState, ref8) ? setupState[ref8] : refs[ref8] : ref8.value;
           if (isUnmount) {
             isArray(existing) && remove(existing, refValue);
           } else {
             if (!isArray(existing)) {
               if (_isString) {
-                refs[ref7] = [refValue];
-                if (hasOwn(setupState, ref7)) {
-                  setupState[ref7] = refs[ref7];
+                refs[ref8] = [refValue];
+                if (hasOwn(setupState, ref8)) {
+                  setupState[ref8] = refs[ref8];
                 }
               } else {
-                ref7.value = [refValue];
+                ref8.value = [refValue];
                 if (rawRef.k)
-                  refs[rawRef.k] = ref7.value;
+                  refs[rawRef.k] = ref8.value;
               }
             } else if (!existing.includes(refValue)) {
               existing.push(refValue);
             }
           }
         } else if (_isString) {
-          refs[ref7] = value;
-          if (hasOwn(setupState, ref7)) {
-            setupState[ref7] = value;
+          refs[ref8] = value;
+          if (hasOwn(setupState, ref8)) {
+            setupState[ref8] = value;
           }
         } else if (_isRef) {
-          ref7.value = value;
+          ref8.value = value;
           if (rawRef.k)
             refs[rawRef.k] = value;
         } else if (process.env.NODE_ENV !== "production") {
-          warn2("Invalid template ref type:", ref7, `(${typeof ref7})`);
+          warn2("Invalid template ref type:", ref8, `(${typeof ref8})`);
         }
       };
       if (value) {
@@ -8866,7 +8869,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
         doSet();
       }
     } else if (process.env.NODE_ENV !== "production") {
-      warn2("Invalid template ref type:", ref7, `(${typeof ref7})`);
+      warn2("Invalid template ref type:", ref8, `(${typeof ref8})`);
     }
   }
 }
@@ -8891,7 +8894,7 @@ function createHydrationFunctions(rendererInternals) {
   const hydrateNode = (node, vnode, parentComponent, parentSuspense, slotScopeIds, optimized = false) => {
     const isFragmentStart = isComment(node) && node.data === "[";
     const onMismatch = () => handleMismatch(node, vnode, parentComponent, parentSuspense, slotScopeIds, isFragmentStart);
-    const { type, ref: ref7, shapeFlag, patchFlag } = vnode;
+    const { type, ref: ref8, shapeFlag, patchFlag } = vnode;
     let domType = node.nodeType;
     vnode.el = node;
     if (patchFlag === -2) {
@@ -8992,8 +8995,8 @@ function createHydrationFunctions(rendererInternals) {
           warn2("Invalid HostVNode type:", type, `(${typeof type})`);
         }
     }
-    if (ref7 != null) {
-      setRef(ref7, null, parentSuspense, vnode);
+    if (ref8 != null) {
+      setRef(ref8, null, parentSuspense, vnode);
     }
     return nextNode;
   };
@@ -9213,7 +9216,7 @@ function baseCreateRenderer(options, createHydrationFns) {
       optimized = false;
       n2.dynamicChildren = null;
     }
-    const { type, ref: ref7, shapeFlag } = n2;
+    const { type, ref: ref8, shapeFlag } = n2;
     switch (type) {
       case Text:
         processText(n1, n2, container, anchor);
@@ -9244,8 +9247,8 @@ function baseCreateRenderer(options, createHydrationFns) {
           warn2("Invalid VNode type:", type, `(${typeof type})`);
         }
     }
-    if (ref7 != null && parentComponent) {
-      setRef(ref7, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
+    if (ref8 != null && parentComponent) {
+      setRef(ref8, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
     }
   };
   const processText = (n1, n2, container, anchor) => {
@@ -9942,9 +9945,9 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
   };
   const unmount = (vnode, parentComponent, parentSuspense, doRemove = false, optimized = false) => {
-    const { type, props, ref: ref7, children, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
-    if (ref7 != null) {
-      setRef(ref7, null, parentSuspense, vnode, true);
+    const { type, props, ref: ref8, children, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
+    if (ref8 != null) {
+      setRef(ref8, null, parentSuspense, vnode, true);
     }
     if (shapeFlag & 256) {
       parentComponent.ctx.deactivate(vnode);
@@ -10369,7 +10372,7 @@ function guardReactiveProps(props) {
   return isProxy(props) || InternalObjectKey in props ? extend({}, props) : props;
 }
 function cloneVNode(vnode, extraProps, mergeRef = false) {
-  const { props, ref: ref7, patchFlag, children } = vnode;
+  const { props, ref: ref8, patchFlag, children } = vnode;
   const mergedProps = extraProps ? mergeProps(props || {}, extraProps) : props;
   const cloned = {
     __v_isVNode: true,
@@ -10377,7 +10380,7 @@ function cloneVNode(vnode, extraProps, mergeRef = false) {
     type: vnode.type,
     props: mergedProps,
     key: mergedProps && normalizeKey(mergedProps),
-    ref: extraProps && extraProps.ref ? mergeRef && ref7 ? isArray(ref7) ? ref7.concat(normalizeRef(extraProps)) : [ref7, normalizeRef(extraProps)] : normalizeRef(extraProps) : ref7,
+    ref: extraProps && extraProps.ref ? mergeRef && ref8 ? isArray(ref8) ? ref8.concat(normalizeRef(extraProps)) : [ref8, normalizeRef(extraProps)] : normalizeRef(extraProps) : ref8,
     scopeId: vnode.scopeId,
     slotScopeIds: vnode.slotScopeIds,
     children: process.env.NODE_ENV !== "production" && patchFlag === -1 && isArray(children) ? children.map(deepCloneVNode) : children,
@@ -10999,9 +11002,9 @@ function initCustomFormatter() {
     if (instance.data !== EMPTY_OBJ) {
       blocks.push(createInstanceBlock("data", toRaw(instance.data)));
     }
-    const computed5 = extractKeys(instance, "computed");
-    if (computed5) {
-      blocks.push(createInstanceBlock("computed", computed5));
+    const computed6 = extractKeys(instance, "computed");
+    if (computed6) {
+      blocks.push(createInstanceBlock("computed", computed6));
     }
     const injected = extractKeys(instance, "inject");
     if (injected) {
@@ -11951,8 +11954,8 @@ var init_runtime_core_esm_bundler = __esm({
     };
     InternalObjectKey = `__vInternal`;
     normalizeKey = ({ key }) => key != null ? key : null;
-    normalizeRef = ({ ref: ref7, ref_key, ref_for }) => {
-      return ref7 != null ? isString(ref7) || isRef(ref7) || isFunction(ref7) ? { i: currentRenderingInstance, r: ref7, k: ref_key, f: !!ref_for } : ref7 : null;
+    normalizeRef = ({ ref: ref8, ref_key, ref_for }) => {
+      return ref8 != null ? isString(ref8) || isRef(ref8) || isFunction(ref8) ? { i: currentRenderingInstance, r: ref8, k: ref_key, f: !!ref_for } : ref8 : null;
     };
     createVNode = process.env.NODE_ENV !== "production" ? createVNodeWithArgsTransform : _createVNode;
     emptyAppContext = createAppContext();
@@ -13693,6 +13696,7 @@ var src_exports = {};
 __export(src_exports, {
   YoungCmdPopup: () => YoungCmdPopup_default,
   YoungContextMenu: () => YoungContextMenu_default,
+  YoungSlideVerify: () => YoungSlideVerify_default,
   YoungTab: () => YoungTab_default
 });
 module.exports = __toCommonJS(src_exports);
@@ -14130,9 +14134,611 @@ var YoungContextMenu_default = (0, vue_exports.defineComponent)({
     }, item.title)))));
   }
 });
+
+// src/components/YoungSlideVerify.tsx
+var YoungSlideVerify_default = (0, vue_exports.defineComponent)({
+  props: {
+    canvasWidth: { type: Number, default: 310 },
+    canvasHeight: { type: Number, default: 160 },
+    show: { type: Boolean, default: false },
+    puzzleScale: { type: Number, default: 1 },
+    sliderSize: { type: Number, default: 50 },
+    range: { type: Number, default: 10 },
+    imgs: {
+      type: Array,
+      default: void 0
+    },
+    successText: {
+      type: String,
+      default: "\u9A8C\u8BC1\u901A\u8FC7\uFF01"
+    },
+    failText: {
+      type: String,
+      default: "\u9A8C\u8BC1\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5"
+    },
+    sliderText: {
+      type: String,
+      default: "\u62D6\u52A8\u6ED1\u5757\u5B8C\u6210\u62FC\u56FE"
+    },
+    zIndex: {
+      type: Number,
+      default: 10001
+    }
+  },
+  emits: ["success", "fail", "close"],
+  setup(props, { emit: emit2, attrs }) {
+    const rangeSlider = (0, vue_exports.ref)();
+    const canvas1 = (0, vue_exports.ref)();
+    const canvas2 = (0, vue_exports.ref)();
+    const canvas3 = (0, vue_exports.ref)();
+    const state = (0, vue_exports.reactive)({
+      mouseDown: false,
+      startWidth: 50,
+      startX: 0,
+      newX: 0,
+      pinX: 0,
+      pinY: 0,
+      loading: false,
+      isCanSlide: false,
+      error: false,
+      infoBoxShow: false,
+      infoText: "",
+      infoBoxFail: false,
+      timer1: void 0,
+      closeDown: false,
+      isSuccess: false,
+      imgIndex: -1,
+      isSubmting: false
+    });
+    (0, vue_exports.watch)(() => props.show, (newV) => {
+      if (newV) {
+        document.body.classList.add("vue-puzzle-overflow");
+        reset();
+      } else {
+        state.isSubmting = false;
+        state.isSuccess = false;
+        state.infoBoxShow = false;
+        document.body.classList.remove("vue-puzzle-overflow");
+      }
+    });
+    const styleWidth = (0, vue_exports.computed)(() => {
+      const w = state.startWidth + state.newX - state.startX;
+      return w < sliderBaseSize.value ? sliderBaseSize.value : w > props.canvasWidth ? props.canvasWidth : w;
+    });
+    const puzzleBaseSize = (0, vue_exports.computed)(() => {
+      return Math.round(Math.max(Math.min(props.puzzleScale, 2), 0.2) * 52.5 + 6);
+    });
+    const sliderBaseSize = (0, vue_exports.computed)(() => {
+      return Math.max(Math.min(Math.round(props.sliderSize), Math.round(props.canvasWidth * 0.5)), 10);
+    });
+    const onC = () => {
+      if (!state.mouseDown) {
+        state.timer1 && clearTimeout(state.timer1);
+        emit2("close");
+      }
+    };
+    const onCloseMouseDown = () => {
+      state.closeDown = true;
+    };
+    const onCloseMouseUp = () => {
+      if (state.closeDown) {
+        onC();
+      }
+      state.closeDown = false;
+    };
+    const onRangeMouseDown = (e) => {
+      var _a3;
+      if (state.isCanSlide) {
+        state.mouseDown = true;
+        state.startWidth = ((_a3 = rangeSlider.value) == null ? void 0 : _a3.clientWidth) ?? 0;
+        state.newX = e.clientX || e.changedTouches[0].clientX;
+        state.startX = e.clientX || e.changedTouches[0].clientX;
+      }
+    };
+    const onRangeMouseMove = (e) => {
+      if (state.mouseDown) {
+        e.preventDefault();
+        state.newX = e.clientX || e.changedTouches[0].clientX;
+      }
+    };
+    const onRangeMouseUp = () => {
+      if (state.mouseDown) {
+        state.mouseDown = false;
+        submit();
+      }
+    };
+    const init = (withCanvas = false) => {
+      var _a3;
+      if (state.loading && !withCanvas) {
+        return;
+      }
+      state.loading = true;
+      state.isCanSlide = false;
+      const c = canvas1.value;
+      const c2 = canvas2.value;
+      const c3 = canvas3.value;
+      const ctx = c == null ? void 0 : c.getContext("2d");
+      const ctx2 = c2 == null ? void 0 : c2.getContext("2d");
+      const ctx3 = c3 == null ? void 0 : c3.getContext("2d");
+      if (!ctx || !ctx2 || !ctx3) {
+        console.error("not found ctx / ctx2 / ctx3");
+        return;
+      }
+      const isFirefox = navigator.userAgent.indexOf("Firefox") >= 0 && navigator.userAgent.indexOf("Windows") >= 0;
+      const img = document.createElement("img");
+      ctx.fillStyle = "rgba(255,255,255,1)";
+      ctx3.fillStyle = "rgba(255,255,255,1)";
+      ctx.clearRect(0, 0, props.canvasWidth, props.canvasHeight);
+      ctx2.clearRect(0, 0, props.canvasWidth, props.canvasHeight);
+      state.pinX = getRandom(puzzleBaseSize.value + 20, props.canvasWidth - puzzleBaseSize.value - 10);
+      state.pinY = getRandom(20, props.canvasHeight - puzzleBaseSize.value - 10);
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        const [x, y, w, h2] = makeImgSize(img);
+        ctx.save();
+        paintBrick(ctx);
+        ctx.closePath();
+        if (!isFirefox) {
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = 0;
+          ctx.shadowColor = "#000";
+          ctx.shadowBlur = 3;
+          ctx.fill();
+          ctx.clip();
+        } else {
+          ctx.clip();
+          ctx.save();
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = 0;
+          ctx.shadowColor = "#000";
+          ctx.shadowBlur = 3;
+          ctx.fill();
+          ctx.restore();
+        }
+        ctx.drawImage(img, x, y, w, h2);
+        ctx3.fillRect(0, 0, props.canvasWidth, props.canvasHeight);
+        ctx3.drawImage(img, x, y, w, h2);
+        ctx.globalCompositeOperation = "source-atop";
+        paintBrick(ctx);
+        ctx.arc(state.pinX + Math.ceil(puzzleBaseSize.value / 2), state.pinY + Math.ceil(puzzleBaseSize.value / 2), puzzleBaseSize.value * 1.2, 0, Math.PI * 2, true);
+        ctx.closePath();
+        ctx.shadowColor = "rgba(255, 255, 255, .8)";
+        ctx.shadowOffsetX = -1;
+        ctx.shadowOffsetY = -1;
+        ctx.shadowBlur = Math.min(Math.ceil(8 * props.puzzleScale), 12);
+        ctx.fillStyle = "#ffffaa";
+        ctx.fill();
+        const imgData = ctx.getImageData(state.pinX - 3, state.pinY - 20, state.pinX + puzzleBaseSize.value + 5, state.pinY + puzzleBaseSize.value + 5);
+        ctx2.putImageData(imgData, 0, state.pinY - 20);
+        ctx.restore();
+        ctx.clearRect(0, 0, props.canvasWidth, props.canvasHeight);
+        ctx.save();
+        paintBrick(ctx);
+        ctx.globalAlpha = 0.8;
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+        ctx.restore();
+        ctx.save();
+        ctx.globalCompositeOperation = "source-atop";
+        paintBrick(ctx);
+        ctx.arc(state.pinX + Math.ceil(puzzleBaseSize.value / 2), state.pinY + Math.ceil(puzzleBaseSize.value / 2), puzzleBaseSize.value * 1.2, 0, Math.PI * 2, true);
+        ctx.shadowColor = "#000";
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.shadowBlur = 16;
+        ctx.fill();
+        ctx.restore();
+        ctx.save();
+        ctx.globalCompositeOperation = "destination-over";
+        ctx.drawImage(img, x, y, w, h2);
+        ctx.restore();
+        state.loading = false;
+        state.isCanSlide = true;
+      };
+      img.onerror = () => {
+        init(true);
+      };
+      if (!withCanvas && ((_a3 = props.imgs) == null ? void 0 : _a3.length)) {
+        let randomNum = getRandom(0, props.imgs.length - 1);
+        if (randomNum === state.imgIndex) {
+          if (randomNum === props.imgs.length - 1) {
+            randomNum = 0;
+          } else {
+            randomNum++;
+          }
+        }
+        state.imgIndex = randomNum;
+        img.src = props.imgs[randomNum];
+      } else {
+        img.src = makeImgWithCanvas();
+      }
+    };
+    const getRandom = (min, max) => {
+      return Math.ceil(Math.random() * (max - min) + min);
+    };
+    const makeImgSize = (img) => {
+      const imgScale = img.width / img.height;
+      const canvasScale = props.canvasWidth / props.canvasHeight;
+      let x = 0, y = 0, w = 0, h2 = 0;
+      if (imgScale > canvasScale) {
+        h2 = props.canvasHeight;
+        w = imgScale * h2;
+        y = 0;
+        x = (props.canvasWidth - w) / 2;
+      } else {
+        w = props.canvasWidth;
+        h2 = w / imgScale;
+        x = 0;
+        y = (props.canvasHeight - h2) / 2;
+      }
+      return [x, y, w, h2];
+    };
+    const paintBrick = (ctx) => {
+      const moveL = Math.ceil(15 * props.puzzleScale);
+      ctx.beginPath();
+      ctx.moveTo(state.pinX, state.pinY);
+      ctx.lineTo(state.pinX + moveL, state.pinY);
+      ctx.arcTo(state.pinX + moveL, state.pinY - moveL / 2, state.pinX + moveL + moveL / 2, state.pinY - moveL / 2, moveL / 2);
+      ctx.arcTo(state.pinX + moveL + moveL, state.pinY - moveL / 2, state.pinX + moveL + moveL, state.pinY, moveL / 2);
+      ctx.lineTo(state.pinX + moveL + moveL + moveL, state.pinY);
+      ctx.lineTo(state.pinX + moveL + moveL + moveL, state.pinY + moveL);
+      ctx.arcTo(state.pinX + moveL + moveL + moveL + moveL / 2, state.pinY + moveL, state.pinX + moveL + moveL + moveL + moveL / 2, state.pinY + moveL + moveL / 2, moveL / 2);
+      ctx.arcTo(state.pinX + moveL + moveL + moveL + moveL / 2, state.pinY + moveL + moveL, state.pinX + moveL + moveL + moveL, state.pinY + moveL + moveL, moveL / 2);
+      ctx.lineTo(state.pinX + moveL + moveL + moveL, state.pinY + moveL + moveL + moveL);
+      ctx.lineTo(state.pinX, state.pinY + moveL + moveL + moveL);
+      ctx.lineTo(state.pinX, state.pinY + moveL + moveL);
+      ctx.arcTo(state.pinX + moveL / 2, state.pinY + moveL + moveL, state.pinX + moveL / 2, state.pinY + moveL + moveL / 2, moveL / 2);
+      ctx.arcTo(state.pinX + moveL / 2, state.pinY + moveL, state.pinX, state.pinY + moveL, moveL / 2);
+      ctx.lineTo(state.pinX, state.pinY);
+    };
+    const makeImgWithCanvas = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        console.error("not found ctx");
+        return "";
+      }
+      canvas.width = props.canvasWidth;
+      canvas.height = props.canvasHeight;
+      ctx.fillStyle = `rgb(${getRandom(100, 255)},${getRandom(100, 255)},${getRandom(100, 255)})`;
+      ctx.fillRect(0, 0, props.canvasWidth, props.canvasHeight);
+      for (let i = 0; i < 12; i++) {
+        ctx.fillStyle = `rgb(${getRandom(100, 255)},${getRandom(100, 255)},${getRandom(100, 255)})`;
+        ctx.strokeStyle = `rgb(${getRandom(100, 255)},${getRandom(100, 255)},${getRandom(100, 255)})`;
+        if (getRandom(0, 2) > 1) {
+          ctx.save();
+          ctx.rotate(getRandom(-90, 90) * Math.PI / 180);
+          ctx.fillRect(getRandom(-20, canvas.width - 20), getRandom(-20, canvas.height - 20), getRandom(10, canvas.width / 2 + 10), getRandom(10, canvas.height / 2 + 10));
+          ctx.restore();
+        } else {
+          ctx.beginPath();
+          const ran = getRandom(-Math.PI, Math.PI);
+          ctx.arc(getRandom(0, canvas.width), getRandom(0, canvas.height), getRandom(10, canvas.height / 2 + 10), ran, ran + Math.PI * 1.5);
+          ctx.closePath();
+          ctx.fill();
+        }
+      }
+      return canvas.toDataURL("image/png");
+    };
+    const submit = () => {
+      state.isSubmting = true;
+      const x = Math.abs(state.pinX - (styleWidth.value - sliderBaseSize.value) + (puzzleBaseSize.value - sliderBaseSize.value) * ((styleWidth.value - sliderBaseSize.value) / (props.canvasWidth - sliderBaseSize.value)) - 3);
+      if (x < props.range) {
+        state.infoText = props.successText;
+        state.infoBoxFail = false;
+        state.infoBoxShow = true;
+        state.isCanSlide = false;
+        state.isSuccess = true;
+        state.timer1 && clearTimeout(state.timer1);
+        state.timer1 = setTimeout(() => {
+          state.isSubmting = false;
+          emit2("success", x);
+        }, 800);
+      } else {
+        state.infoText = props.failText;
+        state.infoBoxFail = true;
+        state.infoBoxShow = true;
+        state.isCanSlide = false;
+        emit2("fail", x);
+        state.timer1 && clearTimeout(state.timer1);
+        state.timer1 = setTimeout(() => {
+          state.isSubmting = false;
+          reset();
+        }, 800);
+      }
+    };
+    const resetState = () => {
+      state.infoBoxFail = false;
+      state.infoBoxShow = false;
+      state.isCanSlide = false;
+      state.isSuccess = false;
+      state.startWidth = sliderBaseSize.value;
+      state.startX = 0;
+      state.newX = 0;
+    };
+    const reset = () => {
+      if (state.isSubmting) {
+        return;
+      }
+      resetState();
+      init();
+    };
+    (0, vue_exports.onMounted)(() => {
+      document.addEventListener("mousemove", onRangeMouseMove, false);
+      document.addEventListener("mouseup", onRangeMouseUp, false);
+      document.addEventListener("touchmove", onRangeMouseMove, {
+        passive: false
+      });
+      document.addEventListener("touchend", onRangeMouseUp, false);
+      if (props.show) {
+        document.body.classList.add("vue-puzzle-overflow");
+        reset();
+      }
+    });
+    (0, vue_exports.onUnmounted)(() => {
+      state.timer1 && clearTimeout(state.timer1);
+      document.removeEventListener("mousemove", onRangeMouseMove, false);
+      document.removeEventListener("mouseup", onRangeMouseUp, false);
+      document.removeEventListener("touchmove", onRangeMouseMove);
+      document.removeEventListener("touchend", onRangeMouseUp, false);
+    });
+    return () => /* @__PURE__ */ React.createElement("div", __spreadProps(__spreadValues({}, attrs), {
+      style: {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        backgroundColor: "rgba(0, 0, 0, 0.3)",
+        zIndex: props.zIndex,
+        opacity: props.show ? 1 : 0,
+        pointerEvents: props.show ? "auto" : "none",
+        transition: "opacity 200ms"
+      },
+      onMousedown: onCloseMouseDown,
+      onMouseup: onCloseMouseUp,
+      onTouchstart: onCloseMouseDown,
+      onTouchend: onCloseMouseUp
+    }), /* @__PURE__ */ React.createElement("div", {
+      style: {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        padding: "20px",
+        background: "#fff",
+        userSelect: "none",
+        borderRadius: "3px",
+        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.3)"
+      },
+      onMousedown: (e) => e.stopPropagation(),
+      onTouchstart: (e) => e.stopPropagation()
+    }, /* @__PURE__ */ React.createElement("div", {
+      style: {
+        position: "relative",
+        overflow: "hidden",
+        borderRadius: "3px",
+        height: `${props.canvasHeight}px`
+      }
+    }, /* @__PURE__ */ React.createElement("canvas", {
+      ref: canvas1,
+      width: props.canvasWidth,
+      height: props.canvasHeight,
+      style: {
+        width: `${props.canvasWidth}px`,
+        height: `${props.canvasHeight}px`
+      }
+    }), /* @__PURE__ */ React.createElement("canvas", {
+      ref: canvas3,
+      style: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        opacity: state.isSuccess ? 1 : 0,
+        zIndex: 3,
+        transition: "opacity 600ms",
+        width: `${props.canvasWidth}px`,
+        height: `${props.canvasHeight}px`
+      },
+      width: props.canvasWidth,
+      height: props.canvasHeight
+    }), /* @__PURE__ */ React.createElement("canvas", {
+      ref: canvas2,
+      style: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: `${puzzleBaseSize.value}px`,
+        height: `${props.canvasHeight}px`,
+        zIndex: 2,
+        transform: `translateX(${styleWidth.value - sliderBaseSize.value - (puzzleBaseSize.value - sliderBaseSize.value) * ((styleWidth.value - sliderBaseSize.value) / (props.canvasWidth - sliderBaseSize.value))}px)`
+      },
+      width: puzzleBaseSize.value,
+      height: props.canvasHeight
+    }), /* @__PURE__ */ React.createElement("div", {
+      style: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        zIndex: 20,
+        opacity: state.loading ? 1 : 0,
+        pointerEvents: state.loading ? "auto" : "none",
+        transition: "opacity 100ms",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }
+    }, /* @__PURE__ */ React.createElement("style", null, `
+                  @keyframes load {
+                    0% {
+                      opacity: 1;
+                      transform: scale(1.3);
+                    }
+                    100% {
+                      opacity: 0.2;
+                      transform: scale(0.3);
+                    }
+                  }
+                  .loading_item {
+                    display: inline-block;
+                    width: 5px;
+                    height: 100%;
+                    margin-left: 2px;
+                    border-radius: 50%;
+                    background-color: #888;
+                    animation: load 1.04s ease infinite;
+                  }
+                  `), /* @__PURE__ */ React.createElement("div", {
+      style: {
+        flex: "none",
+        height: "5px",
+        lineHeight: 0
+      }
+    }, /* @__PURE__ */ React.createElement("span", {
+      class: "loading_item",
+      style: { animationPlayState: state.loading ? "" : "paused", marginLeft: 0 }
+    }), /* @__PURE__ */ React.createElement("span", {
+      class: "loading_item",
+      style: { animationPlayState: state.loading ? "" : "paused", animationDelay: "0.13s" }
+    }), /* @__PURE__ */ React.createElement("span", {
+      class: "loading_item",
+      style: { animationPlayState: state.loading ? "" : "paused", animationDelay: "0.26s" }
+    }), /* @__PURE__ */ React.createElement("span", {
+      class: "loading_item",
+      style: { animationPlayState: state.loading ? "" : "paused", animationDelay: "0.39s" }
+    }), /* @__PURE__ */ React.createElement("span", {
+      class: "loading_item",
+      style: { animationPlayState: state.loading ? "" : "paused", animationDelay: "0.52s" }
+    }))), /* @__PURE__ */ React.createElement("div", {
+      style: {
+        position: "absolute",
+        left: 0,
+        bottom: 0,
+        width: "100%",
+        height: "24px",
+        lineHeight: "24px",
+        textAlign: "center",
+        overflow: "hidden",
+        fontSize: "13px",
+        backgroundColor: state.infoBoxFail ? "#ce594b" : "#83ce3f",
+        opacity: state.infoBoxShow ? 0.95 : 0,
+        transform: `translateY(${state.infoBoxShow ? 0 : "24px"})`,
+        transition: "all 200ms",
+        color: "#fff",
+        zIndex: 10
+      }
+    }, state.infoText), /* @__PURE__ */ React.createElement("div", {
+      style: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "30px",
+        height: "100%",
+        backgroundColor: "rgba(255, 255, 255, 0.1)",
+        zIndex: 3,
+        transform: `translateX(${state.isSuccess ? `${props.canvasWidth + props.canvasHeight * 0.578}px` : `-${props.canvasHeight * 0.578}px`}) skew(-30deg, 0)`,
+        transition: state.isSuccess ? "transform 600ms" : ""
+      }
+    }), /* @__PURE__ */ React.createElement("style", null, `
+                .reset_ {
+                  position: absolute;
+                  top: 2px;
+                  right: 2px;
+                  width: 35px;
+                  height: auto;
+                  z-index: 12;
+                  cursor: pointer;
+                  transition: transform 200ms;
+                  transform: rotate(0deg);
+                }
+                .reset_:hover {
+                  transform: rotate(-90deg);
+                }
+
+                .auth-control_.range-box {
+                  position: relative;
+                  width: 100%;
+                  background-color: #eef1f8;
+                  margin-top: 20px;
+                  border-radius: 3px;
+                  box-shadow: 0 0 8px rgba(240, 240, 240, 0.6) inset;
+                }
+
+                .auth-control_.range-text {
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  font-size: 14px;
+                  color: #b7bcd1;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  text-align: center;
+                  width: 100%;
+                }
+                .auth-control_.range-slider {
+                  position: absolute;
+                  height: 100%;
+                  width: 50px;
+                  background-color: rgba(106, 160, 255, 0.8);
+                  border-radius: 3px;
+                }
+                .vue-puzzle-overflow {
+                  overflow: hidden !important;
+                }
+                `), /* @__PURE__ */ React.createElement("img", {
+      class: "reset_",
+      title: "\u5237\u65B0",
+      onClick: reset,
+      src: "data:image/svg+xml;utf8,%3Csvg preserveAspectRatio='xMidYMid meet' viewBox='0 0 21 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='%2343CF96' d='m7.5 21l2.999-3v1.5a7.501 7.501 0 0 0 5.299-12.811l2.114-2.124A10.465 10.465 0 0 1 21 12.002C21 17.8 16.3 22.5 10.502 22.5H10.5V24zM0 12C.007 6.204 4.704 1.507 10.499 1.5h.001V0l3 3l-3 3V4.5h-.002a7.502 7.502 0 0 0-5.299 12.812l-2.112 2.124a10.397 10.397 0 0 1-3.088-7.407v-.03v.002z'/%3E%3C/svg%3E"
+    })), /* @__PURE__ */ React.createElement("div", {
+      class: "auth-control_"
+    }, /* @__PURE__ */ React.createElement("div", {
+      class: "range-box",
+      style: { height: `${sliderBaseSize.value}px` }
+    }, /* @__PURE__ */ React.createElement("div", {
+      class: "range-text"
+    }, props.sliderText), /* @__PURE__ */ React.createElement("div", {
+      ref: rangeSlider,
+      class: "range-slider",
+      style: {
+        width: `${styleWidth.value}px`
+      }
+    }, /* @__PURE__ */ React.createElement("div", {
+      style: {
+        width: `${sliderBaseSize.value}px`,
+        position: "absolute",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        right: 0,
+        height: "100%",
+        backgroundColor: "#fff",
+        borderRadius: "3px",
+        boxShadow: "0 0 4px #ccc",
+        cursor: "pointer"
+      },
+      onMousedown: onRangeMouseDown,
+      onTouchstart: onRangeMouseDown,
+      onMouseenter: () => state.mouseDown = true,
+      onMouseleave: () => state.mouseDown = false
+    }, /* @__PURE__ */ React.createElement("div", {
+      style: { width: 0, height: state.mouseDown ? 0 : "40%", transition: "all 200ms", border: state.mouseDown ? "4px solid transparent" : "1px solid #6aa0ff", borderRightColor: state.mouseDown ? "#6aa0ff" : "" }
+    }), /* @__PURE__ */ React.createElement("div", {
+      style: { width: 0, height: state.mouseDown ? 0 : "40%", transition: "all 200ms", border: "1px solid #6aa0ff", margin: state.mouseDown ? "0 6px" : "0 4px", borderRightColor: state.mouseDown ? "#6aa0ff" : "", borderWidth: state.mouseDown ? "3px" : "", borderRadius: state.mouseDown ? "3px" : "" }
+    }), /* @__PURE__ */ React.createElement("div", {
+      style: { width: 0, height: state.mouseDown ? 0 : "40%", transition: "all 200ms", border: state.mouseDown ? "4px solid transparent" : "1px solid #6aa0ff", borderLeftColor: state.mouseDown ? "#6aa0ff" : "" }
+    })))))));
+  }
+});
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   YoungCmdPopup,
   YoungContextMenu,
+  YoungSlideVerify,
   YoungTab
 });

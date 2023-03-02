@@ -1,7 +1,7 @@
 import * as vue from 'vue';
 import { PropType } from 'vue';
 
-declare const _default$2: vue.DefineComponent<{
+declare const _default$3: vue.DefineComponent<{
     zIndex: {
         type: NumberConstructor;
         default: number;
@@ -15,7 +15,7 @@ declare const _default$2: vue.DefineComponent<{
     zIndex: number;
 }>;
 
-declare const _default$1: vue.DefineComponent<{
+declare const _default$2: vue.DefineComponent<{
     titleStyle: {
         type: ObjectConstructor;
         default: () => {};
@@ -57,7 +57,7 @@ interface ContextMenuItem {
     handlerName: string;
     title: string;
 }
-declare const _default: vue.DefineComponent<{
+declare const _default$1: vue.DefineComponent<{
     modelValue: {
         type: BooleanConstructor;
         required: true;
@@ -80,4 +80,148 @@ declare const _default: vue.DefineComponent<{
     onClickItem?: (...args: any[]) => any;
 }, {}>;
 
-export { _default$2 as YoungCmdPopup, _default as YoungContextMenu, _default$1 as YoungTab };
+declare const _default: vue.DefineComponent<{
+    /**
+     * 主 canvas 的宽
+     */
+    canvasWidth: {
+        type: NumberConstructor;
+        default: number;
+    };
+    /**
+     * 主 canvas 的高
+     */
+    canvasHeight: {
+        type: NumberConstructor;
+        default: number;
+    };
+    /**
+     * 是否出现，由父级控制
+     */
+    show: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    /**
+     * 拼图块的大小缩放比例
+     */
+    puzzleScale: {
+        type: NumberConstructor;
+        default: number;
+    };
+    /**
+     * 滑块的大小
+     */
+    sliderSize: {
+        type: NumberConstructor;
+        default: number;
+    };
+    /**
+     * 允许的偏差值
+     */
+    range: {
+        type: NumberConstructor;
+        default: number;
+    };
+    imgs: {
+        type: PropType<string[]>;
+        default: any;
+    };
+    successText: {
+        type: StringConstructor;
+        default: string;
+    };
+    failText: {
+        type: StringConstructor;
+        default: string;
+    };
+    sliderText: {
+        type: StringConstructor;
+        default: string;
+    };
+    zIndex: {
+        type: NumberConstructor;
+        default: number;
+    };
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("close" | "success" | "fail")[], "close" | "success" | "fail", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+    /**
+     * 主 canvas 的宽
+     */
+    canvasWidth: {
+        type: NumberConstructor;
+        default: number;
+    };
+    /**
+     * 主 canvas 的高
+     */
+    canvasHeight: {
+        type: NumberConstructor;
+        default: number;
+    };
+    /**
+     * 是否出现，由父级控制
+     */
+    show: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    /**
+     * 拼图块的大小缩放比例
+     */
+    puzzleScale: {
+        type: NumberConstructor;
+        default: number;
+    };
+    /**
+     * 滑块的大小
+     */
+    sliderSize: {
+        type: NumberConstructor;
+        default: number;
+    };
+    /**
+     * 允许的偏差值
+     */
+    range: {
+        type: NumberConstructor;
+        default: number;
+    };
+    imgs: {
+        type: PropType<string[]>;
+        default: any;
+    };
+    successText: {
+        type: StringConstructor;
+        default: string;
+    };
+    failText: {
+        type: StringConstructor;
+        default: string;
+    };
+    sliderText: {
+        type: StringConstructor;
+        default: string;
+    };
+    zIndex: {
+        type: NumberConstructor;
+        default: number;
+    };
+}>> & {
+    onClose?: (...args: any[]) => any;
+    onSuccess?: (...args: any[]) => any;
+    onFail?: (...args: any[]) => any;
+}, {
+    zIndex: number;
+    show: boolean;
+    range: number;
+    canvasWidth: number;
+    canvasHeight: number;
+    puzzleScale: number;
+    sliderSize: number;
+    imgs: string[];
+    successText: string;
+    failText: string;
+    sliderText: string;
+}>;
+
+export { _default$3 as YoungCmdPopup, _default$1 as YoungContextMenu, _default as YoungSlideVerify, _default$2 as YoungTab };
