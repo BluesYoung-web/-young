@@ -20,11 +20,13 @@
   },
   "devDependencies": {
     "@bluesyoung/utils": "workspace:*",
+    "@types/sortablejs": "^1.15.0",
     "@types/xlsx": "^0.0.36",
     "@vitejs/plugin-vue-jsx": "^2.1.1",
     "@vue/shared": "^3.2.47",
     "@vueuse/core": "^9.10.0",
     "element-plus": "^2.2.28",
+    "sortablejs": "^1.15.0",
     "vue": "^3.2.45"
   },
   "repository": {

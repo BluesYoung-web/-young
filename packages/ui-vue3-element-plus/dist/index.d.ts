@@ -70,7 +70,11 @@ declare const _default$6: vue.DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
-}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("sort-change" | "selection-change")[], "sort-change" | "selection-change", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+    rowDraggable: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("sort-change" | "selection-change" | "row-drag-change")[], "sort-change" | "selection-change" | "row-drag-change", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     tableData: {
         type: PropType<TableDataItem<any>[]>;
         required: true;
@@ -87,12 +91,18 @@ declare const _default$6: vue.DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    rowDraggable: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }>> & {
     "onSort-change"?: (...args: any[]) => any;
     "onSelection-change"?: (...args: any[]) => any;
+    "onRow-drag-change"?: (...args: any[]) => any;
 }, {
     tableHeight: number;
     selectable: boolean;
+    rowDraggable: boolean;
 }>;
 
 declare const _default$5: vue.DefineComponent<{

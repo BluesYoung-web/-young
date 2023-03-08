@@ -1,14 +1,15 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
- * @LastEditTime: 2023-03-08 13:59:31
+ * @LastEditTime: 2023-03-08 16:34:37
  * @Description:
  */
-import { nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
+import { nextTick, onActivated, ref, watchEffect, defineComponent, onMounted } from 'vue';
 import type { PropType, VNode } from 'vue';
 import { deepClone } from '@bluesyoung/utils';
 import { ElTable, ElTableColumn, ElTooltip } from 'element-plus';
 import { useAutoLoad } from '..';
+import type { SortableEvent } from 'sortablejs';
 
 export type TableHeadAligin = 'left' | 'center' | 'right' | undefined;
 
@@ -83,9 +84,66 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    rowDraggable: {
+      type: Boolean,
+      default: false
+    },
+    /**
+     * 列排序有 bug，暂不放出
+     */
+    // colDraggable: {
+    //   type: Boolean,
+    //   default: false
+    // }
   },
-  emits: ['sort-change', 'selection-change'],
+  emits: ['sort-change', 'selection-change', 'row-drag-change',
+    //  'col-drag-change'
+  ],
   setup(props, { emit, attrs, slots }) {
+    onMounted(async () => {
+      if (
+        props.rowDraggable
+        // || props.colDraggable
+      ) {
+        const { default: Sortable } = await import('sortablejs');
+        if (props.rowDraggable) {
+          const el = (tableRef.value.$el as HTMLDivElement).querySelector('tbody');
+          el.style.cursor = 'move';
+          new Sortable(el, {
+            animation: 150,
+            onEnd: ({ oldIndex, newIndex }: SortableEvent) => {
+              if (oldIndex === newIndex) {
+                return;
+              }
+              const data = tableData_drag.value;
+              const row = deepClone(data[oldIndex]);
+              data.splice(oldIndex, 1);
+              data.splice(newIndex, 0, row);
+              emit('row-drag-change', tableData_drag.value);
+            },
+          });
+        }
+
+        // if (props.colDraggable) {
+        //   const el = (tableRef.value.$el as HTMLDivElement).querySelector('thead tr') as HTMLTableSectionElement;
+        //   el.style.cursor = 'move';
+        //   new Sortable(el, {
+        //     animation: 150,
+        //     onEnd: ({ oldIndex, newIndex }: SortableEvent) => {
+        //       if (oldIndex === newIndex) {
+        //         return;
+        //       }
+        //       const data = tableHead_drag.value;
+        //       const col = deepClone(data[oldIndex]);
+        //       data.splice(oldIndex, 1);
+        //       data.splice(newIndex, 0, col);
+        //       emit('col-drag-change', data);
+        //     },
+        //   });
+        // }
+      }
+    });
+
     /**
      * 引用表格元素
      */
@@ -100,6 +158,10 @@ export default defineComponent({
     const tableData_1 = ref<TableDataItem[]>([]);
     const tableHead_1 = ref<TableHeadItem[]>([]);
 
+    const tableData_drag = ref<TableDataItem[]>([]);
+    // const tableHead_drag = ref<TableHeadItem[]>([]);
+
+
     watchEffect(() => {
       const t1 = props.tableData;
       const t2 = props.tableHead;
@@ -108,19 +170,29 @@ export default defineComponent({
       nextTick(() => {
         // @ts-ignore
         tableHead_1.value = t2.filter((item) => !item.only_export);
+        // @ts-ignore
+        // tableHead_drag.value = t2.filter((item) => !item.only_export);
 
         const step = 50;
         if (len <= step) {
           tableData_1.value = deepClone(t1);
+          tableData_drag.value = deepClone(t1);
         } else {
           const { elArr, load } = useAutoLoad(tableData_1, ref(t1), step);
+          const { elArr: elArr_drag, load: load_drag } = useAutoLoad(tableData_drag, ref(t1), step);
 
           let n = 0;
           tableData_1.value = t1.slice(n, step);
+          tableData_drag.value = t1.slice(n, step);
 
           nextTick(() => {
             elArr.value = tableRef.value.$el.querySelector('tbody').children;
             load();
+          });
+
+          nextTick(() => {
+            elArr_drag.value = tableRef.value.$el.querySelector('tbody').children;
+            load_drag();
           });
         }
       });

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-10-19 10:48:36
- * @LastEditTime: 2023-01-05 17:12:17
+ * @LastEditTime: 2023-03-08 16:27:27
  * @Description:
  */
 /// <reference types="vite/client" />
@@ -23,7 +23,14 @@ export default defineConfig({
     },
     sourcemap: true,
     rollupOptions: {
-      external: ['vue', '@vueuse/core', 'element-plus', '@bluesyoung/utils', '@vue/shared'],
+      external: [
+        'vue',
+        '@vueuse/core',
+        'element-plus',
+        '@bluesyoung/utils',
+        '@vue/shared',
+        'sortablejs',
+      ],
     },
   },
 });
