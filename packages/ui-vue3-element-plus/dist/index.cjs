@@ -68667,12 +68667,12 @@ var YoungDialog_default = (0, vue_exports.defineComponent)({
       get: () => props.isAdd || props.isMore || props.isEdit,
       set: (v2) => null
     });
-    (0, vue_exports.watch)(() => showDialog.value, (v2, o2) => {
+    props.diffForm && (0, vue_exports.watch)(() => showDialog.value, (v2, o2) => {
       if (v2 && !o2) {
         formHash_before.value = JSON.stringify(props.diffForm);
       }
     });
-    (0, vue_exports.watch)(() => props.modelValue, (v2, o2) => {
+    props.diffForm && (0, vue_exports.watch)(() => props.modelValue, (v2, o2) => {
       if (v2 && !o2) {
         formHash_before.value = JSON.stringify(props.diffForm);
       }
@@ -68698,7 +68698,7 @@ var YoungDialog_default = (0, vue_exports.defineComponent)({
         emit2("update:modelValue", false);
         return;
       }
-      if (formHash_before.value && formHash_before.value === formHash_after) {
+      if (props.diffForm && formHash_before.value === formHash_after) {
         emit2("clear");
         emit2("update:modelValue", false);
         return;

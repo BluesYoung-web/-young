@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 18:03:54
- * @LastEditTime: 2023-03-08 14:27:01
+ * @LastEditTime: 2023-03-08 16:45:34
  * @Description:
  */
 import { ElButton, ElDialog, ElMessageBox } from 'element-plus';
@@ -36,8 +36,8 @@ export default defineComponent({
      */
     diffForm: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   emits: ['sure', 'clear', 'update:modelValue'],
   setup(props, { emit, attrs, slots }) {
@@ -59,17 +59,25 @@ export default defineComponent({
       set: (v) => null,
     });
 
-    watch(() => showDialog.value, (v, o) => {
-      if (v && !o) {
-        formHash_before.value = JSON.stringify(props.diffForm);
-      }
-    });
+    props.diffForm &&
+      watch(
+        () => showDialog.value,
+        (v, o) => {
+          if (v && !o) {
+            formHash_before.value = JSON.stringify(props.diffForm);
+          }
+        },
+      );
 
-    watch(() => props.modelValue, (v, o) => {
-      if (v && !o) {
-        formHash_before.value = JSON.stringify(props.diffForm);
-      }
-    });
+    props.diffForm &&
+      watch(
+        () => props.modelValue,
+        (v, o) => {
+          if (v && !o) {
+            formHash_before.value = JSON.stringify(props.diffForm);
+          }
+        },
+      );
 
     const sure = async () => {
       if (props.sureFn) {
@@ -93,7 +101,7 @@ export default defineComponent({
         emit('update:modelValue', false);
         return;
       }
-      if (formHash_before.value && formHash_before.value === formHash_after) {
+      if (props.diffForm && formHash_before.value === formHash_after) {
         emit('clear');
         emit('update:modelValue', false);
         return;
@@ -105,7 +113,6 @@ export default defineComponent({
           })
           .catch(() => null);
       }
-
     };
 
     return () => (

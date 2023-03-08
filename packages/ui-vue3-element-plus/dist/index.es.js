@@ -224,9 +224,9 @@ const I2 = qr({
       get: () => e.isAdd || e.isMore || e.isEdit,
       set: (l) => null
     });
-    C0(() => s.value, (l, c) => {
+    e.diffForm && C0(() => s.value, (l, c) => {
       l && !c && (a.value = JSON.stringify(e.diffForm));
-    }), C0(() => e.modelValue, (l, c) => {
+    }), e.diffForm && C0(() => e.modelValue, (l, c) => {
       l && !c && (a.value = JSON.stringify(e.diffForm));
     });
     const f = async () => {
@@ -243,7 +243,7 @@ const I2 = qr({
         t("clear"), t("update:modelValue", !1);
         return;
       }
-      if (a.value && a.value === l) {
+      if (e.diffForm && a.value === l) {
         t("clear"), t("update:modelValue", !1);
         return;
       } else
