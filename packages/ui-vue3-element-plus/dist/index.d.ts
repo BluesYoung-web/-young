@@ -196,6 +196,13 @@ declare const _default$4: vue.DefineComponent<{
     isEdit: BooleanConstructor;
     isMore: BooleanConstructor;
     sureFn: FunctionConstructor;
+    /**
+     * 对比 form 表单
+     */
+    diffForm: {
+        type: ObjectConstructor;
+        default: any;
+    };
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("sure" | "clear" | "update:modelValue")[], "sure" | "clear" | "update:modelValue", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     modelValue: BooleanConstructor;
     realTitle: StringConstructor;
@@ -219,6 +226,13 @@ declare const _default$4: vue.DefineComponent<{
     isEdit: BooleanConstructor;
     isMore: BooleanConstructor;
     sureFn: FunctionConstructor;
+    /**
+     * 对比 form 表单
+     */
+    diffForm: {
+        type: ObjectConstructor;
+        default: any;
+    };
 }>> & {
     onSure?: (...args: any[]) => any;
     onClear?: (...args: any[]) => any;
@@ -232,6 +246,7 @@ declare const _default$4: vue.DefineComponent<{
     isAdd: boolean;
     isEdit: boolean;
     isMore: boolean;
+    diffForm: Record<string, any>;
 }>;
 
 declare type SelectOptionItem<T extends any = any> = {

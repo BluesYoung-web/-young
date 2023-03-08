@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
- * @LastEditTime: 2023-02-08 09:17:10
+ * @LastEditTime: 2023-03-08 13:59:31
  * @Description:
  */
 import { nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -127,15 +127,14 @@ export default defineComponent({
     });
 
     return () => (
-      // @ts-ignore
       <ElTable
         {...attrs}
         ref={tableRef}
         data={tableData_1.value}
-        style="width: 100%"
+        style={{ width: '100%' }}
         height={props.tableHeight}
-        onSortChange={(e) => emit('sort-change', e)}
-        onSelectionChange={(e) => emit('selection-change', e)}
+        onSort-Change={(e) => emit('sort-change', e)}
+        onSelection-Change={(e) => emit('selection-change', e)}
       >
         {props.selectable && <ElTableColumn type="selection" width="55" />}
         {tableHead_1.value.map((head, index) => (

@@ -1,11 +1,11 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 18:03:54
- * @LastEditTime: 2023-01-05 18:09:45
+ * @LastEditTime: 2023-03-08 14:27:01
  * @Description:
  */
 import { ElButton, ElDialog, ElMessageBox } from 'element-plus';
-import { Teleport, computed, defineComponent } from 'vue';
+import { Teleport, computed, defineComponent, watch, ref } from 'vue';
 
 export default defineComponent({
   props: {
@@ -31,9 +31,18 @@ export default defineComponent({
     isEdit: Boolean,
     isMore: Boolean,
     sureFn: Function,
+    /**
+     * 对比 form 表单
+     */
+    diffForm: {
+      type: Object,
+      default: null
+    }
   },
   emits: ['sure', 'clear', 'update:modelValue'],
   setup(props, { emit, attrs, slots }) {
+    const formHash_before = ref('');
+
     const title = computed(() => {
       let str = '新建';
       if (props.isEdit) {
@@ -48,6 +57,18 @@ export default defineComponent({
     const showDialog = computed({
       get: () => props.isAdd || props.isMore || props.isEdit,
       set: (v) => null,
+    });
+
+    watch(() => showDialog.value, (v, o) => {
+      if (v && !o) {
+        formHash_before.value = JSON.stringify(props.diffForm);
+      }
+    });
+
+    watch(() => props.modelValue, (v, o) => {
+      if (v && !o) {
+        formHash_before.value = JSON.stringify(props.diffForm);
+      }
     });
 
     const sure = async () => {
@@ -66,17 +87,25 @@ export default defineComponent({
     };
 
     const beforeClose = () => {
+      const formHash_after = JSON.stringify(props.diffForm);
       if (props.isMore || !props.showCancel) {
         emit('clear');
         emit('update:modelValue', false);
         return;
       }
-      ElMessageBox.confirm('数据未保存，关闭将丢失数据，确认关闭？', '提示')
-        .then(() => {
-          emit('update:modelValue', false);
-          emit('clear');
-        })
-        .catch(() => null);
+      if (formHash_before.value && formHash_before.value === formHash_after) {
+        emit('clear');
+        emit('update:modelValue', false);
+        return;
+      } else {
+        ElMessageBox.confirm('数据未保存，关闭将丢失数据，确认关闭？', '提示')
+          .then(() => {
+            emit('update:modelValue', false);
+            emit('clear');
+          })
+          .catch(() => null);
+      }
+
     };
 
     return () => (
