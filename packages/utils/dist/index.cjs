@@ -99,18 +99,18 @@ module.exports = __toCommonJS(src_exports);
 // src/core/isType.ts
 var isType = (val, typeFn) => Object.prototype.toString.call(val) === `[object ${typeFn.name}]`;
 var isArray = (arr) => isType(arr, Array);
-var isObject = (arr) => isType(arr, Object);
+var isObject = (obj) => isType(obj, Object);
 var isNumber = (num) => isType(num, Number);
 var isString = (str) => isType(str, String);
 var isBoolean = (bool) => isType(bool, Boolean);
-var isMap = (bool) => isType(bool, Map);
-var isWeakMap = (bool) => isType(bool, WeakMap);
-var isSet = (bool) => isType(bool, Set);
-var isWeakSet = (bool) => isType(bool, WeakSet);
-var isArrayBuffer = (bool) => isType(bool, ArrayBuffer);
-var isRegExp = (bool) => isType(bool, RegExp);
-var isFunction = (bool) => isType(bool, Function);
-var isSymbol = (bool) => isType(bool, Symbol);
+var isMap = (map) => isType(map, Map);
+var isWeakMap = (map) => isType(map, WeakMap);
+var isSet = (s) => isType(s, Set);
+var isWeakSet = (s) => isType(s, WeakSet);
+var isArrayBuffer = (b) => isType(b, ArrayBuffer);
+var isRegExp = (r) => isType(r, RegExp);
+var isFunction = (f) => isType(f, Function);
+var isSymbol = (s) => isType(s, Symbol);
 var isNull = (n) => n === null;
 var isUndefined = (u) => u === void 0;
 

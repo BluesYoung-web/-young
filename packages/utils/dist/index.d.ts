@@ -1,20 +1,20 @@
 declare const deepClone: <T extends unknown = any>(obj: T) => T;
 
-declare const isArray: (arr: any) => boolean;
-declare const isObject: (arr: any) => boolean;
-declare const isNumber: (num: any) => boolean;
-declare const isString: (str: any) => boolean;
-declare const isBoolean: (bool: any) => boolean;
-declare const isMap: (bool: any) => boolean;
-declare const isWeakMap: (bool: any) => boolean;
-declare const isSet: (bool: any) => boolean;
-declare const isWeakSet: (bool: any) => boolean;
-declare const isArrayBuffer: (bool: any) => boolean;
-declare const isRegExp: (bool: any) => boolean;
-declare const isFunction: (bool: any) => boolean;
-declare const isSymbol: (bool: any) => boolean;
-declare const isNull: (n: any) => boolean;
-declare const isUndefined: (u: any) => boolean;
+declare const isArray: (arr: any) => arr is any[];
+declare const isObject: (obj: any) => obj is Object;
+declare const isNumber: (num: any) => num is number;
+declare const isString: (str: any) => str is string;
+declare const isBoolean: (bool: any) => bool is boolean;
+declare const isMap: (map: any) => map is Map<any, any>;
+declare const isWeakMap: (map: any) => map is WeakMap<any, any>;
+declare const isSet: (s: any) => s is Set<any>;
+declare const isWeakSet: (s: any) => s is WeakSet<any>;
+declare const isArrayBuffer: (b: any) => b is ArrayBuffer;
+declare const isRegExp: (r: any) => r is RegExp;
+declare const isFunction: (f: any) => f is Function;
+declare const isSymbol: (s: any) => s is Symbol;
+declare const isNull: (n: any) => n is null;
+declare const isUndefined: (u: any) => u is undefined;
 
 /**
  * 加入财务分隔符
