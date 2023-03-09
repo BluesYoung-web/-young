@@ -68455,8 +68455,6 @@ var YoungTable_default = (0, vue_exports.defineComponent)({
     }
   },
   emits: [
-    "sort-change",
-    "selection-change",
     "row-drag-change"
   ],
   setup(props, { emit: emit2, attrs, slots }) {
@@ -68524,9 +68522,7 @@ var YoungTable_default = (0, vue_exports.defineComponent)({
         ref: tableRef,
         data: tableData_1.value,
         style: { width: "100%" },
-        height: props.tableHeight,
-        "onSort-Change": (e) => emit2("sort-change", e),
-        "onSelection-Change": (e) => emit2("selection-change", e)
+        height: props.tableHeight
       }), props.selectable && /* @__PURE__ */ React.createElement(ElTableColumn2, {
         type: "selection",
         width: "55"

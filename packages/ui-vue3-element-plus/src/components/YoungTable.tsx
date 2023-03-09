@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
- * @LastEditTime: 2023-03-08 16:34:37
+ * @LastEditTime: 2023-03-09 17:22:34
  * @Description:
  */
 import { nextTick, onActivated, ref, watchEffect, defineComponent, onMounted } from 'vue';
@@ -86,7 +86,7 @@ export default defineComponent({
     },
     rowDraggable: {
       type: Boolean,
-      default: false
+      default: false,
     },
     /**
      * 列排序有 bug，暂不放出
@@ -96,7 +96,8 @@ export default defineComponent({
     //   default: false
     // }
   },
-  emits: ['sort-change', 'selection-change', 'row-drag-change',
+  emits: [
+    'row-drag-change',
     //  'col-drag-change'
   ],
   setup(props, { emit, attrs, slots }) {
@@ -161,7 +162,6 @@ export default defineComponent({
     const tableData_drag = ref<TableDataItem[]>([]);
     // const tableHead_drag = ref<TableHeadItem[]>([]);
 
-
     watchEffect(() => {
       const t1 = props.tableData;
       const t2 = props.tableHead;
@@ -205,8 +205,6 @@ export default defineComponent({
         data={tableData_1.value}
         style={{ width: '100%' }}
         height={props.tableHeight}
-        onSort-Change={(e) => emit('sort-change', e)}
-        onSelection-Change={(e) => emit('selection-change', e)}
       >
         {props.selectable && <ElTableColumn type="selection" width="55" />}
         {tableHead_1.value.map((head, index) => (

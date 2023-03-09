@@ -30,8 +30,6 @@ const I2 = qr({
     }
   },
   emits: [
-    "sort-change",
-    "selection-change",
     "row-drag-change"
   ],
   setup(e, {
@@ -97,9 +95,7 @@ const I2 = qr({
       style: {
         width: "100%"
       },
-      height: e.tableHeight,
-      "onSort-Change": (o) => t("sort-change", o),
-      "onSelection-Change": (o) => t("selection-change", o)
+      height: e.tableHeight
     }), {
       default: () => {
         var o, l;
