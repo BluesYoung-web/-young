@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-01-06 14:42:47
+ * @LastEditTime: 2023-03-09 17:11:19
  * @Description:
  */
 import type { AxiosInstance, AxiosRequestConfig, Method, AxiosAdapter } from 'axios';
@@ -62,6 +62,10 @@ export interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
    * @default /api
    */
   baseURL: string;
+  /**
+   * 动态获取基础地址
+   */
+  lazyBaseURL?: () => string;
   /**
    * 默认方法
    * @default post
@@ -134,10 +138,10 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
 ) => {
   const finalConfig = defu(config, defaultConfig);
 
-  const { baseURL, method, timeout, headers, checkFn, adapter, loading, fail } = finalConfig;
+  const { baseURL, lazyBaseURL, method, timeout, headers, checkFn, adapter, loading, fail } =
+    finalConfig;
 
   const net = axios.create({
-    baseURL,
     method,
     timeout,
     headers: headers.getCommonHeaders(),
@@ -147,6 +151,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
   net.interceptors.request.use(
     (req) => {
       loading.start();
+      req.baseURL = lazyBaseURL?.() ?? baseURL;
       return req;
     },
     (error) => {

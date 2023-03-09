@@ -37,6 +37,10 @@ interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
      */
     baseURL: string;
     /**
+     * 动态获取基础地址
+     */
+    lazyBaseURL?: () => string;
+    /**
      * 默认方法
      * @default post
      */
