@@ -28,9 +28,13 @@ importers:
 
   packages/call-app:
     specifiers:
-      '@bluesyoung/share-dom': workspace:^0.0.3
+      '@bluesyoung/share-dom': workspace:^*
+      '@bluesyoung/utils': workspace:^*
+      defu: ^6.1.2
     dependencies:
       '@bluesyoung/share-dom': link:../share-dom
+      '@bluesyoung/utils': link:../utils
+      defu: 6.1.2
 
   packages/casdoor-auth:
     specifiers: {}
@@ -277,12 +281,15 @@ importers:
       vitest: 0.12.6
       webpack: 5.72.1
 
+  packages/utils:
+    specifiers: {}
+
   packages/wechat-auth:
     specifiers: {}
 
   playground/beginner-guid-demo:
     specifiers:
-      '@bluesyoung/beginner-guid': workspace:^0.1.0
+      '@bluesyoung/beginner-guid': workspace:^*
       '@vitejs/plugin-vue': ^2.3.3
       typescript: ^4.5.4
       vite: ^2.9.9
@@ -299,7 +306,7 @@ importers:
 
   playground/call-app-demo:
     specifiers:
-      '@bluesyoung/call-app': workspace:^0.0.2
+      '@bluesyoung/call-app': workspace:^*
       '@vitejs/plugin-vue': ^2.3.3
       typescript: ^4.5.4
       vite: ^2.9.9
@@ -316,7 +323,7 @@ importers:
 
   playground/slide-verify-demo:
     specifiers:
-      '@bluesyoung/slide-verify': workspace:^0.0.1
+      '@bluesyoung/slide-verify': workspace:^*
       '@vitejs/plugin-vue': ^2.3.3
       typescript: ^4.5.4
       vite: ^2.9.9
@@ -333,7 +340,7 @@ importers:
 
   playground/unplugin-json-conf-demo:
     specifiers:
-      '@bluesyoung/unplugin-json-conf': workspace:^0.0.2
+      '@bluesyoung/unplugin-json-conf': workspace:^*
       '@vitejs/plugin-vue': ^2.3.3
       typescript: ^4.7.2
       vite: ^2.9.9
@@ -3124,6 +3131,10 @@ packages:
 
   /defu/6.1.1:
     resolution: {integrity: sha512-aA964RUCsBt0FGoNIlA3uFgo2hO+WWC0fiC6DBps/0SFzkKcYoM/3CzVLIa5xSsrFjdioMdYgAIbwo80qp2MoA==}
+    dev: false
+
+  /defu/6.1.2:
+    resolution: {integrity: sha512-+uO4+qr7msjNNWKYPHqN/3+Dx3NFkmIzayk2L1MyZQlvgZb/J1A0fo410dpKrN2SnqFjt8n4JL8fDJE0wIgjFQ==}
     dev: false
 
   /delayed-stream/1.0.0:

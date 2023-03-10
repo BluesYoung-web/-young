@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bluesyoung/unplugin-json-conf": "workspace:^0.0.2",
+    "@bluesyoung/unplugin-json-conf": "workspace:^*",
     "vue": "^3.2.36"
   },
   "devDependencies": {
