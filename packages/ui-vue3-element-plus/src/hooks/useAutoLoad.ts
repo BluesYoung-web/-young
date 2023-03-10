@@ -1,19 +1,24 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 10:47:55
- * @LastEditTime: 2023-01-05 11:09:17
+ * @LastEditTime: 2023-03-10 15:27:27
  * @Description:
  */
 import type { Ref } from 'vue';
 import { ref, watchEffect, nextTick } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
-export const useAutoLoad = <T>(
-  list: Ref<T[]>,
-  allData: Ref<T[]>,
-  pageSize = 10,
-  pause = ref(false),
-) => {
-  const elArr = ref<HTMLDivElement[]>([]);
+
+interface UseAutoLoad<T extends any = any> {
+  (list: Ref<T[]>, allData: Ref<T[]>, pageSize?: number, pause?: Ref<boolean>): {
+    elArr: Ref<any[]>;
+    touchEndEl: Ref<boolean>;
+    page: Ref<number>;
+    load: () => void;
+  };
+}
+
+export const useAutoLoad: UseAutoLoad = (list, allData, pageSize = 10, pause = ref(false)) => {
+  const elArr = ref<any[]>([]);
   const touchEndEl = ref(false);
   const page = ref(1);
 

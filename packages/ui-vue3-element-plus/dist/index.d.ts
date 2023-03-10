@@ -1,7 +1,7 @@
 import * as vue from 'vue';
 import { VNode, PropType, Ref } from 'vue';
 
-declare type TableHeadAligin = 'left' | 'center' | 'right' | undefined;
+type TableHeadAligin = 'left' | 'center' | 'right' | undefined;
 interface TableHeadItem<T extends any = any> {
     /**
      * 参数名
@@ -50,7 +50,7 @@ interface TableHeadItem<T extends any = any> {
     show_overflow_tooltip?: boolean;
     [x: string]: any;
 }
-declare type TableDataItem<T extends any = any> = {
+type TableDataItem<T extends any = any> = {
     [key in keyof T]: T[key];
 } & Record<string, any>;
 declare const _default$6: vue.DefineComponent<{
@@ -257,7 +257,7 @@ declare const _default$4: vue.DefineComponent<{
     diffForm: Record<string, any>;
 }>;
 
-declare type SelectOptionItem<T extends any = any> = {
+type SelectOptionItem<T extends any = any> = {
     label: string;
     value: T;
     disabled?: boolean;
@@ -375,14 +375,17 @@ declare const _default: vue.DefineComponent<{
     unix: boolean;
 }>;
 
-declare const useAutoLoad: <T>(list: Ref<T[]>, allData: Ref<T[]>, pageSize?: number, pause?: Ref<boolean>) => {
-    elArr: Ref<HTMLDivElement[]>;
-    touchEndEl: Ref<boolean>;
-    page: Ref<number>;
-    load: () => void;
-};
+interface UseAutoLoad<T extends any = any> {
+    (list: Ref<T[]>, allData: Ref<T[]>, pageSize?: number, pause?: Ref<boolean>): {
+        elArr: Ref<any[]>;
+        touchEndEl: Ref<boolean>;
+        page: Ref<number>;
+        load: () => void;
+    };
+}
+declare const useAutoLoad: UseAutoLoad;
 
-declare type Cbk<T> = {
+type Cbk<T> = {
     addCbk?: () => Promise<void | boolean>;
     modCbk?: () => Promise<void | boolean>;
     delCbk?: (row: T) => void;
@@ -391,7 +394,7 @@ declare type Cbk<T> = {
     clearEffect?: () => void;
     disableclear?: boolean;
 };
-declare type ValidFn = () => Promise<boolean>;
+type ValidFn = () => Promise<boolean>;
 declare const useFormMode: <T>(FORM_TEMP: T, { addCbk, modCbk, delCbk, cpEffect, cgEffect, clearEffect, disableclear }: Cbk<T>, tip?: string) => {
     isAdd: vue.Ref<boolean>;
     isEdit: vue.Ref<boolean>;

@@ -1,38 +1,9 @@
 var __create = Object.create;
 var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a3, b2) => {
-  for (var prop in b2 || (b2 = {}))
-    if (__hasOwnProp.call(b2, prop))
-      __defNormalProp(a3, prop, b2[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b2)) {
-      if (__propIsEnum.call(b2, prop))
-        __defNormalProp(a3, prop, b2[prop]);
-    }
-  return a3;
-};
-var __spreadProps = (a3, b2) => __defProps(a3, __getOwnPropDescs(b2));
-var __objRest = (source, exclude) => {
-  var target = {};
-  for (var prop in source)
-    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
-      target[prop] = source[prop];
-  if (source != null && __getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(source)) {
-      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
-        target[prop] = source[prop];
-    }
-  return target;
-};
 var __esm = (fn2, res) => function __init() {
   return fn2 && (res = (0, fn2[__getOwnPropNames(fn2)[0]])(fn2 = 0)), res;
 };
@@ -52,7 +23,14 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __reExport = (target, mod, secondTarget) => (__copyProps(target, mod, "default"), secondTarget && __copyProps(secondTarget, mod, "default"));
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // ../../node_modules/.pnpm/@vue+shared@3.2.45/node_modules/@vue/shared/dist/shared.esm-bundler.js
@@ -347,25 +325,76 @@ var PatchFlagNames, slotFlagsText, GLOBALS_WHITE_LISTED, isGloballyWhitelisted, 
 var init_shared_esm_bundler = __esm({
   "../../node_modules/.pnpm/@vue+shared@3.2.45/node_modules/@vue/shared/dist/shared.esm-bundler.js"() {
     PatchFlagNames = {
-      [1]: `TEXT`,
-      [2]: `CLASS`,
-      [4]: `STYLE`,
-      [8]: `PROPS`,
-      [16]: `FULL_PROPS`,
-      [32]: `HYDRATE_EVENTS`,
-      [64]: `STABLE_FRAGMENT`,
-      [128]: `KEYED_FRAGMENT`,
-      [256]: `UNKEYED_FRAGMENT`,
-      [512]: `NEED_PATCH`,
-      [1024]: `DYNAMIC_SLOTS`,
-      [2048]: `DEV_ROOT_FRAGMENT`,
-      [-1]: `HOISTED`,
-      [-2]: `BAIL`
+      [
+        1
+        /* PatchFlags.TEXT */
+      ]: `TEXT`,
+      [
+        2
+        /* PatchFlags.CLASS */
+      ]: `CLASS`,
+      [
+        4
+        /* PatchFlags.STYLE */
+      ]: `STYLE`,
+      [
+        8
+        /* PatchFlags.PROPS */
+      ]: `PROPS`,
+      [
+        16
+        /* PatchFlags.FULL_PROPS */
+      ]: `FULL_PROPS`,
+      [
+        32
+        /* PatchFlags.HYDRATE_EVENTS */
+      ]: `HYDRATE_EVENTS`,
+      [
+        64
+        /* PatchFlags.STABLE_FRAGMENT */
+      ]: `STABLE_FRAGMENT`,
+      [
+        128
+        /* PatchFlags.KEYED_FRAGMENT */
+      ]: `KEYED_FRAGMENT`,
+      [
+        256
+        /* PatchFlags.UNKEYED_FRAGMENT */
+      ]: `UNKEYED_FRAGMENT`,
+      [
+        512
+        /* PatchFlags.NEED_PATCH */
+      ]: `NEED_PATCH`,
+      [
+        1024
+        /* PatchFlags.DYNAMIC_SLOTS */
+      ]: `DYNAMIC_SLOTS`,
+      [
+        2048
+        /* PatchFlags.DEV_ROOT_FRAGMENT */
+      ]: `DEV_ROOT_FRAGMENT`,
+      [
+        -1
+        /* PatchFlags.HOISTED */
+      ]: `HOISTED`,
+      [
+        -2
+        /* PatchFlags.BAIL */
+      ]: `BAIL`
     };
     slotFlagsText = {
-      [1]: "STABLE",
-      [2]: "DYNAMIC",
-      [3]: "FORWARDED"
+      [
+        1
+        /* SlotFlags.STABLE */
+      ]: "STABLE",
+      [
+        2
+        /* SlotFlags.DYNAMIC */
+      ]: "DYNAMIC",
+      [
+        3
+        /* SlotFlags.FORWARDED */
+      ]: "FORWARDED"
     };
     GLOBALS_WHITE_LISTED = "Infinity,undefined,NaN,isFinite,isNaN,parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,BigInt";
     isGloballyWhitelisted = /* @__PURE__ */ makeMap(GLOBALS_WHITE_LISTED);
@@ -451,7 +480,10 @@ var init_shared_esm_bundler = __esm({
     };
     isPlainObject = (val) => toTypeString(val) === "[object Object]";
     isIntegerKey = (key) => isString(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
-    isReservedProp = /* @__PURE__ */ makeMap(",key,ref,ref_for,ref_key,onVnodeBeforeMount,onVnodeMounted,onVnodeBeforeUpdate,onVnodeUpdated,onVnodeBeforeUnmount,onVnodeUnmounted");
+    isReservedProp = /* @__PURE__ */ makeMap(
+      // the leading comma is intentional so empty string "" is also included
+      ",key,ref,ref_for,ref_key,onVnodeBeforeMount,onVnodeMounted,onVnodeBeforeUpdate,onVnodeUpdated,onVnodeBeforeUnmount,onVnodeUnmounted"
+    );
     isBuiltInDirective = /* @__PURE__ */ makeMap("bind,cloak,else-if,else,for,html,if,model,on,once,pre,show,slot,text,memo");
     cacheStringFunction = (fn2) => {
       const cache2 = /* @__PURE__ */ Object.create(null);
@@ -750,7 +782,12 @@ function isStaticArgOf(arg, name) {
   return !!(arg && isStaticExp(arg) && arg.content === name);
 }
 function hasDynamicKeyVBind(node) {
-  return node.props.some((p3) => p3.type === 7 && p3.name === "bind" && (!p3.arg || p3.arg.type !== 4 || !p3.arg.isStatic));
+  return node.props.some(
+    (p3) => p3.type === 7 && p3.name === "bind" && (!p3.arg || // v-bind="obj"
+    p3.arg.type !== 4 || // v-bind:[_ctx.foo]
+    !p3.arg.isStatic)
+    // v-bind:[foo]
+  );
 }
 function isText(node) {
   return node.type === 5 || node.type === 2;
@@ -986,11 +1023,19 @@ function parseChildren(context, mode, ancestors) {
             if (ns2 !== 0) {
               node = parseCDATA(context, ancestors);
             } else {
-              emitError(context, 1);
+              emitError(
+                context,
+                1
+                /* ErrorCodes.CDATA_IN_HTML_CONTENT */
+              );
               node = parseBogusComment(context);
             }
           } else {
-            emitError(context, 11);
+            emitError(
+              context,
+              11
+              /* ErrorCodes.INCORRECTLY_OPENED_COMMENT */
+            );
             node = parseBogusComment(context);
           }
         } else if (s2[1] === "/") {
@@ -1001,7 +1046,11 @@ function parseChildren(context, mode, ancestors) {
             advanceBy(context, 3);
             continue;
           } else if (/[a-z]/i.test(s2[2])) {
-            emitError(context, 23);
+            emitError(
+              context,
+              23
+              /* ErrorCodes.X_INVALID_END_TAG */
+            );
             parseTag(context, 1, parent);
             continue;
           } else {
@@ -1085,7 +1134,11 @@ function parseCDATA(context, ancestors) {
   advanceBy(context, 9);
   const nodes = parseChildren(context, 3, ancestors);
   if (context.source.length === 0) {
-    emitError(context, 6);
+    emitError(
+      context,
+      6
+      /* ErrorCodes.EOF_IN_CDATA */
+    );
   } else {
     advanceBy(context, 3);
   }
@@ -1098,13 +1151,25 @@ function parseComment(context) {
   if (!match) {
     content = context.source.slice(4);
     advanceBy(context, context.source.length);
-    emitError(context, 7);
+    emitError(
+      context,
+      7
+      /* ErrorCodes.EOF_IN_COMMENT */
+    );
   } else {
     if (match.index <= 3) {
-      emitError(context, 0);
+      emitError(
+        context,
+        0
+        /* ErrorCodes.ABRUPT_CLOSING_OF_EMPTY_COMMENT */
+      );
     }
     if (match[1]) {
-      emitError(context, 10);
+      emitError(
+        context,
+        10
+        /* ErrorCodes.INCORRECTLY_CLOSED_COMMENT */
+      );
     }
     content = context.source.slice(4, match.index);
     const s2 = context.source.slice(0, match.index);
@@ -1112,7 +1177,11 @@ function parseComment(context) {
     while ((nestedIndex = s2.indexOf("<!--", prevIndex)) !== -1) {
       advanceBy(context, nestedIndex - prevIndex + 1);
       if (nestedIndex + 4 < s2.length) {
-        emitError(context, 16);
+        emitError(
+          context,
+          16
+          /* ErrorCodes.NESTED_COMMENT */
+        );
       }
       prevIndex = nestedIndex + 1;
     }
@@ -1181,7 +1250,11 @@ function parseElement(context, ancestors) {
     if (context.source.length === 0 && element.tag.toLowerCase() === "script") {
       const first = children[0];
       if (first && startsWith(first.loc.source, "<!--")) {
-        emitError(context, 8);
+        emitError(
+          context,
+          8
+          /* ErrorCodes.EOF_IN_SCRIPT_HTML_COMMENT_LIKE_TEXT */
+        );
       }
     }
   }
@@ -1215,11 +1288,19 @@ function parseTag(context, type4, parent) {
   }
   let isSelfClosing = false;
   if (context.source.length === 0) {
-    emitError(context, 9);
+    emitError(
+      context,
+      9
+      /* ErrorCodes.EOF_IN_TAG */
+    );
   } else {
     isSelfClosing = startsWith(context.source, "/>");
     if (type4 === 1 && isSelfClosing) {
-      emitError(context, 4);
+      emitError(
+        context,
+        4
+        /* ErrorCodes.END_TAG_WITH_TRAILING_SOLIDUS */
+      );
     }
     advanceBy(context, isSelfClosing ? 2 : 1);
   }
@@ -1266,6 +1347,7 @@ function parseTag(context, type4, parent) {
     children: [],
     loc: getSelection(context, start),
     codegenNode: void 0
+    // to be created during transform phase
   };
 }
 function isComponent(tag, props, context) {
@@ -1289,7 +1371,10 @@ function isComponent(tag, props, context) {
     } else {
       if (p3.name === "is") {
         return true;
-      } else if (p3.name === "bind" && isStaticArgOf(p3.arg, "is") && true && checkCompatEnabled("COMPILER_IS_ON_ELEMENT", context, p3.loc)) {
+      } else if (
+        // :is on plain element - only treat as component in compat mode
+        p3.name === "bind" && isStaticArgOf(p3.arg, "is") && true && checkCompatEnabled("COMPILER_IS_ON_ELEMENT", context, p3.loc)
+      ) {
         return true;
       }
     }
@@ -1300,13 +1385,21 @@ function parseAttributes(context, type4) {
   const attributeNames = /* @__PURE__ */ new Set();
   while (context.source.length > 0 && !startsWith(context.source, ">") && !startsWith(context.source, "/>")) {
     if (startsWith(context.source, "/")) {
-      emitError(context, 22);
+      emitError(
+        context,
+        22
+        /* ErrorCodes.UNEXPECTED_SOLIDUS_IN_TAG */
+      );
       advanceBy(context, 1);
       advanceSpaces(context);
       continue;
     }
     if (type4 === 1) {
-      emitError(context, 3);
+      emitError(
+        context,
+        3
+        /* ErrorCodes.END_TAG_WITH_ATTRIBUTES */
+      );
     }
     const attr = parseAttribute(context, attributeNames);
     if (attr.type === 6 && attr.value && attr.name === "class") {
@@ -1316,7 +1409,11 @@ function parseAttributes(context, type4) {
       props.push(attr);
     }
     if (/^[^\t\r\n\f />]/.test(context.source)) {
-      emitError(context, 15);
+      emitError(
+        context,
+        15
+        /* ErrorCodes.MISSING_WHITESPACE_BETWEEN_ATTRIBUTES */
+      );
     }
     advanceSpaces(context);
   }
@@ -1327,11 +1424,19 @@ function parseAttribute(context, nameSet) {
   const match = /^[^\t\r\n\f />][^\t\r\n\f />=]*/.exec(context.source);
   const name = match[0];
   if (nameSet.has(name)) {
-    emitError(context, 2);
+    emitError(
+      context,
+      2
+      /* ErrorCodes.DUPLICATE_ATTRIBUTE */
+    );
   }
   nameSet.add(name);
   if (name[0] === "=") {
-    emitError(context, 19);
+    emitError(
+      context,
+      19
+      /* ErrorCodes.UNEXPECTED_EQUALS_SIGN_BEFORE_ATTRIBUTE_NAME */
+    );
   }
   {
     const pattern4 = /["'<]/g;
@@ -1348,7 +1453,11 @@ function parseAttribute(context, nameSet) {
     advanceSpaces(context);
     value = parseAttributeValue(context);
     if (!value) {
-      emitError(context, 13);
+      emitError(
+        context,
+        13
+        /* ErrorCodes.MISSING_ATTRIBUTE_VALUE */
+      );
     }
   }
   const loc = getSelection(context, start);
@@ -1366,7 +1475,11 @@ function parseAttribute(context, nameSet) {
       if (content.startsWith("[")) {
         isStatic = false;
         if (!content.endsWith("]")) {
-          emitError(context, 27);
+          emitError(
+            context,
+            27
+            /* ErrorCodes.X_MISSING_DYNAMIC_DIRECTIVE_ARGUMENT_END */
+          );
           content = content.slice(1);
         } else {
           content = content.slice(1, content.length - 1);
@@ -1408,6 +1521,8 @@ function parseAttribute(context, nameSet) {
         type: 4,
         content: value.content,
         isStatic: false,
+        // Treat as non-constant by default. This can be potentially set to
+        // other values by `transformExpression` to make it eligible for hoisting.
         constType: 0,
         loc: value.loc
       },
@@ -1417,7 +1532,11 @@ function parseAttribute(context, nameSet) {
     };
   }
   if (!context.inVPre && startsWith(name, "v-")) {
-    emitError(context, 26);
+    emitError(
+      context,
+      26
+      /* ErrorCodes.X_MISSING_DIRECTIVE_NAME */
+    );
   }
   return {
     type: 6,
@@ -1439,9 +1558,19 @@ function parseAttributeValue(context) {
     advanceBy(context, 1);
     const endIndex = context.source.indexOf(quote);
     if (endIndex === -1) {
-      content = parseTextData(context, context.source.length, 4);
+      content = parseTextData(
+        context,
+        context.source.length,
+        4
+        /* TextModes.ATTRIBUTE_VALUE */
+      );
     } else {
-      content = parseTextData(context, endIndex, 4);
+      content = parseTextData(
+        context,
+        endIndex,
+        4
+        /* TextModes.ATTRIBUTE_VALUE */
+      );
       advanceBy(context, 1);
     }
   } else {
@@ -1454,7 +1583,12 @@ function parseAttributeValue(context) {
     while (m3 = unexpectedChars.exec(match[0])) {
       emitError(context, 18, m3.index);
     }
-    content = parseTextData(context, match[0].length, 4);
+    content = parseTextData(
+      context,
+      match[0].length,
+      4
+      /* TextModes.ATTRIBUTE_VALUE */
+    );
   }
   return { content, isQuoted, loc: getSelection(context, start) };
 }
@@ -1462,7 +1596,11 @@ function parseInterpolation(context, mode) {
   const [open, close2] = context.options.delimiters;
   const closeIndex = context.source.indexOf(close2, open.length);
   if (closeIndex === -1) {
-    emitError(context, 25);
+    emitError(
+      context,
+      25
+      /* ErrorCodes.X_MISSING_INTERPOLATION_END */
+    );
     return void 0;
   }
   const start = getCursor(context);
@@ -1485,6 +1623,7 @@ function parseInterpolation(context, mode) {
     content: {
       type: 4,
       isStatic: false,
+      // Set `isConstant` to false by default and will decide in transformExpression
       constType: 0,
       content,
       loc: getSelection(context, innerStart, innerEnd)
@@ -1515,7 +1654,11 @@ function parseTextData(context, length, mode) {
   if (mode === 2 || mode === 3 || !rawText.includes("&")) {
     return rawText;
   } else {
-    return context.options.decodeEntities(rawText, mode === 4);
+    return context.options.decodeEntities(
+      rawText,
+      mode === 4
+      /* TextModes.ATTRIBUTE_VALUE */
+    );
   }
 }
 function getCursor(context) {
@@ -1593,7 +1736,13 @@ function startsWithEndTagOpen(source, tag) {
   return startsWith(source, "</") && source.slice(2, 2 + tag.length).toLowerCase() === tag.toLowerCase() && /[\t\r\n\f />]/.test(source[2 + tag.length] || ">");
 }
 function hoistStatic(root2, context) {
-  walk(root2, context, isSingleElementRoot(root2, root2.children[0]));
+  walk(
+    root2,
+    context,
+    // Root node is unfortunately non-hoistable due to potential parent
+    // fallthrough attributes.
+    isSingleElementRoot(root2, root2.children[0])
+  );
 }
 function isSingleElementRoot(root2, child) {
   const { children } = root2;
@@ -1677,7 +1826,11 @@ function getConstantType(node, context) {
         let returnType2 = 3;
         const generatedPropsType = getGeneratedPropsConstantType(node, context);
         if (generatedPropsType === 0) {
-          constantCache.set(node, 0);
+          constantCache.set(
+            node,
+            0
+            /* ConstantTypes.NOT_CONSTANT */
+          );
           return 0;
         }
         if (generatedPropsType < returnType2) {
@@ -1686,7 +1839,11 @@ function getConstantType(node, context) {
         for (let i = 0; i < node.children.length; i++) {
           const childType = getConstantType(node.children[i], context);
           if (childType === 0) {
-            constantCache.set(node, 0);
+            constantCache.set(
+              node,
+              0
+              /* ConstantTypes.NOT_CONSTANT */
+            );
             return 0;
           }
           if (childType < returnType2) {
@@ -1699,7 +1856,11 @@ function getConstantType(node, context) {
             if (p3.type === 7 && p3.name === "bind" && p3.exp) {
               const expType = getConstantType(p3.exp, context);
               if (expType === 0) {
-                constantCache.set(node, 0);
+                constantCache.set(
+                  node,
+                  0
+                  /* ConstantTypes.NOT_CONSTANT */
+                );
                 return 0;
               }
               if (expType < returnType2) {
@@ -1712,7 +1873,11 @@ function getConstantType(node, context) {
           for (let i = 0; i < node.props.length; i++) {
             const p3 = node.props[i];
             if (p3.type === 7) {
-              constantCache.set(node, 0);
+              constantCache.set(
+                node,
+                0
+                /* ConstantTypes.NOT_CONSTANT */
+              );
               return 0;
             }
           }
@@ -1724,7 +1889,11 @@ function getConstantType(node, context) {
         constantCache.set(node, returnType2);
         return returnType2;
       } else {
-        constantCache.set(node, 0);
+        constantCache.set(
+          node,
+          0
+          /* ConstantTypes.NOT_CONSTANT */
+        );
         return 0;
       }
     case 2:
@@ -1816,6 +1985,7 @@ function getPatchFlag(node) {
 function createTransformContext(root2, { filename = "", prefixIdentifiers = false, hoistStatic: hoistStatic2 = false, cacheHandlers = false, nodeTransforms = [], directiveTransforms = {}, transformHoist = null, isBuiltInComponent = NOOP, isCustomElement = NOOP, expressionPlugins = [], scopeId = null, slotted = true, ssr = false, inSSR = false, ssrCssVars = ``, bindingMetadata = EMPTY_OBJ, inline: inline2 = false, isTS = false, onError = defaultOnError, onWarn = defaultOnWarn, compatConfig }) {
   const nameMatch = filename.replace(/\?.*$/, "").match(/([^/\\]+)\.\w+$/);
   const context = {
+    // options
     selfName: nameMatch && capitalize(camelize(nameMatch[1])),
     prefixIdentifiers,
     hoistStatic: hoistStatic2,
@@ -1837,6 +2007,7 @@ function createTransformContext(root2, { filename = "", prefixIdentifiers = fals
     onError,
     onWarn,
     compatConfig,
+    // state
     root: root2,
     helpers: /* @__PURE__ */ new Map(),
     components: /* @__PURE__ */ new Set(),
@@ -1857,6 +2028,7 @@ function createTransformContext(root2, { filename = "", prefixIdentifiers = fals
     currentNode: root2,
     childIndex: 0,
     inVOnce: false,
+    // methods
     helper(name) {
       const count = context.helpers.get(name) || 0;
       context.helpers.set(name, count + 1);
@@ -1917,7 +2089,13 @@ function createTransformContext(root2, { filename = "", prefixIdentifiers = fals
       if (isString(exp))
         exp = createSimpleExpression(exp);
       context.hoists.push(exp);
-      const identifier = createSimpleExpression(`_hoisted_${context.hoists.length}`, false, exp.loc, 2);
+      const identifier = createSimpleExpression(
+        `_hoisted_${context.hoists.length}`,
+        false,
+        exp.loc,
+        2
+        /* ConstantTypes.CAN_HOIST */
+      );
       identifier.hoisted = exp;
       return identifier;
     },
@@ -1966,12 +2144,33 @@ function createRootCodegen(root2, context) {
     }
   } else if (children.length > 1) {
     let patchFlag = 64;
-    let patchFlagText = PatchFlagNames[64];
-    if (process.env.NODE_ENV !== "production" && children.filter((c2) => c2.type !== 3).length === 1) {
+    let patchFlagText = PatchFlagNames[
+      64
+      /* PatchFlags.STABLE_FRAGMENT */
+    ];
+    if (process.env.NODE_ENV !== "production" && children.filter(
+      (c2) => c2.type !== 3
+      /* NodeTypes.COMMENT */
+    ).length === 1) {
       patchFlag |= 2048;
-      patchFlagText += `, ${PatchFlagNames[2048]}`;
+      patchFlagText += `, ${PatchFlagNames[
+        2048
+        /* PatchFlags.DEV_ROOT_FRAGMENT */
+      ]}`;
     }
-    root2.codegenNode = createVNodeCall(context, helper(FRAGMENT), void 0, root2.children, patchFlag + (process.env.NODE_ENV !== "production" ? ` /* ${patchFlagText} */` : ``), void 0, void 0, true, void 0, false);
+    root2.codegenNode = createVNodeCall(
+      context,
+      helper(FRAGMENT),
+      void 0,
+      root2.children,
+      patchFlag + (process.env.NODE_ENV !== "production" ? ` /* ${patchFlagText} */` : ``),
+      void 0,
+      void 0,
+      true,
+      void 0,
+      false
+      /* isComponent */
+    );
   } else
     ;
 }
@@ -2182,6 +2381,7 @@ function generate(ast, options = {}) {
     ast,
     code: context.code,
     preamble: ``,
+    // SourceMapGenerator does have toJSON() method but it's not in the types
     map: context.map ? context.map.toJSON() : void 0
   };
 }
@@ -2445,7 +2645,10 @@ function genObjectExpression(node, context) {
     push(`{}`, node);
     return;
   }
-  const multilines = properties.length > 1 || process.env.NODE_ENV !== "production" && properties.some((p3) => p3.value.type !== 4);
+  const multilines = properties.length > 1 || process.env.NODE_ENV !== "production" && properties.some(
+    (p3) => p3.value.type !== 4
+    /* NodeTypes.SIMPLE_EXPRESSION */
+  );
   push(multilines ? `{` : `{ `);
   multilines && indent();
   for (let i = 0; i < properties.length; i++) {
@@ -2534,7 +2737,10 @@ function genConditionalExpression(node, context) {
   if (!isNested) {
     context.indentLevel--;
   }
-  needNewline && deindent(true);
+  needNewline && deindent(
+    true
+    /* without newline */
+  );
 }
 function genCacheExpression(node, context) {
   const { push, helper, indent, deindent, newline } = context;
@@ -2714,7 +2920,8 @@ function processIf(node, dir, context, processCodegen) {
         }
         context.removeNode();
         const branch = createIfBranch(node, dir);
-        if (process.env.NODE_ENV !== "production" && comments.length && !(context.parent && context.parent.type === 1 && isBuiltInType(context.parent.tag, "transition"))) {
+        if (process.env.NODE_ENV !== "production" && comments.length && // #3619 ignore comments if the v-if is direct child of <transition>
+        !(context.parent && context.parent.type === 1 && isBuiltInType(context.parent.tag, "transition"))) {
           branch.children = [...comments, ...branch.children];
         }
         if (process.env.NODE_ENV !== "production" || false) {
@@ -2753,17 +2960,29 @@ function createIfBranch(node, dir) {
 }
 function createCodegenNodeForBranch(branch, keyIndex, context) {
   if (branch.condition) {
-    return createConditionalExpression(branch.condition, createChildrenCodegenNode(branch, keyIndex, context), createCallExpression(context.helper(CREATE_COMMENT), [
-      process.env.NODE_ENV !== "production" ? '"v-if"' : '""',
-      "true"
-    ]));
+    return createConditionalExpression(
+      branch.condition,
+      createChildrenCodegenNode(branch, keyIndex, context),
+      // make sure to pass in asBlock: true so that the comment node call
+      // closes the current block.
+      createCallExpression(context.helper(CREATE_COMMENT), [
+        process.env.NODE_ENV !== "production" ? '"v-if"' : '""',
+        "true"
+      ])
+    );
   } else {
     return createChildrenCodegenNode(branch, keyIndex, context);
   }
 }
 function createChildrenCodegenNode(branch, keyIndex, context) {
   const { helper } = context;
-  const keyProperty = createObjectProperty(`key`, createSimpleExpression(`${keyIndex}`, false, locStub, 2));
+  const keyProperty = createObjectProperty(`key`, createSimpleExpression(
+    `${keyIndex}`,
+    false,
+    locStub,
+    2
+    /* ConstantTypes.CAN_HOIST */
+  ));
   const { children } = branch;
   const firstChild = children[0];
   const needFragmentWrapper = children.length !== 1 || firstChild.type !== 1;
@@ -2774,10 +2993,19 @@ function createChildrenCodegenNode(branch, keyIndex, context) {
       return vnodeCall;
     } else {
       let patchFlag = 64;
-      let patchFlagText = PatchFlagNames[64];
-      if (process.env.NODE_ENV !== "production" && !branch.isTemplateIf && children.filter((c2) => c2.type !== 3).length === 1) {
+      let patchFlagText = PatchFlagNames[
+        64
+        /* PatchFlags.STABLE_FRAGMENT */
+      ];
+      if (process.env.NODE_ENV !== "production" && !branch.isTemplateIf && children.filter(
+        (c2) => c2.type !== 3
+        /* NodeTypes.COMMENT */
+      ).length === 1) {
         patchFlag |= 2048;
-        patchFlagText += `, ${PatchFlagNames[2048]}`;
+        patchFlagText += `, ${PatchFlagNames[
+          2048
+          /* PatchFlags.DEV_ROOT_FRAGMENT */
+        ]}`;
       }
       return createVNodeCall(context, helper(FRAGMENT), createObjectExpression([keyProperty]), children, patchFlag + (process.env.NODE_ENV !== "production" ? ` /* ${patchFlagText} */` : ``), void 0, void 0, true, false, false, branch.loc);
     }
@@ -2829,7 +3057,12 @@ function processFor(node, dir, context, processCodegen) {
     context.onError(createCompilerError(31, dir.loc));
     return;
   }
-  const parseResult = parseForExpression(dir.exp, context);
+  const parseResult = parseForExpression(
+    // can only be simple expression because vFor transform is applied
+    // before expression transform.
+    dir.exp,
+    context
+  );
   if (!parseResult) {
     context.onError(createCompilerError(32, dir.loc));
     return;
@@ -2965,7 +3198,12 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
     if (vIf = findDir(slotElement, "if")) {
       hasDynamicSlots = true;
       dynamicSlots.push(createConditionalExpression(vIf.exp, buildDynamicSlot(slotName, slotFunction, conditionalBranchIndex++), defaultFallback));
-    } else if (vElse = findDir(slotElement, /^else(-if)?$/, true)) {
+    } else if (vElse = findDir(
+      slotElement,
+      /^else(-if)?$/,
+      true
+      /* allowEmpty */
+    )) {
       let j = i;
       let prev;
       while (j--) {
@@ -2991,7 +3229,12 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
       if (parseResult) {
         dynamicSlots.push(createCallExpression(context.helper(RENDER_LIST), [
           parseResult.source,
-          createFunctionExpression(createForLoopParams(parseResult), buildDynamicSlot(slotName, slotFunction), true)
+          createFunctionExpression(
+            createForLoopParams(parseResult),
+            buildDynamicSlot(slotName, slotFunction),
+            true
+            /* force newline */
+          )
         ]));
       } else {
         context.onError(createCompilerError(32, vFor.loc));
@@ -3020,7 +3263,10 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
     };
     if (!hasTemplateSlots) {
       slotsProperties.push(buildDefaultSlotProperty(void 0, children));
-    } else if (implicitDefaultChildren.length && implicitDefaultChildren.some((node2) => isNonWhitespaceContent(node2))) {
+    } else if (implicitDefaultChildren.length && // #3766
+    // with whitespace: 'preserve', whitespaces between slots will end up in
+    // implicitDefaultChildren. Ignore if all implicit children are whitespaces.
+    implicitDefaultChildren.some((node2) => isNonWhitespaceContent(node2))) {
       if (hasNamedDefaultSlot) {
         context.onError(createCompilerError(39, implicitDefaultChildren[0].loc));
       } else {
@@ -3029,7 +3275,12 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
     }
   }
   const slotFlag = hasDynamicSlots ? 2 : hasForwardedSlots(node.children) ? 3 : 1;
-  let slots = createObjectExpression(slotsProperties.concat(createObjectProperty(`_`, createSimpleExpression(slotFlag + (process.env.NODE_ENV !== "production" ? ` /* ${slotFlagsText[slotFlag]} */` : ``), false))), loc);
+  let slots = createObjectExpression(slotsProperties.concat(createObjectProperty(
+    `_`,
+    // 2 = compiled but dynamic = can skip normalization, but must run diff
+    // 1 = compiled and static = can skip normalization AND diff as optimized
+    createSimpleExpression(slotFlag + (process.env.NODE_ENV !== "production" ? ` /* ${slotFlagsText[slotFlag]} */` : ``), false)
+  )), loc);
   if (dynamicSlots.length) {
     slots = createCallExpression(context.helper(CREATE_SLOTS), [
       slots,
@@ -3137,7 +3388,11 @@ function buildProps(node, context, props = node.props, isComponent2, isDynamicCo
     if (isStaticExp(key)) {
       const name = key.content;
       const isEventHandler = isOn(name);
-      if (isEventHandler && (!isComponent2 || isDynamicComponent) && name.toLowerCase() !== "onclick" && name !== "onUpdate:modelValue" && !isReservedProp(name)) {
+      if (isEventHandler && (!isComponent2 || isDynamicComponent) && // omit the flag for click handlers because hydration gives click
+      // dedicated fast path.
+      name.toLowerCase() !== "onclick" && // omit v-model handlers
+      name !== "onUpdate:modelValue" && // omit onVnodeXXX hooks
+      !isReservedProp(name)) {
         hasHydrationEventBinding = true;
       }
       if (isEventHandler && isReservedProp(name)) {
@@ -3196,7 +3451,12 @@ function buildProps(node, context, props = node.props, isComponent2, isDynamicCo
       if (isVOn && ssr) {
         continue;
       }
-      if (isVBind && isStaticArgOf(arg, "key") || isVOn && hasChildren && isStaticArgOf(arg, "vue:before-update")) {
+      if (
+        // #938: elements with dynamic keys should be forced into blocks
+        isVBind && isStaticArgOf(arg, "key") || // inline before-update hooks need to force block so that it is invoked
+        // before children
+        isVOn && hasChildren && isStaticArgOf(arg, "vue:before-update")
+      ) {
         shouldUseBlock = true;
       }
       if (isVBind && isStaticArgOf(arg, "ref") && context.scopes.vFor > 0) {
@@ -3321,7 +3581,11 @@ function buildProps(node, context, props = node.props, isComponent2, isDynamicCo
           if (classProp && !isStaticExp(classProp.value)) {
             classProp.value = createCallExpression(context.helper(NORMALIZE_CLASS), [classProp.value]);
           }
-          if (styleProp && (hasStyleBinding || styleProp.value.type === 4 && styleProp.value.content.trim()[0] === `[` || styleProp.value.type === 17)) {
+          if (styleProp && // the static style is compiled into an object,
+          // so use `hasStyleBinding` to ensure that it is a dynamic style binding
+          (hasStyleBinding || styleProp.value.type === 4 && styleProp.value.content.trim()[0] === `[` || // v-bind:style and style both exist,
+          // v-bind:style with static literal object
+          styleProp.value.type === 17)) {
             styleProp.value = createCallExpression(context.helper(NORMALIZE_STYLE), [styleProp.value]);
           }
         } else {
@@ -3507,7 +3771,8 @@ function parseFilter(node, context) {
     } else if (inRegex) {
       if (c2 === 47 && prev !== 92)
         inRegex = false;
-    } else if (c2 === 124 && exp.charCodeAt(i + 1) !== 124 && exp.charCodeAt(i - 1) !== 124 && !curly && !square && !paren) {
+    } else if (c2 === 124 && // pipe
+    exp.charCodeAt(i + 1) !== 124 && exp.charCodeAt(i - 1) !== 124 && !curly && !square && !paren) {
       if (expression === void 0) {
         lastFilterIndex = i + 1;
         expression = exp.slice(0, i).trim();
@@ -3614,17 +3879,29 @@ function baseCompile(template, options = {}) {
   const isModuleMode = options.mode === "module";
   {
     if (options.prefixIdentifiers === true) {
-      onError(createCompilerError(47));
+      onError(createCompilerError(
+        47
+        /* ErrorCodes.X_PREFIX_ID_NOT_SUPPORTED */
+      ));
     } else if (isModuleMode) {
-      onError(createCompilerError(48));
+      onError(createCompilerError(
+        48
+        /* ErrorCodes.X_MODULE_MODE_NOT_SUPPORTED */
+      ));
     }
   }
   const prefixIdentifiers = false;
   if (options.cacheHandlers) {
-    onError(createCompilerError(49));
+    onError(createCompilerError(
+      49
+      /* ErrorCodes.X_CACHE_HANDLER_NOT_SUPPORTED */
+    ));
   }
   if (options.scopeId && !isModuleMode) {
-    onError(createCompilerError(50));
+    onError(createCompilerError(
+      50
+      /* ErrorCodes.X_SCOPE_ID_NOT_SUPPORTED */
+    ));
   }
   const ast = isString(template) ? baseParse(template, options) : template;
   const [nodeTransforms, directiveTransforms] = getBaseTransformPreset();
@@ -3633,8 +3910,14 @@ function baseCompile(template, options = {}) {
     nodeTransforms: [
       ...nodeTransforms,
       ...options.nodeTransforms || []
+      // user transforms
     ],
-    directiveTransforms: extend({}, directiveTransforms, options.directiveTransforms || {})
+    directiveTransforms: extend(
+      {},
+      directiveTransforms,
+      options.directiveTransforms || {}
+      // user transforms
+    )
   }));
   return generate(ast, extend({}, options, {
     prefixIdentifiers
@@ -3646,59 +3929,220 @@ var init_compiler_core_esm_bundler = __esm({
     init_shared_esm_bundler();
     init_shared_esm_bundler();
     errorMessages = {
-      [0]: "Illegal comment.",
-      [1]: "CDATA section is allowed only in XML context.",
-      [2]: "Duplicate attribute.",
-      [3]: "End tag cannot have attributes.",
-      [4]: "Illegal '/' in tags.",
-      [5]: "Unexpected EOF in tag.",
-      [6]: "Unexpected EOF in CDATA section.",
-      [7]: "Unexpected EOF in comment.",
-      [8]: "Unexpected EOF in script.",
-      [9]: "Unexpected EOF in tag.",
-      [10]: "Incorrectly closed comment.",
-      [11]: "Incorrectly opened comment.",
-      [12]: "Illegal tag name. Use '&lt;' to print '<'.",
-      [13]: "Attribute value was expected.",
-      [14]: "End tag name was expected.",
-      [15]: "Whitespace was expected.",
-      [16]: "Unexpected '<!--' in comment.",
-      [17]: `Attribute name cannot contain U+0022 ("), U+0027 ('), and U+003C (<).`,
-      [18]: "Unquoted attribute value cannot contain U+0022 (\"), U+0027 ('), U+003C (<), U+003D (=), and U+0060 (`).",
-      [19]: "Attribute name cannot start with '='.",
-      [21]: "'<?' is allowed only in XML context.",
-      [20]: `Unexpected null character.`,
-      [22]: "Illegal '/' in tags.",
-      [23]: "Invalid end tag.",
-      [24]: "Element is missing end tag.",
-      [25]: "Interpolation end sign was not found.",
-      [27]: "End bracket for dynamic directive argument was not found. Note that dynamic directive argument cannot contain spaces.",
-      [26]: "Legal directive name was expected.",
-      [28]: `v-if/v-else-if is missing expression.`,
-      [29]: `v-if/else branches must use unique keys.`,
-      [30]: `v-else/v-else-if has no adjacent v-if or v-else-if.`,
-      [31]: `v-for is missing expression.`,
-      [32]: `v-for has invalid expression.`,
-      [33]: `<template v-for> key should be placed on the <template> tag.`,
-      [34]: `v-bind is missing expression.`,
-      [35]: `v-on is missing expression.`,
-      [36]: `Unexpected custom directive on <slot> outlet.`,
-      [37]: `Mixed v-slot usage on both the component and nested <template>.When there are multiple named slots, all slots should use <template> syntax to avoid scope ambiguity.`,
-      [38]: `Duplicate slot names found. `,
-      [39]: `Extraneous children found when component already has explicitly named default slot. These children will be ignored.`,
-      [40]: `v-slot can only be used on components or <template> tags.`,
-      [41]: `v-model is missing expression.`,
-      [42]: `v-model value must be a valid JavaScript member expression.`,
-      [43]: `v-model cannot be used on v-for or v-slot scope variables because they are not writable.`,
-      [44]: `v-model cannot be used on a prop, because local prop bindings are not writable.
+      // parse errors
+      [
+        0
+        /* ErrorCodes.ABRUPT_CLOSING_OF_EMPTY_COMMENT */
+      ]: "Illegal comment.",
+      [
+        1
+        /* ErrorCodes.CDATA_IN_HTML_CONTENT */
+      ]: "CDATA section is allowed only in XML context.",
+      [
+        2
+        /* ErrorCodes.DUPLICATE_ATTRIBUTE */
+      ]: "Duplicate attribute.",
+      [
+        3
+        /* ErrorCodes.END_TAG_WITH_ATTRIBUTES */
+      ]: "End tag cannot have attributes.",
+      [
+        4
+        /* ErrorCodes.END_TAG_WITH_TRAILING_SOLIDUS */
+      ]: "Illegal '/' in tags.",
+      [
+        5
+        /* ErrorCodes.EOF_BEFORE_TAG_NAME */
+      ]: "Unexpected EOF in tag.",
+      [
+        6
+        /* ErrorCodes.EOF_IN_CDATA */
+      ]: "Unexpected EOF in CDATA section.",
+      [
+        7
+        /* ErrorCodes.EOF_IN_COMMENT */
+      ]: "Unexpected EOF in comment.",
+      [
+        8
+        /* ErrorCodes.EOF_IN_SCRIPT_HTML_COMMENT_LIKE_TEXT */
+      ]: "Unexpected EOF in script.",
+      [
+        9
+        /* ErrorCodes.EOF_IN_TAG */
+      ]: "Unexpected EOF in tag.",
+      [
+        10
+        /* ErrorCodes.INCORRECTLY_CLOSED_COMMENT */
+      ]: "Incorrectly closed comment.",
+      [
+        11
+        /* ErrorCodes.INCORRECTLY_OPENED_COMMENT */
+      ]: "Incorrectly opened comment.",
+      [
+        12
+        /* ErrorCodes.INVALID_FIRST_CHARACTER_OF_TAG_NAME */
+      ]: "Illegal tag name. Use '&lt;' to print '<'.",
+      [
+        13
+        /* ErrorCodes.MISSING_ATTRIBUTE_VALUE */
+      ]: "Attribute value was expected.",
+      [
+        14
+        /* ErrorCodes.MISSING_END_TAG_NAME */
+      ]: "End tag name was expected.",
+      [
+        15
+        /* ErrorCodes.MISSING_WHITESPACE_BETWEEN_ATTRIBUTES */
+      ]: "Whitespace was expected.",
+      [
+        16
+        /* ErrorCodes.NESTED_COMMENT */
+      ]: "Unexpected '<!--' in comment.",
+      [
+        17
+        /* ErrorCodes.UNEXPECTED_CHARACTER_IN_ATTRIBUTE_NAME */
+      ]: `Attribute name cannot contain U+0022 ("), U+0027 ('), and U+003C (<).`,
+      [
+        18
+        /* ErrorCodes.UNEXPECTED_CHARACTER_IN_UNQUOTED_ATTRIBUTE_VALUE */
+      ]: "Unquoted attribute value cannot contain U+0022 (\"), U+0027 ('), U+003C (<), U+003D (=), and U+0060 (`).",
+      [
+        19
+        /* ErrorCodes.UNEXPECTED_EQUALS_SIGN_BEFORE_ATTRIBUTE_NAME */
+      ]: "Attribute name cannot start with '='.",
+      [
+        21
+        /* ErrorCodes.UNEXPECTED_QUESTION_MARK_INSTEAD_OF_TAG_NAME */
+      ]: "'<?' is allowed only in XML context.",
+      [
+        20
+        /* ErrorCodes.UNEXPECTED_NULL_CHARACTER */
+      ]: `Unexpected null character.`,
+      [
+        22
+        /* ErrorCodes.UNEXPECTED_SOLIDUS_IN_TAG */
+      ]: "Illegal '/' in tags.",
+      // Vue-specific parse errors
+      [
+        23
+        /* ErrorCodes.X_INVALID_END_TAG */
+      ]: "Invalid end tag.",
+      [
+        24
+        /* ErrorCodes.X_MISSING_END_TAG */
+      ]: "Element is missing end tag.",
+      [
+        25
+        /* ErrorCodes.X_MISSING_INTERPOLATION_END */
+      ]: "Interpolation end sign was not found.",
+      [
+        27
+        /* ErrorCodes.X_MISSING_DYNAMIC_DIRECTIVE_ARGUMENT_END */
+      ]: "End bracket for dynamic directive argument was not found. Note that dynamic directive argument cannot contain spaces.",
+      [
+        26
+        /* ErrorCodes.X_MISSING_DIRECTIVE_NAME */
+      ]: "Legal directive name was expected.",
+      // transform errors
+      [
+        28
+        /* ErrorCodes.X_V_IF_NO_EXPRESSION */
+      ]: `v-if/v-else-if is missing expression.`,
+      [
+        29
+        /* ErrorCodes.X_V_IF_SAME_KEY */
+      ]: `v-if/else branches must use unique keys.`,
+      [
+        30
+        /* ErrorCodes.X_V_ELSE_NO_ADJACENT_IF */
+      ]: `v-else/v-else-if has no adjacent v-if or v-else-if.`,
+      [
+        31
+        /* ErrorCodes.X_V_FOR_NO_EXPRESSION */
+      ]: `v-for is missing expression.`,
+      [
+        32
+        /* ErrorCodes.X_V_FOR_MALFORMED_EXPRESSION */
+      ]: `v-for has invalid expression.`,
+      [
+        33
+        /* ErrorCodes.X_V_FOR_TEMPLATE_KEY_PLACEMENT */
+      ]: `<template v-for> key should be placed on the <template> tag.`,
+      [
+        34
+        /* ErrorCodes.X_V_BIND_NO_EXPRESSION */
+      ]: `v-bind is missing expression.`,
+      [
+        35
+        /* ErrorCodes.X_V_ON_NO_EXPRESSION */
+      ]: `v-on is missing expression.`,
+      [
+        36
+        /* ErrorCodes.X_V_SLOT_UNEXPECTED_DIRECTIVE_ON_SLOT_OUTLET */
+      ]: `Unexpected custom directive on <slot> outlet.`,
+      [
+        37
+        /* ErrorCodes.X_V_SLOT_MIXED_SLOT_USAGE */
+      ]: `Mixed v-slot usage on both the component and nested <template>.When there are multiple named slots, all slots should use <template> syntax to avoid scope ambiguity.`,
+      [
+        38
+        /* ErrorCodes.X_V_SLOT_DUPLICATE_SLOT_NAMES */
+      ]: `Duplicate slot names found. `,
+      [
+        39
+        /* ErrorCodes.X_V_SLOT_EXTRANEOUS_DEFAULT_SLOT_CHILDREN */
+      ]: `Extraneous children found when component already has explicitly named default slot. These children will be ignored.`,
+      [
+        40
+        /* ErrorCodes.X_V_SLOT_MISPLACED */
+      ]: `v-slot can only be used on components or <template> tags.`,
+      [
+        41
+        /* ErrorCodes.X_V_MODEL_NO_EXPRESSION */
+      ]: `v-model is missing expression.`,
+      [
+        42
+        /* ErrorCodes.X_V_MODEL_MALFORMED_EXPRESSION */
+      ]: `v-model value must be a valid JavaScript member expression.`,
+      [
+        43
+        /* ErrorCodes.X_V_MODEL_ON_SCOPE_VARIABLE */
+      ]: `v-model cannot be used on v-for or v-slot scope variables because they are not writable.`,
+      [
+        44
+        /* ErrorCodes.X_V_MODEL_ON_PROPS */
+      ]: `v-model cannot be used on a prop, because local prop bindings are not writable.
 Use a v-bind binding combined with a v-on listener that emits update:x event instead.`,
-      [45]: `Error parsing JavaScript expression: `,
-      [46]: `<KeepAlive> expects exactly one child component.`,
-      [47]: `"prefixIdentifiers" option is not supported in this build of compiler.`,
-      [48]: `ES module mode is not supported in this build of compiler.`,
-      [49]: `"cacheHandlers" option is only supported when the "prefixIdentifiers" option is enabled.`,
-      [50]: `"scopeId" option is only supported in module mode.`,
-      [51]: ``
+      [
+        45
+        /* ErrorCodes.X_INVALID_EXPRESSION */
+      ]: `Error parsing JavaScript expression: `,
+      [
+        46
+        /* ErrorCodes.X_KEEP_ALIVE_INVALID_CHILDREN */
+      ]: `<KeepAlive> expects exactly one child component.`,
+      // generic errors
+      [
+        47
+        /* ErrorCodes.X_PREFIX_ID_NOT_SUPPORTED */
+      ]: `"prefixIdentifiers" option is not supported in this build of compiler.`,
+      [
+        48
+        /* ErrorCodes.X_MODULE_MODE_NOT_SUPPORTED */
+      ]: `ES module mode is not supported in this build of compiler.`,
+      [
+        49
+        /* ErrorCodes.X_CACHE_HANDLER_NOT_SUPPORTED */
+      ]: `"cacheHandlers" option is only supported when the "prefixIdentifiers" option is enabled.`,
+      [
+        50
+        /* ErrorCodes.X_SCOPE_ID_NOT_SUPPORTED */
+      ]: `"scopeId" option is only supported in module mode.`,
+      // just to fulfill types
+      [
+        51
+        /* ErrorCodes.__EXTEND_POINT__ */
+      ]: ``
     };
     FRAGMENT = Symbol(process.env.NODE_ENV !== "production" ? `Fragment` : ``);
     TELEPORT = Symbol(process.env.NODE_ENV !== "production" ? `Teleport` : ``);
@@ -3858,37 +4302,64 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
     isMemberExpression = isMemberExpressionBrowser;
     propsHelperSet = /* @__PURE__ */ new Set([NORMALIZE_PROPS, GUARD_REACTIVE_PROPS]);
     deprecationData = {
-      ["COMPILER_IS_ON_ELEMENT"]: {
+      [
+        "COMPILER_IS_ON_ELEMENT"
+        /* CompilerDeprecationTypes.COMPILER_IS_ON_ELEMENT */
+      ]: {
         message: `Platform-native elements with "is" prop will no longer be treated as components in Vue 3 unless the "is" value is explicitly prefixed with "vue:".`,
         link: `https://v3-migration.vuejs.org/breaking-changes/custom-elements-interop.html`
       },
-      ["COMPILER_V_BIND_SYNC"]: {
+      [
+        "COMPILER_V_BIND_SYNC"
+        /* CompilerDeprecationTypes.COMPILER_V_BIND_SYNC */
+      ]: {
         message: (key) => `.sync modifier for v-bind has been removed. Use v-model with argument instead. \`v-bind:${key}.sync\` should be changed to \`v-model:${key}\`.`,
         link: `https://v3-migration.vuejs.org/breaking-changes/v-model.html`
       },
-      ["COMPILER_V_BIND_PROP"]: {
+      [
+        "COMPILER_V_BIND_PROP"
+        /* CompilerDeprecationTypes.COMPILER_V_BIND_PROP */
+      ]: {
         message: `.prop modifier for v-bind has been removed and no longer necessary. Vue 3 will automatically set a binding as DOM property when appropriate.`
       },
-      ["COMPILER_V_BIND_OBJECT_ORDER"]: {
+      [
+        "COMPILER_V_BIND_OBJECT_ORDER"
+        /* CompilerDeprecationTypes.COMPILER_V_BIND_OBJECT_ORDER */
+      ]: {
         message: `v-bind="obj" usage is now order sensitive and behaves like JavaScript object spread: it will now overwrite an existing non-mergeable attribute that appears before v-bind in the case of conflict. To retain 2.x behavior, move v-bind to make it the first attribute. You can also suppress this warning if the usage is intended.`,
         link: `https://v3-migration.vuejs.org/breaking-changes/v-bind.html`
       },
-      ["COMPILER_V_ON_NATIVE"]: {
+      [
+        "COMPILER_V_ON_NATIVE"
+        /* CompilerDeprecationTypes.COMPILER_V_ON_NATIVE */
+      ]: {
         message: `.native modifier for v-on has been removed as is no longer necessary.`,
         link: `https://v3-migration.vuejs.org/breaking-changes/v-on-native-modifier-removed.html`
       },
-      ["COMPILER_V_IF_V_FOR_PRECEDENCE"]: {
+      [
+        "COMPILER_V_IF_V_FOR_PRECEDENCE"
+        /* CompilerDeprecationTypes.COMPILER_V_IF_V_FOR_PRECEDENCE */
+      ]: {
         message: `v-if / v-for precedence when used on the same element has changed in Vue 3: v-if now takes higher precedence and will no longer have access to v-for scope variables. It is best to avoid the ambiguity with <template> tags or use a computed property that filters v-for data source.`,
         link: `https://v3-migration.vuejs.org/breaking-changes/v-if-v-for.html`
       },
-      ["COMPILER_NATIVE_TEMPLATE"]: {
+      [
+        "COMPILER_NATIVE_TEMPLATE"
+        /* CompilerDeprecationTypes.COMPILER_NATIVE_TEMPLATE */
+      ]: {
         message: `<template> with no special directives will render as a native template element instead of its inner content in Vue 3.`
       },
-      ["COMPILER_INLINE_TEMPLATE"]: {
+      [
+        "COMPILER_INLINE_TEMPLATE"
+        /* CompilerDeprecationTypes.COMPILER_INLINE_TEMPLATE */
+      ]: {
         message: `"inline-template" has been removed in Vue 3.`,
         link: `https://v3-migration.vuejs.org/breaking-changes/inline-template-attribute.html`
       },
-      ["COMPILER_FILTER"]: {
+      [
+        "COMPILER_FILTER"
+        /* CompilerDeprecationTypes.COMPILER_FILTERS */
+      ]: {
         message: `filters have been removed in Vue 3. The "|" symbol will be treated as native JavaScript bitwise OR operator. Use method calls or computed properties instead.`,
         link: `https://v3-migration.vuejs.org/breaking-changes/filters.html`
       }
@@ -3939,7 +4410,12 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
             const exp = dir.exp;
             const arg = dir.arg;
             if (exp && exp.type === 4 && !(dir.name === "on" && arg)) {
-              dir.exp = processExpression(exp, context, dir.name === "slot");
+              dir.exp = processExpression(
+                exp,
+                context,
+                // slot args must be processed as function params
+                dir.name === "slot"
+              );
             }
             if (arg && arg.type === 4 && !arg.isStatic) {
               dir.arg = processExpression(arg, context);
@@ -4005,7 +4481,22 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
               injectProp(childBlock, keyProperty, context);
             }
           } else if (needFragmentWrapper) {
-            childBlock = createVNodeCall(context, helper(FRAGMENT), keyProperty ? createObjectExpression([keyProperty]) : void 0, node.children, 64 + (process.env.NODE_ENV !== "production" ? ` /* ${PatchFlagNames[64]} */` : ``), void 0, void 0, true, void 0, false);
+            childBlock = createVNodeCall(
+              context,
+              helper(FRAGMENT),
+              keyProperty ? createObjectExpression([keyProperty]) : void 0,
+              node.children,
+              64 + (process.env.NODE_ENV !== "production" ? ` /* ${PatchFlagNames[
+                64
+                /* PatchFlags.STABLE_FRAGMENT */
+              ]} */` : ``),
+              void 0,
+              void 0,
+              true,
+              void 0,
+              false
+              /* isComponent */
+            );
           } else {
             childBlock = children[0].codegenNode;
             if (isTemplate && keyProperty) {
@@ -4044,7 +4535,12 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
             ]);
             renderExp.arguments.push(loop, createSimpleExpression(`_cache`), createSimpleExpression(String(context.cached++)));
           } else {
-            renderExp.arguments.push(createFunctionExpression(createForLoopParams(forNode.parseResult), childBlock, true));
+            renderExp.arguments.push(createFunctionExpression(
+              createForLoopParams(forNode.parseResult),
+              childBlock,
+              true
+              /* force newline */
+            ));
           }
         };
       });
@@ -4102,7 +4598,14 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
         let vnodeDynamicProps;
         let dynamicPropNames;
         let vnodeDirectives;
-        let shouldUseBlock = isDynamicComponent || vnodeTag === TELEPORT || vnodeTag === SUSPENSE || !isComponent2 && (tag === "svg" || tag === "foreignObject");
+        let shouldUseBlock = (
+          // dynamic component may resolve to plain elements
+          isDynamicComponent || vnodeTag === TELEPORT || vnodeTag === SUSPENSE || !isComponent2 && // <svg> and <foreignObject> must be forced into blocks so that block
+          // updates inside get proper isSVG flag at runtime. (#639, #643)
+          // This is technically web-specific, but splitting the logic out of core
+          // leads to too much unnecessary complexity.
+          (tag === "svg" || tag === "foreignObject")
+        );
         if (props.length > 0) {
           const propsBuildResult = buildProps(node, context, void 0, isComponent2, isDynamicComponent);
           vnodeProps = propsBuildResult.props;
@@ -4126,7 +4629,9 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
               }));
             }
           }
-          const shouldBuildAsSlots = isComponent2 && vnodeTag !== TELEPORT && vnodeTag !== KEEP_ALIVE;
+          const shouldBuildAsSlots = isComponent2 && // Teleport is not a real component and has dedicated runtime handling
+          vnodeTag !== TELEPORT && // explained above.
+          vnodeTag !== KEEP_ALIVE;
           if (shouldBuildAsSlots) {
             const { slots, hasDynamicSlots } = buildSlots(node, context);
             vnodeChildren = slots;
@@ -4220,7 +4725,15 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
           if (rawName.startsWith("vue:")) {
             rawName = `vnode-${rawName.slice(4)}`;
           }
-          const eventString = node.tagType !== 0 || rawName.startsWith("vnode") || !/[A-Z]/.test(rawName) ? toHandlerKey(camelize(rawName)) : `on:${rawName}`;
+          const eventString = node.tagType !== 0 || rawName.startsWith("vnode") || !/[A-Z]/.test(rawName) ? (
+            // for non-element and vnode lifecycle event listeners, auto convert
+            // it to camelCase. See issue #2249
+            toHandlerKey(camelize(rawName))
+          ) : (
+            // preserve case for plain element listeners that have uppercase
+            // letters, as these may be custom elements' custom events
+            `on:${rawName}`
+          );
           eventName = createSimpleExpression(eventString, true, arg.loc);
         } else {
           eventName = createCompoundExpression([
@@ -4345,7 +4858,19 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
               }
             }
           }
-          if (!hasText || children.length === 1 && (node.type === 0 || node.type === 1 && node.tagType === 0 && !node.props.find((p3) => p3.type === 7 && !context.directiveTransforms[p3.name]) && !(node.tag === "template"))) {
+          if (!hasText || // if this is a plain element with a single text child, leave it
+          // as-is since the runtime has dedicated fast path for this by directly
+          // setting textContent of the element.
+          // for component root it's always normalized anyway.
+          children.length === 1 && (node.type === 0 || node.type === 1 && node.tagType === 0 && // #3756
+          // custom directives can potentially add DOM elements arbitrarily,
+          // we need to avoid setting textContent of the element at runtime
+          // to avoid accidentally overwriting the DOM elements added
+          // by the user through custom directives.
+          !node.props.find((p3) => p3.type === 7 && !context.directiveTransforms[p3.name]) && // in compat mode, <template> tags with no special directives
+          // will be rendered as a fragment so its children must be
+          // converted into vnodes.
+          !(node.tag === "template"))) {
             return;
           }
           for (let i = 0; i < children.length; i++) {
@@ -4356,7 +4881,10 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
                 callArgs.push(child);
               }
               if (!context.ssr && getConstantType(child, context) === 0) {
-                callArgs.push(1 + (process.env.NODE_ENV !== "production" ? ` /* ${PatchFlagNames[1]} */` : ``));
+                callArgs.push(1 + (process.env.NODE_ENV !== "production" ? ` /* ${PatchFlagNames[
+                  1
+                  /* PatchFlags.TEXT */
+                ]} */` : ``));
               }
               children[i] = {
                 type: 12,
@@ -4382,7 +4910,11 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
           context.inVOnce = false;
           const cur = context.currentNode;
           if (cur.codegenNode) {
-            cur.codegenNode = context.cache(cur.codegenNode, true);
+            cur.codegenNode = context.cache(
+              cur.codegenNode,
+              true
+              /* isVNode */
+            );
           }
         };
       }
@@ -4417,13 +4949,21 @@ Use a v-bind binding combined with a v-on listener that emits update:x event ins
         ]);
       }
       const props = [
+        // modelValue: foo
         createObjectProperty(propName, dir.exp),
+        // "onUpdate:modelValue": $event => (foo = $event)
         createObjectProperty(eventName, assignmentExp)
       ];
       if (dir.modifiers.length && node.tagType === 1) {
         const modifiers = dir.modifiers.map((m3) => (isSimpleIdentifier(m3) ? m3 : JSON.stringify(m3)) + `: true`).join(`, `);
         const modifiersKey = arg ? isStaticExp(arg) ? `${arg.content}Modifiers` : createCompoundExpression([arg, ' + "Modifiers"']) : `modelModifiers`;
-        props.push(createObjectProperty(modifiersKey, createSimpleExpression(`{ ${modifiers} }`, false, dir.loc, 2)));
+        props.push(createObjectProperty(modifiersKey, createSimpleExpression(
+          `{ ${modifiers} }`,
+          false,
+          dir.loc,
+          2
+          /* ConstantTypes.CAN_HOIST */
+        )));
       }
       return createTransformProps(props);
     };
@@ -4641,6 +5181,9 @@ function hasMultipleChildren(node) {
 function compile(template, options = {}) {
   return baseCompile(template, extend({}, parserOptions, options, {
     nodeTransforms: [
+      // ignore <script> and <tag>
+      // this is not put inside DOMNodeTransforms because that list is used
+      // by compiler-ssr to generate vnode fallback branches
       ignoreSideEffectTags,
       ...DOMNodeTransforms,
       ...options.nodeTransforms || []
@@ -4693,6 +5236,7 @@ var init_compiler_dom_esm_bundler = __esm({
           return TRANSITION_GROUP;
         }
       },
+      // https://html.spec.whatwg.org/multipage/parsing.html#tree-construction-dispatcher
       getNamespace(tag, parent) {
         let ns2 = parent ? parent.ns : 0;
         if (parent && ns2 === 2) {
@@ -4721,6 +5265,7 @@ var init_compiler_dom_esm_bundler = __esm({
         }
         return ns2;
       },
+      // https://html.spec.whatwg.org/multipage/parsing.html#parsing-html-fragments
       getTextMode({ tag, ns: ns2 }) {
         if (ns2 === 0) {
           if (tag === "textarea" || tag === "title") {
@@ -4751,20 +5296,59 @@ var init_compiler_dom_esm_bundler = __esm({
     };
     parseInlineCSS = (cssText, loc) => {
       const normalized = parseStringStyle(cssText);
-      return createSimpleExpression(JSON.stringify(normalized), false, loc, 3);
+      return createSimpleExpression(
+        JSON.stringify(normalized),
+        false,
+        loc,
+        3
+        /* ConstantTypes.CAN_STRINGIFY */
+      );
     };
     DOMErrorMessages = {
-      [51]: `v-html is missing expression.`,
-      [52]: `v-html will override element children.`,
-      [53]: `v-text is missing expression.`,
-      [54]: `v-text will override element children.`,
-      [55]: `v-model can only be used on <input>, <textarea> and <select> elements.`,
-      [56]: `v-model argument is not supported on plain elements.`,
-      [57]: `v-model cannot be used on file inputs since they are read-only. Use a v-on:change listener instead.`,
-      [58]: `Unnecessary value binding used alongside v-model. It will interfere with v-model's behavior.`,
-      [59]: `v-show is missing expression.`,
-      [60]: `<Transition> expects exactly one child element or component.`,
-      [61]: `Tags with side effect (<script> and <style>) are ignored in client component templates.`
+      [
+        51
+        /* DOMErrorCodes.X_V_HTML_NO_EXPRESSION */
+      ]: `v-html is missing expression.`,
+      [
+        52
+        /* DOMErrorCodes.X_V_HTML_WITH_CHILDREN */
+      ]: `v-html will override element children.`,
+      [
+        53
+        /* DOMErrorCodes.X_V_TEXT_NO_EXPRESSION */
+      ]: `v-text is missing expression.`,
+      [
+        54
+        /* DOMErrorCodes.X_V_TEXT_WITH_CHILDREN */
+      ]: `v-text will override element children.`,
+      [
+        55
+        /* DOMErrorCodes.X_V_MODEL_ON_INVALID_ELEMENT */
+      ]: `v-model can only be used on <input>, <textarea> and <select> elements.`,
+      [
+        56
+        /* DOMErrorCodes.X_V_MODEL_ARG_ON_ELEMENT */
+      ]: `v-model argument is not supported on plain elements.`,
+      [
+        57
+        /* DOMErrorCodes.X_V_MODEL_ON_FILE_INPUT_ELEMENT */
+      ]: `v-model cannot be used on file inputs since they are read-only. Use a v-on:change listener instead.`,
+      [
+        58
+        /* DOMErrorCodes.X_V_MODEL_UNNECESSARY_VALUE */
+      ]: `Unnecessary value binding used alongside v-model. It will interfere with v-model's behavior.`,
+      [
+        59
+        /* DOMErrorCodes.X_V_SHOW_NO_EXPRESSION */
+      ]: `v-show is missing expression.`,
+      [
+        60
+        /* DOMErrorCodes.X_TRANSITION_INVALID_CHILDREN */
+      ]: `<Transition> expects exactly one child element or component.`,
+      [
+        61
+        /* DOMErrorCodes.X_IGNORED_SIDE_EFFECT_TAG */
+      ]: `Tags with side effect (<script> and <style>) are ignored in client component templates.`
     };
     transformVHtml = (dir, node, context) => {
       const { exp, loc } = dir;
@@ -4857,7 +5441,10 @@ var init_compiler_dom_esm_bundler = __esm({
       return baseResult;
     };
     isEventOptionModifier = /* @__PURE__ */ makeMap(`passive,once,capture`);
-    isNonKeyModifier = /* @__PURE__ */ makeMap(`stop,prevent,self,ctrl,shift,alt,meta,exact,middle`);
+    isNonKeyModifier = /* @__PURE__ */ makeMap(
+      // event propagation management
+      `stop,prevent,self,ctrl,shift,alt,meta,exact,middle`
+    );
     maybeKeyModifier = /* @__PURE__ */ makeMap("left,right");
     isKeyboardEvent = /* @__PURE__ */ makeMap(`onkeyup,onkeydown,onkeypress`, true);
     resolveModifiers = (key, modifiers, context, loc) => {
@@ -4926,7 +5513,8 @@ var init_compiler_dom_esm_bundler = __esm({
             JSON.stringify(nonKeyModifiers)
           ]);
         }
-        if (keyModifiers.length && (!isStaticExp(key) || isKeyboardEvent(key.content))) {
+        if (keyModifiers.length && // if event name is dynamic, always wrap with keys guard
+        (!isStaticExp(key) || isKeyboardEvent(key.content))) {
           handlerExp = createCallExpression(context.helper(V_ON_WITH_KEYS), [
             handlerExp,
             JSON.stringify(keyModifiers)
@@ -5078,16 +5666,16 @@ function track(target, type4, key) {
   }
 }
 function trackEffects(dep, debuggerEventExtraInfo) {
-  let shouldTrack2 = false;
+  let shouldTrack3 = false;
   if (effectTrackDepth <= maxMarkerBits) {
     if (!newTracked(dep)) {
       dep.n |= trackOpBit;
-      shouldTrack2 = !wasTracked(dep);
+      shouldTrack3 = !wasTracked(dep);
     }
   } else {
-    shouldTrack2 = !dep.has(activeEffect);
+    shouldTrack3 = !dep.has(activeEffect);
   }
-  if (shouldTrack2) {
+  if (shouldTrack3) {
     dep.add(activeEffect);
     activeEffect.deps.push(dep);
     if (process.env.NODE_ENV !== "production" && activeEffect.onTrack) {
@@ -5214,26 +5802,26 @@ function createArrayInstrumentations() {
   });
   return instrumentations;
 }
-function createGetter(isReadonly2 = false, shallow = false) {
-  return function get3(target, key, receiver) {
+function createGetter(isReadonly3 = false, shallow = false) {
+  return function get4(target, key, receiver) {
     if (key === "__v_isReactive") {
-      return !isReadonly2;
+      return !isReadonly3;
     } else if (key === "__v_isReadonly") {
-      return isReadonly2;
+      return isReadonly3;
     } else if (key === "__v_isShallow") {
       return shallow;
-    } else if (key === "__v_raw" && receiver === (isReadonly2 ? shallow ? shallowReadonlyMap : readonlyMap : shallow ? shallowReactiveMap : reactiveMap).get(target)) {
+    } else if (key === "__v_raw" && receiver === (isReadonly3 ? shallow ? shallowReadonlyMap : readonlyMap : shallow ? shallowReactiveMap : reactiveMap).get(target)) {
       return target;
     }
     const targetIsArray = isArray(target);
-    if (!isReadonly2 && targetIsArray && hasOwn(arrayInstrumentations, key)) {
+    if (!isReadonly3 && targetIsArray && hasOwn(arrayInstrumentations, key)) {
       return Reflect.get(arrayInstrumentations, key, receiver);
     }
     const res = Reflect.get(target, key, receiver);
     if (isSymbol(key) ? builtInSymbols.has(key) : isNonTrackableKeys(key)) {
       return res;
     }
-    if (!isReadonly2) {
+    if (!isReadonly3) {
       track(target, "get", key);
     }
     if (shallow) {
@@ -5243,13 +5831,13 @@ function createGetter(isReadonly2 = false, shallow = false) {
       return targetIsArray && isIntegerKey(key) ? res : res.value;
     }
     if (isObject(res)) {
-      return isReadonly2 ? readonly(res) : reactive(res);
+      return isReadonly3 ? readonly(res) : reactive(res);
     }
     return res;
   };
 }
 function createSetter(shallow = false) {
-  return function set4(target, key, value, receiver) {
+  return function set5(target, key, value, receiver) {
     let oldValue = target[key];
     if (isReadonly(oldValue) && isRef(oldValue) && !isRef(value)) {
       return false;
@@ -5296,31 +5884,37 @@ function ownKeys(target) {
   track(target, "iterate", isArray(target) ? "length" : ITERATE_KEY);
   return Reflect.ownKeys(target);
 }
-function get$1(target, key, isReadonly2 = false, isShallow3 = false) {
-  target = target["__v_raw"];
+function get$1(target, key, isReadonly3 = false, isShallow4 = false) {
+  target = target[
+    "__v_raw"
+    /* ReactiveFlags.RAW */
+  ];
   const rawTarget = toRaw(target);
   const rawKey = toRaw(key);
-  if (!isReadonly2) {
+  if (!isReadonly3) {
     if (key !== rawKey) {
       track(rawTarget, "get", key);
     }
     track(rawTarget, "get", rawKey);
   }
-  const { has: has2 } = getProto(rawTarget);
-  const wrap = isShallow3 ? toShallow : isReadonly2 ? toReadonly : toReactive;
-  if (has2.call(rawTarget, key)) {
+  const { has: has3 } = getProto(rawTarget);
+  const wrap = isShallow4 ? toShallow : isReadonly3 ? toReadonly : toReactive;
+  if (has3.call(rawTarget, key)) {
     return wrap(target.get(key));
-  } else if (has2.call(rawTarget, rawKey)) {
+  } else if (has3.call(rawTarget, rawKey)) {
     return wrap(target.get(rawKey));
   } else if (target !== rawTarget) {
     target.get(key);
   }
 }
-function has$1(key, isReadonly2 = false) {
-  const target = this["__v_raw"];
+function has$1(key, isReadonly3 = false) {
+  const target = this[
+    "__v_raw"
+    /* ReactiveFlags.RAW */
+  ];
   const rawTarget = toRaw(target);
   const rawKey = toRaw(key);
-  if (!isReadonly2) {
+  if (!isReadonly3) {
     if (key !== rawKey) {
       track(rawTarget, "has", key);
     }
@@ -5328,9 +5922,12 @@ function has$1(key, isReadonly2 = false) {
   }
   return key === rawKey ? target.has(key) : target.has(key) || target.has(rawKey);
 }
-function size(target, isReadonly2 = false) {
-  target = target["__v_raw"];
-  !isReadonly2 && track(toRaw(target), "iterate", ITERATE_KEY);
+function size(target, isReadonly3 = false) {
+  target = target[
+    "__v_raw"
+    /* ReactiveFlags.RAW */
+  ];
+  !isReadonly3 && track(toRaw(target), "iterate", ITERATE_KEY);
   return Reflect.get(target, "size", target);
 }
 function add(value) {
@@ -5347,15 +5944,15 @@ function add(value) {
 function set$1(key, value) {
   value = toRaw(value);
   const target = toRaw(this);
-  const { has: has2, get: get3 } = getProto(target);
-  let hadKey = has2.call(target, key);
+  const { has: has3, get: get4 } = getProto(target);
+  let hadKey = has3.call(target, key);
   if (!hadKey) {
     key = toRaw(key);
-    hadKey = has2.call(target, key);
+    hadKey = has3.call(target, key);
   } else if (process.env.NODE_ENV !== "production") {
-    checkIdentityKeys(target, has2, key);
+    checkIdentityKeys(target, has3, key);
   }
-  const oldValue = get3.call(target, key);
+  const oldValue = get4.call(target, key);
   target.set(key, value);
   if (!hadKey) {
     trigger(target, "add", key, value);
@@ -5366,15 +5963,15 @@ function set$1(key, value) {
 }
 function deleteEntry(key) {
   const target = toRaw(this);
-  const { has: has2, get: get3 } = getProto(target);
-  let hadKey = has2.call(target, key);
+  const { has: has3, get: get4 } = getProto(target);
+  let hadKey = has3.call(target, key);
   if (!hadKey) {
     key = toRaw(key);
-    hadKey = has2.call(target, key);
+    hadKey = has3.call(target, key);
   } else if (process.env.NODE_ENV !== "production") {
-    checkIdentityKeys(target, has2, key);
+    checkIdentityKeys(target, has3, key);
   }
-  const oldValue = get3 ? get3.call(target, key) : void 0;
+  const oldValue = get4 ? get4.call(target, key) : void 0;
   const result = target.delete(key);
   if (hadKey) {
     trigger(target, "delete", key, void 0, oldValue);
@@ -5391,29 +5988,36 @@ function clear() {
   }
   return result;
 }
-function createForEach(isReadonly2, isShallow3) {
+function createForEach(isReadonly3, isShallow4) {
   return function forEach(callback, thisArg) {
     const observed = this;
-    const target = observed["__v_raw"];
+    const target = observed[
+      "__v_raw"
+      /* ReactiveFlags.RAW */
+    ];
     const rawTarget = toRaw(target);
-    const wrap = isShallow3 ? toShallow : isReadonly2 ? toReadonly : toReactive;
-    !isReadonly2 && track(rawTarget, "iterate", ITERATE_KEY);
+    const wrap = isShallow4 ? toShallow : isReadonly3 ? toReadonly : toReactive;
+    !isReadonly3 && track(rawTarget, "iterate", ITERATE_KEY);
     return target.forEach((value, key) => {
       return callback.call(thisArg, wrap(value), wrap(key), observed);
     });
   };
 }
-function createIterableMethod(method4, isReadonly2, isShallow3) {
+function createIterableMethod(method4, isReadonly3, isShallow4) {
   return function(...args) {
-    const target = this["__v_raw"];
+    const target = this[
+      "__v_raw"
+      /* ReactiveFlags.RAW */
+    ];
     const rawTarget = toRaw(target);
     const targetIsMap = isMap(rawTarget);
     const isPair = method4 === "entries" || method4 === Symbol.iterator && targetIsMap;
     const isKeyOnly = method4 === "keys" && targetIsMap;
     const innerIterator = target[method4](...args);
-    const wrap = isShallow3 ? toShallow : isReadonly2 ? toReadonly : toReactive;
-    !isReadonly2 && track(rawTarget, "iterate", isKeyOnly ? MAP_KEY_ITERATE_KEY : ITERATE_KEY);
+    const wrap = isShallow4 ? toShallow : isReadonly3 ? toReadonly : toReactive;
+    !isReadonly3 && track(rawTarget, "iterate", isKeyOnly ? MAP_KEY_ITERATE_KEY : ITERATE_KEY);
     return {
+      // iterator protocol
       next() {
         const { value, done } = innerIterator.next();
         return done ? { value, done } : {
@@ -5421,6 +6025,7 @@ function createIterableMethod(method4, isReadonly2, isShallow3) {
           done
         };
       },
+      // iterable protocol
       [Symbol.iterator]() {
         return this;
       }
@@ -5437,7 +6042,7 @@ function createReadonlyMethod(type4) {
   };
 }
 function createInstrumentations() {
-  const mutableInstrumentations2 = {
+  const mutableInstrumentations3 = {
     get(key) {
       return get$1(this, key);
     },
@@ -5451,7 +6056,7 @@ function createInstrumentations() {
     clear,
     forEach: createForEach(false, false)
   };
-  const shallowInstrumentations2 = {
+  const shallowInstrumentations3 = {
     get(key) {
       return get$1(this, key, false, true);
     },
@@ -5465,7 +6070,7 @@ function createInstrumentations() {
     clear,
     forEach: createForEach(false, true)
   };
-  const readonlyInstrumentations2 = {
+  const readonlyInstrumentations3 = {
     get(key) {
       return get$1(this, key, true);
     },
@@ -5475,13 +6080,25 @@ function createInstrumentations() {
     has(key) {
       return has$1.call(this, key, true);
     },
-    add: createReadonlyMethod("add"),
-    set: createReadonlyMethod("set"),
-    delete: createReadonlyMethod("delete"),
-    clear: createReadonlyMethod("clear"),
+    add: createReadonlyMethod(
+      "add"
+      /* TriggerOpTypes.ADD */
+    ),
+    set: createReadonlyMethod(
+      "set"
+      /* TriggerOpTypes.SET */
+    ),
+    delete: createReadonlyMethod(
+      "delete"
+      /* TriggerOpTypes.DELETE */
+    ),
+    clear: createReadonlyMethod(
+      "clear"
+      /* TriggerOpTypes.CLEAR */
+    ),
     forEach: createForEach(true, false)
   };
-  const shallowReadonlyInstrumentations2 = {
+  const shallowReadonlyInstrumentations3 = {
     get(key) {
       return get$1(this, key, true, true);
     },
@@ -5491,42 +6108,54 @@ function createInstrumentations() {
     has(key) {
       return has$1.call(this, key, true);
     },
-    add: createReadonlyMethod("add"),
-    set: createReadonlyMethod("set"),
-    delete: createReadonlyMethod("delete"),
-    clear: createReadonlyMethod("clear"),
+    add: createReadonlyMethod(
+      "add"
+      /* TriggerOpTypes.ADD */
+    ),
+    set: createReadonlyMethod(
+      "set"
+      /* TriggerOpTypes.SET */
+    ),
+    delete: createReadonlyMethod(
+      "delete"
+      /* TriggerOpTypes.DELETE */
+    ),
+    clear: createReadonlyMethod(
+      "clear"
+      /* TriggerOpTypes.CLEAR */
+    ),
     forEach: createForEach(true, true)
   };
   const iteratorMethods = ["keys", "values", "entries", Symbol.iterator];
   iteratorMethods.forEach((method4) => {
-    mutableInstrumentations2[method4] = createIterableMethod(method4, false, false);
-    readonlyInstrumentations2[method4] = createIterableMethod(method4, true, false);
-    shallowInstrumentations2[method4] = createIterableMethod(method4, false, true);
-    shallowReadonlyInstrumentations2[method4] = createIterableMethod(method4, true, true);
+    mutableInstrumentations3[method4] = createIterableMethod(method4, false, false);
+    readonlyInstrumentations3[method4] = createIterableMethod(method4, true, false);
+    shallowInstrumentations3[method4] = createIterableMethod(method4, false, true);
+    shallowReadonlyInstrumentations3[method4] = createIterableMethod(method4, true, true);
   });
   return [
-    mutableInstrumentations2,
-    readonlyInstrumentations2,
-    shallowInstrumentations2,
-    shallowReadonlyInstrumentations2
+    mutableInstrumentations3,
+    readonlyInstrumentations3,
+    shallowInstrumentations3,
+    shallowReadonlyInstrumentations3
   ];
 }
-function createInstrumentationGetter(isReadonly2, shallow) {
-  const instrumentations = shallow ? isReadonly2 ? shallowReadonlyInstrumentations : shallowInstrumentations : isReadonly2 ? readonlyInstrumentations : mutableInstrumentations;
+function createInstrumentationGetter(isReadonly3, shallow) {
+  const instrumentations = shallow ? isReadonly3 ? shallowReadonlyInstrumentations : shallowInstrumentations : isReadonly3 ? readonlyInstrumentations : mutableInstrumentations;
   return (target, key, receiver) => {
     if (key === "__v_isReactive") {
-      return !isReadonly2;
+      return !isReadonly3;
     } else if (key === "__v_isReadonly") {
-      return isReadonly2;
+      return isReadonly3;
     } else if (key === "__v_raw") {
       return target;
     }
     return Reflect.get(hasOwn(instrumentations, key) && key in target ? instrumentations : target, key, receiver);
   };
 }
-function checkIdentityKeys(target, has2, key) {
+function checkIdentityKeys(target, has3, key) {
   const rawKey = toRaw(key);
-  if (rawKey !== key && has2.call(target, rawKey)) {
+  if (rawKey !== key && has3.call(target, rawKey)) {
     const type4 = toRawType(target);
     console.warn(`Reactive ${type4} contains both the raw and reactive versions of the same object${type4 === `Map` ? ` as keys` : ``}, which can lead to inconsistencies. Avoid differentiating between the raw and reactive versions of an object and only use the reactive version if possible.`);
   }
@@ -5546,7 +6175,10 @@ function targetTypeMap(rawType) {
   }
 }
 function getTargetType(value) {
-  return value["__v_skip"] || !Object.isExtensible(value) ? 0 : targetTypeMap(toRawType(value));
+  return value[
+    "__v_skip"
+    /* ReactiveFlags.SKIP */
+  ] || !Object.isExtensible(value) ? 0 : targetTypeMap(toRawType(value));
 }
 function reactive(target) {
   if (isReadonly(target)) {
@@ -5563,14 +6195,20 @@ function readonly(target) {
 function shallowReadonly(target) {
   return createReactiveObject(target, true, shallowReadonlyHandlers, shallowReadonlyCollectionHandlers, shallowReadonlyMap);
 }
-function createReactiveObject(target, isReadonly2, baseHandlers, collectionHandlers, proxyMap) {
+function createReactiveObject(target, isReadonly3, baseHandlers, collectionHandlers, proxyMap) {
   if (!isObject(target)) {
     if (process.env.NODE_ENV !== "production") {
       console.warn(`value cannot be made reactive: ${String(target)}`);
     }
     return target;
   }
-  if (target["__v_raw"] && !(isReadonly2 && target["__v_isReactive"])) {
+  if (target[
+    "__v_raw"
+    /* ReactiveFlags.RAW */
+  ] && !(isReadonly3 && target[
+    "__v_isReactive"
+    /* ReactiveFlags.IS_REACTIVE */
+  ])) {
     return target;
   }
   const existingProxy = proxyMap.get(target);
@@ -5587,21 +6225,36 @@ function createReactiveObject(target, isReadonly2, baseHandlers, collectionHandl
 }
 function isReactive(value) {
   if (isReadonly(value)) {
-    return isReactive(value["__v_raw"]);
+    return isReactive(value[
+      "__v_raw"
+      /* ReactiveFlags.RAW */
+    ]);
   }
-  return !!(value && value["__v_isReactive"]);
+  return !!(value && value[
+    "__v_isReactive"
+    /* ReactiveFlags.IS_REACTIVE */
+  ]);
 }
 function isReadonly(value) {
-  return !!(value && value["__v_isReadonly"]);
+  return !!(value && value[
+    "__v_isReadonly"
+    /* ReactiveFlags.IS_READONLY */
+  ]);
 }
 function isShallow(value) {
-  return !!(value && value["__v_isShallow"]);
+  return !!(value && value[
+    "__v_isShallow"
+    /* ReactiveFlags.IS_SHALLOW */
+  ]);
 }
 function isProxy(value) {
   return isReactive(value) || isReadonly(value);
 }
 function toRaw(observed) {
-  const raw = observed && observed["__v_raw"];
+  const raw = observed && observed[
+    "__v_raw"
+    /* ReactiveFlags.RAW */
+  ];
   return raw ? toRaw(raw) : observed;
 }
 function markRaw(value) {
@@ -5726,9 +6379,17 @@ var init_reactivity_esm_bundler = __esm({
           warn(`cannot run an inactive effect scope.`);
         }
       }
+      /**
+       * This should only be called on non-detached scopes
+       * @internal
+       */
       on() {
         activeEffectScope = this;
       }
+      /**
+       * This should only be called on non-detached scopes
+       * @internal
+       */
       off() {
         activeEffectScope = this.parent;
       }
@@ -5856,7 +6517,9 @@ var init_reactivity_esm_bundler = __esm({
     shouldTrack = true;
     trackStack = [];
     isNonTrackableKeys = /* @__PURE__ */ makeMap(`__proto__,__v_isRef,__isVue`);
-    builtInSymbols = new Set(/* @__PURE__ */ Object.getOwnPropertyNames(Symbol).filter((key) => key !== "arguments" && key !== "caller").map((key) => Symbol[key]).filter(isSymbol));
+    builtInSymbols = new Set(
+      /* @__PURE__ */ Object.getOwnPropertyNames(Symbol).filter((key) => key !== "arguments" && key !== "caller").map((key) => Symbol[key]).filter(isSymbol)
+    );
     get = /* @__PURE__ */ createGetter();
     shallowGet = /* @__PURE__ */ createGetter(false, true);
     readonlyGet = /* @__PURE__ */ createGetter(true);
@@ -5952,9 +6615,9 @@ var init_reactivity_esm_bundler = __esm({
       constructor(factory) {
         this.dep = void 0;
         this.__v_isRef = true;
-        const { get: get3, set: set4 } = factory(() => trackRefValue(this), () => triggerRefValue(this));
-        this._get = get3;
-        this._set = set4;
+        const { get: get4, set: set5 } = factory(() => trackRefValue(this), () => triggerRefValue(this));
+        this._get = get4;
+        this._set = set5;
       }
       get value() {
         return this._get();
@@ -5979,7 +6642,7 @@ var init_reactivity_esm_bundler = __esm({
       }
     };
     ComputedRefImpl = class {
-      constructor(getter, _setter, isReadonly2, isSSR) {
+      constructor(getter, _setter, isReadonly3, isSSR) {
         this._setter = _setter;
         this.dep = void 0;
         this.__v_isRef = true;
@@ -5993,7 +6656,10 @@ var init_reactivity_esm_bundler = __esm({
         });
         this.effect.computed = this;
         this.effect.active = this._cacheable = !isSSR;
-        this["__v_isReadonly"] = isReadonly2;
+        this[
+          "__v_isReadonly"
+          /* ReactiveFlags.IS_READONLY */
+        ] = isReadonly3;
       }
       get value() {
         const self2 = toRaw(this);
@@ -6036,7 +6702,8 @@ function warn2(msg, ...args) {
     ]);
   } else {
     const warnArgs = [`[Vue warn]: ${msg}`, ...args];
-    if (trace.length && true) {
+    if (trace.length && // avoid spamming console during tests
+    true) {
       warnArgs.push(`
 `, ...formatTrace(trace));
     }
@@ -6276,7 +6943,12 @@ function flushJobs(seen2) {
         if (process.env.NODE_ENV !== "production" && check(job)) {
           continue;
         }
-        callWithErrorHandling(job, null, 14);
+        callWithErrorHandling(
+          job,
+          null,
+          14
+          /* ErrorCodes.SCHEDULER */
+        );
       }
     }
   } finally {
@@ -6409,13 +7081,20 @@ function emit(event, ...args) {
   }
 }
 function setDevtoolsHook(hook, target) {
-  var _a3, _b;
+  var _a4, _b;
   devtools = hook;
   if (devtools) {
     devtools.enabled = true;
     buffer.forEach(({ event, args }) => devtools.emit(event, ...args));
     buffer = [];
-  } else if (typeof window !== "undefined" && window.HTMLElement && !((_b = (_a3 = window.navigator) === null || _a3 === void 0 ? void 0 : _a3.userAgent) === null || _b === void 0 ? void 0 : _b.includes("jsdom"))) {
+  } else if (
+    // handle late devtools injection - only do this if we are in an actual
+    // browser environment to avoid the timer handle stalling test runner exit
+    // (#4815)
+    typeof window !== "undefined" && // some envs mock window but not fully
+    window.HTMLElement && // also exclude jsdom
+    !((_b = (_a4 = window.navigator) === null || _a4 === void 0 ? void 0 : _a4.userAgent) === null || _b === void 0 ? void 0 : _b.includes("jsdom"))
+  ) {
     const replay = target.__VUE_DEVTOOLS_HOOK_REPLAY__ = target.__VUE_DEVTOOLS_HOOK_REPLAY__ || [];
     replay.push((newHook) => {
       setDevtoolsHook(newHook, target);
@@ -6501,7 +7180,8 @@ function emit$1(instance, event, ...rawArgs) {
     }
   }
   let handlerName;
-  let handler = props[handlerName = toHandlerKey(event)] || props[handlerName = toHandlerKey(camelize(event))];
+  let handler = props[handlerName = toHandlerKey(event)] || // also try camelCase event handler (#2249)
+  props[handlerName = toHandlerKey(camelize(event))];
   if (!handler && isModelListener2) {
     handler = props[handlerName = toHandlerKey(hyphenate(event))];
   }
@@ -6639,12 +7319,21 @@ function renderComponentRoot(instance) {
         },
         slots,
         emit: emit2
-      } : { attrs, slots, emit: emit2 }) : render6(props, null));
+      } : { attrs, slots, emit: emit2 }) : render6(
+        props,
+        null
+        /* we know it doesn't need it */
+      ));
       fallthroughAttrs = Component.props ? attrs : getFunctionalFallthrough(attrs);
     }
   } catch (err) {
     blockStack.length = 0;
-    handleError(err, instance, 1);
+    handleError(
+      err,
+      instance,
+      1
+      /* ErrorCodes.RENDER_FUNCTION */
+    );
     result = createVNode(Comment);
   }
   let root2 = result;
@@ -6803,7 +7492,17 @@ function mountSuspense(vnode, container, anchor, parentComponent, parentSuspense
   if (suspense.deps > 0) {
     triggerEvent(vnode, "onPending");
     triggerEvent(vnode, "onFallback");
-    patch(null, vnode.ssFallback, container, anchor, parentComponent, null, isSVG, slotScopeIds);
+    patch(
+      null,
+      vnode.ssFallback,
+      container,
+      anchor,
+      parentComponent,
+      null,
+      // fallback tree will not have suspense context
+      isSVG,
+      slotScopeIds
+    );
     setActiveBranch(suspense, vnode.ssFallback);
   } else {
     suspense.resolve();
@@ -6823,7 +7522,18 @@ function patchSuspense(n1, n2, container, anchor, parentComponent, isSVG, slotSc
       if (suspense.deps <= 0) {
         suspense.resolve();
       } else if (isInFallback) {
-        patch(activeBranch, newFallback, container, anchor, parentComponent, null, isSVG, slotScopeIds, optimized);
+        patch(
+          activeBranch,
+          newFallback,
+          container,
+          anchor,
+          parentComponent,
+          null,
+          // fallback tree will not have suspense context
+          isSVG,
+          slotScopeIds,
+          optimized
+        );
         setActiveBranch(suspense, newFallback);
       }
     } else {
@@ -6842,7 +7552,18 @@ function patchSuspense(n1, n2, container, anchor, parentComponent, isSVG, slotSc
         if (suspense.deps <= 0) {
           suspense.resolve();
         } else {
-          patch(activeBranch, newFallback, container, anchor, parentComponent, null, isSVG, slotScopeIds, optimized);
+          patch(
+            activeBranch,
+            newFallback,
+            container,
+            anchor,
+            parentComponent,
+            null,
+            // fallback tree will not have suspense context
+            isSVG,
+            slotScopeIds,
+            optimized
+          );
           setActiveBranch(suspense, newFallback);
         }
       } else if (activeBranch && isSameVNodeType(newBranch, activeBranch)) {
@@ -6922,7 +7643,13 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
         if (delayEnter) {
           activeBranch.transition.afterLeave = () => {
             if (pendingId === suspense.pendingId) {
-              move(pendingBranch, container2, anchor2, 0);
+              move(
+                pendingBranch,
+                container2,
+                anchor2,
+                0
+                /* MoveType.ENTER */
+              );
             }
           };
         }
@@ -6932,7 +7659,13 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
           unmount(activeBranch, parentComponent2, suspense, true);
         }
         if (!delayEnter) {
-          move(pendingBranch, container2, anchor2, 0);
+          move(
+            pendingBranch,
+            container2,
+            anchor2,
+            0
+            /* MoveType.ENTER */
+          );
         }
       }
       setActiveBranch(suspense, pendingBranch);
@@ -6965,7 +7698,18 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
         if (!suspense.isInFallback) {
           return;
         }
-        patch(null, fallbackVNode, container2, anchor2, parentComponent2, null, isSVG2, slotScopeIds, optimized);
+        patch(
+          null,
+          fallbackVNode,
+          container2,
+          anchor2,
+          parentComponent2,
+          null,
+          // fallback tree will not have suspense context
+          isSVG2,
+          slotScopeIds,
+          optimized
+        );
         setActiveBranch(suspense, fallbackVNode);
       };
       const delayEnter = fallbackVNode.transition && fallbackVNode.transition.mode === "out-in";
@@ -6973,7 +7717,14 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
         activeBranch.transition.afterLeave = mountFallback;
       }
       suspense.isInFallback = true;
-      unmount(activeBranch, parentComponent2, null, true);
+      unmount(
+        activeBranch,
+        parentComponent2,
+        null,
+        // no suspense so unmount hooks fire now
+        true
+        // shouldRemove
+      );
       if (!delayEnter) {
         mountFallback();
       }
@@ -6992,7 +7743,12 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
       }
       const hydratedEl = instance.vnode.el;
       instance.asyncDep.catch((err) => {
-        handleError(err, instance, 0);
+        handleError(
+          err,
+          instance,
+          0
+          /* ErrorCodes.SETUP_FUNCTION */
+        );
       }).then((asyncSetupResult) => {
         if (instance.isUnmounted || suspense.isUnmounted || suspense.pendingId !== instance.suspenseId) {
           return;
@@ -7007,7 +7763,20 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
           vnode2.el = hydratedEl;
         }
         const placeholder = !hydratedEl && instance.subTree.el;
-        setupRenderEffect(instance, vnode2, parentNode(hydratedEl || instance.subTree.el), hydratedEl ? null : next(instance.subTree), suspense, isSVG, optimized);
+        setupRenderEffect(
+          instance,
+          vnode2,
+          // component may have been moved before resolve.
+          // if this is not a hydration, instance.subTree will be the comment
+          // placeholder.
+          parentNode(hydratedEl || instance.subTree.el),
+          // anchor will not be used if this is hydration, so only need to
+          // consider the comment placeholder case.
+          hydratedEl ? null : next(instance.subTree),
+          suspense,
+          isSVG,
+          optimized
+        );
         if (placeholder) {
           remove2(placeholder);
         }
@@ -7033,7 +7802,20 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
   return suspense;
 }
 function hydrateSuspense(node, vnode, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, rendererInternals, hydrateNode) {
-  const suspense = vnode.suspense = createSuspenseBoundary(vnode, parentSuspense, parentComponent, node.parentNode, document.createElement("div"), null, isSVG, slotScopeIds, optimized, rendererInternals, true);
+  const suspense = vnode.suspense = createSuspenseBoundary(
+    vnode,
+    parentSuspense,
+    parentComponent,
+    node.parentNode,
+    document.createElement("div"),
+    null,
+    isSVG,
+    slotScopeIds,
+    optimized,
+    rendererInternals,
+    true
+    /* hydrating */
+  );
   const result = hydrateNode(node, suspense.pendingBranch = vnode.ssContent, parentComponent, suspense, slotScopeIds, optimized);
   if (suspense.deps === 0) {
     suspense.resolve();
@@ -7169,14 +7951,24 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
       } else if (isReactive(s2)) {
         return traverse(s2);
       } else if (isFunction(s2)) {
-        return callWithErrorHandling(s2, instance, 2);
+        return callWithErrorHandling(
+          s2,
+          instance,
+          2
+          /* ErrorCodes.WATCH_GETTER */
+        );
       } else {
         process.env.NODE_ENV !== "production" && warnInvalidSource(s2);
       }
     });
   } else if (isFunction(source)) {
     if (cb) {
-      getter = () => callWithErrorHandling(source, instance, 2);
+      getter = () => callWithErrorHandling(
+        source,
+        instance,
+        2
+        /* ErrorCodes.WATCH_GETTER */
+      );
     } else {
       getter = () => {
         if (instance && instance.isUnmounted) {
@@ -7199,7 +7991,12 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
   let cleanup;
   let onCleanup = (fn2) => {
     cleanup = effect2.onStop = () => {
-      callWithErrorHandling(fn2, instance, 4);
+      callWithErrorHandling(
+        fn2,
+        instance,
+        4
+        /* ErrorCodes.WATCH_CLEANUP */
+      );
     };
   };
   let ssrCleanup;
@@ -7234,6 +8031,7 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
         }
         callWithAsyncErrorHandling(cb, instance, 3, [
           newValue,
+          // pass undefined as the old value when it's changed for the first time
           oldValue === INITIAL_WATCHER_VALUE ? void 0 : isMultiSource && oldValue[0] === INITIAL_WATCHER_VALUE ? [] : oldValue,
           onCleanup
         ]);
@@ -7312,7 +8110,10 @@ function createPathGetter(ctx, path) {
   };
 }
 function traverse(value, seen2) {
-  if (!isObject(value) || value["__v_skip"]) {
+  if (!isObject(value) || value[
+    "__v_skip"
+    /* ReactiveFlags.SKIP */
+  ]) {
     return value;
   }
   seen2 = seen2 || /* @__PURE__ */ new Set();
@@ -7391,7 +8192,10 @@ function resolveTransitionHooks(vnode, props, state, instance) {
         }
       }
       if (el._leaveCb) {
-        el._leaveCb(true);
+        el._leaveCb(
+          true
+          /* cancelled */
+        );
       }
       const leavingVNode = leavingVNodesCache[key];
       if (leavingVNode && isSameVNodeType(vnode, leavingVNode) && leavingVNode.el._leaveCb) {
@@ -7436,7 +8240,10 @@ function resolveTransitionHooks(vnode, props, state, instance) {
     leave(el, remove2) {
       const key2 = String(vnode.key);
       if (el._enterCb) {
-        el._enterCb(true);
+        el._enterCb(
+          true
+          /* cancelled */
+        );
       }
       if (state.isUnmounting) {
         return remove2();
@@ -7525,6 +8332,7 @@ function defineAsyncComponent(source) {
     errorComponent,
     delay = 200,
     timeout,
+    // undefined = never times out
     suspensible = true,
     onError: userOnError
   } = source;
@@ -7579,7 +8387,13 @@ function defineAsyncComponent(source) {
       }
       const onError = (err) => {
         pendingRequest = null;
-        handleError(err, instance, 13, !errorComponent);
+        handleError(
+          err,
+          instance,
+          13,
+          !errorComponent
+          /* do not throw in dev if user provided error component */
+        );
       };
       if (suspensible && instance.suspense || isInSSRComponentSetup) {
         return load().then((comp) => {
@@ -7678,7 +8492,13 @@ function registerKeepAliveHook(hook, type4, target = currentInstance) {
   }
 }
 function injectToKeepAliveRoot(hook, type4, target, keepAliveRoot) {
-  const injected = injectHook(type4, hook, keepAliveRoot, true);
+  const injected = injectHook(
+    type4,
+    hook,
+    keepAliveRoot,
+    true
+    /* prepend */
+  );
   onUnmounted(() => {
     remove(keepAliveRoot[type4], injected);
   }, target);
@@ -7794,12 +8614,21 @@ function resolveAsset(type4, name, warnMissing = true, maybeSelfReference = fals
   if (instance) {
     const Component = instance.type;
     if (type4 === COMPONENTS) {
-      const selfName = getComponentName(Component, false);
+      const selfName = getComponentName(
+        Component,
+        false
+        /* do not include inferred name to avoid breaking existing code */
+      );
       if (selfName && (selfName === name || selfName === camelize(name) || selfName === capitalize(camelize(name)))) {
         return Component;
       }
     }
-    const res = resolve(instance[type4] || Component[type4], name) || resolve(instance.appContext[type4], name);
+    const res = (
+      // local registration
+      // check instance[type] first which is resolved for options API
+      resolve(instance[type4] || Component[type4], name) || // global registration
+      resolve(instance.appContext[type4], name)
+    );
     if (!res && maybeSelfReference) {
       return Component;
     }
@@ -7885,9 +8714,17 @@ function renderSlot(slots, name, props = {}, fallback, noSlotted) {
   }
   openBlock();
   const validSlotContent = slot && ensureValidVNode(slot(props));
-  const rendered = createBlock(Fragment, {
-    key: props.key || validSlotContent && validSlotContent.key || `_${name}`
-  }, validSlotContent || (fallback ? fallback() : []), validSlotContent && slots._ === 1 ? 64 : -2);
+  const rendered = createBlock(
+    Fragment,
+    {
+      key: props.key || // slot content array of a dynamic conditional slot may have a branch
+      // key attached in the `createSlots` helper, respect that
+      validSlotContent && validSlotContent.key || `_${name}`
+    },
+    validSlotContent || (fallback ? fallback() : []),
+    validSlotContent && slots._ === 1 ? 64 : -2
+    /* PatchFlags.BAIL */
+  );
   if (!noSlotted && rendered.scopeId) {
     rendered.slotScopeIds = [rendered.scopeId + "-s"];
   }
@@ -7930,6 +8767,8 @@ function createDevRenderContext(instance) {
       configurable: true,
       enumerable: false,
       get: () => publicPropertiesMap[key](instance),
+      // intercepted by the proxy so no need for implementation,
+      // but needed to prevent set errors
       set: NOOP
     });
   });
@@ -7981,15 +8820,22 @@ function applyOptions(instance) {
   const ctx = instance.ctx;
   shouldCacheAccess = false;
   if (options.beforeCreate) {
-    callHook(options.beforeCreate, instance, "bc");
+    callHook(
+      options.beforeCreate,
+      instance,
+      "bc"
+      /* LifecycleHooks.BEFORE_CREATE */
+    );
   }
   const {
+    // state
     data: dataOptions,
     computed: computedOptions,
     methods,
     watch: watchOptions,
     provide: provideOptions,
     inject: injectOptions,
+    // lifecycle
     created,
     beforeMount,
     mounted,
@@ -8006,8 +8852,10 @@ function applyOptions(instance) {
     renderTriggered,
     errorCaptured,
     serverPrefetch,
+    // public API
     expose,
     inheritAttrs,
+    // assets
     components,
     directives,
     filters
@@ -8077,16 +8925,16 @@ function applyOptions(instance) {
   if (computedOptions) {
     for (const key in computedOptions) {
       const opt = computedOptions[key];
-      const get3 = isFunction(opt) ? opt.bind(publicThis, publicThis) : isFunction(opt.get) ? opt.get.bind(publicThis, publicThis) : NOOP;
-      if (process.env.NODE_ENV !== "production" && get3 === NOOP) {
+      const get4 = isFunction(opt) ? opt.bind(publicThis, publicThis) : isFunction(opt.get) ? opt.get.bind(publicThis, publicThis) : NOOP;
+      if (process.env.NODE_ENV !== "production" && get4 === NOOP) {
         warn2(`Computed property "${key}" has no getter.`);
       }
-      const set4 = !isFunction(opt) && isFunction(opt.set) ? opt.set.bind(publicThis) : process.env.NODE_ENV !== "production" ? () => {
+      const set5 = !isFunction(opt) && isFunction(opt.set) ? opt.set.bind(publicThis) : process.env.NODE_ENV !== "production" ? () => {
         warn2(`Write operation failed: computed property "${key}" is readonly.`);
       } : NOOP;
       const c2 = computed2({
-        get: get3,
-        set: set4
+        get: get4,
+        set: set5
       });
       Object.defineProperty(ctx, key, {
         enumerable: true,
@@ -8111,7 +8959,12 @@ function applyOptions(instance) {
     });
   }
   if (created) {
-    callHook(created, instance, "c");
+    callHook(
+      created,
+      instance,
+      "c"
+      /* LifecycleHooks.CREATED */
+    );
   }
   function registerLifecycleHook(register2, hook) {
     if (isArray(hook)) {
@@ -8165,7 +9018,12 @@ function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP, 
     let injected;
     if (isObject(opt)) {
       if ("default" in opt) {
-        injected = inject(opt.from || key, opt.default, true);
+        injected = inject(
+          opt.from || key,
+          opt.default,
+          true
+          /* treat default function as factory */
+        );
       } else {
         injected = inject(opt.from || key);
       }
@@ -8343,7 +9201,12 @@ function updateProps(instance, rawProps, rawPrevProps, optimized) {
   const rawCurrentProps = toRaw(props);
   const [options] = instance.propsOptions;
   let hasAttrsChanged = false;
-  if (!(process.env.NODE_ENV !== "production" && isInHmrContext(instance)) && (optimized || patchFlag > 0) && !(patchFlag & 16)) {
+  if (
+    // always force full diff in dev
+    // - #1942 if hmr is enabled with sfc component
+    // - vite#872 non-sfc component used by sfc component
+    !(process.env.NODE_ENV !== "production" && isInHmrContext(instance)) && (optimized || patchFlag > 0) && !(patchFlag & 16)
+  ) {
     if (patchFlag & 8) {
       const propsToUpdate = instance.vnode.dynamicProps;
       for (let i = 0; i < propsToUpdate.length; i++) {
@@ -8360,7 +9223,15 @@ function updateProps(instance, rawProps, rawPrevProps, optimized) {
             }
           } else {
             const camelizedKey = camelize(key);
-            props[camelizedKey] = resolvePropValue(options, rawCurrentProps, camelizedKey, value, instance, false);
+            props[camelizedKey] = resolvePropValue(
+              options,
+              rawCurrentProps,
+              camelizedKey,
+              value,
+              instance,
+              false
+              /* isAbsent */
+            );
           }
         } else {
           if (value !== attrs[key]) {
@@ -8376,10 +9247,23 @@ function updateProps(instance, rawProps, rawPrevProps, optimized) {
     }
     let kebabKey;
     for (const key in rawCurrentProps) {
-      if (!rawProps || !hasOwn(rawProps, key) && ((kebabKey = hyphenate(key)) === key || !hasOwn(rawProps, kebabKey))) {
+      if (!rawProps || // for camelCase
+      !hasOwn(rawProps, key) && // it's possible the original props was passed in as kebab-case
+      // and converted to camelCase (#955)
+      ((kebabKey = hyphenate(key)) === key || !hasOwn(rawProps, kebabKey))) {
         if (options) {
-          if (rawPrevProps && (rawPrevProps[key] !== void 0 || rawPrevProps[kebabKey] !== void 0)) {
-            props[key] = resolvePropValue(options, rawCurrentProps, key, void 0, instance, true);
+          if (rawPrevProps && // for camelCase
+          (rawPrevProps[key] !== void 0 || // for kebab-case
+          rawPrevProps[kebabKey] !== void 0)) {
+            props[key] = resolvePropValue(
+              options,
+              rawCurrentProps,
+              key,
+              void 0,
+              instance,
+              true
+              /* isAbsent */
+            );
           }
         } else {
           delete props[key];
@@ -8456,10 +9340,16 @@ function resolvePropValue(options, props, key, value, instance, isAbsent2) {
         value = defaultValue;
       }
     }
-    if (opt[0]) {
+    if (opt[
+      0
+      /* BooleanFlags.shouldCast */
+    ]) {
       if (isAbsent2 && !hasDefault) {
         value = false;
-      } else if (opt[1] && (value === "" || value === hyphenate(key))) {
+      } else if (opt[
+        1
+        /* BooleanFlags.shouldCastTrue */
+      ] && (value === "" || value === hyphenate(key))) {
         value = true;
       }
     }
@@ -8522,8 +9412,14 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
         if (prop) {
           const booleanIndex = getTypeIndex(Boolean, prop.type);
           const stringIndex = getTypeIndex(String, prop.type);
-          prop[0] = booleanIndex > -1;
-          prop[1] = stringIndex < 0 || booleanIndex < stringIndex;
+          prop[
+            0
+            /* BooleanFlags.shouldCast */
+          ] = booleanIndex > -1;
+          prop[
+            1
+            /* BooleanFlags.shouldCastTrue */
+          ] = stringIndex < 0 || booleanIndex < stringIndex;
           if (booleanIndex > -1 || hasOwn(prop, "default")) {
             needCastKeys.push(normalizedKey);
           }
@@ -9044,7 +9940,8 @@ function createHydrationFunctions(rendererInternals) {
           dirs && invokeDirectiveHook(vnode, null, parentComponent, "mounted");
         }, parentSuspense);
       }
-      if (shapeFlag & 16 && !(props && (props.innerHTML || props.textContent))) {
+      if (shapeFlag & 16 && // skip if element has innerHTML / textContent
+      !(props && (props.innerHTML || props.textContent))) {
         let next = hydrateChildren(el.firstChild, vnode, el, parentComponent, parentSuspense, slotScopeIds, optimized);
         let hasWarned2 = false;
         while (next) {
@@ -9470,7 +10367,20 @@ function baseCreateRenderer(options, createHydrationFns) {
     for (let i = 0; i < newChildren.length; i++) {
       const oldVNode = oldChildren[i];
       const newVNode = newChildren[i];
-      const container = oldVNode.el && (oldVNode.type === Fragment || !isSameVNodeType(oldVNode, newVNode) || oldVNode.shapeFlag & (6 | 64)) ? hostParentNode(oldVNode.el) : fallbackContainer;
+      const container = (
+        // oldVNode may be an errored async setup() component inside Suspense
+        // which will not have a mounted element
+        oldVNode.el && // - In the case of a Fragment, we need to provide the actual parent
+        // of the Fragment itself so it can move its children.
+        (oldVNode.type === Fragment || // - In the case of different nodes, there is going to be a replacement
+        // which also requires the correct parent container
+        !isSameVNodeType(oldVNode, newVNode) || // - In the case of a component, it could contain anything.
+        oldVNode.shapeFlag & (6 | 64)) ? hostParentNode(oldVNode.el) : (
+          // In other cases, the parent container is not actually used so we
+          // just pass the block element here to avoid a DOM parentNode call.
+          fallbackContainer
+        )
+      );
       patch(oldVNode, newVNode, container, null, parentComponent, parentSuspense, isSVG, slotScopeIds, true);
     }
   };
@@ -9501,7 +10411,8 @@ function baseCreateRenderer(options, createHydrationFns) {
     const fragmentStartAnchor = n2.el = n1 ? n1.el : hostCreateText("");
     const fragmentEndAnchor = n2.anchor = n1 ? n1.anchor : hostCreateText("");
     let { patchFlag, dynamicChildren, slotScopeIds: fragmentSlotScopeIds } = n2;
-    if (process.env.NODE_ENV !== "production" && (isHmrUpdating || patchFlag & 2048)) {
+    if (process.env.NODE_ENV !== "production" && // #5523 dev root fragment may inherit directives
+    (isHmrUpdating || patchFlag & 2048)) {
       patchFlag = 0;
       optimized = false;
       dynamicChildren = null;
@@ -9514,12 +10425,25 @@ function baseCreateRenderer(options, createHydrationFns) {
       hostInsert(fragmentEndAnchor, container, anchor);
       mountChildren(n2.children, container, fragmentEndAnchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
     } else {
-      if (patchFlag > 0 && patchFlag & 64 && dynamicChildren && n1.dynamicChildren) {
+      if (patchFlag > 0 && patchFlag & 64 && dynamicChildren && // #2715 the previous fragment could've been a BAILed one as a result
+      // of renderSlot() with no valid children
+      n1.dynamicChildren) {
         patchBlockChildren(n1.dynamicChildren, dynamicChildren, container, parentComponent, parentSuspense, isSVG, slotScopeIds);
         if (process.env.NODE_ENV !== "production" && parentComponent && parentComponent.type.__hmrId) {
           traverseStaticChildren(n1, n2);
-        } else if (n2.key != null || parentComponent && n2 === parentComponent.subTree) {
-          traverseStaticChildren(n1, n2, true);
+        } else if (
+          // #2080 if the stable fragment has a key, it's a <template v-for> that may
+          //  get moved around. Make sure all root level vnodes inherit el.
+          // #2134 or if it's a component root, it may also get moved around
+          // as the component is being moved.
+          n2.key != null || parentComponent && n2 === parentComponent.subTree
+        ) {
+          traverseStaticChildren(
+            n1,
+            n2,
+            true
+            /* shallow */
+          );
         }
       } else {
         patchChildren(n1, n2, container, fragmentEndAnchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
@@ -9628,7 +10552,13 @@ function baseCreateRenderer(options, createHydrationFns) {
             }
           };
           if (isAsyncWrapperVNode) {
-            initialVNode.type.__asyncLoader().then(() => !instance.isUnmounted && hydrateSubTree());
+            initialVNode.type.__asyncLoader().then(
+              // note: we are moving the render call into an async callback,
+              // which means it won't track dependencies - but it's ok because
+              // a server-rendered async wrapper is already in resolved state
+              // and it will never need to change.
+              () => !instance.isUnmounted && hydrateSubTree()
+            );
           } else {
             hydrateSubTree();
           }
@@ -9697,7 +10627,17 @@ function baseCreateRenderer(options, createHydrationFns) {
         if (process.env.NODE_ENV !== "production") {
           startMeasure(instance, `patch`);
         }
-        patch(prevTree, nextTree, hostParentNode(prevTree.el), getNextHostNode(prevTree), instance, parentSuspense, isSVG);
+        patch(
+          prevTree,
+          nextTree,
+          // parent may have changed if it's in a teleport
+          hostParentNode(prevTree.el),
+          // anchor may have changed if it's in a fragment
+          getNextHostNode(prevTree),
+          instance,
+          parentSuspense,
+          isSVG
+        );
         if (process.env.NODE_ENV !== "production") {
           endMeasure(instance, `patch`);
         }
@@ -9719,7 +10659,12 @@ function baseCreateRenderer(options, createHydrationFns) {
         }
       }
     };
-    const effect2 = instance.effect = new ReactiveEffect(componentUpdateFn, () => queueJob(update), instance.scope);
+    const effect2 = instance.effect = new ReactiveEffect(
+      componentUpdateFn,
+      () => queueJob(update),
+      instance.scope
+      // track it in component's effect scope
+    );
     const update = instance.update = () => effect2.run();
     update.id = instance.uid;
     toggleRecurse(instance, true);
@@ -9897,7 +10842,13 @@ function baseCreateRenderer(options, createHydrationFns) {
           patch(null, nextChild, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
         } else if (moved2) {
           if (j < 0 || i !== increasingNewIndexSequence[j]) {
-            move(nextChild, container, anchor, 2);
+            move(
+              nextChild,
+              container,
+              anchor,
+              2
+              /* MoveType.REORDER */
+            );
           } else {
             j--;
           }
@@ -9983,7 +10934,8 @@ function baseCreateRenderer(options, createHydrationFns) {
       }
       if (shapeFlag & 64) {
         vnode.type.remove(vnode, parentComponent, parentSuspense, optimized, internals, doRemove);
-      } else if (dynamicChildren && (type4 !== Fragment || patchFlag > 0 && patchFlag & 64)) {
+      } else if (dynamicChildren && // #1153: fast path should not be taken for non-stable (v-for) fragments
+      (type4 !== Fragment || patchFlag > 0 && patchFlag & 64)) {
         unmountChildren(dynamicChildren, parentComponent, parentSuspense, false, true);
       } else if (type4 === Fragment && patchFlag & (128 | 256) || !optimized && shapeFlag & 16) {
         unmountChildren(children, parentComponent, parentSuspense);
@@ -10203,7 +11155,13 @@ function moveTeleport(vnode, container, parentAnchor, { o: { insert }, m: move }
   if (!isReorder || isTeleportDisabled(props)) {
     if (shapeFlag & 16) {
       for (let i = 0; i < children.length; i++) {
-        move(children[i], container, parentAnchor, 2);
+        move(
+          children[i],
+          container,
+          parentAnchor,
+          2
+          /* MoveType.REORDER */
+        );
       }
     }
   }
@@ -10268,10 +11226,27 @@ function setupBlock(vnode) {
   return vnode;
 }
 function createElementBlock(type4, props, children, patchFlag, dynamicProps, shapeFlag) {
-  return setupBlock(createBaseVNode(type4, props, children, patchFlag, dynamicProps, shapeFlag, true));
+  return setupBlock(createBaseVNode(
+    type4,
+    props,
+    children,
+    patchFlag,
+    dynamicProps,
+    shapeFlag,
+    true
+    /* isBlock */
+  ));
 }
 function createBlock(type4, props, children, patchFlag, dynamicProps) {
-  return setupBlock(createVNode(type4, props, children, patchFlag, dynamicProps, true));
+  return setupBlock(createVNode(
+    type4,
+    props,
+    children,
+    patchFlag,
+    dynamicProps,
+    true
+    /* isBlock: prevent a block from tracking itself */
+  ));
 }
 function isVNode(value) {
   return value ? value.__v_isVNode === true : false;
@@ -10327,7 +11302,15 @@ function createBaseVNode(type4, props = null, children = null, patchFlag = 0, dy
   if (process.env.NODE_ENV !== "production" && vnode.key !== vnode.key) {
     warn2(`VNode created with invalid key (NaN). VNode type:`, vnode.type);
   }
-  if (isBlockTreeEnabled > 0 && !isBlockNode && currentBlock && (vnode.patchFlag > 0 || shapeFlag & 6) && vnode.patchFlag !== 32) {
+  if (isBlockTreeEnabled > 0 && // avoid a block node from tracking itself
+  !isBlockNode && // has current parent block
+  currentBlock && // presence of a patch flag indicates this node needs patching on updates.
+  // component nodes also should always be patched, because even if the
+  // component doesn't need to update, it needs to persist the instance on to
+  // the next vnode so that it can be properly unmounted later.
+  (vnode.patchFlag > 0 || shapeFlag & 6) && // the EVENTS flag is only for hydration and if it is the only flag, the
+  // vnode should not be considered dynamic due to handler caching.
+  vnode.patchFlag !== 32) {
     currentBlock.push(vnode);
   }
   return vnode;
@@ -10340,7 +11323,12 @@ function _createVNode(type4, props = null, children = null, patchFlag = 0, dynam
     type4 = Comment;
   }
   if (isVNode(type4)) {
-    const cloned = cloneVNode(type4, props, true);
+    const cloned = cloneVNode(
+      type4,
+      props,
+      true
+      /* mergeRef: true */
+    );
     if (children) {
       normalizeChildren(cloned, children);
     }
@@ -10392,7 +11380,12 @@ function cloneVNode(vnode, extraProps, mergeRef = false) {
     type: vnode.type,
     props: mergedProps,
     key: mergedProps && normalizeKey(mergedProps),
-    ref: extraProps && extraProps.ref ? mergeRef && ref153 ? isArray(ref153) ? ref153.concat(normalizeRef(extraProps)) : [ref153, normalizeRef(extraProps)] : normalizeRef(extraProps) : ref153,
+    ref: extraProps && extraProps.ref ? (
+      // #2078 in the case of <component :is="vnode" ref="extra"/>
+      // if the vnode itself already has a ref, cloneVNode will need to merge
+      // the refs so the single vnode can be set on multiple refs
+      mergeRef && ref153 ? isArray(ref153) ? ref153.concat(normalizeRef(extraProps)) : [ref153, normalizeRef(extraProps)] : normalizeRef(extraProps)
+    ) : ref153,
     scopeId: vnode.scopeId,
     slotScopeIds: vnode.slotScopeIds,
     children: process.env.NODE_ENV !== "production" && patchFlag === -1 && isArray(children) ? children.map(deepCloneVNode) : children,
@@ -10400,12 +11393,20 @@ function cloneVNode(vnode, extraProps, mergeRef = false) {
     targetAnchor: vnode.targetAnchor,
     staticCount: vnode.staticCount,
     shapeFlag: vnode.shapeFlag,
+    // if the vnode is cloned with extra props, we can no longer assume its
+    // existing patch flag to be reliable and need to add the FULL_PROPS flag.
+    // note: preserve flag for fragments since they use the flag for children
+    // fast paths only.
     patchFlag: extraProps && vnode.type !== Fragment ? patchFlag === -1 ? 16 : patchFlag | 16 : patchFlag,
     dynamicProps: vnode.dynamicProps,
     dynamicChildren: vnode.dynamicChildren,
     appContext: vnode.appContext,
     dirs: vnode.dirs,
     transition: vnode.transition,
+    // These should technically only be non-null on mounted VNodes. However,
+    // they *should* be copied for kept-alive vnodes. So we just always copy
+    // them since them being non-null during a mount doesn't affect the logic as
+    // they will simply be overwritten.
     component: vnode.component,
     suspense: vnode.suspense,
     ssContent: vnode.ssContent && cloneVNode(vnode.ssContent),
@@ -10438,7 +11439,12 @@ function normalizeVNode(child) {
   if (child == null || typeof child === "boolean") {
     return createVNode(Comment);
   } else if (isArray(child)) {
-    return createVNode(Fragment, null, child.slice());
+    return createVNode(
+      Fragment,
+      null,
+      // #3666, avoid reference pollution when reusing vnode
+      child.slice()
+    );
   } else if (typeof child === "object") {
     return cloneIfMounted(child);
   } else {
@@ -10537,7 +11543,10 @@ function createComponentInstance(vnode, parent, suspense) {
     subTree: null,
     effect: null,
     update: null,
-    scope: new EffectScope(true),
+    scope: new EffectScope(
+      true
+      /* detached */
+    ),
     render: null,
     proxy: null,
     exposed: null,
@@ -10546,14 +11555,20 @@ function createComponentInstance(vnode, parent, suspense) {
     provides: parent ? parent.provides : Object.create(appContext.provides),
     accessCache: null,
     renderCache: [],
+    // local resolved assets
     components: null,
     directives: null,
+    // resolved props and emits options
     propsOptions: normalizePropsOptions(type4, appContext),
     emitsOptions: normalizeEmitsOptions(type4, appContext),
+    // emit
     emit: null,
     emitted: null,
+    // props default value
     propsDefaults: EMPTY_OBJ,
+    // inheritAttrs
     inheritAttrs: type4.inheritAttrs,
+    // state
     ctx: EMPTY_OBJ,
     data: EMPTY_OBJ,
     props: EMPTY_OBJ,
@@ -10562,10 +11577,13 @@ function createComponentInstance(vnode, parent, suspense) {
     refs: EMPTY_OBJ,
     setupState: EMPTY_OBJ,
     setupContext: null,
+    // suspense related
     suspense,
     suspenseId: suspense ? suspense.pendingId : 0,
     asyncDep: null,
     asyncResolved: false,
+    // lifecycle hooks
+    // not using enums here because it results in computed properties
     isMounted: false,
     isUnmounted: false,
     isDeactivated: false,
@@ -10616,7 +11634,7 @@ function setupComponent(instance, isSSR = false) {
   return setupResult;
 }
 function setupStatefulComponent(instance, isSSR) {
-  var _a3;
+  var _a4;
   const Component = instance.type;
   if (process.env.NODE_ENV !== "production") {
     if (Component.name) {
@@ -10657,12 +11675,17 @@ function setupStatefulComponent(instance, isSSR) {
         return setupResult.then((resolvedResult) => {
           handleSetupResult(instance, resolvedResult, isSSR);
         }).catch((e) => {
-          handleError(e, instance, 0);
+          handleError(
+            e,
+            instance,
+            0
+            /* ErrorCodes.SETUP_FUNCTION */
+          );
         });
       } else {
         instance.asyncDep = setupResult;
         if (process.env.NODE_ENV !== "production" && !instance.suspense) {
-          const name = (_a3 = Component.name) !== null && _a3 !== void 0 ? _a3 : "Anonymous";
+          const name = (_a4 = Component.name) !== null && _a4 !== void 0 ? _a4 : "Anonymous";
           warn2(`Component <${name}>: setup function returned a promise, but no <Suspense> boundary was found in the parent component tree. A component with async setup() must be nested in a <Suspense> in order to be rendered.`);
         }
       }
@@ -10739,7 +11762,10 @@ function finishComponentSetup(instance, isSSR, skipOptions) {
   }
   if (process.env.NODE_ENV !== "production" && !Component.render && instance.render === NOOP && !isSSR) {
     if (!compile2 && Component.template) {
-      warn2(`Component provided template option but runtime compilation is not supported in this build of Vue. Configure your bundler to alias "vue" to "vue/dist/vue.esm-bundler.js".`);
+      warn2(
+        `Component provided template option but runtime compilation is not supported in this build of Vue. Configure your bundler to alias "vue" to "vue/dist/vue.esm-bundler.js".`
+        /* should not happen */
+      );
     } else {
       warn2(`Component is missing template or render function.`);
     }
@@ -10943,7 +11969,10 @@ function h(type4, propsOrChildren, children) {
   }
 }
 function isShallow2(value) {
-  return !!(value && value["__v_isShallow"]);
+  return !!(value && value[
+    "__v_isShallow"
+    /* ReactiveFlags.IS_SHALLOW */
+  ]);
 }
 function initCustomFormatter() {
   if (!(process.env.NODE_ENV !== "production") || typeof window === "undefined") {
@@ -11014,9 +12043,9 @@ function initCustomFormatter() {
     if (instance.data !== EMPTY_OBJ) {
       blocks.push(createInstanceBlock("data", toRaw(instance.data)));
     }
-    const computed183 = extractKeys(instance, "computed");
-    if (computed183) {
-      blocks.push(createInstanceBlock("computed", computed183));
+    const computed184 = extractKeys(instance, "computed");
+    if (computed184) {
+      blocks.push(createInstanceBlock("computed", computed184));
     }
     const injected = extractKeys(instance, "inject");
     if (injected) {
@@ -11153,35 +12182,122 @@ var init_runtime_core_esm_bundler = __esm({
     init_shared_esm_bundler();
     stack = [];
     ErrorTypeStrings = {
-      ["sp"]: "serverPrefetch hook",
-      ["bc"]: "beforeCreate hook",
-      ["c"]: "created hook",
-      ["bm"]: "beforeMount hook",
-      ["m"]: "mounted hook",
-      ["bu"]: "beforeUpdate hook",
-      ["u"]: "updated",
-      ["bum"]: "beforeUnmount hook",
-      ["um"]: "unmounted hook",
-      ["a"]: "activated hook",
-      ["da"]: "deactivated hook",
-      ["ec"]: "errorCaptured hook",
-      ["rtc"]: "renderTracked hook",
-      ["rtg"]: "renderTriggered hook",
-      [0]: "setup function",
-      [1]: "render function",
-      [2]: "watcher getter",
-      [3]: "watcher callback",
-      [4]: "watcher cleanup function",
-      [5]: "native event handler",
-      [6]: "component event handler",
-      [7]: "vnode hook",
-      [8]: "directive hook",
-      [9]: "transition hook",
-      [10]: "app errorHandler",
-      [11]: "app warnHandler",
-      [12]: "ref function",
-      [13]: "async component loader",
-      [14]: "scheduler flush. This is likely a Vue internals bug. Please open an issue at https://new-issue.vuejs.org/?repo=vuejs/core"
+      [
+        "sp"
+        /* LifecycleHooks.SERVER_PREFETCH */
+      ]: "serverPrefetch hook",
+      [
+        "bc"
+        /* LifecycleHooks.BEFORE_CREATE */
+      ]: "beforeCreate hook",
+      [
+        "c"
+        /* LifecycleHooks.CREATED */
+      ]: "created hook",
+      [
+        "bm"
+        /* LifecycleHooks.BEFORE_MOUNT */
+      ]: "beforeMount hook",
+      [
+        "m"
+        /* LifecycleHooks.MOUNTED */
+      ]: "mounted hook",
+      [
+        "bu"
+        /* LifecycleHooks.BEFORE_UPDATE */
+      ]: "beforeUpdate hook",
+      [
+        "u"
+        /* LifecycleHooks.UPDATED */
+      ]: "updated",
+      [
+        "bum"
+        /* LifecycleHooks.BEFORE_UNMOUNT */
+      ]: "beforeUnmount hook",
+      [
+        "um"
+        /* LifecycleHooks.UNMOUNTED */
+      ]: "unmounted hook",
+      [
+        "a"
+        /* LifecycleHooks.ACTIVATED */
+      ]: "activated hook",
+      [
+        "da"
+        /* LifecycleHooks.DEACTIVATED */
+      ]: "deactivated hook",
+      [
+        "ec"
+        /* LifecycleHooks.ERROR_CAPTURED */
+      ]: "errorCaptured hook",
+      [
+        "rtc"
+        /* LifecycleHooks.RENDER_TRACKED */
+      ]: "renderTracked hook",
+      [
+        "rtg"
+        /* LifecycleHooks.RENDER_TRIGGERED */
+      ]: "renderTriggered hook",
+      [
+        0
+        /* ErrorCodes.SETUP_FUNCTION */
+      ]: "setup function",
+      [
+        1
+        /* ErrorCodes.RENDER_FUNCTION */
+      ]: "render function",
+      [
+        2
+        /* ErrorCodes.WATCH_GETTER */
+      ]: "watcher getter",
+      [
+        3
+        /* ErrorCodes.WATCH_CALLBACK */
+      ]: "watcher callback",
+      [
+        4
+        /* ErrorCodes.WATCH_CLEANUP */
+      ]: "watcher cleanup function",
+      [
+        5
+        /* ErrorCodes.NATIVE_EVENT_HANDLER */
+      ]: "native event handler",
+      [
+        6
+        /* ErrorCodes.COMPONENT_EVENT_HANDLER */
+      ]: "component event handler",
+      [
+        7
+        /* ErrorCodes.VNODE_HOOK */
+      ]: "vnode hook",
+      [
+        8
+        /* ErrorCodes.DIRECTIVE_HOOK */
+      ]: "directive hook",
+      [
+        9
+        /* ErrorCodes.TRANSITION_HOOK */
+      ]: "transition hook",
+      [
+        10
+        /* ErrorCodes.APP_ERROR_HANDLER */
+      ]: "app errorHandler",
+      [
+        11
+        /* ErrorCodes.APP_WARN_HANDLER */
+      ]: "app warnHandler",
+      [
+        12
+        /* ErrorCodes.FUNCTION_REF */
+      ]: "ref function",
+      [
+        13
+        /* ErrorCodes.ASYNC_COMPONENT_LOADER */
+      ]: "async component loader",
+      [
+        14
+        /* ErrorCodes.SCHEDULER */
+      ]: "scheduler flush. This is likely a Vue internals bug. Please open an issue at https://new-issue.vuejs.org/?repo=vuejs/core"
     };
     isFlushing = false;
     isFlushPending = false;
@@ -11216,16 +12332,32 @@ var init_runtime_core_esm_bundler = __esm({
     map = /* @__PURE__ */ new Map();
     buffer = [];
     devtoolsNotInstalled = false;
-    devtoolsComponentAdded = /* @__PURE__ */ createDevtoolsComponentHook("component:added");
-    devtoolsComponentUpdated = /* @__PURE__ */ createDevtoolsComponentHook("component:updated");
-    _devtoolsComponentRemoved = /* @__PURE__ */ createDevtoolsComponentHook("component:removed");
+    devtoolsComponentAdded = /* @__PURE__ */ createDevtoolsComponentHook(
+      "component:added"
+      /* DevtoolsHooks.COMPONENT_ADDED */
+    );
+    devtoolsComponentUpdated = /* @__PURE__ */ createDevtoolsComponentHook(
+      "component:updated"
+      /* DevtoolsHooks.COMPONENT_UPDATED */
+    );
+    _devtoolsComponentRemoved = /* @__PURE__ */ createDevtoolsComponentHook(
+      "component:removed"
+      /* DevtoolsHooks.COMPONENT_REMOVED */
+    );
     devtoolsComponentRemoved = (component2) => {
-      if (devtools && typeof devtools.cleanupBuffer === "function" && !devtools.cleanupBuffer(component2)) {
+      if (devtools && typeof devtools.cleanupBuffer === "function" && // remove the component if it wasn't buffered
+      !devtools.cleanupBuffer(component2)) {
         _devtoolsComponentRemoved(component2);
       }
     };
-    devtoolsPerfStart = /* @__PURE__ */ createDevtoolsPerformanceHook("perf:start");
-    devtoolsPerfEnd = /* @__PURE__ */ createDevtoolsPerformanceHook("perf:end");
+    devtoolsPerfStart = /* @__PURE__ */ createDevtoolsPerformanceHook(
+      "perf:start"
+      /* DevtoolsHooks.PERFORMANCE_START */
+    );
+    devtoolsPerfEnd = /* @__PURE__ */ createDevtoolsPerformanceHook(
+      "perf:end"
+      /* DevtoolsHooks.PERFORMANCE_END */
+    );
     currentRenderingInstance = null;
     currentScopeId = null;
     withScopeId = (_id) => withCtx;
@@ -11275,6 +12407,10 @@ var init_runtime_core_esm_bundler = __esm({
     isSuspense = (type4) => type4.__isSuspense;
     SuspenseImpl = {
       name: "Suspense",
+      // In order to make Suspense tree-shakable, we need to avoid importing it
+      // directly in the renderer. The renderer checks for the __isSuspense flag
+      // on a vnode's type and calls the `process` method, passing in renderer
+      // internals.
       __isSuspense: true,
       process(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, rendererInternals) {
         if (n1 == null) {
@@ -11297,14 +12433,17 @@ var init_runtime_core_esm_bundler = __esm({
         mode: String,
         appear: Boolean,
         persisted: Boolean,
+        // enter
         onBeforeEnter: TransitionHookValidator,
         onEnter: TransitionHookValidator,
         onAfterEnter: TransitionHookValidator,
         onEnterCancelled: TransitionHookValidator,
+        // leave
         onBeforeLeave: TransitionHookValidator,
         onLeave: TransitionHookValidator,
         onAfterLeave: TransitionHookValidator,
         onLeaveCancelled: TransitionHookValidator,
+        // appear
         onBeforeAppear: TransitionHookValidator,
         onAppear: TransitionHookValidator,
         onAfterAppear: TransitionHookValidator,
@@ -11396,6 +12535,9 @@ var init_runtime_core_esm_bundler = __esm({
     isKeepAlive = (vnode) => vnode.type.__isKeepAlive;
     KeepAliveImpl = {
       name: `KeepAlive`,
+      // Marker for special handling inside the renderer. We are not using a ===
+      // check directly on KeepAlive in the renderer, because importing it directly
+      // would prevent it from being tree-shaken.
       __isKeepAlive: true,
       props: {
         include: [String, RegExp, Array],
@@ -11477,10 +12619,15 @@ var init_runtime_core_esm_bundler = __esm({
           cache2.delete(key);
           keys2.delete(key);
         }
-        watch(() => [props.include, props.exclude], ([include, exclude]) => {
-          include && pruneCache((name) => matches(include, name));
-          exclude && pruneCache((name) => !matches(exclude, name));
-        }, { flush: "post", deep: true });
+        watch(
+          () => [props.include, props.exclude],
+          ([include, exclude]) => {
+            include && pruneCache((name) => matches(include, name));
+            exclude && pruneCache((name) => !matches(exclude, name));
+          },
+          // prune post-render after `current` has been updated
+          { flush: "post", deep: true }
+        );
         let pendingCacheKey = null;
         const cacheSubtree = () => {
           if (pendingCacheKey != null) {
@@ -11558,16 +12705,46 @@ var init_runtime_core_esm_bundler = __esm({
       }
     };
     KeepAlive = KeepAliveImpl;
-    createHook = (lifecycle) => (hook, target = currentInstance) => (!isInSSRComponentSetup || lifecycle === "sp") && injectHook(lifecycle, (...args) => hook(...args), target);
-    onBeforeMount = createHook("bm");
-    onMounted = createHook("m");
-    onBeforeUpdate = createHook("bu");
-    onUpdated = createHook("u");
-    onBeforeUnmount = createHook("bum");
-    onUnmounted = createHook("um");
-    onServerPrefetch = createHook("sp");
-    onRenderTriggered = createHook("rtg");
-    onRenderTracked = createHook("rtc");
+    createHook = (lifecycle) => (hook, target = currentInstance) => (
+      // post-create lifecycle registrations are noops during SSR (except for serverPrefetch)
+      (!isInSSRComponentSetup || lifecycle === "sp") && injectHook(lifecycle, (...args) => hook(...args), target)
+    );
+    onBeforeMount = createHook(
+      "bm"
+      /* LifecycleHooks.BEFORE_MOUNT */
+    );
+    onMounted = createHook(
+      "m"
+      /* LifecycleHooks.MOUNTED */
+    );
+    onBeforeUpdate = createHook(
+      "bu"
+      /* LifecycleHooks.BEFORE_UPDATE */
+    );
+    onUpdated = createHook(
+      "u"
+      /* LifecycleHooks.UPDATED */
+    );
+    onBeforeUnmount = createHook(
+      "bum"
+      /* LifecycleHooks.BEFORE_UNMOUNT */
+    );
+    onUnmounted = createHook(
+      "um"
+      /* LifecycleHooks.UNMOUNTED */
+    );
+    onServerPrefetch = createHook(
+      "sp"
+      /* LifecycleHooks.SERVER_PREFETCH */
+    );
+    onRenderTriggered = createHook(
+      "rtg"
+      /* LifecycleHooks.RENDER_TRIGGERED */
+    );
+    onRenderTracked = createHook(
+      "rtc"
+      /* LifecycleHooks.RENDER_TRACKED */
+    );
     COMPONENTS = "components";
     DIRECTIVES = "directives";
     NULL_DYNAMIC_COMPONENT = Symbol();
@@ -11578,7 +12755,9 @@ var init_runtime_core_esm_bundler = __esm({
         return getExposeProxy(i) || i.proxy;
       return getPublicInstance(i.parent);
     };
-    publicPropertiesMap = /* @__PURE__ */ extend(/* @__PURE__ */ Object.create(null), {
+    publicPropertiesMap = // Move PURE marker to new line to workaround compiler discarding it
+    // due to type annotation
+    /* @__PURE__ */ extend(/* @__PURE__ */ Object.create(null), {
       $: (i) => i,
       $el: (i) => i.vnode.el,
       $data: (i) => i.data,
@@ -11622,7 +12801,11 @@ var init_runtime_core_esm_bundler = __esm({
           } else if (data !== EMPTY_OBJ && hasOwn(data, key)) {
             accessCache[key] = 2;
             return data[key];
-          } else if ((normalizedProps = instance.propsOptions[0]) && hasOwn(normalizedProps, key)) {
+          } else if (
+            // only cache other properties when instance has declared (thus stable)
+            // props
+            (normalizedProps = instance.propsOptions[0]) && hasOwn(normalizedProps, key)
+          ) {
             accessCache[key] = 3;
             return props[key];
           } else if (ctx !== EMPTY_OBJ && hasOwn(ctx, key)) {
@@ -11640,16 +12823,24 @@ var init_runtime_core_esm_bundler = __esm({
             process.env.NODE_ENV !== "production" && markAttrsAccessed();
           }
           return publicGetter(instance);
-        } else if ((cssModule = type4.__cssModules) && (cssModule = cssModule[key])) {
+        } else if (
+          // css module (injected by vue-loader)
+          (cssModule = type4.__cssModules) && (cssModule = cssModule[key])
+        ) {
           return cssModule;
         } else if (ctx !== EMPTY_OBJ && hasOwn(ctx, key)) {
           accessCache[key] = 4;
           return ctx[key];
-        } else if (globalProperties = appContext.config.globalProperties, hasOwn(globalProperties, key)) {
+        } else if (
+          // global properties
+          globalProperties = appContext.config.globalProperties, hasOwn(globalProperties, key)
+        ) {
           {
             return globalProperties[key];
           }
-        } else if (process.env.NODE_ENV !== "production" && currentRenderingInstance && (!isString(key) || key.indexOf("__v") !== 0)) {
+        } else if (process.env.NODE_ENV !== "production" && currentRenderingInstance && (!isString(key) || // #1091 avoid internal isRef/isVNode checks on component instance leading
+        // to infinite warning loop
+        key.indexOf("__v") !== 0)) {
           if (data !== EMPTY_OBJ && isReservedPrefix(key[0]) && hasOwn(data, key)) {
             warn2(`Property ${JSON.stringify(key)} must be accessed via $data because it starts with a reserved character ("$" or "_") and is not proxied on the render context.`);
           } else if (instance === currentRenderingInstance) {
@@ -11715,11 +12906,11 @@ var init_runtime_core_esm_bundler = __esm({
         return PublicInstanceProxyHandlers.get(target, key, target);
       },
       has(_2, key) {
-        const has2 = key[0] !== "_" && !isGloballyWhitelisted(key);
-        if (process.env.NODE_ENV !== "production" && !has2 && PublicInstanceProxyHandlers.has(_2, key)) {
+        const has3 = key[0] !== "_" && !isGloballyWhitelisted(key);
+        if (process.env.NODE_ENV !== "production" && !has3 && PublicInstanceProxyHandlers.has(_2, key)) {
           warn2(`Property ${JSON.stringify(key)} should not start with _ which is a reserved prefix for Vue internals.`);
         }
-        return has2;
+        return has3;
       }
     });
     shouldCacheAccess = true;
@@ -11727,8 +12918,10 @@ var init_runtime_core_esm_bundler = __esm({
       data: mergeDataFn,
       props: mergeObjectOptions,
       emits: mergeObjectOptions,
+      // objects
       methods: mergeObjectOptions,
       computed: mergeObjectOptions,
+      // lifecycle
       beforeCreate: mergeAsArray2,
       created: mergeAsArray2,
       beforeMount: mergeAsArray2,
@@ -11743,9 +12936,12 @@ var init_runtime_core_esm_bundler = __esm({
       deactivated: mergeAsArray2,
       errorCaptured: mergeAsArray2,
       serverPrefetch: mergeAsArray2,
+      // assets
       components: mergeObjectOptions,
       directives: mergeObjectOptions,
+      // watch
       watch: mergeWatchOptions,
+      // provide / inject
       provide: mergeDataFn,
       inject: mergeInject
     };
@@ -11918,18 +13114,39 @@ var init_runtime_core_esm_bundler = __esm({
           }
           if (disabled) {
             if (!wasDisabled) {
-              moveTeleport(n2, container, mainAnchor, internals, 1);
+              moveTeleport(
+                n2,
+                container,
+                mainAnchor,
+                internals,
+                1
+                /* TeleportMoveTypes.TOGGLE */
+              );
             }
           } else {
             if ((n2.props && n2.props.to) !== (n1.props && n1.props.to)) {
               const nextTarget = n2.target = resolveTarget(n2.props, querySelector);
               if (nextTarget) {
-                moveTeleport(n2, nextTarget, null, internals, 0);
+                moveTeleport(
+                  n2,
+                  nextTarget,
+                  null,
+                  internals,
+                  0
+                  /* TeleportMoveTypes.TARGET_CHANGE */
+                );
               } else if (process.env.NODE_ENV !== "production") {
                 warn2("Invalid Teleport target on update:", target, `(${typeof target})`);
               }
             } else if (wasDisabled) {
-              moveTeleport(n2, target, targetAnchor, internals, 1);
+              moveTeleport(
+                n2,
+                target,
+                targetAnchor,
+                internals,
+                1
+                /* TeleportMoveTypes.TOGGLE */
+              );
             }
           }
         }
@@ -12270,10 +13487,14 @@ function patchDOMProp(el, key, value, prevChildren, parentComponent, parentSuspe
     el[key] = value == null ? "" : value;
     return;
   }
-  if (key === "value" && el.tagName !== "PROGRESS" && !el.tagName.includes("-")) {
+  if (key === "value" && el.tagName !== "PROGRESS" && // custom elements may use _value internally
+  !el.tagName.includes("-")) {
     el._value = value;
     const newValue = value == null ? "" : value;
-    if (el.value !== newValue || el.tagName === "OPTION") {
+    if (el.value !== newValue || // #4956: always set for OPTION elements because its value falls back to
+    // textContent if no value attribute is present. And setting .value for
+    // OPTION has no side effect
+    el.tagName === "OPTION") {
       el.value = newValue;
     }
     if (value == null) {
@@ -12824,7 +14045,11 @@ function initVModelForSSR() {
     if (typeof vnode.type !== "string") {
       return;
     }
-    const modelToUse = resolveDynamicModel(vnode.type.toUpperCase(), vnode.props && vnode.props.type);
+    const modelToUse = resolveDynamicModel(
+      // resolveDynamicModel expects an uppercase tag name, but vnode.type is lowercase
+      vnode.type.toUpperCase(),
+      vnode.props && vnode.props.type
+    );
     if (modelToUse.getSSRProps) {
       return modelToUse.getSSRProps(binding, vnode);
     }
@@ -12934,6 +14159,10 @@ var init_runtime_dom_esm_bundler = __esm({
       setScopeId(el, id2) {
         el.setAttribute(id2, "");
       },
+      // __UNSAFE__
+      // Reason: innerHTML.
+      // Static content here can only come from compiled templates.
+      // As long as the user only uses trusted templates, this is safe.
       insertStaticContent(content, parent, anchor, isSVG, start, end2) {
         const before = anchor ? anchor.previousSibling : parent.lastChild;
         if (start && (start === end2 || start.nextSibling)) {
@@ -12955,7 +14184,9 @@ var init_runtime_dom_esm_bundler = __esm({
           parent.insertBefore(template, anchor);
         }
         return [
+          // first
           before ? before.nextSibling : parent.firstChild,
+          // last
           anchor ? anchor.previousSibling : parent.lastChild
         ];
       }
@@ -13035,6 +14266,9 @@ var init_runtime_dom_esm_bundler = __esm({
           }
         });
       }
+      /**
+       * resolve inner component definition (handle possible async component)
+       */
       _resolveDef() {
         this._resolved = true;
         for (let i = 0; i < this.attributes.length; i++) {
@@ -13045,8 +14279,8 @@ var init_runtime_dom_esm_bundler = __esm({
             this._setAttr(m3.attributeName);
           }
         }).observe(this, { attributes: true });
-        const resolve2 = (def2, isAsync = false) => {
-          const { props, styles } = def2;
+        const resolve2 = (def3, isAsync = false) => {
+          const { props, styles } = def3;
           let numberProps;
           if (props && !isArray(props)) {
             for (const key in props) {
@@ -13061,20 +14295,20 @@ var init_runtime_dom_esm_bundler = __esm({
           }
           this._numberProps = numberProps;
           if (isAsync) {
-            this._resolveProps(def2);
+            this._resolveProps(def3);
           }
           this._applyStyles(styles);
           this._update();
         };
         const asyncDef = this._def.__asyncLoader;
         if (asyncDef) {
-          asyncDef().then((def2) => resolve2(def2, true));
+          asyncDef().then((def3) => resolve2(def3, true));
         } else {
           resolve2(this._def);
         }
       }
-      _resolveProps(def2) {
-        const { props } = def2;
+      _resolveProps(def3) {
+        const { props } = def3;
         const declaredPropKeys = isArray(props) ? props : Object.keys(props || {});
         for (const key of Object.keys(this)) {
           if (key[0] !== "_" && declaredPropKeys.includes(key)) {
@@ -13100,9 +14334,15 @@ var init_runtime_dom_esm_bundler = __esm({
         }
         this._setProp(camelKey, value, false);
       }
+      /**
+       * @internal
+       */
       _getProp(key) {
         return this._props[key];
       }
+      /**
+       * @internal
+       */
       _setProp(key, val, shouldReflect = true, shouldUpdate = true) {
         if (val !== this._props[key]) {
           this._props[key] = val;
@@ -13310,6 +14550,7 @@ var init_runtime_dom_esm_bundler = __esm({
           addEventListener(el, "change", onCompositionEnd);
         }
       },
+      // set value on mounted so it's after min/max for type="range"
       mounted(el, { value }) {
         el.value = value == null ? "" : value;
       },
@@ -13335,6 +14576,7 @@ var init_runtime_dom_esm_bundler = __esm({
       }
     };
     vModelCheckbox = {
+      // #4096 array checkboxes need to be deep traversed
       deep: true,
       created(el, _2, vnode) {
         el._assign = getModelAssigner(vnode);
@@ -13366,6 +14608,7 @@ var init_runtime_dom_esm_bundler = __esm({
           }
         });
       },
+      // set initial checked on mount to wait for true-value/false-value
       mounted: setChecked,
       beforeUpdate(el, binding, vnode) {
         el._assign = getModelAssigner(vnode);
@@ -13388,6 +14631,7 @@ var init_runtime_dom_esm_bundler = __esm({
       }
     };
     vModelSelect = {
+      // <select multiple> value need to be deep traversed
       deep: true,
       created(el, { value, modifiers: { number: number4 } }, vnode) {
         const isSetModel = isSet(value);
@@ -13397,6 +14641,8 @@ var init_runtime_dom_esm_bundler = __esm({
         });
         el._assign = getModelAssigner(vnode);
       },
+      // set value in mounted & updated because <select> relies on its children
+      // <option>s.
       mounted(el, { value }) {
         setSelected(el, value);
       },
@@ -13707,7 +14953,7 @@ var require_vue = __commonJS({
 var require_dayjs_min = __commonJS({
   "../../node_modules/.pnpm/dayjs@1.11.7/node_modules/dayjs/dayjs.min.js"(exports2, module2) {
     !function(t, e) {
-      typeof exports2 == "object" && typeof module2 != "undefined" ? module2.exports = e() : typeof define == "function" && define.amd ? define(e) : (t = typeof globalThis != "undefined" ? globalThis : t || self).dayjs = e();
+      "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = e() : "function" == typeof define && define.amd ? define(e) : (t = "undefined" != typeof globalThis ? globalThis : t || self).dayjs = e();
     }(exports2, function() {
       "use strict";
       var t = 1e3, e = 6e4, n = 36e5, r = "millisecond", i = "second", s2 = "minute", u2 = "hour", a3 = "day", o2 = "week", f3 = "month", h30 = "quarter", c2 = "year", d2 = "date", l2 = "Invalid Date", $ = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/, y = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, M2 = { name: "en", weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_"), ordinal: function(t2) {
@@ -13729,7 +14975,7 @@ var require_dayjs_min = __commonJS({
       }, p: function(t2) {
         return { M: f3, y: c2, w: o2, d: a3, D: d2, h: u2, m: s2, s: i, ms: r, Q: h30 }[t2] || String(t2 || "").toLowerCase().replace(/s$/, "");
       }, u: function(t2) {
-        return t2 === void 0;
+        return void 0 === t2;
       } }, g = "en", D2 = {};
       D2[g] = M2;
       var p3 = function(t2) {
@@ -13738,7 +14984,7 @@ var require_dayjs_min = __commonJS({
         var i2;
         if (!e2)
           return g;
-        if (typeof e2 == "string") {
+        if ("string" == typeof e2) {
           var s3 = e2.toLowerCase();
           D2[s3] && (i2 = s3), n2 && (D2[s3] = n2, i2 = s3);
           var u3 = e2.split("-");
@@ -13752,7 +14998,7 @@ var require_dayjs_min = __commonJS({
       }, w2 = function(t2, e2) {
         if (p3(t2))
           return t2.clone();
-        var n2 = typeof e2 == "object" ? e2 : {};
+        var n2 = "object" == typeof e2 ? e2 : {};
         return n2.date = t2, n2.args = arguments, new _2(n2);
       }, O3 = v2;
       O3.l = S2, O3.i = p3, O3.w = function(t2, e2) {
@@ -13766,13 +15012,13 @@ var require_dayjs_min = __commonJS({
         return m4.parse = function(t2) {
           this.$d = function(t3) {
             var e2 = t3.date, n2 = t3.utc;
-            if (e2 === null)
-              return new Date(NaN);
+            if (null === e2)
+              return /* @__PURE__ */ new Date(NaN);
             if (O3.u(e2))
-              return new Date();
+              return /* @__PURE__ */ new Date();
             if (e2 instanceof Date)
               return new Date(e2);
-            if (typeof e2 == "string" && !/Z$/i.test(e2)) {
+            if ("string" == typeof e2 && !/Z$/i.test(e2)) {
               var r2 = e2.match($);
               if (r2) {
                 var i2 = r2[2] - 1 || 0, s3 = (r2[7] || "0").substring(0, 3);
@@ -13919,7 +15165,7 @@ var require_dayjs_min = __commonJS({
 var require_customParseFormat = __commonJS({
   "../../node_modules/.pnpm/dayjs@1.11.7/node_modules/dayjs/plugin/customParseFormat.js"(exports2, module2) {
     !function(e, t) {
-      typeof exports2 == "object" && typeof module2 != "undefined" ? module2.exports = t() : typeof define == "function" && define.amd ? define(t) : (e = typeof globalThis != "undefined" ? globalThis : e || self).dayjs_plugin_customParseFormat = t();
+      "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = "undefined" != typeof globalThis ? globalThis : e || self).dayjs_plugin_customParseFormat = t();
     }(exports2, function() {
       "use strict";
       var e = { LTS: "h:mm:ss A", LT: "h:mm A", L: "MM/DD/YYYY", LL: "MMMM D, YYYY", LLL: "MMMM D, YYYY h:mm A", LLLL: "dddd, MMMM D, YYYY h:mm A" }, t = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g, n = /\d\d/, r = /\d\d?/, i = /\d*[^-_:/,()\s\d]+/, o2 = {}, s2 = function(e2) {
@@ -13933,10 +15179,10 @@ var require_customParseFormat = __commonJS({
         (this.zone || (this.zone = {})).offset = function(e3) {
           if (!e3)
             return 0;
-          if (e3 === "Z")
+          if ("Z" === e3)
             return 0;
           var t2 = e3.match(/([+-]|\d\d)/g), n2 = 60 * t2[1] + (+t2[2] || 0);
-          return n2 === 0 ? 0 : t2[0] === "+" ? -n2 : n2;
+          return 0 === n2 ? 0 : "+" === t2[0] ? -n2 : n2;
         }(e2);
       }], h30 = function(e2) {
         var t2 = o2[e2];
@@ -13997,7 +15243,7 @@ var require_customParseFormat = __commonJS({
         return function(e2) {
           for (var t2 = {}, n3 = 0, r3 = 0; n3 < a4; n3 += 1) {
             var i3 = s3[n3];
-            if (typeof i3 == "string")
+            if ("string" == typeof i3)
               r3 += i3.length;
             else {
               var o3 = i3.regex, f5 = i3.parser, h32 = e2.slice(r3), u4 = o3.exec(h32)[0];
@@ -14006,9 +15252,9 @@ var require_customParseFormat = __commonJS({
           }
           return function(e3) {
             var t3 = e3.afternoon;
-            if (t3 !== void 0) {
+            if (void 0 !== t3) {
               var n4 = e3.hours;
-              t3 ? n4 < 12 && (e3.hours += 12) : n4 === 12 && (e3.hours = 0), delete e3.afternoon;
+              t3 ? n4 < 12 && (e3.hours += 12) : 12 === n4 && (e3.hours = 0), delete e3.afternoon;
             }
           }(t2), t2;
         };
@@ -14020,20 +15266,20 @@ var require_customParseFormat = __commonJS({
           var t3 = e3.date, r3 = e3.utc, s3 = e3.args;
           this.$u = r3;
           var a4 = s3[1];
-          if (typeof a4 == "string") {
-            var f4 = s3[2] === true, h31 = s3[3] === true, u3 = f4 || h31, d3 = s3[2];
+          if ("string" == typeof a4) {
+            var f4 = true === s3[2], h31 = true === s3[3], u3 = f4 || h31, d3 = s3[2];
             h31 && (d3 = s3[2]), o2 = this.$locale(), !f4 && d3 && (o2 = n2.Ls[d3]), this.$d = function(e4, t4, n3) {
               try {
                 if (["x", "X"].indexOf(t4) > -1)
-                  return new Date((t4 === "X" ? 1e3 : 1) * e4);
-                var r4 = c2(t4)(e4), i3 = r4.year, o3 = r4.month, s4 = r4.day, a5 = r4.hours, f5 = r4.minutes, h32 = r4.seconds, u4 = r4.milliseconds, d4 = r4.zone, l3 = new Date(), m4 = s4 || (i3 || o3 ? 1 : l3.getDate()), M3 = i3 || l3.getFullYear(), Y2 = 0;
+                  return new Date(("X" === t4 ? 1e3 : 1) * e4);
+                var r4 = c2(t4)(e4), i3 = r4.year, o3 = r4.month, s4 = r4.day, a5 = r4.hours, f5 = r4.minutes, h32 = r4.seconds, u4 = r4.milliseconds, d4 = r4.zone, l3 = /* @__PURE__ */ new Date(), m4 = s4 || (i3 || o3 ? 1 : l3.getDate()), M3 = i3 || l3.getFullYear(), Y2 = 0;
                 i3 && !o3 || (Y2 = o3 > 0 ? o3 - 1 : l3.getMonth());
                 var p3 = a5 || 0, v2 = f5 || 0, D2 = h32 || 0, g = u4 || 0;
                 return d4 ? new Date(Date.UTC(M3, Y2, m4, p3, v2, D2, g + 60 * d4.offset * 1e3)) : n3 ? new Date(Date.UTC(M3, Y2, m4, p3, v2, D2, g)) : new Date(M3, Y2, m4, p3, v2, D2, g);
               } catch (e5) {
-                return new Date("");
+                return /* @__PURE__ */ new Date("");
               }
-            }(t3, a4, r3), this.init(), d3 && d3 !== true && (this.$L = this.locale(d3).$L), u3 && t3 != this.format(a4) && (this.$d = new Date("")), o2 = {};
+            }(t3, a4, r3), this.init(), d3 && true !== d3 && (this.$L = this.locale(d3).$L), u3 && t3 != this.format(a4) && (this.$d = /* @__PURE__ */ new Date("")), o2 = {};
           } else if (a4 instanceof Array)
             for (var l2 = a4.length, m3 = 1; m3 <= l2; m3 += 1) {
               s3[1] = a4[m3 - 1];
@@ -14042,7 +15288,7 @@ var require_customParseFormat = __commonJS({
                 this.$d = M2.$d, this.$L = M2.$L, this.init();
                 break;
               }
-              m3 === l2 && (this.$d = new Date(""));
+              m3 === l2 && (this.$d = /* @__PURE__ */ new Date(""));
             }
           else
             i2.call(this, e3);
@@ -14056,7 +15302,7 @@ var require_customParseFormat = __commonJS({
 var require_localeData = __commonJS({
   "../../node_modules/.pnpm/dayjs@1.11.7/node_modules/dayjs/plugin/localeData.js"(exports2, module2) {
     !function(n, e) {
-      typeof exports2 == "object" && typeof module2 != "undefined" ? module2.exports = e() : typeof define == "function" && define.amd ? define(e) : (n = typeof globalThis != "undefined" ? globalThis : n || self).dayjs_plugin_localeData = e();
+      "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = e() : "function" == typeof define && define.amd ? define(e) : (n = "undefined" != typeof globalThis ? globalThis : n || self).dayjs_plugin_localeData = e();
     }(exports2, function() {
       "use strict";
       return function(n, e, t) {
@@ -14137,7 +15383,7 @@ var require_localeData = __commonJS({
 var require_advancedFormat = __commonJS({
   "../../node_modules/.pnpm/dayjs@1.11.7/node_modules/dayjs/plugin/advancedFormat.js"(exports2, module2) {
     !function(e, t) {
-      typeof exports2 == "object" && typeof module2 != "undefined" ? module2.exports = t() : typeof define == "function" && define.amd ? define(t) : (e = typeof globalThis != "undefined" ? globalThis : e || self).dayjs_plugin_advancedFormat = t();
+      "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = "undefined" != typeof globalThis ? globalThis : e || self).dayjs_plugin_advancedFormat = t();
     }(exports2, function() {
       "use strict";
       return function(e, t) {
@@ -14160,13 +15406,13 @@ var require_advancedFormat = __commonJS({
                 return r2.ordinal(t2.week(), "W");
               case "w":
               case "ww":
-                return s2.s(t2.week(), e3 === "w" ? 1 : 2, "0");
+                return s2.s(t2.week(), "w" === e3 ? 1 : 2, "0");
               case "W":
               case "WW":
-                return s2.s(t2.isoWeek(), e3 === "W" ? 1 : 2, "0");
+                return s2.s(t2.isoWeek(), "W" === e3 ? 1 : 2, "0");
               case "k":
               case "kk":
-                return s2.s(String(t2.$H === 0 ? 24 : t2.$H), e3 === "k" ? 1 : 2, "0");
+                return s2.s(String(0 === t2.$H ? 24 : t2.$H), "k" === e3 ? 1 : 2, "0");
               case "X":
                 return Math.floor(t2.$d.getTime() / 1e3);
               case "x":
@@ -14190,17 +15436,17 @@ var require_advancedFormat = __commonJS({
 var require_weekOfYear = __commonJS({
   "../../node_modules/.pnpm/dayjs@1.11.7/node_modules/dayjs/plugin/weekOfYear.js"(exports2, module2) {
     !function(e, t) {
-      typeof exports2 == "object" && typeof module2 != "undefined" ? module2.exports = t() : typeof define == "function" && define.amd ? define(t) : (e = typeof globalThis != "undefined" ? globalThis : e || self).dayjs_plugin_weekOfYear = t();
+      "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = "undefined" != typeof globalThis ? globalThis : e || self).dayjs_plugin_weekOfYear = t();
     }(exports2, function() {
       "use strict";
       var e = "week", t = "year";
       return function(i, n, r) {
         var f3 = n.prototype;
         f3.week = function(i2) {
-          if (i2 === void 0 && (i2 = null), i2 !== null)
+          if (void 0 === i2 && (i2 = null), null !== i2)
             return this.add(7 * (i2 - this.week()), "day");
           var n2 = this.$locale().yearStart || 1;
-          if (this.month() === 11 && this.date() > 25) {
+          if (11 === this.month() && this.date() > 25) {
             var f4 = r(this).startOf(t).add(1, t).date(n2), s2 = r(this).endOf(e);
             if (f4.isBefore(s2))
               return 1;
@@ -14208,7 +15454,7 @@ var require_weekOfYear = __commonJS({
           var a3 = r(this).startOf(t).date(n2).startOf(e).subtract(1, "millisecond"), o2 = this.diff(a3, e, true);
           return o2 < 0 ? r(this).startOf("week").week() : Math.ceil(o2);
         }, f3.weeks = function(e2) {
-          return e2 === void 0 && (e2 = null), this.week(e2);
+          return void 0 === e2 && (e2 = null), this.week(e2);
         };
       };
     });
@@ -14219,13 +15465,13 @@ var require_weekOfYear = __commonJS({
 var require_weekYear = __commonJS({
   "../../node_modules/.pnpm/dayjs@1.11.7/node_modules/dayjs/plugin/weekYear.js"(exports2, module2) {
     !function(e, t) {
-      typeof exports2 == "object" && typeof module2 != "undefined" ? module2.exports = t() : typeof define == "function" && define.amd ? define(t) : (e = typeof globalThis != "undefined" ? globalThis : e || self).dayjs_plugin_weekYear = t();
+      "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = "undefined" != typeof globalThis ? globalThis : e || self).dayjs_plugin_weekYear = t();
     }(exports2, function() {
       "use strict";
       return function(e, t) {
         t.prototype.weekYear = function() {
           var e2 = this.month(), t2 = this.week(), n = this.year();
-          return t2 === 1 && e2 === 11 ? n + 1 : e2 === 0 && t2 >= 52 ? n - 1 : n;
+          return 1 === t2 && 11 === e2 ? n + 1 : 0 === e2 && t2 >= 52 ? n - 1 : n;
         };
       };
     });
@@ -14236,13 +15482,13 @@ var require_weekYear = __commonJS({
 var require_dayOfYear = __commonJS({
   "../../node_modules/.pnpm/dayjs@1.11.7/node_modules/dayjs/plugin/dayOfYear.js"(exports2, module2) {
     !function(e, t) {
-      typeof exports2 == "object" && typeof module2 != "undefined" ? module2.exports = t() : typeof define == "function" && define.amd ? define(t) : (e = typeof globalThis != "undefined" ? globalThis : e || self).dayjs_plugin_dayOfYear = t();
+      "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = "undefined" != typeof globalThis ? globalThis : e || self).dayjs_plugin_dayOfYear = t();
     }(exports2, function() {
       "use strict";
       return function(e, t, n) {
         t.prototype.dayOfYear = function(e2) {
           var t2 = Math.round((n(this).startOf("day") - n(this).startOf("year")) / 864e5) + 1;
-          return e2 == null ? t2 : this.add(e2 - t2, "day");
+          return null == e2 ? t2 : this.add(e2 - t2, "day");
         };
       };
     });
@@ -14253,7 +15499,7 @@ var require_dayOfYear = __commonJS({
 var require_isSameOrAfter = __commonJS({
   "../../node_modules/.pnpm/dayjs@1.11.7/node_modules/dayjs/plugin/isSameOrAfter.js"(exports2, module2) {
     !function(e, t) {
-      typeof exports2 == "object" && typeof module2 != "undefined" ? module2.exports = t() : typeof define == "function" && define.amd ? define(t) : (e = typeof globalThis != "undefined" ? globalThis : e || self).dayjs_plugin_isSameOrAfter = t();
+      "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = "undefined" != typeof globalThis ? globalThis : e || self).dayjs_plugin_isSameOrAfter = t();
     }(exports2, function() {
       "use strict";
       return function(e, t) {
@@ -14269,7 +15515,7 @@ var require_isSameOrAfter = __commonJS({
 var require_isSameOrBefore = __commonJS({
   "../../node_modules/.pnpm/dayjs@1.11.7/node_modules/dayjs/plugin/isSameOrBefore.js"(exports2, module2) {
     !function(e, i) {
-      typeof exports2 == "object" && typeof module2 != "undefined" ? module2.exports = i() : typeof define == "function" && define.amd ? define(i) : (e = typeof globalThis != "undefined" ? globalThis : e || self).dayjs_plugin_isSameOrBefore = i();
+      "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = i() : "function" == typeof define && define.amd ? define(i) : (e = "undefined" != typeof globalThis ? globalThis : e || self).dayjs_plugin_isSameOrBefore = i();
     }(exports2, function() {
       "use strict";
       return function(e, i) {
@@ -14336,7 +15582,7 @@ __export(sortable_esm_exports, {
   Swap: () => SwapPlugin,
   default: () => sortable_esm_default
 });
-function ownKeys2(object4, enumerableOnly) {
+function ownKeys3(object4, enumerableOnly) {
   var keys2 = Object.keys(object4);
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object4);
@@ -14353,13 +15599,13 @@ function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
     if (i % 2) {
-      ownKeys2(Object(source), true).forEach(function(key) {
+      ownKeys3(Object(source), true).forEach(function(key) {
         _defineProperty(target, key, source[key]);
       });
     } else if (Object.getOwnPropertyDescriptors) {
       Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
     } else {
-      ownKeys2(Object(source)).forEach(function(key) {
+      ownKeys3(Object(source)).forEach(function(key) {
         Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
       });
     }
@@ -14726,7 +15972,7 @@ function getParentAutoScrollElement(el, includeSelf) {
   } while (elem = elem.parentNode);
   return getWindowScrollingElement();
 }
-function extend2(dst, src) {
+function extend3(dst, src) {
   if (dst && src) {
     for (var key in src) {
       if (src.hasOwnProperty(key)) {
@@ -14838,7 +16084,8 @@ function AnimationStateManager() {
         }
         target.toRect = toRect;
         if (target.thisAnimationDuration) {
-          if (isRectEqual(prevFromRect, toRect) && !isRectEqual(fromRect, toRect) && (animatingRect.top - toRect.top) / (animatingRect.left - toRect.left) === (fromRect.top - toRect.top) / (fromRect.left - toRect.left)) {
+          if (isRectEqual(prevFromRect, toRect) && !isRectEqual(fromRect, toRect) && // Make sure animatingRect is on line between toRect & fromRect
+          (animatingRect.top - toRect.top) / (animatingRect.left - toRect.left) === (fromRect.top - toRect.top) / (fromRect.left - toRect.left)) {
             time = calculateRealTime(animatingRect, prevFromRect, prevToRect, _this.options);
           }
         }
@@ -14968,8 +16215,11 @@ function Sortable(el, options) {
     handle: null,
     draggable: /^[uo]l$/i.test(el.nodeName) ? ">li" : ">*",
     swapThreshold: 1,
+    // percentage; 0 <= x <= 1
     invertSwap: false,
+    // invert always
     invertedSwapThreshold: null,
+    // will be set to same as swapThreshold if default
     removeCloneOnHide: true,
     direction: function direction2() {
       return _detectDirection(el, this.options);
@@ -15703,8 +16953,13 @@ function MultiDragPlugin() {
     }
   };
   return _extends2(MultiDrag, {
+    // Static methods & properties
     pluginName: "multiDrag",
     utils: {
+      /**
+       * Selects the provided multi-drag item
+       * @param  {HTMLElement} el    The element to be selected
+       */
       select: function select(el) {
         var sortable = el.parentNode[expando];
         if (!sortable || !sortable.options.multiDrag || ~multiDragElements.indexOf(el))
@@ -15716,6 +16971,10 @@ function MultiDragPlugin() {
         toggleClass(el, sortable.options.selectedClass, true);
         multiDragElements.push(el);
       },
+      /**
+       * Deselects the provided multi-drag item
+       * @param  {HTMLElement} el    The element to be deselected
+       */
       deselect: function deselect(el) {
         var sortable = el.parentNode[expando], index2 = multiDragElements.indexOf(el);
         if (!sortable || !sortable.options.multiDrag || !~index2)
@@ -15807,7 +17066,7 @@ var init_sortable_esm = __esm({
       passive: false
     };
     R_SPACE = /\s+/g;
-    expando = "Sortable" + new Date().getTime();
+    expando = "Sortable" + (/* @__PURE__ */ new Date()).getTime();
     plugins = [];
     defaults = {
       initializeByDefault: true
@@ -16054,7 +17313,8 @@ var init_sortable_esm = __esm({
         dragEl.parentNode[expando]._isOutsideThisEl(evt.target);
       }
     };
-    Sortable.prototype = {
+    Sortable.prototype = /** @lends Sortable.prototype */
+    {
       constructor: Sortable,
       _isOutsideThisEl: function _isOutsideThisEl(target) {
         if (!this.el.contains(target) && target !== this.el) {
@@ -16441,6 +17701,7 @@ var init_sortable_esm = __esm({
           css(document.body, "user-select", "none");
         }
       },
+      // Returns true - if no further action is needed (either inserted or another condition)
       _onDragOver: function _onDragOver(evt) {
         var el = this.el, target = evt.target, dragRect, targetRect, revert, options = this.options, group = options.group, activeSortable = Sortable.active, isOwner = activeGroup === group, canSort = options.sort, fromSortable = putSortable || activeSortable, vertical, _this = this, completedFired = false;
         if (_silent)
@@ -16810,6 +18071,10 @@ var init_sortable_esm = __esm({
             break;
         }
       },
+      /**
+       * Serializes the item into an array of string.
+       * @returns {String[]}
+       */
       toArray: function toArray() {
         var order = [], el, children = this.el.children, i = 0, n = children.length, options = this.options;
         for (; i < n; i++) {
@@ -16820,6 +18085,10 @@ var init_sortable_esm = __esm({
         }
         return order;
       },
+      /**
+       * Sorts the elements according to the array.
+       * @param  {String[]}  order  order of the items
+       */
       sort: function sort(order, useAnimation) {
         var items = {}, rootEl2 = this.el;
         this.toArray().forEach(function(id2, i) {
@@ -16837,13 +18106,28 @@ var init_sortable_esm = __esm({
         });
         useAnimation && this.animateAll();
       },
+      /**
+       * Save the current sorting
+       */
       save: function save() {
         var store = this.options.store;
         store && store.set && store.set(this);
       },
+      /**
+       * For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.
+       * @param   {HTMLElement}  el
+       * @param   {String}       [selector]  default: `options.draggable`
+       * @returns {HTMLElement|null}
+       */
       closest: function closest$1(el, selector) {
         return closest(el, selector || this.options.draggable, this.el, false);
       },
+      /**
+       * Set/get option
+       * @param   {string} name
+       * @param   {*}      [value]
+       * @returns {*}
+       */
       option: function option(name, value) {
         var options = this.options;
         if (value === void 0) {
@@ -16860,6 +18144,9 @@ var init_sortable_esm = __esm({
           }
         }
       },
+      /**
+       * Destroy
+       */
       destroy: function destroy() {
         pluginEvent2("destroy", this);
         var el = this.el;
@@ -16930,7 +18217,7 @@ var init_sortable_esm = __esm({
       is: function is(el, selector) {
         return !!closest(el, selector, el, false);
       },
-      extend: extend2,
+      extend: extend3,
       throttle: throttle2,
       closest,
       toggleClass,
@@ -17143,7 +18430,7 @@ var O = (e) => {
   return t;
 };
 var f = () => {
-  const e = new Date();
+  const e = /* @__PURE__ */ new Date();
   e.setDate(e.getDate() - 1), e.setHours(0, 0, 0, 0);
   const t = new Date(e.getTime() + 1e3 * 60 * 60 * 24);
   return t.setHours(23, 59, 59), [e, t];
@@ -17152,21 +18439,21 @@ var J = [
   {
     text: "\u4ECA\u5929",
     value: (() => {
-      const e = new Date();
-      return [new Date(), e];
+      const e = /* @__PURE__ */ new Date();
+      return [/* @__PURE__ */ new Date(), e];
     })()
   },
   {
     text: "\u6628\u5929",
     value: (() => {
-      const e = new Date(), t = new Date();
+      const e = /* @__PURE__ */ new Date(), t = /* @__PURE__ */ new Date();
       return e.setTime(t.getTime() - 3600 * 1e3 * 24 * 1), t.setTime(t.getTime() - 3600 * 1e3 * 24 * 1), [t, e];
     })()
   },
   {
     text: "\u672C\u5468",
     value: (() => {
-      const e = new Date(), t = new Date();
+      const e = /* @__PURE__ */ new Date(), t = /* @__PURE__ */ new Date();
       var n = t.getDay() || 7;
       return t.setDate(t.getDate() - n + 1), [t, e];
     })()
@@ -17174,35 +18461,35 @@ var J = [
   {
     text: "\u4E0A\u5468",
     value: (() => {
-      let e = new Date(), t = new Date(e.getTime() - 7 * 24 * 3600 * 1e3), n = new Date(e.getTime() - 7 * 24 * 3600 * 1e3), s2 = t.getDay(), o2 = t.getDate() - s2 + (s2 === 0 ? -6 : 1), r = new Date(t.setDate(o2)), c2 = new Date(n.setDate(o2 + 6));
+      let e = /* @__PURE__ */ new Date(), t = new Date(e.getTime() - 7 * 24 * 3600 * 1e3), n = new Date(e.getTime() - 7 * 24 * 3600 * 1e3), s2 = t.getDay(), o2 = t.getDate() - s2 + (s2 === 0 ? -6 : 1), r = new Date(t.setDate(o2)), c2 = new Date(n.setDate(o2 + 6));
       return [r, c2];
     })()
   },
   {
     text: "\u672C\u6708",
     value: (() => {
-      const e = new Date(), t = new Date();
+      const e = /* @__PURE__ */ new Date(), t = /* @__PURE__ */ new Date();
       return t.setDate(1), t.setHours(0), t.setSeconds(0), t.setMinutes(0), [t, e];
     })()
   },
   {
     text: "\u4E0A\u6708",
     value: (() => {
-      let e = 864e5, t = new Date(), n = new Date(t.getFullYear(), t.getMonth() - 1, 1), o2 = new Date(t.getFullYear(), t.getMonth(), 1).getTime() - 1 * e, r = new Date(o2);
+      let e = 864e5, t = /* @__PURE__ */ new Date(), n = new Date(t.getFullYear(), t.getMonth() - 1, 1), o2 = new Date(t.getFullYear(), t.getMonth(), 1).getTime() - 1 * e, r = new Date(o2);
       return [n, r];
     })()
   },
   {
     text: "\u6700\u8FD17\u5929",
     value: (() => {
-      const e = new Date(), t = new Date();
+      const e = /* @__PURE__ */ new Date(), t = /* @__PURE__ */ new Date();
       return t.setTime(t.getTime() - 3600 * 1e3 * 24 * 6), [t, e];
     })()
   },
   {
     text: "\u6700\u8FD130\u5929",
     value: (() => {
-      const e = new Date(), t = new Date();
+      const e = /* @__PURE__ */ new Date(), t = /* @__PURE__ */ new Date();
       return t.setTime(t.getTime() - 3600 * 1e3 * 24 * 30), [t, e];
     })()
   }
@@ -17421,7 +18708,9 @@ var funcProto2 = Function.prototype;
 var objectProto3 = Object.prototype;
 var funcToString2 = funcProto2.toString;
 var hasOwnProperty3 = objectProto3.hasOwnProperty;
-var reIsNative = RegExp("^" + funcToString2.call(hasOwnProperty3).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+var reIsNative = RegExp(
+  "^" + funcToString2.call(hasOwnProperty3).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
+);
 function baseIsNative(value) {
   if (!isObject_default(value) || isMasked_default(value)) {
     return false;
@@ -17866,7 +19155,11 @@ var hasOwnProperty6 = objectProto7.hasOwnProperty;
 function arrayLikeKeys(value, inherited) {
   var isArr = isArray_default(value), isArg = !isArr && isArguments_default(value), isBuff = !isArr && !isArg && isBuffer_default(value), isType = !isArr && !isArg && !isBuff && isTypedArray_default(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes_default(value.length, String) : [], length = result.length;
   for (var key in value) {
-    if ((inherited || hasOwnProperty6.call(value, key)) && !(skipIndexes && (key == "length" || isBuff && (key == "offset" || key == "parent") || isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || isIndex_default(key, length)))) {
+    if ((inherited || hasOwnProperty6.call(value, key)) && !(skipIndexes && // Safari 9 has enumerable `arguments.length` in strict mode.
+    (key == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
+    isBuff && (key == "offset" || key == "parent") || // PhantomJS 2 has enumerable non-index properties on typed arrays.
+    isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || // Skip index properties.
+    isIndex_default(key, length)))) {
       result.push(key);
     }
   }
@@ -18158,9 +19451,9 @@ var mapCacheHas_default = mapCacheHas;
 
 // ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/_mapCacheSet.js
 function mapCacheSet(key, value) {
-  var data = getMapData_default(this, key), size3 = data.size;
+  var data = getMapData_default(this, key), size4 = data.size;
   data.set(key, value);
-  this.size += data.size == size3 ? 0 : 1;
+  this.size += data.size == size4 ? 0 : 1;
   return this;
 }
 var mapCacheSet_default = mapCacheSet;
@@ -18924,9 +20217,9 @@ function mapToArray(map3) {
 var mapToArray_default = mapToArray;
 
 // ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/_setToArray.js
-function setToArray(set4) {
-  var index2 = -1, result = Array(set4.size);
-  set4.forEach(function(value) {
+function setToArray(set5) {
+  var index2 = -1, result = Array(set5.size);
+  set5.forEach(function(value) {
     result[++index2] = value;
   });
   return result;
@@ -19660,9 +20953,9 @@ function baseUniq(array4, iteratee, comparator2) {
     isCommon = false;
     includes = arrayIncludesWith_default;
   } else if (length >= LARGE_ARRAY_SIZE2) {
-    var set4 = iteratee ? null : createSet_default(array4);
-    if (set4) {
-      return setToArray_default(set4);
+    var set5 = iteratee ? null : createSet_default(array4);
+    if (set5) {
+      return setToArray_default(set5);
     }
     isCommon = false;
     includes = cacheHas_default;
@@ -19672,22 +20965,22 @@ function baseUniq(array4, iteratee, comparator2) {
   }
   outer:
     while (++index2 < length) {
-      var value = array4[index2], computed183 = iteratee ? iteratee(value) : value;
+      var value = array4[index2], computed184 = iteratee ? iteratee(value) : value;
       value = comparator2 || value !== 0 ? value : 0;
-      if (isCommon && computed183 === computed183) {
+      if (isCommon && computed184 === computed184) {
         var seenIndex = seen2.length;
         while (seenIndex--) {
-          if (seen2[seenIndex] === computed183) {
+          if (seen2[seenIndex] === computed184) {
             continue outer;
           }
         }
         if (iteratee) {
-          seen2.push(computed183);
+          seen2.push(computed184);
         }
         result.push(value);
-      } else if (!includes(seen2, computed183, comparator2)) {
+      } else if (!includes(seen2, computed184, comparator2)) {
         if (seen2 !== result) {
-          seen2.push(computed183);
+          seen2.push(computed184);
         }
         result.push(value);
       }
@@ -19707,8 +21000,8 @@ var FOCUSABLE_ELEMENT_SELECTORS = `a[href],button:not([disabled]),button:not([hi
 var isVisible = (element) => {
   if (process.env.NODE_ENV === "test")
     return true;
-  const computed183 = getComputedStyle(element);
-  return computed183.position === "fixed" ? false : element.offsetParent !== null;
+  const computed184 = getComputedStyle(element);
+  return computed184.position === "fixed" ? false : element.offsetParent !== null;
 };
 var obtainAllFocusableElements = (element) => {
   return Array.from(element.querySelectorAll(FOCUSABLE_ELEMENT_SELECTORS)).filter((item) => isFocusable(item) && isVisible(item));
@@ -19836,12 +21129,12 @@ var __spreadValues$9 = (a3, b2) => {
 };
 var __spreadProps$6 = (a3, b2) => __defProps$6(a3, __getOwnPropDescs$6(b2));
 function computedEager(fn2, options) {
-  var _a3;
+  var _a4;
   const result = (0, lib_exports.shallowRef)();
   (0, lib_exports.watchEffect)(() => {
     result.value = fn2();
   }, __spreadProps$6(__spreadValues$9({}, options), {
-    flush: (_a3 = options == null ? void 0 : options.flush) != null ? _a3 : "sync"
+    flush: (_a4 = options == null ? void 0 : options.flush) != null ? _a4 : "sync"
   }));
   return (0, lib_exports.readonly)(result);
 }
@@ -19913,7 +21206,7 @@ function throttleFilter(ms, trailing = true, leading = true, rejectOnCancel = fa
   let isLeading = true;
   let lastRejector = noop2;
   let lastValue;
-  const clear2 = () => {
+  const clear3 = () => {
     if (timer) {
       clearTimeout(timer);
       timer = void 0;
@@ -19927,7 +21220,7 @@ function throttleFilter(ms, trailing = true, leading = true, rejectOnCancel = fa
     const invoke = () => {
       return lastValue = _invoke();
     };
-    clear2();
+    clear3();
     if (duration <= 0) {
       lastExec = Date.now();
       return invoke();
@@ -19942,7 +21235,7 @@ function throttleFilter(ms, trailing = true, leading = true, rejectOnCancel = fa
           lastExec = Date.now();
           isLeading = true;
           resolve2(invoke());
-          clear2();
+          clear3();
         }, duration - elapsed);
       });
     }
@@ -19991,7 +21284,7 @@ function useTimeoutFn(cb, interval, options = {}) {
   } = options;
   const isPending = (0, lib_exports.ref)(false);
   let timer = null;
-  function clear2() {
+  function clear3() {
     if (timer) {
       clearTimeout(timer);
       timer = null;
@@ -19999,10 +21292,10 @@ function useTimeoutFn(cb, interval, options = {}) {
   }
   function stop2() {
     isPending.value = false;
-    clear2();
+    clear3();
   }
   function start(...args) {
-    clear2();
+    clear3();
     isPending.value = true;
     timer = setTimeout(() => {
       isPending.value = false;
@@ -20025,9 +21318,9 @@ function useTimeoutFn(cb, interval, options = {}) {
 
 // ../../node_modules/.pnpm/@vueuse+core@9.10.0_vue@3.2.45/node_modules/@vueuse/core/index.mjs
 function unrefElement(elRef) {
-  var _a3;
+  var _a4;
   const plain = resolveUnref(elRef);
-  return (_a3 = plain == null ? void 0 : plain.$el) != null ? _a3 : plain;
+  return (_a4 = plain == null ? void 0 : plain.$el) != null ? _a4 : plain;
 }
 var defaultWindow = isClient ? window : void 0;
 var defaultDocument = isClient ? window.document : void 0;
@@ -20118,9 +21411,9 @@ function onClickOutside(target, handler, options = {}) {
       }
     }, { passive: true }),
     detectIframe && useEventListener(window2, "blur", (event) => {
-      var _a3;
+      var _a4;
       const el = unrefElement(target);
-      if (((_a3 = window2.document.activeElement) == null ? void 0 : _a3.tagName) === "IFRAME" && !(el == null ? void 0 : el.contains(window2.document.activeElement)))
+      if (((_a4 = window2.document.activeElement) == null ? void 0 : _a4.tagName) === "IFRAME" && !(el == null ? void 0 : el.contains(window2.document.activeElement)))
         handler(event);
     })
   ].filter(Boolean);
@@ -20144,19 +21437,19 @@ var handlers = _global[globalKey];
 function useCssVar(prop, target, { window: window2 = defaultWindow, initialValue = "" } = {}) {
   const variable = (0, lib_exports.ref)(initialValue);
   const elRef = (0, lib_exports.computed)(() => {
-    var _a3;
-    return unrefElement(target) || ((_a3 = window2 == null ? void 0 : window2.document) == null ? void 0 : _a3.documentElement);
+    var _a4;
+    return unrefElement(target) || ((_a4 = window2 == null ? void 0 : window2.document) == null ? void 0 : _a4.documentElement);
   });
   (0, lib_exports.watch)([elRef, () => resolveUnref(prop)], ([el, prop2]) => {
-    var _a3;
+    var _a4;
     if (el && window2) {
-      const value = (_a3 = window2.getComputedStyle(el).getPropertyValue(prop2)) == null ? void 0 : _a3.trim();
+      const value = (_a4 = window2.getComputedStyle(el).getPropertyValue(prop2)) == null ? void 0 : _a4.trim();
       variable.value = value || initialValue;
     }
   }, { immediate: true });
   (0, lib_exports.watch)(variable, (val) => {
-    var _a3;
-    if ((_a3 = elRef.value) == null ? void 0 : _a3.style)
+    var _a4;
+    if ((_a4 = elRef.value) == null ? void 0 : _a4.style)
       elRef.value.style.setProperty(resolveUnref(prop), val);
   });
   return variable;
@@ -20186,7 +21479,7 @@ var __objRest$2 = (source, exclude) => {
   return target;
 };
 function useResizeObserver(target, callback, options = {}) {
-  const _a3 = options, { window: window2 = defaultWindow } = _a3, observerOptions = __objRest$2(_a3, ["window"]);
+  const _a4 = options, { window: window2 = defaultWindow } = _a4, observerOptions = __objRest$2(_a4, ["window"]);
   let observer;
   const isSupported2 = useSupported(() => window2 && "ResizeObserver" in window2);
   const cleanup = () => {
@@ -20320,18 +21613,18 @@ var SwipeDirection;
   SwipeDirection2["NONE"] = "NONE";
 })(SwipeDirection || (SwipeDirection = {}));
 var __defProp2 = Object.defineProperty;
-var __getOwnPropSymbols2 = Object.getOwnPropertySymbols;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp2 = Object.prototype.hasOwnProperty;
-var __propIsEnum2 = Object.prototype.propertyIsEnumerable;
-var __defNormalProp2 = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues2 = (a3, b2) => {
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a3, b2) => {
   for (var prop in b2 || (b2 = {}))
     if (__hasOwnProp2.call(b2, prop))
-      __defNormalProp2(a3, prop, b2[prop]);
-  if (__getOwnPropSymbols2)
-    for (var prop of __getOwnPropSymbols2(b2)) {
-      if (__propIsEnum2.call(b2, prop))
-        __defNormalProp2(a3, prop, b2[prop]);
+      __defNormalProp(a3, prop, b2[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b2)) {
+      if (__propIsEnum.call(b2, prop))
+        __defNormalProp(a3, prop, b2[prop]);
     }
   return a3;
 };
@@ -20361,11 +21654,11 @@ var _TransitionPresets = {
   easeOutBack: [0.34, 1.56, 0.64, 1],
   easeInOutBack: [0.68, -0.6, 0.32, 1.6]
 };
-var TransitionPresets = __spreadValues2({
+var TransitionPresets = __spreadValues({
   linear: identity2
 }, _TransitionPresets);
 function useVModel(props, key, emit2, options = {}) {
-  var _a3, _b, _c, _d, _e;
+  var _a4, _b, _c, _d, _e;
   const {
     clone: clone3 = false,
     passive = false,
@@ -20374,7 +21667,7 @@ function useVModel(props, key, emit2, options = {}) {
     defaultValue
   } = options;
   const vm = (0, lib_exports.getCurrentInstance)();
-  const _emit = emit2 || (vm == null ? void 0 : vm.emit) || ((_a3 = vm == null ? void 0 : vm.$emit) == null ? void 0 : _a3.bind(vm)) || ((_c = (_b = vm == null ? void 0 : vm.proxy) == null ? void 0 : _b.$emit) == null ? void 0 : _c.bind(vm == null ? void 0 : vm.proxy));
+  const _emit = emit2 || (vm == null ? void 0 : vm.emit) || ((_a4 = vm == null ? void 0 : vm.$emit) == null ? void 0 : _a4.bind(vm)) || ((_c = (_b = vm == null ? void 0 : vm.proxy) == null ? void 0 : _b.$emit) == null ? void 0 : _c.bind(vm == null ? void 0 : vm.proxy));
   let event = eventName;
   if (!key) {
     if (isVue2) {
@@ -20619,7 +21912,7 @@ var removeClass = (el, cls) => {
   el.classList.remove(...classNameToArray(cls));
 };
 var getStyle = (element, styleName) => {
-  var _a3;
+  var _a4;
   if (!isClient || !element || !styleName)
     return "";
   let key = camelize3(styleName);
@@ -20629,8 +21922,8 @@ var getStyle = (element, styleName) => {
     const style = element.style[key];
     if (style)
       return style;
-    const computed183 = (_a3 = document.defaultView) == null ? void 0 : _a3.getComputedStyle(element, "");
-    return computed183 ? computed183[key] : "";
+    const computed184 = (_a4 = document.defaultView) == null ? void 0 : _a4.getComputedStyle(element, "");
+    return computed184 ? computed184[key] : "";
   } catch (e) {
     return element.style[key];
   }
@@ -20673,7 +21966,7 @@ var getScrollContainer = (el, isVertical) => {
 };
 var scrollBarWidth;
 var getScrollBarWidth = (namespace) => {
-  var _a3;
+  var _a4;
   if (!isClient)
     return 0;
   if (scrollBarWidth !== void 0)
@@ -20691,7 +21984,7 @@ var getScrollBarWidth = (namespace) => {
   inner.style.width = "100%";
   outer.appendChild(inner);
   const widthWithScroll = inner.offsetWidth;
-  (_a3 = outer.parentNode) == null ? void 0 : _a3.removeChild(outer);
+  (_a4 = outer.parentNode) == null ? void 0 : _a4.removeChild(outer);
   scrollBarWidth = widthNoScroll - widthWithScroll;
   return scrollBarWidth;
 };
@@ -21691,8 +22984,8 @@ var componentSizeMap = {
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/utils/vue/size.mjs
-var getComponentSize = (size3) => {
-  return componentSizeMap[size3 || "default"];
+var getComponentSize = (size4) => {
+  return componentSizeMap[size4 || "default"];
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/utils/vue/validator.mjs
@@ -21753,14 +23046,14 @@ var flattedChildren = (children) => {
   const vNodes = isArray3(children) ? children : [children];
   const result = [];
   vNodes.forEach((child) => {
-    var _a3;
+    var _a4;
     if (isArray3(child)) {
       result.push(...flattedChildren(child));
     } else if ((0, vue_exports.isVNode)(child) && isArray3(child.children)) {
       result.push(...flattedChildren(child.children));
     } else {
       result.push(child);
-      if ((0, vue_exports.isVNode)(child) && ((_a3 = child.component) == null ? void 0 : _a3.subTree)) {
+      if ((0, vue_exports.isVNode)(child) && ((_a4 = child.component) == null ? void 0 : _a4.subTree)) {
         result.push(...flattedChildren(child.component.subTree));
       }
     }
@@ -21812,8 +23105,8 @@ var useAttrs2 = (params = {}) => {
     return (0, vue_exports.computed)(() => ({}));
   }
   return (0, vue_exports.computed)(() => {
-    var _a3;
-    return fromPairs_default(Object.entries((_a3 = instance.proxy) == null ? void 0 : _a3.$attrs).filter(([key]) => !allExcludeKeys.value.includes(key) && !(excludeListeners && LISTENER_PREFIX.test(key))));
+    var _a4;
+    return fromPairs_default(Object.entries((_a4 = instance.proxy) == null ? void 0 : _a4.$attrs).filter(([key]) => !allExcludeKeys.value.includes(key) && !(excludeListeners && LISTENER_PREFIX.test(key))));
   });
 };
 
@@ -21882,8 +23175,8 @@ var ROOT_PICKER_INJECTION_KEY = Symbol();
 var useProp = (name) => {
   const vm = (0, vue_exports.getCurrentInstance)();
   return (0, vue_exports.computed)(() => {
-    var _a3, _b;
-    return (_b = ((_a3 = vm.proxy) == null ? void 0 : _a3.$props)[name]) != null ? _b : void 0;
+    var _a4, _b;
+    return (_b = ((_a4 = vm.proxy) == null ? void 0 : _a4.$props)[name]) != null ? _b : void 0;
   });
 };
 
@@ -21893,18 +23186,18 @@ function useGlobalConfig(key, defaultValue = void 0) {
   const config = (0, vue_exports.getCurrentInstance)() ? (0, vue_exports.inject)(configProviderContextKey, globalConfig) : globalConfig;
   if (key) {
     return (0, vue_exports.computed)(() => {
-      var _a3, _b;
-      return (_b = (_a3 = config.value) == null ? void 0 : _a3[key]) != null ? _b : defaultValue;
+      var _a4, _b;
+      return (_b = (_a4 = config.value) == null ? void 0 : _a4[key]) != null ? _b : defaultValue;
     });
   } else {
     return config;
   }
 }
 var provideGlobalConfig = (config, app, global2 = false) => {
-  var _a3;
+  var _a4;
   const inSetup = !!(0, vue_exports.getCurrentInstance)();
   const oldConfig = inSetup ? useGlobalConfig() : void 0;
-  const provideFn = (_a3 = app == null ? void 0 : app.provide) != null ? _a3 : inSetup ? vue_exports.provide : void 0;
+  const provideFn = (_a4 = app == null ? void 0 : app.provide) != null ? _a4 : inSetup ? vue_exports.provide : void 0;
   if (!provideFn) {
     debugWarn("provideGlobalConfig", "provideGlobalConfig() can only be used inside setup().");
     return;
@@ -21922,11 +23215,11 @@ var provideGlobalConfig = (config, app, global2 = false) => {
   return context;
 };
 var mergeConfig = (a3, b2) => {
-  var _a3;
+  var _a4;
   const keys2 = [.../* @__PURE__ */ new Set([...keysOf(a3), ...keysOf(b2)])];
   const obj = {};
   for (const key of keys2) {
-    obj[key] = (_a3 = b2[key]) != null ? _a3 : a3[key];
+    obj[key] = (_a4 = b2[key]) != null ? _a4 : a3[key];
   }
   return obj;
 };
@@ -21939,11 +23232,11 @@ var useSizeProp = buildProp({
 });
 var useSize = (fallback, ignore = {}) => {
   const emptyRef = (0, vue_exports.ref)(void 0);
-  const size3 = ignore.prop ? emptyRef : useProp("size");
+  const size4 = ignore.prop ? emptyRef : useProp("size");
   const globalConfig2 = ignore.global ? emptyRef : useGlobalConfig("size");
   const form = ignore.form ? { size: void 0 } : (0, vue_exports.inject)(formContextKey, void 0);
   const formItem = ignore.formItem ? { size: void 0 } : (0, vue_exports.inject)(formItemContextKey, void 0);
-  return (0, vue_exports.computed)(() => size3.value || (0, vue_exports.unref)(fallback) || (formItem == null ? void 0 : formItem.size) || (form == null ? void 0 : form.size) || globalConfig2.value || "");
+  return (0, vue_exports.computed)(() => size4.value || (0, vue_exports.unref)(fallback) || (formItem == null ? void 0 : formItem.size) || (form == null ? void 0 : form.size) || globalConfig2.value || "");
 };
 var useDisabled = (fallback) => {
   const disabled = useProp("disabled");
@@ -22029,8 +23322,8 @@ var useDraggable = (targetRef, dragRef, draggable2) => {
 var useFocus = (el) => {
   return {
     focus: () => {
-      var _a3, _b;
-      (_b = (_a3 = el.value) == null ? void 0 : _a3.focus) == null ? void 0 : _b.call(_a3);
+      var _a4, _b;
+      (_b = (_a4 = el.value) == null ? void 0 : _a4.focus) == null ? void 0 : _b.call(_a4);
     }
   };
 };
@@ -22147,8 +23440,8 @@ var useFormItemInputId = (props, {
   const inputId = (0, vue_exports.ref)();
   let idUnwatch = void 0;
   const isLabeledByFormItem = (0, vue_exports.computed)(() => {
-    var _a3;
-    return !!(!props.label && formItemContext && formItemContext.inputIds && ((_a3 = formItemContext.inputIds) == null ? void 0 : _a3.length) <= 1);
+    var _a4;
+    return !!(!props.label && formItemContext && formItemContext.inputIds && ((_a4 = formItemContext.inputIds) == null ? void 0 : _a4.length) <= 1);
   });
   (0, vue_exports.onMounted)(() => {
     idUnwatch = (0, vue_exports.watch)([(0, vue_exports.toRef)(props, "id"), disableIdGeneration], ([id2, disableIdGeneration2]) => {
@@ -22337,8 +23630,8 @@ var English = {
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/hooks/use-locale/index.mjs
 var buildTranslator = (locale) => (path, option2) => translate(path, option2, (0, vue_exports.unref)(locale));
 var translate = (path, option2, locale) => get_default(locale, path, path).replace(/\{(\w+)\}/g, (_2, key) => {
-  var _a3;
-  return `${(_a3 = option2 == null ? void 0 : option2[key]) != null ? _a3 : `{${key}}`}`;
+  var _a4;
+  return `${(_a4 = option2 == null ? void 0 : option2[key]) != null ? _a4 : `{${key}}`}`;
 });
 var buildLocaleContext = (locale) => {
   const lang = (0, vue_exports.computed)(() => (0, vue_exports.unref)(locale).name);
@@ -22354,14 +23647,887 @@ var useLocale = () => {
   return buildLocaleContext((0, vue_exports.computed)(() => locale.value || English));
 };
 
+// ../../node_modules/.pnpm/@vue+shared@3.2.33/node_modules/@vue/shared/dist/shared.esm-bundler.js
+function makeMap3(str, expectsLowerCase) {
+  const map3 = /* @__PURE__ */ Object.create(null);
+  const list = str.split(",");
+  for (let i = 0; i < list.length; i++) {
+    map3[list[i]] = true;
+  }
+  return expectsLowerCase ? (val) => !!map3[val.toLowerCase()] : (val) => !!map3[val];
+}
+var specialBooleanAttrs3 = `itemscope,allowfullscreen,formnovalidate,ismap,nomodule,novalidate,readonly`;
+var isBooleanAttr3 = /* @__PURE__ */ makeMap3(specialBooleanAttrs3 + `,async,autofocus,autoplay,controls,default,defer,disabled,hidden,loop,open,required,reversed,scoped,seamless,checked,muted,multiple,selected`);
+var EMPTY_OBJ3 = process.env.NODE_ENV !== "production" ? Object.freeze({}) : {};
+var EMPTY_ARR3 = process.env.NODE_ENV !== "production" ? Object.freeze([]) : [];
+var NOOP3 = () => {
+};
+var extend2 = Object.assign;
+var hasOwnProperty16 = Object.prototype.hasOwnProperty;
+var hasOwn4 = (val, key) => hasOwnProperty16.call(val, key);
+var isArray4 = Array.isArray;
+var isMap3 = (val) => toTypeString3(val) === "[object Map]";
+var isFunction5 = (val) => typeof val === "function";
+var isString4 = (val) => typeof val === "string";
+var isSymbol3 = (val) => typeof val === "symbol";
+var isObject5 = (val) => val !== null && typeof val === "object";
+var objectToString4 = Object.prototype.toString;
+var toTypeString3 = (value) => objectToString4.call(value);
+var toRawType3 = (value) => {
+  return toTypeString3(value).slice(8, -1);
+};
+var isIntegerKey2 = (key) => isString4(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
+var cacheStringFunction4 = (fn2) => {
+  const cache2 = /* @__PURE__ */ Object.create(null);
+  return (str) => {
+    const hit = cache2[str];
+    return hit || (cache2[str] = fn2(str));
+  };
+};
+var camelizeRE4 = /-(\w)/g;
+var camelize4 = cacheStringFunction4((str) => {
+  return str.replace(camelizeRE4, (_2, c2) => c2 ? c2.toUpperCase() : "");
+});
+var hyphenateRE3 = /\B([A-Z])/g;
+var hyphenate3 = cacheStringFunction4((str) => str.replace(hyphenateRE3, "-$1").toLowerCase());
+var capitalize4 = cacheStringFunction4((str) => str.charAt(0).toUpperCase() + str.slice(1));
+var toHandlerKey3 = cacheStringFunction4((str) => str ? `on${capitalize4(str)}` : ``);
+var hasChanged2 = (value, oldValue) => !Object.is(value, oldValue);
+
+// ../../node_modules/.pnpm/@vue+reactivity@3.2.33/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js
+function warn4(msg, ...args) {
+  console.warn(`[Vue warn] ${msg}`, ...args);
+}
+var activeEffectScope2;
+function recordEffectScope2(effect2, scope = activeEffectScope2) {
+  if (scope && scope.active) {
+    scope.effects.push(effect2);
+  }
+}
+var createDep2 = (effects) => {
+  const dep = new Set(effects);
+  dep.w = 0;
+  dep.n = 0;
+  return dep;
+};
+var wasTracked2 = (dep) => (dep.w & trackOpBit2) > 0;
+var newTracked2 = (dep) => (dep.n & trackOpBit2) > 0;
+var initDepMarkers2 = ({ deps }) => {
+  if (deps.length) {
+    for (let i = 0; i < deps.length; i++) {
+      deps[i].w |= trackOpBit2;
+    }
+  }
+};
+var finalizeDepMarkers2 = (effect2) => {
+  const { deps } = effect2;
+  if (deps.length) {
+    let ptr = 0;
+    for (let i = 0; i < deps.length; i++) {
+      const dep = deps[i];
+      if (wasTracked2(dep) && !newTracked2(dep)) {
+        dep.delete(effect2);
+      } else {
+        deps[ptr++] = dep;
+      }
+      dep.w &= ~trackOpBit2;
+      dep.n &= ~trackOpBit2;
+    }
+    deps.length = ptr;
+  }
+};
+var targetMap2 = /* @__PURE__ */ new WeakMap();
+var effectTrackDepth2 = 0;
+var trackOpBit2 = 1;
+var maxMarkerBits2 = 30;
+var activeEffect2;
+var ITERATE_KEY2 = Symbol(process.env.NODE_ENV !== "production" ? "iterate" : "");
+var MAP_KEY_ITERATE_KEY2 = Symbol(process.env.NODE_ENV !== "production" ? "Map key iterate" : "");
+var ReactiveEffect2 = class {
+  constructor(fn2, scheduler = null, scope) {
+    this.fn = fn2;
+    this.scheduler = scheduler;
+    this.active = true;
+    this.deps = [];
+    this.parent = void 0;
+    recordEffectScope2(this, scope);
+  }
+  run() {
+    if (!this.active) {
+      return this.fn();
+    }
+    let parent = activeEffect2;
+    let lastShouldTrack = shouldTrack2;
+    while (parent) {
+      if (parent === this) {
+        return;
+      }
+      parent = parent.parent;
+    }
+    try {
+      this.parent = activeEffect2;
+      activeEffect2 = this;
+      shouldTrack2 = true;
+      trackOpBit2 = 1 << ++effectTrackDepth2;
+      if (effectTrackDepth2 <= maxMarkerBits2) {
+        initDepMarkers2(this);
+      } else {
+        cleanupEffect2(this);
+      }
+      return this.fn();
+    } finally {
+      if (effectTrackDepth2 <= maxMarkerBits2) {
+        finalizeDepMarkers2(this);
+      }
+      trackOpBit2 = 1 << --effectTrackDepth2;
+      activeEffect2 = this.parent;
+      shouldTrack2 = lastShouldTrack;
+      this.parent = void 0;
+      if (this.deferStop) {
+        this.stop();
+      }
+    }
+  }
+  stop() {
+    if (activeEffect2 === this) {
+      this.deferStop = true;
+    } else if (this.active) {
+      cleanupEffect2(this);
+      if (this.onStop) {
+        this.onStop();
+      }
+      this.active = false;
+    }
+  }
+};
+function cleanupEffect2(effect2) {
+  const { deps } = effect2;
+  if (deps.length) {
+    for (let i = 0; i < deps.length; i++) {
+      deps[i].delete(effect2);
+    }
+    deps.length = 0;
+  }
+}
+var shouldTrack2 = true;
+var trackStack2 = [];
+function pauseTracking2() {
+  trackStack2.push(shouldTrack2);
+  shouldTrack2 = false;
+}
+function resetTracking2() {
+  const last2 = trackStack2.pop();
+  shouldTrack2 = last2 === void 0 ? true : last2;
+}
+function track2(target, type4, key) {
+  if (shouldTrack2 && activeEffect2) {
+    let depsMap = targetMap2.get(target);
+    if (!depsMap) {
+      targetMap2.set(target, depsMap = /* @__PURE__ */ new Map());
+    }
+    let dep = depsMap.get(key);
+    if (!dep) {
+      depsMap.set(key, dep = createDep2());
+    }
+    const eventInfo = process.env.NODE_ENV !== "production" ? { effect: activeEffect2, target, type: type4, key } : void 0;
+    trackEffects2(dep, eventInfo);
+  }
+}
+function trackEffects2(dep, debuggerEventExtraInfo) {
+  let shouldTrack3 = false;
+  if (effectTrackDepth2 <= maxMarkerBits2) {
+    if (!newTracked2(dep)) {
+      dep.n |= trackOpBit2;
+      shouldTrack3 = !wasTracked2(dep);
+    }
+  } else {
+    shouldTrack3 = !dep.has(activeEffect2);
+  }
+  if (shouldTrack3) {
+    dep.add(activeEffect2);
+    activeEffect2.deps.push(dep);
+    if (process.env.NODE_ENV !== "production" && activeEffect2.onTrack) {
+      activeEffect2.onTrack(Object.assign({ effect: activeEffect2 }, debuggerEventExtraInfo));
+    }
+  }
+}
+function trigger2(target, type4, key, newValue, oldValue, oldTarget) {
+  const depsMap = targetMap2.get(target);
+  if (!depsMap) {
+    return;
+  }
+  let deps = [];
+  if (type4 === "clear") {
+    deps = [...depsMap.values()];
+  } else if (key === "length" && isArray4(target)) {
+    depsMap.forEach((dep, key2) => {
+      if (key2 === "length" || key2 >= newValue) {
+        deps.push(dep);
+      }
+    });
+  } else {
+    if (key !== void 0) {
+      deps.push(depsMap.get(key));
+    }
+    switch (type4) {
+      case "add":
+        if (!isArray4(target)) {
+          deps.push(depsMap.get(ITERATE_KEY2));
+          if (isMap3(target)) {
+            deps.push(depsMap.get(MAP_KEY_ITERATE_KEY2));
+          }
+        } else if (isIntegerKey2(key)) {
+          deps.push(depsMap.get("length"));
+        }
+        break;
+      case "delete":
+        if (!isArray4(target)) {
+          deps.push(depsMap.get(ITERATE_KEY2));
+          if (isMap3(target)) {
+            deps.push(depsMap.get(MAP_KEY_ITERATE_KEY2));
+          }
+        }
+        break;
+      case "set":
+        if (isMap3(target)) {
+          deps.push(depsMap.get(ITERATE_KEY2));
+        }
+        break;
+    }
+  }
+  const eventInfo = process.env.NODE_ENV !== "production" ? { target, type: type4, key, newValue, oldValue, oldTarget } : void 0;
+  if (deps.length === 1) {
+    if (deps[0]) {
+      if (process.env.NODE_ENV !== "production") {
+        triggerEffects2(deps[0], eventInfo);
+      } else {
+        triggerEffects2(deps[0]);
+      }
+    }
+  } else {
+    const effects = [];
+    for (const dep of deps) {
+      if (dep) {
+        effects.push(...dep);
+      }
+    }
+    if (process.env.NODE_ENV !== "production") {
+      triggerEffects2(createDep2(effects), eventInfo);
+    } else {
+      triggerEffects2(createDep2(effects));
+    }
+  }
+}
+function triggerEffects2(dep, debuggerEventExtraInfo) {
+  for (const effect2 of isArray4(dep) ? dep : [...dep]) {
+    if (effect2 !== activeEffect2 || effect2.allowRecurse) {
+      if (process.env.NODE_ENV !== "production" && effect2.onTrigger) {
+        effect2.onTrigger(extend2({ effect: effect2 }, debuggerEventExtraInfo));
+      }
+      if (effect2.scheduler) {
+        effect2.scheduler();
+      } else {
+        effect2.run();
+      }
+    }
+  }
+}
+var isNonTrackableKeys2 = /* @__PURE__ */ makeMap3(`__proto__,__v_isRef,__isVue`);
+var builtInSymbols2 = new Set(
+  /* @__PURE__ */ Object.getOwnPropertyNames(Symbol).map((key) => Symbol[key]).filter(isSymbol3)
+);
+var get3 = /* @__PURE__ */ createGetter2();
+var readonlyGet2 = /* @__PURE__ */ createGetter2(true);
+var arrayInstrumentations2 = /* @__PURE__ */ createArrayInstrumentations2();
+function createArrayInstrumentations2() {
+  const instrumentations = {};
+  ["includes", "indexOf", "lastIndexOf"].forEach((key) => {
+    instrumentations[key] = function(...args) {
+      const arr = toRaw2(this);
+      for (let i = 0, l2 = this.length; i < l2; i++) {
+        track2(arr, "get", i + "");
+      }
+      const res = arr[key](...args);
+      if (res === -1 || res === false) {
+        return arr[key](...args.map(toRaw2));
+      } else {
+        return res;
+      }
+    };
+  });
+  ["push", "pop", "shift", "unshift", "splice"].forEach((key) => {
+    instrumentations[key] = function(...args) {
+      pauseTracking2();
+      const res = toRaw2(this)[key].apply(this, args);
+      resetTracking2();
+      return res;
+    };
+  });
+  return instrumentations;
+}
+function createGetter2(isReadonly3 = false, shallow = false) {
+  return function get4(target, key, receiver) {
+    if (key === "__v_isReactive") {
+      return !isReadonly3;
+    } else if (key === "__v_isReadonly") {
+      return isReadonly3;
+    } else if (key === "__v_isShallow") {
+      return shallow;
+    } else if (key === "__v_raw" && receiver === (isReadonly3 ? shallow ? shallowReadonlyMap2 : readonlyMap2 : shallow ? shallowReactiveMap2 : reactiveMap2).get(target)) {
+      return target;
+    }
+    const targetIsArray = isArray4(target);
+    if (!isReadonly3 && targetIsArray && hasOwn4(arrayInstrumentations2, key)) {
+      return Reflect.get(arrayInstrumentations2, key, receiver);
+    }
+    const res = Reflect.get(target, key, receiver);
+    if (isSymbol3(key) ? builtInSymbols2.has(key) : isNonTrackableKeys2(key)) {
+      return res;
+    }
+    if (!isReadonly3) {
+      track2(target, "get", key);
+    }
+    if (shallow) {
+      return res;
+    }
+    if (isRef5(res)) {
+      const shouldUnwrap = !targetIsArray || !isIntegerKey2(key);
+      return shouldUnwrap ? res.value : res;
+    }
+    if (isObject5(res)) {
+      return isReadonly3 ? readonly4(res) : reactive4(res);
+    }
+    return res;
+  };
+}
+var set4 = /* @__PURE__ */ createSetter2();
+function createSetter2(shallow = false) {
+  return function set5(target, key, value, receiver) {
+    let oldValue = target[key];
+    if (isReadonly2(oldValue) && isRef5(oldValue) && !isRef5(value)) {
+      return false;
+    }
+    if (!shallow && !isReadonly2(value)) {
+      if (!isShallow3(value)) {
+        value = toRaw2(value);
+        oldValue = toRaw2(oldValue);
+      }
+      if (!isArray4(target) && isRef5(oldValue) && !isRef5(value)) {
+        oldValue.value = value;
+        return true;
+      }
+    }
+    const hadKey = isArray4(target) && isIntegerKey2(key) ? Number(key) < target.length : hasOwn4(target, key);
+    const result = Reflect.set(target, key, value, receiver);
+    if (target === toRaw2(receiver)) {
+      if (!hadKey) {
+        trigger2(target, "add", key, value);
+      } else if (hasChanged2(value, oldValue)) {
+        trigger2(target, "set", key, value, oldValue);
+      }
+    }
+    return result;
+  };
+}
+function deleteProperty2(target, key) {
+  const hadKey = hasOwn4(target, key);
+  const oldValue = target[key];
+  const result = Reflect.deleteProperty(target, key);
+  if (result && hadKey) {
+    trigger2(target, "delete", key, void 0, oldValue);
+  }
+  return result;
+}
+function has2(target, key) {
+  const result = Reflect.has(target, key);
+  if (!isSymbol3(key) || !builtInSymbols2.has(key)) {
+    track2(target, "has", key);
+  }
+  return result;
+}
+function ownKeys2(target) {
+  track2(target, "iterate", isArray4(target) ? "length" : ITERATE_KEY2);
+  return Reflect.ownKeys(target);
+}
+var mutableHandlers2 = {
+  get: get3,
+  set: set4,
+  deleteProperty: deleteProperty2,
+  has: has2,
+  ownKeys: ownKeys2
+};
+var readonlyHandlers2 = {
+  get: readonlyGet2,
+  set(target, key) {
+    if (process.env.NODE_ENV !== "production") {
+      warn4(`Set operation on key "${String(key)}" failed: target is readonly.`, target);
+    }
+    return true;
+  },
+  deleteProperty(target, key) {
+    if (process.env.NODE_ENV !== "production") {
+      warn4(`Delete operation on key "${String(key)}" failed: target is readonly.`, target);
+    }
+    return true;
+  }
+};
+var toShallow2 = (value) => value;
+var getProto2 = (v2) => Reflect.getPrototypeOf(v2);
+function get$12(target, key, isReadonly3 = false, isShallow4 = false) {
+  target = target[
+    "__v_raw"
+    /* RAW */
+  ];
+  const rawTarget = toRaw2(target);
+  const rawKey = toRaw2(key);
+  if (key !== rawKey) {
+    !isReadonly3 && track2(rawTarget, "get", key);
+  }
+  !isReadonly3 && track2(rawTarget, "get", rawKey);
+  const { has: has3 } = getProto2(rawTarget);
+  const wrap = isShallow4 ? toShallow2 : isReadonly3 ? toReadonly2 : toReactive2;
+  if (has3.call(rawTarget, key)) {
+    return wrap(target.get(key));
+  } else if (has3.call(rawTarget, rawKey)) {
+    return wrap(target.get(rawKey));
+  } else if (target !== rawTarget) {
+    target.get(key);
+  }
+}
+function has$12(key, isReadonly3 = false) {
+  const target = this[
+    "__v_raw"
+    /* RAW */
+  ];
+  const rawTarget = toRaw2(target);
+  const rawKey = toRaw2(key);
+  if (key !== rawKey) {
+    !isReadonly3 && track2(rawTarget, "has", key);
+  }
+  !isReadonly3 && track2(rawTarget, "has", rawKey);
+  return key === rawKey ? target.has(key) : target.has(key) || target.has(rawKey);
+}
+function size2(target, isReadonly3 = false) {
+  target = target[
+    "__v_raw"
+    /* RAW */
+  ];
+  !isReadonly3 && track2(toRaw2(target), "iterate", ITERATE_KEY2);
+  return Reflect.get(target, "size", target);
+}
+function add2(value) {
+  value = toRaw2(value);
+  const target = toRaw2(this);
+  const proto = getProto2(target);
+  const hadKey = proto.has.call(target, value);
+  if (!hadKey) {
+    target.add(value);
+    trigger2(target, "add", value, value);
+  }
+  return this;
+}
+function set$12(key, value) {
+  value = toRaw2(value);
+  const target = toRaw2(this);
+  const { has: has3, get: get4 } = getProto2(target);
+  let hadKey = has3.call(target, key);
+  if (!hadKey) {
+    key = toRaw2(key);
+    hadKey = has3.call(target, key);
+  } else if (process.env.NODE_ENV !== "production") {
+    checkIdentityKeys2(target, has3, key);
+  }
+  const oldValue = get4.call(target, key);
+  target.set(key, value);
+  if (!hadKey) {
+    trigger2(target, "add", key, value);
+  } else if (hasChanged2(value, oldValue)) {
+    trigger2(target, "set", key, value, oldValue);
+  }
+  return this;
+}
+function deleteEntry2(key) {
+  const target = toRaw2(this);
+  const { has: has3, get: get4 } = getProto2(target);
+  let hadKey = has3.call(target, key);
+  if (!hadKey) {
+    key = toRaw2(key);
+    hadKey = has3.call(target, key);
+  } else if (process.env.NODE_ENV !== "production") {
+    checkIdentityKeys2(target, has3, key);
+  }
+  const oldValue = get4 ? get4.call(target, key) : void 0;
+  const result = target.delete(key);
+  if (hadKey) {
+    trigger2(target, "delete", key, void 0, oldValue);
+  }
+  return result;
+}
+function clear2() {
+  const target = toRaw2(this);
+  const hadItems = target.size !== 0;
+  const oldTarget = process.env.NODE_ENV !== "production" ? isMap3(target) ? new Map(target) : new Set(target) : void 0;
+  const result = target.clear();
+  if (hadItems) {
+    trigger2(target, "clear", void 0, void 0, oldTarget);
+  }
+  return result;
+}
+function createForEach2(isReadonly3, isShallow4) {
+  return function forEach(callback, thisArg) {
+    const observed = this;
+    const target = observed[
+      "__v_raw"
+      /* RAW */
+    ];
+    const rawTarget = toRaw2(target);
+    const wrap = isShallow4 ? toShallow2 : isReadonly3 ? toReadonly2 : toReactive2;
+    !isReadonly3 && track2(rawTarget, "iterate", ITERATE_KEY2);
+    return target.forEach((value, key) => {
+      return callback.call(thisArg, wrap(value), wrap(key), observed);
+    });
+  };
+}
+function createIterableMethod2(method4, isReadonly3, isShallow4) {
+  return function(...args) {
+    const target = this[
+      "__v_raw"
+      /* RAW */
+    ];
+    const rawTarget = toRaw2(target);
+    const targetIsMap = isMap3(rawTarget);
+    const isPair = method4 === "entries" || method4 === Symbol.iterator && targetIsMap;
+    const isKeyOnly = method4 === "keys" && targetIsMap;
+    const innerIterator = target[method4](...args);
+    const wrap = isShallow4 ? toShallow2 : isReadonly3 ? toReadonly2 : toReactive2;
+    !isReadonly3 && track2(rawTarget, "iterate", isKeyOnly ? MAP_KEY_ITERATE_KEY2 : ITERATE_KEY2);
+    return {
+      // iterator protocol
+      next() {
+        const { value, done } = innerIterator.next();
+        return done ? { value, done } : {
+          value: isPair ? [wrap(value[0]), wrap(value[1])] : wrap(value),
+          done
+        };
+      },
+      // iterable protocol
+      [Symbol.iterator]() {
+        return this;
+      }
+    };
+  };
+}
+function createReadonlyMethod2(type4) {
+  return function(...args) {
+    if (process.env.NODE_ENV !== "production") {
+      const key = args[0] ? `on key "${args[0]}" ` : ``;
+      console.warn(`${capitalize4(type4)} operation ${key}failed: target is readonly.`, toRaw2(this));
+    }
+    return type4 === "delete" ? false : this;
+  };
+}
+function createInstrumentations2() {
+  const mutableInstrumentations3 = {
+    get(key) {
+      return get$12(this, key);
+    },
+    get size() {
+      return size2(this);
+    },
+    has: has$12,
+    add: add2,
+    set: set$12,
+    delete: deleteEntry2,
+    clear: clear2,
+    forEach: createForEach2(false, false)
+  };
+  const shallowInstrumentations3 = {
+    get(key) {
+      return get$12(this, key, false, true);
+    },
+    get size() {
+      return size2(this);
+    },
+    has: has$12,
+    add: add2,
+    set: set$12,
+    delete: deleteEntry2,
+    clear: clear2,
+    forEach: createForEach2(false, true)
+  };
+  const readonlyInstrumentations3 = {
+    get(key) {
+      return get$12(this, key, true);
+    },
+    get size() {
+      return size2(this, true);
+    },
+    has(key) {
+      return has$12.call(this, key, true);
+    },
+    add: createReadonlyMethod2(
+      "add"
+      /* ADD */
+    ),
+    set: createReadonlyMethod2(
+      "set"
+      /* SET */
+    ),
+    delete: createReadonlyMethod2(
+      "delete"
+      /* DELETE */
+    ),
+    clear: createReadonlyMethod2(
+      "clear"
+      /* CLEAR */
+    ),
+    forEach: createForEach2(true, false)
+  };
+  const shallowReadonlyInstrumentations3 = {
+    get(key) {
+      return get$12(this, key, true, true);
+    },
+    get size() {
+      return size2(this, true);
+    },
+    has(key) {
+      return has$12.call(this, key, true);
+    },
+    add: createReadonlyMethod2(
+      "add"
+      /* ADD */
+    ),
+    set: createReadonlyMethod2(
+      "set"
+      /* SET */
+    ),
+    delete: createReadonlyMethod2(
+      "delete"
+      /* DELETE */
+    ),
+    clear: createReadonlyMethod2(
+      "clear"
+      /* CLEAR */
+    ),
+    forEach: createForEach2(true, true)
+  };
+  const iteratorMethods = ["keys", "values", "entries", Symbol.iterator];
+  iteratorMethods.forEach((method4) => {
+    mutableInstrumentations3[method4] = createIterableMethod2(method4, false, false);
+    readonlyInstrumentations3[method4] = createIterableMethod2(method4, true, false);
+    shallowInstrumentations3[method4] = createIterableMethod2(method4, false, true);
+    shallowReadonlyInstrumentations3[method4] = createIterableMethod2(method4, true, true);
+  });
+  return [
+    mutableInstrumentations3,
+    readonlyInstrumentations3,
+    shallowInstrumentations3,
+    shallowReadonlyInstrumentations3
+  ];
+}
+var [mutableInstrumentations2, readonlyInstrumentations2, shallowInstrumentations2, shallowReadonlyInstrumentations2] = /* @__PURE__ */ createInstrumentations2();
+function createInstrumentationGetter2(isReadonly3, shallow) {
+  const instrumentations = shallow ? isReadonly3 ? shallowReadonlyInstrumentations2 : shallowInstrumentations2 : isReadonly3 ? readonlyInstrumentations2 : mutableInstrumentations2;
+  return (target, key, receiver) => {
+    if (key === "__v_isReactive") {
+      return !isReadonly3;
+    } else if (key === "__v_isReadonly") {
+      return isReadonly3;
+    } else if (key === "__v_raw") {
+      return target;
+    }
+    return Reflect.get(hasOwn4(instrumentations, key) && key in target ? instrumentations : target, key, receiver);
+  };
+}
+var mutableCollectionHandlers2 = {
+  get: /* @__PURE__ */ createInstrumentationGetter2(false, false)
+};
+var readonlyCollectionHandlers2 = {
+  get: /* @__PURE__ */ createInstrumentationGetter2(true, false)
+};
+function checkIdentityKeys2(target, has3, key) {
+  const rawKey = toRaw2(key);
+  if (rawKey !== key && has3.call(target, rawKey)) {
+    const type4 = toRawType3(target);
+    console.warn(`Reactive ${type4} contains both the raw and reactive versions of the same object${type4 === `Map` ? ` as keys` : ``}, which can lead to inconsistencies. Avoid differentiating between the raw and reactive versions of an object and only use the reactive version if possible.`);
+  }
+}
+var reactiveMap2 = /* @__PURE__ */ new WeakMap();
+var shallowReactiveMap2 = /* @__PURE__ */ new WeakMap();
+var readonlyMap2 = /* @__PURE__ */ new WeakMap();
+var shallowReadonlyMap2 = /* @__PURE__ */ new WeakMap();
+function targetTypeMap2(rawType) {
+  switch (rawType) {
+    case "Object":
+    case "Array":
+      return 1;
+    case "Map":
+    case "Set":
+    case "WeakMap":
+    case "WeakSet":
+      return 2;
+    default:
+      return 0;
+  }
+}
+function getTargetType2(value) {
+  return value[
+    "__v_skip"
+    /* SKIP */
+  ] || !Object.isExtensible(value) ? 0 : targetTypeMap2(toRawType3(value));
+}
+function reactive4(target) {
+  if (isReadonly2(target)) {
+    return target;
+  }
+  return createReactiveObject2(target, false, mutableHandlers2, mutableCollectionHandlers2, reactiveMap2);
+}
+function readonly4(target) {
+  return createReactiveObject2(target, true, readonlyHandlers2, readonlyCollectionHandlers2, readonlyMap2);
+}
+function createReactiveObject2(target, isReadonly3, baseHandlers, collectionHandlers, proxyMap) {
+  if (!isObject5(target)) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(`value cannot be made reactive: ${String(target)}`);
+    }
+    return target;
+  }
+  if (target[
+    "__v_raw"
+    /* RAW */
+  ] && !(isReadonly3 && target[
+    "__v_isReactive"
+    /* IS_REACTIVE */
+  ])) {
+    return target;
+  }
+  const existingProxy = proxyMap.get(target);
+  if (existingProxy) {
+    return existingProxy;
+  }
+  const targetType = getTargetType2(target);
+  if (targetType === 0) {
+    return target;
+  }
+  const proxy = new Proxy(target, targetType === 2 ? collectionHandlers : baseHandlers);
+  proxyMap.set(target, proxy);
+  return proxy;
+}
+function isReadonly2(value) {
+  return !!(value && value[
+    "__v_isReadonly"
+    /* IS_READONLY */
+  ]);
+}
+function isShallow3(value) {
+  return !!(value && value[
+    "__v_isShallow"
+    /* IS_SHALLOW */
+  ]);
+}
+function toRaw2(observed) {
+  const raw = observed && observed[
+    "__v_raw"
+    /* RAW */
+  ];
+  return raw ? toRaw2(raw) : observed;
+}
+var toReactive2 = (value) => isObject5(value) ? reactive4(value) : value;
+var toReadonly2 = (value) => isObject5(value) ? readonly4(value) : value;
+function trackRefValue2(ref153) {
+  if (shouldTrack2 && activeEffect2) {
+    ref153 = toRaw2(ref153);
+    if (process.env.NODE_ENV !== "production") {
+      trackEffects2(ref153.dep || (ref153.dep = createDep2()), {
+        target: ref153,
+        type: "get",
+        key: "value"
+      });
+    } else {
+      trackEffects2(ref153.dep || (ref153.dep = createDep2()));
+    }
+  }
+}
+function triggerRefValue2(ref153, newVal) {
+  ref153 = toRaw2(ref153);
+  if (ref153.dep) {
+    if (process.env.NODE_ENV !== "production") {
+      triggerEffects2(ref153.dep, {
+        target: ref153,
+        type: "set",
+        key: "value",
+        newValue: newVal
+      });
+    } else {
+      triggerEffects2(ref153.dep);
+    }
+  }
+}
+function isRef5(r) {
+  return !!(r && r.__v_isRef === true);
+}
+var ComputedRefImpl2 = class {
+  constructor(getter, _setter, isReadonly3, isSSR) {
+    this._setter = _setter;
+    this.dep = void 0;
+    this.__v_isRef = true;
+    this._dirty = true;
+    this.effect = new ReactiveEffect2(getter, () => {
+      if (!this._dirty) {
+        this._dirty = true;
+        triggerRefValue2(this);
+      }
+    });
+    this.effect.computed = this;
+    this.effect.active = this._cacheable = !isSSR;
+    this[
+      "__v_isReadonly"
+      /* IS_READONLY */
+    ] = isReadonly3;
+  }
+  get value() {
+    const self2 = toRaw2(this);
+    trackRefValue2(self2);
+    if (self2._dirty || !self2._cacheable) {
+      self2._dirty = false;
+      self2._value = self2.effect.run();
+    }
+    return self2._value;
+  }
+  set value(newValue) {
+    this._setter(newValue);
+  }
+};
+function computed12(getterOrOptions, debugOptions, isSSR = false) {
+  let getter;
+  let setter;
+  const onlyGetter = isFunction5(getterOrOptions);
+  if (onlyGetter) {
+    getter = getterOrOptions;
+    setter = process.env.NODE_ENV !== "production" ? () => {
+      console.warn("Write operation failed: computed value is readonly");
+    } : NOOP3;
+  } else {
+    getter = getterOrOptions.get;
+    setter = getterOrOptions.set;
+  }
+  const cRef = new ComputedRefImpl2(getter, setter, onlyGetter || !setter, isSSR);
+  if (process.env.NODE_ENV !== "production" && debugOptions && !isSSR) {
+    cRef.effect.onTrack = debugOptions.onTrack;
+    cRef.effect.onTrigger = debugOptions.onTrigger;
+  }
+  return cRef;
+}
+var _a3;
+_a3 = "__v_isReadonly";
+
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/hooks/use-lockscreen/index.mjs
-init_reactivity_esm_bundler();
-var useLockscreen = (trigger2) => {
-  if (!(0, vue_exports.isRef)(trigger2)) {
+var useLockscreen = (trigger3) => {
+  if (!(0, vue_exports.isRef)(trigger3)) {
     throwError("[useLockscreen]", "You need to pass a ref param to this function");
   }
   const ns2 = useNamespace("popup");
-  const hiddenCls = computed(() => ns2.bm("parent", "hidden"));
+  const hiddenCls = computed12(() => ns2.bm("parent", "hidden"));
   if (!isClient || hasClass(document.body, hiddenCls.value)) {
     return;
   }
@@ -22376,7 +24542,7 @@ var useLockscreen = (trigger2) => {
       }
     }, 200);
   };
-  (0, vue_exports.watch)(trigger2, (val) => {
+  (0, vue_exports.watch)(trigger3, (val) => {
     if (!val) {
       cleanup();
       return;
@@ -22495,7 +24661,9 @@ var createModelToggleComposable = (name) => {
     };
     (0, vue_exports.watch)(() => props[name], onChange);
     if (shouldHideWhenRouteChanges && instance.appContext.config.globalProperties.$route !== void 0) {
-      (0, vue_exports.watch)(() => __spreadValues({}, instance.proxy.$route), () => {
+      (0, vue_exports.watch)(() => ({
+        ...instance.proxy.$route
+      }), () => {
         if (shouldHideWhenRouteChanges.value && indicator.value) {
           hide2();
         }
@@ -23103,11 +25271,11 @@ var yn = we({ defaultModifiers: gn });
 var useRestoreActive = (toggle, initialFocus) => {
   let previousActive;
   (0, vue_exports.watch)(() => toggle.value, (val) => {
-    var _a3, _b;
+    var _a4, _b;
     if (val) {
       previousActive = document.activeElement;
       if ((0, vue_exports.isRef)(initialFocus)) {
-        (_b = (_a3 = initialFocus.value).focus) == null ? void 0 : _b.call(_a3);
+        (_b = (_a4 = initialFocus.value).focus) == null ? void 0 : _b.call(_a4);
       }
     } else {
       if (process.env.NODE_ENV === "test") {
@@ -23441,9 +25609,13 @@ var computePosition = async (reference, floating, config) => {
     });
     x2 = nextX != null ? nextX : x2;
     y = nextY != null ? nextY : y;
-    middlewareData = __spreadProps(__spreadValues({}, middlewareData), {
-      [name]: __spreadValues(__spreadValues({}, middlewareData[name]), data)
-    });
+    middlewareData = {
+      ...middlewareData,
+      [name]: {
+        ...middlewareData[name],
+        ...data
+      }
+    };
     if (process.env.NODE_ENV !== "production") {
       if (resetCount > 50) {
         console.warn(["Floating UI: The middleware lifecycle appears to be running in an", "infinite loop. This is usually caused by a `reset` continually", "being returned without a break condition."].join(" "));
@@ -23480,12 +25652,13 @@ var computePosition = async (reference, floating, config) => {
   };
 };
 function expandPaddingObject(padding) {
-  return __spreadValues({
+  return {
     top: 0,
     right: 0,
     bottom: 0,
-    left: 0
-  }, padding);
+    left: 0,
+    ...padding
+  };
 }
 function getSideObjectFromPadding(padding) {
   return typeof padding !== "number" ? expandPaddingObject(padding) : {
@@ -23496,12 +25669,13 @@ function getSideObjectFromPadding(padding) {
   };
 }
 function rectToClientRect(rect) {
-  return __spreadProps(__spreadValues({}, rect), {
+  return {
+    ...rect,
     top: rect.y,
     left: rect.x,
     right: rect.x + rect.width,
     bottom: rect.y + rect.height
-  });
+  };
 }
 var min = Math.min;
 var max = Math.max;
@@ -23583,11 +25757,12 @@ async function convertValueToCoords(middlewareArguments, value) {
     mainAxis: rawValue,
     crossAxis: 0,
     alignmentAxis: null
-  } : __spreadValues({
+  } : {
     mainAxis: 0,
     crossAxis: 0,
-    alignmentAxis: null
-  }, rawValue);
+    alignmentAxis: null,
+    ...rawValue
+  };
   if (alignment && typeof alignmentAxis === "number") {
     crossAxis = alignment === "end" ? alignmentAxis * -1 : alignmentAxis;
   }
@@ -23676,10 +25851,13 @@ function isContainingBlock(element) {
   const isFirefox2 = /firefox/i.test(getUAString());
   const css2 = getComputedStyle$1(element);
   const backdropFilter = css2.backdropFilter || css2.WebkitBackdropFilter;
-  return css2.transform !== "none" || css2.perspective !== "none" || (backdropFilter ? backdropFilter !== "none" : false) || isFirefox2 && css2.willChange === "filter" || isFirefox2 && (css2.filter ? css2.filter !== "none" : false) || ["transform", "perspective"].some((value) => css2.willChange.includes(value)) || ["paint", "layout", "strict", "content"].some((value) => {
-    const contain = css2.contain;
-    return contain != null ? contain.includes(value) : false;
-  });
+  return css2.transform !== "none" || css2.perspective !== "none" || (backdropFilter ? backdropFilter !== "none" : false) || isFirefox2 && css2.willChange === "filter" || isFirefox2 && (css2.filter ? css2.filter !== "none" : false) || ["transform", "perspective"].some((value) => css2.willChange.includes(value)) || ["paint", "layout", "strict", "content"].some(
+    // TS 4.1 compat
+    (value) => {
+      const contain = css2.contain;
+      return contain != null ? contain.includes(value) : false;
+    }
+  );
 }
 function isLayoutViewport() {
   return !/^((?!chrome|android).)*safari/i.test(getUAString());
@@ -23847,7 +26025,13 @@ function getParentNode(node) {
   if (getNodeName(node) === "html") {
     return node;
   }
-  const result = node.assignedSlot || node.parentNode || (isShadowRoot(node) ? node.host : null) || getDocumentElement(node);
+  const result = (
+    // Step into the shadow DOM of the parent of a slotted node
+    node.assignedSlot || // DOM Element detected
+    node.parentNode || // ShadowRoot detected
+    (isShadowRoot(node) ? node.host : null) || // Fallback
+    getDocumentElement(node)
+  );
   return isShadowRoot(result) ? result.host : result;
 }
 function getTrueOffsetParent(element) {
@@ -24086,10 +26270,11 @@ var platform = {
     const getDimensionsFn = this.getDimensions;
     return {
       reference: getRectRelativeToOffsetParent(reference, await getOffsetParentFn(floating), strategy),
-      floating: __spreadValues({
+      floating: {
         x: 0,
-        y: 0
-      }, await getDimensionsFn(floating))
+        y: 0,
+        ...await getDimensionsFn(floating)
+      }
     };
   },
   getClientRects: (element) => Array.from(element.getClientRects()),
@@ -24097,15 +26282,18 @@ var platform = {
 };
 var computePosition2 = (reference, floating, options) => {
   const cache2 = /* @__PURE__ */ new Map();
-  const mergedOptions = __spreadValues({
-    platform
-  }, options);
-  const platformWithCache = __spreadProps(__spreadValues({}, mergedOptions.platform), {
+  const mergedOptions = {
+    platform,
+    ...options
+  };
+  const platformWithCache = {
+    ...mergedOptions.platform,
     _c: cache2
-  });
-  return computePosition(reference, floating, __spreadProps(__spreadValues({}, mergedOptions), {
+  };
+  return computePosition(reference, floating, {
+    ...mergedOptions,
     platform: platformWithCache
-  }));
+  });
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/hooks/use-floating/index.mjs
@@ -24158,11 +26346,12 @@ var useFloating = ({
       update();
     });
   });
-  return __spreadProps(__spreadValues({}, states), {
+  return {
+    ...states,
     update,
     referenceRef,
     contentRef
-  });
+  };
 };
 var arrowMiddleware = ({
   arrowRef,
@@ -24232,8 +26421,8 @@ function useCursor(input) {
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/hooks/use-ordered-children/index.mjs
 var getOrderedChildren = (vm, childComponentName, children) => {
   const nodes = flattedChildren(vm.subTree).filter((n) => {
-    var _a3;
-    return (0, vue_exports.isVNode)(n) && ((_a3 = n.type) == null ? void 0 : _a3.name) === childComponentName && !!n.component;
+    var _a4;
+    return (0, vue_exports.isVNode)(n) && ((_a4 = n.type) == null ? void 0 : _a4.name) === childComponentName && !!n.component;
   });
   const uids = nodes.map((n) => n.component.uid);
   return uids.map((uid3) => children[uid3]).filter((p3) => !!p3);
@@ -24314,7 +26503,8 @@ var COMPONENT_NAME = "ElAffix";
 var __default__ = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME
 });
-var _sfc_main = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__), {
+var _sfc_main = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__,
   props: affixProps,
   emits: affixEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -24383,9 +26573,9 @@ var _sfc_main = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(_
     };
     (0, vue_exports.watch)(fixed, (val) => emit2("change", val));
     (0, vue_exports.onMounted)(() => {
-      var _a3;
+      var _a4;
       if (props.target) {
-        target.value = (_a3 = document.querySelector(props.target)) != null ? _a3 : void 0;
+        target.value = (_a4 = document.querySelector(props.target)) != null ? _a4 : void 0;
         if (!target.value)
           throwError(COMPONENT_NAME, `Target is not existed: ${props.target}`);
       } else {
@@ -24416,7 +26606,7 @@ var _sfc_main = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(_
       ], 6);
     };
   }
-}));
+});
 var Affix = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/affix/src/affix.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/affix/index.mjs
@@ -24437,17 +26627,18 @@ var __default__2 = (0, vue_exports.defineComponent)({
   name: "ElIcon",
   inheritAttrs: false
 });
-var _sfc_main2 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__2), {
+var _sfc_main2 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__2,
   props: iconProps,
   setup(__props) {
     const props = __props;
     const ns2 = useNamespace("icon");
     const style = (0, vue_exports.computed)(() => {
-      const { size: size3, color } = props;
-      if (!size3 && !color)
+      const { size: size4, color } = props;
+      if (!size4 && !color)
         return {};
       return {
-        fontSize: isUndefined(size3) ? void 0 : addUnit(size3),
+        fontSize: isUndefined(size4) ? void 0 : addUnit(size4),
         "--color": color
       };
     });
@@ -24460,7 +26651,7 @@ var _sfc_main2 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       ], 16);
     };
   }
-}));
+});
 var Icon = /* @__PURE__ */ _export_sfc(_sfc_main2, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/icon/src/icon.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/icon/index.mjs
@@ -24506,7 +26697,8 @@ var alertEmits = {
 var __default__3 = (0, vue_exports.defineComponent)({
   name: "ElAlert"
 });
-var _sfc_main3 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__3), {
+var _sfc_main3 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__3,
   props: alertProps,
   emits: alertEmits,
   setup(__props, { emit: emit2 }) {
@@ -24590,7 +26782,7 @@ var _sfc_main3 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       }, 8, ["name"]);
     };
   }
-}));
+});
 var Alert = /* @__PURE__ */ _export_sfc(_sfc_main3, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/alert/src/alert.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/alert/index.mjs
@@ -24633,7 +26825,7 @@ function calculateNodeStyling(targetElement) {
   return { contextStyle, paddingSize, borderSize, boxSizing };
 }
 function calcTextareaHeight(targetElement, minRows = 1, maxRows) {
-  var _a3;
+  var _a4;
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement("textarea");
     document.body.appendChild(hiddenTextarea);
@@ -24666,7 +26858,7 @@ function calcTextareaHeight(targetElement, minRows = 1, maxRows) {
     height = Math.min(maxHeight, height);
   }
   result.height = `${height}px`;
-  (_a3 = hiddenTextarea.parentNode) == null ? void 0 : _a3.removeChild(hiddenTextarea);
+  (_a4 = hiddenTextarea.parentNode) == null ? void 0 : _a4.removeChild(hiddenTextarea);
   hiddenTextarea = void 0;
   return result;
 }
@@ -24781,7 +26973,8 @@ var __default__4 = (0, vue_exports.defineComponent)({
   name: "ElInput",
   inheritAttrs: false
 });
-var _sfc_main4 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__4), {
+var _sfc_main4 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__4,
   props: inputProps,
   emits: inputEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -24839,8 +27032,8 @@ var _sfc_main4 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
     const textareaCalcStyle = (0, vue_exports.shallowRef)(props.inputStyle);
     const _ref = (0, vue_exports.computed)(() => input.value || textarea.value);
     const needStatusIcon = (0, vue_exports.computed)(() => {
-      var _a3;
-      return (_a3 = form == null ? void 0 : form.statusIcon) != null ? _a3 : false;
+      var _a4;
+      return (_a4 = form == null ? void 0 : form.statusIcon) != null ? _a4 : false;
     });
     const validateState = (0, vue_exports.computed)(() => (formItem == null ? void 0 : formItem.validateState) || "");
     const validateIcon = (0, vue_exports.computed)(() => validateState.value && ValidateComponentsMap[validateState.value]);
@@ -24878,7 +27071,9 @@ var _sfc_main4 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       if (autosize) {
         const minRows = isObject4(autosize) ? autosize.minRows : void 0;
         const maxRows = isObject4(autosize) ? autosize.maxRows : void 0;
-        textareaCalcStyle.value = __spreadValues({}, calcTextareaHeight(textarea.value, minRows, maxRows));
+        textareaCalcStyle.value = {
+          ...calcTextareaHeight(textarea.value, minRows, maxRows)
+        };
       } else {
         textareaCalcStyle.value = {
           minHeight: calcTextareaHeight(textarea.value).minHeight
@@ -24918,9 +27113,9 @@ var _sfc_main4 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       isComposing.value = true;
     };
     const handleCompositionUpdate = (event) => {
-      var _a3;
+      var _a4;
       emit2("compositionupdate", event);
-      const text = (_a3 = event.target) == null ? void 0 : _a3.value;
+      const text = (_a4 = event.target) == null ? void 0 : _a4.value;
       const lastCharacter = text[text.length - 1] || "";
       isComposing.value = !isKorean(lastCharacter);
     };
@@ -24936,24 +27131,24 @@ var _sfc_main4 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       focus();
     };
     const focus = async () => {
-      var _a3;
+      var _a4;
       await (0, vue_exports.nextTick)();
-      (_a3 = _ref.value) == null ? void 0 : _a3.focus();
+      (_a4 = _ref.value) == null ? void 0 : _a4.focus();
     };
     const blur = () => {
-      var _a3;
-      return (_a3 = _ref.value) == null ? void 0 : _a3.blur();
+      var _a4;
+      return (_a4 = _ref.value) == null ? void 0 : _a4.blur();
     };
     const handleFocus = (event) => {
       focused.value = true;
       emit2("focus", event);
     };
     const handleBlur = (event) => {
-      var _a3;
+      var _a4;
       focused.value = false;
       emit2("blur", event);
       if (props.validateEvent) {
-        (_a3 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a3.call(formItem, "blur").catch((err) => debugWarn(err));
+        (_a4 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a4.call(formItem, "blur").catch((err) => debugWarn(err));
       }
     };
     const handleMouseLeave = (evt) => {
@@ -24968,20 +27163,20 @@ var _sfc_main4 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       emit2("keydown", evt);
     };
     const select = () => {
-      var _a3;
-      (_a3 = _ref.value) == null ? void 0 : _a3.select();
+      var _a4;
+      (_a4 = _ref.value) == null ? void 0 : _a4.select();
     };
-    const clear2 = () => {
+    const clear3 = () => {
       emit2(UPDATE_MODEL_EVENT, "");
       emit2("change", "");
       emit2("clear");
       emit2("input", "");
     };
     (0, vue_exports.watch)(() => props.modelValue, () => {
-      var _a3;
+      var _a4;
       (0, vue_exports.nextTick)(() => resizeTextarea());
       if (props.validateEvent) {
-        (_a3 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a3.call(formItem, "change").catch((err) => debugWarn(err));
+        (_a4 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a4.call(formItem, "change").catch((err) => debugWarn(err));
       }
     });
     (0, vue_exports.watch)(nativeInputValue, () => setNativeInputValue());
@@ -25006,7 +27201,7 @@ var _sfc_main4 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       focus,
       blur,
       select,
-      clear: clear2,
+      clear: clear3,
       resizeTextarea
     });
     return (_ctx, _cache) => {
@@ -25101,7 +27296,7 @@ var _sfc_main4 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
                   key: 1,
                   class: (0, vue_exports.normalizeClass)([(0, vue_exports.unref)(nsInput).e("icon"), (0, vue_exports.unref)(nsInput).e("clear")]),
                   onMousedown: (0, vue_exports.withModifiers)((0, vue_exports.unref)(NOOP2), ["prevent"]),
-                  onClick: clear2
+                  onClick: clear3
                 }, {
                   default: (0, vue_exports.withCtx)(() => [
                     (0, vue_exports.createVNode)((0, vue_exports.unref)(circle_close_default))
@@ -25185,7 +27380,7 @@ var _sfc_main4 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       ]);
     };
   }
-}));
+});
 var Input = /* @__PURE__ */ _export_sfc(_sfc_main4, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/input/src/input.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/input/index.mjs
@@ -25217,10 +27412,10 @@ var BAR_MAP = {
 };
 var renderThumbStyle = ({
   move,
-  size: size3,
+  size: size4,
   bar
 }) => ({
-  [bar.size]: size3,
+  [bar.size]: size4,
   transform: `translate${bar.axis}(${move}%)`
 });
 
@@ -25262,11 +27457,11 @@ var _sfc_main5 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
     }));
     const offsetRatio = (0, vue_exports.computed)(() => instance.value[bar.value.offset] ** 2 / scrollbar.wrapElement[bar.value.scrollSize] / props.ratio / thumb.value[bar.value.offset]);
     const clickThumbHandler = (e) => {
-      var _a3;
+      var _a4;
       e.stopPropagation();
       if (e.ctrlKey || [1, 2].includes(e.button))
         return;
-      (_a3 = window.getSelection()) == null ? void 0 : _a3.removeAllRanges();
+      (_a4 = window.getSelection()) == null ? void 0 : _a4.removeAllRanges();
       startDrag(e);
       const el = e.currentTarget;
       if (!el)
@@ -25470,7 +27665,8 @@ var COMPONENT_NAME3 = "ElScrollbar";
 var __default__5 = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME3
 });
-var _sfc_main7 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__5), {
+var _sfc_main7 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__5,
   props: scrollbarProps,
   emits: scrollbarEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -25505,9 +27701,9 @@ var _sfc_main7 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       return [ns2.e("view"), props.viewClass];
     });
     const handleScroll2 = () => {
-      var _a3;
+      var _a4;
       if (wrapRef.value) {
-        (_a3 = barRef.value) == null ? void 0 : _a3.handleScroll(wrapRef.value);
+        (_a4 = barRef.value) == null ? void 0 : _a4.handleScroll(wrapRef.value);
         emit2("scroll", {
           scrollTop: wrapRef.value.scrollTop,
           scrollLeft: wrapRef.value.scrollLeft
@@ -25562,10 +27758,10 @@ var _sfc_main7 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
     (0, vue_exports.watch)(() => [props.maxHeight, props.height], () => {
       if (!props.native)
         (0, vue_exports.nextTick)(() => {
-          var _a3;
+          var _a4;
           update();
           if (wrapRef.value) {
-            (_a3 = barRef.value) == null ? void 0 : _a3.handleScroll(wrapRef.value);
+            (_a4 = barRef.value) == null ? void 0 : _a4.handleScroll(wrapRef.value);
           }
         });
     });
@@ -25626,7 +27822,7 @@ var _sfc_main7 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       ], 2);
     };
   }
-}));
+});
 var Scrollbar = /* @__PURE__ */ _export_sfc(_sfc_main7, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/scrollbar/src/scrollbar.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/scrollbar/index.mjs
@@ -25656,7 +27852,8 @@ var __default__6 = (0, vue_exports.defineComponent)({
   name: "ElPopperRoot",
   inheritAttrs: false
 });
-var _sfc_main8 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__6), {
+var _sfc_main8 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__6,
   props: popperProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -25678,7 +27875,7 @@ var _sfc_main8 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       return (0, vue_exports.renderSlot)(_ctx.$slots, "default");
     };
   }
-}));
+});
 var Popper = /* @__PURE__ */ _export_sfc(_sfc_main8, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/popper/src/popper.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/popper/src/arrow.mjs
@@ -25694,7 +27891,8 @@ var __default__7 = (0, vue_exports.defineComponent)({
   name: "ElPopperArrow",
   inheritAttrs: false
 });
-var _sfc_main9 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__7), {
+var _sfc_main9 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__7,
   props: popperArrowProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -25718,7 +27916,7 @@ var _sfc_main9 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(
       }, null, 2);
     };
   }
-}));
+});
 var ElPopperArrow = /* @__PURE__ */ _export_sfc(_sfc_main9, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/popper/src/arrow.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/slot/src/only-child.mjs
@@ -25729,9 +27927,9 @@ var OnlyChild = (0, vue_exports.defineComponent)({
     slots,
     attrs
   }) {
-    var _a3;
+    var _a4;
     const forwardRefInjection = (0, vue_exports.inject)(FORWARD_REF_INJECTION_KEY);
-    const forwardRefDirective = useForwardRefDirective((_a3 = forwardRefInjection == null ? void 0 : forwardRefInjection.setForwardRef) != null ? _a3 : NOOP2);
+    const forwardRefDirective = useForwardRefDirective((_a4 = forwardRefInjection == null ? void 0 : forwardRefInjection.setForwardRef) != null ? _a4 : NOOP2);
     return () => {
       var _a22;
       const defaultSlot = (_a22 = slots.default) == null ? void 0 : _a22.call(slots, attrs);
@@ -25815,7 +28013,8 @@ var __default__8 = (0, vue_exports.defineComponent)({
   name: "ElPopperTrigger",
   inheritAttrs: false
 });
-var _sfc_main10 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__8), {
+var _sfc_main10 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__8,
   props: popperTriggerProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -25862,12 +28061,12 @@ var _sfc_main10 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
             "onBlur",
             "onContextmenu"
           ].forEach((eventName) => {
-            var _a3;
+            var _a4;
             const handler = props[eventName];
             if (handler) {
               ;
               el.addEventListener(eventName.slice(2).toLowerCase(), handler);
-              (_a3 = prevEl == null ? void 0 : prevEl.removeEventListener) == null ? void 0 : _a3.call(prevEl, eventName.slice(2).toLowerCase(), handler);
+              (_a4 = prevEl == null ? void 0 : prevEl.removeEventListener) == null ? void 0 : _a4.call(prevEl, eventName.slice(2).toLowerCase(), handler);
             }
           });
           virtualTriggerAriaStopWatch = (0, vue_exports.watch)([ariaControls, ariaDescribedby, ariaHaspopup, ariaExpanded], (watches) => {
@@ -25916,7 +28115,7 @@ var _sfc_main10 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 16, ["aria-controls", "aria-describedby", "aria-expanded", "aria-haspopup"])) : (0, vue_exports.createCommentVNode)("v-if", true);
     };
   }
-}));
+});
 var ElPopperTrigger = /* @__PURE__ */ _export_sfc(_sfc_main10, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/popper/src/trigger.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/focus-trap/src/tokens.mjs
@@ -26012,9 +28211,9 @@ var createFocusableStack = () => {
     stack2.unshift(layer);
   };
   const remove2 = (layer) => {
-    var _a3, _b;
+    var _a4, _b;
     stack2 = removeFromStack(stack2, layer);
-    (_b = (_a3 = stack2[0]) == null ? void 0 : _a3.resume) == null ? void 0 : _b.call(_a3);
+    (_b = (_a4 = stack2[0]) == null ? void 0 : _a4.resume) == null ? void 0 : _b.call(_a4);
   };
   return {
     push,
@@ -26065,9 +28264,10 @@ var useFocusReason = () => {
   };
 };
 var createFocusOutPreventedEvent = (detail) => {
-  return new CustomEvent(FOCUSOUT_PREVENTED, __spreadProps(__spreadValues({}, FOCUSOUT_PREVENTED_OPTS), {
+  return new CustomEvent(FOCUSOUT_PREVENTED, {
+    ...FOCUSOUT_PREVENTED_OPTS,
     detail
-  }));
+  });
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/focus-trap/src/focus-trap.mjs
@@ -26270,11 +28470,12 @@ var _sfc_main11 = (0, vue_exports.defineComponent)({
       const trapContainer = (0, vue_exports.unref)(forwardRef);
       if (trapContainer) {
         trapContainer.removeEventListener(FOCUS_AFTER_TRAPPED, trapOnFocus);
-        const releasedEvent = new CustomEvent(FOCUS_AFTER_RELEASED, __spreadProps(__spreadValues({}, FOCUS_AFTER_TRAPPED_OPTS), {
+        const releasedEvent = new CustomEvent(FOCUS_AFTER_RELEASED, {
+          ...FOCUS_AFTER_TRAPPED_OPTS,
           detail: {
             focusReason: focusReason2.value
           }
-        }));
+        });
         trapContainer.addEventListener(FOCUS_AFTER_RELEASED, releaseOnFocus);
         trapContainer.dispatchEvent(releasedEvent);
         if (!releasedEvent.defaultPrevented && (focusReason2.value == "keyboard" || !isFocusCausedByUserEvent())) {
@@ -26345,7 +28546,8 @@ var popperCoreConfigProps = buildProps2({
     default: "absolute"
   }
 });
-var popperContentProps = buildProps2(__spreadProps(__spreadValues({}, popperCoreConfigProps), {
+var popperContentProps = buildProps2({
+  ...popperCoreConfigProps,
   id: String,
   style: {
     type: definePropType([String, Array, Object])
@@ -26393,7 +28595,7 @@ var popperContentProps = buildProps2(__spreadProps(__spreadValues({}, popperCore
   },
   virtualTriggering: Boolean,
   zIndex: Number
-}));
+});
 var popperContentEmits = {
   mouseenter: (evt) => evt instanceof MouseEvent,
   mouseleave: (evt) => evt instanceof MouseEvent,
@@ -26405,12 +28607,12 @@ var popperContentEmits = {
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/popper/src/utils.mjs
 var buildPopperOptions = (props, arrowProps) => {
   const { placement, strategy, popperOptions } = props;
-  const options = __spreadProps(__spreadValues({
+  const options = {
     placement,
-    strategy
-  }, popperOptions), {
+    strategy,
+    ...popperOptions,
     modifiers: genModifiers(props)
-  });
+  };
   attachArrow(options, arrowProps);
   deriveExtraModifiers(options, popperOptions == null ? void 0 : popperOptions.modifiers);
   return options;
@@ -26474,7 +28676,8 @@ function deriveExtraModifiers(options, modifiers) {
 var __default__9 = (0, vue_exports.defineComponent)({
   name: "ElPopperContent"
 });
-var _sfc_main12 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__9), {
+var _sfc_main12 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__9,
   props: popperContentProps,
   emits: popperContentEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -26492,10 +28695,11 @@ var _sfc_main12 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       arrowOffset
     });
     if (formItemContext && (formItemContext.addInputId || formItemContext.removeInputId)) {
-      (0, vue_exports.provide)(formItemContextKey, __spreadProps(__spreadValues({}, formItemContext), {
+      (0, vue_exports.provide)(formItemContextKey, {
+        ...formItemContext,
         addInputId: NOOP2,
         removeInputId: NOOP2
-      }));
+      });
     }
     const contentZIndex = (0, vue_exports.ref)(props.zIndex || nextZIndex());
     const trapped = (0, vue_exports.ref)(false);
@@ -26523,14 +28727,15 @@ var _sfc_main12 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       return yn(referenceEl, popperContentEl, options);
     };
     const updatePopper = (shouldUpdateZIndex = true) => {
-      var _a3;
-      (_a3 = (0, vue_exports.unref)(popperInstanceRef)) == null ? void 0 : _a3.update();
+      var _a4;
+      (_a4 = (0, vue_exports.unref)(popperInstanceRef)) == null ? void 0 : _a4.update();
       shouldUpdateZIndex && (contentZIndex.value = props.zIndex || nextZIndex());
     };
     const togglePopperAlive = () => {
-      var _a3, _b;
+      var _a4, _b;
       const monitorable = { name: "eventListeners", enabled: props.visible };
-      (_b = (_a3 = (0, vue_exports.unref)(popperInstanceRef)) == null ? void 0 : _a3.setOptions) == null ? void 0 : _b.call(_a3, (options) => __spreadProps(__spreadValues({}, options), {
+      (_b = (_a4 = (0, vue_exports.unref)(popperInstanceRef)) == null ? void 0 : _a4.setOptions) == null ? void 0 : _b.call(_a4, (options) => ({
+        ...options,
         modifiers: [...options.modifiers || [], monitorable]
       }));
       updatePopper(false);
@@ -26544,8 +28749,8 @@ var _sfc_main12 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       emit2("focus");
     };
     const onFocusAfterReleased = (event) => {
-      var _a3;
-      if (((_a3 = event.detail) == null ? void 0 : _a3.focusReason) !== "pointer") {
+      var _a4;
+      if (((_a4 = event.detail) == null ? void 0 : _a4.focusReason) !== "pointer") {
         focusStartRef.value = "first";
         emit2("blur");
       }
@@ -26573,10 +28778,10 @@ var _sfc_main12 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     (0, vue_exports.onMounted)(() => {
       let updateHandle;
       (0, vue_exports.watch)(computedReference, (referenceEl) => {
-        var _a3;
+        var _a4;
         updateHandle == null ? void 0 : updateHandle();
         const popperInstance = (0, vue_exports.unref)(popperInstanceRef);
-        (_a3 = popperInstance == null ? void 0 : popperInstance.destroy) == null ? void 0 : _a3.call(popperInstance);
+        (_a4 = popperInstance == null ? void 0 : popperInstance.destroy) == null ? void 0 : _a4.call(popperInstance);
         if (referenceEl) {
           const popperContentEl = (0, vue_exports.unref)(popperContentRef);
           contentRef.value = popperContentEl;
@@ -26619,8 +28824,8 @@ var _sfc_main12 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
         arrowEl: (0, vue_exports.unref)(arrowRef),
         arrowOffset: (0, vue_exports.unref)(arrowOffset)
       }), (option2) => {
-        var _a3;
-        return (_a3 = popperInstanceRef.value) == null ? void 0 : _a3.setOptions(option2);
+        var _a4;
+        return (_a4 = popperInstanceRef.value) == null ? void 0 : _a4.setOptions(option2);
       });
     });
     (0, vue_exports.onBeforeUnmount)(() => {
@@ -26662,7 +28867,7 @@ var _sfc_main12 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 38);
     };
   }
-}));
+});
 var ElPopperContent = /* @__PURE__ */ _export_sfc(_sfc_main12, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/popper/src/content.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/popper/index.mjs
@@ -26670,7 +28875,9 @@ var ElPopper = withInstall(Popper);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip/src/content.mjs
 var ns = useNamespace("tooltip");
-var useTooltipContentProps = buildProps2(__spreadProps(__spreadValues(__spreadValues({}, useDelayedToggleProps), popperContentProps), {
+var useTooltipContentProps = buildProps2({
+  ...useDelayedToggleProps,
+  ...popperContentProps,
   appendTo: {
     type: definePropType([String, Object])
   },
@@ -26699,10 +28906,11 @@ var useTooltipContentProps = buildProps2(__spreadProps(__spreadValues(__spreadVa
   disabled: {
     type: Boolean
   }
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip/src/trigger.mjs
-var useTooltipTriggerProps = buildProps2(__spreadProps(__spreadValues({}, popperTriggerProps), {
+var useTooltipTriggerProps = buildProps2({
+  ...popperTriggerProps,
   disabled: Boolean,
   trigger: {
     type: definePropType([String, Array]),
@@ -26712,7 +28920,7 @@ var useTooltipTriggerProps = buildProps2(__spreadProps(__spreadValues({}, popper
     type: definePropType(Array),
     default: () => [EVENT_CODE.enter, EVENT_CODE.space]
   }
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip/src/tooltip.mjs
 var {
@@ -26720,12 +28928,17 @@ var {
   useModelToggleEmits: useTooltipModelToggleEmits,
   useModelToggle: useTooltipModelToggle
 } = createModelToggleComposable("visible");
-var useTooltipProps = buildProps2(__spreadProps(__spreadValues(__spreadValues(__spreadValues(__spreadValues(__spreadValues({}, popperProps), useTooltipModelToggleProps), useTooltipContentProps), useTooltipTriggerProps), popperArrowProps), {
+var useTooltipProps = buildProps2({
+  ...popperProps,
+  ...useTooltipModelToggleProps,
+  ...useTooltipContentProps,
+  ...useTooltipTriggerProps,
+  ...popperArrowProps,
   showArrow: {
     type: Boolean,
     default: true
   }
-}));
+});
 var tooltipEmits = [
   ...useTooltipModelToggleEmits,
   "before-show",
@@ -26737,15 +28950,15 @@ var tooltipEmits = [
 ];
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip/src/utils.mjs
-var isTriggerType = (trigger2, type4) => {
-  if (isArray3(trigger2)) {
-    return trigger2.includes(type4);
+var isTriggerType = (trigger3, type4) => {
+  if (isArray3(trigger3)) {
+    return trigger3.includes(type4);
   }
-  return trigger2 === type4;
+  return trigger3 === type4;
 };
-var whenTrigger = (trigger2, type4, handler) => {
+var whenTrigger = (trigger3, type4, handler) => {
   return (e) => {
-    isTriggerType((0, vue_exports.unref)(trigger2), type4) && handler(e);
+    isTriggerType((0, vue_exports.unref)(trigger3), type4) && handler(e);
   };
 };
 
@@ -26753,7 +28966,8 @@ var whenTrigger = (trigger2, type4, handler) => {
 var __default__10 = (0, vue_exports.defineComponent)({
   name: "ElTooltipTrigger"
 });
-var _sfc_main13 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__10), {
+var _sfc_main13 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__10,
   props: useTooltipTriggerProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -26765,17 +28979,17 @@ var _sfc_main13 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
         return true;
       }
     };
-    const trigger2 = (0, vue_exports.toRef)(props, "trigger");
-    const onMouseenter = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger2, "hover", onOpen));
-    const onMouseleave = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger2, "hover", onClose));
-    const onClick = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger2, "click", (e) => {
+    const trigger3 = (0, vue_exports.toRef)(props, "trigger");
+    const onMouseenter = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger3, "hover", onOpen));
+    const onMouseleave = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger3, "hover", onClose));
+    const onClick = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger3, "click", (e) => {
       if (e.button === 0) {
         onToggle(e);
       }
     }));
-    const onFocus = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger2, "focus", onOpen));
-    const onBlur = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger2, "focus", onClose));
-    const onContextMenu = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger2, "contextmenu", (e) => {
+    const onFocus = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger3, "focus", onOpen));
+    const onBlur = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger3, "focus", onClose));
+    const onContextMenu = composeEventHandlers(stopWhenControlledOrDisabled, whenTrigger(trigger3, "contextmenu", (e) => {
       e.preventDefault();
       onToggle(e);
     }));
@@ -26811,7 +29025,7 @@ var _sfc_main13 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 8, ["id", "virtual-ref", "open", "virtual-triggering", "class", "onBlur", "onClick", "onContextmenu", "onFocus", "onMouseenter", "onMouseleave", "onKeydown"]);
     };
   }
-}));
+});
 var ElTooltipTrigger = /* @__PURE__ */ _export_sfc(_sfc_main13, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tooltip/src/trigger.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip/src/content2.mjs
@@ -26819,7 +29033,8 @@ var __default__11 = (0, vue_exports.defineComponent)({
   name: "ElTooltipContent",
   inheritAttrs: false
 });
-var _sfc_main14 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__11), {
+var _sfc_main14 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__11,
   props: useTooltipContentProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -26830,7 +29045,7 @@ var _sfc_main14 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       controlled,
       id: id2,
       open,
-      trigger: trigger2,
+      trigger: trigger3,
       onClose,
       onOpen,
       onShow,
@@ -26857,8 +29072,8 @@ var _sfc_main14 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       return props.appendTo || selector.value;
     });
     const contentStyle = (0, vue_exports.computed)(() => {
-      var _a3;
-      return (_a3 = props.style) != null ? _a3 : {};
+      var _a4;
+      return (_a4 = props.style) != null ? _a4 : {};
     });
     const ariaHidden = (0, vue_exports.computed)(() => !(0, vue_exports.unref)(open));
     const onTransitionLeave = () => {
@@ -26869,18 +29084,18 @@ var _sfc_main14 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
         return true;
     };
     const onContentEnter = composeEventHandlers(stopWhenControlled, () => {
-      if (props.enterable && (0, vue_exports.unref)(trigger2) === "hover") {
+      if (props.enterable && (0, vue_exports.unref)(trigger3) === "hover") {
         onOpen();
       }
     });
     const onContentLeave = composeEventHandlers(stopWhenControlled, () => {
-      if ((0, vue_exports.unref)(trigger2) === "hover") {
+      if ((0, vue_exports.unref)(trigger3) === "hover") {
         onClose();
       }
     });
     const onBeforeEnter = () => {
-      var _a3, _b;
-      (_b = (_a3 = contentRef.value) == null ? void 0 : _a3.updatePopper) == null ? void 0 : _b.call(_a3);
+      var _a4, _b;
+      (_b = (_a4 = contentRef.value) == null ? void 0 : _a4.updatePopper) == null ? void 0 : _b.call(_a4);
       onBeforeShow == null ? void 0 : onBeforeShow();
     };
     const onBeforeLeave = () => {
@@ -26889,12 +29104,12 @@ var _sfc_main14 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     const onAfterShow = () => {
       onShow();
       stopHandle = onClickOutside((0, vue_exports.computed)(() => {
-        var _a3;
-        return (_a3 = contentRef.value) == null ? void 0 : _a3.popperContentRef;
+        var _a4;
+        return (_a4 = contentRef.value) == null ? void 0 : _a4.popperContentRef;
       }), () => {
         if ((0, vue_exports.unref)(controlled))
           return;
-        const $trigger = (0, vue_exports.unref)(trigger2);
+        const $trigger = (0, vue_exports.unref)(trigger3);
         if ($trigger !== "hover") {
           onClose();
         }
@@ -26914,8 +29129,8 @@ var _sfc_main14 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       flush: "post"
     });
     (0, vue_exports.watch)(() => props.content, () => {
-      var _a3, _b;
-      (_b = (_a3 = contentRef.value) == null ? void 0 : _a3.updatePopper) == null ? void 0 : _b.call(_a3);
+      var _a4, _b;
+      (_b = (_a4 = contentRef.value) == null ? void 0 : _a4.updatePopper) == null ? void 0 : _b.call(_a4);
     });
     expose({
       contentRef
@@ -26975,7 +29190,7 @@ var _sfc_main14 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 8, ["disabled", "to"]);
     };
   }
-}));
+});
 var ElTooltipContent = /* @__PURE__ */ _export_sfc(_sfc_main14, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tooltip/src/content.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip/src/tooltip2.mjs
@@ -26984,7 +29199,8 @@ var _hoisted_22 = { key: 1 };
 var __default__12 = (0, vue_exports.defineComponent)({
   name: "ElTooltip"
 });
-var _sfc_main15 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__12), {
+var _sfc_main15 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__12,
   props: useTooltipProps,
   emits: tooltipEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -26994,10 +29210,10 @@ var _sfc_main15 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     const popperRef = (0, vue_exports.ref)();
     const contentRef = (0, vue_exports.ref)();
     const updatePopper = () => {
-      var _a3;
+      var _a4;
       const popperComponent = (0, vue_exports.unref)(popperRef);
       if (popperComponent) {
-        (_a3 = popperComponent.popperInstanceRef) == null ? void 0 : _a3.update();
+        (_a4 = popperComponent.popperInstanceRef) == null ? void 0 : _a4.update();
       }
     };
     const open = (0, vue_exports.ref)(false);
@@ -27051,8 +29267,8 @@ var _sfc_main15 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }
     });
     const isFocusInsideContent = () => {
-      var _a3, _b;
-      const popperContent = (_b = (_a3 = contentRef.value) == null ? void 0 : _a3.contentRef) == null ? void 0 : _b.popperContentRef;
+      var _a4, _b;
+      const popperContent = (_b = (_a4 = contentRef.value) == null ? void 0 : _a4.contentRef) == null ? void 0 : _b.popperContentRef;
       return popperContent && popperContent.contains(document.activeElement);
     };
     (0, vue_exports.onDeactivated)(() => open.value && hide2());
@@ -27133,7 +29349,7 @@ var _sfc_main15 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 8, ["role"]);
     };
   }
-}));
+});
 var Tooltip = /* @__PURE__ */ _export_sfc(_sfc_main15, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tooltip/src/tooltip.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip/index.mjs
@@ -27217,7 +29433,8 @@ var __default__13 = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME4,
   inheritAttrs: false
 });
-var _sfc_main16 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__13), {
+var _sfc_main16 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__13,
   props: autocompleteProps,
   emits: autocompleteEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -27230,7 +29447,7 @@ var _sfc_main16 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     const regionRef = (0, vue_exports.ref)();
     const popperRef = (0, vue_exports.ref)();
     const listboxRef = (0, vue_exports.ref)();
-    let readonly6 = false;
+    let readonly7 = false;
     let ignoreFocusEvent = false;
     const suggestions = (0, vue_exports.ref)([]);
     const highlightedIndex = (0, vue_exports.ref)(-1);
@@ -27302,10 +29519,10 @@ var _sfc_main16 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       debouncedGetData(value);
     };
     const handleMouseDown = (event) => {
-      var _a3;
+      var _a4;
       if (disabled.value)
         return;
-      if (((_a3 = event.target) == null ? void 0 : _a3.tagName) !== "INPUT" || refInput.value.includes(document.activeElement)) {
+      if (((_a4 = event.target) == null ? void 0 : _a4.tagName) !== "INPUT" || refInput.value.includes(document.activeElement)) {
         activated.value = true;
       }
     };
@@ -27317,7 +29534,7 @@ var _sfc_main16 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
         return;
       activated.value = true;
       emit2("focus", evt);
-      if (props.triggerOnFocus && !readonly6) {
+      if (props.triggerOnFocus && !readonly7) {
         debouncedGetData(String(props.modelValue));
       }
     };
@@ -27351,12 +29568,12 @@ var _sfc_main16 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       activated.value = false;
     };
     const focus = () => {
-      var _a3;
-      (_a3 = inputRef.value) == null ? void 0 : _a3.focus();
+      var _a4;
+      (_a4 = inputRef.value) == null ? void 0 : _a4.focus();
     };
     const blur = () => {
-      var _a3;
-      (_a3 = inputRef.value) == null ? void 0 : _a3.blur();
+      var _a4;
+      (_a4 = inputRef.value) == null ? void 0 : _a4.blur();
     };
     const handleSelect = async (item) => {
       emit2(INPUT_EVENT, item[props.valueKey]);
@@ -27398,7 +29615,7 @@ var _sfc_main16 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       inputRef.value.ref.setAttribute("aria-autocomplete", "list");
       inputRef.value.ref.setAttribute("aria-controls", "id");
       inputRef.value.ref.setAttribute("aria-activedescendant", `${listboxId.value}-item-${highlightedIndex.value}`);
-      readonly6 = inputRef.value.ref.hasAttribute("readonly");
+      readonly7 = inputRef.value.ref.hasAttribute("readonly");
     });
     expose({
       highlightedIndex,
@@ -27542,7 +29759,7 @@ var _sfc_main16 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 8, ["visible", "placement", "popper-class", "teleported", "transition"]);
     };
   }
-}));
+});
 var Autocomplete = /* @__PURE__ */ _export_sfc(_sfc_main16, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/autocomplete/src/autocomplete.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/autocomplete/index.mjs
@@ -27584,7 +29801,8 @@ var _hoisted_14 = ["src", "alt", "srcset"];
 var __default__14 = (0, vue_exports.defineComponent)({
   name: "ElAvatar"
 });
-var _sfc_main17 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__14), {
+var _sfc_main17 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__14,
   props: avatarProps,
   emits: avatarEmits,
   setup(__props, { emit: emit2 }) {
@@ -27592,10 +29810,10 @@ var _sfc_main17 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     const ns2 = useNamespace("avatar");
     const hasLoadError = (0, vue_exports.ref)(false);
     const avatarClass = (0, vue_exports.computed)(() => {
-      const { size: size3, icon, shape } = props;
+      const { size: size4, icon, shape } = props;
       const classList = [ns2.b()];
-      if (isString3(size3))
-        classList.push(ns2.m(size3));
+      if (isString3(size4))
+        classList.push(ns2.m(size4));
       if (icon)
         classList.push(ns2.m("icon"));
       if (shape)
@@ -27603,9 +29821,9 @@ var _sfc_main17 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       return classList;
     });
     const sizeStyle = (0, vue_exports.computed)(() => {
-      const { size: size3 } = props;
-      return isNumber(size3) ? ns2.cssVarBlock({
-        size: addUnit(size3) || ""
+      const { size: size4 } = props;
+      return isNumber(size4) ? ns2.cssVarBlock({
+        size: addUnit(size4) || ""
       }) : void 0;
     });
     const fitStyle = (0, vue_exports.computed)(() => ({
@@ -27637,7 +29855,7 @@ var _sfc_main17 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 6);
     };
   }
-}));
+});
 var Avatar = /* @__PURE__ */ _export_sfc(_sfc_main17, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/avatar/src/avatar.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/avatar/index.mjs
@@ -27700,11 +29918,11 @@ var useBackTop = (props, emit2, componentName2) => {
   const handleScrollThrottled = useThrottleFn(handleScroll2, 300, true);
   useEventListener(container, "scroll", handleScrollThrottled);
   (0, vue_exports.onMounted)(() => {
-    var _a3;
+    var _a4;
     container.value = document;
     el.value = document.documentElement;
     if (props.target) {
-      el.value = (_a3 = document.querySelector(props.target)) != null ? _a3 : void 0;
+      el.value = (_a4 = document.querySelector(props.target)) != null ? _a4 : void 0;
       if (!el.value) {
         throwError(componentName2, `target does not exist: ${props.target}`);
       }
@@ -27722,7 +29940,8 @@ var COMPONENT_NAME5 = "ElBacktop";
 var __default__15 = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME5
 });
-var _sfc_main18 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__15), {
+var _sfc_main18 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__15,
   props: backtopProps,
   emits: backtopEmits,
   setup(__props, { emit: emit2 }) {
@@ -27760,7 +29979,7 @@ var _sfc_main18 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 8, ["name"]);
     };
   }
-}));
+});
 var Backtop = /* @__PURE__ */ _export_sfc(_sfc_main18, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/backtop/src/backtop.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/backtop/index.mjs
@@ -27790,7 +30009,8 @@ var _hoisted_15 = ["textContent"];
 var __default__16 = (0, vue_exports.defineComponent)({
   name: "ElBadge"
 });
-var _sfc_main19 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__16), {
+var _sfc_main19 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__16,
   props: badgeProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -27833,7 +30053,7 @@ var _sfc_main19 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Badge = /* @__PURE__ */ _export_sfc(_sfc_main19, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/badge/src/badge.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/badge/index.mjs
@@ -27854,7 +30074,8 @@ var breadcrumbProps = buildProps2({
 var __default__17 = (0, vue_exports.defineComponent)({
   name: "ElBreadcrumb"
 });
-var _sfc_main20 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__17), {
+var _sfc_main20 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__17,
   props: breadcrumbProps,
   setup(__props) {
     const props = __props;
@@ -27879,7 +30100,7 @@ var _sfc_main20 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Breadcrumb = /* @__PURE__ */ _export_sfc(_sfc_main20, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/breadcrumb/src/breadcrumb.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/breadcrumb/src/breadcrumb-item.mjs
@@ -27898,7 +30119,8 @@ var breadcrumbItemProps = buildProps2({
 var __default__18 = (0, vue_exports.defineComponent)({
   name: "ElBreadcrumbItem"
 });
-var _sfc_main21 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__18), {
+var _sfc_main21 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__18,
   props: breadcrumbItemProps,
   setup(__props) {
     const props = __props;
@@ -27942,7 +30164,7 @@ var _sfc_main21 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var BreadcrumbItem = /* @__PURE__ */ _export_sfc(_sfc_main21, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/breadcrumb/src/breadcrumb-item.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/breadcrumb/index.mjs
@@ -27969,12 +30191,12 @@ var useButton = (props, emit2) => {
   const slots = (0, vue_exports.useSlots)();
   const _type = (0, vue_exports.computed)(() => props.type || (buttonGroupContext == null ? void 0 : buttonGroupContext.type) || "");
   const autoInsertSpace = (0, vue_exports.computed)(() => {
-    var _a3, _b, _c;
-    return (_c = (_b = props.autoInsertSpace) != null ? _b : (_a3 = globalConfig2.value) == null ? void 0 : _a3.autoInsertSpace) != null ? _c : false;
+    var _a4, _b, _c;
+    return (_c = (_b = props.autoInsertSpace) != null ? _b : (_a4 = globalConfig2.value) == null ? void 0 : _a4.autoInsertSpace) != null ? _c : false;
   });
   const shouldAddSpace = (0, vue_exports.computed)(() => {
-    var _a3;
-    const defaultSlot = (_a3 = slots.default) == null ? void 0 : _a3.call(slots);
+    var _a4;
+    const defaultSlot = (_a4 = slots.default) == null ? void 0 : _a4.call(slots);
     if (autoInsertSpace.value && (defaultSlot == null ? void 0 : defaultSlot.length) === 1) {
       const slot = defaultSlot[0];
       if ((slot == null ? void 0 : slot.type) === vue_exports.Text) {
@@ -28555,383 +30777,386 @@ function isValidCSSUnit(color) {
 }
 
 // ../../node_modules/.pnpm/@ctrl+tinycolor@3.4.1/node_modules/@ctrl/tinycolor/dist/module/index.js
-var TinyColor = function() {
-  function TinyColor2(color, opts) {
-    if (color === void 0) {
-      color = "";
+var TinyColor = (
+  /** @class */
+  function() {
+    function TinyColor2(color, opts) {
+      if (color === void 0) {
+        color = "";
+      }
+      if (opts === void 0) {
+        opts = {};
+      }
+      var _a4;
+      if (color instanceof TinyColor2) {
+        return color;
+      }
+      if (typeof color === "number") {
+        color = numberInputToObject(color);
+      }
+      this.originalInput = color;
+      var rgb = inputToRGB(color);
+      this.originalInput = color;
+      this.r = rgb.r;
+      this.g = rgb.g;
+      this.b = rgb.b;
+      this.a = rgb.a;
+      this.roundA = Math.round(100 * this.a) / 100;
+      this.format = (_a4 = opts.format) !== null && _a4 !== void 0 ? _a4 : rgb.format;
+      this.gradientType = opts.gradientType;
+      if (this.r < 1) {
+        this.r = Math.round(this.r);
+      }
+      if (this.g < 1) {
+        this.g = Math.round(this.g);
+      }
+      if (this.b < 1) {
+        this.b = Math.round(this.b);
+      }
+      this.isValid = rgb.ok;
     }
-    if (opts === void 0) {
-      opts = {};
-    }
-    var _a3;
-    if (color instanceof TinyColor2) {
-      return color;
-    }
-    if (typeof color === "number") {
-      color = numberInputToObject(color);
-    }
-    this.originalInput = color;
-    var rgb = inputToRGB(color);
-    this.originalInput = color;
-    this.r = rgb.r;
-    this.g = rgb.g;
-    this.b = rgb.b;
-    this.a = rgb.a;
-    this.roundA = Math.round(100 * this.a) / 100;
-    this.format = (_a3 = opts.format) !== null && _a3 !== void 0 ? _a3 : rgb.format;
-    this.gradientType = opts.gradientType;
-    if (this.r < 1) {
-      this.r = Math.round(this.r);
-    }
-    if (this.g < 1) {
-      this.g = Math.round(this.g);
-    }
-    if (this.b < 1) {
-      this.b = Math.round(this.b);
-    }
-    this.isValid = rgb.ok;
-  }
-  TinyColor2.prototype.isDark = function() {
-    return this.getBrightness() < 128;
-  };
-  TinyColor2.prototype.isLight = function() {
-    return !this.isDark();
-  };
-  TinyColor2.prototype.getBrightness = function() {
-    var rgb = this.toRgb();
-    return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1e3;
-  };
-  TinyColor2.prototype.getLuminance = function() {
-    var rgb = this.toRgb();
-    var R2;
-    var G2;
-    var B2;
-    var RsRGB = rgb.r / 255;
-    var GsRGB = rgb.g / 255;
-    var BsRGB = rgb.b / 255;
-    if (RsRGB <= 0.03928) {
-      R2 = RsRGB / 12.92;
-    } else {
-      R2 = Math.pow((RsRGB + 0.055) / 1.055, 2.4);
-    }
-    if (GsRGB <= 0.03928) {
-      G2 = GsRGB / 12.92;
-    } else {
-      G2 = Math.pow((GsRGB + 0.055) / 1.055, 2.4);
-    }
-    if (BsRGB <= 0.03928) {
-      B2 = BsRGB / 12.92;
-    } else {
-      B2 = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
-    }
-    return 0.2126 * R2 + 0.7152 * G2 + 0.0722 * B2;
-  };
-  TinyColor2.prototype.getAlpha = function() {
-    return this.a;
-  };
-  TinyColor2.prototype.setAlpha = function(alpha) {
-    this.a = boundAlpha(alpha);
-    this.roundA = Math.round(100 * this.a) / 100;
-    return this;
-  };
-  TinyColor2.prototype.toHsv = function() {
-    var hsv = rgbToHsv(this.r, this.g, this.b);
-    return { h: hsv.h * 360, s: hsv.s, v: hsv.v, a: this.a };
-  };
-  TinyColor2.prototype.toHsvString = function() {
-    var hsv = rgbToHsv(this.r, this.g, this.b);
-    var h30 = Math.round(hsv.h * 360);
-    var s2 = Math.round(hsv.s * 100);
-    var v2 = Math.round(hsv.v * 100);
-    return this.a === 1 ? "hsv(".concat(h30, ", ").concat(s2, "%, ").concat(v2, "%)") : "hsva(".concat(h30, ", ").concat(s2, "%, ").concat(v2, "%, ").concat(this.roundA, ")");
-  };
-  TinyColor2.prototype.toHsl = function() {
-    var hsl = rgbToHsl(this.r, this.g, this.b);
-    return { h: hsl.h * 360, s: hsl.s, l: hsl.l, a: this.a };
-  };
-  TinyColor2.prototype.toHslString = function() {
-    var hsl = rgbToHsl(this.r, this.g, this.b);
-    var h30 = Math.round(hsl.h * 360);
-    var s2 = Math.round(hsl.s * 100);
-    var l2 = Math.round(hsl.l * 100);
-    return this.a === 1 ? "hsl(".concat(h30, ", ").concat(s2, "%, ").concat(l2, "%)") : "hsla(".concat(h30, ", ").concat(s2, "%, ").concat(l2, "%, ").concat(this.roundA, ")");
-  };
-  TinyColor2.prototype.toHex = function(allow3Char) {
-    if (allow3Char === void 0) {
-      allow3Char = false;
-    }
-    return rgbToHex(this.r, this.g, this.b, allow3Char);
-  };
-  TinyColor2.prototype.toHexString = function(allow3Char) {
-    if (allow3Char === void 0) {
-      allow3Char = false;
-    }
-    return "#" + this.toHex(allow3Char);
-  };
-  TinyColor2.prototype.toHex8 = function(allow4Char) {
-    if (allow4Char === void 0) {
-      allow4Char = false;
-    }
-    return rgbaToHex(this.r, this.g, this.b, this.a, allow4Char);
-  };
-  TinyColor2.prototype.toHex8String = function(allow4Char) {
-    if (allow4Char === void 0) {
-      allow4Char = false;
-    }
-    return "#" + this.toHex8(allow4Char);
-  };
-  TinyColor2.prototype.toRgb = function() {
-    return {
-      r: Math.round(this.r),
-      g: Math.round(this.g),
-      b: Math.round(this.b),
-      a: this.a
+    TinyColor2.prototype.isDark = function() {
+      return this.getBrightness() < 128;
     };
-  };
-  TinyColor2.prototype.toRgbString = function() {
-    var r = Math.round(this.r);
-    var g = Math.round(this.g);
-    var b2 = Math.round(this.b);
-    return this.a === 1 ? "rgb(".concat(r, ", ").concat(g, ", ").concat(b2, ")") : "rgba(".concat(r, ", ").concat(g, ", ").concat(b2, ", ").concat(this.roundA, ")");
-  };
-  TinyColor2.prototype.toPercentageRgb = function() {
-    var fmt = function(x2) {
-      return "".concat(Math.round(bound01(x2, 255) * 100), "%");
+    TinyColor2.prototype.isLight = function() {
+      return !this.isDark();
     };
-    return {
-      r: fmt(this.r),
-      g: fmt(this.g),
-      b: fmt(this.b),
-      a: this.a
+    TinyColor2.prototype.getBrightness = function() {
+      var rgb = this.toRgb();
+      return (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1e3;
     };
-  };
-  TinyColor2.prototype.toPercentageRgbString = function() {
-    var rnd = function(x2) {
-      return Math.round(bound01(x2, 255) * 100);
+    TinyColor2.prototype.getLuminance = function() {
+      var rgb = this.toRgb();
+      var R2;
+      var G2;
+      var B2;
+      var RsRGB = rgb.r / 255;
+      var GsRGB = rgb.g / 255;
+      var BsRGB = rgb.b / 255;
+      if (RsRGB <= 0.03928) {
+        R2 = RsRGB / 12.92;
+      } else {
+        R2 = Math.pow((RsRGB + 0.055) / 1.055, 2.4);
+      }
+      if (GsRGB <= 0.03928) {
+        G2 = GsRGB / 12.92;
+      } else {
+        G2 = Math.pow((GsRGB + 0.055) / 1.055, 2.4);
+      }
+      if (BsRGB <= 0.03928) {
+        B2 = BsRGB / 12.92;
+      } else {
+        B2 = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
+      }
+      return 0.2126 * R2 + 0.7152 * G2 + 0.0722 * B2;
     };
-    return this.a === 1 ? "rgb(".concat(rnd(this.r), "%, ").concat(rnd(this.g), "%, ").concat(rnd(this.b), "%)") : "rgba(".concat(rnd(this.r), "%, ").concat(rnd(this.g), "%, ").concat(rnd(this.b), "%, ").concat(this.roundA, ")");
-  };
-  TinyColor2.prototype.toName = function() {
-    if (this.a === 0) {
-      return "transparent";
-    }
-    if (this.a < 1) {
+    TinyColor2.prototype.getAlpha = function() {
+      return this.a;
+    };
+    TinyColor2.prototype.setAlpha = function(alpha) {
+      this.a = boundAlpha(alpha);
+      this.roundA = Math.round(100 * this.a) / 100;
+      return this;
+    };
+    TinyColor2.prototype.toHsv = function() {
+      var hsv = rgbToHsv(this.r, this.g, this.b);
+      return { h: hsv.h * 360, s: hsv.s, v: hsv.v, a: this.a };
+    };
+    TinyColor2.prototype.toHsvString = function() {
+      var hsv = rgbToHsv(this.r, this.g, this.b);
+      var h30 = Math.round(hsv.h * 360);
+      var s2 = Math.round(hsv.s * 100);
+      var v2 = Math.round(hsv.v * 100);
+      return this.a === 1 ? "hsv(".concat(h30, ", ").concat(s2, "%, ").concat(v2, "%)") : "hsva(".concat(h30, ", ").concat(s2, "%, ").concat(v2, "%, ").concat(this.roundA, ")");
+    };
+    TinyColor2.prototype.toHsl = function() {
+      var hsl = rgbToHsl(this.r, this.g, this.b);
+      return { h: hsl.h * 360, s: hsl.s, l: hsl.l, a: this.a };
+    };
+    TinyColor2.prototype.toHslString = function() {
+      var hsl = rgbToHsl(this.r, this.g, this.b);
+      var h30 = Math.round(hsl.h * 360);
+      var s2 = Math.round(hsl.s * 100);
+      var l2 = Math.round(hsl.l * 100);
+      return this.a === 1 ? "hsl(".concat(h30, ", ").concat(s2, "%, ").concat(l2, "%)") : "hsla(".concat(h30, ", ").concat(s2, "%, ").concat(l2, "%, ").concat(this.roundA, ")");
+    };
+    TinyColor2.prototype.toHex = function(allow3Char) {
+      if (allow3Char === void 0) {
+        allow3Char = false;
+      }
+      return rgbToHex(this.r, this.g, this.b, allow3Char);
+    };
+    TinyColor2.prototype.toHexString = function(allow3Char) {
+      if (allow3Char === void 0) {
+        allow3Char = false;
+      }
+      return "#" + this.toHex(allow3Char);
+    };
+    TinyColor2.prototype.toHex8 = function(allow4Char) {
+      if (allow4Char === void 0) {
+        allow4Char = false;
+      }
+      return rgbaToHex(this.r, this.g, this.b, this.a, allow4Char);
+    };
+    TinyColor2.prototype.toHex8String = function(allow4Char) {
+      if (allow4Char === void 0) {
+        allow4Char = false;
+      }
+      return "#" + this.toHex8(allow4Char);
+    };
+    TinyColor2.prototype.toRgb = function() {
+      return {
+        r: Math.round(this.r),
+        g: Math.round(this.g),
+        b: Math.round(this.b),
+        a: this.a
+      };
+    };
+    TinyColor2.prototype.toRgbString = function() {
+      var r = Math.round(this.r);
+      var g = Math.round(this.g);
+      var b2 = Math.round(this.b);
+      return this.a === 1 ? "rgb(".concat(r, ", ").concat(g, ", ").concat(b2, ")") : "rgba(".concat(r, ", ").concat(g, ", ").concat(b2, ", ").concat(this.roundA, ")");
+    };
+    TinyColor2.prototype.toPercentageRgb = function() {
+      var fmt = function(x2) {
+        return "".concat(Math.round(bound01(x2, 255) * 100), "%");
+      };
+      return {
+        r: fmt(this.r),
+        g: fmt(this.g),
+        b: fmt(this.b),
+        a: this.a
+      };
+    };
+    TinyColor2.prototype.toPercentageRgbString = function() {
+      var rnd = function(x2) {
+        return Math.round(bound01(x2, 255) * 100);
+      };
+      return this.a === 1 ? "rgb(".concat(rnd(this.r), "%, ").concat(rnd(this.g), "%, ").concat(rnd(this.b), "%)") : "rgba(".concat(rnd(this.r), "%, ").concat(rnd(this.g), "%, ").concat(rnd(this.b), "%, ").concat(this.roundA, ")");
+    };
+    TinyColor2.prototype.toName = function() {
+      if (this.a === 0) {
+        return "transparent";
+      }
+      if (this.a < 1) {
+        return false;
+      }
+      var hex2 = "#" + rgbToHex(this.r, this.g, this.b, false);
+      for (var _i = 0, _a4 = Object.entries(names); _i < _a4.length; _i++) {
+        var _b = _a4[_i], key = _b[0], value = _b[1];
+        if (hex2 === value) {
+          return key;
+        }
+      }
       return false;
-    }
-    var hex2 = "#" + rgbToHex(this.r, this.g, this.b, false);
-    for (var _i = 0, _a3 = Object.entries(names); _i < _a3.length; _i++) {
-      var _b = _a3[_i], key = _b[0], value = _b[1];
-      if (hex2 === value) {
-        return key;
-      }
-    }
-    return false;
-  };
-  TinyColor2.prototype.toString = function(format2) {
-    var formatSet = Boolean(format2);
-    format2 = format2 !== null && format2 !== void 0 ? format2 : this.format;
-    var formattedString = false;
-    var hasAlpha = this.a < 1 && this.a >= 0;
-    var needsAlphaFormat = !formatSet && hasAlpha && (format2.startsWith("hex") || format2 === "name");
-    if (needsAlphaFormat) {
-      if (format2 === "name" && this.a === 0) {
-        return this.toName();
-      }
-      return this.toRgbString();
-    }
-    if (format2 === "rgb") {
-      formattedString = this.toRgbString();
-    }
-    if (format2 === "prgb") {
-      formattedString = this.toPercentageRgbString();
-    }
-    if (format2 === "hex" || format2 === "hex6") {
-      formattedString = this.toHexString();
-    }
-    if (format2 === "hex3") {
-      formattedString = this.toHexString(true);
-    }
-    if (format2 === "hex4") {
-      formattedString = this.toHex8String(true);
-    }
-    if (format2 === "hex8") {
-      formattedString = this.toHex8String();
-    }
-    if (format2 === "name") {
-      formattedString = this.toName();
-    }
-    if (format2 === "hsl") {
-      formattedString = this.toHslString();
-    }
-    if (format2 === "hsv") {
-      formattedString = this.toHsvString();
-    }
-    return formattedString || this.toHexString();
-  };
-  TinyColor2.prototype.toNumber = function() {
-    return (Math.round(this.r) << 16) + (Math.round(this.g) << 8) + Math.round(this.b);
-  };
-  TinyColor2.prototype.clone = function() {
-    return new TinyColor2(this.toString());
-  };
-  TinyColor2.prototype.lighten = function(amount) {
-    if (amount === void 0) {
-      amount = 10;
-    }
-    var hsl = this.toHsl();
-    hsl.l += amount / 100;
-    hsl.l = clamp01(hsl.l);
-    return new TinyColor2(hsl);
-  };
-  TinyColor2.prototype.brighten = function(amount) {
-    if (amount === void 0) {
-      amount = 10;
-    }
-    var rgb = this.toRgb();
-    rgb.r = Math.max(0, Math.min(255, rgb.r - Math.round(255 * -(amount / 100))));
-    rgb.g = Math.max(0, Math.min(255, rgb.g - Math.round(255 * -(amount / 100))));
-    rgb.b = Math.max(0, Math.min(255, rgb.b - Math.round(255 * -(amount / 100))));
-    return new TinyColor2(rgb);
-  };
-  TinyColor2.prototype.darken = function(amount) {
-    if (amount === void 0) {
-      amount = 10;
-    }
-    var hsl = this.toHsl();
-    hsl.l -= amount / 100;
-    hsl.l = clamp01(hsl.l);
-    return new TinyColor2(hsl);
-  };
-  TinyColor2.prototype.tint = function(amount) {
-    if (amount === void 0) {
-      amount = 10;
-    }
-    return this.mix("white", amount);
-  };
-  TinyColor2.prototype.shade = function(amount) {
-    if (amount === void 0) {
-      amount = 10;
-    }
-    return this.mix("black", amount);
-  };
-  TinyColor2.prototype.desaturate = function(amount) {
-    if (amount === void 0) {
-      amount = 10;
-    }
-    var hsl = this.toHsl();
-    hsl.s -= amount / 100;
-    hsl.s = clamp01(hsl.s);
-    return new TinyColor2(hsl);
-  };
-  TinyColor2.prototype.saturate = function(amount) {
-    if (amount === void 0) {
-      amount = 10;
-    }
-    var hsl = this.toHsl();
-    hsl.s += amount / 100;
-    hsl.s = clamp01(hsl.s);
-    return new TinyColor2(hsl);
-  };
-  TinyColor2.prototype.greyscale = function() {
-    return this.desaturate(100);
-  };
-  TinyColor2.prototype.spin = function(amount) {
-    var hsl = this.toHsl();
-    var hue = (hsl.h + amount) % 360;
-    hsl.h = hue < 0 ? 360 + hue : hue;
-    return new TinyColor2(hsl);
-  };
-  TinyColor2.prototype.mix = function(color, amount) {
-    if (amount === void 0) {
-      amount = 50;
-    }
-    var rgb1 = this.toRgb();
-    var rgb2 = new TinyColor2(color).toRgb();
-    var p3 = amount / 100;
-    var rgba = {
-      r: (rgb2.r - rgb1.r) * p3 + rgb1.r,
-      g: (rgb2.g - rgb1.g) * p3 + rgb1.g,
-      b: (rgb2.b - rgb1.b) * p3 + rgb1.b,
-      a: (rgb2.a - rgb1.a) * p3 + rgb1.a
     };
-    return new TinyColor2(rgba);
-  };
-  TinyColor2.prototype.analogous = function(results, slices) {
-    if (results === void 0) {
-      results = 6;
-    }
-    if (slices === void 0) {
-      slices = 30;
-    }
-    var hsl = this.toHsl();
-    var part = 360 / slices;
-    var ret = [this];
-    for (hsl.h = (hsl.h - (part * results >> 1) + 720) % 360; --results; ) {
-      hsl.h = (hsl.h + part) % 360;
-      ret.push(new TinyColor2(hsl));
-    }
-    return ret;
-  };
-  TinyColor2.prototype.complement = function() {
-    var hsl = this.toHsl();
-    hsl.h = (hsl.h + 180) % 360;
-    return new TinyColor2(hsl);
-  };
-  TinyColor2.prototype.monochromatic = function(results) {
-    if (results === void 0) {
-      results = 6;
-    }
-    var hsv = this.toHsv();
-    var h30 = hsv.h;
-    var s2 = hsv.s;
-    var v2 = hsv.v;
-    var res = [];
-    var modification = 1 / results;
-    while (results--) {
-      res.push(new TinyColor2({ h: h30, s: s2, v: v2 }));
-      v2 = (v2 + modification) % 1;
-    }
-    return res;
-  };
-  TinyColor2.prototype.splitcomplement = function() {
-    var hsl = this.toHsl();
-    var h30 = hsl.h;
-    return [
-      this,
-      new TinyColor2({ h: (h30 + 72) % 360, s: hsl.s, l: hsl.l }),
-      new TinyColor2({ h: (h30 + 216) % 360, s: hsl.s, l: hsl.l })
-    ];
-  };
-  TinyColor2.prototype.onBackground = function(background) {
-    var fg = this.toRgb();
-    var bg = new TinyColor2(background).toRgb();
-    return new TinyColor2({
-      r: bg.r + (fg.r - bg.r) * fg.a,
-      g: bg.g + (fg.g - bg.g) * fg.a,
-      b: bg.b + (fg.b - bg.b) * fg.a
-    });
-  };
-  TinyColor2.prototype.triad = function() {
-    return this.polyad(3);
-  };
-  TinyColor2.prototype.tetrad = function() {
-    return this.polyad(4);
-  };
-  TinyColor2.prototype.polyad = function(n) {
-    var hsl = this.toHsl();
-    var h30 = hsl.h;
-    var result = [this];
-    var increment = 360 / n;
-    for (var i = 1; i < n; i++) {
-      result.push(new TinyColor2({ h: (h30 + i * increment) % 360, s: hsl.s, l: hsl.l }));
-    }
-    return result;
-  };
-  TinyColor2.prototype.equals = function(color) {
-    return this.toRgbString() === new TinyColor2(color).toRgbString();
-  };
-  return TinyColor2;
-}();
+    TinyColor2.prototype.toString = function(format2) {
+      var formatSet = Boolean(format2);
+      format2 = format2 !== null && format2 !== void 0 ? format2 : this.format;
+      var formattedString = false;
+      var hasAlpha = this.a < 1 && this.a >= 0;
+      var needsAlphaFormat = !formatSet && hasAlpha && (format2.startsWith("hex") || format2 === "name");
+      if (needsAlphaFormat) {
+        if (format2 === "name" && this.a === 0) {
+          return this.toName();
+        }
+        return this.toRgbString();
+      }
+      if (format2 === "rgb") {
+        formattedString = this.toRgbString();
+      }
+      if (format2 === "prgb") {
+        formattedString = this.toPercentageRgbString();
+      }
+      if (format2 === "hex" || format2 === "hex6") {
+        formattedString = this.toHexString();
+      }
+      if (format2 === "hex3") {
+        formattedString = this.toHexString(true);
+      }
+      if (format2 === "hex4") {
+        formattedString = this.toHex8String(true);
+      }
+      if (format2 === "hex8") {
+        formattedString = this.toHex8String();
+      }
+      if (format2 === "name") {
+        formattedString = this.toName();
+      }
+      if (format2 === "hsl") {
+        formattedString = this.toHslString();
+      }
+      if (format2 === "hsv") {
+        formattedString = this.toHsvString();
+      }
+      return formattedString || this.toHexString();
+    };
+    TinyColor2.prototype.toNumber = function() {
+      return (Math.round(this.r) << 16) + (Math.round(this.g) << 8) + Math.round(this.b);
+    };
+    TinyColor2.prototype.clone = function() {
+      return new TinyColor2(this.toString());
+    };
+    TinyColor2.prototype.lighten = function(amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+      var hsl = this.toHsl();
+      hsl.l += amount / 100;
+      hsl.l = clamp01(hsl.l);
+      return new TinyColor2(hsl);
+    };
+    TinyColor2.prototype.brighten = function(amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+      var rgb = this.toRgb();
+      rgb.r = Math.max(0, Math.min(255, rgb.r - Math.round(255 * -(amount / 100))));
+      rgb.g = Math.max(0, Math.min(255, rgb.g - Math.round(255 * -(amount / 100))));
+      rgb.b = Math.max(0, Math.min(255, rgb.b - Math.round(255 * -(amount / 100))));
+      return new TinyColor2(rgb);
+    };
+    TinyColor2.prototype.darken = function(amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+      var hsl = this.toHsl();
+      hsl.l -= amount / 100;
+      hsl.l = clamp01(hsl.l);
+      return new TinyColor2(hsl);
+    };
+    TinyColor2.prototype.tint = function(amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+      return this.mix("white", amount);
+    };
+    TinyColor2.prototype.shade = function(amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+      return this.mix("black", amount);
+    };
+    TinyColor2.prototype.desaturate = function(amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+      var hsl = this.toHsl();
+      hsl.s -= amount / 100;
+      hsl.s = clamp01(hsl.s);
+      return new TinyColor2(hsl);
+    };
+    TinyColor2.prototype.saturate = function(amount) {
+      if (amount === void 0) {
+        amount = 10;
+      }
+      var hsl = this.toHsl();
+      hsl.s += amount / 100;
+      hsl.s = clamp01(hsl.s);
+      return new TinyColor2(hsl);
+    };
+    TinyColor2.prototype.greyscale = function() {
+      return this.desaturate(100);
+    };
+    TinyColor2.prototype.spin = function(amount) {
+      var hsl = this.toHsl();
+      var hue = (hsl.h + amount) % 360;
+      hsl.h = hue < 0 ? 360 + hue : hue;
+      return new TinyColor2(hsl);
+    };
+    TinyColor2.prototype.mix = function(color, amount) {
+      if (amount === void 0) {
+        amount = 50;
+      }
+      var rgb1 = this.toRgb();
+      var rgb2 = new TinyColor2(color).toRgb();
+      var p3 = amount / 100;
+      var rgba = {
+        r: (rgb2.r - rgb1.r) * p3 + rgb1.r,
+        g: (rgb2.g - rgb1.g) * p3 + rgb1.g,
+        b: (rgb2.b - rgb1.b) * p3 + rgb1.b,
+        a: (rgb2.a - rgb1.a) * p3 + rgb1.a
+      };
+      return new TinyColor2(rgba);
+    };
+    TinyColor2.prototype.analogous = function(results, slices) {
+      if (results === void 0) {
+        results = 6;
+      }
+      if (slices === void 0) {
+        slices = 30;
+      }
+      var hsl = this.toHsl();
+      var part = 360 / slices;
+      var ret = [this];
+      for (hsl.h = (hsl.h - (part * results >> 1) + 720) % 360; --results; ) {
+        hsl.h = (hsl.h + part) % 360;
+        ret.push(new TinyColor2(hsl));
+      }
+      return ret;
+    };
+    TinyColor2.prototype.complement = function() {
+      var hsl = this.toHsl();
+      hsl.h = (hsl.h + 180) % 360;
+      return new TinyColor2(hsl);
+    };
+    TinyColor2.prototype.monochromatic = function(results) {
+      if (results === void 0) {
+        results = 6;
+      }
+      var hsv = this.toHsv();
+      var h30 = hsv.h;
+      var s2 = hsv.s;
+      var v2 = hsv.v;
+      var res = [];
+      var modification = 1 / results;
+      while (results--) {
+        res.push(new TinyColor2({ h: h30, s: s2, v: v2 }));
+        v2 = (v2 + modification) % 1;
+      }
+      return res;
+    };
+    TinyColor2.prototype.splitcomplement = function() {
+      var hsl = this.toHsl();
+      var h30 = hsl.h;
+      return [
+        this,
+        new TinyColor2({ h: (h30 + 72) % 360, s: hsl.s, l: hsl.l }),
+        new TinyColor2({ h: (h30 + 216) % 360, s: hsl.s, l: hsl.l })
+      ];
+    };
+    TinyColor2.prototype.onBackground = function(background) {
+      var fg = this.toRgb();
+      var bg = new TinyColor2(background).toRgb();
+      return new TinyColor2({
+        r: bg.r + (fg.r - bg.r) * fg.a,
+        g: bg.g + (fg.g - bg.g) * fg.a,
+        b: bg.b + (fg.b - bg.b) * fg.a
+      });
+    };
+    TinyColor2.prototype.triad = function() {
+      return this.polyad(3);
+    };
+    TinyColor2.prototype.tetrad = function() {
+      return this.polyad(4);
+    };
+    TinyColor2.prototype.polyad = function(n) {
+      var hsl = this.toHsl();
+      var h30 = hsl.h;
+      var result = [this];
+      var increment = 360 / n;
+      for (var i = 1; i < n; i++) {
+        result.push(new TinyColor2({ h: (h30 + i * increment) % 360, s: hsl.s, l: hsl.l }));
+      }
+      return result;
+    };
+    TinyColor2.prototype.equals = function(color) {
+      return this.toRgbString() === new TinyColor2(color).toRgbString();
+    };
+    return TinyColor2;
+  }()
+);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/button/src/button-custom.mjs
 function darken(color, amount = 20) {
@@ -28993,7 +31218,8 @@ var _hoisted_17 = ["aria-disabled", "disabled", "autofocus", "type"];
 var __default__19 = (0, vue_exports.defineComponent)({
   name: "ElButton"
 });
-var _sfc_main22 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__19), {
+var _sfc_main22 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__19,
   props: buttonProps,
   emits: buttonEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -29057,7 +31283,7 @@ var _sfc_main22 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 14, _hoisted_17);
     };
   }
-}));
+});
 var Button = /* @__PURE__ */ _export_sfc(_sfc_main22, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/button/src/button.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/button/src/button-group.mjs
@@ -29070,7 +31296,8 @@ var buttonGroupProps = {
 var __default__20 = (0, vue_exports.defineComponent)({
   name: "ElButtonGroup"
 });
-var _sfc_main23 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__20), {
+var _sfc_main23 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__20,
   props: buttonGroupProps,
   setup(__props) {
     const props = __props;
@@ -29087,7 +31314,7 @@ var _sfc_main23 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var ButtonGroup = /* @__PURE__ */ _export_sfc(_sfc_main23, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/button/src/button-group.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/button/index.mjs
@@ -29169,11 +31396,11 @@ var formatter = function(date5, format2, lang) {
   return (0, import_dayjs.default)(date5).locale(lang).format(format2);
 };
 var makeList = (total2, method4) => {
-  var _a3;
+  var _a4;
   const arr = [];
   const disabledArr = method4 == null ? void 0 : method4();
   for (let i = 0; i < total2; i++) {
-    arr.push((_a3 = disabledArr == null ? void 0 : disabledArr.includes(i)) != null ? _a3 : false);
+    arr.push((_a4 = disabledArr == null ? void 0 : disabledArr.includes(i)) != null ? _a4 : false);
   }
   return arr;
 };
@@ -29203,7 +31430,7 @@ var timePanelSharedProps = buildProps2({
 });
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/time-picker/src/common/props.mjs
-var timePickerDefaultProps = buildProps2(__spreadProps(__spreadValues({
+var timePickerDefaultProps = buildProps2({
   id: {
     type: definePropType([Array, String])
   },
@@ -29273,8 +31500,8 @@ var timePickerDefaultProps = buildProps2(__spreadProps(__spreadValues({
   isRange: {
     type: Boolean,
     default: false
-  }
-}, disabledTimeListsProps), {
+  },
+  ...disabledTimeListsProps,
   disabledDate: {
     type: Function
   },
@@ -29302,7 +31529,7 @@ var timePickerDefaultProps = buildProps2(__spreadProps(__spreadValues({
     default: true
   },
   unlinkPanels: Boolean
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/time-picker/src/common/picker.mjs
 var _hoisted_19 = ["id", "name", "placeholder", "value", "disabled", "readonly"];
@@ -29310,7 +31537,8 @@ var _hoisted_24 = ["id", "name", "placeholder", "value", "disabled", "readonly"]
 var __default__21 = (0, vue_exports.defineComponent)({
   name: "Picker"
 });
-var _sfc_main24 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__21), {
+var _sfc_main24 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__21,
   props: timePickerDefaultProps,
   emits: [
     "update:modelValue",
@@ -29455,9 +31683,9 @@ var _sfc_main24 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     const handleBlurInput = (e) => {
       const handleBlurDefer = async () => {
         setTimeout(() => {
-          var _a3;
+          var _a4;
           if (currentHandleBlurDeferCallback === handleBlurDefer) {
-            if (!(((_a3 = refPopper.value) == null ? void 0 : _a3.isFocusInsideContent()) && !hasJustTabExitedInput) && refInput.value.filter((input) => {
+            if (!(((_a4 = refPopper.value) == null ? void 0 : _a4.isFocusInsideContent()) && !hasJustTabExitedInput) && refInput.value.filter((input) => {
               return input.contains(document.activeElement);
             }).length === 0) {
               handleChange();
@@ -29544,10 +31772,10 @@ var _sfc_main24 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       return !modelValue || isArray3(modelValue) && !modelValue.filter(Boolean).length;
     });
     const onMouseDownInput = async (event) => {
-      var _a3;
+      var _a4;
       if (props.readonly || pickerDisabled.value)
         return;
-      if (((_a3 = event.target) == null ? void 0 : _a3.tagName) !== "INPUT" || refInput.value.includes(document.activeElement)) {
+      if (((_a4 = event.target) == null ? void 0 : _a4.tagName) !== "INPUT" || refInput.value.includes(document.activeElement)) {
         pickerVisible.value = true;
       }
     };
@@ -29562,10 +31790,10 @@ var _sfc_main24 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       showClose.value = false;
     };
     const onTouchStartInput = (event) => {
-      var _a3;
+      var _a4;
       if (props.readonly || pickerDisabled.value)
         return;
-      if (((_a3 = event.touches[0].target) == null ? void 0 : _a3.tagName) !== "INPUT" || refInput.value.includes(document.activeElement)) {
+      if (((_a4 = event.touches[0].target) == null ? void 0 : _a4.tagName) !== "INPUT" || refInput.value.includes(document.activeElement)) {
         pickerVisible.value = true;
       }
     };
@@ -29574,15 +31802,15 @@ var _sfc_main24 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     });
     const pickerSize = useSize();
     const popperEl = (0, vue_exports.computed)(() => {
-      var _a3, _b;
-      return (_b = (_a3 = (0, vue_exports.unref)(refPopper)) == null ? void 0 : _a3.popperRef) == null ? void 0 : _b.contentRef;
+      var _a4, _b;
+      return (_b = (_a4 = (0, vue_exports.unref)(refPopper)) == null ? void 0 : _a4.popperRef) == null ? void 0 : _b.contentRef;
     });
     const actualInputRef = (0, vue_exports.computed)(() => {
-      var _a3;
+      var _a4;
       if ((0, vue_exports.unref)(isRangeInput)) {
         return (0, vue_exports.unref)(inputRef);
       }
-      return (_a3 = (0, vue_exports.unref)(inputRef)) == null ? void 0 : _a3.$el;
+      return (_a4 = (0, vue_exports.unref)(inputRef)) == null ? void 0 : _a4.$el;
     });
     onClickOutside(actualInputRef, (e) => {
       const unrefedPopperEl = (0, vue_exports.unref)(popperEl);
@@ -29691,14 +31919,14 @@ var _sfc_main24 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }
     };
     const handleStartChange = () => {
-      var _a3;
+      var _a4;
       const values = userInput.value;
       const value = parseUserInputToDayjs(values && values[0]);
       const parsedVal = (0, vue_exports.unref)(parsedValue2);
       if (value && value.isValid()) {
         userInput.value = [
           formatDayjsToString(value),
-          ((_a3 = displayValue.value) == null ? void 0 : _a3[1]) || null
+          ((_a4 = displayValue.value) == null ? void 0 : _a4[1]) || null
         ];
         const newValue = [value, parsedVal && (parsedVal[1] || null)];
         if (isValidValue3(newValue)) {
@@ -29708,13 +31936,13 @@ var _sfc_main24 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }
     };
     const handleEndChange = () => {
-      var _a3;
+      var _a4;
       const values = (0, vue_exports.unref)(userInput);
       const value = parseUserInputToDayjs(values && values[1]);
       const parsedVal = (0, vue_exports.unref)(parsedValue2);
       if (value && value.isValid()) {
         userInput.value = [
-          ((_a3 = (0, vue_exports.unref)(displayValue)) == null ? void 0 : _a3[0]) || null,
+          ((_a4 = (0, vue_exports.unref)(displayValue)) == null ? void 0 : _a4[0]) || null,
           formatDayjsToString(value)
         ];
         const newValue = [parsedVal && parsedVal[0], value];
@@ -29933,19 +32161,20 @@ var _sfc_main24 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 16, ["visible", "transition", "popper-class", "popper-options"]);
     };
   }
-}));
+});
 var CommonPicker = /* @__PURE__ */ _export_sfc(_sfc_main24, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/time-picker/src/common/picker.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/time-picker/src/time-picker-com/panel-time-pick.mjs
 var import_dayjs2 = __toESM(require_dayjs_min(), 1);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/time-picker/src/props/panel-time-picker.mjs
-var panelTimePickerProps = buildProps2(__spreadProps(__spreadValues({}, timePanelSharedProps), {
+var panelTimePickerProps = buildProps2({
+  ...timePanelSharedProps,
   datetimeRole: String,
   parsedValue: {
     type: definePropType(Object)
   }
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/time-picker/src/composables/use-time-panel.mjs
 var useTimePanel = ({
@@ -30123,7 +32352,7 @@ var vRepeatClick = {
     let intervalId;
     let delayId;
     const handler = () => isFunction4(value) ? value() : value.handler();
-    const clear2 = () => {
+    const clear3 = () => {
       if (delayId) {
         clearTimeout(delayId);
         delayId = void 0;
@@ -30136,9 +32365,9 @@ var vRepeatClick = {
     el.addEventListener("mousedown", (evt) => {
       if (evt.button !== 0)
         return;
-      clear2();
+      clear3();
       handler();
-      document.addEventListener("mouseup", () => clear2(), {
+      document.addEventListener("mouseup", () => clear3(), {
         once: true
       });
       delayId = setTimeout(() => {
@@ -30154,7 +32383,7 @@ var vRepeatClick = {
 var FOCUSABLE_CHILDREN = "_trap-focus-children";
 var FOCUS_STACK = [];
 var FOCUS_HANDLER = (e) => {
-  var _a3;
+  var _a4;
   if (FOCUS_STACK.length === 0)
     return;
   const focusableElement = FOCUS_STACK[FOCUS_STACK.length - 1][FOCUSABLE_CHILDREN];
@@ -30180,7 +32409,7 @@ var FOCUS_HANDLER = (e) => {
     if (process.env.NODE_ENV === "test") {
       const index2 = focusableElement.indexOf(e.target);
       if (index2 !== -1) {
-        (_a3 = focusableElement[goingBackward ? index2 - 1 : index2 + 1]) == null ? void 0 : _a3.focus();
+        (_a4 = focusableElement[goingBackward ? index2 - 1 : index2 + 1]) == null ? void 0 : _a4.focus();
       }
     }
   }
@@ -30323,7 +32552,7 @@ var Mousewheel = {
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/time-picker/src/props/basic-time-spinner.mjs
-var basicTimeSpinnerProps = buildProps2(__spreadValues({
+var basicTimeSpinnerProps = buildProps2({
   role: {
     type: String,
     required: true
@@ -30340,8 +32569,9 @@ var basicTimeSpinnerProps = buildProps2(__spreadValues({
   amPmMode: {
     type: definePropType(String),
     default: ""
-  }
-}, disabledTimeListsProps));
+  },
+  ...disabledTimeListsProps
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/time-picker/src/time-picker-com/basic-time-spinner.mjs
 var _hoisted_111 = ["onClick"];
@@ -30789,11 +33019,12 @@ var TimePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main26, [["__file", "/home/
 var import_dayjs3 = __toESM(require_dayjs_min(), 1);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/time-picker/src/props/panel-time-range.mjs
-var panelTimeRangeProps = buildProps2(__spreadProps(__spreadValues({}, timePanelSharedProps), {
+var panelTimeRangeProps = buildProps2({
+  ...timePanelSharedProps,
   parsedValue: {
     type: definePropType(Array)
   }
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/time-picker/src/time-picker-com/panel-time-range.mjs
 var _hoisted_113 = ["disabled"];
@@ -31070,12 +33301,13 @@ import_dayjs4.default.extend(import_customParseFormat.default);
 var TimePicker = (0, vue_exports.defineComponent)({
   name: "ElTimePicker",
   install: null,
-  props: __spreadProps(__spreadValues({}, timePickerDefaultProps), {
+  props: {
+    ...timePickerDefaultProps,
     isRange: {
       type: Boolean,
       default: false
     }
-  }),
+  },
   emits: ["update:modelValue"],
   setup(props, ctx) {
     const commonPicker = (0, vue_exports.ref)();
@@ -31084,25 +33316,25 @@ var TimePicker = (0, vue_exports.defineComponent)({
     (0, vue_exports.provide)("ElPopperOptions", props.popperOptions);
     ctx.expose({
       focus: (e) => {
-        var _a3;
-        (_a3 = commonPicker.value) == null ? void 0 : _a3.handleFocusInput(e);
+        var _a4;
+        (_a4 = commonPicker.value) == null ? void 0 : _a4.handleFocusInput(e);
       },
       blur: (e) => {
-        var _a3;
-        (_a3 = commonPicker.value) == null ? void 0 : _a3.handleBlurInput(e);
+        var _a4;
+        (_a4 = commonPicker.value) == null ? void 0 : _a4.handleBlurInput(e);
       },
       handleOpen: () => {
-        var _a3;
-        (_a3 = commonPicker.value) == null ? void 0 : _a3.handleOpen();
+        var _a4;
+        (_a4 = commonPicker.value) == null ? void 0 : _a4.handleOpen();
       },
       handleClose: () => {
-        var _a3;
-        (_a3 = commonPicker.value) == null ? void 0 : _a3.handleClose();
+        var _a4;
+        (_a4 = commonPicker.value) == null ? void 0 : _a4.handleClose();
       }
     });
     return () => {
-      var _a3;
-      const format2 = (_a3 = props.format) != null ? _a3 : DEFAULT_FORMATS_TIME;
+      var _a4;
+      const format2 = (_a4 = props.format) != null ? _a4 : DEFAULT_FORMATS_TIME;
       return (0, vue_exports.createVNode)(CommonPicker, (0, vue_exports.mergeProps)(props, {
         "ref": commonPicker,
         "type": type4,
@@ -31246,7 +33478,8 @@ var _hoisted_27 = ["onClick"];
 var __default__22 = (0, vue_exports.defineComponent)({
   name: "DateTable"
 });
-var _sfc_main28 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__22), {
+var _sfc_main28 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__22,
   props: dateTableProps,
   emits: dateTableEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -31321,7 +33554,7 @@ var _sfc_main28 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var DateTable = /* @__PURE__ */ _export_sfc(_sfc_main28, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/calendar/src/date-table.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/calendar/src/use-calendar.mjs
@@ -31470,7 +33703,8 @@ var COMPONENT_NAME6 = "ElCalendar";
 var __default__23 = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME6
 });
-var _sfc_main29 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__23), {
+var _sfc_main29 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__23,
   props: calendarProps,
   emits: calendarEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -31586,7 +33820,7 @@ var _sfc_main29 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Calendar = /* @__PURE__ */ _export_sfc(_sfc_main29, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/calendar/src/calendar.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/calendar/index.mjs
@@ -31613,7 +33847,8 @@ var cardProps = buildProps2({
 var __default__24 = (0, vue_exports.defineComponent)({
   name: "ElCard"
 });
-var _sfc_main30 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__24), {
+var _sfc_main30 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__24,
   props: cardProps,
   setup(__props) {
     const ns2 = useNamespace("card");
@@ -31638,7 +33873,7 @@ var _sfc_main30 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Card = /* @__PURE__ */ _export_sfc(_sfc_main30, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/card/src/card.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/card/index.mjs
@@ -31778,7 +34013,7 @@ var useCarousel = (props, emit2, componentName2) => {
     });
   }
   function itemInStage(item, index2) {
-    var _a3, _b, _c, _d;
+    var _a4, _b, _c, _d;
     const _items = (0, vue_exports.unref)(items);
     const itemCount = _items.length;
     if (itemCount === 0 || !item.states.inStage)
@@ -31788,7 +34023,7 @@ var useCarousel = (props, emit2, componentName2) => {
     const lastItemIndex = itemCount - 1;
     const isLastItemActive = _items[lastItemIndex].states.active;
     const isFirstItemActive = _items[0].states.active;
-    const isNextItemActive = (_b = (_a3 = _items[nextItemIndex]) == null ? void 0 : _a3.states) == null ? void 0 : _b.active;
+    const isNextItemActive = (_b = (_a4 = _items[nextItemIndex]) == null ? void 0 : _a4.states) == null ? void 0 : _b.active;
     const isPrevItemActive = (_d = (_c = _items[prevItemIndex]) == null ? void 0 : _c.states) == null ? void 0 : _d.active;
     if (index2 === lastItemIndex && isFirstItemActive || isNextItemActive) {
       return "left";
@@ -31910,7 +34145,8 @@ var COMPONENT_NAME7 = "ElCarousel";
 var __default__25 = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME7
 });
-var _sfc_main31 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__25), {
+var _sfc_main31 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__25,
   props: carouselProps,
   emits: carouselEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -32053,7 +34289,7 @@ var _sfc_main31 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 34);
     };
   }
-}));
+});
 var Carousel = /* @__PURE__ */ _export_sfc(_sfc_main31, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/carousel/src/carousel.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/carousel/src/carousel-item.mjs
@@ -32101,8 +34337,8 @@ var useCarouselItem = (props, componentName2) => {
     return index2;
   }
   function calcCardTranslate(index2, activeIndex) {
-    var _a3;
-    const parentWidth = ((_a3 = carouselContext.root.value) == null ? void 0 : _a3.offsetWidth) || 0;
+    var _a4;
+    const parentWidth = ((_a4 = carouselContext.root.value) == null ? void 0 : _a4.offsetWidth) || 0;
     if (inStage.value) {
       return parentWidth * ((2 - CARD_SCALE) * (index2 - activeIndex) + 1) / 4;
     } else if (index2 < activeIndex) {
@@ -32119,9 +34355,9 @@ var useCarouselItem = (props, componentName2) => {
     return distance * (index2 - activeIndex);
   }
   const translateItem = (index2, activeIndex, oldIndex2) => {
-    var _a3;
+    var _a4;
     const _isCardType = (0, vue_exports.unref)(isCardType);
-    const carouselItemLength = (_a3 = carouselContext.items.value.length) != null ? _a3 : Number.NaN;
+    const carouselItemLength = (_a4 = carouselContext.items.value.length) != null ? _a4 : Number.NaN;
     const isActive = index2 === activeIndex;
     if (!_isCardType && !isUndefined(oldIndex2)) {
       animating.value = isActive || index2 === oldIndex2;
@@ -32187,7 +34423,8 @@ var COMPONENT_NAME8 = "ElCarouselItem";
 var __default__26 = (0, vue_exports.defineComponent)({
   name: "ElCarouselItem"
 });
-var _sfc_main32 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__26), {
+var _sfc_main32 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__26,
   props: carouselItemProps,
   setup(__props) {
     const props = __props;
@@ -32238,7 +34475,7 @@ var _sfc_main32 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ]);
     };
   }
-}));
+});
 var CarouselItem = /* @__PURE__ */ _export_sfc(_sfc_main32, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/carousel/src/carousel-item.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/carousel/index.mjs
@@ -32299,8 +34536,8 @@ var useCheckboxDisabled = ({
 }) => {
   const checkboxGroup = (0, vue_exports.inject)(checkboxGroupContextKey, void 0);
   const isLimitDisabled = (0, vue_exports.computed)(() => {
-    var _a3, _b;
-    const max4 = (_a3 = checkboxGroup == null ? void 0 : checkboxGroup.max) == null ? void 0 : _a3.value;
+    var _a4, _b;
+    const max4 = (_a4 = checkboxGroup == null ? void 0 : checkboxGroup.max) == null ? void 0 : _a4.value;
     const min4 = (_b = checkboxGroup == null ? void 0 : checkboxGroup.min) == null ? void 0 : _b.value;
     return !isUndefined(max4) && model.value.length >= max4 && !isChecked.value || !isUndefined(min4) && model.value.length <= min4 && isChecked.value;
   });
@@ -32323,8 +34560,8 @@ var useCheckboxEvent = (props, {
   const { formItem } = useFormItem();
   const { emit: emit2 } = (0, vue_exports.getCurrentInstance)();
   function getLabeledValue(value) {
-    var _a3, _b;
-    return value === props.trueLabel || value === true ? (_a3 = props.trueLabel) != null ? _a3 : true : (_b = props.falseLabel) != null ? _b : false;
+    var _a4, _b;
+    return value === props.trueLabel || value === true ? (_a4 = props.trueLabel) != null ? _a4 : true : (_b = props.falseLabel) != null ? _b : false;
   }
   function emitChangeEvent(checked, e) {
     emit2("change", getLabeledValue(checked), e);
@@ -32369,13 +34606,13 @@ var useCheckboxModel = (props) => {
   const isLimitExceeded = (0, vue_exports.ref)(false);
   const model = (0, vue_exports.computed)({
     get() {
-      var _a3, _b;
-      return isGroup.value ? (_a3 = checkboxGroup == null ? void 0 : checkboxGroup.modelValue) == null ? void 0 : _a3.value : (_b = props.modelValue) != null ? _b : selfModel.value;
+      var _a4, _b;
+      return isGroup.value ? (_a4 = checkboxGroup == null ? void 0 : checkboxGroup.modelValue) == null ? void 0 : _a4.value : (_b = props.modelValue) != null ? _b : selfModel.value;
     },
     set(val) {
-      var _a3, _b;
+      var _a4, _b;
       if (isGroup.value && isArray3(val)) {
-        isLimitExceeded.value = ((_a3 = checkboxGroup == null ? void 0 : checkboxGroup.max) == null ? void 0 : _a3.value) !== void 0 && val.length > (checkboxGroup == null ? void 0 : checkboxGroup.max.value);
+        isLimitExceeded.value = ((_a4 = checkboxGroup == null ? void 0 : checkboxGroup.max) == null ? void 0 : _a4.value) !== void 0 && val.length > (checkboxGroup == null ? void 0 : checkboxGroup.max.value);
         isLimitExceeded.value === false && ((_b = checkboxGroup == null ? void 0 : checkboxGroup.changeEvent) == null ? void 0 : _b.call(checkboxGroup, val));
       } else {
         emit2(UPDATE_MODEL_EVENT, val);
@@ -32411,14 +34648,14 @@ var useCheckboxStatus = (props, slots, { model }) => {
     }
   });
   const checkboxButtonSize = useSize((0, vue_exports.computed)(() => {
-    var _a3;
-    return (_a3 = checkboxGroup == null ? void 0 : checkboxGroup.size) == null ? void 0 : _a3.value;
+    var _a4;
+    return (_a4 = checkboxGroup == null ? void 0 : checkboxGroup.size) == null ? void 0 : _a4.value;
   }), {
     prop: true
   });
   const checkboxSize = useSize((0, vue_exports.computed)(() => {
-    var _a3;
-    return (_a3 = checkboxGroup == null ? void 0 : checkboxGroup.size) == null ? void 0 : _a3.value;
+    var _a4;
+    return (_a4 = checkboxGroup == null ? void 0 : checkboxGroup.size) == null ? void 0 : _a4.value;
   }));
   const hasOwnLabel = (0, vue_exports.computed)(() => {
     return !!(slots.default || props.label);
@@ -32489,7 +34726,8 @@ var _hoisted_33 = ["id", "aria-hidden", "disabled", "value", "name", "tabindex"]
 var __default__27 = (0, vue_exports.defineComponent)({
   name: "ElCheckbox"
 });
-var _sfc_main33 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__27), {
+var _sfc_main33 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__27,
   props: checkboxProps,
   emits: checkboxEmits,
   setup(__props) {
@@ -32591,7 +34829,7 @@ var _sfc_main33 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 8, ["class", "aria-controls", "onClick"]);
     };
   }
-}));
+});
 var Checkbox = /* @__PURE__ */ _export_sfc(_sfc_main33, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/checkbox/src/checkbox.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/checkbox/src/checkbox-button.mjs
@@ -32600,7 +34838,8 @@ var _hoisted_213 = ["name", "tabindex", "disabled", "value"];
 var __default__28 = (0, vue_exports.defineComponent)({
   name: "ElCheckboxButton"
 });
-var _sfc_main34 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__28), {
+var _sfc_main34 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__28,
   props: checkboxProps,
   emits: checkboxEmits,
   setup(__props) {
@@ -32617,8 +34856,8 @@ var _sfc_main34 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     const checkboxGroup = (0, vue_exports.inject)(checkboxGroupContextKey, void 0);
     const ns2 = useNamespace("checkbox");
     const activeStyle = (0, vue_exports.computed)(() => {
-      var _a3, _b, _c, _d;
-      const fillValue = (_b = (_a3 = checkboxGroup == null ? void 0 : checkboxGroup.fill) == null ? void 0 : _a3.value) != null ? _b : "";
+      var _a4, _b, _c, _d;
+      const fillValue = (_b = (_a4 = checkboxGroup == null ? void 0 : checkboxGroup.fill) == null ? void 0 : _a4.value) != null ? _b : "";
       return {
         backgroundColor: fillValue,
         borderColor: fillValue,
@@ -32681,7 +34920,7 @@ var _sfc_main34 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var CheckboxButton = /* @__PURE__ */ _export_sfc(_sfc_main34, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/checkbox/src/checkbox-button.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/checkbox/src/checkbox-group.mjs
@@ -32715,7 +34954,8 @@ var checkboxGroupEmits = {
 var __default__29 = (0, vue_exports.defineComponent)({
   name: "ElCheckboxGroup"
 });
-var _sfc_main35 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__29), {
+var _sfc_main35 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__29,
   props: checkboxGroupProps,
   emits: checkboxGroupEmits,
   setup(__props, { emit: emit2 }) {
@@ -32738,31 +34978,32 @@ var _sfc_main35 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
         changeEvent(val);
       }
     });
-    (0, vue_exports.provide)(checkboxGroupContextKey, __spreadProps(__spreadValues({}, pick_default((0, vue_exports.toRefs)(props), [
-      "size",
-      "min",
-      "max",
-      "disabled",
-      "validateEvent",
-      "fill",
-      "textColor"
-    ])), {
+    (0, vue_exports.provide)(checkboxGroupContextKey, {
+      ...pick_default((0, vue_exports.toRefs)(props), [
+        "size",
+        "min",
+        "max",
+        "disabled",
+        "validateEvent",
+        "fill",
+        "textColor"
+      ]),
       modelValue,
       changeEvent
-    }));
+    });
     (0, vue_exports.watch)(() => props.modelValue, () => {
       if (props.validateEvent) {
         formItem == null ? void 0 : formItem.validate("change").catch((err) => debugWarn(err));
       }
     });
     return (_ctx, _cache) => {
-      var _a3;
+      var _a4;
       return (0, vue_exports.openBlock)(), (0, vue_exports.createBlock)((0, vue_exports.resolveDynamicComponent)(_ctx.tag), {
         id: (0, vue_exports.unref)(groupId),
         class: (0, vue_exports.normalizeClass)((0, vue_exports.unref)(ns2).b("group")),
         role: "group",
         "aria-label": !(0, vue_exports.unref)(isLabeledByFormItem) ? _ctx.label || "checkbox-group" : void 0,
-        "aria-labelledby": (0, vue_exports.unref)(isLabeledByFormItem) ? (_a3 = (0, vue_exports.unref)(formItem)) == null ? void 0 : _a3.labelId : void 0
+        "aria-labelledby": (0, vue_exports.unref)(isLabeledByFormItem) ? (_a4 = (0, vue_exports.unref)(formItem)) == null ? void 0 : _a4.labelId : void 0
       }, {
         default: (0, vue_exports.withCtx)(() => [
           (0, vue_exports.renderSlot)(_ctx.$slots, "default")
@@ -32771,7 +35012,7 @@ var _sfc_main35 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 8, ["id", "class", "aria-label", "aria-labelledby"]);
     };
   }
-}));
+});
 var CheckboxGroup = /* @__PURE__ */ _export_sfc(_sfc_main35, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/checkbox/src/checkbox-group.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/checkbox/index.mjs
@@ -32791,7 +35032,8 @@ var radioPropsBase = buildProps2({
     default: ""
   }
 });
-var radioProps = buildProps2(__spreadProps(__spreadValues({}, radioPropsBase), {
+var radioProps = buildProps2({
+  ...radioPropsBase,
   modelValue: {
     type: [String, Number, Boolean],
     default: ""
@@ -32801,7 +35043,7 @@ var radioProps = buildProps2(__spreadProps(__spreadValues({}, radioPropsBase), {
     default: ""
   },
   border: Boolean
-}));
+});
 var radioEmits = {
   [UPDATE_MODEL_EVENT]: (val) => isString3(val) || isNumber(val) || isBoolean2(val),
   [CHANGE_EVENT]: (val) => isString3(val) || isNumber(val) || isBoolean2(val)
@@ -32825,7 +35067,7 @@ var useRadio = (props, emit2) => {
       radioRef.value.checked = props.modelValue === props.label;
     }
   });
-  const size3 = useSize((0, vue_exports.computed)(() => radioGroup == null ? void 0 : radioGroup.size));
+  const size4 = useSize((0, vue_exports.computed)(() => radioGroup == null ? void 0 : radioGroup.size));
   const disabled = useDisabled((0, vue_exports.computed)(() => radioGroup == null ? void 0 : radioGroup.disabled));
   const focus = (0, vue_exports.ref)(false);
   const tabIndex = (0, vue_exports.computed)(() => {
@@ -32836,7 +35078,7 @@ var useRadio = (props, emit2) => {
     isGroup,
     radioGroup,
     focus,
-    size: size3,
+    size: size4,
     disabled,
     tabIndex,
     modelValue
@@ -32848,18 +35090,19 @@ var _hoisted_119 = ["value", "name", "disabled"];
 var __default__30 = (0, vue_exports.defineComponent)({
   name: "ElRadio"
 });
-var _sfc_main36 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__30), {
+var _sfc_main36 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__30,
   props: radioProps,
   emits: radioEmits,
   setup(__props, { emit: emit2 }) {
     const props = __props;
     const ns2 = useNamespace("radio");
-    const { radioRef, radioGroup, focus, size: size3, disabled, modelValue } = useRadio(props, emit2);
+    const { radioRef, radioGroup, focus, size: size4, disabled, modelValue } = useRadio(props, emit2);
     function handleChange() {
       (0, vue_exports.nextTick)(() => emit2("change", modelValue.value));
     }
     return (_ctx, _cache) => {
-      var _a3;
+      var _a4;
       return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("label", {
         class: (0, vue_exports.normalizeClass)([
           (0, vue_exports.unref)(ns2).b(),
@@ -32867,7 +35110,7 @@ var _sfc_main36 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
           (0, vue_exports.unref)(ns2).is("focus", (0, vue_exports.unref)(focus)),
           (0, vue_exports.unref)(ns2).is("bordered", _ctx.border),
           (0, vue_exports.unref)(ns2).is("checked", (0, vue_exports.unref)(modelValue) === _ctx.label),
-          (0, vue_exports.unref)(ns2).m((0, vue_exports.unref)(size3))
+          (0, vue_exports.unref)(ns2).m((0, vue_exports.unref)(size4))
         ])
       }, [
         (0, vue_exports.createElementVNode)("span", {
@@ -32883,7 +35126,7 @@ var _sfc_main36 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
             "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => (0, vue_exports.isRef)(modelValue) ? modelValue.value = $event : null),
             class: (0, vue_exports.normalizeClass)((0, vue_exports.unref)(ns2).e("original")),
             value: _ctx.label,
-            name: _ctx.name || ((_a3 = (0, vue_exports.unref)(radioGroup)) == null ? void 0 : _a3.name),
+            name: _ctx.name || ((_a4 = (0, vue_exports.unref)(radioGroup)) == null ? void 0 : _a4.name),
             disabled: (0, vue_exports.unref)(disabled),
             type: "radio",
             onFocus: _cache[1] || (_cache[1] = ($event) => focus.value = true),
@@ -32908,28 +35151,30 @@ var _sfc_main36 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Radio = /* @__PURE__ */ _export_sfc(_sfc_main36, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/radio/src/radio.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/radio/src/radio-button.mjs
-var radioButtonProps = buildProps2(__spreadProps(__spreadValues({}, radioPropsBase), {
+var radioButtonProps = buildProps2({
+  ...radioPropsBase,
   name: {
     type: String,
     default: ""
   }
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/radio/src/radio-button2.mjs
 var _hoisted_120 = ["value", "name", "disabled"];
 var __default__31 = (0, vue_exports.defineComponent)({
   name: "ElRadioButton"
 });
-var _sfc_main37 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__31), {
+var _sfc_main37 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__31,
   props: radioButtonProps,
   setup(__props) {
     const props = __props;
     const ns2 = useNamespace("radio");
-    const { radioRef, focus, size: size3, disabled, modelValue, radioGroup } = useRadio(props);
+    const { radioRef, focus, size: size4, disabled, modelValue, radioGroup } = useRadio(props);
     const activeStyle = (0, vue_exports.computed)(() => {
       return {
         backgroundColor: (radioGroup == null ? void 0 : radioGroup.fill) || "",
@@ -32939,14 +35184,14 @@ var _sfc_main37 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       };
     });
     return (_ctx, _cache) => {
-      var _a3;
+      var _a4;
       return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("label", {
         class: (0, vue_exports.normalizeClass)([
           (0, vue_exports.unref)(ns2).b("button"),
           (0, vue_exports.unref)(ns2).is("active", (0, vue_exports.unref)(modelValue) === _ctx.label),
           (0, vue_exports.unref)(ns2).is("disabled", (0, vue_exports.unref)(disabled)),
           (0, vue_exports.unref)(ns2).is("focus", (0, vue_exports.unref)(focus)),
-          (0, vue_exports.unref)(ns2).bm("button", (0, vue_exports.unref)(size3))
+          (0, vue_exports.unref)(ns2).bm("button", (0, vue_exports.unref)(size4))
         ])
       }, [
         (0, vue_exports.withDirectives)((0, vue_exports.createElementVNode)("input", {
@@ -32956,7 +35201,7 @@ var _sfc_main37 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
           class: (0, vue_exports.normalizeClass)((0, vue_exports.unref)(ns2).be("button", "original-radio")),
           value: _ctx.label,
           type: "radio",
-          name: _ctx.name || ((_a3 = (0, vue_exports.unref)(radioGroup)) == null ? void 0 : _a3.name),
+          name: _ctx.name || ((_a4 = (0, vue_exports.unref)(radioGroup)) == null ? void 0 : _a4.name),
           disabled: (0, vue_exports.unref)(disabled),
           onFocus: _cache[1] || (_cache[1] = ($event) => focus.value = true),
           onBlur: _cache[2] || (_cache[2] = ($event) => focus.value = false)
@@ -32976,7 +35221,7 @@ var _sfc_main37 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var RadioButton = /* @__PURE__ */ _export_sfc(_sfc_main37, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/radio/src/radio-button.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/radio/src/radio-group.mjs
@@ -33019,7 +35264,8 @@ var _hoisted_121 = ["id", "aria-label", "aria-labelledby"];
 var __default__32 = (0, vue_exports.defineComponent)({
   name: "ElRadioGroup"
 });
-var _sfc_main38 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__32), {
+var _sfc_main38 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__32,
   props: radioGroupProps,
   emits: radioGroupEmits,
   setup(__props, { emit: emit2 }) {
@@ -33045,10 +35291,11 @@ var _sfc_main38 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     const name = (0, vue_exports.computed)(() => {
       return props.name || radioId.value;
     });
-    (0, vue_exports.provide)(radioGroupKey, (0, vue_exports.reactive)(__spreadProps(__spreadValues({}, (0, vue_exports.toRefs)(props)), {
+    (0, vue_exports.provide)(radioGroupKey, (0, vue_exports.reactive)({
+      ...(0, vue_exports.toRefs)(props),
       changeEvent,
       name
-    })));
+    }));
     (0, vue_exports.watch)(() => props.modelValue, () => {
       if (props.validateEvent) {
         formItem == null ? void 0 : formItem.validate("change").catch((err) => debugWarn(err));
@@ -33068,7 +35315,7 @@ var _sfc_main38 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 10, _hoisted_121);
     };
   }
-}));
+});
 var RadioGroup = /* @__PURE__ */ _export_sfc(_sfc_main38, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/radio/src/radio-group.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/radio/index.mjs
@@ -33127,8 +35374,8 @@ var _sfc_main39 = (0, vue_exports.defineComponent)({
     const multiple = (0, vue_exports.computed)(() => panel.config.multiple);
     const checkStrictly = (0, vue_exports.computed)(() => panel.config.checkStrictly);
     const checkedNodeId = (0, vue_exports.computed)(() => {
-      var _a3;
-      return (_a3 = panel.checkedNodes[0]) == null ? void 0 : _a3.uid;
+      var _a4;
+      return (_a4 = panel.checkedNodes[0]) == null ? void 0 : _a4.uid;
     });
     const isDisabled = (0, vue_exports.computed)(() => props.node.isDisabled);
     const isLeaf2 = (0, vue_exports.computed)(() => props.node.isLeaf);
@@ -33136,9 +35383,9 @@ var _sfc_main39 = (0, vue_exports.defineComponent)({
     const inExpandingPath = (0, vue_exports.computed)(() => isInPath(panel.expandingNode));
     const inCheckedPath = (0, vue_exports.computed)(() => checkStrictly.value && panel.checkedNodes.some(isInPath));
     const isInPath = (node) => {
-      var _a3;
+      var _a4;
       const { level, uid: uid3 } = props.node;
-      return ((_a3 = node == null ? void 0 : node.pathNodes[level - 1]) == null ? void 0 : _a3.uid) === uid3;
+      return ((_a4 = node == null ? void 0 : node.pathNodes[level - 1]) == null ? void 0 : _a4.uid) === uid3;
     };
     const doExpand = () => {
       if (inExpandingPath.value)
@@ -33398,7 +35645,7 @@ function _sfc_render3(_ctx, _cache, $props, $setup, $data, $options) {
     onMouseleave: _ctx.clearHoverZone
   }, {
     default: (0, vue_exports.withCtx)(() => {
-      var _a3;
+      var _a4;
       return [
         ((0, vue_exports.openBlock)(true), (0, vue_exports.createElementBlock)(vue_exports.Fragment, null, (0, vue_exports.renderList)(_ctx.nodes, (node) => {
           return (0, vue_exports.openBlock)(), (0, vue_exports.createBlock)(_component_el_cascader_node, {
@@ -33425,7 +35672,7 @@ function _sfc_render3(_ctx, _cache, $props, $setup, $data, $options) {
         ], 2)) : _ctx.isEmpty ? ((0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("div", {
           key: 1,
           class: (0, vue_exports.normalizeClass)(_ctx.ns.e("empty-text"))
-        }, (0, vue_exports.toDisplayString)(_ctx.t("el.cascader.noData")), 3)) : ((_a3 = _ctx.panel) == null ? void 0 : _a3.isHoverMenu) ? ((0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("svg", {
+        }, (0, vue_exports.toDisplayString)(_ctx.t("el.cascader.noData")), 3)) : ((_a4 = _ctx.panel) == null ? void 0 : _a4.isHoverMenu) ? ((0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("svg", {
           key: 2,
           ref: "hoverZone",
           class: (0, vue_exports.normalizeClass)(_ctx.ns.e("hover-zone"))
@@ -33632,7 +35879,10 @@ var DefaultProps = {
   hoverThreshold: 500
 };
 var useCascaderConfig = (props) => {
-  return (0, vue_exports.computed)(() => __spreadValues(__spreadValues({}, DefaultProps), props.props));
+  return (0, vue_exports.computed)(() => ({
+    ...DefaultProps,
+    ...props.props
+  }));
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/cascader-panel/src/utils.mjs
@@ -33674,13 +35924,14 @@ var _sfc_main41 = (0, vue_exports.defineComponent)({
   components: {
     ElCascaderMenu
   },
-  props: __spreadProps(__spreadValues({}, CommonProps), {
+  props: {
+    ...CommonProps,
     border: {
       type: Boolean,
       default: true
     },
     renderLabel: Function
-  }),
+  },
   emits: [UPDATE_MODEL_EVENT, CHANGE_EVENT, "close", "expand-change"],
   setup(props, { emit: emit2, slots }) {
     let manualChecked = false;
@@ -33731,7 +35982,7 @@ var _sfc_main41 = (0, vue_exports.defineComponent)({
       cfg.lazyLoad(node, resolve2);
     };
     const expandNode = (node, silent) => {
-      var _a3;
+      var _a4;
       const { level } = node;
       const newMenus = menus.value.slice(0, level);
       let newExpandingNode;
@@ -33741,7 +35992,7 @@ var _sfc_main41 = (0, vue_exports.defineComponent)({
         newExpandingNode = node;
         newMenus.push(node.children);
       }
-      if (((_a3 = expandingNode.value) == null ? void 0 : _a3.uid) !== (newExpandingNode == null ? void 0 : newExpandingNode.uid)) {
+      if (((_a4 = expandingNode.value) == null ? void 0 : _a4.uid) !== (newExpandingNode == null ? void 0 : newExpandingNode.uid)) {
         expandingNode.value = node;
         menus.value = newMenus;
         !silent && emit2("expand-change", (node == null ? void 0 : node.pathValues) || []);
@@ -33768,22 +36019,22 @@ var _sfc_main41 = (0, vue_exports.defineComponent)({
       return store == null ? void 0 : store.getFlattedNodes(leafOnly);
     };
     const getCheckedNodes = (leafOnly) => {
-      var _a3;
-      return (_a3 = getFlattedNodes(leafOnly)) == null ? void 0 : _a3.filter((node) => node.checked !== false);
+      var _a4;
+      return (_a4 = getFlattedNodes(leafOnly)) == null ? void 0 : _a4.filter((node) => node.checked !== false);
     };
     const clearCheckedNodes = () => {
       checkedNodes.value.forEach((node) => node.doCheck(false));
       calculateCheckedValue();
     };
     const calculateCheckedValue = () => {
-      var _a3;
+      var _a4;
       const { checkStrictly, multiple } = config.value;
       const oldNodes = checkedNodes.value;
       const newNodes = getCheckedNodes(!checkStrictly);
       const nodes = sortByOriginalOrder(oldNodes, newNodes);
       const values = nodes.map((node) => node.valueByOption);
       checkedNodes.value = nodes;
-      checkedValue.value = multiple ? values : (_a3 = values[0]) != null ? _a3 : null;
+      checkedValue.value = multiple ? values : (_a4 = values[0]) != null ? _a4 : null;
     };
     const syncCheckedValue = (loaded = false, forced = false) => {
       const { modelValue } = props;
@@ -33971,7 +36222,8 @@ var tagEmits = {
 var __default__33 = (0, vue_exports.defineComponent)({
   name: "ElTag"
 });
-var _sfc_main42 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__33), {
+var _sfc_main42 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__33,
   props: tagProps,
   emits: tagEmits,
   setup(__props, { emit: emit2 }) {
@@ -34050,14 +36302,15 @@ var _sfc_main42 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 8, ["name"]));
     };
   }
-}));
+});
 var Tag = /* @__PURE__ */ _export_sfc(_sfc_main42, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tag/src/tag.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tag/index.mjs
 var ElTag = withInstall(Tag);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/cascader/src/cascader.mjs
-var cascaderProps = buildProps2(__spreadProps(__spreadValues({}, CommonProps), {
+var cascaderProps = buildProps2({
+  ...CommonProps,
   size: useSizeProp,
   placeholder: String,
   disabled: Boolean,
@@ -34093,12 +36346,12 @@ var cascaderProps = buildProps2(__spreadProps(__spreadValues({}, CommonProps), {
     default: ""
   },
   teleported: useTooltipContentProps.teleported,
-  tagType: __spreadProps(__spreadValues({}, tagProps.type), { default: "info" }),
+  tagType: { ...tagProps.type, default: "info" },
   validateEvent: {
     type: Boolean,
     default: true
   }
-}));
+});
 var cascaderEmits = {
   [UPDATE_MODEL_EVENT]: (val) => !!val,
   [CHANGE_EVENT]: (val) => !!val,
@@ -34117,7 +36370,8 @@ var COMPONENT_NAME9 = "ElCascader";
 var __default__34 = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME9
 });
-var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__34), {
+var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__34,
   props: cascaderProps,
   emits: cascaderEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -34168,11 +36422,11 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     const realSize = useSize();
     const tagSize = (0, vue_exports.computed)(() => ["small"].includes(realSize.value) ? "small" : "default");
     const multiple = (0, vue_exports.computed)(() => !!props.props.multiple);
-    const readonly6 = (0, vue_exports.computed)(() => !props.filterable || multiple.value);
+    const readonly7 = (0, vue_exports.computed)(() => !props.filterable || multiple.value);
     const searchKeyword = (0, vue_exports.computed)(() => multiple.value ? searchInputValue.value : inputValue.value);
     const checkedNodes = (0, vue_exports.computed)(() => {
-      var _a3;
-      return ((_a3 = panel.value) == null ? void 0 : _a3.checkedNodes) || [];
+      var _a4;
+      return ((_a4 = panel.value) == null ? void 0 : _a4.checkedNodes) || [];
     });
     const clearBtnVisible = (0, vue_exports.computed)(() => {
       if (!props.clearable || isDisabled.value || filtering.value || !inputHover.value)
@@ -34197,8 +36451,8 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }
     });
     const cascaderPanelRef = (0, vue_exports.computed)(() => {
-      var _a3, _b;
-      return (_b = (_a3 = tooltipRef.value) == null ? void 0 : _a3.popperRef) == null ? void 0 : _b.contentRef;
+      var _a4, _b;
+      return (_b = (_a4 = tooltipRef.value) == null ? void 0 : _a4.popperRef) == null ? void 0 : _b.contentRef;
     });
     const cascaderKls = (0, vue_exports.computed)(() => {
       return [
@@ -34216,13 +36470,13 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ];
     });
     const togglePopperVisible = (visible) => {
-      var _a3, _b, _c;
+      var _a4, _b, _c;
       if (isDisabled.value)
         return;
       visible = visible != null ? visible : !popperVisible.value;
       if (visible !== popperVisible.value) {
         popperVisible.value = visible;
-        (_b = (_a3 = input.value) == null ? void 0 : _a3.input) == null ? void 0 : _b.setAttribute("aria-expanded", `${visible}`);
+        (_b = (_a4 = input.value) == null ? void 0 : _a4.input) == null ? void 0 : _b.setAttribute("aria-expanded", `${visible}`);
         if (visible) {
           updatePopperPosition();
           (0, vue_exports.nextTick)((_c = panel.value) == null ? void 0 : _c.scrollToExpandingNode);
@@ -34234,8 +36488,8 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     };
     const updatePopperPosition = () => {
       (0, vue_exports.nextTick)(() => {
-        var _a3;
-        (_a3 = tooltipRef.value) == null ? void 0 : _a3.updatePopper();
+        var _a4;
+        (_a4 = tooltipRef.value) == null ? void 0 : _a4.updatePopper();
       });
     };
     const hideSuggestionPanel = () => {
@@ -34253,10 +36507,10 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       };
     };
     const deleteTag = (tag) => {
-      var _a3;
+      var _a4;
       const node = tag.node;
       node.doCheck(false);
-      (_a3 = panel.value) == null ? void 0 : _a3.calculateCheckedValue();
+      (_a4 = panel.value) == null ? void 0 : _a4.calculateCheckedValue();
       emit2("removeTag", node.valueByOption);
     };
     const calculatePresentTags = () => {
@@ -34287,9 +36541,9 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       presentTags.value = tags;
     };
     const calculateSuggestions = () => {
-      var _a3, _b;
+      var _a4, _b;
       const { filterMethod, showAllLevels, separator } = props;
-      const res = (_b = (_a3 = panel.value) == null ? void 0 : _a3.getFlattedNodes(!props.props.checkStrictly)) == null ? void 0 : _b.filter((node) => {
+      const res = (_b = (_a4 = panel.value) == null ? void 0 : _a4.getFlattedNodes(!props.props.checkStrictly)) == null ? void 0 : _b.filter((node) => {
         if (node.isDisabled)
           return false;
         node.calcText(showAllLevels, separator);
@@ -34308,12 +36562,12 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       updatePopperPosition();
     };
     const focusFirstNode = () => {
-      var _a3;
+      var _a4;
       let firstNode;
       if (filtering.value && suggestionPanel.value) {
         firstNode = suggestionPanel.value.$el.querySelector(`.${nsCascader.e("suggestion-item")}`);
       } else {
-        firstNode = (_a3 = panel.value) == null ? void 0 : _a3.$el.querySelector(`.${nsCascader.b("node")}[tabindex="-1"]`);
+        firstNode = (_a4 = panel.value) == null ? void 0 : _a4.$el.querySelector(`.${nsCascader.b("node")}[tabindex="-1"]`);
       }
       if (firstNode) {
         firstNode.focus();
@@ -34321,8 +36575,8 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }
     };
     const updateStyle = () => {
-      var _a3, _b;
-      const inputInner = (_a3 = input.value) == null ? void 0 : _a3.input;
+      var _a4, _b;
+      const inputInner = (_a4 = input.value) == null ? void 0 : _a4.input;
       const tagWrapperEl = tagWrapper.value;
       const suggestionPanelEl = (_b = suggestionPanel.value) == null ? void 0 : _b.$el;
       if (!isClient || !inputInner)
@@ -34339,16 +36593,16 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }
     };
     const getCheckedNodes = (leafOnly) => {
-      var _a3;
-      return (_a3 = panel.value) == null ? void 0 : _a3.getCheckedNodes(leafOnly);
+      var _a4;
+      return (_a4 = panel.value) == null ? void 0 : _a4.getCheckedNodes(leafOnly);
     };
     const handleExpandChange = (value) => {
       updatePopperPosition();
       emit2("expandChange", value);
     };
     const handleComposition = (event) => {
-      var _a3;
-      const text = (_a3 = event.target) == null ? void 0 : _a3.value;
+      var _a4;
+      const text = (_a4 = event.target) == null ? void 0 : _a4.value;
       if (event.type === "compositionend") {
         isOnComposition.value = false;
         (0, vue_exports.nextTick)(() => handleInput(text));
@@ -34382,8 +36636,8 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }
     };
     const handleClear = () => {
-      var _a3;
-      (_a3 = panel.value) == null ? void 0 : _a3.clearCheckedNodes();
+      var _a4;
+      (_a4 = panel.value) == null ? void 0 : _a4.clearCheckedNodes();
       if (!popperVisible.value && props.filterable) {
         syncPresentTextValue();
       }
@@ -34395,10 +36649,10 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       searchInputValue.value = value;
     };
     const handleSuggestionClick = (node) => {
-      var _a3, _b;
+      var _a4, _b;
       const { checked } = node;
       if (multiple.value) {
-        (_a3 = panel.value) == null ? void 0 : _a3.handleCheckChange(node, !checked, false);
+        (_a4 = panel.value) == null ? void 0 : _a4.handleCheckChange(node, !checked, false);
       } else {
         !checked && ((_b = panel.value) == null ? void 0 : _b.handleCheckChange(node, true, false));
         togglePopperVisible(false);
@@ -34502,7 +36756,7 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
           (0, vue_exports.withDirectives)(((0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("div", {
             class: (0, vue_exports.normalizeClass)((0, vue_exports.unref)(cascaderKls)),
             style: (0, vue_exports.normalizeStyle)((0, vue_exports.unref)(cascaderStyle)),
-            onClick: _cache[5] || (_cache[5] = () => togglePopperVisible((0, vue_exports.unref)(readonly6) ? void 0 : true)),
+            onClick: _cache[5] || (_cache[5] = () => togglePopperVisible((0, vue_exports.unref)(readonly7) ? void 0 : true)),
             onKeydown: handleKeyDown,
             onMouseenter: _cache[6] || (_cache[6] = ($event) => inputHover.value = true),
             onMouseleave: _cache[7] || (_cache[7] = ($event) => inputHover.value = false)
@@ -34513,7 +36767,7 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
               modelValue: inputValue.value,
               "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => inputValue.value = $event),
               placeholder: (0, vue_exports.unref)(currentPlaceholder),
-              readonly: (0, vue_exports.unref)(readonly6),
+              readonly: (0, vue_exports.unref)(readonly7),
               disabled: (0, vue_exports.unref)(isDisabled),
               "validate-event": false,
               size: (0, vue_exports.unref)(realSize),
@@ -34687,7 +36941,7 @@ var _sfc_main43 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 8, ["visible", "teleported", "popper-class", "transition"]);
     };
   }
-}));
+});
 var Cascader = /* @__PURE__ */ _export_sfc(_sfc_main43, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/cascader/src/cascader.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/cascader/index.mjs
@@ -34713,7 +36967,8 @@ var checkTagEmits = {
 var __default__35 = (0, vue_exports.defineComponent)({
   name: "ElCheckTag"
 });
-var _sfc_main44 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__35), {
+var _sfc_main44 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__35,
   props: checkTagProps,
   emits: checkTagEmits,
   setup(__props, { emit: emit2 }) {
@@ -34733,7 +36988,7 @@ var _sfc_main44 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var CheckTag = /* @__PURE__ */ _export_sfc(_sfc_main44, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/check-tag/src/check-tag.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/check-tag/index.mjs
@@ -34787,7 +37042,8 @@ var colProps = buildProps2({
 var __default__36 = (0, vue_exports.defineComponent)({
   name: "ElCol"
 });
-var _sfc_main45 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__36), {
+var _sfc_main45 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__36,
   props: colProps,
   setup(__props) {
     const props = __props;
@@ -34804,21 +37060,21 @@ var _sfc_main45 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       const classes = [];
       const pos = ["span", "offset", "pull", "push"];
       pos.forEach((prop) => {
-        const size3 = props[prop];
-        if (isNumber(size3)) {
+        const size4 = props[prop];
+        if (isNumber(size4)) {
           if (prop === "span")
             classes.push(ns2.b(`${props[prop]}`));
-          else if (size3 > 0)
+          else if (size4 > 0)
             classes.push(ns2.b(`${prop}-${props[prop]}`));
         }
       });
       const sizes = ["xs", "sm", "md", "lg", "xl"];
-      sizes.forEach((size3) => {
-        if (isNumber(props[size3])) {
-          classes.push(ns2.b(`${size3}-${props[size3]}`));
-        } else if (isObject4(props[size3])) {
-          Object.entries(props[size3]).forEach(([prop, sizeProp]) => {
-            classes.push(prop !== "span" ? ns2.b(`${size3}-${prop}-${sizeProp}`) : ns2.b(`${size3}-${sizeProp}`));
+      sizes.forEach((size4) => {
+        if (isNumber(props[size4])) {
+          classes.push(ns2.b(`${size4}-${props[size4]}`));
+        } else if (isObject4(props[size4])) {
+          Object.entries(props[size4]).forEach(([prop, sizeProp]) => {
+            classes.push(prop !== "span" ? ns2.b(`${size4}-${prop}-${sizeProp}`) : ns2.b(`${size4}-${sizeProp}`));
           });
         }
       });
@@ -34839,7 +37095,7 @@ var _sfc_main45 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 8, ["class", "style"]);
     };
   }
-}));
+});
 var Col = /* @__PURE__ */ _export_sfc(_sfc_main45, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/col/src/col.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/col/index.mjs
@@ -34904,7 +37160,8 @@ var useCollapseDOM = () => {
 var __default__37 = (0, vue_exports.defineComponent)({
   name: "ElCollapse"
 });
-var _sfc_main46 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__37), {
+var _sfc_main46 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__37,
   props: collapseProps,
   emits: collapseEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -34925,14 +37182,15 @@ var _sfc_main46 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Collapse = /* @__PURE__ */ _export_sfc(_sfc_main46, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/collapse/src/collapse.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/collapse-transition/src/collapse-transition.mjs
 var __default__38 = (0, vue_exports.defineComponent)({
   name: "ElCollapseTransition"
 });
-var _sfc_main47 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__38), {
+var _sfc_main47 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__38,
   setup(__props) {
     const ns2 = useNamespace("collapse-transition");
     const on3 = {
@@ -34996,7 +37254,7 @@ var _sfc_main47 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 16, ["name"]);
     };
   }
-}));
+});
 var CollapseTransition = /* @__PURE__ */ _export_sfc(_sfc_main47, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/collapse-transition/src/collapse-transition.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/collapse-transition/index.mjs
@@ -35092,7 +37350,8 @@ var _hoisted_35 = ["id", "aria-hidden", "aria-labelledby"];
 var __default__39 = (0, vue_exports.defineComponent)({
   name: "ElCollapseItem"
 });
-var _sfc_main48 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__39), {
+var _sfc_main48 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__39,
   props: collapseItemProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -35172,7 +37431,7 @@ var _sfc_main48 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var CollapseItem = /* @__PURE__ */ _export_sfc(_sfc_main48, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/collapse/src/collapse-item.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/collapse/index.mjs
@@ -35187,11 +37446,11 @@ function draggable(element, options) {
   if (!isClient)
     return;
   const moveFn = function(event) {
-    var _a3;
-    (_a3 = options.drag) == null ? void 0 : _a3.call(options, event);
+    var _a4;
+    (_a4 = options.drag) == null ? void 0 : _a4.call(options, event);
   };
   const upFn = function(event) {
-    var _a3;
+    var _a4;
     document.removeEventListener("mousemove", moveFn);
     document.removeEventListener("mouseup", upFn);
     document.removeEventListener("touchmove", moveFn);
@@ -35199,10 +37458,10 @@ function draggable(element, options) {
     document.onselectstart = null;
     document.ondragstart = null;
     isDragging = false;
-    (_a3 = options.end) == null ? void 0 : _a3.call(options, event);
+    (_a4 = options.end) == null ? void 0 : _a4.call(options, event);
   };
   const downFn = function(event) {
-    var _a3;
+    var _a4;
     if (isDragging)
       return;
     event.preventDefault();
@@ -35213,7 +37472,7 @@ function draggable(element, options) {
     document.addEventListener("touchmove", moveFn);
     document.addEventListener("touchend", upFn);
     isDragging = true;
-    (_a3 = options.start) == null ? void 0 : _a3.call(options, event);
+    (_a4 = options.start) == null ? void 0 : _a4.call(options, event);
   };
   element.addEventListener("mousedown", downFn);
   element.addEventListener("touchstart", downFn);
@@ -35977,7 +38236,8 @@ var _hoisted_127 = ["id", "aria-label", "aria-labelledby", "aria-description", "
 var __default__40 = (0, vue_exports.defineComponent)({
   name: "ElColorPicker"
 });
-var _sfc_main53 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__40), {
+var _sfc_main53 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__40,
   props: colorPickerProps,
   emits: colorPickerEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -36079,7 +38339,7 @@ var _sfc_main53 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
         }
       });
     }
-    function clear2() {
+    function clear3() {
       debounceSetShowPicker(false);
       emit2(UPDATE_MODEL_EVENT, null);
       emit2("change", null);
@@ -36113,8 +38373,8 @@ var _sfc_main53 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     });
     (0, vue_exports.watch)(() => showPicker.value, () => {
       (0, vue_exports.nextTick)(() => {
-        var _a3, _b, _c;
-        (_a3 = hue.value) == null ? void 0 : _a3.update();
+        var _a4, _b, _c;
+        (_a4 = hue.value) == null ? void 0 : _a4.update();
         (_b = sv.value) == null ? void 0 : _b.update();
         (_c = alpha.value) == null ? void 0 : _c.update();
       });
@@ -36189,7 +38449,7 @@ var _sfc_main53 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
                 class: (0, vue_exports.normalizeClass)((0, vue_exports.unref)(ns2).be("dropdown", "link-btn")),
                 text: "",
                 size: "small",
-                onClick: clear2
+                onClick: clear3
               }, {
                 default: (0, vue_exports.withCtx)(() => [
                   (0, vue_exports.createTextVNode)((0, vue_exports.toDisplayString)((0, vue_exports.unref)(t)("el.colorpicker.clear")), 1)
@@ -36268,7 +38528,7 @@ var _sfc_main53 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, 8, ["visible", "popper-class", "transition"]);
     };
   }
-}));
+});
 var ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main53, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/color-picker/src/color-picker.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/color-picker/index.mjs
@@ -36323,7 +38583,8 @@ var ElConfigProvider = withInstall(ConfigProvider);
 var __default__41 = (0, vue_exports.defineComponent)({
   name: "ElContainer"
 });
-var _sfc_main54 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__41), {
+var _sfc_main54 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__41,
   props: {
     direction: {
       type: String
@@ -36357,14 +38618,15 @@ var _sfc_main54 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Container = /* @__PURE__ */ _export_sfc(_sfc_main54, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/container/src/container.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/container/src/aside.mjs
 var __default__42 = (0, vue_exports.defineComponent)({
   name: "ElAside"
 });
-var _sfc_main55 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__42), {
+var _sfc_main55 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__42,
   props: {
     width: {
       type: String,
@@ -36384,14 +38646,15 @@ var _sfc_main55 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 6);
     };
   }
-}));
+});
 var Aside = /* @__PURE__ */ _export_sfc(_sfc_main55, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/container/src/aside.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/container/src/footer.mjs
 var __default__43 = (0, vue_exports.defineComponent)({
   name: "ElFooter"
 });
-var _sfc_main56 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__43), {
+var _sfc_main56 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__43,
   props: {
     height: {
       type: String,
@@ -36411,14 +38674,15 @@ var _sfc_main56 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 6);
     };
   }
-}));
+});
 var Footer = /* @__PURE__ */ _export_sfc(_sfc_main56, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/container/src/footer.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/container/src/header.mjs
 var __default__44 = (0, vue_exports.defineComponent)({
   name: "ElHeader"
 });
-var _sfc_main57 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__44), {
+var _sfc_main57 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__44,
   props: {
     height: {
       type: String,
@@ -36442,14 +38706,15 @@ var _sfc_main57 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 6);
     };
   }
-}));
+});
 var Header = /* @__PURE__ */ _export_sfc(_sfc_main57, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/container/src/header.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/container/src/main.mjs
 var __default__45 = (0, vue_exports.defineComponent)({
   name: "ElMain"
 });
-var _sfc_main58 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__45), {
+var _sfc_main58 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__45,
   setup(__props) {
     const ns2 = useNamespace("main");
     return (_ctx, _cache) => {
@@ -36460,7 +38725,7 @@ var _sfc_main58 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Main = /* @__PURE__ */ _export_sfc(_sfc_main58, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/container/src/main.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/container/index.mjs
@@ -36546,7 +38811,8 @@ var selectionModeWithDefault = (mode) => {
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/date-picker/src/props/panel-date-pick.mjs
-var panelDatePickProps = buildProps2(__spreadProps(__spreadValues({}, panelSharedProps), {
+var panelDatePickProps = buildProps2({
+  ...panelSharedProps,
   parsedValue: {
     type: definePropType([Object, Array])
   },
@@ -36557,19 +38823,20 @@ var panelDatePickProps = buildProps2(__spreadProps(__spreadValues({}, panelShare
     type: String,
     default: ""
   }
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/date-picker/src/date-picker-com/basic-date-table.mjs
 var import_dayjs8 = __toESM(require_dayjs_min(), 1);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/date-picker/src/props/basic-date-table.mjs
-var basicDateTableProps = buildProps2(__spreadProps(__spreadValues({}, datePickerSharedProps), {
+var basicDateTableProps = buildProps2({
+  ...datePickerSharedProps,
   cellClassName: {
     type: definePropType(Function)
   },
   showWeekNumber: Boolean,
   selectionMode: selectionModeWithDefault("date")
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/date-picker/src/utils.mjs
 var import_dayjs7 = __toESM(require_dayjs_min(), 1);
@@ -36819,15 +39086,15 @@ var _sfc_main59 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       return rows_;
     });
     (0, vue_exports.watch)(() => props.date, async () => {
-      var _a3, _b;
-      if ((_a3 = tbodyRef.value) == null ? void 0 : _a3.contains(document.activeElement)) {
+      var _a4, _b;
+      if ((_a4 = tbodyRef.value) == null ? void 0 : _a4.contains(document.activeElement)) {
         await (0, vue_exports.nextTick)();
         (_b = currentCellRef.value) == null ? void 0 : _b.focus();
       }
     });
     const focus = async () => {
-      var _a3;
-      (_a3 = currentCellRef.value) == null ? void 0 : _a3.focus();
+      var _a4;
+      (_a4 = currentCellRef.value) == null ? void 0 : _a4.focus();
     };
     const isNormalDay = (type4 = "") => {
       return ["normal", "today"].includes(type4);
@@ -36878,12 +39145,12 @@ var _sfc_main59 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       return startDate.value.add(offsetFromStart, "day");
     };
     const handleMouseMove = (event) => {
-      var _a3;
+      var _a4;
       if (!props.rangeState.selecting)
         return;
       let target = event.target;
       if (target.tagName === "SPAN") {
-        target = (_a3 = target.parentNode) == null ? void 0 : _a3.parentNode;
+        target = (_a4 = target.parentNode) == null ? void 0 : _a4.parentNode;
       }
       if (target.tagName === "DIV") {
         target = target.parentNode;
@@ -37040,9 +39307,10 @@ var DateTable2 = /* @__PURE__ */ _export_sfc(_sfc_main59, [["__file", "/home/run
 var import_dayjs9 = __toESM(require_dayjs_min(), 1);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/date-picker/src/props/basic-month-table.mjs
-var basicMonthTableProps = buildProps2(__spreadProps(__spreadValues({}, datePickerSharedProps), {
+var basicMonthTableProps = buildProps2({
+  ...datePickerSharedProps,
   selectionMode: selectionModeWithDefault("month")
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/date-picker/src/date-picker-com/basic-month-table.mjs
 var _hoisted_130 = ["aria-label"];
@@ -37072,7 +39340,7 @@ var _sfc_main60 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
     const lastRow = (0, vue_exports.ref)();
     const lastColumn = (0, vue_exports.ref)();
     const rows = (0, vue_exports.computed)(() => {
-      var _a3, _b;
+      var _a4, _b;
       const rows2 = tableRows.value;
       const now2 = (0, import_dayjs9.default)().locale(lang.value).startOf("month");
       for (let i = 0; i < 3; i++) {
@@ -37093,7 +39361,7 @@ var _sfc_main60 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
           const calTime = props.date.startOf("year").month(index2);
           const calEndDate = props.rangeState.endDate || props.maxDate || props.rangeState.selecting && props.minDate || null;
           cell.inRange = !!(props.minDate && calTime.isSameOrAfter(props.minDate, "month") && calEndDate && calTime.isSameOrBefore(calEndDate, "month")) || !!(props.minDate && calTime.isSameOrBefore(props.minDate, "month") && calEndDate && calTime.isSameOrAfter(calEndDate, "month"));
-          if ((_a3 = props.minDate) == null ? void 0 : _a3.isSameOrAfter(calEndDate)) {
+          if ((_a4 = props.minDate) == null ? void 0 : _a4.isSameOrAfter(calEndDate)) {
             cell.start = !!(calEndDate && calTime.isSame(calEndDate, "month"));
             cell.end = props.minDate && calTime.isSame(props.minDate, "month");
           } else {
@@ -37111,13 +39379,13 @@ var _sfc_main60 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       return rows2;
     });
     const focus = () => {
-      var _a3;
-      (_a3 = currentCellRef.value) == null ? void 0 : _a3.focus();
+      var _a4;
+      (_a4 = currentCellRef.value) == null ? void 0 : _a4.focus();
     };
     const getCellStyle = (cell) => {
       const style = {};
       const year = props.date.year();
-      const today = new Date();
+      const today = /* @__PURE__ */ new Date();
       const month = cell.text;
       style.disabled = props.disabledDate ? datesInMonth(year, month, lang.value).every(props.disabledDate) : false;
       style.current = castArray2(props.parsedValue).findIndex((date5) => import_dayjs9.default.isDayjs(date5) && date5.year() === year && date5.month() === month) >= 0;
@@ -37139,12 +39407,12 @@ var _sfc_main60 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       return castArray2(props.date).findIndex((date5) => date5.year() === year && date5.month() === month) >= 0;
     };
     const handleMouseMove = (event) => {
-      var _a3;
+      var _a4;
       if (!props.rangeState.selecting)
         return;
       let target = event.target;
       if (target.tagName === "A") {
-        target = (_a3 = target.parentNode) == null ? void 0 : _a3.parentNode;
+        target = (_a4 = target.parentNode) == null ? void 0 : _a4.parentNode;
       }
       if (target.tagName === "DIV") {
         target = target.parentNode;
@@ -37165,8 +39433,8 @@ var _sfc_main60 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       }
     };
     const handleMonthTableClick = (event) => {
-      var _a3;
-      const target = (_a3 = event.target) == null ? void 0 : _a3.closest("td");
+      var _a4;
+      const target = (_a4 = event.target) == null ? void 0 : _a4.closest("td");
       if ((target == null ? void 0 : target.tagName) !== "TD")
         return;
       if (hasClass(target, "disabled"))
@@ -37192,8 +39460,8 @@ var _sfc_main60 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       }
     };
     (0, vue_exports.watch)(() => props.date, async () => {
-      var _a3, _b;
-      if ((_a3 = tbodyRef.value) == null ? void 0 : _a3.contains(document.activeElement)) {
+      var _a4, _b;
+      if ((_a4 = tbodyRef.value) == null ? void 0 : _a4.contains(document.activeElement)) {
         await (0, vue_exports.nextTick)();
         (_b = currentCellRef.value) == null ? void 0 : _b.focus();
       }
@@ -37279,8 +39547,8 @@ var _sfc_main61 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       return Math.floor(props.date.year() / 10) * 10;
     });
     const focus = () => {
-      var _a3;
-      (_a3 = currentCellRef.value) == null ? void 0 : _a3.focus();
+      var _a4;
+      (_a4 = currentCellRef.value) == null ? void 0 : _a4.focus();
     };
     const getCellKls = (year) => {
       const kls = {};
@@ -37304,8 +39572,8 @@ var _sfc_main61 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       }
     };
     (0, vue_exports.watch)(() => props.date, async () => {
-      var _a3, _b;
-      if ((_a3 = tbodyRef.value) == null ? void 0 : _a3.contains(document.activeElement)) {
+      var _a4, _b;
+      if ((_a4 = tbodyRef.value) == null ? void 0 : _a4.contains(document.activeElement)) {
         await (0, vue_exports.nextTick)();
         (_b = currentCellRef.value) == null ? void 0 : _b.focus();
       }
@@ -37628,9 +39896,9 @@ var _sfc_main62 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       return parseDate2;
     };
     const handleFocusPicker = async () => {
-      var _a3;
+      var _a4;
       if (["week", "month", "year", "date"].includes(selectionMode.value)) {
-        (_a3 = currentViewRef.value) == null ? void 0 : _a3.focus();
+        (_a4 = currentViewRef.value) == null ? void 0 : _a4.focus();
         if (selectionMode.value === "week") {
           handleKeyControl(EVENT_CODE.down);
         }
@@ -37659,7 +39927,7 @@ var _sfc_main62 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       }
     };
     const handleKeyControl = (code) => {
-      var _a3;
+      var _a4;
       const { up: up2, down: down2, left: left2, right: right2, home: home2, end: end2, pageUp: pageUp2, pageDown: pageDown2 } = EVENT_CODE;
       const mapping = {
         year: {
@@ -37700,7 +39968,7 @@ var _sfc_main62 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
         const map3 = mapping[keyboardMode.value];
         if (!map3)
           return;
-        map3.offset(newDate, isFunction4(map3[code]) ? map3[code](newDate) : (_a3 = map3[code]) != null ? _a3 : 0);
+        map3.offset(newDate, isFunction4(map3[code]) ? map3[code](newDate) : (_a4 = map3[code]) != null ? _a4 : 0);
         if (disabledDate2 && disabledDate2(newDate)) {
           break;
         }
@@ -37985,7 +40253,10 @@ var DatePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main62, [["__file", "/home/
 var import_dayjs13 = __toESM(require_dayjs_min(), 1);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/date-picker/src/props/panel-date-range.mjs
-var panelDateRangeProps = buildProps2(__spreadValues(__spreadValues({}, panelSharedProps), panelRangeSharedProps));
+var panelDateRangeProps = buildProps2({
+  ...panelSharedProps,
+  ...panelRangeSharedProps
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/date-picker/src/composables/use-shortcut.mjs
 var import_dayjs12 = __toESM(require_dayjs_min(), 1);
@@ -38742,7 +41013,9 @@ var DateRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main63, [["__file", "/
 var import_dayjs14 = __toESM(require_dayjs_min(), 1);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/date-picker/src/props/panel-month-range.mjs
-var panelMonthRangeProps = buildProps2(__spreadValues({}, panelRangeSharedProps));
+var panelMonthRangeProps = buildProps2({
+  ...panelRangeSharedProps
+});
 var panelMonthRangeEmits = ["pick", "set-picker-option"];
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/date-picker/src/composables/use-month-range-header.mjs
@@ -38802,7 +41075,8 @@ var unit2 = "year";
 var __default__46 = (0, vue_exports.defineComponent)({
   name: "DatePickerMonthRange"
 });
-var _sfc_main64 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__46), {
+var _sfc_main64 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__46,
   props: panelMonthRangeProps,
   emits: panelMonthRangeEmits,
   setup(__props, { emit: emit2 }) {
@@ -39005,7 +41279,7 @@ var _sfc_main64 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var MonthRangePickPanel = /* @__PURE__ */ _export_sfc(_sfc_main64, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/date-picker/src/date-picker-com/panel-month-range.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/date-picker/src/panel-utils.mjs
@@ -39036,7 +41310,10 @@ import_dayjs15.default.extend(import_isSameOrBefore.default);
 var DatePicker = (0, vue_exports.defineComponent)({
   name: "ElDatePicker",
   install: null,
-  props: __spreadValues(__spreadValues({}, timePickerDefaultProps), datePickerProps),
+  props: {
+    ...timePickerDefaultProps,
+    ...datePickerProps
+  },
   emits: ["update:modelValue"],
   setup(props, {
     expose,
@@ -39052,16 +41329,16 @@ var DatePicker = (0, vue_exports.defineComponent)({
     const commonPicker = (0, vue_exports.ref)();
     const refProps = {
       focus: (focusStartInput = true) => {
-        var _a3;
-        (_a3 = commonPicker.value) == null ? void 0 : _a3.focus(focusStartInput);
+        var _a4;
+        (_a4 = commonPicker.value) == null ? void 0 : _a4.focus(focusStartInput);
       },
       handleOpen: () => {
-        var _a3;
-        (_a3 = commonPicker.value) == null ? void 0 : _a3.handleOpen();
+        var _a4;
+        (_a4 = commonPicker.value) == null ? void 0 : _a4.handleOpen();
       },
       handleClose: () => {
-        var _a3;
-        (_a3 = commonPicker.value) == null ? void 0 : _a3.handleClose();
+        var _a4;
+        (_a4 = commonPicker.value) == null ? void 0 : _a4.handleClose();
       }
     };
     expose(refProps);
@@ -39069,8 +41346,8 @@ var DatePicker = (0, vue_exports.defineComponent)({
       emit2("update:modelValue", val);
     };
     return () => {
-      var _a3;
-      const format2 = (_a3 = props.format) != null ? _a3 : DEFAULT_FORMATS_DATEPICKER[props.type] || DEFAULT_FORMATS_DATE;
+      var _a4;
+      const format2 = (_a4 = props.format) != null ? _a4 : DEFAULT_FORMATS_DATEPICKER[props.type] || DEFAULT_FORMATS_DATE;
       const Component = getPanel(props.type);
       return (0, vue_exports.createVNode)(CommonPicker, (0, vue_exports.mergeProps)(props, {
         "format": format2,
@@ -39116,11 +41393,11 @@ var ElDescriptionsCell = (0, vue_exports.defineComponent)({
     };
   },
   render() {
-    var _a3, _b, _c, _d, _e, _f;
+    var _a4, _b, _c, _d, _e, _f;
     const item = getNormalizedProps(this.cell);
     const { border, direction: direction2 } = this.descriptions;
     const isVertical = direction2 === "vertical";
-    const label = ((_c = (_b = (_a3 = this.cell) == null ? void 0 : _a3.children) == null ? void 0 : _b.label) == null ? void 0 : _c.call(_b)) || item.label;
+    const label = ((_c = (_b = (_a4 = this.cell) == null ? void 0 : _a4.children) == null ? void 0 : _b.label) == null ? void 0 : _c.call(_b)) || item.label;
     const content = (_f = (_e = (_d = this.cell) == null ? void 0 : _d.children) == null ? void 0 : _e.default) == null ? void 0 : _f.call(_e);
     const span = item.span;
     const align = item.align ? `is-${item.align}` : "";
@@ -39189,7 +41466,8 @@ var _hoisted_137 = { key: 1 };
 var __default__47 = (0, vue_exports.defineComponent)({
   name: "ElDescriptionsRow"
 });
-var _sfc_main65 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__47), {
+var _sfc_main65 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__47,
   props: descriptionsRowProps,
   setup(__props) {
     const descriptions = (0, vue_exports.inject)(descriptionsKey, {});
@@ -39242,7 +41520,7 @@ var _sfc_main65 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ]));
     };
   }
-}));
+});
 var ElDescriptionsRow = /* @__PURE__ */ _export_sfc(_sfc_main65, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/descriptions/src/descriptions-row.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/descriptions/src/description.mjs
@@ -39275,7 +41553,8 @@ var descriptionProps = buildProps2({
 var __default__48 = (0, vue_exports.defineComponent)({
   name: "ElDescriptions"
 });
-var _sfc_main66 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__48), {
+var _sfc_main66 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__48,
   props: descriptionProps,
   setup(__props) {
     const props = __props;
@@ -39297,8 +41576,8 @@ var _sfc_main66 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       return node;
     };
     const getRows = () => {
-      var _a3;
-      const children = flattedChildren((_a3 = slots.default) == null ? void 0 : _a3.call(slots)).filter((node) => {
+      var _a4;
+      const children = flattedChildren((_a4 = slots.default) == null ? void 0 : _a4.call(slots)).filter((node) => {
         var _a22;
         return ((_a22 = node == null ? void 0 : node.type) == null ? void 0 : _a22.name) === "ElDescriptionsItem";
       });
@@ -39372,7 +41651,7 @@ var _sfc_main66 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Descriptions = /* @__PURE__ */ _export_sfc(_sfc_main66, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/descriptions/src/description.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/descriptions/src/description-item.mjs
@@ -39523,7 +41802,8 @@ var dialogContentEmits = {
 var _hoisted_138 = ["aria-label"];
 var _hoisted_225 = ["id"];
 var __default__49 = (0, vue_exports.defineComponent)({ name: "ElDialogContent" });
-var _sfc_main67 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__49), {
+var _sfc_main67 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__49,
   props: dialogContentProps,
   emits: dialogContentEmits,
   setup(__props) {
@@ -39592,11 +41872,12 @@ var _sfc_main67 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 6);
     };
   }
-}));
+});
 var ElDialogContent = /* @__PURE__ */ _export_sfc(_sfc_main67, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/dialog/src/dialog-content.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/dialog/src/dialog.mjs
-var dialogProps = buildProps2(__spreadProps(__spreadValues({}, dialogContentProps), {
+var dialogProps = buildProps2({
+  ...dialogContentProps,
   appendToBody: {
     type: Boolean,
     default: false
@@ -39650,7 +41931,7 @@ var dialogProps = buildProps2(__spreadProps(__spreadValues({}, dialogContentProp
     type: Boolean,
     default: false
   }
-}));
+});
 var dialogEmits = {
   open: () => true,
   opened: () => true,
@@ -39761,8 +42042,8 @@ var useDialog = (props, targetRef) => {
     emit2("closeAutoFocus");
   }
   function onFocusoutPrevented(event) {
-    var _a3;
-    if (((_a3 = event.detail) == null ? void 0 : _a3.focusReason) === "pointer") {
+    var _a4;
+    if (((_a4 = event.detail) == null ? void 0 : _a4.focusReason) === "pointer") {
       event.preventDefault();
     }
   }
@@ -39838,7 +42119,8 @@ var __default__50 = (0, vue_exports.defineComponent)({
   name: "ElDialog",
   inheritAttrs: false
 });
-var _sfc_main68 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__50), {
+var _sfc_main68 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__50,
   props: dialogProps,
   emits: dialogEmits,
   setup(__props, { expose }) {
@@ -39987,7 +42269,7 @@ var _sfc_main68 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 8, ["disabled"]);
     };
   }
-}));
+});
 var Dialog = /* @__PURE__ */ _export_sfc(_sfc_main68, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/dialog/src/dialog.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/dialog/index.mjs
@@ -40015,7 +42297,8 @@ var dividerProps = buildProps2({
 var __default__51 = (0, vue_exports.defineComponent)({
   name: "ElDivider"
 });
-var _sfc_main69 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__51), {
+var _sfc_main69 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__51,
   props: dividerProps,
   setup(__props) {
     const props = __props;
@@ -40040,14 +42323,15 @@ var _sfc_main69 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 6);
     };
   }
-}));
+});
 var Divider = /* @__PURE__ */ _export_sfc(_sfc_main69, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/divider/src/divider.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/divider/index.mjs
 var ElDivider = withInstall(Divider);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/drawer/src/drawer.mjs
-var drawerProps = buildProps2(__spreadProps(__spreadValues({}, dialogProps), {
+var drawerProps = buildProps2({
+  ...dialogProps,
   direction: {
     type: String,
     default: "rtl",
@@ -40065,7 +42349,7 @@ var drawerProps = buildProps2(__spreadProps(__spreadValues({}, dialogProps), {
     type: Boolean,
     default: true
   }
-}));
+});
 var drawerEmits = dialogEmits;
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/drawer/src/drawer2.mjs
@@ -40102,14 +42386,15 @@ var _sfc_main70 = (0, vue_exports.defineComponent)({
     const { t } = useLocale();
     const isHorizontal2 = (0, vue_exports.computed)(() => props.direction === "rtl" || props.direction === "ltr");
     const drawerSize = (0, vue_exports.computed)(() => addUnit(props.size));
-    return __spreadProps(__spreadValues({}, useDialog(props, drawerRef)), {
+    return {
+      ...useDialog(props, drawerRef),
       drawerRef,
       focusStartRef,
       isHorizontal: isHorizontal2,
       drawerSize,
       ns: ns2,
       t
-    });
+    };
   }
 });
 var _hoisted_140 = ["aria-label", "aria-labelledby", "aria-describedby"];
@@ -40260,7 +42545,8 @@ var createCollectionWithScope = (name) => {
   const COLLECTION_ITEM_NAME = `${COLLECTION_NAME}Item`;
   const COLLECTION_INJECTION_KEY3 = Symbol(COLLECTION_NAME);
   const COLLECTION_ITEM_INJECTION_KEY3 = Symbol(COLLECTION_ITEM_NAME);
-  const ElCollection3 = __spreadProps(__spreadValues({}, Collection), {
+  const ElCollection3 = {
+    ...Collection,
     name: COLLECTION_NAME,
     setup() {
       const collectionRef = (0, vue_exports.ref)(null);
@@ -40279,8 +42565,9 @@ var createCollectionWithScope = (name) => {
         collectionRef
       });
     }
-  });
-  const ElCollectionItem3 = __spreadProps(__spreadValues({}, CollectionItem), {
+  };
+  const ElCollectionItem3 = {
+    ...CollectionItem,
     name: COLLECTION_ITEM_NAME,
     setup(_2, { attrs }) {
       const collectionItemRef = (0, vue_exports.ref)(null);
@@ -40291,9 +42578,10 @@ var createCollectionWithScope = (name) => {
       (0, vue_exports.onMounted)(() => {
         const collectionItemEl = (0, vue_exports.unref)(collectionItemRef);
         if (collectionItemEl) {
-          collectionInjection.itemMap.set(collectionItemEl, __spreadValues({
-            ref: collectionItemEl
-          }, attrs));
+          collectionInjection.itemMap.set(collectionItemEl, {
+            ref: collectionItemEl,
+            ...attrs
+          });
         }
       });
       (0, vue_exports.onBeforeUnmount)(() => {
@@ -40301,7 +42589,7 @@ var createCollectionWithScope = (name) => {
         collectionInjection.itemMap.delete(collectionItemEl);
       });
     }
-  });
+  };
   return {
     COLLECTION_INJECTION_KEY: COLLECTION_INJECTION_KEY3,
     COLLECTION_ITEM_INJECTION_KEY: COLLECTION_ITEM_INJECTION_KEY3,
@@ -40396,8 +42684,8 @@ var _sfc_main73 = (0, vue_exports.defineComponent)({
   props: rovingFocusGroupProps,
   emits: [CURRENT_TAB_ID_CHANGE_EVT, "entryFocus"],
   setup(props, { emit: emit2 }) {
-    var _a3;
-    const currentTabbedId = (0, vue_exports.ref)((_a3 = props.currentTabId || props.defaultCurrentTabId) != null ? _a3 : null);
+    var _a4;
+    const currentTabbedId = (0, vue_exports.ref)((_a4 = props.currentTabId || props.defaultCurrentTabId) != null ? _a4 : null);
     const isBackingOut = (0, vue_exports.ref)(false);
     const isClickFocus = (0, vue_exports.ref)(false);
     const rovingFocusGroupRef = (0, vue_exports.ref)(null);
@@ -40610,9 +42898,10 @@ var ElRovingFocusItem = /* @__PURE__ */ _export_sfc(_sfc_main75, [["render", _sf
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/dropdown/src/dropdown.mjs
 var dropdownProps = buildProps2({
   trigger: useTooltipTriggerProps.trigger,
-  effect: __spreadProps(__spreadValues({}, useTooltipContentProps.effect), {
+  effect: {
+    ...useTooltipContentProps.effect,
     default: "light"
-  }),
+  },
   type: {
     type: definePropType(String)
   },
@@ -40744,12 +43033,12 @@ var _sfc_main76 = (0, vue_exports.defineComponent)({
       handleClose();
     }
     function handleClose() {
-      var _a3;
-      (_a3 = popperRef.value) == null ? void 0 : _a3.onClose();
+      var _a4;
+      (_a4 = popperRef.value) == null ? void 0 : _a4.onClose();
     }
     function handleOpen() {
-      var _a3;
-      (_a3 = popperRef.value) == null ? void 0 : _a3.onOpen();
+      var _a4;
+      (_a4 = popperRef.value) == null ? void 0 : _a4.onOpen();
     }
     const dropdownSize = useSize();
     function commandHandler(...args) {
@@ -40799,9 +43088,9 @@ var _sfc_main76 = (0, vue_exports.defineComponent)({
       hideOnClick: (0, vue_exports.toRef)(props, "hideOnClick")
     });
     const onFocusAfterTrapped = (e) => {
-      var _a3, _b;
+      var _a4, _b;
       e.preventDefault();
-      (_b = (_a3 = contentRef.value) == null ? void 0 : _a3.focus) == null ? void 0 : _b.call(_a3, {
+      (_b = (_a4 = contentRef.value) == null ? void 0 : _a4.focus) == null ? void 0 : _b.call(_a4, {
         preventScroll: true
       });
     };
@@ -40835,7 +43124,7 @@ var _sfc_main76 = (0, vue_exports.defineComponent)({
   }
 });
 function _sfc_render20(_ctx, _cache, $props, $setup, $data, $options) {
-  var _a3;
+  var _a4;
   const _component_el_dropdown_collection = (0, vue_exports.resolveComponent)("el-dropdown-collection");
   const _component_el_roving_focus_group = (0, vue_exports.resolveComponent)("el-roving-focus-group");
   const _component_el_scrollbar = (0, vue_exports.resolveComponent)("el-scrollbar");
@@ -40859,7 +43148,7 @@ function _sfc_render20(_ctx, _cache, $props, $setup, $data, $options) {
       "manual-mode": true,
       placement: _ctx.placement,
       "popper-class": [_ctx.ns.e("popper"), _ctx.popperClass],
-      "reference-element": (_a3 = _ctx.referenceElementRef) == null ? void 0 : _a3.$el,
+      "reference-element": (_a4 = _ctx.referenceElementRef) == null ? void 0 : _a4.$el,
       trigger: _ctx.trigger,
       "trigger-keys": _ctx.triggerKeys,
       "trigger-target-el": _ctx.contentRef,
@@ -41029,7 +43318,7 @@ function _sfc_render21(_ctx, _cache, $props, $setup, $data, $options) {
       role: "separator",
       class: _ctx.ns.bem("menu", "item", "divided")
     }, _ctx.$attrs), null, 16)) : (0, vue_exports.createCommentVNode)("v-if", true),
-    (0, vue_exports.createElementVNode)("li", (0, vue_exports.mergeProps)({ ref: _ctx.itemRef }, __spreadValues(__spreadValues({}, _ctx.dataset), _ctx.$attrs), {
+    (0, vue_exports.createElementVNode)("li", (0, vue_exports.mergeProps)({ ref: _ctx.itemRef }, { ..._ctx.dataset, ..._ctx.$attrs }, {
       "aria-disabled": _ctx.disabled,
       class: [_ctx.ns.be("menu", "item"), _ctx.ns.is("disabled", _ctx.disabled)],
       tabindex: _ctx.tabIndex,
@@ -41079,22 +43368,22 @@ var _sfc_main78 = (0, vue_exports.defineComponent)({
     const _instance = (0, vue_exports.getCurrentInstance)();
     const itemRef = (0, vue_exports.ref)(null);
     const textContent = (0, vue_exports.computed)(() => {
-      var _a3, _b;
-      return (_b = (_a3 = (0, vue_exports.unref)(itemRef)) == null ? void 0 : _a3.textContent) != null ? _b : "";
+      var _a4, _b;
+      return (_b = (_a4 = (0, vue_exports.unref)(itemRef)) == null ? void 0 : _a4.textContent) != null ? _b : "";
     });
     const { onItemEnter, onItemLeave } = (0, vue_exports.inject)(DROPDOWN_INJECTION_KEY, void 0);
     const handlePointerMove = composeEventHandlers((e) => {
       emit2("pointermove", e);
       return e.defaultPrevented;
     }, whenMouse((e) => {
-      var _a3;
+      var _a4;
       if (props.disabled) {
         onItemLeave(e);
       } else {
         onItemEnter(e);
         if (!e.defaultPrevented) {
           ;
-          (_a3 = e.currentTarget) == null ? void 0 : _a3.focus();
+          (_a4 = e.currentTarget) == null ? void 0 : _a4.focus();
         }
       }
     }));
@@ -41111,18 +43400,18 @@ var _sfc_main78 = (0, vue_exports.defineComponent)({
       emit2("click", e);
       return e.type !== "keydown" && e.defaultPrevented;
     }, (e) => {
-      var _a3, _b, _c;
+      var _a4, _b, _c;
       if (props.disabled) {
         e.stopImmediatePropagation();
         return;
       }
-      if ((_a3 = elDropdown == null ? void 0 : elDropdown.hideOnClick) == null ? void 0 : _a3.value) {
+      if ((_a4 = elDropdown == null ? void 0 : elDropdown.hideOnClick) == null ? void 0 : _a4.value) {
         (_b = elDropdown.handleClick) == null ? void 0 : _b.call(elDropdown);
       }
       (_c = elDropdown.commandHandler) == null ? void 0 : _c.call(elDropdown, props.command, _instance, e);
     });
     const propsAndAttrs = (0, vue_exports.computed)(() => {
-      return __spreadValues(__spreadValues({}, props), attrs);
+      return { ...props, ...attrs };
     });
     return {
       handleClick,
@@ -41134,13 +43423,13 @@ var _sfc_main78 = (0, vue_exports.defineComponent)({
   }
 });
 function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
-  var _a3;
+  var _a4;
   const _component_el_dropdown_item_impl = (0, vue_exports.resolveComponent)("el-dropdown-item-impl");
   const _component_el_roving_focus_item = (0, vue_exports.resolveComponent)("el-roving-focus-item");
   const _component_el_dropdown_collection_item = (0, vue_exports.resolveComponent)("el-dropdown-collection-item");
   return (0, vue_exports.openBlock)(), (0, vue_exports.createBlock)(_component_el_dropdown_collection_item, {
     disabled: _ctx.disabled,
-    "text-value": (_a3 = _ctx.textValue) != null ? _a3 : _ctx.textContent
+    "text-value": (_a4 = _ctx.textValue) != null ? _a4 : _ctx.textContent
   }, {
     default: (0, vue_exports.withCtx)(() => [
       (0, vue_exports.createVNode)(_component_el_roving_focus_item, {
@@ -41173,7 +43462,7 @@ var _sfc_main79 = (0, vue_exports.defineComponent)({
   setup(props) {
     const ns2 = useNamespace("dropdown");
     const { _elDropdownSize } = useDropdown();
-    const size3 = _elDropdownSize.value;
+    const size4 = _elDropdownSize.value;
     const { focusTrapRef, onKeydown } = (0, vue_exports.inject)(FOCUS_TRAP_INJECTION_KEY, void 0);
     const { contentRef, role, triggerId } = (0, vue_exports.inject)(DROPDOWN_INJECTION_KEY, void 0);
     const { collectionRef: dropdownCollectionRef, getItems } = (0, vue_exports.inject)(COLLECTION_INJECTION_KEY2, void 0);
@@ -41187,12 +43476,12 @@ var _sfc_main79 = (0, vue_exports.defineComponent)({
     } = (0, vue_exports.inject)(ROVING_FOCUS_GROUP_INJECTION_KEY, void 0);
     const { collectionRef: rovingFocusGroupCollectionRef } = (0, vue_exports.inject)(COLLECTION_INJECTION_KEY, void 0);
     const dropdownKls = (0, vue_exports.computed)(() => {
-      return [ns2.b("menu"), ns2.bm("menu", size3 == null ? void 0 : size3.value)];
+      return [ns2.b("menu"), ns2.bm("menu", size4 == null ? void 0 : size4.value)];
     });
     const dropdownListWrapperRef = composeRefs(contentRef, dropdownCollectionRef, focusTrapRef, rovingFocusGroupRef, rovingFocusGroupCollectionRef);
     const composedKeydown = composeEventHandlers((e) => {
-      var _a3;
-      (_a3 = props.onKeydown) == null ? void 0 : _a3.call(props, e);
+      var _a4;
+      (_a4 = props.onKeydown) == null ? void 0 : _a4.call(props, e);
     }, (e) => {
       const { currentTarget, code, target } = e;
       const isKeydownContained = currentTarget.contains(target);
@@ -41218,7 +43507,7 @@ var _sfc_main79 = (0, vue_exports.defineComponent)({
       onKeydown(e);
     };
     return {
-      size: size3,
+      size: size4,
       rovingFocusGroupRootStyle,
       tabIndex,
       dropdownKls,
@@ -41457,7 +43746,8 @@ var _hoisted_230 = { key: 1 };
 var __default__52 = (0, vue_exports.defineComponent)({
   name: "ElEmpty"
 });
-var _sfc_main81 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__52), {
+var _sfc_main81 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__52,
   props: emptyProps,
   setup(__props) {
     const props = __props;
@@ -41497,7 +43787,7 @@ var _sfc_main81 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Empty = /* @__PURE__ */ _export_sfc(_sfc_main81, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/empty/src/empty.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/empty/index.mjs
@@ -41600,7 +43890,8 @@ var COMPONENT_NAME10 = "ElForm";
 var __default__53 = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME10
 });
-var _sfc_main82 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__53), {
+var _sfc_main82 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__53,
   props: formProps,
   emits: formEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -41666,7 +43957,10 @@ var _sfc_main82 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
         try {
           await field.validate("");
         } catch (fields3) {
-          validationErrors = __spreadValues(__spreadValues({}, validationErrors), fields3);
+          validationErrors = {
+            ...validationErrors,
+            ...fields3
+          };
         }
       }
       if (Object.keys(validationErrors).length === 0)
@@ -41693,10 +43987,10 @@ var _sfc_main82 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }
     };
     const scrollToField = (prop) => {
-      var _a3;
+      var _a4;
       const field = filterFields(fields, prop)[0];
       if (field) {
-        (_a3 = field.$el) == null ? void 0 : _a3.scrollIntoView();
+        (_a4 = field.$el) == null ? void 0 : _a4.scrollIntoView();
       }
     };
     (0, vue_exports.watch)(() => props.rules, () => {
@@ -41704,14 +43998,16 @@ var _sfc_main82 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
         validate().catch((err) => debugWarn(err));
       }
     }, { deep: true });
-    (0, vue_exports.provide)(formContextKey, (0, vue_exports.reactive)(__spreadValues(__spreadProps(__spreadValues({}, (0, vue_exports.toRefs)(props)), {
+    (0, vue_exports.provide)(formContextKey, (0, vue_exports.reactive)({
+      ...(0, vue_exports.toRefs)(props),
       emit: emit2,
       resetFields,
       clearValidate,
       validateField,
       addField,
-      removeField
-    }), useFormLabelWidth())));
+      removeField,
+      ...useFormLabelWidth()
+    }));
     expose({
       validate,
       validateField,
@@ -41727,7 +44023,7 @@ var _sfc_main82 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Form = /* @__PURE__ */ _export_sfc(_sfc_main82, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/form/src/form.vue"]]);
 
 // ../../node_modules/.pnpm/async-validator@4.2.5/node_modules/async-validator/dist-web/index.js
@@ -42096,7 +44392,12 @@ var getUrlRegex = function() {
   return urlReg;
 };
 var pattern$2 = {
+  // http://emailregex.com/
   email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+\.)+[a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]{2,}))$/,
+  // url: new RegExp(
+  //   '^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$',
+  //   'i',
+  // ),
   hex: /^#?([a-f0-9]{6}|[a-f0-9]{3})$/i
 };
 var types = {
@@ -42575,7 +44876,7 @@ var Schema = /* @__PURE__ */ function() {
     function complete(results) {
       var errors = [];
       var fields = {};
-      function add2(e) {
+      function add3(e) {
         if (Array.isArray(e)) {
           var _errors;
           errors = (_errors = errors).concat.apply(_errors, e);
@@ -42584,7 +44885,7 @@ var Schema = /* @__PURE__ */ function() {
         }
       }
       for (var i = 0; i < results.length; i++) {
-        add2(results[i]);
+        add3(results[i]);
       }
       if (!errors.length) {
         callback(null, source);
@@ -42842,8 +45143,8 @@ var FormLabelWrap = (0, vue_exports.defineComponent)({
     const el = (0, vue_exports.ref)();
     const computedWidth = (0, vue_exports.ref)(0);
     const getLabelWidth = () => {
-      var _a3;
-      if ((_a3 = el.value) == null ? void 0 : _a3.firstElementChild) {
+      var _a4;
+      if ((_a4 = el.value) == null ? void 0 : _a4.firstElementChild) {
         const width = window.getComputedStyle(el.value.firstElementChild).width;
         return Math.ceil(Number.parseFloat(width));
       } else {
@@ -42875,11 +45176,11 @@ var FormLabelWrap = (0, vue_exports.defineComponent)({
       }
     });
     useResizeObserver((0, vue_exports.computed)(() => {
-      var _a3, _b;
-      return (_b = (_a3 = el.value) == null ? void 0 : _a3.firstElementChild) != null ? _b : null;
+      var _a4, _b;
+      return (_b = (_a4 = el.value) == null ? void 0 : _a4.firstElementChild) != null ? _b : null;
     }), updateLabelWidthFn);
     return () => {
-      var _a3, _b;
+      var _a4, _b;
       if (!slots)
         return null;
       const {
@@ -42900,7 +45201,7 @@ var FormLabelWrap = (0, vue_exports.defineComponent)({
           "ref": el,
           "class": [ns2.be("item", "label-wrap")],
           "style": style
-        }, [(_a3 = slots.default) == null ? void 0 : _a3.call(slots)]);
+        }, [(_a4 = slots.default) == null ? void 0 : _a4.call(slots)]);
       } else {
         return (0, vue_exports.createVNode)(vue_exports.Fragment, {
           "ref": el
@@ -42915,7 +45216,8 @@ var _hoisted_147 = ["role", "aria-labelledby"];
 var __default__54 = (0, vue_exports.defineComponent)({
   name: "ElFormItem"
 });
-var _sfc_main83 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__54), {
+var _sfc_main83 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__54,
   props: formItemProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -43011,7 +45313,7 @@ var _sfc_main83 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
           for (const [rule, i] of requiredRules) {
             if (rule.required === required4)
               continue;
-            rules2[i] = __spreadProps(__spreadValues({}, rule), { required: required4 });
+            rules2[i] = { ...rule, required: required4 };
           }
         } else {
           rules2.push({ required: required4 });
@@ -43020,38 +45322,35 @@ var _sfc_main83 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       return rules2;
     });
     const validateEnabled = (0, vue_exports.computed)(() => normalizedRules.value.length > 0);
-    const getFilteredRule = (trigger2) => {
+    const getFilteredRule = (trigger3) => {
       const rules2 = normalizedRules.value;
       return rules2.filter((rule) => {
-        if (!rule.trigger || !trigger2)
+        if (!rule.trigger || !trigger3)
           return true;
         if (Array.isArray(rule.trigger)) {
-          return rule.trigger.includes(trigger2);
+          return rule.trigger.includes(trigger3);
         } else {
-          return rule.trigger === trigger2;
+          return rule.trigger === trigger3;
         }
-      }).map((_a3) => {
-        var _b = _a3, { trigger: trigger22 } = _b, rule = __objRest(_b, ["trigger"]);
-        return rule;
-      });
+      }).map(({ trigger: trigger22, ...rule }) => rule);
     };
     const isRequired = (0, vue_exports.computed)(() => normalizedRules.value.some((rule) => rule.required));
     const shouldShowError = (0, vue_exports.computed)(() => {
-      var _a3;
-      return validateStateDebounced.value === "error" && props.showMessage && ((_a3 = formContext == null ? void 0 : formContext.showMessage) != null ? _a3 : true);
+      var _a4;
+      return validateStateDebounced.value === "error" && props.showMessage && ((_a4 = formContext == null ? void 0 : formContext.showMessage) != null ? _a4 : true);
     });
     const currentLabel = (0, vue_exports.computed)(() => `${props.label || ""}${(formContext == null ? void 0 : formContext.labelSuffix) || ""}`);
     const setValidationState = (state) => {
       validateState.value = state;
     };
     const onValidationFailed = (error) => {
-      var _a3, _b;
+      var _a4, _b;
       const { errors, fields } = error;
       if (!errors || !fields) {
         console.error(error);
       }
       setValidationState("error");
-      validateMessage.value = errors ? (_b = (_a3 = errors == null ? void 0 : errors[0]) == null ? void 0 : _a3.message) != null ? _b : `${props.prop} is required` : "";
+      validateMessage.value = errors ? (_b = (_a4 = errors == null ? void 0 : errors[0]) == null ? void 0 : _a4.message) != null ? _b : `${props.prop} is required` : "";
       formContext == null ? void 0 : formContext.emit("validate", props.prop, false, validateMessage.value);
     };
     const onValidationSucceeded = () => {
@@ -43071,7 +45370,7 @@ var _sfc_main83 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
         return Promise.reject(err);
       });
     };
-    const validate = async (trigger2, callback) => {
+    const validate = async (trigger3, callback) => {
       if (isResettingField || !props.prop) {
         return false;
       }
@@ -43080,7 +45379,7 @@ var _sfc_main83 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
         callback == null ? void 0 : callback(false);
         return false;
       }
-      const rules2 = getFilteredRule(trigger2);
+      const rules2 = getFilteredRule(trigger3);
       if (rules2.length === 0) {
         callback == null ? void 0 : callback(true);
         return true;
@@ -43124,7 +45423,8 @@ var _sfc_main83 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       setValidationState(val ? "error" : "");
     }, { immediate: true });
     (0, vue_exports.watch)(() => props.validateStatus, (val) => setValidationState(val || ""));
-    const context = (0, vue_exports.reactive)(__spreadProps(__spreadValues({}, (0, vue_exports.toRefs)(props)), {
+    const context = (0, vue_exports.reactive)({
+      ...(0, vue_exports.toRefs)(props),
       $el: formItemRef,
       size: _size,
       validateState,
@@ -43137,7 +45437,7 @@ var _sfc_main83 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       resetField,
       clearValidate,
       validate
-    }));
+    });
     (0, vue_exports.provide)(formItemContextKey, context);
     (0, vue_exports.onMounted)(() => {
       if (props.prop) {
@@ -43157,7 +45457,7 @@ var _sfc_main83 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       resetField
     });
     return (_ctx, _cache) => {
-      var _a3;
+      var _a4;
       return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("div", {
         ref_key: "formItemRef",
         ref: formItemRef,
@@ -43167,7 +45467,7 @@ var _sfc_main83 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }, [
         (0, vue_exports.createVNode)((0, vue_exports.unref)(FormLabelWrap), {
           "is-auto-width": (0, vue_exports.unref)(labelStyle).width === "auto",
-          "update-all": ((_a3 = (0, vue_exports.unref)(formContext)) == null ? void 0 : _a3.labelWidth) === "auto"
+          "update-all": ((_a4 = (0, vue_exports.unref)(formContext)) == null ? void 0 : _a4.labelWidth) === "auto"
         }, {
           default: (0, vue_exports.withCtx)(() => [
             (0, vue_exports.unref)(hasLabel) ? ((0, vue_exports.openBlock)(), (0, vue_exports.createBlock)((0, vue_exports.resolveDynamicComponent)((0, vue_exports.unref)(labelFor) ? "label" : "div"), {
@@ -43211,7 +45511,7 @@ var _sfc_main83 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 10, _hoisted_147);
     };
   }
-}));
+});
 var FormItem = /* @__PURE__ */ _export_sfc(_sfc_main83, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/form/src/form-item.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/form/index.mjs
@@ -43264,7 +45564,8 @@ var _hoisted_153 = ["src"];
 var __default__55 = (0, vue_exports.defineComponent)({
   name: "ElImageViewer"
 });
-var _sfc_main84 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__55), {
+var _sfc_main84 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__55,
   props: imageViewerProps,
   emits: imageViewerEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -43406,10 +45707,11 @@ var _sfc_main84 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       const startX = e.pageX;
       const startY = e.pageY;
       const dragHandler = throttle_default((ev) => {
-        transform2.value = __spreadProps(__spreadValues({}, transform2.value), {
+        transform2.value = {
+          ...transform2.value,
           offsetX: offsetX + ev.pageX - startX,
           offsetY: offsetY + ev.pageY - startY
-        });
+        };
       });
       const removeMousemove = useEventListener(document, "mousemove", dragHandler);
       useEventListener(document, "mouseup", () => {
@@ -43454,11 +45756,12 @@ var _sfc_main84 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     function handleActions(action, options = {}) {
       if (loading.value)
         return;
-      const { zoomRate, rotateDeg, enableTransition } = __spreadValues({
+      const { zoomRate, rotateDeg, enableTransition } = {
         zoomRate: props.zoomRate,
         rotateDeg: 90,
-        enableTransition: true
-      }, options);
+        enableTransition: true,
+        ...options
+      };
       switch (action) {
         case "zoomOut":
           if (transform2.value.scale > 0.2) {
@@ -43492,9 +45795,9 @@ var _sfc_main84 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       emit2("switch", val);
     });
     (0, vue_exports.onMounted)(() => {
-      var _a3, _b;
+      var _a4, _b;
       registerEventListener();
-      (_b = (_a3 = wrapper.value) == null ? void 0 : _a3.focus) == null ? void 0 : _b.call(_a3);
+      (_b = (_a4 = wrapper.value) == null ? void 0 : _a4.focus) == null ? void 0 : _b.call(_a4);
     });
     expose({
       setActiveItem
@@ -43646,7 +45949,7 @@ var _sfc_main84 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 8, ["disabled"]);
     };
   }
-}));
+});
 var ImageViewer = /* @__PURE__ */ _export_sfc(_sfc_main84, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/image-viewer/src/image-viewer.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/image-viewer/index.mjs
@@ -43721,7 +46024,8 @@ var __default__56 = (0, vue_exports.defineComponent)({
   name: "ElImage",
   inheritAttrs: false
 });
-var _sfc_main85 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__56), {
+var _sfc_main85 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__56,
   props: imageProps,
   emits: imageEmits,
   setup(__props, { emit: emit2 }) {
@@ -43790,7 +46094,7 @@ var _sfc_main85 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     }
     const lazyLoadHandler = useThrottleFn(handleLazyLoad, 200);
     async function addLazyLoadListener() {
-      var _a3;
+      var _a4;
       if (!isClient)
         return;
       await (0, vue_exports.nextTick)();
@@ -43798,7 +46102,7 @@ var _sfc_main85 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       if (isElement(scrollContainer)) {
         _scrollContainer.value = scrollContainer;
       } else if (isString3(scrollContainer) && scrollContainer !== "") {
-        _scrollContainer.value = (_a3 = document.querySelector(scrollContainer)) != null ? _a3 : void 0;
+        _scrollContainer.value = (_a4 = document.querySelector(scrollContainer)) != null ? _a4 : void 0;
       } else if (container.value) {
         _scrollContainer.value = getScrollContainer(container.value);
       }
@@ -43920,7 +46224,7 @@ var _sfc_main85 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 6);
     };
   }
-}));
+});
 var Image2 = /* @__PURE__ */ _export_sfc(_sfc_main85, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/image/src/image.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/image/index.mjs
@@ -43989,7 +46293,8 @@ var _hoisted_233 = ["aria-label", "onKeydown"];
 var __default__57 = (0, vue_exports.defineComponent)({
   name: "ElInputNumber"
 });
-var _sfc_main86 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__57), {
+var _sfc_main86 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__57,
   props: inputNumberProps,
   emits: inputNumberEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -44112,7 +46417,7 @@ var _sfc_main86 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       return newVal;
     };
     const setCurrentValue = (value, emitChange = true) => {
-      var _a3;
+      var _a4;
       const oldVal = data.currentValue;
       const newVal = verifyValue(value);
       if (oldVal === newVal)
@@ -44125,7 +46430,7 @@ var _sfc_main86 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       emit2(UPDATE_MODEL_EVENT, newVal);
       emit2(CHANGE_EVENT, newVal, oldVal);
       if (props.validateEvent) {
-        (_a3 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a3.call(formItem, "change").catch((err) => debugWarn(err));
+        (_a4 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a4.call(formItem, "change").catch((err) => debugWarn(err));
       }
       data.currentValue = newVal;
     };
@@ -44143,21 +46448,21 @@ var _sfc_main86 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       data.userInput = null;
     };
     const focus = () => {
-      var _a3, _b;
-      (_b = (_a3 = input.value) == null ? void 0 : _a3.focus) == null ? void 0 : _b.call(_a3);
+      var _a4, _b;
+      (_b = (_a4 = input.value) == null ? void 0 : _a4.focus) == null ? void 0 : _b.call(_a4);
     };
     const blur = () => {
-      var _a3, _b;
-      (_b = (_a3 = input.value) == null ? void 0 : _a3.blur) == null ? void 0 : _b.call(_a3);
+      var _a4, _b;
+      (_b = (_a4 = input.value) == null ? void 0 : _a4.blur) == null ? void 0 : _b.call(_a4);
     };
     const handleFocus = (event) => {
       emit2("focus", event);
     };
     const handleBlur = (event) => {
-      var _a3;
+      var _a4;
       emit2("blur", event);
       if (props.validateEvent) {
-        (_a3 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a3.call(formItem, "blur").catch((err) => debugWarn(err));
+        (_a4 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a4.call(formItem, "blur").catch((err) => debugWarn(err));
       }
     };
     (0, vue_exports.watch)(() => props.modelValue, (value) => {
@@ -44169,9 +46474,9 @@ var _sfc_main86 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }
     }, { immediate: true });
     (0, vue_exports.onMounted)(() => {
-      var _a3;
+      var _a4;
       const { min: min4, max: max4, modelValue } = props;
-      const innerInput = (_a3 = input.value) == null ? void 0 : _a3.input;
+      const innerInput = (_a4 = input.value) == null ? void 0 : _a4.input;
       innerInput.setAttribute("role", "spinbutton");
       if (Number.isFinite(max4)) {
         innerInput.setAttribute("aria-valuemax", String(max4));
@@ -44194,8 +46499,8 @@ var _sfc_main86 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       }
     });
     (0, vue_exports.onUpdated)(() => {
-      var _a3;
-      const innerInput = (_a3 = input.value) == null ? void 0 : _a3.input;
+      var _a4;
+      const innerInput = (_a4 = input.value) == null ? void 0 : _a4.input;
       innerInput == null ? void 0 : innerInput.setAttribute("aria-valuenow", `${data.currentValue}`);
     });
     expose({
@@ -44274,7 +46579,7 @@ var _sfc_main86 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 34);
     };
   }
-}));
+});
 var InputNumber = /* @__PURE__ */ _export_sfc(_sfc_main86, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/input-number/src/input-number.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/input-number/index.mjs
@@ -44306,7 +46611,8 @@ var _hoisted_158 = ["href"];
 var __default__58 = (0, vue_exports.defineComponent)({
   name: "ElLink"
 });
-var _sfc_main87 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__58), {
+var _sfc_main87 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__58,
   props: linkProps,
   emits: linkEmits,
   setup(__props, { emit: emit2 }) {
@@ -44344,7 +46650,7 @@ var _sfc_main87 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 10, _hoisted_158);
     };
   }
-}));
+});
 var Link = /* @__PURE__ */ _export_sfc(_sfc_main87, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/link/src/link.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/link/index.mjs
@@ -44705,8 +47011,8 @@ var SubMenu2 = (0, vue_exports.defineComponent)({
       };
     });
     const doDestroy = () => {
-      var _a3, _b, _c;
-      return (_c = (_b = (_a3 = vPopper.value) == null ? void 0 : _a3.popperRef) == null ? void 0 : _b.popperInstanceRef) == null ? void 0 : _c.destroy();
+      var _a4, _b, _c;
+      return (_c = (_b = (_a4 = vPopper.value) == null ? void 0 : _a4.popperRef) == null ? void 0 : _b.popperInstanceRef) == null ? void 0 : _c.destroy();
     };
     const handleCollapseToggle = (value) => {
       if (!value) {
@@ -44723,7 +47029,7 @@ var SubMenu2 = (0, vue_exports.defineComponent)({
       });
     };
     const handleMouseenter = (event, showTimeout = props.showTimeout) => {
-      var _a3;
+      var _a4;
       if (event.type === "focus") {
         return;
       }
@@ -44736,11 +47042,11 @@ var SubMenu2 = (0, vue_exports.defineComponent)({
         rootMenu.openMenu(props.index, indexPath.value);
       }, showTimeout));
       if (appendToBody.value) {
-        (_a3 = parentMenu.value.vnode.el) == null ? void 0 : _a3.dispatchEvent(new MouseEvent("mouseenter"));
+        (_a4 = parentMenu.value.vnode.el) == null ? void 0 : _a4.dispatchEvent(new MouseEvent("mouseenter"));
       }
     };
     const handleMouseleave = (deepDispatch = false) => {
-      var _a3, _b;
+      var _a4, _b;
       if (rootMenu.props.menuTrigger === "click" && rootMenu.props.mode === "horizontal" || !rootMenu.props.collapse && rootMenu.props.mode === "vertical") {
         return;
       }
@@ -44748,7 +47054,7 @@ var SubMenu2 = (0, vue_exports.defineComponent)({
       subMenu.mouseInChild.value = false;
       ({ stop: timeout } = useTimeoutFn(() => !mouseInChild.value && rootMenu.closeMenu(props.index, indexPath.value), props.hideTimeout));
       if (appendToBody.value && deepDispatch) {
-        if (((_a3 = instance.parent) == null ? void 0 : _a3.type.name) === "ElSubMenu") {
+        if (((_a4 = instance.parent) == null ? void 0 : _a4.type.name) === "ElSubMenu") {
           (_b = subMenu.handleMouseleave) == null ? void 0 : _b.call(subMenu, true);
         }
       }
@@ -44781,9 +47087,9 @@ var SubMenu2 = (0, vue_exports.defineComponent)({
       rootMenu.removeSubMenu(item);
     });
     return () => {
-      var _a3;
+      var _a4;
       const titleTag = [
-        (_a3 = slots.title) == null ? void 0 : _a3.call(slots),
+        (_a4 = slots.title) == null ? void 0 : _a4.call(slots),
         (0, vue_exports.h)(ElIcon, {
           class: nsSubMenu.e("icon-arrow"),
           style: {
@@ -45009,10 +47315,10 @@ var Menu2 = (0, vue_exports.defineComponent)({
       }
     };
     const calcSliceIndex = () => {
-      var _a3, _b;
+      var _a4, _b;
       if (!menu.value)
         return -1;
-      const items2 = Array.from((_b = (_a3 = menu.value) == null ? void 0 : _a3.childNodes) != null ? _b : []).filter((item) => item.nodeName !== "#text" || item.nodeValue);
+      const items2 = Array.from((_b = (_a4 = menu.value) == null ? void 0 : _a4.childNodes) != null ? _b : []).filter((item) => item.nodeName !== "#text" || item.nodeValue);
       const moreItemWidth = 64;
       const paddingLeft = Number.parseInt(getComputedStyle(menu.value).paddingLeft, 10);
       const paddingRight = Number.parseInt(getComputedStyle(menu.value).paddingRight, 10);
@@ -45118,8 +47424,8 @@ var Menu2 = (0, vue_exports.defineComponent)({
       });
     }
     return () => {
-      var _a3, _b;
-      let slot = (_b = (_a3 = slots.default) == null ? void 0 : _a3.call(slots)) != null ? _b : [];
+      var _a4, _b;
+      let slot = (_b = (_a4 = slots.default) == null ? void 0 : _a4.call(slots)) != null ? _b : [];
       const vShowMore = [];
       if (props.mode === "horizontal" && menu.value) {
         const originalSlot = flattedChildren(slot);
@@ -45331,7 +47637,8 @@ var _hoisted_159 = ["aria-label"];
 var __default__59 = (0, vue_exports.defineComponent)({
   name: "ElPageHeader"
 });
-var _sfc_main91 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__59), {
+var _sfc_main91 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__59,
   props: pageHeaderProps,
   emits: pageHeaderEmits,
   setup(__props, { emit: emit2 }) {
@@ -45420,7 +47727,7 @@ var _sfc_main91 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var PageHeader = /* @__PURE__ */ _export_sfc(_sfc_main91, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/page-header/src/page-header.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/page-header/index.mjs
@@ -45450,7 +47757,8 @@ var _hoisted_236 = { key: 0 };
 var __default__60 = (0, vue_exports.defineComponent)({
   name: "ElPaginationPrev"
 });
-var _sfc_main92 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__60), {
+var _sfc_main92 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__60,
   props: paginationPrevProps,
   emits: paginationPrevEmits,
   setup(__props) {
@@ -45473,7 +47781,7 @@ var _sfc_main92 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 8, _hoisted_160);
     };
   }
-}));
+});
 var Prev = /* @__PURE__ */ _export_sfc(_sfc_main92, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/pagination/src/components/prev.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/pagination/src/components/next.mjs
@@ -45501,7 +47809,8 @@ var _hoisted_237 = { key: 0 };
 var __default__61 = (0, vue_exports.defineComponent)({
   name: "ElPaginationNext"
 });
-var _sfc_main93 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__61), {
+var _sfc_main93 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__61,
   props: paginationNextProps,
   emits: ["click"],
   setup(__props) {
@@ -45524,7 +47833,7 @@ var _sfc_main93 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 8, _hoisted_161);
     };
   }
-}));
+});
 var Next = /* @__PURE__ */ _export_sfc(_sfc_main93, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/pagination/src/components/next.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/select/src/token.mjs
@@ -45535,7 +47844,7 @@ var selectKey = "ElSelect";
 function useOption(props, states) {
   const select = (0, vue_exports.inject)(selectKey);
   const selectGroup = (0, vue_exports.inject)(selectGroupKey, { disabled: false });
-  const isObject5 = (0, vue_exports.computed)(() => {
+  const isObject6 = (0, vue_exports.computed)(() => {
     return Object.prototype.toString.call(props.value).toLowerCase() === "[object object]";
   });
   const itemSelected = (0, vue_exports.computed)(() => {
@@ -45554,7 +47863,7 @@ function useOption(props, states) {
     }
   });
   const currentLabel = (0, vue_exports.computed)(() => {
-    return props.label || (isObject5.value ? "" : props.value);
+    return props.label || (isObject6.value ? "" : props.value);
   });
   const currentValue = (0, vue_exports.computed)(() => {
     return props.value || props.label || "";
@@ -45564,7 +47873,7 @@ function useOption(props, states) {
   });
   const instance = (0, vue_exports.getCurrentInstance)();
   const contains = (arr = [], target) => {
-    if (!isObject5.value) {
+    if (!isObject6.value) {
       return arr && arr.includes(target);
     } else {
       const valueKey = select.props.valueKey;
@@ -45574,7 +47883,7 @@ function useOption(props, states) {
     }
   };
   const isEqual3 = (a3, b2) => {
-    if (!isObject5.value) {
+    if (!isObject6.value) {
       return a3 === b2;
     } else {
       const { valueKey } = select.props;
@@ -45721,8 +48030,8 @@ var _sfc_main95 = (0, vue_exports.defineComponent)({
     const isFitInputWidth = (0, vue_exports.computed)(() => select.props.fitInputWidth);
     const minWidth = (0, vue_exports.ref)("");
     function updateMinWidth() {
-      var _a3;
-      minWidth.value = `${(_a3 = select.selectWrapper) == null ? void 0 : _a3.offsetWidth}px`;
+      var _a4;
+      minWidth.value = `${(_a4 = select.selectWrapper) == null ? void 0 : _a4.offsetWidth}px`;
     }
     (0, vue_exports.onMounted)(() => {
       updateMinWidth();
@@ -45797,7 +48106,7 @@ var useSelect = (props, states, ctx) => {
   const queryChange = (0, vue_exports.shallowRef)({ query: "" });
   const groupQueryChange = (0, vue_exports.shallowRef)("");
   const { form, formItem } = useFormItem();
-  const readonly6 = (0, vue_exports.computed)(() => !props.filterable || props.multiple || !states.visible);
+  const readonly7 = (0, vue_exports.computed)(() => !props.filterable || props.multiple || !states.visible);
   const selectDisabled = (0, vue_exports.computed)(() => props.disabled || (form == null ? void 0 : form.disabled));
   const showClose = (0, vue_exports.computed)(() => {
     const hasValue = props.multiple ? Array.isArray(props.modelValue) && props.modelValue.length > 0 : props.modelValue !== void 0 && props.modelValue !== null && props.modelValue !== "";
@@ -45875,7 +48184,7 @@ var useSelect = (props, states, ctx) => {
     deep: true
   });
   (0, vue_exports.watch)(() => states.visible, (val) => {
-    var _a3, _b, _c;
+    var _a4, _b, _c;
     if (!val) {
       if (props.filterable) {
         if (isFunction4(props.filterMethod)) {
@@ -45912,7 +48221,7 @@ var useSelect = (props, states, ctx) => {
         }
       }
     } else {
-      (_b = (_a3 = tooltipRef.value) == null ? void 0 : _a3.updatePopper) == null ? void 0 : _b.call(_a3);
+      (_b = (_a4 = tooltipRef.value) == null ? void 0 : _a4.updatePopper) == null ? void 0 : _b.call(_a4);
       if (props.filterable) {
         states.filteredOptionsCount = states.optionsCount;
         states.query = props.remote ? "" : states.selectedLabel;
@@ -45935,10 +48244,10 @@ var useSelect = (props, states, ctx) => {
     ctx.emit("visible-change", val);
   });
   (0, vue_exports.watch)(() => states.options.entries(), () => {
-    var _a3, _b, _c;
+    var _a4, _b, _c;
     if (!isClient)
       return;
-    (_b = (_a3 = tooltipRef.value) == null ? void 0 : _a3.updatePopper) == null ? void 0 : _b.call(_a3);
+    (_b = (_a4 = tooltipRef.value) == null ? void 0 : _a4.updatePopper) == null ? void 0 : _b.call(_a4);
     if (props.multiple) {
       resetInputHeight();
     }
@@ -45966,7 +48275,7 @@ var useSelect = (props, states, ctx) => {
     if (props.collapseTags && !props.filterable)
       return;
     (0, vue_exports.nextTick)(() => {
-      var _a3, _b;
+      var _a4, _b;
       if (!reference.value)
         return;
       const input2 = reference.value.$el.querySelector("input");
@@ -45975,7 +48284,7 @@ var useSelect = (props, states, ctx) => {
       input2.style.height = `${(states.selected.length === 0 ? sizeInMap : Math.max(_tags ? _tags.clientHeight + (_tags.clientHeight > sizeInMap ? 6 : 0) : 0, sizeInMap)) - 2}px`;
       states.tagInMultiLine = Number.parseFloat(input2.style.height) >= sizeInMap;
       if (states.visible && emptyText.value !== false) {
-        (_b = (_a3 = tooltipRef.value) == null ? void 0 : _a3.updatePopper) == null ? void 0 : _b.call(_a3);
+        (_b = (_a4 = tooltipRef.value) == null ? void 0 : _a4.updatePopper) == null ? void 0 : _b.call(_a4);
       }
     });
   };
@@ -45988,9 +48297,9 @@ var useSelect = (props, states, ctx) => {
     }
     states.previousQuery = val;
     (0, vue_exports.nextTick)(() => {
-      var _a3, _b;
+      var _a4, _b;
       if (states.visible)
-        (_b = (_a3 = tooltipRef.value) == null ? void 0 : _a3.updatePopper) == null ? void 0 : _b.call(_a3);
+        (_b = (_a4 = tooltipRef.value) == null ? void 0 : _a4.updatePopper) == null ? void 0 : _b.call(_a4);
     });
     states.hoverIndex = -1;
     if (props.multiple && props.filterable) {
@@ -46030,10 +48339,10 @@ var useSelect = (props, states, ctx) => {
     states.hoverIndex = getValueIndex(optionsArray.value, userCreatedOption || firstOriginOption);
   };
   const setSelected2 = () => {
-    var _a3;
+    var _a4;
     if (!props.multiple) {
       const option2 = getOption(props.modelValue);
-      if ((_a3 = option2.props) == null ? void 0 : _a3.created) {
+      if ((_a4 = option2.props) == null ? void 0 : _a4.created) {
         states.createdLabel = option2.props.value;
         states.createdSelected = true;
       } else {
@@ -46109,15 +48418,15 @@ var useSelect = (props, states, ctx) => {
     }, 300);
   };
   const handleResize = () => {
-    var _a3, _b;
+    var _a4, _b;
     resetInputWidth();
-    (_b = (_a3 = tooltipRef.value) == null ? void 0 : _a3.updatePopper) == null ? void 0 : _b.call(_a3);
+    (_b = (_a4 = tooltipRef.value) == null ? void 0 : _a4.updatePopper) == null ? void 0 : _b.call(_a4);
     if (props.multiple && !props.filterable)
       resetInputHeight();
   };
   const resetInputWidth = () => {
-    var _a3;
-    states.inputWidth = (_a3 = reference.value) == null ? void 0 : _a3.$el.getBoundingClientRect().width;
+    var _a4;
+    states.inputWidth = (_a4 = reference.value) == null ? void 0 : _a4.$el.getBoundingClientRect().width;
   };
   const onInputChange = () => {
     if (props.filterable && states.query !== states.selectedLabel) {
@@ -46174,7 +48483,7 @@ var useSelect = (props, states, ctx) => {
     ctx.emit("clear");
   };
   const handleOptionSelect = (option2, byClick) => {
-    var _a3;
+    var _a4;
     if (props.multiple) {
       const value = (props.modelValue || []).slice();
       const optionIndex = getValueIndex(value, option2.value);
@@ -46191,7 +48500,7 @@ var useSelect = (props, states, ctx) => {
         states.inputLength = 20;
       }
       if (props.filterable)
-        (_a3 = input.value) == null ? void 0 : _a3.focus();
+        (_a4 = input.value) == null ? void 0 : _a4.focus();
     } else {
       ctx.emit(UPDATE_MODEL_EVENT, option2.value);
       emitChange(option2.value);
@@ -46227,7 +48536,7 @@ var useSelect = (props, states, ctx) => {
     }
   };
   const scrollToOption = (option2) => {
-    var _a3, _b, _c, _d, _e;
+    var _a4, _b, _c, _d, _e;
     const targetOption = Array.isArray(option2) ? option2[0] : option2;
     let target = null;
     if (targetOption == null ? void 0 : targetOption.value) {
@@ -46237,7 +48546,7 @@ var useSelect = (props, states, ctx) => {
       }
     }
     if (tooltipRef.value && target) {
-      const menu = (_d = (_c = (_b = (_a3 = tooltipRef.value) == null ? void 0 : _a3.popperRef) == null ? void 0 : _b.contentRef) == null ? void 0 : _c.querySelector) == null ? void 0 : _d.call(_c, `.${ns2.be("dropdown", "wrap")}`);
+      const menu = (_d = (_c = (_b = (_a4 = tooltipRef.value) == null ? void 0 : _a4.popperRef) == null ? void 0 : _b.contentRef) == null ? void 0 : _c.querySelector) == null ? void 0 : _d.call(_c, `.${ns2.be("dropdown", "wrap")}`);
       if (menu) {
         scrollIntoView(menu, target);
       }
@@ -46303,9 +48612,9 @@ var useSelect = (props, states, ctx) => {
     }
   };
   const blur = () => {
-    var _a3;
+    var _a4;
     states.visible = false;
-    (_a3 = reference.value) == null ? void 0 : _a3.blur();
+    (_a4 = reference.value) == null ? void 0 : _a4.blur();
   };
   const handleBlur = (event) => {
     (0, vue_exports.nextTick)(() => {
@@ -46331,7 +48640,7 @@ var useSelect = (props, states, ctx) => {
     }
   };
   const toggleMenu = (e) => {
-    var _a3;
+    var _a4;
     if (e && !states.mouseEnter) {
       return;
     }
@@ -46345,7 +48654,7 @@ var useSelect = (props, states, ctx) => {
       }
       if (states.visible) {
         ;
-        (_a3 = input.value || reference.value) == null ? void 0 : _a3.focus();
+        (_a4 = input.value || reference.value) == null ? void 0 : _a4.focus();
       }
     }
   };
@@ -46407,7 +48716,7 @@ var useSelect = (props, states, ctx) => {
     deleteSelected,
     handleOptionSelect,
     scrollToOption,
-    readonly: readonly6,
+    readonly: readonly7,
     resetInputHeight,
     showClose,
     iconComponent,
@@ -46537,7 +48846,7 @@ var _sfc_main96 = (0, vue_exports.defineComponent)({
       type: iconPropType,
       default: arrow_down_default
     },
-    tagType: __spreadProps(__spreadValues({}, tagProps.type), { default: "info" }),
+    tagType: { ...tagProps.type, default: "info" },
     validateEvent: {
       type: Boolean,
       default: true
@@ -46573,7 +48882,7 @@ var _sfc_main96 = (0, vue_exports.defineComponent)({
     const {
       optionsArray,
       selectSize,
-      readonly: readonly6,
+      readonly: readonly7,
       handleResize,
       collapseTagSize,
       debouncedOnInputChange,
@@ -46706,14 +49015,14 @@ var _sfc_main96 = (0, vue_exports.defineComponent)({
       ctx.emit(UPDATE_MODEL_EVENT, "");
     }
     const popperPaneRef = (0, vue_exports.computed)(() => {
-      var _a3, _b;
-      return (_b = (_a3 = tooltipRef.value) == null ? void 0 : _a3.popperRef) == null ? void 0 : _b.contentRef;
+      var _a4, _b;
+      return (_b = (_a4 = tooltipRef.value) == null ? void 0 : _a4.popperRef) == null ? void 0 : _b.contentRef;
     });
     return {
       tagInMultiLine,
       prefixWidth,
       selectSize,
-      readonly: readonly6,
+      readonly: readonly7,
       handleResize,
       collapseTagSize,
       debouncedOnInputChange,
@@ -47103,7 +49412,9 @@ var _sfc_main97 = (0, vue_exports.defineComponent)({
     const visible = (0, vue_exports.ref)(true);
     const instance = (0, vue_exports.getCurrentInstance)();
     const children = (0, vue_exports.ref)([]);
-    (0, vue_exports.provide)(selectGroupKey, (0, vue_exports.reactive)(__spreadValues({}, (0, vue_exports.toRefs)(props))));
+    (0, vue_exports.provide)(selectGroupKey, (0, vue_exports.reactive)({
+      ...(0, vue_exports.toRefs)(props)
+    }));
     const select = (0, vue_exports.inject)(selectKey);
     (0, vue_exports.onMounted)(() => {
       children.value = flattedChildren2(instance.subTree);
@@ -47112,10 +49423,10 @@ var _sfc_main97 = (0, vue_exports.defineComponent)({
       const children2 = [];
       if (Array.isArray(node.children)) {
         node.children.forEach((child) => {
-          var _a3;
+          var _a4;
           if (child.type && child.type.name === "ElOption" && child.component && child.component.proxy) {
             children2.push(child.component.proxy);
-          } else if ((_a3 = child.children) == null ? void 0 : _a3.length) {
+          } else if ((_a4 = child.children) == null ? void 0 : _a4.length) {
             children2.push(...flattedChildren2(child));
           }
         });
@@ -47187,7 +49498,8 @@ var paginationSizesProps = buildProps2({
 var __default__62 = (0, vue_exports.defineComponent)({
   name: "ElPaginationSizes"
 });
-var _sfc_main98 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__62), {
+var _sfc_main98 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__62,
   props: paginationSizesProps,
   emits: ["page-size-change"],
   setup(__props, { emit: emit2 }) {
@@ -47209,10 +49521,10 @@ var _sfc_main98 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     });
     const innerPageSizes = (0, vue_exports.computed)(() => props.pageSizes);
     function handleChange(val) {
-      var _a3;
+      var _a4;
       if (val !== innerPageSize.value) {
         innerPageSize.value = val;
-        (_a3 = pagination.handleSizeChange) == null ? void 0 : _a3.call(pagination, Number(val));
+        (_a4 = pagination.handleSizeChange) == null ? void 0 : _a4.call(pagination, Number(val));
       }
     }
     return (_ctx, _cache) => {
@@ -47241,7 +49553,7 @@ var _sfc_main98 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 2);
     };
   }
-}));
+});
 var Sizes = /* @__PURE__ */ _export_sfc(_sfc_main98, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/pagination/src/components/sizes.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/pagination/src/components/jumper.mjs
@@ -47257,7 +49569,8 @@ var _hoisted_164 = ["disabled"];
 var __default__63 = (0, vue_exports.defineComponent)({
   name: "ElPaginationJumper"
 });
-var _sfc_main99 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__63), {
+var _sfc_main99 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__63,
   props: paginationJumperProps,
   setup(__props) {
     const { t } = useLocale();
@@ -47265,8 +49578,8 @@ var _sfc_main99 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
     const { pageCount, disabled, currentPage, changeEvent } = usePagination();
     const userInput = (0, vue_exports.ref)();
     const innerValue = (0, vue_exports.computed)(() => {
-      var _a3;
-      return (_a3 = userInput.value) != null ? _a3 : currentPage == null ? void 0 : currentPage.value;
+      var _a4;
+      return (_a4 = userInput.value) != null ? _a4 : currentPage == null ? void 0 : currentPage.value;
     });
     function handleInput(val) {
       userInput.value = +val;
@@ -47302,7 +49615,7 @@ var _sfc_main99 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps
       ], 10, _hoisted_164);
     };
   }
-}));
+});
 var Jumper = /* @__PURE__ */ _export_sfc(_sfc_main99, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/pagination/src/components/jumper.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/pagination/src/components/total.mjs
@@ -47318,7 +49631,8 @@ var _hoisted_165 = ["disabled"];
 var __default__64 = (0, vue_exports.defineComponent)({
   name: "ElPaginationTotal"
 });
-var _sfc_main100 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__64), {
+var _sfc_main100 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__64,
   props: paginationTotalProps,
   setup(__props) {
     const { t } = useLocale();
@@ -47333,7 +49647,7 @@ var _sfc_main100 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       })), 11, _hoisted_165);
     };
   }
-}));
+});
 var Total = /* @__PURE__ */ _export_sfc(_sfc_main100, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/pagination/src/components/total.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/pagination/src/components/pager.mjs
@@ -47363,7 +49677,8 @@ var _hoisted_62 = ["aria-current", "tabindex"];
 var __default__65 = (0, vue_exports.defineComponent)({
   name: "ElPaginationPager"
 });
-var _sfc_main101 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__65), {
+var _sfc_main101 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__65,
   props: paginationPagerProps,
   emits: ["change"],
   setup(__props, { emit: emit2 }) {
@@ -47552,7 +49867,7 @@ var _sfc_main101 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 42, _hoisted_166);
     };
   }
-}));
+});
 var Pager = /* @__PURE__ */ _export_sfc(_sfc_main101, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/pagination/src/components/pager.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/pagination/src/pagination.mjs
@@ -47730,7 +50045,7 @@ var Pagination = (0, vue_exports.defineComponent)({
       handleSizeChange
     });
     return () => {
-      var _a3, _b;
+      var _a4, _b;
       if (!assertValidUsage.value) {
         debugWarn(componentName, t("el.pagination.deprecationWarning"));
         return null;
@@ -47775,7 +50090,7 @@ var Pagination = (0, vue_exports.defineComponent)({
           disabled: props.disabled,
           size: props.small ? "small" : "default"
         }),
-        slot: (_b = (_a3 = slots == null ? void 0 : slots.default) == null ? void 0 : _a3.call(slots)) != null ? _b : null,
+        slot: (_b = (_a4 = slots == null ? void 0 : slots.default) == null ? void 0 : _a4.call(slots)) != null ? _b : null,
         total: (0, vue_exports.h)(Total, { total: isAbsent(props.total) ? 0 : props.total })
       };
       const components = props.layout.split(",").map((item) => item.trim());
@@ -47865,7 +50180,8 @@ var popconfirmProps = buildProps2({
 var __default__66 = (0, vue_exports.defineComponent)({
   name: "ElPopconfirm"
 });
-var _sfc_main102 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__66), {
+var _sfc_main102 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__66,
   props: popconfirmProps,
   setup(__props) {
     const props = __props;
@@ -47873,8 +50189,8 @@ var _sfc_main102 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
     const ns2 = useNamespace("popconfirm");
     const tooltipRef = (0, vue_exports.ref)();
     const hidePopper = () => {
-      var _a3, _b;
-      (_b = (_a3 = tooltipRef.value) == null ? void 0 : _a3.onClose) == null ? void 0 : _b.call(_a3);
+      var _a4, _b;
+      (_b = (_a4 = tooltipRef.value) == null ? void 0 : _a4.onClose) == null ? void 0 : _b.call(_a4);
     };
     const style = (0, vue_exports.computed)(() => {
       return {
@@ -47882,13 +50198,13 @@ var _sfc_main102 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       };
     });
     const confirm = (e) => {
-      var _a3;
-      (_a3 = props.onConfirm) == null ? void 0 : _a3.call(props, e);
+      var _a4;
+      (_a4 = props.onConfirm) == null ? void 0 : _a4.call(props, e);
       hidePopper();
     };
     const cancel = (e) => {
-      var _a3;
-      (_a3 = props.onCancel) == null ? void 0 : _a3.call(props, e);
+      var _a4;
+      (_a4 = props.onCancel) == null ? void 0 : _a4.call(props, e);
       hidePopper();
     };
     const finalConfirmButtonText = (0, vue_exports.computed)(() => props.confirmButtonText || t("el.popconfirm.confirmButtonText"));
@@ -47961,7 +50277,7 @@ var _sfc_main102 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       }, 16, ["popper-class", "popper-style", "teleported", "hide-after", "persistent"]);
     };
   }
-}));
+});
 var Popconfirm = /* @__PURE__ */ _export_sfc(_sfc_main102, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/popconfirm/src/popconfirm.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/popconfirm/index.mjs
@@ -47979,12 +50295,14 @@ var popoverProps = buildProps2({
   content: useTooltipContentProps.content,
   popperStyle: useTooltipContentProps.popperStyle,
   popperClass: useTooltipContentProps.popperClass,
-  enterable: __spreadProps(__spreadValues({}, useTooltipContentProps.enterable), {
+  enterable: {
+    ...useTooltipContentProps.enterable,
     default: true
-  }),
-  effect: __spreadProps(__spreadValues({}, useTooltipContentProps.effect), {
+  },
+  effect: {
+    ...useTooltipContentProps.effect,
     default: "light"
-  }),
+  },
   teleported: useTooltipContentProps.teleported,
   title: String,
   width: {
@@ -48032,7 +50350,8 @@ var updateEventKeyRaw = `onUpdate:visible`;
 var __default__67 = (0, vue_exports.defineComponent)({
   name: "ElPopover"
 });
-var _sfc_main103 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__67), {
+var _sfc_main103 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__67,
   props: popoverProps,
   emits: popoverEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -48043,8 +50362,8 @@ var _sfc_main103 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
     const ns2 = useNamespace("popover");
     const tooltipRef = (0, vue_exports.ref)();
     const popperRef = (0, vue_exports.computed)(() => {
-      var _a3;
-      return (_a3 = (0, vue_exports.unref)(tooltipRef)) == null ? void 0 : _a3.popperRef;
+      var _a4;
+      return (_a4 = (0, vue_exports.unref)(tooltipRef)) == null ? void 0 : _a4.popperRef;
     });
     const style = (0, vue_exports.computed)(() => {
       return [
@@ -48061,8 +50380,8 @@ var _sfc_main103 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       return props.transition === `${ns2.namespace.value}-fade-in-linear`;
     });
     const hide2 = () => {
-      var _a3;
-      (_a3 = tooltipRef.value) == null ? void 0 : _a3.hide();
+      var _a4;
+      (_a4 = tooltipRef.value) == null ? void 0 : _a4.hide();
     };
     const beforeEnter = () => {
       emit2("before-enter");
@@ -48130,7 +50449,7 @@ var _sfc_main103 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       }, 16, ["trigger", "placement", "disabled", "visible", "transition", "popper-options", "tabindex", "content", "offset", "show-after", "hide-after", "auto-close", "show-arrow", "aria-label", "effect", "enterable", "popper-class", "popper-style", "teleported", "persistent", "gpu-acceleration", "onUpdate:visible"]);
     };
   }
-}));
+});
 var Popover = /* @__PURE__ */ _export_sfc(_sfc_main103, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/popover/src/popover.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/popover/src/directive.mjs
@@ -48225,7 +50544,8 @@ var _hoisted_55 = { key: 0 };
 var __default__68 = (0, vue_exports.defineComponent)({
   name: "ElProgress"
 });
-var _sfc_main104 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__68), {
+var _sfc_main104 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__68,
   props: progressProps,
   setup(__props) {
     const props = __props;
@@ -48310,7 +50630,7 @@ var _sfc_main104 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       return seriesColors.sort((a3, b2) => a3.percentage - b2.percentage);
     }
     const getCurrentColor = (percentage) => {
-      var _a3;
+      var _a4;
       const { color } = props;
       if (isFunction4(color)) {
         return color(percentage);
@@ -48322,7 +50642,7 @@ var _sfc_main104 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
           if (color2.percentage > percentage)
             return color2.color;
         }
-        return (_a3 = colors[colors.length - 1]) == null ? void 0 : _a3.color;
+        return (_a4 = colors[colors.length - 1]) == null ? void 0 : _a4.color;
       }
     };
     return (_ctx, _cache) => {
@@ -48409,7 +50729,7 @@ var _sfc_main104 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 10, _hoisted_167);
     };
   }
-}));
+});
 var Progress = /* @__PURE__ */ _export_sfc(_sfc_main104, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/progress/src/progress.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/progress/index.mjs
@@ -48515,7 +50835,8 @@ var _hoisted_241 = ["onMousemove", "onClick"];
 var __default__69 = (0, vue_exports.defineComponent)({
   name: "ElRate"
 });
-var _sfc_main105 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__69), {
+var _sfc_main105 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__69,
   props: rateProps,
   emits: rateEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -48581,7 +50902,7 @@ var _sfc_main105 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       };
     });
     const componentMap = (0, vue_exports.computed)(() => {
-      let icons = isArray3(props.icons) ? [...props.icons] : __spreadValues({}, props.icons);
+      let icons = isArray3(props.icons) ? [...props.icons] : { ...props.icons };
       icons = (0, vue_exports.markRaw)(icons);
       return isArray3(icons) ? {
         [props.lowThreshold]: icons[0],
@@ -48689,13 +51010,13 @@ var _sfc_main105 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       resetCurrentValue
     });
     return (_ctx, _cache) => {
-      var _a3;
+      var _a4;
       return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("div", {
         id: (0, vue_exports.unref)(inputId),
         class: (0, vue_exports.normalizeClass)([(0, vue_exports.unref)(rateClasses), (0, vue_exports.unref)(ns2).is("disabled", (0, vue_exports.unref)(rateDisabled))]),
         role: "slider",
         "aria-label": !(0, vue_exports.unref)(isLabeledByFormItem) ? _ctx.label || "rating" : void 0,
-        "aria-labelledby": (0, vue_exports.unref)(isLabeledByFormItem) ? (_a3 = (0, vue_exports.unref)(formItemContext)) == null ? void 0 : _a3.labelId : void 0,
+        "aria-labelledby": (0, vue_exports.unref)(isLabeledByFormItem) ? (_a4 = (0, vue_exports.unref)(formItemContext)) == null ? void 0 : _a4.labelId : void 0,
         "aria-valuenow": currentValue.value,
         "aria-valuetext": (0, vue_exports.unref)(text) || void 0,
         "aria-valuemin": "0",
@@ -48750,7 +51071,7 @@ var _sfc_main105 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 46, _hoisted_168);
     };
   }
-}));
+});
 var Rate = /* @__PURE__ */ _export_sfc(_sfc_main105, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/rate/src/rate.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/rate/index.mjs
@@ -48789,7 +51110,8 @@ var resultProps = buildProps2({
 var __default__70 = (0, vue_exports.defineComponent)({
   name: "ElResult"
 });
-var _sfc_main106 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__70), {
+var _sfc_main106 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__70,
   props: resultProps,
   setup(__props) {
     const props = __props;
@@ -48842,7 +51164,7 @@ var _sfc_main106 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 2);
     };
   }
-}));
+});
 var Result = /* @__PURE__ */ _export_sfc(_sfc_main106, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/result/src/result.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/result/index.mjs
@@ -48883,7 +51205,8 @@ var rowProps = buildProps2({
 var __default__71 = (0, vue_exports.defineComponent)({
   name: "ElRow"
 });
-var _sfc_main107 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__71), {
+var _sfc_main107 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__71,
   props: rowProps,
   setup(__props) {
     const props = __props;
@@ -48917,7 +51240,7 @@ var _sfc_main107 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       }, 8, ["class", "style"]);
     };
   }
-}));
+});
 var Row = /* @__PURE__ */ _export_sfc(_sfc_main107, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/row/src/row.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/row/index.mjs
@@ -48968,7 +51291,7 @@ function memoizeOne(resultFn, isEqual3) {
     };
     return lastResult;
   }
-  memoized.clear = function clear2() {
+  memoized.clear = function clear3() {
     cache2 = null;
   };
   return memoized;
@@ -49120,21 +51443,22 @@ var virtualizedProps = buildProps2({
     default: false
   }
 });
-var virtualizedListProps = buildProps2(__spreadValues({
+var virtualizedListProps = buildProps2({
   cache,
   estimatedItemSize,
   layout,
   initScrollOffset,
   total,
-  itemSize
-}, virtualizedProps));
+  itemSize,
+  ...virtualizedProps
+});
 var scrollbarSize = {
   type: Number,
   default: 6
 };
 var startGap = { type: Number, default: 0 };
 var endGap = { type: Number, default: 2 };
-var virtualizedGridProps = buildProps2(__spreadValues({
+var virtualizedGridProps = buildProps2({
   columnCache: cache,
   columnWidth: itemSize,
   estimatedColumnWidth: estimatedItemSize,
@@ -49155,8 +51479,9 @@ var virtualizedGridProps = buildProps2(__spreadValues({
   hScrollbarSize: scrollbarSize,
   vScrollbarSize: scrollbarSize,
   scrollbarStartGap: startGap,
-  scrollbarEndGap: endGap
-}, virtualizedProps));
+  scrollbarEndGap: endGap,
+  ...virtualizedProps
+});
 var virtualizedScrollbarProps = buildProps2({
   alwaysOn: Boolean,
   class: String,
@@ -49214,10 +51539,10 @@ function getRTLOffsetType(recalculate = false) {
   }
   return cachedRTLResult;
 }
-function renderThumbStyle2({ move, size: size3, bar }, layout2) {
+function renderThumbStyle2({ move, size: size4, bar }, layout2) {
   const style = {};
   const translate2 = `translate${bar.axis}(${move}px)`;
-  style[bar.size] = size3;
+  style[bar.size] = size4;
   style.transform = translate2;
   style.msTransform = translate2;
   style.webkitTransform = translate2;
@@ -49445,12 +51770,12 @@ var createList = ({
         props.style
       ]);
       const innerStyle = (0, vue_exports.computed)(() => {
-        const size3 = (0, vue_exports.unref)(estimatedTotalSize);
+        const size4 = (0, vue_exports.unref)(estimatedTotalSize);
         const horizontal = (0, vue_exports.unref)(_isHorizontal);
         return {
-          height: horizontal ? "100%" : `${size3}px`,
+          height: horizontal ? "100%" : `${size4}px`,
           pointerEvents: (0, vue_exports.unref)(states).isScrolling ? "none" : void 0,
-          width: horizontal ? `${size3}px` : "100%"
+          width: horizontal ? `${size4}px` : "100%"
         };
       });
       const clientSize = (0, vue_exports.computed)(() => _isHorizontal.value ? props.width : props.height);
@@ -49459,9 +51784,9 @@ var createList = ({
         atEndEdge: (0, vue_exports.computed)(() => states.value.scrollOffset >= estimatedTotalSize.value),
         layout: (0, vue_exports.computed)(() => props.layout)
       }, (offset2) => {
-        var _a3, _b;
+        var _a4, _b;
         ;
-        (_b = (_a3 = scrollbarRef.value).onMouseUp) == null ? void 0 : _b.call(_a3);
+        (_b = (_a4 = scrollbarRef.value).onMouseUp) == null ? void 0 : _b.call(_a4);
         scrollTo(Math.min(states.value.scrollOffset + offset2, estimatedTotalSize.value - clientSize.value));
       });
       const emitEvents = () => {
@@ -49480,12 +51805,13 @@ var createList = ({
           return;
         }
         const scrollOffset = Math.max(0, Math.min(scrollTop, scrollHeight - clientHeight));
-        states.value = __spreadProps(__spreadValues({}, _states), {
+        states.value = {
+          ..._states,
           isScrolling: true,
           scrollDir: getScrollDir(_states.scrollOffset, scrollOffset),
           scrollOffset,
           updateRequested: false
-        });
+        };
         (0, vue_exports.nextTick)(resetIsScrolling);
       };
       const scrollHorizontally = (e) => {
@@ -49509,12 +51835,13 @@ var createList = ({
           }
         }
         scrollOffset = Math.max(0, Math.min(scrollOffset, scrollWidth - clientWidth));
-        states.value = __spreadProps(__spreadValues({}, _states), {
+        states.value = {
+          ..._states,
           isScrolling: true,
           scrollDir: getScrollDir(_states.scrollOffset, scrollOffset),
           scrollOffset,
           updateRequested: false
-        });
+        };
         (0, vue_exports.nextTick)(resetIsScrolling);
       };
       const onScroll = (e) => {
@@ -49530,11 +51857,12 @@ var createList = ({
         if (offset2 === (0, vue_exports.unref)(states).scrollOffset) {
           return;
         }
-        states.value = __spreadProps(__spreadValues({}, (0, vue_exports.unref)(states)), {
+        states.value = {
+          ...(0, vue_exports.unref)(states),
           scrollOffset: offset2,
           scrollDir: getScrollDir((0, vue_exports.unref)(states).scrollOffset, offset2),
           updateRequested: true
-        });
+        };
         (0, vue_exports.nextTick)(resetIsScrolling);
       };
       const scrollToItem = (idx, alignment = AUTO_ALIGNMENT) => {
@@ -49550,7 +51878,7 @@ var createList = ({
           style = itemStyleCache[idx];
         } else {
           const offset2 = getItemOffset(props, idx, (0, vue_exports.unref)(dynamicSizeCache));
-          const size3 = getItemSize(props, idx, (0, vue_exports.unref)(dynamicSizeCache));
+          const size4 = getItemSize(props, idx, (0, vue_exports.unref)(dynamicSizeCache));
           const horizontal = (0, vue_exports.unref)(_isHorizontal);
           const isRtl = direction2 === RTL;
           const offsetHorizontal = horizontal ? offset2 : 0;
@@ -49559,8 +51887,8 @@ var createList = ({
             left: isRtl ? void 0 : `${offsetHorizontal}px`,
             right: isRtl ? `${offsetHorizontal}px` : void 0,
             top: !horizontal ? `${offset2}px` : 0,
-            height: !horizontal ? `${size3}px` : "100%",
-            width: horizontal ? `${size3}px` : "100%"
+            height: !horizontal ? `${size4}px` : "100%",
+            width: horizontal ? `${size4}px` : "100%"
           };
         }
         return style;
@@ -49652,7 +51980,7 @@ var createList = ({
       return api;
     },
     render(ctx) {
-      var _a3;
+      var _a4;
       const {
         $slots,
         className,
@@ -49679,7 +52007,7 @@ var createList = ({
       const children = [];
       if (total2 > 0) {
         for (let i = start; i <= end2; i++) {
-          children.push((_a3 = $slots.default) == null ? void 0 : _a3.call($slots, {
+          children.push((_a4 = $slots.default) == null ? void 0 : _a4.call($slots, {
             data,
             key: i,
             index: i,
@@ -49728,8 +52056,8 @@ var FixedSizeList = createList({
   getItemSize: ({ itemSize: itemSize3 }) => itemSize3,
   getEstimatedTotalSize: ({ total: total2, itemSize: itemSize3 }) => itemSize3 * total2,
   getOffset: ({ height, total: total2, itemSize: itemSize3, layout: layout2, width }, index2, alignment, scrollOffset) => {
-    const size3 = isHorizontal(layout2) ? width : height;
-    if (process.env.NODE_ENV !== "production" && isString3(size3)) {
+    const size4 = isHorizontal(layout2) ? width : height;
+    if (process.env.NODE_ENV !== "production" && isString3(size4)) {
       throwError("[ElVirtualList]", `
         You should set
           width/height
@@ -49737,11 +52065,11 @@ var FixedSizeList = createList({
           horizontal/vertical
       `);
     }
-    const lastItemOffset = Math.max(0, total2 * itemSize3 - size3);
+    const lastItemOffset = Math.max(0, total2 * itemSize3 - size4);
     const maxOffset = Math.min(lastItemOffset, index2 * itemSize3);
-    const minOffset = Math.max(0, (index2 + 1) * itemSize3 - size3);
+    const minOffset = Math.max(0, (index2 + 1) * itemSize3 - size4);
     if (alignment === SMART_ALIGNMENT) {
-      if (scrollOffset >= minOffset - size3 && scrollOffset <= maxOffset + size3) {
+      if (scrollOffset >= minOffset - size4 && scrollOffset <= maxOffset + size4) {
         alignment = AUTO_ALIGNMENT;
       } else {
         alignment = CENTERED_ALIGNMENT;
@@ -49756,9 +52084,9 @@ var FixedSizeList = createList({
       }
       case CENTERED_ALIGNMENT: {
         const middleOffset = Math.round(minOffset + (maxOffset - minOffset) / 2);
-        if (middleOffset < Math.ceil(size3 / 2)) {
+        if (middleOffset < Math.ceil(size4 / 2)) {
           return 0;
-        } else if (middleOffset > lastItemOffset + Math.floor(size3 / 2)) {
+        } else if (middleOffset > lastItemOffset + Math.floor(size4 / 2)) {
           return lastItemOffset;
         } else {
           return middleOffset;
@@ -49779,8 +52107,8 @@ var FixedSizeList = createList({
   getStartIndexForOffset: ({ total: total2, itemSize: itemSize3 }, offset2) => Math.max(0, Math.min(total2 - 1, Math.floor(offset2 / itemSize3))),
   getStopIndexForStartIndex: ({ height, total: total2, itemSize: itemSize3, layout: layout2, width }, startIndex, scrollOffset) => {
     const offset2 = startIndex * itemSize3;
-    const size3 = isHorizontal(layout2) ? width : height;
-    const numVisibleItems = Math.ceil((size3 + scrollOffset - offset2) / itemSize3);
+    const size4 = isHorizontal(layout2) ? width : height;
+    const numVisibleItems = Math.ceil((size4 + scrollOffset - offset2) / itemSize3);
     return Math.max(0, Math.min(total2 - 1, startIndex + numVisibleItems - 1));
   },
   initCache() {
@@ -49803,12 +52131,12 @@ var getItemFromCache = (props, index2, listCache) => {
       offset2 = item.offset + item.size;
     }
     for (let i = lastVisitedIndex + 1; i <= index2; i++) {
-      const size3 = itemSize3(i);
+      const size4 = itemSize3(i);
       items[i] = {
         offset: offset2,
-        size: size3
+        size: size4
       };
-      offset2 += size3;
+      offset2 += size4;
     }
     listCache.lastVisitedIndex = index2;
   }
@@ -49865,13 +52193,13 @@ var DynamicSizeList = createList({
   getEstimatedTotalSize,
   getOffset: (props, index2, alignment, scrollOffset, listCache) => {
     const { height, layout: layout2, width } = props;
-    const size3 = isHorizontal(layout2) ? width : height;
+    const size4 = isHorizontal(layout2) ? width : height;
     const item = getItemFromCache(props, index2, listCache);
     const estimatedTotalSize = getEstimatedTotalSize(props, listCache);
-    const maxOffset = Math.max(0, Math.min(estimatedTotalSize - size3, item.offset));
-    const minOffset = Math.max(0, item.offset - size3 + item.size);
+    const maxOffset = Math.max(0, Math.min(estimatedTotalSize - size4, item.offset));
+    const minOffset = Math.max(0, item.offset - size4 + item.size);
     if (alignment === SMART_ALIGNMENT) {
-      if (scrollOffset >= minOffset - size3 && scrollOffset <= maxOffset + size3) {
+      if (scrollOffset >= minOffset - size4 && scrollOffset <= maxOffset + size4) {
         alignment = AUTO_ALIGNMENT;
       } else {
         alignment = CENTERED_ALIGNMENT;
@@ -49902,9 +52230,9 @@ var DynamicSizeList = createList({
   getStartIndexForOffset: (props, offset2, listCache) => findItem(props, listCache, offset2),
   getStopIndexForStartIndex: (props, startIndex, scrollOffset, listCache) => {
     const { height, total: total2, layout: layout2, width } = props;
-    const size3 = isHorizontal(layout2) ? width : height;
+    const size4 = isHorizontal(layout2) ? width : height;
     const item = getItemFromCache(props, startIndex, listCache);
-    const maxOffset = scrollOffset + size3;
+    const maxOffset = scrollOffset + size4;
     let offset2 = item.offset + item.size;
     let stopIndex = startIndex;
     while (stopIndex < total2 - 1 && offset2 < maxOffset) {
@@ -49920,9 +52248,9 @@ var DynamicSizeList = createList({
       lastVisitedIndex: -1
     };
     cache2.clearCacheAfterIndex = (index2, forceUpdate = true) => {
-      var _a3, _b;
+      var _a4, _b;
       cache2.lastVisitedIndex = Math.min(cache2.lastVisitedIndex, index2 - 1);
-      (_a3 = instance.exposed) == null ? void 0 : _a3.getItemStyleCache(-1);
+      (_a4 = instance.exposed) == null ? void 0 : _a4.getItemStyleCache(-1);
       if (forceUpdate) {
         (_b = instance.proxy) == null ? void 0 : _b.$forceUpdate();
       }
@@ -50063,7 +52391,7 @@ var createGrid = ({
       const estimatedTotalHeight = (0, vue_exports.computed)(() => getEstimatedTotalHeight2(props, (0, vue_exports.unref)(cache2)));
       const estimatedTotalWidth = (0, vue_exports.computed)(() => getEstimatedTotalWidth2(props, (0, vue_exports.unref)(cache2)));
       const windowStyle = (0, vue_exports.computed)(() => {
-        var _a3;
+        var _a4;
         return [
           {
             position: "relative",
@@ -50076,7 +52404,7 @@ var createGrid = ({
             height: isNumber(props.height) ? `${props.height}px` : props.height,
             width: isNumber(props.width) ? `${props.width}px` : props.width
           },
-          (_a3 = props.style) != null ? _a3 : {}
+          (_a4 = props.style) != null ? _a4 : {}
         ];
       });
       const innerStyle = (0, vue_exports.computed)(() => {
@@ -50148,14 +52476,15 @@ var createGrid = ({
               break;
           }
         }
-        states.value = __spreadProps(__spreadValues({}, _states), {
+        states.value = {
+          ..._states,
           isScrolling: true,
           scrollLeft: _scrollLeft,
           scrollTop: Math.max(0, Math.min(scrollTop, scrollHeight - clientHeight)),
           updateRequested: true,
           xAxisScrollDir: getScrollDir(_states.scrollLeft, _scrollLeft),
           yAxisScrollDir: getScrollDir(_states.scrollTop, scrollTop)
-        });
+        };
         (0, vue_exports.nextTick)(() => resetIsScrolling());
         onUpdated10();
         emitEvents();
@@ -50180,8 +52509,8 @@ var createGrid = ({
         atYStartEdge: (0, vue_exports.computed)(() => states.value.scrollTop <= 0),
         atYEndEdge: (0, vue_exports.computed)(() => states.value.scrollTop >= estimatedTotalHeight.value)
       }, (x2, y) => {
-        var _a3, _b, _c, _d;
-        (_b = (_a3 = hScrollbar.value) == null ? void 0 : _a3.onMouseUp) == null ? void 0 : _b.call(_a3);
+        var _a4, _b, _c, _d;
+        (_b = (_a4 = hScrollbar.value) == null ? void 0 : _a4.onMouseUp) == null ? void 0 : _b.call(_a4);
         (_d = (_c = hScrollbar.value) == null ? void 0 : _c.onMouseUp) == null ? void 0 : _d.call(_c);
         const width = (0, vue_exports.unref)(parsedWidth);
         const height = (0, vue_exports.unref)(parsedHeight);
@@ -50200,13 +52529,14 @@ var createGrid = ({
         if (scrollTop === _states.scrollTop && scrollLeft === _states.scrollLeft) {
           return;
         }
-        states.value = __spreadProps(__spreadValues({}, _states), {
+        states.value = {
+          ..._states,
           xAxisScrollDir: getScrollDir(_states.scrollLeft, scrollLeft),
           yAxisScrollDir: getScrollDir(_states.scrollTop, scrollTop),
           scrollLeft,
           scrollTop,
           updateRequested: true
-        });
+        };
         (0, vue_exports.nextTick)(() => resetIsScrolling());
         onUpdated10();
         emitEvents();
@@ -50354,7 +52684,7 @@ var createGrid = ({
         };
       };
       const renderItems = () => {
-        var _a3;
+        var _a4;
         const [columnStart, columnEnd] = (0, vue_exports.unref)(columnsToRender);
         const [rowStart, rowEnd] = (0, vue_exports.unref)(rowsToRender);
         const { data, totalColumn, totalRow, useIsScrolling, itemKey } = props;
@@ -50362,7 +52692,7 @@ var createGrid = ({
         if (totalRow > 0 && totalColumn > 0) {
           for (let row = rowStart; row <= rowEnd; row++) {
             for (let column2 = columnStart; column2 <= columnEnd; column2++) {
-              children.push((_a3 = slots.default) == null ? void 0 : _a3.call(slots, {
+              children.push((_a4 = slots.default) == null ? void 0 : _a4.call(slots, {
                 columnIndex: column2,
                 data,
                 key: itemKey({ columnIndex: column2, data, rowIndex: row }),
@@ -50561,12 +52891,12 @@ var getItemFromCache2 = (props, index2, gridCache, type4) => {
       offset2 = item.offset + item.size;
     }
     for (let i = lastVisited + 1; i <= index2; i++) {
-      const size3 = sizer(i);
+      const size4 = sizer(i);
       cachedItems[i] = {
         offset: offset2,
-        size: size3
+        size: size4
       };
-      offset2 += size3;
+      offset2 += size4;
     }
     gridCache[ACCESS_LAST_VISITED_KEY_MAP[type4]] = index2;
   }
@@ -50637,16 +52967,16 @@ var ACCESS_ESTIMATED_SIZE_KEY_MAP = {
   row: getEstimatedTotalHeight
 };
 var getOffset = (props, index2, alignment, scrollOffset, cache2, type4, scrollBarWidth2) => {
-  const [size3, estimatedSizeAssociates] = [
+  const [size4, estimatedSizeAssociates] = [
     type4 === "row" ? props.height : props.width,
     ACCESS_ESTIMATED_SIZE_KEY_MAP[type4]
   ];
   const item = getItemFromCache2(props, index2, cache2, type4);
   const estimatedSize = estimatedSizeAssociates(props, cache2);
-  const maxOffset = max3(0, min3(estimatedSize - size3, item.offset));
-  const minOffset = max3(0, item.offset - size3 + scrollBarWidth2 + item.size);
+  const maxOffset = max3(0, min3(estimatedSize - size4, item.offset));
+  const minOffset = max3(0, item.offset - size4 + scrollBarWidth2 + item.size);
   if (alignment === SMART_ALIGNMENT) {
-    if (scrollOffset >= minOffset - size3 && scrollOffset <= maxOffset + size3) {
+    if (scrollOffset >= minOffset - size4 && scrollOffset <= maxOffset + size4) {
       alignment = AUTO_ALIGNMENT;
     } else {
       alignment = CENTERED_ALIGNMENT;
@@ -50717,7 +53047,7 @@ var DynamicSizeGrid = createGrid({
   },
   injectToInstance: (instance, cache2) => {
     const resetAfter = ({ columnIndex, rowIndex }, forceUpdate) => {
-      var _a3, _b;
+      var _a4, _b;
       forceUpdate = isUndefined(forceUpdate) ? true : forceUpdate;
       if (isNumber(columnIndex)) {
         cache2.value.lastVisitedColumnIndex = Math.min(cache2.value.lastVisitedColumnIndex, columnIndex - 1);
@@ -50725,7 +53055,7 @@ var DynamicSizeGrid = createGrid({
       if (isNumber(rowIndex)) {
         cache2.value.lastVisitedRowIndex = Math.min(cache2.value.lastVisitedRowIndex, rowIndex - 1);
       }
-      (_a3 = instance.exposed) == null ? void 0 : _a3.getItemStyleCache.value(-1, null, null);
+      (_a4 = instance.exposed) == null ? void 0 : _a4.getItemStyleCache.value(-1, null, null);
       if (forceUpdate)
         (_b = instance.proxy) == null ? void 0 : _b.$forceUpdate();
     };
@@ -51001,10 +53331,10 @@ var ElSelectMenu2 = (0, vue_exports.defineComponent)({
     const ns2 = useNamespace("select");
     const cachedHeights = (0, vue_exports.ref)([]);
     const listRef = (0, vue_exports.ref)();
-    const size3 = (0, vue_exports.computed)(() => props.data.length);
-    (0, vue_exports.watch)(() => size3.value, () => {
-      var _a3, _b;
-      (_b = (_a3 = select.popper.value).updatePopper) == null ? void 0 : _b.call(_a3);
+    const size4 = (0, vue_exports.computed)(() => props.data.length);
+    (0, vue_exports.watch)(() => size4.value, () => {
+      var _a4, _b;
+      (_b = (_a4 = select.popper.value).updatePopper) == null ? void 0 : _b.call(_a4);
     });
     const isSized = (0, vue_exports.computed)(() => isUndefined(select.props.estimatedOptionHeight));
     const listProps = (0, vue_exports.computed)(() => {
@@ -51119,8 +53449,8 @@ var ElSelectMenu2 = (0, vue_exports.defineComponent)({
         "onHover": onHover
       }), {
         default: (props2) => {
-          var _a3;
-          return ((_a3 = slots.default) == null ? void 0 : _a3.call(slots, props2)) || (0, vue_exports.createVNode)("span", null, [item.label]);
+          var _a4;
+          return ((_a4 = slots.default) == null ? void 0 : _a4.call(slots, props2)) || (0, vue_exports.createVNode)("span", null, [item.label]);
         }
       });
     };
@@ -51173,7 +53503,7 @@ var ElSelectMenu2 = (0, vue_exports.defineComponent)({
       }
     };
     return () => {
-      var _a3;
+      var _a4;
       const {
         data,
         width
@@ -51189,7 +53519,7 @@ var ElSelectMenu2 = (0, vue_exports.defineComponent)({
           "style": {
             width: `${width}px`
           }
-        }, [(_a3 = slots.empty) == null ? void 0 : _a3.call(slots)]);
+        }, [(_a4 = slots.empty) == null ? void 0 : _a4.call(slots)]);
       }
       const List = (0, vue_exports.unref)(isSized) ? FixedSizeList : DynamicSizeList;
       return (0, vue_exports.createVNode)("div", {
@@ -51428,9 +53758,10 @@ var useSelect2 = (props, emit2) => {
       if (isArray3(v2.options)) {
         const filtered = v2.options.filter(isValidOption);
         if (filtered.length > 0) {
-          return __spreadProps(__spreadValues({}, v2), {
+          return {
+            ...v2,
             options: filtered
-          });
+          };
         }
       } else {
         if (props.remote || isValidOption(v2)) {
@@ -51445,14 +53776,14 @@ var useSelect2 = (props, emit2) => {
   const collapseTagSize = (0, vue_exports.computed)(() => selectSize.value === "small" ? "small" : "default");
   const tagMaxWidth = (0, vue_exports.computed)(() => {
     const select = selectionRef.value;
-    const size3 = collapseTagSize.value || "default";
+    const size4 = collapseTagSize.value || "default";
     const paddingLeft = select ? Number.parseInt(getComputedStyle(select).paddingLeft) : 0;
     const paddingRight = select ? Number.parseInt(getComputedStyle(select).paddingRight) : 0;
-    return states.selectWidth - paddingRight - paddingLeft - TAG_BASE_WIDTH[size3];
+    return states.selectWidth - paddingRight - paddingLeft - TAG_BASE_WIDTH[size4];
   });
   const calculatePopperSize = () => {
-    var _a3;
-    popperSize.value = ((_a3 = selectRef.value) == null ? void 0 : _a3.offsetWidth) || 200;
+    var _a4;
+    popperSize.value = ((_a4 = selectRef.value) == null ? void 0 : _a4.offsetWidth) || 200;
   };
   const inputWrapperStyle = (0, vue_exports.computed)(() => {
     return {
@@ -51470,8 +53801,8 @@ var useSelect2 = (props, emit2) => {
     return props.multiple || isNil_default(props.modelValue) ? _placeholder : states.selectedLabel;
   });
   const popperRef = (0, vue_exports.computed)(() => {
-    var _a3, _b;
-    return (_b = (_a3 = popper.value) == null ? void 0 : _a3.popperRef) == null ? void 0 : _b.contentRef;
+    var _a4, _b;
+    return (_b = (_a4 = popper.value) == null ? void 0 : _a4.popperRef) == null ? void 0 : _b.contentRef;
   });
   const indexRef = (0, vue_exports.computed)(() => {
     if (props.multiple) {
@@ -51506,8 +53837,8 @@ var useSelect2 = (props, emit2) => {
     handleCompositionEnd
   } = useInput((e) => onInput(e));
   const focusAndUpdatePopup = () => {
-    var _a3, _b, _c;
-    (_b = (_a3 = inputRef.value).focus) == null ? void 0 : _b.call(_a3);
+    var _a4, _b, _c;
+    (_b = (_a4 = inputRef.value).focus) == null ? void 0 : _b.call(_a4);
     (_c = popper.value) == null ? void 0 : _c.updatePopper();
   };
   const toggleMenu = () => {
@@ -51517,9 +53848,9 @@ var useSelect2 = (props, emit2) => {
       if (states.isComposing)
         states.softFocus = true;
       return (0, vue_exports.nextTick)(() => {
-        var _a3, _b;
+        var _a4, _b;
         expanded.value = !expanded.value;
-        (_b = (_a3 = inputRef.value) == null ? void 0 : _a3.focus) == null ? void 0 : _b.call(_a3);
+        (_b = (_a4 = inputRef.value) == null ? void 0 : _a4.focus) == null ? void 0 : _b.call(_a4);
       });
     }
   };
@@ -51580,21 +53911,21 @@ var useSelect2 = (props, emit2) => {
       return;
     }
     return (0, vue_exports.nextTick)(() => {
-      var _a3, _b;
+      var _a4, _b;
       if (!inputRef.value)
         return;
       const selection = selectionRef.value;
       selectRef.value.height = selection.offsetHeight;
       if (expanded.value && emptyText.value !== false) {
-        (_b = (_a3 = popper.value) == null ? void 0 : _a3.updatePopper) == null ? void 0 : _b.call(_a3);
+        (_b = (_a4 = popper.value) == null ? void 0 : _a4.updatePopper) == null ? void 0 : _b.call(_a4);
       }
     });
   };
   const handleResize = () => {
-    var _a3, _b;
+    var _a4, _b;
     resetInputWidth();
     calculatePopperSize();
-    (_b = (_a3 = popper.value) == null ? void 0 : _a3.updatePopper) == null ? void 0 : _b.call(_a3);
+    (_b = (_a4 = popper.value) == null ? void 0 : _a4.updatePopper) == null ? void 0 : _b.call(_a4);
     if (props.multiple) {
       return resetInputHeight();
     }
@@ -51606,7 +53937,7 @@ var useSelect2 = (props, emit2) => {
     }
   };
   const onSelect = (option2, idx, byClick = true) => {
-    var _a3, _b;
+    var _a4, _b;
     if (props.multiple) {
       let selectedOptions = props.modelValue.slice();
       const index2 = getValueIndex(selectedOptions, getValueKey(option2));
@@ -51630,7 +53961,7 @@ var useSelect2 = (props, emit2) => {
         states.inputLength = 20;
       }
       if (props.filterable && !props.reserveKeyword) {
-        (_b = (_a3 = inputRef.value).focus) == null ? void 0 : _b.call(_a3);
+        (_b = (_a4 = inputRef.value).focus) == null ? void 0 : _b.call(_a4);
         onUpdateInputValue("");
       }
       if (props.filterable) {
@@ -51682,8 +54013,8 @@ var useSelect2 = (props, emit2) => {
   const handleBlur = (event) => {
     states.softFocus = false;
     return (0, vue_exports.nextTick)(() => {
-      var _a3, _b;
-      (_b = (_a3 = inputRef.value) == null ? void 0 : _a3.blur) == null ? void 0 : _b.call(_a3);
+      var _a4, _b;
+      (_b = (_a4 = inputRef.value) == null ? void 0 : _a4.blur) == null ? void 0 : _b.call(_a4);
       if (calculatorRef.value) {
         states.calculatedWidth = calculatorRef.value.getBoundingClientRect().width;
       }
@@ -51781,10 +54112,10 @@ var useSelect2 = (props, emit2) => {
     states.hoveringIndex = -1;
   };
   const setSoftFocus = () => {
-    var _a3;
+    var _a4;
     const _input = inputRef.value;
     if (_input) {
-      (_a3 = _input.focus) == null ? void 0 : _a3.call(_input);
+      (_a4 = _input.focus) == null ? void 0 : _a4.call(_input);
     }
   };
   const onInput = (event) => {
@@ -51860,10 +54191,10 @@ var useSelect2 = (props, emit2) => {
     calculatePopperSize();
   };
   (0, vue_exports.watch)(expanded, (val) => {
-    var _a3, _b;
+    var _a4, _b;
     emit2("visible-change", val);
     if (val) {
-      (_b = (_a3 = popper.value).update) == null ? void 0 : _b.call(_a3);
+      (_b = (_a4 = popper.value).update) == null ? void 0 : _b.call(_a4);
     } else {
       states.displayInputValue = "";
       states.previousQuery = null;
@@ -51871,12 +54202,12 @@ var useSelect2 = (props, emit2) => {
     }
   });
   (0, vue_exports.watch)(() => props.modelValue, (val, oldVal) => {
-    var _a3;
+    var _a4;
     if (!val || val.toString() !== states.previousValue) {
       initStates();
     }
     if (!isEqual_default(val, oldVal) && props.validateEvent) {
-      (_a3 = elFormItem == null ? void 0 : elFormItem.validate) == null ? void 0 : _a3.call(elFormItem, "change").catch((err) => debugWarn(err));
+      (_a4 = elFormItem == null ? void 0 : elFormItem.validate) == null ? void 0 : _a4.call(elFormItem, "change").catch((err) => debugWarn(err));
     }
   }, {
     deep: true
@@ -51983,23 +54314,26 @@ var _sfc_main110 = (0, vue_exports.defineComponent)({
       }
       return multiple ? fallback : rawModelValue;
     });
-    const API = useSelect2((0, vue_exports.reactive)(__spreadProps(__spreadValues({}, (0, vue_exports.toRefs)(props)), {
+    const API = useSelect2((0, vue_exports.reactive)({
+      ...(0, vue_exports.toRefs)(props),
       modelValue
-    })), emit2);
+    }), emit2);
     (0, vue_exports.provide)(selectV2InjectionKey, {
-      props: (0, vue_exports.reactive)(__spreadProps(__spreadValues({}, (0, vue_exports.toRefs)(props)), {
+      props: (0, vue_exports.reactive)({
+        ...(0, vue_exports.toRefs)(props),
         height: API.popupHeight,
         modelValue
-      })),
+      }),
       popper: API.popper,
       onSelect: API.onSelect,
       onHover: API.onHover,
       onKeyboardNavigate: API.onKeyboardNavigate,
       onKeyboardSelect: API.onKeyboardSelect
     });
-    return __spreadProps(__spreadValues({}, API), {
+    return {
+      ...API,
       modelValue
-    });
+    };
   }
 });
 var _hoisted_170 = { key: 0 };
@@ -52040,7 +54374,7 @@ function _sfc_render37(_ctx, _cache, $props, $setup, $data, $options) {
       onHide: _cache[24] || (_cache[24] = ($event) => _ctx.states.inputValue = _ctx.states.displayInputValue)
     }, {
       default: (0, vue_exports.withCtx)(() => {
-        var _a3;
+        var _a4;
         return [
           (0, vue_exports.createElementVNode)("div", {
             ref: "selectionRef",
@@ -52064,7 +54398,7 @@ function _sfc_render37(_ctx, _cache, $props, $setup, $data, $options) {
                 class: (0, vue_exports.normalizeClass)(_ctx.nsSelectV2.e("selected-item"))
               }, [
                 (0, vue_exports.createVNode)(_component_el_tag, {
-                  closable: !_ctx.selectDisabled && !((_a3 = _ctx.states.cachedOptions[0]) == null ? void 0 : _a3.disable),
+                  closable: !_ctx.selectDisabled && !((_a4 = _ctx.states.cachedOptions[0]) == null ? void 0 : _a4.disable),
                   size: _ctx.collapseTagSize,
                   type: "info",
                   "disable-transitions": "",
@@ -52405,7 +54739,8 @@ var skeletonItemProps = buildProps2({
 var __default__72 = (0, vue_exports.defineComponent)({
   name: "ElSkeletonItem"
 });
-var _sfc_main111 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__72), {
+var _sfc_main111 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__72,
   props: skeletonItemProps,
   setup(__props) {
     const ns2 = useNamespace("skeleton");
@@ -52417,14 +54752,15 @@ var _sfc_main111 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 2);
     };
   }
-}));
+});
 var SkeletonItem = /* @__PURE__ */ _export_sfc(_sfc_main111, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/skeleton/src/skeleton-item.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/skeleton/src/skeleton2.mjs
 var __default__73 = (0, vue_exports.defineComponent)({
   name: "ElSkeleton"
 });
-var _sfc_main112 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__73), {
+var _sfc_main112 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__73,
   props: skeletonProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -52461,7 +54797,7 @@ var _sfc_main112 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 16)) : (0, vue_exports.renderSlot)(_ctx.$slots, "default", (0, vue_exports.normalizeProps)((0, vue_exports.mergeProps)({ key: 1 }, _ctx.$attrs)));
     };
   }
-}));
+});
 var Skeleton = /* @__PURE__ */ _export_sfc(_sfc_main112, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/skeleton/src/skeleton.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/skeleton/index.mjs
@@ -52680,13 +55016,13 @@ var useSlide = (props, initData, emit2) => {
     emit2(CHANGE_EVENT, props.range ? [minValue.value, maxValue.value] : props.modelValue);
   };
   const handleSliderPointerEvent = (event) => {
-    var _a3, _b, _c, _d, _e, _f;
+    var _a4, _b, _c, _d, _e, _f;
     if (sliderDisabled.value || initData.dragging)
       return;
     resetSize();
     let newPercent = 0;
     if (props.vertical) {
-      const clientY = (_c = (_b = (_a3 = event.touches) == null ? void 0 : _a3.item(0)) == null ? void 0 : _b.clientY) != null ? _c : event.clientY;
+      const clientY = (_c = (_b = (_a4 = event.touches) == null ? void 0 : _a4.item(0)) == null ? void 0 : _b.clientY) != null ? _c : event.clientY;
       const sliderOffsetBottom = slider.value.getBoundingClientRect().bottom;
       newPercent = (sliderOffsetBottom - clientY) / initData.sliderSize * 100;
     } else {
@@ -52699,8 +55035,8 @@ var useSlide = (props, initData, emit2) => {
     return setPosition(newPercent);
   };
   const onSliderWrapperPrevent = (event) => {
-    var _a3, _b;
-    if (((_a3 = buttonRefs["firstButton"].value) == null ? void 0 : _a3.dragging) || ((_b = buttonRefs["secondButton"].value) == null ? void 0 : _b.dragging)) {
+    var _a4, _b;
+    if (((_a4 = buttonRefs["firstButton"].value) == null ? void 0 : _a4.dragging) || ((_b = buttonRefs["secondButton"].value) == null ? void 0 : _b.dragging)) {
       event.preventDefault();
     }
   };
@@ -53005,7 +55341,7 @@ var useWatch = (props, initData, minValue, maxValue, emit2, elFormItem) => {
     }
   };
   const setValues = () => {
-    var _a3, _b;
+    var _a4, _b;
     if (props.min > props.max) {
       throwError("Slider", "min should not be greater than max.");
       return;
@@ -53025,7 +55361,7 @@ var useWatch = (props, initData, minValue, maxValue, emit2, elFormItem) => {
         initData.secondValue = val[1];
         if (valueChanged()) {
           if (props.validateEvent) {
-            (_a3 = elFormItem == null ? void 0 : elFormItem.validate) == null ? void 0 : _a3.call(elFormItem, "change").catch((err) => debugWarn(err));
+            (_a4 = elFormItem == null ? void 0 : elFormItem.validate) == null ? void 0 : _a4.call(elFormItem, "change").catch((err) => debugWarn(err));
           }
           initData.oldValue = val.slice();
         }
@@ -53088,7 +55424,8 @@ var _hoisted_171 = ["tabindex"];
 var __default__74 = (0, vue_exports.defineComponent)({
   name: "ElSliderButton"
 });
-var _sfc_main113 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__74), {
+var _sfc_main113 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__74,
   props: sliderButtonProps,
   emits: sliderButtonEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -53167,7 +55504,7 @@ var _sfc_main113 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 46, _hoisted_171);
     };
   }
-}));
+});
 var SliderButton = /* @__PURE__ */ _export_sfc(_sfc_main113, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/slider/src/button.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/slider/src/marker.mjs
@@ -53199,7 +55536,8 @@ var _hoisted_244 = { key: 1 };
 var __default__75 = (0, vue_exports.defineComponent)({
   name: "ElSlider"
 });
-var _sfc_main114 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__75), {
+var _sfc_main114 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__75,
   props: sliderProps,
   emits: sliderEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -53279,19 +55617,20 @@ var _sfc_main114 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
     const updateDragging = (val) => {
       initData.dragging = val;
     };
-    (0, vue_exports.provide)(sliderContextKey, __spreadProps(__spreadValues({}, (0, vue_exports.toRefs)(props)), {
+    (0, vue_exports.provide)(sliderContextKey, {
+      ...(0, vue_exports.toRefs)(props),
       sliderSize,
       disabled: sliderDisabled,
       precision,
       emitChange,
       resetSize,
       updateDragging
-    }));
+    });
     expose({
       onSliderClick
     });
     return (_ctx, _cache) => {
-      var _a3, _b;
+      var _a4, _b;
       return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("div", {
         id: _ctx.range ? (0, vue_exports.unref)(inputId) : void 0,
         ref_key: "sliderWrapper",
@@ -53299,7 +55638,7 @@ var _sfc_main114 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
         class: (0, vue_exports.normalizeClass)((0, vue_exports.unref)(sliderKls)),
         role: _ctx.range ? "group" : void 0,
         "aria-label": _ctx.range && !(0, vue_exports.unref)(isLabeledByFormItem) ? (0, vue_exports.unref)(groupLabel) : void 0,
-        "aria-labelledby": _ctx.range && (0, vue_exports.unref)(isLabeledByFormItem) ? (_a3 = (0, vue_exports.unref)(elFormItem)) == null ? void 0 : _a3.labelId : void 0,
+        "aria-labelledby": _ctx.range && (0, vue_exports.unref)(isLabeledByFormItem) ? (_a4 = (0, vue_exports.unref)(elFormItem)) == null ? void 0 : _a4.labelId : void 0,
         onTouchstart: _cache[2] || (_cache[2] = (...args) => (0, vue_exports.unref)(onSliderWrapperPrevent) && (0, vue_exports.unref)(onSliderWrapperPrevent)(...args)),
         onTouchmove: _cache[3] || (_cache[3] = (...args) => (0, vue_exports.unref)(onSliderWrapperPrevent) && (0, vue_exports.unref)(onSliderWrapperPrevent)(...args))
       }, [
@@ -53406,7 +55745,7 @@ var _sfc_main114 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 42, _hoisted_175);
     };
   }
-}));
+});
 var Slider = /* @__PURE__ */ _export_sfc(_sfc_main114, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/slider/src/slider.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/slider/index.mjs
@@ -53455,17 +55794,17 @@ function useSpace(props) {
     return [itemBaseStyle, fillStyle];
   });
   (0, vue_exports.watchEffect)(() => {
-    const { size: size3 = "small", wrap, direction: dir, fill } = props;
-    if (isArray3(size3)) {
-      const [h30 = 0, v2 = 0] = size3;
+    const { size: size4 = "small", wrap, direction: dir, fill } = props;
+    if (isArray3(size4)) {
+      const [h30 = 0, v2 = 0] = size4;
       horizontalSize.value = h30;
       verticalSize.value = v2;
     } else {
       let val;
-      if (isNumber(size3)) {
-        val = size3;
+      if (isNumber(size4)) {
+        val = size4;
       } else {
-        val = SIZE_MAP[size3 || "small"] || SIZE_MAP.small;
+        val = SIZE_MAP[size4 || "small"] || SIZE_MAP.small;
       }
       if ((wrap || fill) && dir === "horizontal") {
         horizontalSize.value = verticalSize.value = val;
@@ -53569,10 +55908,10 @@ var Space = (0, vue_exports.defineComponent)({
       return extractedChildren;
     }
     return () => {
-      var _a3;
+      var _a4;
       const { spacer, direction: direction2 } = props;
       const children = (0, vue_exports.renderSlot)(slots, "default", { key: 0 }, () => []);
-      if (((_a3 = children.children) != null ? _a3 : []).length === 0)
+      if (((_a4 = children.children) != null ? _a4 : []).length === 0)
         return null;
       if (isArray3(children.children)) {
         let extractedChildren = extractChildren(children.children);
@@ -53638,7 +55977,8 @@ var statisticProps = buildProps2({
 var __default__76 = (0, vue_exports.defineComponent)({
   name: "ElStatistic"
 });
-var _sfc_main115 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__76), {
+var _sfc_main115 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__76,
   props: statisticProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -53696,7 +56036,7 @@ var _sfc_main115 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 2);
     };
   }
-}));
+});
 var Statistic = /* @__PURE__ */ _export_sfc(_sfc_main115, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/statistic/src/statistic.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/statistic/index.mjs
@@ -53756,7 +56096,8 @@ var formatTime = (timestamp2, format2) => {
 var __default__77 = (0, vue_exports.defineComponent)({
   name: "ElCountdown"
 });
-var _sfc_main116 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__77), {
+var _sfc_main116 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__77,
   props: countdownProps,
   emits: countdownEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -53819,7 +56160,7 @@ var _sfc_main116 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ]), 1032, ["value", "title", "prefix", "suffix", "value-style"]);
     };
   }
-}));
+});
 var Countdown = /* @__PURE__ */ _export_sfc(_sfc_main116, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/countdown/src/countdown.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/countdown/index.mjs
@@ -53865,7 +56206,8 @@ var stepsEmits = {
 var __default__78 = (0, vue_exports.defineComponent)({
   name: "ElSteps"
 });
-var _sfc_main117 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__78), {
+var _sfc_main117 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__78,
   props: stepsProps,
   emits: stepsEmits,
   setup(__props, { emit: emit2 }) {
@@ -53889,7 +56231,7 @@ var _sfc_main117 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 2);
     };
   }
-}));
+});
 var Steps = /* @__PURE__ */ _export_sfc(_sfc_main117, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/steps/src/steps.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/steps/src/item.mjs
@@ -53916,7 +56258,8 @@ var stepProps = buildProps2({
 var __default__79 = (0, vue_exports.defineComponent)({
   name: "ElStep"
 });
-var _sfc_main118 = (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__79), {
+var _sfc_main118 = (0, vue_exports.defineComponent)({
+  ...__default__79,
   props: stepProps,
   setup(__props) {
     const props = __props;
@@ -53958,8 +56301,8 @@ var _sfc_main118 = (0, vue_exports.defineComponent)(__spreadProps(__spreadValues
       return parent.steps.value.length;
     });
     const isLast = (0, vue_exports.computed)(() => {
-      var _a3;
-      return ((_a3 = parent.steps.value[stepsCount.value - 1]) == null ? void 0 : _a3.uid) === (currentInstance2 == null ? void 0 : currentInstance2.uid);
+      var _a4;
+      return ((_a4 = parent.steps.value[stepsCount.value - 1]) == null ? void 0 : _a4.uid) === (currentInstance2 == null ? void 0 : currentInstance2.uid);
     });
     const space = (0, vue_exports.computed)(() => {
       return isSimple.value ? "" : parent.props.space;
@@ -54095,7 +56438,7 @@ var _sfc_main118 = (0, vue_exports.defineComponent)(__spreadProps(__spreadValues
       ], 6);
     };
   }
-}));
+});
 var Step = /* @__PURE__ */ _export_sfc(_sfc_main118, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/steps/src/item.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/steps/index.mjs
@@ -54200,7 +56543,8 @@ var COMPONENT_NAME16 = "ElSwitch";
 var __default__80 = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME16
 });
-var _sfc_main119 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__80), {
+var _sfc_main119 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__80,
   props: switchProps,
   emits: switchEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -54217,8 +56561,8 @@ var _sfc_main119 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ref: "https://element-plus.org/en-US/component/switch.html#attributes",
       type: "Attribute"
     }, (0, vue_exports.computed)(() => {
-      var _a3;
-      return !!((_a3 = vm.vnode.props) == null ? void 0 : _a3.value);
+      var _a4;
+      return !!((_a4 = vm.vnode.props) == null ? void 0 : _a4.value);
     }));
     const { inputId } = useFormItemInputId(props, {
       formItemContext: formItem
@@ -54252,10 +56596,10 @@ var _sfc_main119 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       emit2(INPUT_EVENT, props.inactiveValue);
     }
     (0, vue_exports.watch)(checked, (val) => {
-      var _a3;
+      var _a4;
       input.value.checked = val;
       if (props.validateEvent) {
-        (_a3 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a3.call(formItem, "change").catch((err) => debugWarn(err));
+        (_a4 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a4.call(formItem, "change").catch((err) => debugWarn(err));
       }
     });
     const handleChange = () => {
@@ -54296,11 +56640,15 @@ var _sfc_main119 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       }
     };
     const styles = (0, vue_exports.computed)(() => {
-      return ns2.cssVarBlock(__spreadValues(__spreadValues(__spreadValues({}, props.activeColor ? { "on-color": props.activeColor } : null), props.inactiveColor ? { "off-color": props.inactiveColor } : null), props.borderColor ? { "border-color": props.borderColor } : null));
+      return ns2.cssVarBlock({
+        ...props.activeColor ? { "on-color": props.activeColor } : null,
+        ...props.inactiveColor ? { "off-color": props.inactiveColor } : null,
+        ...props.borderColor ? { "border-color": props.borderColor } : null
+      });
     });
     const focus = () => {
-      var _a3, _b;
-      (_b = (_a3 = input.value) == null ? void 0 : _a3.focus) == null ? void 0 : _b.call(_a3);
+      var _a4, _b;
+      (_b = (_a4 = input.value) == null ? void 0 : _a4.focus) == null ? void 0 : _b.call(_a4);
     };
     (0, vue_exports.onMounted)(() => {
       input.value.checked = checked.value;
@@ -54411,7 +56759,7 @@ var _sfc_main119 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 14, _hoisted_176);
     };
   }
-}));
+});
 var Switch = /* @__PURE__ */ _export_sfc(_sfc_main119, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/switch/src/switch.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/switch/index.mjs
@@ -54420,8 +56768,8 @@ var ElSwitch = withInstall(Switch);
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/table/src/util.mjs
 var import_escape_html = __toESM(require_escape_html(), 1);
 var getCell = function(event) {
-  var _a3;
-  return (_a3 = event.target) == null ? void 0 : _a3.closest("td");
+  var _a4;
+  return (_a4 = event.target) == null ? void 0 : _a4.closest("td");
 };
 var orderBy = function(array4, sortKey, reverse, sortMethod, sortBy) {
   if (!sortKey && !sortMethod && (!sortBy || Array.isArray(sortBy) && !sortBy.length)) {
@@ -54647,7 +56995,7 @@ function walkTreeNode(root2, cb, childrenKey = "children", lazyKey = "hasChildre
   });
 }
 var removePopper;
-function createTablePopper(parentNode, trigger2, popperContent, tooltipOptions) {
+function createTablePopper(parentNode, trigger3, popperContent, tooltipOptions) {
   tooltipOptions = merge_default({
     enterable: true,
     showArrow: true
@@ -54682,8 +57030,8 @@ function createTablePopper(parentNode, trigger2, popperContent, tooltipOptions) 
     try {
       popperInstance && popperInstance.destroy();
       content && (parentNode == null ? void 0 : parentNode.removeChild(content));
-      trigger2.removeEventListener("mouseenter", onOpen);
-      trigger2.removeEventListener("mouseleave", onClose);
+      trigger3.removeEventListener("mouseenter", onOpen);
+      trigger3.removeEventListener("mouseleave", onClose);
       scrollContainer == null ? void 0 : scrollContainer.removeEventListener("scroll", removePopper);
       removePopper = void 0;
     } catch (e) {
@@ -54724,14 +57072,14 @@ function createTablePopper(parentNode, trigger2, popperContent, tooltipOptions) 
     });
   }
   const popperOptions = tooltipOptions.popperOptions || {};
-  popperInstance = yn(trigger2, content, __spreadProps(__spreadValues({
+  popperInstance = yn(trigger3, content, {
     placement: tooltipOptions.placement || "top",
-    strategy: "fixed"
-  }, popperOptions), {
+    strategy: "fixed",
+    ...popperOptions,
     modifiers: popperOptions.modifiers ? modifiers.concat(popperOptions.modifiers) : modifiers
-  }));
-  trigger2.addEventListener("mouseenter", onOpen);
-  trigger2.addEventListener("mouseleave", onClose);
+  });
+  trigger3.addEventListener("mouseenter", onOpen);
+  trigger3.addEventListener("mouseleave", onClose);
   scrollContainer == null ? void 0 : scrollContainer.addEventListener("scroll", removePopper);
   return popperInstance;
 }
@@ -55012,7 +57360,7 @@ function useTree(watcherData) {
     }, childrenColumnName.value, lazyColumnIdentifier.value);
     return res;
   };
-  const updateTreeData = (ifChangeExpandRowKeys = false, ifExpandAll = ((_a3) => (_a3 = instance.store) == null ? void 0 : _a3.states.defaultExpandAll.value)()) => {
+  const updateTreeData = (ifChangeExpandRowKeys = false, ifExpandAll = ((_a4) => (_a4 = instance.store) == null ? void 0 : _a4.states.defaultExpandAll.value)()) => {
     var _a22;
     const nested = normalizedData.value;
     const normalizedLazyNode_ = normalizedLazyNode.value;
@@ -55035,7 +57383,7 @@ function useTree(watcherData) {
       };
       keys2.forEach((key) => {
         const oldValue = oldTreeData[key];
-        const newValue = __spreadValues({}, nested[key]);
+        const newValue = { ...nested[key] };
         newValue.expanded = getExpanded(oldValue, key);
         if (newValue.lazy) {
           const { loaded = false, loading = false } = oldValue || {};
@@ -55168,9 +57516,9 @@ var doFlattenColumns = (columns2) => {
   return result;
 };
 function useWatcher() {
-  var _a3;
+  var _a4;
   const instance = (0, vue_exports.getCurrentInstance)();
-  const { size: tableSize } = (0, vue_exports.toRefs)((_a3 = instance.proxy) == null ? void 0 : _a3.$props);
+  const { size: tableSize } = (0, vue_exports.toRefs)((_a4 = instance.proxy) == null ? void 0 : _a4.$props);
   const rowKey2 = (0, vue_exports.ref)(null);
   const data = (0, vue_exports.ref)([]);
   const _data = (0, vue_exports.ref)([]);
@@ -55545,7 +57893,7 @@ function useWatcher() {
     updateCurrentRowData,
     loadOrToggle,
     updateTreeData,
-    states: __spreadValues(__spreadValues(__spreadValues({
+    states: {
       tableSize,
       rowKey: rowKey2,
       data,
@@ -55572,18 +57920,21 @@ function useWatcher() {
       sortingColumn,
       sortProp,
       sortOrder,
-      hoverRow
-    }, expandStates), treeStates), currentData)
+      hoverRow,
+      ...expandStates,
+      ...treeStates,
+      ...currentData
+    }
   };
 }
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/table/src/store/index.mjs
 function replaceColumn(array4, column2) {
   return array4.map((item) => {
-    var _a3;
+    var _a4;
     if (item.id === column2.id) {
       return column2;
-    } else if ((_a3 = item.children) == null ? void 0 : _a3.length) {
+    } else if ((_a4 = item.children) == null ? void 0 : _a4.length) {
       item.children = replaceColumn(item.children, column2);
     }
     return item;
@@ -55591,8 +57942,8 @@ function replaceColumn(array4, column2) {
 }
 function sortColumn(array4) {
   array4.forEach((item) => {
-    var _a3, _b;
-    item.no = (_a3 = item.getColumnIndex) == null ? void 0 : _a3.call(item);
+    var _a4, _b;
+    item.no = (_a4 = item.getColumnIndex) == null ? void 0 : _a4.call(item);
     if ((_b = item.children) == null ? void 0 : _b.length) {
       sortColumn(item.children);
     }
@@ -55656,8 +58007,8 @@ function useStore() {
       if (parent) {
         parent.children.splice(parent.children.findIndex((item) => item.id === column2.id), 1);
         (0, vue_exports.nextTick)(() => {
-          var _a3;
-          if (((_a3 = parent.children) == null ? void 0 : _a3.length) === 0) {
+          var _a4;
+          if (((_a4 = parent.children) == null ? void 0 : _a4.length) === 0) {
             delete parent.children;
           }
         });
@@ -55737,13 +58088,13 @@ function useStore() {
   const updateTableScrollY = function() {
     (0, vue_exports.nextTick)(() => instance.layout.updateScrollY.apply(instance.layout));
   };
-  return __spreadProps(__spreadValues({
-    ns: ns2
-  }, watcher), {
+  return {
+    ns: ns2,
+    ...watcher,
     mutations,
     commit,
     updateTableScrollY
-  });
+  };
 }
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/table/src/store/helper.mjs
@@ -55981,10 +58332,10 @@ var TableLayout = class {
   notifyObservers(event) {
     const observers = this.observers;
     observers.forEach((observer) => {
-      var _a3, _b;
+      var _a4, _b;
       switch (event) {
         case "columns":
-          (_a3 = observer.state) == null ? void 0 : _a3.onColumnsChange(this);
+          (_a4 = observer.state) == null ? void 0 : _a4.onColumnsChange(this);
           break;
         case "scrollable":
           (_b = observer.state) == null ? void 0 : _b.onScrollableChange(this);
@@ -56040,8 +58391,8 @@ var _sfc_main120 = (0, vue_exports.defineComponent)({
     });
     const filterValue = (0, vue_exports.computed)({
       get: () => {
-        var _a3;
-        return (((_a3 = props.column) == null ? void 0 : _a3.filteredValue) || [])[0];
+        var _a4;
+        return (((_a4 = props.column) == null ? void 0 : _a4.filteredValue) || [])[0];
       },
       set: (value) => {
         if (filteredValue.value) {
@@ -56118,8 +58469,8 @@ var _sfc_main120 = (0, vue_exports.defineComponent)({
       immediate: true
     });
     const popperPaneRef = (0, vue_exports.computed)(() => {
-      var _a3, _b;
-      return (_b = (_a3 = tooltip.value) == null ? void 0 : _a3.popperRef) == null ? void 0 : _b.contentRef;
+      var _a4, _b;
+      return (_b = (_a4 = tooltip.value) == null ? void 0 : _a4.popperRef) == null ? void 0 : _b.contentRef;
     });
     return {
       tooltipVisible,
@@ -56283,8 +58634,8 @@ function useLayoutObserver(root2) {
     return layout2;
   });
   const onColumnsChange = (layout2) => {
-    var _a3;
-    const cols = ((_a3 = root2.vnode.el) == null ? void 0 : _a3.querySelectorAll("colgroup > col")) || [];
+    var _a4;
+    const cols = ((_a4 = root2.vnode.el) == null ? void 0 : _a4.querySelectorAll("colgroup > col")) || [];
     if (!cols.length)
       return;
     const flattenColumns = layout2.getFlattenColumns();
@@ -56302,8 +58653,8 @@ function useLayoutObserver(root2) {
     }
   };
   const onScrollableChange = (layout2) => {
-    var _a3, _b;
-    const cols = ((_a3 = root2.vnode.el) == null ? void 0 : _a3.querySelectorAll("colgroup > col[name=gutter]")) || [];
+    var _a4, _b;
+    const cols = ((_a4 = root2.vnode.el) == null ? void 0 : _a4.querySelectorAll("colgroup > col[name=gutter]")) || [];
     for (let i = 0, j = cols.length; i < j; i++) {
       const col = cols[i];
       col.setAttribute("width", layout2.scrollY.value ? layout2.gutterWidth : "0");
@@ -56410,10 +58761,10 @@ function useEvent(props, emit2) {
     }
   };
   const handleMouseMove = (event, column2) => {
-    var _a3;
+    var _a4;
     if (column2.children && column2.children.length > 0)
       return;
-    const target = (_a3 = event.target) == null ? void 0 : _a3.closest("th");
+    const target = (_a4 = event.target) == null ? void 0 : _a4.closest("th");
     if (!column2 || !column2.resizable)
       return;
     if (!dragging.value && props.border) {
@@ -56446,10 +58797,10 @@ function useEvent(props, emit2) {
     return sortOrders[index2 > sortOrders.length - 2 ? 0 : index2 + 1];
   };
   const handleSortClick = (event, column2, givenOrder) => {
-    var _a3;
+    var _a4;
     event.stopPropagation();
     const order = column2.order === givenOrder ? null : givenOrder || toggleOrder(column2);
-    const target = (_a3 = event.target) == null ? void 0 : _a3.closest("th");
+    const target = (_a4 = event.target) == null ? void 0 : _a4.closest("th");
     if (target) {
       if (hasClass(target, "noclick")) {
         removeClass(target, "noclick");
@@ -56511,8 +58862,8 @@ function useStyle(props) {
     return classes.join(" ");
   };
   const getHeaderCellStyle = (rowIndex, columnIndex, row, column2) => {
-    var _a3;
-    let headerCellStyles = (_a3 = parent == null ? void 0 : parent.props.headerCellStyle) != null ? _a3 : {};
+    var _a4;
+    let headerCellStyles = (_a4 = parent == null ? void 0 : parent.props.headerCellStyle) != null ? _a4 : {};
     if (typeof headerCellStyles === "function") {
       headerCellStyles = headerCellStyles.call(null, {
         rowIndex,
@@ -56806,11 +59157,11 @@ function useEvents(props) {
   const tooltipContent = (0, vue_exports.ref)("");
   const tooltipTrigger = (0, vue_exports.ref)((0, vue_exports.h)("div"));
   const handleEvent2 = (event, row, name) => {
-    var _a3;
+    var _a4;
     const table = parent;
     const cell = getCell(event);
     let column2;
-    const namespace = (_a3 = table == null ? void 0 : table.vnode.el) == null ? void 0 : _a3.dataset.prefix;
+    const namespace = (_a4 = table == null ? void 0 : table.vnode.el) == null ? void 0 : _a4.dataset.prefix;
     if (cell) {
       column2 = getColumnByCell({
         columns: props.store.states.columns.value
@@ -56838,10 +59189,10 @@ function useEvents(props) {
     props.store.commit("setHoverRow", null);
   }, 30);
   const handleCellMouseEnter = (event, row, tooltipOptions) => {
-    var _a3;
+    var _a4;
     const table = parent;
     const cell = getCell(event);
-    const namespace = (_a3 = table == null ? void 0 : table.vnode.el) == null ? void 0 : _a3.dataset.prefix;
+    const namespace = (_a4 = table == null ? void 0 : table.vnode.el) == null ? void 0 : _a4.dataset.prefix;
     if (cell) {
       const column2 = getColumnByCell({
         columns: props.store.states.columns.value
@@ -57048,7 +59399,7 @@ function useRender(props) {
       if (!rowspan || !colspan) {
         return null;
       }
-      const columnData = __spreadValues({}, column2);
+      const columnData = { ...column2 };
       columnData.realWidth = getColspanRealWidth(columns2.value, colspan, cellIndex);
       const data = {
         store: props.store,
@@ -57161,7 +59512,7 @@ function useRender(props) {
             if (childKey === void 0 || childKey === null) {
               throw new Error("For nested data item, row-key is required.");
             }
-            cur = __spreadValues({}, treeData.value[childKey]);
+            cur = { ...treeData.value[childKey] };
             if (cur) {
               innerTreeRowData.expanded = cur.expanded;
               cur.level = cur.level || innerTreeRowData.level;
@@ -57252,8 +59603,8 @@ var TableBody = (0, vue_exports.defineComponent)({
       });
     });
     (0, vue_exports.onUnmounted)(() => {
-      var _a3;
-      (_a3 = removePopper) == null ? void 0 : _a3();
+      var _a4;
+      (_a4 = removePopper) == null ? void 0 : _a4();
     });
     return {
       ns: ns2,
@@ -57675,13 +60026,13 @@ function useStyle3(props, layout2, store, table) {
       useEventListener(window, "resize", resizeListener);
     }
     useResizeObserver(table.refs.bodyWrapper, () => {
-      var _a3, _b;
+      var _a4, _b;
       resizeListener();
-      (_b = (_a3 = table.refs) == null ? void 0 : _a3.scrollBarRef) == null ? void 0 : _b.update();
+      (_b = (_a4 = table.refs) == null ? void 0 : _a4.scrollBarRef) == null ? void 0 : _b.update();
     });
   };
   const resizeListener = () => {
-    var _a3, _b, _c;
+    var _a4, _b, _c;
     const el = table.vnode.el;
     if (!table.$ready || !el)
       return;
@@ -57699,7 +60050,7 @@ function useStyle3(props, layout2, store, table) {
     if ((props.height || shouldUpdateHeight.value) && oldHeight !== height) {
       shouldUpdateLayout = true;
     }
-    const tableHeader = props.tableLayout === "fixed" ? table.refs.headerWrapper : (_a3 = table.refs.tableHeaderRef) == null ? void 0 : _a3.$el;
+    const tableHeader = props.tableLayout === "fixed" ? table.refs.headerWrapper : (_a4 = table.refs.tableHeaderRef) == null ? void 0 : _a4.$el;
     if (props.showHeader && (tableHeader == null ? void 0 : tableHeader.offsetHeight) !== oldHeaderHeight) {
       shouldUpdateLayout = true;
     }
@@ -58355,13 +60706,13 @@ function defaultRenderCell({
   column: column2,
   $index
 }) {
-  var _a3;
+  var _a4;
   const property2 = column2.property;
   const value = property2 && getProp(row, property2).value;
   if (column2 && column2.formatter) {
     return column2.formatter(row, column2, value, $index);
   }
-  return ((_a3 = value == null ? void 0 : value.toString) == null ? void 0 : _a3.call(value)) || "";
+  return ((_a4 = value == null ? void 0 : value.toString) == null ? void 0 : _a4.call(value)) || "";
 }
 function treeCellPrefix({
   row,
@@ -58561,8 +60912,8 @@ function useRender2(props, slots, owner) {
       check(children);
     }
     function check(item) {
-      var _a3;
-      if (((_a3 = item == null ? void 0 : item.type) == null ? void 0 : _a3.name) === "ElTableColumn") {
+      var _a4;
+      if (((_a4 = item == null ? void 0 : item.type) == null ? void 0 : _a4.name) === "ElTableColumn") {
         item.vParent = instance;
       }
     }
@@ -58735,7 +61086,8 @@ var ElTableColumn = (0, vue_exports.defineComponent)({
       isSubColumn.value = owner.value !== parent;
       const type4 = props.type || "default";
       const sortable = props.sortable === "" ? true : props.sortable;
-      const defaults2 = __spreadProps(__spreadValues({}, cellStarts[type4]), {
+      const defaults2 = {
+        ...cellStarts[type4],
         id: columnId.value,
         type: type4,
         property: props.prop || props.property,
@@ -58751,7 +61103,7 @@ var ElTableColumn = (0, vue_exports.defineComponent)({
         sortable,
         index: props.index,
         rawColumnKey: instance.vnode.key
-      });
+      };
       const basicProps = [
         "columnKey",
         "label",
@@ -58782,9 +61134,9 @@ var ElTableColumn = (0, vue_exports.defineComponent)({
       registerComplexWatchers();
     });
     (0, vue_exports.onMounted)(() => {
-      var _a3;
+      var _a4;
       const parent2 = columnOrTableParent.value;
-      const children = isSubColumn.value ? parent2.vnode.el.children : (_a3 = parent2.refs.hiddenColumns) == null ? void 0 : _a3.children;
+      const children = isSubColumn.value ? parent2.vnode.el.children : (_a4 = parent2.refs.hiddenColumns) == null ? void 0 : _a4.children;
       const getColumnIndex = () => getColumnElIndex(children || [], instance.vnode.el);
       columnConfig.value.getColumnIndex = getColumnIndex;
       const columnIndex = getColumnIndex();
@@ -58798,9 +61150,9 @@ var ElTableColumn = (0, vue_exports.defineComponent)({
     return;
   },
   render() {
-    var _a3, _b, _c;
+    var _a4, _b, _c;
     try {
-      const renderDefault = (_b = (_a3 = this.$slots).default) == null ? void 0 : _b.call(_a3, {
+      const renderDefault = (_b = (_a4 = this.$slots).default) == null ? void 0 : _b.call(_a4, {
         row: {},
         column: {},
         $index: -1
@@ -58850,8 +61202,15 @@ var FixedDir = /* @__PURE__ */ ((FixedDir2) => {
   return FixedDir2;
 })(FixedDir || {});
 var oppositeOrderMap = {
-  ["asc"]: "desc",
-  ["desc"]: "asc"
+  [
+    "asc"
+    /* ASC */
+  ]: "desc",
+  [
+    "desc"
+    /* DESC */
+  ]: "asc"
+  /* ASC */
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/table-v2/src/private.mjs
@@ -58859,21 +61218,24 @@ var placeholderSign = Symbol("placeholder");
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/table-v2/src/composables/utils.mjs
 var calcColumnStyle = (column2, fixedColumn, fixed) => {
-  var _a3;
-  const flex = __spreadValues({
+  var _a4;
+  const flex = {
     flexGrow: 0,
-    flexShrink: 0
-  }, fixed ? {} : {
-    flexGrow: column2.flexGrow || 0,
-    flexShrink: column2.flexShrink || 1
-  });
+    flexShrink: 0,
+    ...fixed ? {} : {
+      flexGrow: column2.flexGrow || 0,
+      flexShrink: column2.flexShrink || 1
+    }
+  };
   if (!fixed) {
     flex.flexShrink = 1;
   }
-  const style = __spreadProps(__spreadValues(__spreadValues({}, (_a3 = column2.style) != null ? _a3 : {}), flex), {
+  const style = {
+    ...(_a4 = column2.style) != null ? _a4 : {},
+    ...flex,
     flexBasis: "auto",
     width: column2.width
-  });
+  };
   if (!fixedColumn) {
     if (column2.maxWidth)
       style.maxWidth = column2.maxWidth;
@@ -58894,17 +61256,19 @@ function useColumns(props, columns2, fixed) {
   const mainColumns = (0, vue_exports.computed)(() => {
     const ret = [];
     (0, vue_exports.unref)(fixedColumnsOnLeft).forEach((column2) => {
-      ret.push(__spreadProps(__spreadValues({}, column2), {
+      ret.push({
+        ...column2,
         placeholderSign
-      }));
+      });
     });
     (0, vue_exports.unref)(normalColumns).forEach((column2) => {
       ret.push(column2);
     });
     (0, vue_exports.unref)(fixedColumnsOnRight).forEach((column2) => {
-      ret.push(__spreadProps(__spreadValues({}, column2), {
+      ret.push({
+        ...column2,
         placeholderSign
-      }));
+      });
     });
     return ret;
   });
@@ -58931,7 +61295,7 @@ function useColumns(props, columns2, fixed) {
     column2.width = width;
   };
   function onColumnSorted(e) {
-    var _a3;
+    var _a4;
     const { key } = e.currentTarget.dataset;
     if (!key)
       return;
@@ -58942,7 +61306,7 @@ function useColumns(props, columns2, fixed) {
     } else {
       order = oppositeOrderMap[sortBy.order];
     }
-    (_a3 = props.onColumnSort) == null ? void 0 : _a3.call(props, { column: getColumn(key), key, order });
+    (_a4 = props.onColumnSort) == null ? void 0 : _a4.call(props, { column: getColumn(key), key, order });
   }
   return {
     columns: columns2,
@@ -58970,9 +61334,9 @@ var useScrollbar2 = (props, {
 }) => {
   const scrollPos = (0, vue_exports.ref)({ scrollLeft: 0, scrollTop: 0 });
   function doScroll(params) {
-    var _a3, _b, _c;
+    var _a4, _b, _c;
     const { scrollTop } = params;
-    (_a3 = mainTableRef.value) == null ? void 0 : _a3.scrollTo(params);
+    (_a4 = mainTableRef.value) == null ? void 0 : _a4.scrollTo(params);
     (_b = leftTableRef.value) == null ? void 0 : _b.scrollToTop(scrollTop);
     (_c = rightTableRef.value) == null ? void 0 : _c.scrollToTop(scrollTop);
   }
@@ -58985,14 +61349,14 @@ var useScrollbar2 = (props, {
     doScroll((0, vue_exports.unref)(scrollPos));
   }
   function scrollToLeft(scrollLeft) {
-    var _a3, _b;
+    var _a4, _b;
     scrollPos.value.scrollLeft = scrollLeft;
-    (_b = (_a3 = mainTableRef.value) == null ? void 0 : _a3.scrollTo) == null ? void 0 : _b.call(_a3, (0, vue_exports.unref)(scrollPos));
+    (_b = (_a4 = mainTableRef.value) == null ? void 0 : _a4.scrollTo) == null ? void 0 : _b.call(_a4, (0, vue_exports.unref)(scrollPos));
   }
   function onScroll(params) {
-    var _a3;
+    var _a4;
     scrollTo(params);
-    (_a3 = props.onScroll) == null ? void 0 : _a3.call(props, params);
+    (_a4 = props.onScroll) == null ? void 0 : _a4.call(props, params);
   }
   function onVerticalScroll({ scrollTop }) {
     const { scrollTop: currentScrollTop } = (0, vue_exports.unref)(scrollPos);
@@ -59000,8 +61364,8 @@ var useScrollbar2 = (props, {
       scrollToTop(scrollTop);
   }
   function scrollToRow(row, strategy = "auto") {
-    var _a3;
-    (_a3 = mainTableRef.value) == null ? void 0 : _a3.scrollToRow(row, strategy);
+    var _a4;
+    (_a4 = mainTableRef.value) == null ? void 0 : _a4.scrollToRow(row, strategy);
   }
   (0, vue_exports.watch)(() => (0, vue_exports.unref)(scrollPos).scrollTop, (cur, prev) => {
     if (cur > prev)
@@ -59034,8 +61398,8 @@ var useRow = (props, { mainTableRef, leftTableRef, rightTableRef, onMaybeEndReac
   const rightTableHeights = (0, vue_exports.shallowRef)({});
   const isDynamic = (0, vue_exports.computed)(() => isNumber(props.estimatedRowHeight));
   function onRowsRendered(params) {
-    var _a3;
-    (_a3 = props.onRowsRendered) == null ? void 0 : _a3.call(props, params);
+    var _a4;
+    (_a4 = props.onRowsRendered) == null ? void 0 : _a4.call(props, params);
     if (params.rowCacheEnd > (0, vue_exports.unref)(lastRenderedRowIndex)) {
       lastRenderedRowIndex.value = params.rowCacheEnd;
     }
@@ -59049,7 +61413,7 @@ var useRow = (props, { mainTableRef, leftTableRef, rightTableRef, onMaybeEndReac
     rowIndex,
     rowKey: rowKey2
   }) {
-    var _a3, _b;
+    var _a4, _b;
     const _expandedRowKeys = [...(0, vue_exports.unref)(expandedRowKeys)];
     const currentKeyIndex = _expandedRowKeys.indexOf(rowKey2);
     if (expanded) {
@@ -59061,7 +61425,7 @@ var useRow = (props, { mainTableRef, leftTableRef, rightTableRef, onMaybeEndReac
     }
     expandedRowKeys.value = _expandedRowKeys;
     emit2("update:expandedRowKeys", _expandedRowKeys);
-    (_a3 = props.onRowExpand) == null ? void 0 : _a3.call(props, {
+    (_a4 = props.onRowExpand) == null ? void 0 : _a4.call(props, {
       expanded,
       rowData,
       rowIndex,
@@ -59070,13 +61434,13 @@ var useRow = (props, { mainTableRef, leftTableRef, rightTableRef, onMaybeEndReac
     (_b = props.onExpandedRowsChange) == null ? void 0 : _b.call(props, _expandedRowKeys);
   }
   const flushingRowHeights = debounce_default(() => {
-    var _a3, _b, _c, _d;
+    var _a4, _b, _c, _d;
     isResetting.value = true;
-    rowHeights.value = __spreadValues(__spreadValues({}, (0, vue_exports.unref)(rowHeights)), (0, vue_exports.unref)(pendingRowHeights));
+    rowHeights.value = { ...(0, vue_exports.unref)(rowHeights), ...(0, vue_exports.unref)(pendingRowHeights) };
     resetAfterIndex((0, vue_exports.unref)(resetIndex), false);
     pendingRowHeights.value = {};
     resetIndex.value = null;
-    (_a3 = mainTableRef.value) == null ? void 0 : _a3.forceUpdate();
+    (_a4 = mainTableRef.value) == null ? void 0 : _a4.forceUpdate();
     (_b = leftTableRef.value) == null ? void 0 : _b.forceUpdate();
     (_c = rightTableRef.value) == null ? void 0 : _c.forceUpdate();
     (_d = vm.proxy) == null ? void 0 : _d.$forceUpdate();
@@ -59237,18 +61601,19 @@ var useStyles2 = (props, {
   const rightTableWidth = (0, vue_exports.computed)(() => sum((0, vue_exports.unref)(fixedColumnsOnRight).map(mapColumn)));
   const headerHeight = (0, vue_exports.computed)(() => sum(props.headerHeight));
   const fixedRowsHeight = (0, vue_exports.computed)(() => {
-    var _a3;
-    return (((_a3 = props.fixedData) == null ? void 0 : _a3.length) || 0) * props.rowHeight;
+    var _a4;
+    return (((_a4 = props.fixedData) == null ? void 0 : _a4.length) || 0) * props.rowHeight;
   });
   const windowHeight = (0, vue_exports.computed)(() => {
     return (0, vue_exports.unref)(mainTableHeight) - (0, vue_exports.unref)(headerHeight) - (0, vue_exports.unref)(fixedRowsHeight);
   });
   const rootStyle = (0, vue_exports.computed)(() => {
     const { style = {}, height, width } = props;
-    return enforceUnit(__spreadProps(__spreadValues({}, style), {
+    return enforceUnit({
+      ...style,
       height,
       width
-    }));
+    });
   });
   const footerHeight = (0, vue_exports.computed)(() => enforceUnit({ height: props.footerHeight }));
   const emptyStyle = (0, vue_exports.computed)(() => ({
@@ -59294,8 +61659,8 @@ var useAutoResize = (props) => {
     resizerStopper == null ? void 0 : resizerStopper();
   });
   (0, vue_exports.watch)([width$, height$], ([width, height]) => {
-    var _a3;
-    (_a3 = props.onResize) == null ? void 0 : _a3.call(props, {
+    var _a4;
+    (_a4 = props.onResize) == null ? void 0 : _a4.call(props, {
       width,
       height
     });
@@ -59464,9 +61829,10 @@ var column = {
 var fixedDataType = {
   type: definePropType(Array)
 };
-var dataType = __spreadProps(__spreadValues({}, fixedDataType), {
+var dataType = {
+  ...fixedDataType,
   required: true
-});
+};
 var expandColumnKey = String;
 var expandKeys = {
   type: definePropType(Array),
@@ -59494,9 +61860,10 @@ var tableV2RowProps = buildProps2({
   },
   depth: Number,
   expandColumnKey,
-  estimatedRowHeight: __spreadProps(__spreadValues({}, virtualizedGridProps.estimatedRowHeight), {
+  estimatedRowHeight: {
+    ...virtualizedGridProps.estimatedRowHeight,
     default: void 0
-  }),
+  },
   isScrolling: Boolean,
   onRowExpand: {
     type: definePropType(Function)
@@ -59685,12 +62052,12 @@ var tableV2Props = buildProps2({
 var TableV2Cell = (props, {
   slots
 }) => {
-  var _a3;
+  var _a4;
   const {
     cellData,
     style
   } = props;
-  const displayText = ((_a3 = cellData == null ? void 0 : cellData.toString) == null ? void 0 : _a3.call(cellData)) || "";
+  const displayText = ((_a4 = cellData == null ? void 0 : cellData.toString) == null ? void 0 : _a4.call(cellData)) || "";
   return (0, vue_exports.createVNode)("div", {
     "class": props.class,
     "title": displayText,
@@ -59704,10 +62071,10 @@ TableV2Cell.inheritAttrs = false;
 var HeaderCell = (props, {
   slots
 }) => {
-  var _a3, _b;
+  var _a4, _b;
   return slots.default ? slots.default(props) : (0, vue_exports.createVNode)("div", {
     "class": props.class,
-    "title": (_a3 = props.column) == null ? void 0 : _a3.title
+    "title": (_a4 = props.column) == null ? void 0 : _a4.title
   }, [(_b = props.column) == null ? void 0 : _b.title]);
 };
 HeaderCell.displayName = "ElTableV2HeaderCell";
@@ -59804,12 +62171,12 @@ var TableV2Header = (0, vue_exports.defineComponent)({
         rowHeight
       } = props;
       return fixedHeaderData == null ? void 0 : fixedHeaderData.map((fixedRowData, fixedRowIndex) => {
-        var _a3;
+        var _a4;
         const style = enforceUnit({
           height: rowHeight,
           width: "100%"
         });
-        return (_a3 = slots.fixed) == null ? void 0 : _a3.call(slots, {
+        return (_a4 = slots.fixed) == null ? void 0 : _a4.call(slots, {
           class: fixedRowClassName,
           columns: columns2,
           rowData: fixedRowData,
@@ -59824,12 +62191,12 @@ var TableV2Header = (0, vue_exports.defineComponent)({
         columns: columns2
       } = props;
       return (0, vue_exports.unref)(headerHeights).map((rowHeight, rowIndex) => {
-        var _a3;
+        var _a4;
         const style = enforceUnit({
           width: "100%",
           height: rowHeight
         });
-        return (_a3 = slots.dynamic) == null ? void 0 : _a3.call(slots, {
+        return (_a4 = slots.dynamic) == null ? void 0 : _a4.call(slots, {
           class: dynamicRowClassName,
           columns: columns2,
           headerIndex: rowIndex,
@@ -60033,11 +62400,10 @@ var TableV2Row = (0, vue_exports.defineComponent)({
         });
       }
       if ((0, vue_exports.unref)(measurable)) {
-        const _a3 = style || {}, {
-          height
-        } = _a3, exceptHeightStyle = __objRest(_a3, [
-          "height"
-        ]);
+        const {
+          height,
+          ...exceptHeightStyle
+        } = style || {};
         const _measured = (0, vue_exports.unref)(measured);
         return (0, vue_exports.createVNode)("div", (0, vue_exports.mergeProps)({
           "ref": rowRef,
@@ -60074,14 +62440,14 @@ var ExpandIcon = (props) => {
     expandable,
     onExpand,
     style,
-    size: size3
+    size: size4
   } = props;
   const expandIconProps = {
     onClick: expandable ? () => onExpand(!expanded) : void 0,
     class: props.class
   };
   return (0, vue_exports.createVNode)(ElIcon, (0, vue_exports.mergeProps)(expandIconProps, {
-    "size": size3,
+    "size": size4,
     "style": style
   }), {
     default: () => [(0, vue_exports.createVNode)(arrow_right_default, null, null)]
@@ -60131,8 +62497,8 @@ var useTableGrid = (props) => {
     rowVisibleStart,
     rowVisibleEnd
   }) {
-    var _a3;
-    (_a3 = props.onRowsRendered) == null ? void 0 : _a3.call(props, {
+    var _a4;
+    (_a4 = props.onRowsRendered) == null ? void 0 : _a4.call(props, {
       rowCacheStart,
       rowCacheEnd,
       rowVisibleStart,
@@ -60140,8 +62506,8 @@ var useTableGrid = (props) => {
     });
   }
   function resetAfterRowIndex(index2, forceUpdate2) {
-    var _a3;
-    (_a3 = bodyRef.value) == null ? void 0 : _a3.resetAfterRowIndex(index2, forceUpdate2);
+    var _a4;
+    (_a4 = bodyRef.value) == null ? void 0 : _a4.resetAfterRowIndex(index2, forceUpdate2);
   }
   function scrollTo(leftOrOptions, top) {
     const header$ = (0, vue_exports.unref)(headerRef);
@@ -60160,18 +62526,18 @@ var useTableGrid = (props) => {
     }
   }
   function scrollToTop(scrollTop) {
-    var _a3;
-    (_a3 = (0, vue_exports.unref)(bodyRef)) == null ? void 0 : _a3.scrollTo({
+    var _a4;
+    (_a4 = (0, vue_exports.unref)(bodyRef)) == null ? void 0 : _a4.scrollTo({
       scrollTop
     });
   }
   function scrollToRow(row, strategy) {
-    var _a3;
-    (_a3 = (0, vue_exports.unref)(bodyRef)) == null ? void 0 : _a3.scrollToItem(row, 1, strategy);
+    var _a4;
+    (_a4 = (0, vue_exports.unref)(bodyRef)) == null ? void 0 : _a4.scrollToItem(row, 1, strategy);
   }
   function forceUpdate() {
-    var _a3, _b;
-    (_a3 = (0, vue_exports.unref)(bodyRef)) == null ? void 0 : _a3.$forceUpdate();
+    var _a4, _b;
+    (_a4 = (0, vue_exports.unref)(bodyRef)) == null ? void 0 : _a4.$forceUpdate();
     (_b = (0, vue_exports.unref)(headerRef)) == null ? void 0 : _b.$forceUpdate();
   }
   return {
@@ -60275,12 +62641,13 @@ var TableGrid = (0, vue_exports.defineComponent)({
         "perfMode": false
       }, {
         default: (params) => {
-          var _a3;
+          var _a4;
           const rowData = data[params.rowIndex];
-          return (_a3 = slots.row) == null ? void 0 : _a3.call(slots, __spreadProps(__spreadValues({}, params), {
+          return (_a4 = slots.row) == null ? void 0 : _a4.call(slots, {
+            ...params,
             columns: columns2,
             rowData
-          }));
+          });
         }
       }), (0, vue_exports.unref)(hasHeader) && (0, vue_exports.createVNode)(TableV2Header, {
         "ref": headerRef,
@@ -60308,11 +62675,10 @@ function _isSlot(s2) {
 var MainTable = (props, {
   slots
 }) => {
-  const _a3 = props, {
-    mainTableRef
-  } = _a3, rest = __objRest(_a3, [
-    "mainTableRef"
-  ]);
+  const {
+    mainTableRef,
+    ...rest
+  } = props;
   return (0, vue_exports.createVNode)(TableGrid, (0, vue_exports.mergeProps)({
     "ref": mainTableRef
   }, rest), _isSlot(slots) ? slots : {
@@ -60329,11 +62695,10 @@ var LeftTable = (props, {
 }) => {
   if (!props.columns.length)
     return;
-  const _a3 = props, {
-    leftTableRef
-  } = _a3, rest = __objRest(_a3, [
-    "leftTableRef"
-  ]);
+  const {
+    leftTableRef,
+    ...rest
+  } = props;
   return (0, vue_exports.createVNode)(TableGrid, (0, vue_exports.mergeProps)({
     "ref": leftTableRef
   }, rest), _isSlot2(slots) ? slots : {
@@ -60350,11 +62715,10 @@ var LeftTable2 = (props, {
 }) => {
   if (!props.columns.length)
     return;
-  const _a3 = props, {
-    rightTableRef
-  } = _a3, rest = __objRest(_a3, [
-    "rightTableRef"
-  ]);
+  const {
+    rightTableRef,
+    ...rest
+  } = props;
   return (0, vue_exports.createVNode)(TableGrid, (0, vue_exports.mergeProps)({
     "ref": rightTableRef
   }, rest), _isSlot3(slots) ? slots : {
@@ -60412,7 +62776,8 @@ var RowRenderer = (props, {
     [ns2.is("customized")]: Boolean(slots.row)
   }];
   const onRowHover = hasFixedColumns ? onRowHovered : void 0;
-  const _rowProps = __spreadProps(__spreadValues({}, additionalProps), {
+  const _rowProps = {
+    ...additionalProps,
     columns: columns2,
     columnsStyles,
     class: kls,
@@ -60425,7 +62790,7 @@ var RowRenderer = (props, {
     rowKey: _rowKey,
     rowEventHandlers,
     style
-  });
+  };
   return (0, vue_exports.createVNode)(TableV2Row, (0, vue_exports.mergeProps)(_rowProps, {
     "onRowHover": onRowHover,
     "onRowExpand": onRowExpanded
@@ -60544,13 +62909,14 @@ var HeaderRenderer = ({
   const kls = [ns2.e("header-row"), tryCall(headerClass, param, ""), {
     [ns2.is("customized")]: Boolean(slots.header)
   }];
-  const extraProps = __spreadProps(__spreadValues({}, tryCall(headerProps, param)), {
+  const extraProps = {
+    ...tryCall(headerProps, param),
     columnsStyles,
     class: kls,
     columns: columns2,
     headerIndex,
     style
-  });
+  };
   return (0, vue_exports.createVNode)(TableV2HeaderRow, extraProps, _isSlot5(slots) ? slots : {
     default: () => [slots]
   });
@@ -60578,9 +62944,10 @@ var HeaderCellRenderer = (props, {
     headerClass,
     sortable
   } = column2;
-  const cellProps = __spreadProps(__spreadValues({}, props), {
+  const cellProps = {
+    ...props,
     class: ns2.e("header-cell-text")
-  });
+  };
   const cellRenderer = componentToSlot(headerCellRenderer) || slots.default || ((props2) => (0, vue_exports.createVNode)(HeaderCell, props2, null));
   const Cell = cellRenderer(cellProps);
   const {
@@ -60598,12 +62965,13 @@ var HeaderCellRenderer = (props, {
     sortOrder = sorting ? sortBy.order : SortOrder.ASC;
   }
   const cellKls = [ns2.e("header-cell"), tryCall(headerClass, props, ""), column2.align === Alignment.CENTER && ns2.is("align-center"), column2.align === Alignment.RIGHT && ns2.is("align-right"), sortable && ns2.is("sortable")];
-  const cellWrapperProps = __spreadProps(__spreadValues({}, tryCall(headerCellProps, props)), {
+  const cellWrapperProps = {
+    ...tryCall(headerCellProps, props),
     onClick: column2.sortable ? onColumnSorted : void 0,
     class: cellKls,
     style: cellStyle,
     ["data-key"]: column2.key
-  });
+  };
   return (0, vue_exports.createVNode)("div", cellWrapperProps, [Cell, sortable && (0, vue_exports.createVNode)(SortIcon, {
     "class": [ns2.e("sort-icon"), sorting && ns2.is("sorting")],
     "sortOrder": sortOrder
@@ -60614,11 +62982,11 @@ var HeaderCellRenderer = (props, {
 var Footer2 = (props, {
   slots
 }) => {
-  var _a3;
+  var _a4;
   return (0, vue_exports.createVNode)("div", {
     "class": props.class,
     "style": props.style
-  }, [(_a3 = slots.default) == null ? void 0 : _a3.call(slots)]);
+  }, [(_a4 = slots.default) == null ? void 0 : _a4.call(slots)]);
 };
 Footer2.displayName = "ElTableV2Footer";
 
@@ -60637,11 +63005,11 @@ Footer3.displayName = "ElTableV2Empty";
 var Overlay2 = (props, {
   slots
 }) => {
-  var _a3;
+  var _a4;
   return (0, vue_exports.createVNode)("div", {
     "class": props.class,
     "style": props.style
-  }, [(_a3 = slots.default) == null ? void 0 : _a3.call(slots)]);
+  }, [(_a4 = slots.default) == null ? void 0 : _a4.call(slots)]);
 };
 Overlay2.displayName = "ElTableV2Overlay";
 
@@ -60932,12 +63300,12 @@ var AutoResizer = (0, vue_exports.defineComponent)({
       height: "100%"
     };
     return () => {
-      var _a3;
+      var _a4;
       return (0, vue_exports.createVNode)("div", {
         "ref": sizer,
         "class": ns2.b(),
         "style": style
-      }, [(_a3 = slots.default) == null ? void 0 : _a3.call(slots, {
+      }, [(_a4 = slots.default) == null ? void 0 : _a4.call(slots, {
         height: height.value,
         width: width.value
       })]);
@@ -60962,7 +63330,8 @@ var COMPONENT_NAME21 = "ElTabBar";
 var __default__81 = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME21
 });
-var _sfc_main122 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__81), {
+var _sfc_main122 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__81,
   props: tabBarProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -60980,8 +63349,8 @@ var _sfc_main122 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       const sizeDir = sizeName === "width" ? "x" : "y";
       const position = sizeDir === "x" ? "left" : "top";
       props.tabs.every((tab) => {
-        var _a3, _b;
-        const $el = (_b = (_a3 = instance.parent) == null ? void 0 : _a3.refs) == null ? void 0 : _b[`tab-${tab.uid}`];
+        var _a4, _b;
+        const $el = (_b = (_a4 = instance.parent) == null ? void 0 : _a4.refs) == null ? void 0 : _b[`tab-${tab.uid}`];
         if (!$el)
           return false;
         if (!tab.active) {
@@ -61022,7 +63391,7 @@ var _sfc_main122 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       }, null, 6);
     };
   }
-}));
+});
 var TabBar = /* @__PURE__ */ _export_sfc(_sfc_main122, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tabs/src/tab-bar.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tabs/src/tab-nav.mjs
@@ -61226,10 +63595,10 @@ var TabNav = (0, vue_exports.defineComponent)({
         default: () => [(0, vue_exports.createVNode)(arrow_right_default, null, null)]
       })])] : null;
       const tabs = props.panes.map((pane, index2) => {
-        var _a3, _b, _c, _d;
+        var _a4, _b, _c, _d;
         const uid3 = pane.uid;
         const disabled = pane.props.disabled;
-        const tabName = (_b = (_a3 = pane.props.name) != null ? _a3 : pane.index) != null ? _b : `${index2}`;
+        const tabName = (_b = (_a4 = pane.props.name) != null ? _a4 : pane.index) != null ? _b : `${index2}`;
         const closable = !disabled && (pane.isClosable || props.editable);
         pane.index = `${index2}`;
         const btnClose = closable ? (0, vue_exports.createVNode)(ElIcon, {
@@ -61326,7 +63695,7 @@ var Tabs = (0, vue_exports.defineComponent)({
     slots,
     expose
   }) {
-    var _a3, _b;
+    var _a4, _b;
     const ns2 = useNamespace("tabs");
     const {
       children: panes,
@@ -61334,7 +63703,7 @@ var Tabs = (0, vue_exports.defineComponent)({
       removeChild: unregisterPane
     } = useOrderedChildren((0, vue_exports.getCurrentInstance)(), "ElTabPane");
     const nav$ = (0, vue_exports.ref)();
-    const currentName = (0, vue_exports.ref)((_b = (_a3 = props.modelValue) != null ? _a3 : props.activeName) != null ? _b : "0");
+    const currentName = (0, vue_exports.ref)((_b = (_a4 = props.modelValue) != null ? _a4 : props.activeName) != null ? _b : "0");
     const changeCurrentName = (value) => {
       currentName.value = value;
       emit2(UPDATE_MODEL_EVENT, value);
@@ -61453,7 +63822,8 @@ var COMPONENT_NAME23 = "ElTabPane";
 var __default__82 = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME23
 });
-var _sfc_main123 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__82), {
+var _sfc_main123 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__82,
   props: tabPaneProps,
   setup(__props) {
     const props = __props;
@@ -61466,13 +63836,13 @@ var _sfc_main123 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
     const index2 = (0, vue_exports.ref)();
     const isClosable = (0, vue_exports.computed)(() => props.closable || tabsRoot.props.closable);
     const active = computedEager(() => {
-      var _a3;
-      return tabsRoot.currentName.value === ((_a3 = props.name) != null ? _a3 : index2.value);
+      var _a4;
+      return tabsRoot.currentName.value === ((_a4 = props.name) != null ? _a4 : index2.value);
     });
     const loaded = (0, vue_exports.ref)(active.value);
     const paneName = (0, vue_exports.computed)(() => {
-      var _a3;
-      return (_a3 = props.name) != null ? _a3 : index2.value;
+      var _a4;
+      return (_a4 = props.name) != null ? _a4 : index2.value;
     });
     const shouldBeRender = computedEager(() => !props.lazy || loaded.value || active.value);
     (0, vue_exports.watch)(active, (val) => {
@@ -61509,7 +63879,7 @@ var _sfc_main123 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ]) : (0, vue_exports.createCommentVNode)("v-if", true);
     };
   }
-}));
+});
 var TabPane = /* @__PURE__ */ _export_sfc(_sfc_main123, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tabs/src/tab-pane.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tabs/index.mjs
@@ -61630,7 +64000,8 @@ var nextTime = (time, step) => {
 var __default__83 = (0, vue_exports.defineComponent)({
   name: "ElTimeSelect"
 });
-var _sfc_main124 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__83), {
+var _sfc_main124 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__83,
   props: timeSelectProps,
   emits: ["change", "blur", "focus", "update:modelValue"],
   setup(__props, { expose }) {
@@ -61678,12 +64049,12 @@ var _sfc_main124 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       return result;
     });
     const blur = () => {
-      var _a3, _b;
-      (_b = (_a3 = select.value) == null ? void 0 : _a3.blur) == null ? void 0 : _b.call(_a3);
+      var _a4, _b;
+      (_b = (_a4 = select.value) == null ? void 0 : _a4.blur) == null ? void 0 : _b.call(_a4);
     };
     const focus = () => {
-      var _a3, _b;
-      (_b = (_a3 = select.value) == null ? void 0 : _a3.focus) == null ? void 0 : _b.call(_a3);
+      var _a4, _b;
+      (_b = (_a4 = select.value) == null ? void 0 : _a4.focus) == null ? void 0 : _b.call(_a4);
     };
     expose({
       blur,
@@ -61732,7 +64103,7 @@ var _sfc_main124 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       }, 8, ["model-value", "disabled", "clearable", "clear-icon", "size", "effect", "placeholder", "filterable"]);
     };
   }
-}));
+});
 var TimeSelect = /* @__PURE__ */ _export_sfc(_sfc_main124, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/time-select/src/time-select.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/time-select/index.mjs
@@ -61800,7 +64171,8 @@ var timelineItemProps = buildProps2({
 var __default__84 = (0, vue_exports.defineComponent)({
   name: "ElTimelineItem"
 });
-var _sfc_main125 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__84), {
+var _sfc_main125 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__84,
   props: timelineItemProps,
   setup(__props) {
     const ns2 = useNamespace("timeline-item");
@@ -61859,7 +64231,7 @@ var _sfc_main125 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 2);
     };
   }
-}));
+});
 var TimelineItem = /* @__PURE__ */ _export_sfc(_sfc_main125, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/timeline/src/timeline-item.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/timeline/index.mjs
@@ -61988,7 +64360,11 @@ var tooltipV2TriggerProps = buildProps2({
 });
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip-v2/src/tooltip.mjs
-var tooltipV2Props = buildProps2(__spreadProps(__spreadValues(__spreadValues(__spreadValues(__spreadValues({}, tooltipV2RootProps), tooltipV2ArrowProps), tooltipV2TriggerProps), tooltipV2ContentProps), {
+var tooltipV2Props = buildProps2({
+  ...tooltipV2RootProps,
+  ...tooltipV2ArrowProps,
+  ...tooltipV2TriggerProps,
+  ...tooltipV2ContentProps,
   alwaysOn: Boolean,
   fullTransition: Boolean,
   transitionProps: {
@@ -62000,13 +64376,14 @@ var tooltipV2Props = buildProps2(__spreadProps(__spreadValues(__spreadValues(__s
     type: definePropType(String),
     default: "body"
   }
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip-v2/src/root2.mjs
 var __default__85 = (0, vue_exports.defineComponent)({
   name: "ElTooltipV2Root"
 });
-var _sfc_main126 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__85), {
+var _sfc_main126 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__85,
   props: tooltipV2RootProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -62015,9 +64392,9 @@ var _sfc_main126 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
     const open = (0, vue_exports.computed)({
       get: () => isPropAbsent(props.open) ? _open.value : props.open,
       set: (open2) => {
-        var _a3;
+        var _a4;
         _open.value = open2;
-        (_a3 = props["onUpdate:open"]) == null ? void 0 : _a3.call(props, open2);
+        (_a4 = props["onUpdate:open"]) == null ? void 0 : _a4.call(props, open2);
       }
     });
     const isOpenDelayed = (0, vue_exports.computed)(() => isNumber(props.delayDuration) && props.delayDuration > 0);
@@ -62041,12 +64418,12 @@ var _sfc_main126 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       open.value = false;
     };
     const onChange = (open2) => {
-      var _a3;
+      var _a4;
       if (open2) {
         document.dispatchEvent(new CustomEvent(TOOLTIP_V2_OPEN));
         onOpen();
       }
-      (_a3 = props.onOpenChange) == null ? void 0 : _a3.call(props, open2);
+      (_a4 = props.onOpenChange) == null ? void 0 : _a4.call(props, open2);
     };
     (0, vue_exports.watch)(open, onChange);
     (0, vue_exports.onMounted)(() => {
@@ -62072,15 +64449,19 @@ var _sfc_main126 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       return (0, vue_exports.renderSlot)(_ctx.$slots, "default", { open: (0, vue_exports.unref)(open) });
     };
   }
-}));
+});
 var TooltipV2Root = /* @__PURE__ */ _export_sfc(_sfc_main126, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tooltip-v2/src/root.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip-v2/src/arrow2.mjs
 var __default__86 = (0, vue_exports.defineComponent)({
   name: "ElTooltipV2Arrow"
 });
-var _sfc_main127 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__86), {
-  props: __spreadValues(__spreadValues({}, tooltipV2ArrowProps), tooltipV2ArrowSpecialProps),
+var _sfc_main127 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__86,
+  props: {
+    ...tooltipV2ArrowProps,
+    ...tooltipV2ArrowSpecialProps
+  },
   setup(__props) {
     const props = __props;
     const { ns: ns2 } = (0, vue_exports.inject)(tooltipV2RootKey);
@@ -62088,12 +64469,13 @@ var _sfc_main127 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
     const arrowStyle = (0, vue_exports.computed)(() => {
       const { style, width, height } = props;
       const namespace = ns2.namespace.value;
-      return __spreadValues({
+      return {
         [`--${namespace}-tooltip-v2-arrow-width`]: `${width}px`,
         [`--${namespace}-tooltip-v2-arrow-height`]: `${height}px`,
         [`--${namespace}-tooltip-v2-arrow-border-width`]: `${width / 2}px`,
-        [`--${namespace}-tooltip-v2-arrow-cover-width`]: width / 2 - 1
-      }, style || {});
+        [`--${namespace}-tooltip-v2-arrow-cover-width`]: width / 2 - 1,
+        ...style || {}
+      };
     });
     return (_ctx, _cache) => {
       return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("span", {
@@ -62104,7 +64486,7 @@ var _sfc_main127 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       }, null, 6);
     };
   }
-}));
+});
 var TooltipV2Arrow = /* @__PURE__ */ _export_sfc(_sfc_main127, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tooltip-v2/src/arrow.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/visual-hidden/src/visual-hidden.mjs
@@ -62119,7 +64501,8 @@ var visualHiddenProps = buildProps2({
 var __default__87 = (0, vue_exports.defineComponent)({
   name: "ElVisuallyHidden"
 });
-var _sfc_main128 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__87), {
+var _sfc_main128 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__87,
   props: visualHiddenProps,
   setup(__props) {
     const props = __props;
@@ -62146,7 +64529,7 @@ var _sfc_main128 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 16);
     };
   }
-}));
+});
 var ElVisuallyHidden = /* @__PURE__ */ _export_sfc(_sfc_main128, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/visual-hidden/src/visual-hidden.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip-v2/src/content2.mjs
@@ -62154,8 +64537,9 @@ var _hoisted_181 = ["data-side"];
 var __default__88 = (0, vue_exports.defineComponent)({
   name: "ElTooltipV2Content"
 });
-var _sfc_main129 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__88), {
-  props: __spreadValues(__spreadValues({}, tooltipV2ContentProps), tooltipV2CommonProps),
+var _sfc_main129 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__88,
+  props: { ...tooltipV2ContentProps, ...tooltipV2CommonProps },
   setup(__props) {
     const props = __props;
     const { triggerRef: triggerRef3, contentId } = (0, vue_exports.inject)(tooltipV2RootKey);
@@ -62248,7 +64632,7 @@ var _sfc_main129 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 4);
     };
   }
-}));
+});
 var TooltipV2Content = /* @__PURE__ */ _export_sfc(_sfc_main129, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tooltip-v2/src/content.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip-v2/src/forward-ref.mjs
@@ -62273,8 +64657,8 @@ var ForwardRef = (0, vue_exports.defineComponent)({
       }
     });
     return () => {
-      var _a3;
-      const [firstChild] = ((_a3 = slots.default) == null ? void 0 : _a3.call(slots)) || [];
+      var _a4;
+      const [firstChild] = ((_a4 = slots.default) == null ? void 0 : _a4.call(slots)) || [];
       const child = props.onlyChild ? ensureOnlyChild(firstChild.children) : firstChild.children;
       return (0, vue_exports.createVNode)(vue_exports.Fragment, {
         "ref": setRef2
@@ -62287,8 +64671,12 @@ var ForwardRef = (0, vue_exports.defineComponent)({
 var __default__89 = (0, vue_exports.defineComponent)({
   name: "ElTooltipV2Trigger"
 });
-var _sfc_main130 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__89), {
-  props: __spreadValues(__spreadValues({}, tooltipV2CommonProps), tooltipV2TriggerProps),
+var _sfc_main130 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__89,
+  props: {
+    ...tooltipV2CommonProps,
+    ...tooltipV2TriggerProps
+  },
   setup(__props) {
     const props = __props;
     const { onClose, onOpen, onDelayOpen, triggerRef: triggerRef3, contentId } = (0, vue_exports.inject)(tooltipV2RootKey);
@@ -62360,14 +64748,15 @@ var _sfc_main130 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 16));
     };
   }
-}));
+});
 var TooltipV2Trigger = /* @__PURE__ */ _export_sfc(_sfc_main130, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tooltip-v2/src/trigger.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip-v2/src/tooltip2.mjs
 var __default__90 = (0, vue_exports.defineComponent)({
   name: "ElTooltipV2"
 });
-var _sfc_main131 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__90), {
+var _sfc_main131 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__90,
   props: tooltipV2Props,
   setup(__props) {
     const props = __props;
@@ -62425,7 +64814,7 @@ var _sfc_main131 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       }, 16);
     };
   }
-}));
+});
 var TooltipV2 = /* @__PURE__ */ _export_sfc(_sfc_main131, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tooltip-v2/src/tooltip.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tooltip-v2/index.mjs
@@ -62523,7 +64912,10 @@ var usePropsAlias = (props) => {
     key: "key",
     disabled: "disabled"
   };
-  return (0, vue_exports.computed)(() => __spreadValues(__spreadValues({}, initProps2), props.props));
+  return (0, vue_exports.computed)(() => ({
+    ...initProps2,
+    ...props.props
+  }));
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/transfer/src/composables/use-check.mjs
@@ -62693,7 +65085,8 @@ var useMove = (props, checkedState, emit2) => {
 var __default__91 = (0, vue_exports.defineComponent)({
   name: "ElTransferPanel"
 });
-var _sfc_main132 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__91), {
+var _sfc_main132 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__91,
   props: transferPanelProps,
   emits: transferPanelEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -62772,10 +65165,10 @@ var _sfc_main132 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
                   "validate-event": false
                 }, {
                   default: (0, vue_exports.withCtx)(() => {
-                    var _a3;
+                    var _a4;
                     return [
                       (0, vue_exports.createVNode)(OptionContent, {
-                        option: (_a3 = _ctx.optionRender) == null ? void 0 : _a3.call(_ctx, item)
+                        option: (_a4 = _ctx.optionRender) == null ? void 0 : _a4.call(_ctx, item)
                       }, null, 8, ["option"])
                     ];
                   }),
@@ -62802,7 +65195,7 @@ var _sfc_main132 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 2);
     };
   }
-}));
+});
 var TransferPanel = /* @__PURE__ */ _export_sfc(_sfc_main132, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/transfer/src/transfer-panel.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/transfer/src/transfer2.mjs
@@ -62811,7 +65204,8 @@ var _hoisted_252 = { key: 0 };
 var __default__92 = (0, vue_exports.defineComponent)({
   name: "ElTransfer"
 });
-var _sfc_main133 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__92), {
+var _sfc_main133 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__92,
   props: transferProps,
   emits: transferEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -62845,9 +65239,9 @@ var _sfc_main133 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
     const rightPanelTitle = (0, vue_exports.computed)(() => props.titles[1] || t("el.transfer.titles.1"));
     const panelFilterPlaceholder = (0, vue_exports.computed)(() => props.filterPlaceholder || t("el.transfer.filterPlaceholder"));
     (0, vue_exports.watch)(() => props.modelValue, () => {
-      var _a3;
+      var _a4;
       if (props.validateEvent) {
-        (_a3 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a3.call(formItem, "change").catch((err) => debugWarn(err));
+        (_a4 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a4.call(formItem, "change").catch((err) => debugWarn(err));
       }
     });
     const optionRender = (0, vue_exports.computed)(() => (option2) => {
@@ -62945,7 +65339,7 @@ var _sfc_main133 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 2);
     };
   }
-}));
+});
 var Transfer = /* @__PURE__ */ _export_sfc(_sfc_main133, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/transfer/src/transfer.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/transfer/index.mjs
@@ -64261,7 +66655,7 @@ function useKeydown({ el$ }, store) {
   };
   useEventListener(el$, "keydown", handleKeydown);
   const initTabIndex = () => {
-    var _a3;
+    var _a4;
     treeItems.value = Array.from(el$.value.querySelectorAll(`.${ns2.is("focusable")}[role=treeitem]`));
     checkboxItems.value = Array.from(el$.value.querySelectorAll("input[type=checkbox]"));
     const checkedItem = el$.value.querySelectorAll(`.${ns2.is("checked")}[role=treeitem]`);
@@ -64269,7 +66663,7 @@ function useKeydown({ el$ }, store) {
       checkedItem[0].setAttribute("tabindex", "0");
       return;
     }
-    (_a3 = treeItems.value[0]) == null ? void 0 : _a3.setAttribute("tabindex", "0");
+    (_a4 = treeItems.value[0]) == null ? void 0 : _a4.setAttribute("tabindex", "0");
   };
 }
 
@@ -64544,7 +66938,7 @@ var _sfc_main136 = (0, vue_exports.defineComponent)({
   }
 });
 function _sfc_render41(_ctx, _cache, $props, $setup, $data, $options) {
-  var _a3;
+  var _a4;
   const _component_el_tree_node = (0, vue_exports.resolveComponent)("el-tree-node");
   return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("div", {
     ref: "el$",
@@ -64575,7 +66969,7 @@ function _sfc_render41(_ctx, _cache, $props, $setup, $data, $options) {
     }, [
       (0, vue_exports.createElementVNode)("span", {
         class: (0, vue_exports.normalizeClass)(_ctx.ns.e("empty-text"))
-      }, (0, vue_exports.toDisplayString)((_a3 = _ctx.emptyText) != null ? _a3 : _ctx.t("el.tree.emptyText")), 3)
+      }, (0, vue_exports.toDisplayString)((_a4 = _ctx.emptyText) != null ? _a4 : _ctx.t("el.tree.emptyText")), 3)
     ], 2)) : (0, vue_exports.createCommentVNode)("v-if", true),
     (0, vue_exports.withDirectives)((0, vue_exports.createElementVNode)("div", {
       ref: "dropIndicator$",
@@ -64600,7 +66994,9 @@ var useSelect3 = (props, { attrs }, {
   key
 }) => {
   const ns2 = useNamespace("tree-select");
-  const result = __spreadProps(__spreadValues(__spreadValues({}, pick_default((0, vue_exports.toRefs)(props), Object.keys(ElSelect.props))), attrs), {
+  const result = {
+    ...pick_default((0, vue_exports.toRefs)(props), Object.keys(ElSelect.props)),
+    ...attrs,
     valueKey: key,
     popperClass: (0, vue_exports.computed)(() => {
       const classes = [ns2.e("popper")];
@@ -64612,18 +67008,18 @@ var useSelect3 = (props, { attrs }, {
       if (props.filterMethod)
         props.filterMethod(keyword);
       (0, vue_exports.nextTick)(() => {
-        var _a3;
-        (_a3 = tree.value) == null ? void 0 : _a3.filter(keyword);
+        var _a4;
+        (_a4 = tree.value) == null ? void 0 : _a4.filter(keyword);
       });
     },
     onVisibleChange: (visible) => {
-      var _a3;
-      (_a3 = attrs.onVisibleChange) == null ? void 0 : _a3.call(attrs, visible);
+      var _a4;
+      (_a4 = attrs.onVisibleChange) == null ? void 0 : _a4.call(attrs, visible);
       if (props.filterable && visible) {
         result.filterMethod();
       }
     }
-  });
+  };
   return result;
 };
 
@@ -64703,14 +67099,15 @@ var useTree2 = (props, { attrs, slots, emit: emit2 }, {
     immediate: true,
     deep: true
   });
-  const propsMap = (0, vue_exports.computed)(() => __spreadValues({
-    value: key.value
-  }, props.props));
+  const propsMap = (0, vue_exports.computed)(() => ({
+    value: key.value,
+    ...props.props
+  }));
   const getNodeValByProp = (prop, data) => {
-    var _a3;
+    var _a4;
     const propVal = propsMap.value[prop];
     if (isFunction4(propVal)) {
-      return propVal(data, (_a3 = tree.value) == null ? void 0 : _a3.getNode(getNodeValByProp("value", data)));
+      return propVal(data, (_a4 = tree.value) == null ? void 0 : _a4.getNode(getNodeValByProp("value", data)));
     } else {
       return data[propVal];
     }
@@ -64732,7 +67129,9 @@ var useTree2 = (props, { attrs, slots, emit: emit2 }, {
     }, (data) => getNodeValByProp("children", data));
     return options;
   });
-  return __spreadProps(__spreadValues(__spreadValues({}, pick_default((0, vue_exports.toRefs)(props), Object.keys(_Tree.props))), attrs), {
+  return {
+    ...pick_default((0, vue_exports.toRefs)(props), Object.keys(_Tree.props)),
+    ...attrs,
     nodeKey: key,
     expandOnClickNode: (0, vue_exports.computed)(() => {
       return !props.checkStrictly && props.expandOnClickNode;
@@ -64748,16 +67147,16 @@ var useTree2 = (props, { attrs, slots, emit: emit2 }, {
       }, props.renderContent ? () => props.renderContent(h30, { node, data, store }) : slots.default ? () => slots.default({ node, data, store }) : void 0);
     },
     filterNodeMethod: (value, data, node) => {
-      var _a3;
+      var _a4;
       if (props.filterNodeMethod)
         return props.filterNodeMethod(value, data, node);
       if (!value)
         return true;
-      return (_a3 = getNodeValByProp("label", data)) == null ? void 0 : _a3.includes(value);
+      return (_a4 = getNodeValByProp("label", data)) == null ? void 0 : _a4.includes(value);
     },
     onNodeClick: (data, node, e) => {
-      var _a3, _b, _c;
-      (_a3 = attrs.onNodeClick) == null ? void 0 : _a3.call(attrs, data, node, e);
+      var _a4, _b, _c;
+      (_a4 = attrs.onNodeClick) == null ? void 0 : _a4.call(attrs, data, node, e);
       if (props.showCheckbox && props.checkOnClickNode)
         return;
       if (!props.showCheckbox && (props.checkStrictly || node.isLeaf)) {
@@ -64770,8 +67169,8 @@ var useTree2 = (props, { attrs, slots, emit: emit2 }, {
       }
     },
     onCheck: (data, params) => {
-      var _a3;
-      (_a3 = attrs.onCheck) == null ? void 0 : _a3.call(attrs, data, params);
+      var _a4;
+      (_a4 = attrs.onCheck) == null ? void 0 : _a4.call(attrs, data, params);
       const dataValue = getNodeValByProp("value", data);
       if (props.checkStrictly) {
         emit2(UPDATE_MODEL_EVENT, props.multiple ? params.checkedKeys : params.checkedKeys.includes(dataValue) ? dataValue : void 0);
@@ -64787,7 +67186,7 @@ var useTree2 = (props, { attrs, slots, emit: emit2 }, {
       }
     },
     cacheOptions
-  });
+  };
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tree-select/src/cache-options.mjs
@@ -64816,57 +67215,65 @@ var CacheOptions = (0, vue_exports.defineComponent)({
 var _sfc_main137 = (0, vue_exports.defineComponent)({
   name: "ElTreeSelect",
   inheritAttrs: false,
-  props: __spreadProps(__spreadValues(__spreadValues({}, ElSelect.props), _Tree.props), {
+  props: {
+    ...ElSelect.props,
+    ..._Tree.props,
     cacheData: {
       type: Array,
       default: () => []
     }
-  }),
+  },
   setup(props, context) {
     const { slots, expose } = context;
     const select = (0, vue_exports.ref)();
     const tree = (0, vue_exports.ref)();
     const key = (0, vue_exports.computed)(() => props.nodeKey || props.valueKey || "value");
     const selectProps = useSelect3(props, context, { select, tree, key });
-    const _a3 = useTree2(props, context, {
+    const { cacheOptions, ...treeProps2 } = useTree2(props, context, {
       select,
       tree,
       key
-    }), { cacheOptions } = _a3, treeProps2 = __objRest(_a3, ["cacheOptions"]);
+    });
     const methods = (0, vue_exports.reactive)({});
     expose(methods);
     (0, vue_exports.onMounted)(() => {
-      Object.assign(methods, __spreadValues(__spreadValues({}, pick_default(tree.value, [
-        "filter",
-        "updateKeyChildren",
-        "getCheckedNodes",
-        "setCheckedNodes",
-        "getCheckedKeys",
-        "setCheckedKeys",
-        "setChecked",
-        "getHalfCheckedNodes",
-        "getHalfCheckedKeys",
-        "getCurrentKey",
-        "getCurrentNode",
-        "setCurrentKey",
-        "setCurrentNode",
-        "getNode",
-        "remove",
-        "append",
-        "insertBefore",
-        "insertAfter"
-      ])), pick_default(select.value, ["focus", "blur"])));
+      Object.assign(methods, {
+        ...pick_default(tree.value, [
+          "filter",
+          "updateKeyChildren",
+          "getCheckedNodes",
+          "setCheckedNodes",
+          "getCheckedKeys",
+          "setCheckedKeys",
+          "setChecked",
+          "getHalfCheckedNodes",
+          "getHalfCheckedKeys",
+          "getCurrentKey",
+          "getCurrentNode",
+          "setCurrentKey",
+          "setCurrentNode",
+          "getNode",
+          "remove",
+          "append",
+          "insertBefore",
+          "insertAfter"
+        ]),
+        ...pick_default(select.value, ["focus", "blur"])
+      });
     });
-    return () => (0, vue_exports.h)(ElSelect, (0, vue_exports.reactive)(__spreadProps(__spreadValues({}, selectProps), {
+    return () => (0, vue_exports.h)(ElSelect, (0, vue_exports.reactive)({
+      ...selectProps,
       ref: (ref210) => select.value = ref210
-    })), __spreadProps(__spreadValues({}, slots), {
+    }), {
+      ...slots,
       default: () => [
         (0, vue_exports.h)(CacheOptions, { data: cacheOptions.value }),
-        (0, vue_exports.h)(_Tree, (0, vue_exports.reactive)(__spreadProps(__spreadValues({}, treeProps2), {
+        (0, vue_exports.h)(_Tree, (0, vue_exports.reactive)({
+          ...treeProps2,
           ref: (ref210) => tree.value = ref210
-        })))
+        }))
       ]
-    }));
+    });
   }
 });
 var TreeSelect = /* @__PURE__ */ _export_sfc(_sfc_main137, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tree-select/src/tree-select.vue"]]);
@@ -64916,6 +67323,7 @@ var treeProps = buildProps2({
       label: "label",
       disabled: "disabled",
       value: "id"
+      /* KEY */
     })
   },
   highlightCurrent: {
@@ -65212,7 +67620,7 @@ function useFilter(props, tree) {
     return isFunction4(props.filterMethod);
   });
   function doFilter(query) {
-    var _a3;
+    var _a4;
     if (!filterable.value) {
       return;
     }
@@ -65220,7 +67628,7 @@ function useFilter(props, tree) {
     const hiddenExpandIconKeys = hiddenExpandIconKeySet.value;
     const hiddenKeys = hiddenNodeKeySet.value;
     const family = [];
-    const nodes = ((_a3 = tree.value) == null ? void 0 : _a3.treeNodes) || [];
+    const nodes = ((_a4 = tree.value) == null ? void 0 : _a4.treeNodes) || [];
     const filter = props.filterMethod;
     hiddenKeys.clear();
     function traverse2(nodes2) {
@@ -65300,20 +67708,20 @@ function useTree3(props, emit2) {
   } = useCheck2(props, tree);
   const { doFilter, hiddenNodeKeySet, isForceHiddenExpandIcon } = useFilter(props, tree);
   const valueKey = (0, vue_exports.computed)(() => {
-    var _a3;
-    return ((_a3 = props.props) == null ? void 0 : _a3.value) || TreeOptionsEnum.KEY;
+    var _a4;
+    return ((_a4 = props.props) == null ? void 0 : _a4.value) || TreeOptionsEnum.KEY;
   });
   const childrenKey = (0, vue_exports.computed)(() => {
-    var _a3;
-    return ((_a3 = props.props) == null ? void 0 : _a3.children) || TreeOptionsEnum.CHILDREN;
+    var _a4;
+    return ((_a4 = props.props) == null ? void 0 : _a4.children) || TreeOptionsEnum.CHILDREN;
   });
   const disabledKey = (0, vue_exports.computed)(() => {
-    var _a3;
-    return ((_a3 = props.props) == null ? void 0 : _a3.disabled) || TreeOptionsEnum.DISABLED;
+    var _a4;
+    return ((_a4 = props.props) == null ? void 0 : _a4.disabled) || TreeOptionsEnum.DISABLED;
   });
   const labelKey = (0, vue_exports.computed)(() => {
-    var _a3;
-    return ((_a3 = props.props) == null ? void 0 : _a3.label) || TreeOptionsEnum.LABEL;
+    var _a4;
+    return ((_a4 = props.props) == null ? void 0 : _a4.label) || TreeOptionsEnum.LABEL;
   });
   const flattenTree = (0, vue_exports.computed)(() => {
     const expandedKeys = expandedKeySet.value;
@@ -65354,7 +67762,7 @@ function useTree3(props, emit2) {
     const levelTreeNodeMap = /* @__PURE__ */ new Map();
     let maxLevel = 1;
     function traverse2(nodes, level = 1, parent = void 0) {
-      var _a3;
+      var _a4;
       const siblings = [];
       for (const rawNode of nodes) {
         const value = getKey(rawNode);
@@ -65376,7 +67784,7 @@ function useTree3(props, emit2) {
         if (!levelTreeNodeMap.has(level)) {
           levelTreeNodeMap.set(level, []);
         }
-        (_a3 = levelTreeNodeMap.get(level)) == null ? void 0 : _a3.push(node);
+        (_a4 = levelTreeNodeMap.get(level)) == null ? void 0 : _a4.push(node);
       }
       if (level > maxLevel) {
         maxLevel = level;
@@ -65471,10 +67879,10 @@ function useTree3(props, emit2) {
     return !!current && current === node.key;
   }
   function getCurrentNode() {
-    var _a3, _b;
+    var _a4, _b;
     if (!currentKey.value)
       return void 0;
-    return (_b = (_a3 = tree.value) == null ? void 0 : _a3.treeNodeMap.get(currentKey.value)) == null ? void 0 : _b.data;
+    return (_b = (_a4 = tree.value) == null ? void 0 : _a4.treeNodeMap.get(currentKey.value)) == null ? void 0 : _b.data;
   }
   function getCurrentKey() {
     return currentKey.value;
@@ -65486,9 +67894,9 @@ function useTree3(props, emit2) {
     (0, vue_exports.nextTick)(() => tree.value = createTree(data));
   }
   function getNode(data) {
-    var _a3;
+    var _a4;
     const key = isObject4(data) ? getKey(data) : data;
-    return (_a3 = tree.value) == null ? void 0 : _a3.treeNodeMap.get(key);
+    return (_a4 = tree.value) == null ? void 0 : _a4.treeNodeMap.get(key);
   }
   return {
     tree,
@@ -65544,7 +67952,8 @@ var _hoisted_185 = ["aria-expanded", "aria-disabled", "aria-checked", "data-key"
 var __default__93 = (0, vue_exports.defineComponent)({
   name: "ElTreeNode"
 });
-var _sfc_main138 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__93), {
+var _sfc_main138 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__93,
   props: treeNodeProps,
   emits: treeNodeEmits,
   setup(__props, { emit: emit2 }) {
@@ -65552,12 +67961,12 @@ var _sfc_main138 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
     const tree = (0, vue_exports.inject)(ROOT_TREE_INJECTION_KEY);
     const ns2 = useNamespace("tree");
     const indent = (0, vue_exports.computed)(() => {
-      var _a3;
-      return (_a3 = tree == null ? void 0 : tree.props.indent) != null ? _a3 : 16;
+      var _a4;
+      return (_a4 = tree == null ? void 0 : tree.props.indent) != null ? _a4 : 16;
     });
     const icon = (0, vue_exports.computed)(() => {
-      var _a3;
-      return (_a3 = tree == null ? void 0 : tree.props.icon) != null ? _a3 : caret_right_default;
+      var _a4;
+      return (_a4 = tree == null ? void 0 : tree.props.icon) != null ? _a4 : caret_right_default;
     });
     const handleClick = (e) => {
       emit2("click", props.node, e);
@@ -65569,15 +67978,15 @@ var _sfc_main138 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       emit2("check", props.node, value);
     };
     const handleContextMenu = (event) => {
-      var _a3, _b, _c, _d;
-      if ((_c = (_b = (_a3 = tree == null ? void 0 : tree.instance) == null ? void 0 : _a3.vnode) == null ? void 0 : _b.props) == null ? void 0 : _c["onNodeContextmenu"]) {
+      var _a4, _b, _c, _d;
+      if ((_c = (_b = (_a4 = tree == null ? void 0 : tree.instance) == null ? void 0 : _a4.vnode) == null ? void 0 : _b.props) == null ? void 0 : _c["onNodeContextmenu"]) {
         event.stopPropagation();
         event.preventDefault();
       }
       tree == null ? void 0 : tree.ctx.emit(NODE_CONTEXTMENU, event, (_d = props.node) == null ? void 0 : _d.data, props.node);
     };
     return (_ctx, _cache) => {
-      var _a3, _b, _c;
+      var _a4, _b, _c;
       return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("div", {
         ref: "node$",
         class: (0, vue_exports.normalizeClass)([
@@ -65592,7 +68001,7 @@ var _sfc_main138 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
         "aria-expanded": _ctx.expanded,
         "aria-disabled": _ctx.disabled,
         "aria-checked": _ctx.checked,
-        "data-key": (_a3 = _ctx.node) == null ? void 0 : _a3.key,
+        "data-key": (_a4 = _ctx.node) == null ? void 0 : _a4.key,
         onClick: (0, vue_exports.withModifiers)(handleClick, ["stop"]),
         onContextmenu: handleContextMenu
       }, [
@@ -65631,7 +68040,7 @@ var _sfc_main138 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 42, _hoisted_185);
     };
   }
-}));
+});
 var ElTreeNode2 = /* @__PURE__ */ _export_sfc(_sfc_main138, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tree-v2/src/tree-node.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tree-v2/src/tree.mjs
@@ -65639,7 +68048,8 @@ var itemSize2 = 26;
 var __default__94 = (0, vue_exports.defineComponent)({
   name: "ElTreeV2"
 });
-var _sfc_main139 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__94), {
+var _sfc_main139 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__94,
   props: treeProps,
   emits: treeEmits,
   setup(__props, { expose, emit: emit2 }) {
@@ -65704,7 +68114,7 @@ var _sfc_main139 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       setExpandedKeys
     });
     return (_ctx, _cache) => {
-      var _a3;
+      var _a4;
       return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("div", {
         class: (0, vue_exports.normalizeClass)([(0, vue_exports.unref)(ns2).b(), { [(0, vue_exports.unref)(ns2).m("highlight-current")]: _ctx.highlightCurrent }]),
         role: "tree"
@@ -65742,12 +68152,12 @@ var _sfc_main139 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
         }, [
           (0, vue_exports.createElementVNode)("span", {
             class: (0, vue_exports.normalizeClass)((0, vue_exports.unref)(ns2).e("empty-text"))
-          }, (0, vue_exports.toDisplayString)((_a3 = _ctx.emptyText) != null ? _a3 : (0, vue_exports.unref)(t)("el.tree.emptyText")), 3)
+          }, (0, vue_exports.toDisplayString)((_a4 = _ctx.emptyText) != null ? _a4 : (0, vue_exports.unref)(t)("el.tree.emptyText")), 3)
         ], 2))
       ], 2);
     };
   }
-}));
+});
 var TreeV2 = /* @__PURE__ */ _export_sfc(_sfc_main139, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/tree-v2/src/tree.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/tree-v2/index.mjs
@@ -65900,7 +68310,8 @@ var uploadBaseProps = buildProps2({
   disabled: Boolean,
   limit: Number
 });
-var uploadProps = buildProps2(__spreadProps(__spreadValues({}, uploadBaseProps), {
+var uploadProps = buildProps2({
+  ...uploadBaseProps,
   beforeUpload: {
     type: definePropType(Function),
     default: NOOP2
@@ -65936,7 +68347,7 @@ var uploadProps = buildProps2(__spreadProps(__spreadValues({}, uploadBaseProps),
     type: definePropType(Function),
     default: NOOP2
   }
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/upload/src/upload-list.mjs
 var uploadListProps = buildProps2({
@@ -65971,7 +68382,8 @@ var _hoisted_59 = ["onClick"];
 var __default__95 = (0, vue_exports.defineComponent)({
   name: "ElUploadList"
 });
-var _sfc_main140 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__95), {
+var _sfc_main140 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__95,
   props: uploadListProps,
   emits: uploadListEmits,
   setup(__props, { emit: emit2 }) {
@@ -66123,7 +68535,7 @@ var _sfc_main140 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       }, 8, ["class", "name"]);
     };
   }
-}));
+});
 var UploadList = /* @__PURE__ */ _export_sfc(_sfc_main140, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/upload/src/upload-list.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/upload/src/upload-dragger.mjs
@@ -66143,7 +68555,8 @@ var COMPONENT_NAME24 = "ElUploadDrag";
 var __default__96 = (0, vue_exports.defineComponent)({
   name: COMPONENT_NAME24
 });
-var _sfc_main141 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__96), {
+var _sfc_main141 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__96,
   props: uploadDraggerProps,
   emits: uploadDraggerEmits,
   setup(__props, { emit: emit2 }) {
@@ -66198,11 +68611,12 @@ var _sfc_main141 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 42, _hoisted_187);
     };
   }
-}));
+});
 var UploadDragger = /* @__PURE__ */ _export_sfc(_sfc_main141, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/upload/src/upload-dragger.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/upload/src/upload-content.mjs
-var uploadContentProps = buildProps2(__spreadProps(__spreadValues({}, uploadBaseProps), {
+var uploadContentProps = buildProps2({
+  ...uploadBaseProps,
   beforeUpload: {
     type: definePropType(Function),
     default: NOOP2
@@ -66231,7 +68645,7 @@ var uploadContentProps = buildProps2(__spreadProps(__spreadValues({}, uploadBase
     type: definePropType(Function),
     default: NOOP2
   }
-}));
+});
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/upload/src/upload-content2.mjs
 var _hoisted_188 = ["onKeydown"];
@@ -66240,7 +68654,8 @@ var __default__97 = (0, vue_exports.defineComponent)({
   name: "ElUploadContent",
   inheritAttrs: false
 });
-var _sfc_main142 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__97), {
+var _sfc_main142 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__97,
   props: uploadContentProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -66395,14 +68810,14 @@ var _sfc_main142 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ], 42, _hoisted_188);
     };
   }
-}));
+});
 var UploadContent = /* @__PURE__ */ _export_sfc(_sfc_main142, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/upload/src/upload-content.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/upload/src/use-handlers.mjs
 var SCOPE8 = "ElUpload";
 var revokeObjectURL = (file) => {
-  var _a3;
-  if ((_a3 = file.url) == null ? void 0 : _a3.startsWith("blob:")) {
+  var _a4;
+  if ((_a4 = file.url) == null ? void 0 : _a4.startsWith("blob:")) {
     URL.revokeObjectURL(file.url);
   }
 };
@@ -66410,8 +68825,8 @@ var useHandlers = (props, uploadRef) => {
   const uploadFiles = useVModel(props, "fileList", void 0, { passive: true });
   const getFile = (rawFile) => uploadFiles.value.find((file) => file.uid === rawFile.uid);
   function abort(file) {
-    var _a3;
-    (_a3 = uploadRef.value) == null ? void 0 : _a3.abort(file);
+    var _a4;
+    (_a4 = uploadRef.value) == null ? void 0 : _a4.abort(file);
   }
   function clearFiles(states = ["ready", "uploading", "success", "fail"]) {
     uploadFiles.value = uploadFiles.value.filter((row) => !states.includes(row.status));
@@ -66486,8 +68901,8 @@ var useHandlers = (props, uploadRef) => {
   };
   function submit() {
     uploadFiles.value.filter(({ status }) => status === "ready").forEach(({ raw }) => {
-      var _a3;
-      return raw && ((_a3 = uploadRef.value) == null ? void 0 : _a3.upload(raw));
+      var _a4;
+      return raw && ((_a4 = uploadRef.value) == null ? void 0 : _a4.upload(raw));
     });
   }
   (0, vue_exports.watch)(() => props.listType, (val) => {
@@ -66529,7 +68944,8 @@ var useHandlers = (props, uploadRef) => {
 var __default__98 = (0, vue_exports.defineComponent)({
   name: "ElUpload"
 });
-var _sfc_main143 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__98), {
+var _sfc_main143 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__98,
   props: uploadProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -66548,7 +68964,8 @@ var _sfc_main143 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       handleProgress
     } = useHandlers(props, uploadRef);
     const isPictureCard = (0, vue_exports.computed)(() => props.listType === "picture-card");
-    const uploadContentProps2 = (0, vue_exports.computed)(() => __spreadProps(__spreadValues({}, props), {
+    const uploadContentProps2 = (0, vue_exports.computed)(() => ({
+      ...props,
       fileList: uploadFiles.value,
       onStart: handleStart,
       onProgress: handleProgress,
@@ -66634,7 +69051,7 @@ var _sfc_main143 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       ]);
     };
   }
-}));
+});
 var Upload = /* @__PURE__ */ _export_sfc(_sfc_main143, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/upload/src/upload.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/upload/index.mjs
@@ -66766,10 +69183,10 @@ var attributes = {
 };
 var getScrollOptions = (el, instance) => {
   return Object.entries(attributes).reduce((acm, [name, option2]) => {
-    var _a3, _b;
+    var _a4, _b;
     const { type: type4, default: defaultValue } = option2;
     const attrVal = el.getAttribute(`infinite-scroll-${name}`);
-    let value = (_b = (_a3 = instance[attrVal]) != null ? _a3 : attrVal) != null ? _b : defaultValue;
+    let value = (_b = (_a4 = instance[attrVal]) != null ? _a4 : attrVal) != null ? _b : defaultValue;
     value = value === "false" ? false : value;
     value = type4(value);
     acm[name] = Number.isNaN(value) ? defaultValue : value;
@@ -66872,11 +69289,12 @@ function createLoadingComponent(options) {
   let afterLeaveTimer;
   const ns2 = useNamespace("loading");
   const afterLeaveFlag = (0, vue_exports.ref)(false);
-  const data = (0, vue_exports.reactive)(__spreadProps(__spreadValues({}, options), {
+  const data = (0, vue_exports.reactive)({
+    ...options,
     originalPosition: "",
     originalOverflow: "",
     visible: false
-  }));
+  });
   function setText(text) {
     data.text = text;
   }
@@ -66897,18 +69315,18 @@ function createLoadingComponent(options) {
     loadingInstance.unmount();
   }
   function removeElLoadingChild() {
-    var _a3, _b;
-    (_b = (_a3 = vm.$el) == null ? void 0 : _a3.parentNode) == null ? void 0 : _b.removeChild(vm.$el);
+    var _a4, _b;
+    (_b = (_a4 = vm.$el) == null ? void 0 : _a4.parentNode) == null ? void 0 : _b.removeChild(vm.$el);
   }
   function close2() {
-    var _a3;
+    var _a4;
     if (options.beforeClose && !options.beforeClose())
       return;
     afterLeaveFlag.value = true;
     clearTimeout(afterLeaveTimer);
     afterLeaveTimer = window.setTimeout(handleAfterLeave, 400);
     data.visible = false;
-    (_a3 = options.closed) == null ? void 0 : _a3.call(options);
+    (_a4 = options.closed) == null ? void 0 : _a4.call(options);
   }
   function handleAfterLeave() {
     if (!afterLeaveFlag.value)
@@ -66923,10 +69341,11 @@ function createLoadingComponent(options) {
     setup() {
       return () => {
         const svg = data.spinner || data.svg;
-        const spinner = (0, vue_exports.h)("svg", __spreadValues({
+        const spinner = (0, vue_exports.h)("svg", {
           class: "circular",
-          viewBox: data.svgViewBox ? data.svgViewBox : "0 0 50 50"
-        }, svg ? { innerHTML: svg } : {}), [
+          viewBox: data.svgViewBox ? data.svgViewBox : "0 0 50 50",
+          ...svg ? { innerHTML: svg } : {}
+        }, [
           (0, vue_exports.h)("circle", {
             class: "path",
             cx: "25",
@@ -66962,7 +69381,8 @@ function createLoadingComponent(options) {
   };
   const loadingInstance = (0, vue_exports.createApp)(elLoadingComponent);
   const vm = loadingInstance.mount(document.createElement("div"));
-  return __spreadProps(__spreadValues({}, (0, vue_exports.toRefs)(data)), {
+  return {
+    ...(0, vue_exports.toRefs)(data),
     setText,
     removeElLoadingChild,
     close: close2,
@@ -66971,7 +69391,7 @@ function createLoadingComponent(options) {
     get $el() {
       return vm.$el;
     }
-  });
+  };
 }
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/loading/src/service.mjs
@@ -66983,14 +69403,15 @@ var Loading = function(options = {}) {
   if (resolved.fullscreen && fullscreenInstance) {
     return fullscreenInstance;
   }
-  const instance = createLoadingComponent(__spreadProps(__spreadValues({}, resolved), {
+  const instance = createLoadingComponent({
+    ...resolved,
     closed: () => {
-      var _a3;
-      (_a3 = resolved.closed) == null ? void 0 : _a3.call(resolved);
+      var _a4;
+      (_a4 = resolved.closed) == null ? void 0 : _a4.call(resolved);
       if (resolved.fullscreen)
         fullscreenInstance = void 0;
     }
-  }));
+  });
   addStyle(resolved, resolved.parent, instance);
   addClassList(resolved, resolved.parent, instance);
   resolved.parent.vLoadingAddClassList = () => addClassList(resolved, resolved.parent, instance);
@@ -67009,10 +69430,10 @@ var Loading = function(options = {}) {
   return instance;
 };
 var resolveOptions = (options) => {
-  var _a3, _b, _c, _d;
+  var _a4, _b, _c, _d;
   let target;
   if (isString3(options.target)) {
-    target = (_a3 = document.querySelector(options.target)) != null ? _a3 : document.body;
+    target = (_a4 = document.querySelector(options.target)) != null ? _a4 : document.body;
   } else {
     target = options.target || document.body;
   }
@@ -67071,7 +69492,7 @@ var addClassList = (options, parent, instance) => {
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/loading/src/directive.mjs
 var INSTANCE_KEY = Symbol("ElLoading");
 var createInstance = (el, binding) => {
-  var _a3, _b, _c, _d;
+  var _a4, _b, _c, _d;
   const vm = binding.instance;
   const getBindingProp = (key) => isObject4(binding.value) ? binding.value[key] : void 0;
   const resolveExpression = (key) => {
@@ -67082,7 +69503,7 @@ var createInstance = (el, binding) => {
       return data;
   };
   const getProp2 = (name) => resolveExpression(getBindingProp(name) || el.getAttribute(`element-loading-${hyphenate2(name)}`));
-  const fullscreen = (_a3 = getBindingProp("fullscreen")) != null ? _a3 : binding.modifiers.fullscreen;
+  const fullscreen = (_a4 = getBindingProp("fullscreen")) != null ? _a4 : binding.modifiers.fullscreen;
   const options = {
     text: getProp2("text"),
     svg: getProp2("svg"),
@@ -67126,8 +69547,8 @@ var vLoading = {
     }
   },
   unmounted(el) {
-    var _a3;
-    (_a3 = el[INSTANCE_KEY]) == null ? void 0 : _a3.instance.close();
+    var _a4;
+    (_a4 = el[INSTANCE_KEY]) == null ? void 0 : _a4.instance.close();
   }
 };
 
@@ -67251,7 +69672,8 @@ var _hoisted_258 = ["innerHTML"];
 var __default__99 = (0, vue_exports.defineComponent)({
   name: "ElMessage"
 });
-var _sfc_main144 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__99), {
+var _sfc_main144 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__99,
   props: messageProps,
   emits: messageEmits,
   setup(__props, { expose }) {
@@ -67379,14 +69801,17 @@ var _sfc_main144 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       }, 8, ["name", "onBeforeLeave"]);
     };
   }
-}));
+});
 var MessageConstructor = /* @__PURE__ */ _export_sfc(_sfc_main144, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/message/src/message.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/message/src/method.mjs
 var seed = 1;
 var normalizeOptions = (params) => {
   const options = !params || isString3(params) || (0, vue_exports.isVNode)(params) || isFunction4(params) ? { message: params } : params;
-  const normalized = __spreadValues(__spreadValues({}, messageDefaults), options);
+  const normalized = {
+    ...messageDefaults,
+    ...options
+  };
   if (!normalized.appendTo) {
     normalized.appendTo = document.body;
   } else if (isString3(normalized.appendTo)) {
@@ -67407,13 +69832,13 @@ var closeMessage = (instance) => {
   const { handler } = instance;
   handler.close();
 };
-var createMessage = (_a3, context) => {
-  var _b = _a3, { appendTo } = _b, options = __objRest(_b, ["appendTo"]);
+var createMessage = ({ appendTo, ...options }, context) => {
   const { nextZIndex } = useZIndex();
   const id2 = `message_${seed++}`;
   const userOnClose = options.onClose;
   const container = document.createElement("div");
-  const props = __spreadProps(__spreadValues({}, options), {
+  const props = {
+    ...options,
     zIndex: nextZIndex() + options.zIndex,
     id: id2,
     onClose: () => {
@@ -67423,7 +69848,7 @@ var createMessage = (_a3, context) => {
     onDestroy: () => {
       (0, vue_exports.render)(null, container);
     }
-  });
+  };
   const vnode = (0, vue_exports.createVNode)(MessageConstructor, props, isFunction4(props.message) || (0, vue_exports.isVNode)(props.message) ? {
     default: isFunction4(props.message) ? props.message : () => props.message
   } : null);
@@ -67454,8 +69879,8 @@ var message = (options = {}, context) => {
   const normalized = normalizeOptions(options);
   if (normalized.grouping && instances.length) {
     const instance2 = instances.find(({ vnode: vm }) => {
-      var _a3;
-      return ((_a3 = vm.props) == null ? void 0 : _a3.message) === normalized.message;
+      var _a4;
+      return ((_a4 = vm.props) == null ? void 0 : _a4.message) === normalized.message;
     });
     if (instance2) {
       instance2.props.repeatNum += 1;
@@ -67470,7 +69895,7 @@ var message = (options = {}, context) => {
 messageTypes.forEach((type4) => {
   message[type4] = (options = {}, appContext) => {
     const normalized = normalizeOptions(options);
-    return message(__spreadProps(__spreadValues({}, normalized), { type: type4 }), appContext);
+    return message({ ...normalized, type: type4 }, appContext);
   };
 });
 function closeAll(type4) {
@@ -67492,13 +69917,14 @@ var _sfc_main145 = (0, vue_exports.defineComponent)({
   directives: {
     TrapFocus
   },
-  components: __spreadValues({
+  components: {
     ElButton,
     ElFocusTrap,
     ElInput,
     ElOverlay,
-    ElIcon
-  }, TypeComponents),
+    ElIcon,
+    ...TypeComponents
+  },
   inheritAttrs: false,
   props: {
     buttonSize: {
@@ -67607,11 +70033,11 @@ var _sfc_main145 = (0, vue_exports.defineComponent)({
       }
     }, { immediate: true });
     (0, vue_exports.watch)(() => visible.value, (val) => {
-      var _a3, _b;
+      var _a4, _b;
       if (val) {
         if (props.boxType !== "prompt") {
           if (state.autofocus) {
-            focusStartRef.value = (_b = (_a3 = confirmRef.value) == null ? void 0 : _a3.$el) != null ? _b : rootRef.value;
+            focusStartRef.value = (_b = (_a4 = confirmRef.value) == null ? void 0 : _a4.$el) != null ? _b : rootRef.value;
           } else {
             focusStartRef.value = rootRef.value;
           }
@@ -67671,13 +70097,13 @@ var _sfc_main145 = (0, vue_exports.defineComponent)({
       }
     };
     const handleAction = (action) => {
-      var _a3;
+      var _a4;
       if (props.boxType === "prompt" && action === "confirm" && !validate()) {
         return;
       }
       state.action = action;
       if (state.beforeClose) {
-        (_a3 = state.beforeClose) == null ? void 0 : _a3.call(state, action, state, doClose);
+        (_a4 = state.beforeClose) == null ? void 0 : _a4.call(state, action, state, doClose);
       } else {
         doClose();
       }
@@ -67725,7 +70151,8 @@ var _sfc_main145 = (0, vue_exports.defineComponent)({
       useLockscreen(visible);
     }
     useRestoreActive(visible);
-    return __spreadProps(__spreadValues({}, (0, vue_exports.toRefs)(state)), {
+    return {
+      ...(0, vue_exports.toRefs)(state),
       ns: ns2,
       overlayEvent,
       visible,
@@ -67748,7 +70175,7 @@ var _sfc_main145 = (0, vue_exports.defineComponent)({
       handleInputEnter,
       handleAction,
       t
-    });
+    };
   }
 });
 var _hoisted_191 = ["aria-label", "aria-describedby"];
@@ -68064,11 +70491,12 @@ function messageBoxFactory(boxType) {
     } else {
       titleOrOpts = title;
     }
-    return MessageBox(Object.assign(__spreadValues({
+    return MessageBox(Object.assign({
       title: titleOrOpts,
       message: message2,
-      type: ""
-    }, MESSAGE_BOX_DEFAULT_OPTS[boxType]), options, {
+      type: "",
+      ...MESSAGE_BOX_DEFAULT_OPTS[boxType]
+    }, options, {
       boxType
     }), appContext);
   };
@@ -68171,7 +70599,8 @@ var _hoisted_413 = ["innerHTML"];
 var __default__100 = (0, vue_exports.defineComponent)({
   name: "ElNotification"
 });
-var _sfc_main146 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProps(__spreadValues({}, __default__100), {
+var _sfc_main146 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
+  ...__default__100,
   props: notificationProps,
   emits: notificationEmits,
   setup(__props, { expose }) {
@@ -68297,7 +70726,7 @@ var _sfc_main146 = /* @__PURE__ */ (0, vue_exports.defineComponent)(__spreadProp
       }, 8, ["name", "onBeforeLeave"]);
     };
   }
-}));
+});
 var NotificationConstructor = /* @__PURE__ */ _export_sfc(_sfc_main146, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/notification/src/notification.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/notification/src/notify.mjs
@@ -68318,22 +70747,22 @@ var notify = function(options = {}, context = null) {
   const position = options.position || "top-right";
   let verticalOffset = options.offset || 0;
   notifications[position].forEach(({ vm: vm2 }) => {
-    var _a3;
-    verticalOffset += (((_a3 = vm2.el) == null ? void 0 : _a3.offsetHeight) || 0) + GAP_SIZE;
+    var _a4;
+    verticalOffset += (((_a4 = vm2.el) == null ? void 0 : _a4.offsetHeight) || 0) + GAP_SIZE;
   });
   verticalOffset += GAP_SIZE;
   const { nextZIndex } = useZIndex();
   const id2 = `notification_${seed2++}`;
   const userOnClose = options.onClose;
-  const props = __spreadProps(__spreadValues({
-    zIndex: nextZIndex()
-  }, options), {
+  const props = {
+    zIndex: nextZIndex(),
+    ...options,
     offset: verticalOffset,
     id: id2,
     onClose: () => {
       close(id2, position, userOnClose);
     }
-  });
+  };
   let appendTo = document.body;
   if (isElement(options.appendTo)) {
     appendTo = options.appendTo;
@@ -68369,16 +70798,17 @@ notificationTypes.forEach((type4) => {
         message: options
       };
     }
-    return notify(__spreadProps(__spreadValues({}, options), {
+    return notify({
+      ...options,
       type: type4
-    }));
+    });
   };
 });
 function close(id2, position, userOnClose) {
   const orientedNotifications = notifications[position];
   const idx = orientedNotifications.findIndex(({ vm: vm2 }) => {
-    var _a3;
-    return ((_a3 = vm2.component) == null ? void 0 : _a3.props.id) === id2;
+    var _a4;
+    return ((_a4 = vm2.component) == null ? void 0 : _a4.props.id) === id2;
   });
   if (idx === -1)
     return;
@@ -68453,9 +70883,17 @@ var YoungTable_default = (0, vue_exports.defineComponent)({
       type: Boolean,
       default: false
     }
+    /**
+     * 列排序有 bug，暂不放出
+     */
+    // colDraggable: {
+    //   type: Boolean,
+    //   default: false
+    // }
   },
   emits: [
     "row-drag-change"
+    //  'col-drag-change'
   ],
   setup(props, { emit: emit2, attrs, slots }) {
     (0, vue_exports.onMounted)(async () => {
@@ -68516,46 +70954,49 @@ var YoungTable_default = (0, vue_exports.defineComponent)({
         }
       });
     });
-    return () => {
-      var _a3, _b;
-      return /* @__PURE__ */ React.createElement(ElTable, __spreadProps(__spreadValues({}, attrs), {
-        ref: tableRef,
-        data: tableData_1.value,
-        style: { width: "100%" },
-        height: props.tableHeight
-      }), props.selectable && /* @__PURE__ */ React.createElement(ElTableColumn2, {
-        type: "selection",
-        width: "55"
-      }), tableHead_1.value.map((head, index2) => /* @__PURE__ */ React.createElement(ElTableColumn2, {
-        key: index2,
-        prop: head.prop,
-        label: head.label,
-        width: head.width || "",
-        sortable: head.sortable || false,
-        fixed: head.fixed || false,
-        align: head.aligin || "left",
-        showOverflowTooltip: head.show_overflow_tooltip ?? true,
-        "v-slots": {
+    return () => <ElTable
+      {...attrs}
+      ref={tableRef}
+      data={tableData_1.value}
+      style={{ width: "100%" }}
+      height={props.tableHeight}
+    >
+      {props.selectable && <ElTableColumn2 type="selection" width="55" />}
+      {tableHead_1.value.map((head, index2) => <ElTableColumn2
+        key={index2}
+        prop={head.prop}
+        label={head.label}
+        width={head.width || ""}
+        sortable={head.sortable || false}
+        fixed={head.fixed || false}
+        align={head.aligin || "left"}
+        showOverflowTooltip={head.show_overflow_tooltip ?? true}
+        v-slots={{
           header: (scope) => {
             if (tableHead_1.value[index2].tool_content) {
-              return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", null, scope.column.label), /* @__PURE__ */ React.createElement(ElTooltip, {
-                placement: "bottom",
-                "v-slots": { content: () => tableHead_1.value[index2].tool_content }
-              }, "\uFF1F"));
+              return <>
+                <span>{scope.column.label}</span>
+                <ElTooltip
+                  placement="bottom"
+                  v-slots={{ content: () => tableHead_1.value[index2].tool_content }}
+                >{"\uFF1F"}</ElTooltip>
+              </>;
             } else {
-              return /* @__PURE__ */ React.createElement("span", null, scope.column.label);
+              return <span>{scope.column.label}</span>;
             }
           },
           default: (scope) => {
             if (head.render) {
               return head.render(scope.row, scope.$index);
             } else {
-              return /* @__PURE__ */ React.createElement("span", null, scope.row[head.prop]);
+              return <span>{scope.row[head.prop]}</span>;
             }
           }
-        }
-      })), (_a3 = slots.switch) == null ? void 0 : _a3.call(slots), (_b = slots.operate) == null ? void 0 : _b.call(slots));
-    };
+        }}
+      />)}
+      {slots.switch?.()}
+      {slots.operate?.()}
+    </ElTable>;
   }
 });
 
@@ -68601,18 +71042,17 @@ var YoungPagination_default = (0, vue_exports.defineComponent)({
       emit2("update:page", val);
       emit2("page-change");
     };
-    return () => /* @__PURE__ */ React.createElement("div", {
-      style: "background: white; padding-top: 20px;"
-    }, /* @__PURE__ */ React.createElement(ElPagination, __spreadProps(__spreadValues({}, attrs), {
-      background: props.background,
-      currentPage: props.page,
-      pageSize: props.limit,
-      layout: props.layout,
-      pageSizes: props.pageSizes,
-      total: props.total,
-      "onUpdate:page-size": (v2) => sizeChange(v2),
-      "onUpdate:current-page": (v2) => pageChange(v2)
-    })));
+    return () => <div style="background: white; padding-top: 20px;"><ElPagination
+      {...attrs}
+      background={props.background}
+      currentPage={props.page}
+      pageSize={props.limit}
+      layout={props.layout}
+      pageSizes={props.pageSizes}
+      total={props.total}
+      onUpdate:page-size={(v2) => sizeChange(v2)}
+      onUpdate:current-page={(v2) => pageChange(v2)}
+    /></div>;
   }
 });
 
@@ -68641,6 +71081,9 @@ var YoungDialog_default = (0, vue_exports.defineComponent)({
     isEdit: Boolean,
     isMore: Boolean,
     sureFn: Function,
+    /**
+     * 对比 form 表单
+     */
     diffForm: {
       type: Object,
       default: null
@@ -68663,16 +71106,22 @@ var YoungDialog_default = (0, vue_exports.defineComponent)({
       get: () => props.isAdd || props.isMore || props.isEdit,
       set: (v2) => null
     });
-    props.diffForm && (0, vue_exports.watch)(() => showDialog.value, (v2, o2) => {
-      if (v2 && !o2) {
-        formHash_before.value = JSON.stringify(props.diffForm);
+    props.diffForm && (0, vue_exports.watch)(
+      () => showDialog.value,
+      (v2, o2) => {
+        if (v2 && !o2) {
+          formHash_before.value = JSON.stringify(props.diffForm);
+        }
       }
-    });
-    props.diffForm && (0, vue_exports.watch)(() => props.modelValue, (v2, o2) => {
-      if (v2 && !o2) {
-        formHash_before.value = JSON.stringify(props.diffForm);
+    );
+    props.diffForm && (0, vue_exports.watch)(
+      () => props.modelValue,
+      (v2, o2) => {
+        if (v2 && !o2) {
+          formHash_before.value = JSON.stringify(props.diffForm);
+        }
       }
-    });
+    );
     const sure = async () => {
       if (props.sureFn) {
         const res = await props.sureFn();
@@ -68705,30 +71154,26 @@ var YoungDialog_default = (0, vue_exports.defineComponent)({
         }).catch(() => null);
       }
     };
-    return () => /* @__PURE__ */ React.createElement(vue_exports.Teleport, {
-      to: "body"
-    }, /* @__PURE__ */ React.createElement(ElDialog, __spreadProps(__spreadValues({}, attrs), {
-      modelValue: props.modelValue || showDialog.value,
-      title: props.realTitle || title.value,
-      closeOnClickModal: true,
-      closeOnPressEscape: false,
-      beforeClose,
-      "v-slots": {
-        default: () => {
-          var _a3;
-          return (_a3 = slots.body) == null ? void 0 : _a3.call(slots);
-        },
+    return () => <vue_exports.Teleport to="body"><ElDialog
+      {...attrs}
+      modelValue={props.modelValue || showDialog.value}
+      title={props.realTitle || title.value}
+      closeOnClickModal={true}
+      closeOnPressEscape={false}
+      beforeClose={beforeClose}
+      v-slots={{
+        default: () => slots.body?.(),
         footer: () => {
-          var _a3, _b, _c;
-          return /* @__PURE__ */ React.createElement(React.Fragment, null, (_a3 = slots.button) == null ? void 0 : _a3.call(slots), props.showCancel && /* @__PURE__ */ React.createElement(ElButton, {
-            onClick: () => beforeClose()
-          }, props.cancelText), (_b = slots.step1) == null ? void 0 : _b.call(slots), (_c = slots.step2) == null ? void 0 : _c.call(slots), props.showSure && /* @__PURE__ */ React.createElement(ElButton, {
-            type: "primary",
-            onClick: () => sure()
-          }, props.sureText));
+          return <>
+            {slots.button?.()}
+            {props.showCancel && <ElButton onClick={() => beforeClose()}>{props.cancelText}</ElButton>}
+            {slots.step1?.()}
+            {slots.step2?.()}
+            {props.showSure && <ElButton type="primary" onClick={() => sure()}>{props.sureText}</ElButton>}
+          </>;
         }
-      }
-    })));
+      }}
+    /></vue_exports.Teleport>;
   }
 });
 
@@ -68742,9 +71187,7 @@ var YoungSelect_default = (0, vue_exports.defineComponent)({
   },
   setup(props, { attrs }) {
     const randomSeed = Q();
-    return () => /* @__PURE__ */ React.createElement(ElSelect, __spreadValues({}, attrs), props.options.map((op, index2) => /* @__PURE__ */ React.createElement(ElOption, __spreadProps(__spreadValues({}, op), {
-      key: index2 + randomSeed
-    }))));
+    return () => <ElSelect {...attrs}>{props.options.map((op, index2) => <ElOption {...op} key={index2 + randomSeed} />)}</ElSelect>;
   }
 });
 
@@ -68760,13 +71203,7 @@ var YoungWeekday_default = (0, vue_exports.defineComponent)({
   emits: ["update:modelValue"],
   setup(props, { attrs, emit: emit2 }) {
     const randomSeed = Q();
-    return () => /* @__PURE__ */ React.createElement(ElCheckboxGroup, __spreadProps(__spreadValues({}, attrs), {
-      modelValue: props.modelValue,
-      onChange: (v2) => emit2("update:modelValue", v2)
-    }), Weeks.map((w2, i) => /* @__PURE__ */ React.createElement(ElCheckbox, {
-      label: i + 1,
-      key: i + randomSeed
-    }, w2)));
+    return () => <ElCheckboxGroup {...attrs} modelValue={props.modelValue} onChange={(v2) => emit2("update:modelValue", v2)}>{Weeks.map((w2, i) => <ElCheckbox label={i + 1} key={i + randomSeed}>{w2}</ElCheckbox>)}</ElCheckboxGroup>;
   }
 });
 
@@ -68796,25 +71233,31 @@ var YoungTimeRange_default = (0, vue_exports.defineComponent)({
   },
   emits: ["update:start", "update:end"],
   setup(props, { attrs, emit: emit2 }) {
-    return () => /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(ElTimeSelect, __spreadProps(__spreadValues({}, attrs), {
-      modelValue: props.start,
-      class: "w-120px mr-2",
-      maxTime: props.end,
-      placeholder: "\u5F00\u59CB\u65F6\u95F4",
-      start: props.startTime,
-      step: props.step,
-      end: props.endTime,
-      "onUpdate:modelValue": (v2) => emit2("update:start", v2)
-    })), "- \xA0", /* @__PURE__ */ React.createElement(ElTimeSelect, __spreadProps(__spreadValues({}, attrs), {
-      modelValue: props.end,
-      class: "w-120px",
-      minTime: props.start,
-      placeholder: "\u7ED3\u675F\u65F6\u95F4",
-      start: props.startTime,
-      step: props.step,
-      end: props.endTime,
-      "onUpdate:modelValue": (v2) => emit2("update:end", v2)
-    })));
+    return () => <>
+      <ElTimeSelect
+        {...attrs}
+        modelValue={props.start}
+        class="w-120px mr-2"
+        maxTime={props.end}
+        placeholder={"\u5F00\u59CB\u65F6\u95F4"}
+        start={props.startTime}
+        step={props.step}
+        end={props.endTime}
+        onUpdate:modelValue={(v2) => emit2("update:start", v2)}
+      />
+      {"- \xA0"}
+      <ElTimeSelect
+        {...attrs}
+        modelValue={props.end}
+        class="w-120px"
+        minTime={props.start}
+        placeholder={"\u7ED3\u675F\u65F6\u95F4"}
+        start={props.startTime}
+        step={props.step}
+        end={props.endTime}
+        onUpdate:modelValue={(v2) => emit2("update:end", v2)}
+      />
+    </>;
   }
 });
 
@@ -68864,15 +71307,16 @@ var YoungDateRange_default = (0, vue_exports.defineComponent)({
         }
       }
     };
-    return () => /* @__PURE__ */ React.createElement(ElDatePicker, __spreadProps(__spreadValues({}, attrs), {
-      modelValue: datePicker.value,
-      type: "daterange",
-      "start-placeholder": "\u5F00\u59CB\u65E5\u671F",
-      "end-placeholder": "\u7ED3\u675F\u65E5\u671F",
-      "default-time": f(),
-      clearable: true,
-      "onUpdate:modelValue": (e) => update(e)
-    }));
+    return () => <ElDatePicker
+      {...attrs}
+      modelValue={datePicker.value}
+      type="daterange"
+      start-placeholder={"\u5F00\u59CB\u65E5\u671F"}
+      end-placeholder={"\u7ED3\u675F\u65E5\u671F"}
+      default-time={f()}
+      clearable
+      onUpdate:modelValue={(e) => update(e)}
+    />;
   }
 });
 
@@ -68882,12 +71326,15 @@ var useAutoLoad = (list, allData, pageSize = 10, pause = (0, vue_exports.ref)(fa
   const touchEndEl = (0, vue_exports.ref)(false);
   const page = (0, vue_exports.ref)(1);
   const load = () => {
-    const { stop: stop2 } = useIntersectionObserver(elArr.value[list.value.length - 1], ([{ isIntersecting }]) => {
-      if (isIntersecting) {
-        touchEndEl.value = isIntersecting;
-        stop2();
+    const { stop: stop2 } = useIntersectionObserver(
+      elArr.value[list.value.length - 1],
+      ([{ isIntersecting }]) => {
+        if (isIntersecting) {
+          touchEndEl.value = isIntersecting;
+          stop2();
+        }
       }
-    });
+    );
   };
   (0, vue_exports.watchEffect)(async () => {
     if (pause.value) {
@@ -68925,8 +71372,7 @@ var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, clea
   const formRef = (0, vue_exports.ref)();
   const validForm = async () => {
     const res = await new Promise((resolve2) => {
-      var _a3;
-      (_a3 = formRef.value) == null ? void 0 : _a3.validate(async (valid) => {
+      formRef.value?.validate(async (valid) => {
         if (valid) {
           resolve2(true);
         }
@@ -68936,43 +71382,43 @@ var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, clea
     });
     return res;
   };
-  const clear2 = () => {
+  const clear3 = () => {
     isAdd.value = false;
     isEdit.value = false;
     isMore.value = false;
-    clearEffect == null ? void 0 : clearEffect();
+    clearEffect?.();
     form.value = O(FORM_TEMP);
   };
   const del2 = (row) => {
     ElMessageBox.confirm(tip, "\u63D0\u793A", {
       type: "warning"
     }).then(async () => {
-      await (delCbk == null ? void 0 : delCbk(row));
-      cgEffect == null ? void 0 : cgEffect();
+      await delCbk?.(row);
+      cgEffect?.();
     }).catch(() => null);
   };
   const sure = async () => {
     if (isAdd.value) {
-      const res = await (addCbk == null ? void 0 : addCbk());
+      const res = await addCbk?.();
       if (res === false) {
         return;
       }
     } else {
-      const res = await (modCbk == null ? void 0 : modCbk());
+      const res = await modCbk?.();
       if (res === false) {
         return;
       }
     }
-    !disableclear && clear2();
-    cgEffect == null ? void 0 : cgEffect();
+    !disableclear && clear3();
+    cgEffect?.();
   };
   const edit = async (row) => {
-    const res = await (cpEffect == null ? void 0 : cpEffect(row));
+    const res = await cpEffect?.(row);
     form.value = O(res || row);
     isEdit.value = true;
   };
   const more = async (row) => {
-    const res = await (cpEffect == null ? void 0 : cpEffect(row));
+    const res = await cpEffect?.(row);
     form.value = O(res || row);
     isMore.value = true;
   };
@@ -68980,7 +71426,7 @@ var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, clea
     isAdd,
     isEdit,
     isMore,
-    clear: clear2,
+    clear: clear3,
     edit,
     more,
     form,
@@ -69093,7 +71539,11 @@ function createBuffer() {
 }
 function renderComponentVNode(vnode, parentComponent = null, slotScopeId) {
   const instance = createComponentInstance2(vnode, parentComponent, null);
-  const res = setupComponent2(instance, true);
+  const res = setupComponent2(
+    instance,
+    true
+    /* isSSR */
+  );
   const hasAsyncSetup = isPromise(res);
   const prefetches = instance.sp;
   if (hasAsyncSetup || prefetches) {
@@ -69137,7 +71587,7 @@ function renderComponentSubTree(instance, slotScopeId) {
         const scopeId = cur.vnode.scopeId;
         if (scopeId) {
           if (!hasCloned) {
-            attrs = __spreadValues({}, attrs);
+            attrs = { ...attrs };
             hasCloned = true;
           }
           attrs[scopeId] = "";
@@ -69151,12 +71601,22 @@ function renderComponentSubTree(instance, slotScopeId) {
       }
       if (slotScopeId) {
         if (!hasCloned)
-          attrs = __spreadValues({}, attrs);
+          attrs = { ...attrs };
         attrs[slotScopeId.trim()] = "";
       }
       const prev = setCurrentRenderingInstance2(instance);
       try {
-        ssrRender(instance.proxy, push, instance, attrs, instance.props, instance.setupState, instance.data, instance.ctx);
+        ssrRender(
+          instance.proxy,
+          push,
+          instance,
+          attrs,
+          // compiler-optimized bindings
+          instance.props,
+          instance.setupState,
+          instance.data,
+          instance.ctx
+        );
       } finally {
         setCurrentRenderingInstance2(prev);
       }
@@ -69449,9 +71909,12 @@ var export_json_to_excel = ({ header, data, filename }) => {
     bookSST: false,
     type: "binary"
   });
-  (0, import_file_saver.saveAs)(new Blob([s2ab(wbout)], {
-    type: "application/octet-stream"
-  }), `${filename}.xlsx`);
+  (0, import_file_saver.saveAs)(
+    new Blob([s2ab(wbout)], {
+      type: "application/octet-stream"
+    }),
+    `${filename}.xlsx`
+  );
 };
 
 // src/hooks/useExport.ts
@@ -69524,40 +71987,52 @@ var useExport2Excel = async ({ filename, tableHead, tableData }) => {
   useExport2Excel,
   useFormMode
 });
-/*!
- * escape-html
- * Copyright(c) 2012-2013 TJ Holowaychuk
- * Copyright(c) 2015 Andreas Lubbe
- * Copyright(c) 2015 Tiancheng "Timothy" Gu
- * MIT Licensed
- */
-/*! Element Plus Icons Vue v2.0.10 */
-/**
- * @license
- * Lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="es" -o ./`
- * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-/**
- * Checks if an event is supported in the current execution environment.
- *
- * NOTE: This will not work correctly for non-generic events such as `change`,
- * `reset`, `load`, `error`, and `select`.
- *
- * Borrows from Modernizr.
- *
- * @param {string} eventNameSuffix Event name, e.g. "click".
- * @param {?boolean} capture Check if the capture phase is supported.
- * @return {boolean} True if the event is supported.
- * @internal
- * @license Modernizr 3.0.0pre (Custom Build) | MIT
- */
-/**!
- * Sortable 1.15.0
- * @author	RubaXa   <trash@rubaxa.org>
- * @author	owenm    <owen23355@gmail.com>
- * @license MIT
- */
+/*! Bundled license information:
+
+escape-html/index.js:
+  (*!
+   * escape-html
+   * Copyright(c) 2012-2013 TJ Holowaychuk
+   * Copyright(c) 2015 Andreas Lubbe
+   * Copyright(c) 2015 Tiancheng "Timothy" Gu
+   * MIT Licensed
+   *)
+
+sortablejs/modular/sortable.esm.js:
+  (**!
+   * Sortable 1.15.0
+   * @author	RubaXa   <trash@rubaxa.org>
+   * @author	owenm    <owen23355@gmail.com>
+   * @license MIT
+   *)
+
+lodash-es/lodash.js:
+  (**
+   * @license
+   * Lodash (Custom Build) <https://lodash.com/>
+   * Build: `lodash modularize exports="es" -o ./`
+   * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+   * Released under MIT license <https://lodash.com/license>
+   * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+   * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+   *)
+
+@element-plus/icons-vue/dist/index.js:
+  (*! Element Plus Icons Vue v2.0.10 *)
+
+normalize-wheel-es/dist/index.mjs:
+  (**
+   * Checks if an event is supported in the current execution environment.
+   *
+   * NOTE: This will not work correctly for non-generic events such as `change`,
+   * `reset`, `load`, `error`, and `select`.
+   *
+   * Borrows from Modernizr.
+   *
+   * @param {string} eventNameSuffix Event name, e.g. "click".
+   * @param {?boolean} capture Check if the capture phase is supported.
+   * @return {boolean} True if the event is supported.
+   * @internal
+   * @license Modernizr 3.0.0pre (Custom Build) | MIT
+   *)
+*/
