@@ -428,4 +428,12 @@ interface ExportParams {
  */
 declare const useExport2Excel: ({ filename, tableHead, tableData }: ExportParams) => Promise<unknown>;
 
-export { SelectOptionItem, TableDataItem, TableHeadItem, _default as YoungDateRange, _default$4 as YoungDialog, _default$5 as YoungPagination, _default$3 as YoungSelect, _default$6 as YoungTable, _default$1 as YoungTimeRange, _default$2 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode };
+declare const useVerifyCode: (cbk: () => any | Promise<any>, default_wait?: number, default_tip?: string) => {
+    getCode: () => void;
+    tip: vue.Ref<string>;
+    showSlider: vue.Ref<boolean>;
+    pass: () => Promise<void>;
+    cancel: () => void;
+};
+
+export { SelectOptionItem, TableDataItem, TableHeadItem, _default as YoungDateRange, _default$4 as YoungDialog, _default$5 as YoungPagination, _default$3 as YoungSelect, _default$6 as YoungTable, _default$1 as YoungTimeRange, _default$2 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useVerifyCode };

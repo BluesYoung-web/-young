@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bluesyoung/beginner-guid": "workspace:^*",
+    "@bluesyoung/beginner-guid": "workspace:*",
     "vue": "^3.2.25"
   },
   "devDependencies": {

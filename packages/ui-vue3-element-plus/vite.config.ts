@@ -1,10 +1,11 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-10-19 10:48:36
- * @LastEditTime: 2023-03-08 16:27:27
+ * @LastEditTime: 2023-03-10 17:09:28
  * @Description:
  */
 /// <reference types="vite/client" />
+/// <reference types="vitest" />
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -32,5 +33,8 @@ export default defineConfig({
         'sortablejs',
       ],
     },
+  },
+  test: {
+    environment: 'happy-dom',
   },
 });

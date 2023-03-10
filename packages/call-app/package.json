@@ -37,8 +37,8 @@
   },
   "homepage": "https://github.com/BluesYoung-web/young#readme",
   "dependencies": {
-    "@bluesyoung/share-dom": "workspace:^*",
-    "@bluesyoung/utils": "workspace:^*",
+    "@bluesyoung/share-dom": "workspace:*",
+    "@bluesyoung/utils": "workspace:*",
     "defu": "^6.1.2"
   }
 }

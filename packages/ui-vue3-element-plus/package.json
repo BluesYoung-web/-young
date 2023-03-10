@@ -14,11 +14,13 @@
     }
   },
   "scripts": {
+    "test": "vitest",
     "build": "vite build && tsup",
     "release": "pnpm build && bumpp --commit",
     "push": "pnpm publish --access public"
   },
   "devDependencies": {
+    "@bluesyoung/ui-vue3": "workspace:*",
     "@bluesyoung/utils": "workspace:*",
     "@types/sortablejs": "^1.15.0",
     "@types/xlsx": "^0.0.36",
@@ -27,6 +29,7 @@
     "@vueuse/core": "^9.10.0",
     "element-plus": "^2.2.28",
     "sortablejs": "^1.15.0",
+    "vitest": "^0.29.2",
     "vue": "^3.2.45"
   },
   "repository": {
