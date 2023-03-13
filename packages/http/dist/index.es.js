@@ -20,7 +20,7 @@ const Ue = M("string"), g = M("function"), ye = M("number"), Y = (e) => e !== nu
     return !1;
   const t = G(e);
   return (t === null || t === Object.prototype || Object.getPrototypeOf(t) === null) && !(Symbol.toStringTag in e) && !(Symbol.iterator in e);
-}, ke = A("Date"), He = A("File"), Me = A("Blob"), Ie = A("FileList"), qe = (e) => Y(e) && g(e.pipe), Je = (e) => {
+}, ke = A("Date"), He = A("File"), Me = A("Blob"), Ie = A("FileList"), Je = (e) => Y(e) && g(e.pipe), qe = (e) => {
   const t = "[object FormData]";
   return e && (typeof FormData == "function" && e instanceof FormData || pe.call(e) === t || g(e.toString) && e.toString() === t);
 }, ze = A("URLSearchParams"), $e = (e) => e.trim ? e.trim() : e.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
@@ -118,7 +118,7 @@ const Ve = (e, t, n, { allOwnKeys: r } = {}) => (F(t, (s, o) => {
     if (g(e) && ["arguments", "caller", "callee"].indexOf(n) !== -1)
       return !1;
     const r = e[n];
-    if (!!g(r)) {
+    if (g(r)) {
       if (t.enumerable = !1, "writable" in t) {
         t.writable = !1;
         return;
@@ -157,7 +157,7 @@ const Ve = (e, t, n, { allOwnKeys: r } = {}) => (F(t, (s, o) => {
   isArray: P,
   isArrayBuffer: me,
   isBuffer: Be,
-  isFormData: Je,
+  isFormData: qe,
   isArrayBufferView: Le,
   isString: Ue,
   isNumber: ye,
@@ -170,7 +170,7 @@ const Ve = (e, t, n, { allOwnKeys: r } = {}) => (F(t, (s, o) => {
   isBlob: Me,
   isRegExp: nt,
   isFunction: g,
-  isStream: qe,
+  isStream: Je,
   isURLSearchParams: ze,
   isTypedArray: Qe,
   isFileList: Ie,
@@ -190,6 +190,7 @@ const Ve = (e, t, n, { allOwnKeys: r } = {}) => (F(t, (s, o) => {
   isHTMLForm: et,
   hasOwnProperty: re,
   hasOwnProp: re,
+  // an alias to avoid ESLint no-prototype-builtins detection
   reduceDescriptors: Oe,
   freezeMethods: rt,
   toObjectSet: st,
@@ -201,27 +202,31 @@ const Ve = (e, t, n, { allOwnKeys: r } = {}) => (F(t, (s, o) => {
   isContextDefined: be,
   toJSONObject: at
 };
-function E(e, t, n, r, s) {
+function y(e, t, n, r, s) {
   Error.call(this), Error.captureStackTrace ? Error.captureStackTrace(this, this.constructor) : this.stack = new Error().stack, this.message = e, this.name = "AxiosError", t && (this.code = t), n && (this.config = n), r && (this.request = r), s && (this.response = s);
 }
-a.inherits(E, Error, {
+a.inherits(y, Error, {
   toJSON: function() {
     return {
+      // Standard
       message: this.message,
       name: this.name,
+      // Microsoft
       description: this.description,
       number: this.number,
+      // Mozilla
       fileName: this.fileName,
       lineNumber: this.lineNumber,
       columnNumber: this.columnNumber,
       stack: this.stack,
+      // Axios
       config: a.toJSONObject(this.config),
       code: this.code,
       status: this.response && this.response.status ? this.response.status : null
     };
   }
 });
-const Se = E.prototype, Re = {};
+const Se = y.prototype, Re = {};
 [
   "ERR_BAD_OPTION_VALUE",
   "ERR_BAD_OPTION",
@@ -235,16 +240,17 @@ const Se = E.prototype, Re = {};
   "ERR_CANCELED",
   "ERR_NOT_SUPPORT",
   "ERR_INVALID_URL"
+  // eslint-disable-next-line func-names
 ].forEach((e) => {
   Re[e] = { value: e };
 });
-Object.defineProperties(E, Re);
+Object.defineProperties(y, Re);
 Object.defineProperty(Se, "isAxiosError", { value: !0 });
-E.from = (e, t, n, r, s, o) => {
+y.from = (e, t, n, r, s, o) => {
   const i = Object.create(Se);
   return a.toFlatObject(e, i, function(d) {
     return d !== Error.prototype;
-  }, (u) => u !== "isAxiosError"), E.call(i, e.message, t, n, r, s), i.cause = e, i.name = e.name, o && Object.assign(i, o), i;
+  }, (u) => u !== "isAxiosError"), y.call(i, e.message, t, n, r, s), i.cause = e, i.name = e.name, o && Object.assign(i, o), i;
 };
 var ct = typeof self == "object" ? self.FormData : window.FormData;
 const ut = ct;
@@ -287,7 +293,7 @@ function I(e, t, n) {
     if (a.isDate(f))
       return f.toISOString();
     if (!d && a.isBlob(f))
-      throw new E("Blob is not supported. Use a Buffer instead.");
+      throw new y("Blob is not supported. Use a Buffer instead.");
     return a.isArrayBuffer(f) || a.isTypedArray(f) ? d && typeof Blob == "function" ? new Blob([f]) : Buffer.from(f) : f;
   }
   function l(f, m, S) {
@@ -298,6 +304,7 @@ function I(e, t, n) {
       else if (a.isArray(f) && lt(f) || a.isFileList(f) || a.endsWith(m, "[]") && (b = a.toArray(f)))
         return m = Ae(m), b.forEach(function(B, De) {
           !(a.isUndefined(B) || B === null) && t.append(
+            // eslint-disable-next-line no-nested-ternary
             i === !0 ? se([m], De, o) : i === null ? m : m + "[]",
             c(B)
           );
@@ -310,7 +317,7 @@ function I(e, t, n) {
     convertValue: c,
     isVisitable: K
   });
-  function y(f, m) {
+  function E(f, m) {
     if (!a.isUndefined(f)) {
       if (h.indexOf(f) !== -1)
         throw Error("Circular reference detected in " + m.join("."));
@@ -321,13 +328,13 @@ function I(e, t, n) {
           a.isString(x) ? x.trim() : x,
           m,
           p
-        )) === !0 && y(b, m ? m.concat(x) : [x]);
+        )) === !0 && E(b, m ? m.concat(x) : [x]);
       }), h.pop();
     }
   }
   if (!a.isObject(e))
     throw new TypeError("data must be an object");
-  return y(e), t;
+  return E(e), t;
 }
 function oe(e) {
   const t = {
@@ -376,6 +383,14 @@ class pt {
   constructor() {
     this.handlers = [];
   }
+  /**
+   * Add a new interceptor to the stack
+   *
+   * @param {Function} fulfilled The function to handle `then` for a `Promise`
+   * @param {Function} rejected The function to handle `reject` for a `Promise`
+   *
+   * @return {Number} An ID used to remove interceptor later
+   */
   use(t, n, r) {
     return this.handlers.push({
       fulfilled: t,
@@ -384,12 +399,34 @@ class pt {
       runWhen: r ? r.runWhen : null
     }), this.handlers.length - 1;
   }
+  /**
+   * Remove an interceptor from the stack
+   *
+   * @param {Number} id The ID that was returned by `use`
+   *
+   * @returns {Boolean} `true` if the interceptor was removed, `false` otherwise
+   */
   eject(t) {
     this.handlers[t] && (this.handlers[t] = null);
   }
+  /**
+   * Clear all interceptors from the stack
+   *
+   * @returns {void}
+   */
   clear() {
     this.handlers && (this.handlers = []);
   }
+  /**
+   * Iterate over all the registered interceptors
+   *
+   * This method is particularly useful for skipping over any
+   * interceptors that may have become `null` calling `eject`.
+   *
+   * @param {Function} fn The function to call for each interceptor
+   *
+   * @returns {void}
+   */
   forEach(t) {
     a.forEach(this.handlers, function(r) {
       r !== null && t(r);
@@ -460,7 +497,7 @@ function At(e, t, n) {
     }
   return (n || JSON.stringify)(e);
 }
-const q = {
+const J = {
   transitional: xe,
   adapter: ["xhr", "http"],
   transformRequest: [function(t, n) {
@@ -489,18 +526,22 @@ const q = {
     return o || s ? (n.setContentType("application/json", !1), At(t)) : t;
   }],
   transformResponse: [function(t) {
-    const n = this.transitional || q.transitional, r = n && n.forcedJSONParsing, s = this.responseType === "json";
+    const n = this.transitional || J.transitional, r = n && n.forcedJSONParsing, s = this.responseType === "json";
     if (t && a.isString(t) && (r && !this.responseType || s)) {
       const i = !(n && n.silentJSONParsing) && s;
       try {
         return JSON.parse(t);
       } catch (u) {
         if (i)
-          throw u.name === "SyntaxError" ? E.from(u, E.ERR_BAD_RESPONSE, this, null, this.response) : u;
+          throw u.name === "SyntaxError" ? y.from(u, y.ERR_BAD_RESPONSE, this, null, this.response) : u;
       }
     }
     return t;
   }],
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
   timeout: 0,
   xsrfCookieName: "XSRF-TOKEN",
   xsrfHeaderName: "X-XSRF-TOKEN",
@@ -520,12 +561,12 @@ const q = {
   }
 };
 a.forEach(["delete", "get", "head"], function(t) {
-  q.headers[t] = {};
+  J.headers[t] = {};
 });
 a.forEach(["post", "put", "patch"], function(t) {
-  q.headers[t] = a.merge(Rt);
+  J.headers[t] = a.merge(Rt);
 });
-const ee = q, Tt = a.toObjectSet([
+const ee = J, Tt = a.toObjectSet([
   "age",
   "authorization",
   "content-length",
@@ -570,7 +611,7 @@ function Nt(e) {
 function ce(e, t, n, r) {
   if (a.isFunction(r))
     return r.call(this, t, n);
-  if (!!a.isString(t)) {
+  if (a.isString(t)) {
     if (a.isString(r))
       return t.indexOf(r) !== -1;
     if (a.isRegExp(r))
@@ -591,7 +632,7 @@ function _t(e, t) {
     });
   });
 }
-class J {
+class q {
   constructor(t) {
     t && this.set(t);
   }
@@ -694,10 +735,10 @@ class J {
     return a.isArray(t) ? t.forEach(o) : o(t), this;
   }
 }
-J.accessor(["Content-Type", "Content-Length", "Accept", "Accept-Encoding", "User-Agent"]);
-a.freezeMethods(J.prototype);
-a.freezeMethods(J);
-const R = J;
+q.accessor(["Content-Type", "Content-Length", "Accept", "Accept-Encoding", "User-Agent"]);
+a.freezeMethods(q.prototype);
+a.freezeMethods(q);
+const R = q;
 function z(e, t) {
   const n = this || ee, r = t || n, s = R.from(r.headers);
   let o = r.data;
@@ -709,47 +750,53 @@ function Pe(e) {
   return !!(e && e.__CANCEL__);
 }
 function D(e, t, n) {
-  E.call(this, e == null ? "canceled" : e, E.ERR_CANCELED, t, n), this.name = "CanceledError";
+  y.call(this, e ?? "canceled", y.ERR_CANCELED, t, n), this.name = "CanceledError";
 }
-a.inherits(D, E, {
+a.inherits(D, y, {
   __CANCEL__: !0
 });
 const Ct = null;
 function Ft(e, t, n) {
   const r = n.config.validateStatus;
-  !n.status || !r || r(n.status) ? e(n) : t(new E(
+  !n.status || !r || r(n.status) ? e(n) : t(new y(
     "Request failed with status code " + n.status,
-    [E.ERR_BAD_REQUEST, E.ERR_BAD_RESPONSE][Math.floor(n.status / 100) - 4],
+    [y.ERR_BAD_REQUEST, y.ERR_BAD_RESPONSE][Math.floor(n.status / 100) - 4],
     n.config,
     n.request,
     n
   ));
 }
-const Dt = O.isStandardBrowserEnv ? function() {
-  return {
-    write: function(n, r, s, o, i, u) {
-      const d = [];
-      d.push(n + "=" + encodeURIComponent(r)), a.isNumber(s) && d.push("expires=" + new Date(s).toGMTString()), a.isString(o) && d.push("path=" + o), a.isString(i) && d.push("domain=" + i), u === !0 && d.push("secure"), document.cookie = d.join("; ");
-    },
-    read: function(n) {
-      const r = document.cookie.match(new RegExp("(^|;\\s*)(" + n + ")=([^;]*)"));
-      return r ? decodeURIComponent(r[3]) : null;
-    },
-    remove: function(n) {
-      this.write(n, "", Date.now() - 864e5);
-    }
-  };
-}() : function() {
-  return {
-    write: function() {
-    },
-    read: function() {
-      return null;
-    },
-    remove: function() {
-    }
-  };
-}();
+const Dt = O.isStandardBrowserEnv ? (
+  // Standard browser envs support document.cookie
+  function() {
+    return {
+      write: function(n, r, s, o, i, u) {
+        const d = [];
+        d.push(n + "=" + encodeURIComponent(r)), a.isNumber(s) && d.push("expires=" + new Date(s).toGMTString()), a.isString(o) && d.push("path=" + o), a.isString(i) && d.push("domain=" + i), u === !0 && d.push("secure"), document.cookie = d.join("; ");
+      },
+      read: function(n) {
+        const r = document.cookie.match(new RegExp("(^|;\\s*)(" + n + ")=([^;]*)"));
+        return r ? decodeURIComponent(r[3]) : null;
+      },
+      remove: function(n) {
+        this.write(n, "", Date.now() - 864e5);
+      }
+    };
+  }()
+) : (
+  // Non standard browser env (web workers, react-native) lack needed support.
+  function() {
+    return {
+      write: function() {
+      },
+      read: function() {
+        return null;
+      },
+      remove: function() {
+      }
+    };
+  }()
+);
 function Bt(e) {
   return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(e);
 }
@@ -759,31 +806,38 @@ function Lt(e, t) {
 function _e(e, t) {
   return e && !Bt(t) ? Lt(e, t) : t;
 }
-const Ut = O.isStandardBrowserEnv ? function() {
-  const t = /(msie|trident)/i.test(navigator.userAgent), n = document.createElement("a");
-  let r;
-  function s(o) {
-    let i = o;
-    return t && (n.setAttribute("href", i), i = n.href), n.setAttribute("href", i), {
-      href: n.href,
-      protocol: n.protocol ? n.protocol.replace(/:$/, "") : "",
-      host: n.host,
-      search: n.search ? n.search.replace(/^\?/, "") : "",
-      hash: n.hash ? n.hash.replace(/^#/, "") : "",
-      hostname: n.hostname,
-      port: n.port,
-      pathname: n.pathname.charAt(0) === "/" ? n.pathname : "/" + n.pathname
+const Ut = O.isStandardBrowserEnv ? (
+  // Standard browser envs have full support of the APIs needed to test
+  // whether the request URL is of the same origin as current location.
+  function() {
+    const t = /(msie|trident)/i.test(navigator.userAgent), n = document.createElement("a");
+    let r;
+    function s(o) {
+      let i = o;
+      return t && (n.setAttribute("href", i), i = n.href), n.setAttribute("href", i), {
+        href: n.href,
+        protocol: n.protocol ? n.protocol.replace(/:$/, "") : "",
+        host: n.host,
+        search: n.search ? n.search.replace(/^\?/, "") : "",
+        hash: n.hash ? n.hash.replace(/^#/, "") : "",
+        hostname: n.hostname,
+        port: n.port,
+        pathname: n.pathname.charAt(0) === "/" ? n.pathname : "/" + n.pathname
+      };
+    }
+    return r = s(window.location.href), function(i) {
+      const u = a.isString(i) ? s(i) : i;
+      return u.protocol === r.protocol && u.host === r.host;
     };
-  }
-  return r = s(window.location.href), function(i) {
-    const u = a.isString(i) ? s(i) : i;
-    return u.protocol === r.protocol && u.host === r.host;
-  };
-}() : function() {
-  return function() {
-    return !0;
-  };
-}();
+  }()
+) : (
+  // Non standard browser envs (web workers, react-native) lack needed support.
+  function() {
+    return function() {
+      return !0;
+    };
+  }()
+);
 function jt(e) {
   const t = /^([-+\w]{1,25})(:?\/\/|:)/.exec(e);
   return t && t[1] || "";
@@ -800,8 +854,8 @@ function kt(e, t) {
       p += n[h++], h = h % e;
     if (s = (s + 1) % e, s === o && (o = (o + 1) % e), c - i < t)
       return;
-    const y = l && c - l;
-    return y ? Math.round(p * 1e3 / y) : void 0;
+    const E = l && c - l;
+    return E ? Math.round(p * 1e3 / E) : void 0;
   };
 }
 function ue(e, t) {
@@ -833,21 +887,21 @@ const Ht = typeof XMLHttpRequest < "u", Mt = Ht && function(e) {
     a.isFormData(s) && (O.isStandardBrowserEnv || O.isStandardBrowserWebWorkerEnv) && o.setContentType(!1);
     let c = new XMLHttpRequest();
     if (e.auth) {
-      const y = e.auth.username || "", f = e.auth.password ? unescape(encodeURIComponent(e.auth.password)) : "";
-      o.set("Authorization", "Basic " + btoa(y + ":" + f));
+      const E = e.auth.username || "", f = e.auth.password ? unescape(encodeURIComponent(e.auth.password)) : "";
+      o.set("Authorization", "Basic " + btoa(E + ":" + f));
     }
     const l = _e(e.baseURL, e.url);
     c.open(e.method.toUpperCase(), ge(l, e.params, e.paramsSerializer), !0), c.timeout = e.timeout;
     function h() {
       if (!c)
         return;
-      const y = R.from(
+      const E = R.from(
         "getAllResponseHeaders" in c && c.getAllResponseHeaders()
       ), m = {
         data: !i || i === "text" || i === "json" ? c.responseText : c.response,
         status: c.status,
         statusText: c.statusText,
-        headers: y,
+        headers: E,
         config: e,
         request: c
       };
@@ -860,30 +914,30 @@ const Ht = typeof XMLHttpRequest < "u", Mt = Ht && function(e) {
     if ("onloadend" in c ? c.onloadend = h : c.onreadystatechange = function() {
       !c || c.readyState !== 4 || c.status === 0 && !(c.responseURL && c.responseURL.indexOf("file:") === 0) || setTimeout(h);
     }, c.onabort = function() {
-      !c || (r(new E("Request aborted", E.ECONNABORTED, e, c)), c = null);
+      c && (r(new y("Request aborted", y.ECONNABORTED, e, c)), c = null);
     }, c.onerror = function() {
-      r(new E("Network Error", E.ERR_NETWORK, e, c)), c = null;
+      r(new y("Network Error", y.ERR_NETWORK, e, c)), c = null;
     }, c.ontimeout = function() {
       let f = e.timeout ? "timeout of " + e.timeout + "ms exceeded" : "timeout exceeded";
       const m = e.transitional || xe;
-      e.timeoutErrorMessage && (f = e.timeoutErrorMessage), r(new E(
+      e.timeoutErrorMessage && (f = e.timeoutErrorMessage), r(new y(
         f,
-        m.clarifyTimeoutError ? E.ETIMEDOUT : E.ECONNABORTED,
+        m.clarifyTimeoutError ? y.ETIMEDOUT : y.ECONNABORTED,
         e,
         c
       )), c = null;
     }, O.isStandardBrowserEnv) {
-      const y = (e.withCredentials || Ut(l)) && e.xsrfCookieName && Dt.read(e.xsrfCookieName);
-      y && o.set(e.xsrfHeaderName, y);
+      const E = (e.withCredentials || Ut(l)) && e.xsrfCookieName && Dt.read(e.xsrfCookieName);
+      E && o.set(e.xsrfHeaderName, E);
     }
     s === void 0 && o.setContentType(null), "setRequestHeader" in c && a.forEach(o.toJSON(), function(f, m) {
       c.setRequestHeader(m, f);
-    }), a.isUndefined(e.withCredentials) || (c.withCredentials = !!e.withCredentials), i && i !== "json" && (c.responseType = e.responseType), typeof e.onDownloadProgress == "function" && c.addEventListener("progress", ue(e.onDownloadProgress, !0)), typeof e.onUploadProgress == "function" && c.upload && c.upload.addEventListener("progress", ue(e.onUploadProgress)), (e.cancelToken || e.signal) && (u = (y) => {
-      !c || (r(!y || y.type ? new D(null, e, c) : y), c.abort(), c = null);
+    }), a.isUndefined(e.withCredentials) || (c.withCredentials = !!e.withCredentials), i && i !== "json" && (c.responseType = e.responseType), typeof e.onDownloadProgress == "function" && c.addEventListener("progress", ue(e.onDownloadProgress, !0)), typeof e.onUploadProgress == "function" && c.upload && c.upload.addEventListener("progress", ue(e.onUploadProgress)), (e.cancelToken || e.signal) && (u = (E) => {
+      c && (r(!E || E.type ? new D(null, e, c) : E), c.abort(), c = null);
     }, e.cancelToken && e.cancelToken.subscribe(u), e.signal && (e.signal.aborted ? u() : e.signal.addEventListener("abort", u)));
     const p = jt(l);
     if (p && O.protocols.indexOf(p) === -1) {
-      r(new E("Unsupported protocol " + p + ":", E.ERR_BAD_REQUEST, e));
+      r(new y("Unsupported protocol " + p + ":", y.ERR_BAD_REQUEST, e));
       return;
     }
     c.send(s || null);
@@ -909,7 +963,7 @@ const It = {
     for (let s = 0; s < t && (n = e[s], !(r = a.isString(n) ? j[n.toLowerCase()] : n)); s++)
       ;
     if (!r)
-      throw r === !1 ? new E(
+      throw r === !1 ? new y(
         `Adapter ${n} is not supported by the environment`,
         "ERR_NOT_SUPPORT"
       ) : new Error(
@@ -1022,9 +1076,9 @@ te.transitional = function(t, n, r) {
   }
   return (o, i, u) => {
     if (t === !1)
-      throw new E(
+      throw new y(
         s(i, " has been removed" + (n ? " in " + n : "")),
-        E.ERR_DEPRECATED
+        y.ERR_DEPRECATED
       );
     return n && !de[i] && (de[i] = !0, console.warn(
       s(
@@ -1034,9 +1088,9 @@ te.transitional = function(t, n, r) {
     )), t ? t(o, i, u) : !0;
   };
 };
-function qt(e, t, n) {
+function Jt(e, t, n) {
   if (typeof e != "object")
-    throw new E("options must be an object", E.ERR_BAD_OPTION_VALUE);
+    throw new y("options must be an object", y.ERR_BAD_OPTION_VALUE);
   const r = Object.keys(e);
   let s = r.length;
   for (; s-- > 0; ) {
@@ -1044,15 +1098,15 @@ function qt(e, t, n) {
     if (i) {
       const u = e[o], d = u === void 0 || i(u, o, e);
       if (d !== !0)
-        throw new E("option " + o + " must be " + d, E.ERR_BAD_OPTION_VALUE);
+        throw new y("option " + o + " must be " + d, y.ERR_BAD_OPTION_VALUE);
       continue;
     }
     if (n !== !0)
-      throw new E("Unknown option " + o, E.ERR_BAD_OPTION);
+      throw new y("Unknown option " + o, y.ERR_BAD_OPTION);
   }
 }
 const v = {
-  assertOptions: qt,
+  assertOptions: Jt,
   validators: te
 }, T = v.validators;
 class H {
@@ -1062,6 +1116,14 @@ class H {
       response: new ie()
     };
   }
+  /**
+   * Dispatch a request
+   *
+   * @param {String|Object} configOrUrl The config specific for this request (merged with this.defaults)
+   * @param {?Object} config
+   *
+   * @returns {Promise} The Promise to be fulfilled
+   */
   request(t, n) {
     typeof t == "string" ? (n = n || {}, n.url = t) : n = t || {}, n = N(this.defaults, n);
     const { transitional: r, paramsSerializer: s, headers: o } = n;
@@ -1100,18 +1162,18 @@ class H {
       return l;
     }
     p = u.length;
-    let y = n;
+    let E = n;
     for (h = 0; h < p; ) {
       const f = u[h++], m = u[h++];
       try {
-        y = f(y);
+        E = f(E);
       } catch (S) {
         m.call(this, S);
         break;
       }
     }
     try {
-      l = le.call(this, y);
+      l = le.call(this, E);
     } catch (f) {
       return Promise.reject(f);
     }
@@ -1178,10 +1240,16 @@ class ne {
       r.reason || (r.reason = new D(o, i, u), n(r.reason));
     });
   }
+  /**
+   * Throws a `CanceledError` if cancellation has been requested.
+   */
   throwIfRequested() {
     if (this.reason)
       throw this.reason;
   }
+  /**
+   * Subscribe to the cancel signal
+   */
   subscribe(t) {
     if (this.reason) {
       t(this.reason);
@@ -1189,12 +1257,19 @@ class ne {
     }
     this._listeners ? this._listeners.push(t) : this._listeners = [t];
   }
+  /**
+   * Unsubscribe from the cancel signal
+   */
   unsubscribe(t) {
     if (!this._listeners)
       return;
     const n = this._listeners.indexOf(t);
     n !== -1 && this._listeners.splice(n, 1);
   }
+  /**
+   * Returns an object that contains a new `CancelToken` and a function that, when called,
+   * cancels the `CancelToken`.
+   */
   static source() {
     let t;
     return {
@@ -1205,7 +1280,7 @@ class ne {
     };
   }
 }
-const Jt = ne;
+const qt = ne;
 function zt(e) {
   return function(n) {
     return e.apply(null, n);
@@ -1223,11 +1298,11 @@ function Fe(e) {
 const w = Fe(ee);
 w.Axios = k;
 w.CanceledError = D;
-w.CancelToken = Jt;
+w.CancelToken = qt;
 w.isCancel = Pe;
 w.VERSION = Ce;
 w.toFormData = I;
-w.AxiosError = E;
+w.AxiosError = y;
 w.Cancel = w.CanceledError;
 w.all = function(t) {
   return Promise.all(t);
@@ -1264,10 +1339,10 @@ const Xt = {
   method: "post",
   timeout: 5e3,
   loading: {
-    start: console.log.bind(null, "\u{1F680} ~ http loading start"),
-    end: console.log.bind(null, "\u{1F680} ~ http loading end")
+    start: console.log.bind(null, "🚀 ~ http loading start"),
+    end: console.log.bind(null, "🚀 ~ http loading end")
   },
-  fail: console.error.bind(null, "\u{1F680} ~ http loading error"),
+  fail: console.error.bind(null, "🚀 ~ http loading error"),
   checkFn: (e) => e,
   headers: {
     getCommonHeaders: () => ({}),
@@ -1281,17 +1356,14 @@ const Xt = {
     adapter: d
   });
   return h.interceptors.request.use(
-    (p) => {
-      var y;
-      return c.start(), p.baseURL = (y = r == null ? void 0 : r()) != null ? y : n, p;
-    },
+    (p) => (c.start(), p.baseURL || (p.baseURL = (r == null ? void 0 : r()) ?? n), p),
     (p) => (l(p), Promise.reject(p))
   ), h.interceptors.response.use(
     (p) => {
       c.end();
-      const y = p.data;
+      const E = p.data;
       try {
-        return u(y);
+        return u(E);
       } catch (f) {
         l(f);
       }
@@ -1312,10 +1384,10 @@ const Xt = {
     unlink: void 0,
     __instance__: h,
     __mixin__(p) {
-      for (const y in p)
-        if (Object.prototype.hasOwnProperty.call(p, y)) {
-          const f = this[y] || {}, m = p[y];
-          this[y] = {
+      for (const E in p)
+        if (Object.prototype.hasOwnProperty.call(p, E)) {
+          const f = this[E] || {}, m = p[E];
+          this[E] = {
             ...f,
             ...m
           };

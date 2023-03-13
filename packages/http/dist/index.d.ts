@@ -1,20 +1,20 @@
 import { Method, AxiosAdapter, AxiosInstance, AxiosRequestConfig } from 'axios';
 
-declare type Simplify<T> = {
+type Simplify<T> = {
     [P in keyof T]: T[P];
 };
-declare type SetRequired<T, K extends keyof T> = Simplify<Required<Pick<T, K>> & Pick<T, Exclude<keyof T, K>>>;
-declare type AllMethod = Lowercase<Method>;
-declare type Fn<T extends any = any, R extends any = any> = (...args: T[]) => Promise<R>;
-declare type Cbks = {
+type SetRequired<T, K extends keyof T> = Simplify<Required<Pick<T, K>> & Pick<T, Exclude<keyof T, K>>>;
+type AllMethod = Lowercase<Method>;
+type Fn<T extends any = any, R extends any = any> = (...args: T[]) => Promise<R>;
+type Cbks = {
     [k in AllMethod]?: Record<string, Fn>;
 };
-declare type Handlers<R extends Cbks> = {
+type Handlers<R extends Cbks> = {
     [P in keyof R]?: R[P];
 };
-declare type Headers = Record<string, string>;
-declare type Req = <X extends any = any>(config: AxiosRequestConfig<unknown>) => Promise<X>;
-declare type Prototype = {
+type Headers = Record<string, string>;
+type Req = <X extends any = any>(config: AxiosRequestConfig<unknown>) => Promise<X>;
+type Prototype = {
     __instance__: AxiosInstance;
     __mixin__<T extends Cbks>(extentions: Handlers<T>): SetRequired<Handlers<T>, keyof T> & ThisType<Handlers<T>>;
     freeReq: Req;
@@ -25,7 +25,7 @@ declare enum UsefulContentTypes {
     URLEncoded = "application/x-www-form-urlencoded; charset=UTF-8",
     FormData = "multipart/form-data; charset=UTF-8"
 }
-declare type DefaultMsg = {
+type DefaultMsg = {
     code: number;
     msg: string;
     data: any;

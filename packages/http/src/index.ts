@@ -151,7 +151,9 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
   net.interceptors.request.use(
     (req) => {
       loading.start();
-      req.baseURL = lazyBaseURL?.() ?? baseURL;
+      if (!req.baseURL) {
+        req.baseURL = lazyBaseURL?.() ?? baseURL;
+      }
       return req;
     },
     (error) => {
