@@ -175,10 +175,10 @@ declare const _default$5: vue.DefineComponent<{
     "onUpdate:limit"?: (...args: any[]) => any;
 }, {
     layout: string;
-    pageSizes: number[];
-    background: boolean;
-    autoScroll: boolean;
     hidden: boolean;
+    background: boolean;
+    pageSizes: number[];
+    autoScroll: boolean;
 }>;
 
 declare const _default$4: vue.DefineComponent<{
@@ -211,7 +211,7 @@ declare const _default$4: vue.DefineComponent<{
         type: ObjectConstructor;
         default: any;
     };
-}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("sure" | "clear" | "update:modelValue")[], "sure" | "clear" | "update:modelValue", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("clear" | "sure" | "update:modelValue")[], "clear" | "sure" | "update:modelValue", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     modelValue: BooleanConstructor;
     realTitle: StringConstructor;
     sureText: {
@@ -242,8 +242,8 @@ declare const _default$4: vue.DefineComponent<{
         default: any;
     };
 }>> & {
-    onSure?: (...args: any[]) => any;
     onClear?: (...args: any[]) => any;
+    onSure?: (...args: any[]) => any;
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {
     modelValue: boolean;
@@ -370,8 +370,8 @@ declare const _default: vue.DefineComponent<{
     "onUpdate:start"?: (...args: any[]) => any;
     "onUpdate:end"?: (...args: any[]) => any;
 }, {
-    start: string | number;
     end: string | number;
+    start: string | number;
     unix: boolean;
 }>;
 

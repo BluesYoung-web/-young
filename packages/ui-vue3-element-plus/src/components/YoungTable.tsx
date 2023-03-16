@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
- * @LastEditTime: 2023-03-16 11:35:42
+ * @LastEditTime: 2023-03-16 11:42:12
  * @Description:
  */
 import { nextTick, onActivated, ref, watchEffect, defineComponent, onMounted } from 'vue';
@@ -221,7 +221,9 @@ export default defineComponent({
               header: (scope) => {
                 if (tableHead_1.value[index].tool_content) {
                   return (
-                    <>
+                    <div
+                      style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                    >
                       <span>{scope.column.label}</span>
                       <ElTooltip
                         placement='bottom'
@@ -229,8 +231,8 @@ export default defineComponent({
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="1em"
-                          height="1em"
+                          width="1.2em"
+                          height="1.2em"
                           viewBox="0 0 256 256"
                         >
                           <path
@@ -239,7 +241,7 @@ export default defineComponent({
                           ></path>
                         </svg>
                       </ElTooltip>
-                    </>
+                    </div>
                   );
                 } else {
                   return <span>{scope.column.label}</span>;
