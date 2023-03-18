@@ -53,7 +53,7 @@ interface TableHeadItem<T extends any = any> {
 type TableDataItem<T extends any = any> = {
     [key in keyof T]: T[key];
 } & Record<string, any>;
-declare const _default$6: vue.DefineComponent<{
+declare const _default$7: vue.DefineComponent<{
     tableData: {
         type: PropType<TableDataItem<any>[]>;
         required: true;
@@ -103,7 +103,7 @@ declare const _default$6: vue.DefineComponent<{
     rowDraggable: boolean;
 }>;
 
-declare const _default$5: vue.DefineComponent<{
+declare const _default$6: vue.DefineComponent<{
     total: {
         readonly type: NumberConstructor;
         readonly required: true;
@@ -181,7 +181,7 @@ declare const _default$5: vue.DefineComponent<{
     autoScroll: boolean;
 }>;
 
-declare const _default$4: vue.DefineComponent<{
+declare const _default$5: vue.DefineComponent<{
     modelValue: BooleanConstructor;
     realTitle: StringConstructor;
     sureText: {
@@ -263,7 +263,7 @@ type SelectOptionItem<T extends any = any> = {
     disabled?: boolean;
     children?: SelectOptionItem<T>[];
 };
-declare const _default$3: vue.DefineComponent<{
+declare const _default$4: vue.DefineComponent<{
     options: {
         type: PropType<SelectOptionItem<any>[]>;
         required: true;
@@ -275,7 +275,7 @@ declare const _default$3: vue.DefineComponent<{
     };
 }>>, {}>;
 
-declare const _default$2: vue.DefineComponent<{
+declare const _default$3: vue.DefineComponent<{
     modelValue: {
         type: PropType<number[]>;
         required: true;
@@ -289,7 +289,7 @@ declare const _default$2: vue.DefineComponent<{
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {}>;
 
-declare const _default$1: vue.DefineComponent<{
+declare const _default$2: vue.DefineComponent<{
     start: {
         type: StringConstructor;
         required: true;
@@ -340,7 +340,7 @@ declare const _default$1: vue.DefineComponent<{
     step: string;
 }>;
 
-declare const _default: vue.DefineComponent<{
+declare const _default$1: vue.DefineComponent<{
     start: {
         type: (NumberConstructor | StringConstructor)[];
         default: string;
@@ -373,6 +373,39 @@ declare const _default: vue.DefineComponent<{
     end: string | number;
     start: string | number;
     unix: boolean;
+}>;
+
+type YoungImageViewerConf = {
+    /**
+     * 图片目录
+     */
+    srcList: string[];
+    /**
+     * 当前为第几张
+     */
+    index?: number;
+};
+declare const _default: vue.DefineComponent<{
+    onDestroy: {
+        type: FunctionConstructor;
+        default: () => void;
+    };
+    zIndex: {
+        type: NumberConstructor;
+        default: number;
+    };
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, {}, string, vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+    onDestroy: {
+        type: FunctionConstructor;
+        default: () => void;
+    };
+    zIndex: {
+        type: NumberConstructor;
+        default: number;
+    };
+}>>, {
+    zIndex: number;
+    onDestroy: Function;
 }>;
 
 interface UseAutoLoad<T extends any = any> {
@@ -436,4 +469,11 @@ declare const useVerifyCode: (cbk: () => any | Promise<any>, default_wait?: numb
     cancel: () => void;
 };
 
-export { SelectOptionItem, TableDataItem, TableHeadItem, _default as YoungDateRange, _default$4 as YoungDialog, _default$5 as YoungPagination, _default$3 as YoungSelect, _default$6 as YoungTable, _default$1 as YoungTimeRange, _default$2 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useVerifyCode };
+/**
+ * 基于 ElImageViewer 的命令式图片预览
+ * @param conf
+ * @param zIndex
+ */
+declare const useImagePreview: (conf: YoungImageViewerConf, zIndex?: number) => void;
+
+export { SelectOptionItem, TableDataItem, TableHeadItem, _default$1 as YoungDateRange, _default$5 as YoungDialog, _default as YoungImageViewer, YoungImageViewerConf, _default$6 as YoungPagination, _default$4 as YoungSelect, _default$7 as YoungTable, _default$2 as YoungTimeRange, _default$3 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useImagePreview, useVerifyCode };

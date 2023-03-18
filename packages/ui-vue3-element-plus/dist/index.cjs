@@ -6261,32 +6261,32 @@ function markRaw(value) {
   def(value, "__v_skip", true);
   return value;
 }
-function trackRefValue(ref154) {
+function trackRefValue(ref155) {
   if (shouldTrack && activeEffect) {
-    ref154 = toRaw(ref154);
+    ref155 = toRaw(ref155);
     if (process.env.NODE_ENV !== "production") {
-      trackEffects(ref154.dep || (ref154.dep = createDep()), {
-        target: ref154,
+      trackEffects(ref155.dep || (ref155.dep = createDep()), {
+        target: ref155,
         type: "get",
         key: "value"
       });
     } else {
-      trackEffects(ref154.dep || (ref154.dep = createDep()));
+      trackEffects(ref155.dep || (ref155.dep = createDep()));
     }
   }
 }
-function triggerRefValue(ref154, newVal) {
-  ref154 = toRaw(ref154);
-  if (ref154.dep) {
+function triggerRefValue(ref155, newVal) {
+  ref155 = toRaw(ref155);
+  if (ref155.dep) {
     if (process.env.NODE_ENV !== "production") {
-      triggerEffects(ref154.dep, {
-        target: ref154,
+      triggerEffects(ref155.dep, {
+        target: ref155,
         type: "set",
         key: "value",
         newValue: newVal
       });
     } else {
-      triggerEffects(ref154.dep);
+      triggerEffects(ref155.dep);
     }
   }
 }
@@ -6305,11 +6305,11 @@ function createRef(rawValue, shallow) {
   }
   return new RefImpl(rawValue, shallow);
 }
-function triggerRef(ref154) {
-  triggerRefValue(ref154, process.env.NODE_ENV !== "production" ? ref154.value : void 0);
+function triggerRef(ref155) {
+  triggerRefValue(ref155, process.env.NODE_ENV !== "production" ? ref155.value : void 0);
 }
-function unref(ref154) {
-  return isRef(ref154) ? ref154.value : ref154;
+function unref(ref155) {
+  return isRef(ref155) ? ref155.value : ref155;
 }
 function proxyRefs(objectWithRefs) {
   return isReactive(objectWithRefs) ? objectWithRefs : new Proxy(objectWithRefs, shallowUnwrapHandlers);
@@ -7295,7 +7295,7 @@ function markAttrsAccessed() {
   accessedAttrs = true;
 }
 function renderComponentRoot(instance) {
-  const { type: Component, vnode, proxy, withProxy, props, propsOptions: [propsOptions], slots, attrs, emit: emit2, render: render5, renderCache, data, setupState, ctx, inheritAttrs } = instance;
+  const { type: Component, vnode, proxy, withProxy, props, propsOptions: [propsOptions], slots, attrs, emit: emit2, render: render6, renderCache, data, setupState, ctx, inheritAttrs } = instance;
   let result;
   let fallthroughAttrs;
   const prev = setCurrentRenderingInstance(instance);
@@ -7305,21 +7305,21 @@ function renderComponentRoot(instance) {
   try {
     if (vnode.shapeFlag & 4) {
       const proxyToUse = withProxy || proxy;
-      result = normalizeVNode(render5.call(proxyToUse, proxyToUse, renderCache, props, setupState, data, ctx));
+      result = normalizeVNode(render6.call(proxyToUse, proxyToUse, renderCache, props, setupState, data, ctx));
       fallthroughAttrs = attrs;
     } else {
-      const render6 = Component;
+      const render7 = Component;
       if (process.env.NODE_ENV !== "production" && attrs === props) {
         markAttrsAccessed();
       }
-      result = normalizeVNode(render6.length > 1 ? render6(props, process.env.NODE_ENV !== "production" ? {
+      result = normalizeVNode(render7.length > 1 ? render7(props, process.env.NODE_ENV !== "production" ? {
         get attrs() {
           markAttrsAccessed();
           return attrs;
         },
         slots,
         emit: emit2
-      } : { attrs, slots, emit: emit2 }) : render6(
+      } : { attrs, slots, emit: emit2 }) : render7(
         props,
         null
         /* we know it doesn't need it */
@@ -8446,9 +8446,9 @@ function defineAsyncComponent(source) {
   });
 }
 function createInnerComp(comp, parent) {
-  const { ref: ref154, props, children, ce: ce2 } = parent.vnode;
+  const { ref: ref155, props, children, ce: ce2 } = parent.vnode;
   const vnode = createVNode(comp, props, children);
-  vnode.ref = ref154;
+  vnode.ref = ref155;
   vnode.ce = ce2;
   delete parent.vnode.ce;
   return vnode;
@@ -8847,7 +8847,7 @@ function applyOptions(instance) {
     beforeUnmount,
     destroyed,
     unmounted,
-    render: render5,
+    render: render6,
     renderTracked,
     renderTriggered,
     errorCaptured,
@@ -8998,8 +8998,8 @@ function applyOptions(instance) {
       instance.exposed = {};
     }
   }
-  if (render5 && instance.render === NOOP) {
-    instance.render = render5;
+  if (render6 && instance.render === NOOP) {
+    instance.render = render6;
   }
   if (inheritAttrs != null) {
     instance.inheritAttrs = inheritAttrs;
@@ -9568,7 +9568,7 @@ function createAppContext() {
     emitsCache: /* @__PURE__ */ new WeakMap()
   };
 }
-function createAppAPI(render5, hydrate2) {
+function createAppAPI(render6, hydrate2) {
   return function createApp4(rootComponent, rootProps = null) {
     if (!isFunction(rootComponent)) {
       rootComponent = Object.assign({}, rootComponent);
@@ -9658,13 +9658,13 @@ function createAppAPI(render5, hydrate2) {
           vnode.appContext = context;
           if (process.env.NODE_ENV !== "production") {
             context.reload = () => {
-              render5(cloneVNode(vnode), rootContainer, isSVG);
+              render6(cloneVNode(vnode), rootContainer, isSVG);
             };
           }
           if (isHydrate && hydrate2) {
             hydrate2(vnode, rootContainer);
           } else {
-            render5(vnode, rootContainer, isSVG);
+            render6(vnode, rootContainer, isSVG);
           }
           isMounted = true;
           app._container = rootContainer;
@@ -9681,7 +9681,7 @@ If you want to remount the same app, move your app creation logic into a factory
       },
       unmount() {
         if (isMounted) {
-          render5(null, app._container);
+          render6(null, app._container);
           if (process.env.NODE_ENV !== "production" || __VUE_PROD_DEVTOOLS__) {
             app._instance = null;
             devtoolsUnmountApp(app);
@@ -9712,7 +9712,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   }
   const refValue = vnode.shapeFlag & 4 ? getExposeProxy(vnode.component) || vnode.component.proxy : vnode.el;
   const value = isUnmount ? null : refValue;
-  const { i: owner, r: ref154 } = rawRef;
+  const { i: owner, r: ref155 } = rawRef;
   if (process.env.NODE_ENV !== "production" && !owner) {
     warn2(`Missing ref owner context. ref cannot be used on hoisted vnodes. A vnode with ref must be created inside the render function.`);
     return;
@@ -9720,7 +9720,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   const oldRef = oldRawRef && oldRawRef.r;
   const refs = owner.refs === EMPTY_OBJ ? owner.refs = {} : owner.refs;
   const setupState = owner.setupState;
-  if (oldRef != null && oldRef !== ref154) {
+  if (oldRef != null && oldRef !== ref155) {
     if (isString(oldRef)) {
       refs[oldRef] = null;
       if (hasOwn(setupState, oldRef)) {
@@ -9730,44 +9730,44 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
       oldRef.value = null;
     }
   }
-  if (isFunction(ref154)) {
-    callWithErrorHandling(ref154, owner, 12, [value, refs]);
+  if (isFunction(ref155)) {
+    callWithErrorHandling(ref155, owner, 12, [value, refs]);
   } else {
-    const _isString = isString(ref154);
-    const _isRef = isRef(ref154);
+    const _isString = isString(ref155);
+    const _isRef = isRef(ref155);
     if (_isString || _isRef) {
       const doSet = () => {
         if (rawRef.f) {
-          const existing = _isString ? hasOwn(setupState, ref154) ? setupState[ref154] : refs[ref154] : ref154.value;
+          const existing = _isString ? hasOwn(setupState, ref155) ? setupState[ref155] : refs[ref155] : ref155.value;
           if (isUnmount) {
             isArray(existing) && remove(existing, refValue);
           } else {
             if (!isArray(existing)) {
               if (_isString) {
-                refs[ref154] = [refValue];
-                if (hasOwn(setupState, ref154)) {
-                  setupState[ref154] = refs[ref154];
+                refs[ref155] = [refValue];
+                if (hasOwn(setupState, ref155)) {
+                  setupState[ref155] = refs[ref155];
                 }
               } else {
-                ref154.value = [refValue];
+                ref155.value = [refValue];
                 if (rawRef.k)
-                  refs[rawRef.k] = ref154.value;
+                  refs[rawRef.k] = ref155.value;
               }
             } else if (!existing.includes(refValue)) {
               existing.push(refValue);
             }
           }
         } else if (_isString) {
-          refs[ref154] = value;
-          if (hasOwn(setupState, ref154)) {
-            setupState[ref154] = value;
+          refs[ref155] = value;
+          if (hasOwn(setupState, ref155)) {
+            setupState[ref155] = value;
           }
         } else if (_isRef) {
-          ref154.value = value;
+          ref155.value = value;
           if (rawRef.k)
             refs[rawRef.k] = value;
         } else if (process.env.NODE_ENV !== "production") {
-          warn2("Invalid template ref type:", ref154, `(${typeof ref154})`);
+          warn2("Invalid template ref type:", ref155, `(${typeof ref155})`);
         }
       };
       if (value) {
@@ -9777,7 +9777,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
         doSet();
       }
     } else if (process.env.NODE_ENV !== "production") {
-      warn2("Invalid template ref type:", ref154, `(${typeof ref154})`);
+      warn2("Invalid template ref type:", ref155, `(${typeof ref155})`);
     }
   }
 }
@@ -9802,7 +9802,7 @@ function createHydrationFunctions(rendererInternals) {
   const hydrateNode = (node, vnode, parentComponent, parentSuspense, slotScopeIds, optimized = false) => {
     const isFragmentStart = isComment(node) && node.data === "[";
     const onMismatch = () => handleMismatch(node, vnode, parentComponent, parentSuspense, slotScopeIds, isFragmentStart);
-    const { type: type4, ref: ref154, shapeFlag, patchFlag } = vnode;
+    const { type: type4, ref: ref155, shapeFlag, patchFlag } = vnode;
     let domType = node.nodeType;
     vnode.el = node;
     if (patchFlag === -2) {
@@ -9903,8 +9903,8 @@ function createHydrationFunctions(rendererInternals) {
           warn2("Invalid HostVNode type:", type4, `(${typeof type4})`);
         }
     }
-    if (ref154 != null) {
-      setRef(ref154, null, parentSuspense, vnode);
+    if (ref155 != null) {
+      setRef(ref155, null, parentSuspense, vnode);
     }
     return nextNode;
   };
@@ -10125,7 +10125,7 @@ function baseCreateRenderer(options, createHydrationFns) {
       optimized = false;
       n2.dynamicChildren = null;
     }
-    const { type: type4, ref: ref154, shapeFlag } = n2;
+    const { type: type4, ref: ref155, shapeFlag } = n2;
     switch (type4) {
       case Text:
         processText(n1, n2, container, anchor);
@@ -10156,8 +10156,8 @@ function baseCreateRenderer(options, createHydrationFns) {
           warn2("Invalid VNode type:", type4, `(${typeof type4})`);
         }
     }
-    if (ref154 != null && parentComponent) {
-      setRef(ref154, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
+    if (ref155 != null && parentComponent) {
+      setRef(ref155, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
     }
   };
   const processText = (n1, n2, container, anchor) => {
@@ -10908,9 +10908,9 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
   };
   const unmount = (vnode, parentComponent, parentSuspense, doRemove = false, optimized = false) => {
-    const { type: type4, props, ref: ref154, children, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
-    if (ref154 != null) {
-      setRef(ref154, null, parentSuspense, vnode, true);
+    const { type: type4, props, ref: ref155, children, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
+    if (ref155 != null) {
+      setRef(ref155, null, parentSuspense, vnode, true);
     }
     if (shapeFlag & 256) {
       parentComponent.ctx.deactivate(vnode);
@@ -11041,7 +11041,7 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
     return hostNextSibling(vnode.anchor || vnode.el);
   };
-  const render5 = (vnode, container, isSVG) => {
+  const render6 = (vnode, container, isSVG) => {
     if (vnode == null) {
       if (container._vnode) {
         unmount(container._vnode, null, null, true);
@@ -11071,9 +11071,9 @@ function baseCreateRenderer(options, createHydrationFns) {
     [hydrate2, hydrateNode] = createHydrationFns(internals);
   }
   return {
-    render: render5,
+    render: render6,
     hydrate: hydrate2,
-    createApp: createAppAPI(render5, hydrate2)
+    createApp: createAppAPI(render6, hydrate2)
   };
 }
 function toggleRecurse({ effect: effect2, update }, allowed) {
@@ -11372,7 +11372,7 @@ function guardReactiveProps(props) {
   return isProxy(props) || InternalObjectKey in props ? extend({}, props) : props;
 }
 function cloneVNode(vnode, extraProps, mergeRef = false) {
-  const { props, ref: ref154, patchFlag, children } = vnode;
+  const { props, ref: ref155, patchFlag, children } = vnode;
   const mergedProps = extraProps ? mergeProps(props || {}, extraProps) : props;
   const cloned = {
     __v_isVNode: true,
@@ -11384,8 +11384,8 @@ function cloneVNode(vnode, extraProps, mergeRef = false) {
       // #2078 in the case of <component :is="vnode" ref="extra"/>
       // if the vnode itself already has a ref, cloneVNode will need to merge
       // the refs so the single vnode can be set on multiple refs
-      mergeRef && ref154 ? isArray(ref154) ? ref154.concat(normalizeRef(extraProps)) : [ref154, normalizeRef(extraProps)] : normalizeRef(extraProps)
-    ) : ref154,
+      mergeRef && ref155 ? isArray(ref155) ? ref155.concat(normalizeRef(extraProps)) : [ref155, normalizeRef(extraProps)] : normalizeRef(extraProps)
+    ) : ref155,
     scopeId: vnode.scopeId,
     slotScopeIds: vnode.slotScopeIds,
     children: process.env.NODE_ENV !== "production" && patchFlag === -1 && isArray(children) ? children.map(deepCloneVNode) : children,
@@ -12149,12 +12149,12 @@ function initCustomFormatter() {
     window.devtoolsFormatters = [formatter2];
   }
 }
-function withMemo(memo, render5, cache2, index2) {
+function withMemo(memo, render6, cache2, index2) {
   const cached = cache2[index2];
   if (cached && isMemoSame(cached, memo)) {
     return cached;
   }
-  const ret = render5();
+  const ret = render6();
   ret.memo = memo.slice();
   return cache2[index2] = ret;
 }
@@ -13183,8 +13183,8 @@ var init_runtime_core_esm_bundler = __esm({
     };
     InternalObjectKey = `__vInternal`;
     normalizeKey = ({ key }) => key != null ? key : null;
-    normalizeRef = ({ ref: ref154, ref_key, ref_for }) => {
-      return ref154 != null ? isString(ref154) || isRef(ref154) || isFunction(ref154) ? { i: currentRenderingInstance, r: ref154, k: ref_key, f: !!ref_for } : ref154 : null;
+    normalizeRef = ({ ref: ref155, ref_key, ref_for }) => {
+      return ref155 != null ? isString(ref155) || isRef(ref155) || isFunction(ref155) ? { i: currentRenderingInstance, r: ref155, k: ref_key, f: !!ref_for } : ref155 : null;
     };
     createVNode = process.env.NODE_ENV !== "production" ? createVNodeWithArgsTransform : _createVNode;
     emptyAppContext = createAppContext();
@@ -14853,9 +14853,9 @@ var require_vue_cjs_prod = __commonJS({
         opts.isCustomElement = (tag) => !!customElements.get(tag);
       }
       const { code } = compilerDom.compile(template, opts);
-      const render5 = new Function("Vue", code)(runtimeDom__namespace);
-      render5._rc = true;
-      return compileCache[key] = render5;
+      const render6 = new Function("Vue", code)(runtimeDom__namespace);
+      render6._rc = true;
+      return compileCache[key] = render6;
     }
     runtimeDom.registerRuntimeCompiler(compileToFunction);
     Object.keys(runtimeDom).forEach(function(k) {
@@ -14924,9 +14924,9 @@ var require_vue_cjs = __commonJS({
         runtimeDom.warn(codeFrame ? `${message2}
 ${codeFrame}` : message2);
       }
-      const render5 = new Function("Vue", code)(runtimeDom__namespace);
-      render5._rc = true;
-      return compileCache[key] = render5;
+      const render6 = new Function("Vue", code)(runtimeDom__namespace);
+      render6._rc = true;
+      return compileCache[key] = render6;
     }
     runtimeDom.registerRuntimeCompiler(compileToFunction);
     Object.keys(runtimeDom).forEach(function(k) {
@@ -18388,6 +18388,7 @@ var src_exports = {};
 __export(src_exports, {
   YoungDateRange: () => YoungDateRange_default,
   YoungDialog: () => YoungDialog_default,
+  YoungImageViewer: () => YoungImageViewer_default,
   YoungPagination: () => YoungPagination_default,
   YoungSelect: () => YoungSelect_default,
   YoungTable: () => YoungTable_default,
@@ -18396,6 +18397,7 @@ __export(src_exports, {
   useAutoLoad: () => useAutoLoad,
   useExport2Excel: () => useExport2Excel,
   useFormMode: () => useFormMode,
+  useImagePreview: () => useImagePreview,
   useVerifyCode: () => useVerifyCode
 });
 module.exports = __toCommonJS(src_exports);
@@ -22917,11 +22919,11 @@ var withNoopInstall = (component2) => {
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/utils/vue/refs.mjs
 var composeRefs = (...refs) => {
   return (el) => {
-    refs.forEach((ref154) => {
-      if (isFunction4(ref154)) {
-        ref154(el);
+    refs.forEach((ref155) => {
+      if (isFunction4(ref155)) {
+        ref155(el);
       } else {
-        ref154.value = el;
+        ref155.value = el;
       }
     });
   };
@@ -23246,11 +23248,11 @@ var useDisabled = (fallback) => {
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/hooks/use-deprecated/index.mjs
-var useDeprecated = ({ from, replacement, scope, version: version6, ref: ref154, type: type4 = "API" }, condition) => {
+var useDeprecated = ({ from, replacement, scope, version: version6, ref: ref155, type: type4 = "API" }, condition) => {
   (0, vue_exports.watch)(() => (0, vue_exports.unref)(condition), (val) => {
     if (val) {
       debugWarn(scope, `[${type4}] ${from} is about to be deprecated in version ${version6}, please use ${replacement} instead.
-For more detail, please visit: ${ref154}
+For more detail, please visit: ${ref155}
 `);
     }
   }, {
@@ -64710,17 +64712,17 @@ var Node2 = class {
     }
     this.updateLeafState();
   }
-  insertBefore(child, ref154) {
+  insertBefore(child, ref155) {
     let index2;
-    if (ref154) {
-      index2 = this.childNodes.indexOf(ref154);
+    if (ref155) {
+      index2 = this.childNodes.indexOf(ref155);
     }
     this.insertChild(child, index2);
   }
-  insertAfter(child, ref154) {
+  insertAfter(child, ref155) {
     let index2;
-    if (ref154) {
-      index2 = this.childNodes.indexOf(ref154);
+    if (ref155) {
+      index2 = this.childNodes.indexOf(ref155);
       if (index2 !== -1)
         index2 += 1;
     }
@@ -70458,6 +70460,67 @@ var YoungDateRange_default = (0, vue_exports.defineComponent)({
   }
 });
 
+// src/components/YoungImageViewer.tsx
+var YoungImageViewer_default = (0, vue_exports.defineComponent)({
+  props: {
+    onDestroy: {
+      type: Function,
+      default: () => console.log("\u4E3A\u4E86\u8282\u7701\u6027\u80FD\uFF0C\u6B64\u65F6\u5E94\u8BE5\u9500\u6BC1dom")
+    },
+    zIndex: {
+      type: Number,
+      default: 9999
+    }
+  },
+  setup(props, { expose }) {
+    const showViewer = (0, vue_exports.ref)(false);
+    const previewConfig = (0, vue_exports.reactive)({
+      srcList: [],
+      index: 0,
+      zIndex: props.zIndex
+    });
+    function wheelHandler(e) {
+      if (!e.ctrlKey)
+        return;
+      if (e.deltaY < 0) {
+        e.preventDefault();
+        return false;
+      } else if (e.deltaY > 0) {
+        e.preventDefault();
+        return false;
+      }
+    }
+    const stopWheelListener = useEventListener("wheel", wheelHandler, {
+      passive: false
+    });
+    let prevOverflow;
+    function show(conf) {
+      previewConfig.srcList = conf.srcList;
+      previewConfig.index = conf.index ?? 0;
+      prevOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      showViewer.value = true;
+    }
+    function close2() {
+      stopWheelListener();
+      document.body.style.overflow = prevOverflow;
+      showViewer.value = false;
+      props.onDestroy();
+    }
+    expose({
+      show,
+      close: close2
+    });
+    return () => showViewer.value && <ElImageViewer
+      zIndex={previewConfig.zIndex}
+      initialIndex={previewConfig.index}
+      urlList={previewConfig.srcList}
+      hideOnClickModal
+      onClose={close2}
+    />;
+  }
+});
+
 // src/hooks/useAutoLoad.ts
 var useAutoLoad = (list, allData, pageSize = 10, pause = (0, vue_exports.ref)(false)) => {
   const elArr = (0, vue_exports.ref)([]);
@@ -71163,10 +71226,25 @@ var useVerifyCode = (cbk, default_wait = 60, default_tip = "\u83B7\u53D6\u9A8C\u
     cancel
   };
 };
+
+// src/hooks/useImagePreview.ts
+var useImagePreview = (conf, zIndex2 = 9999) => {
+  const appendTo = document.createElement("div");
+  const vnode = (0, vue_exports.createVNode)(YoungImageViewer_default, {
+    onDestroy: () => {
+      document.body.removeChild(appendTo);
+    },
+    zIndex: zIndex2
+  });
+  (0, vue_exports.render)(vnode, appendTo);
+  document.body.appendChild(appendTo);
+  vnode.component.exposed?.show(conf);
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   YoungDateRange,
   YoungDialog,
+  YoungImageViewer,
   YoungPagination,
   YoungSelect,
   YoungTable,
@@ -71175,6 +71253,7 @@ var useVerifyCode = (cbk, default_wait = 60, default_tip = "\u83B7\u53D6\u9A8C\u
   useAutoLoad,
   useExport2Excel,
   useFormMode,
+  useImagePreview,
   useVerifyCode
 });
 /*! Bundled license information:
