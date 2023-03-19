@@ -18390,6 +18390,7 @@ __export(src_exports, {
   YoungDialog: () => YoungDialog_default,
   YoungImageViewer: () => YoungImageViewer_default,
   YoungPagination: () => YoungPagination_default,
+  YoungSearchForm: () => YoungSearchForm_default,
   YoungSelect: () => YoungSelect_default,
   YoungTable: () => YoungTable_default,
   YoungTimeRange: () => YoungTimeRange_default,
@@ -18398,6 +18399,7 @@ __export(src_exports, {
   useExport2Excel: () => useExport2Excel,
   useFormMode: () => useFormMode,
   useImagePreview: () => useImagePreview,
+  useKeyUp: () => useKeyUp,
   useVerifyCode: () => useVerifyCode
 });
 module.exports = __toCommonJS(src_exports);
@@ -70320,14 +70322,26 @@ var YoungDialog_default = (0, vue_exports.defineComponent)({
 // src/components/YoungSelect.tsx
 var YoungSelect_default = (0, vue_exports.defineComponent)({
   props: {
+    modelValue: {
+      type: Object,
+      required: false
+    },
     options: {
       type: Object,
       required: true
     }
   },
-  setup(props, { attrs }) {
+  emits: ["update:modelValue", "change"],
+  setup(props, { attrs, emit: emit2 }) {
     const randomSeed = Q();
-    return () => <ElSelect {...attrs}>{props.options.map((op, index2) => <ElOption {...op} key={index2 + randomSeed} />)}</ElSelect>;
+    return () => <ElSelect
+      modelValue={props.modelValue}
+      onUpdate:modelValue={(v2) => {
+        emit2("update:modelValue", v2);
+        emit2("change", v2);
+      }}
+      {...attrs}
+    >{props.options.map((op, index2) => <ElOption {...op} key={index2 + randomSeed} />)}</ElSelect>;
   }
 });
 
@@ -70518,6 +70532,112 @@ var YoungImageViewer_default = (0, vue_exports.defineComponent)({
       hideOnClickModal
       onClose={close2}
     />;
+  }
+});
+
+// src/components/YoungSearchForm.tsx
+var YoungSearchForm_default = (0, vue_exports.defineComponent)({
+  props: {
+    modelValue: Object,
+    searchScheme: Object,
+    fastSearch: {
+      type: Boolean,
+      default: false
+    },
+    onSearch: {
+      type: Function,
+      default: () => console.log("---\u8868\u5355\u5143\u7D20\u89E6\u53D1\u8BF7\u6C42---")
+    }
+  },
+  emits: ["update:modelValue"],
+  setup(props, { attrs, emit: emit2, slots }) {
+    const update = (args) => {
+      emit2("update:modelValue", {
+        // @ts-ignore
+        ...props.modelValue,
+        ...args
+      });
+    };
+    const search = () => {
+      props.fastSearch && props.onSearch();
+    };
+    const renderItem = (key) => {
+      const conf = props.searchScheme[key];
+      if (!conf.attrs) {
+        conf.attrs = {};
+      }
+      const EleMap = {
+        input: (key2) => <ElFormItem label={conf.tip}><ElInput
+          modelValue={props.modelValue[key2]}
+          onUpdate:modelValue={(v2) => update({ [key2]: v2 })}
+          onKeyup={(e) => useKeyUp(e, () => search())}
+          style={{ width: "220px" }}
+          {...conf.attrs}
+        /></ElFormItem>,
+        number: (key2) => <ElFormItem label={conf.tip}><ElInputNumber
+          modelValue={props.modelValue[key2]}
+          onUpdate:modelValue={(e) => update({ [key2]: e })}
+          onChange={search}
+          style={{ width: "120px" }}
+          {...conf.attrs}
+        /></ElFormItem>,
+        select: (key2) => <ElFormItem label={conf.tip}><YoungSelect_default
+          modelValue={props.modelValue[key2]}
+          options={conf.options || []}
+          onUpdate:modelValue={(e) => update({ [key2]: e })}
+          onChange={search}
+          {...conf.attrs}
+        /></ElFormItem>,
+        datetimerange: (key2) => <ElFormItem label={conf.tip}><YoungDateRange_default
+          start={props.modelValue[key2].start}
+          end={props.modelValue[key2].end}
+          onUpdate:start={(v2) => {
+            update({ [key2]: { start: v2, end: props.modelValue[key2].end } });
+            search();
+          }}
+          onUpdate:end={(v2) => {
+            update({ [key2]: { start: props.modelValue[key2].start, end: v2 } });
+            search();
+          }}
+          {...conf.attrs}
+        /></ElFormItem>
+      };
+      const elRender = EleMap[conf.type];
+      if (elRender) {
+        return elRender(key);
+      } else {
+        throw new Error("unknown search form type");
+      }
+    };
+    return () => <div style={{ maxWidth: "100%", margin: "auto", padding: "20px" }} {...attrs}><ElForm model={props.modelValue}>
+      <style>{`
+            .el-row {
+              display: flex;
+              flex-wrap: wrap;
+              margin-right: -10px;
+              margin-left: -10px;
+            }
+
+            .el-col {
+              padding-right: 10px;
+              padding-left: 10px;
+            }
+            `}</style>
+      <ElRow gutter={20}>
+        {Object.keys(props.searchScheme).map((key, index2) => <ElCol span={8} key={index2 + Q()}>{renderItem(key)}</ElCol>)}
+        {
+          /* 其他元素 */
+        }
+        {slots.custom && <ElCol span={8}>{slots.custom()}</ElCol>}
+      </ElRow>
+      <ElRow justify="end"><ElCol><ElFormItem>
+        <ElButton type="primary" onClick={() => props.onSearch}>{"\u641C\u7D22"}</ElButton>
+        {
+          /* 其他按钮 */
+        }
+        {slots.btns?.()}
+      </ElFormItem></ElCol></ElRow>
+    </ElForm></div>;
   }
 });
 
@@ -71240,12 +71360,21 @@ var useImagePreview = (conf, zIndex2 = 9999) => {
   document.body.appendChild(appendTo);
   vnode.component.exposed?.show(conf);
 };
+
+// src/hooks/useKeyboardFn.ts
+var useKeyUp = (e, fn2, key = "enter") => {
+  if (e.key.toLocaleLowerCase() === key) {
+    e.preventDefault();
+    fn2();
+  }
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   YoungDateRange,
   YoungDialog,
   YoungImageViewer,
   YoungPagination,
+  YoungSearchForm,
   YoungSelect,
   YoungTable,
   YoungTimeRange,
@@ -71254,6 +71383,7 @@ var useImagePreview = (conf, zIndex2 = 9999) => {
   useExport2Excel,
   useFormMode,
   useImagePreview,
+  useKeyUp,
   useVerifyCode
 });
 /*! Bundled license information:

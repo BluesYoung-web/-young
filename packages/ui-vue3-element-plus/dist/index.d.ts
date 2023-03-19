@@ -53,7 +53,7 @@ interface TableHeadItem<T extends any = any> {
 type TableDataItem<T extends any = any> = {
     [key in keyof T]: T[key];
 } & Record<string, any>;
-declare const _default$7: vue.DefineComponent<{
+declare const _default$8: vue.DefineComponent<{
     tableData: {
         type: PropType<TableDataItem<any>[]>;
         required: true;
@@ -103,7 +103,7 @@ declare const _default$7: vue.DefineComponent<{
     rowDraggable: boolean;
 }>;
 
-declare const _default$6: vue.DefineComponent<{
+declare const _default$7: vue.DefineComponent<{
     total: {
         readonly type: NumberConstructor;
         readonly required: true;
@@ -181,7 +181,7 @@ declare const _default$6: vue.DefineComponent<{
     autoScroll: boolean;
 }>;
 
-declare const _default$5: vue.DefineComponent<{
+declare const _default$6: vue.DefineComponent<{
     modelValue: BooleanConstructor;
     realTitle: StringConstructor;
     sureText: {
@@ -263,19 +263,30 @@ type SelectOptionItem<T extends any = any> = {
     disabled?: boolean;
     children?: SelectOptionItem<T>[];
 };
-declare const _default$4: vue.DefineComponent<{
+declare const _default$5: vue.DefineComponent<{
+    modelValue: {
+        type: ObjectConstructor;
+        required: false;
+    };
     options: {
         type: PropType<SelectOptionItem<any>[]>;
         required: true;
     };
-}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, {}, string, vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+    modelValue: {
+        type: ObjectConstructor;
+        required: false;
+    };
     options: {
         type: PropType<SelectOptionItem<any>[]>;
         required: true;
     };
-}>>, {}>;
+}>> & {
+    onChange?: (...args: any[]) => any;
+    "onUpdate:modelValue"?: (...args: any[]) => any;
+}, {}>;
 
-declare const _default$3: vue.DefineComponent<{
+declare const _default$4: vue.DefineComponent<{
     modelValue: {
         type: PropType<number[]>;
         required: true;
@@ -289,7 +300,7 @@ declare const _default$3: vue.DefineComponent<{
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {}>;
 
-declare const _default$2: vue.DefineComponent<{
+declare const _default$3: vue.DefineComponent<{
     start: {
         type: StringConstructor;
         required: true;
@@ -340,7 +351,7 @@ declare const _default$2: vue.DefineComponent<{
     step: string;
 }>;
 
-declare const _default$1: vue.DefineComponent<{
+declare const _default$2: vue.DefineComponent<{
     start: {
         type: (NumberConstructor | StringConstructor)[];
         default: string;
@@ -385,7 +396,7 @@ type YoungImageViewerConf = {
      */
     index?: number;
 };
-declare const _default: vue.DefineComponent<{
+declare const _default$1: vue.DefineComponent<{
     onDestroy: {
         type: FunctionConstructor;
         default: () => void;
@@ -406,6 +417,54 @@ declare const _default: vue.DefineComponent<{
 }>>, {
     zIndex: number;
     onDestroy: Function;
+}>;
+
+type YoungSearchFormType = 'input' | 'number' | 'select' | 'datetimerange';
+type YoungSearchFormItem = {
+    /**
+     * 表单元素的类型
+     */
+    type: YoungSearchFormType;
+    /**
+     * 是否拥有前缀提示
+     */
+    tip?: string;
+    /**
+     * 下拉专属选项
+     */
+    options?: SelectOptionItem[];
+    /**
+     * 透传给元素的其他属性
+     */
+    attrs?: Record<string, any>;
+};
+declare const _default: vue.DefineComponent<{
+    modelValue: PropType<Record<string, any>>;
+    searchScheme: PropType<Record<string, YoungSearchFormItem>>;
+    fastSearch: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    onSearch: {
+        type: FunctionConstructor;
+        default: () => void;
+    };
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+    modelValue: PropType<Record<string, any>>;
+    searchScheme: PropType<Record<string, YoungSearchFormItem>>;
+    fastSearch: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    onSearch: {
+        type: FunctionConstructor;
+        default: () => void;
+    };
+}>> & {
+    "onUpdate:modelValue"?: (...args: any[]) => any;
+}, {
+    fastSearch: boolean;
+    onSearch: Function;
 }>;
 
 interface UseAutoLoad<T extends any = any> {
@@ -476,4 +535,6 @@ declare const useVerifyCode: (cbk: () => any | Promise<any>, default_wait?: numb
  */
 declare const useImagePreview: (conf: YoungImageViewerConf, zIndex?: number) => void;
 
-export { SelectOptionItem, TableDataItem, TableHeadItem, _default$1 as YoungDateRange, _default$5 as YoungDialog, _default as YoungImageViewer, YoungImageViewerConf, _default$6 as YoungPagination, _default$4 as YoungSelect, _default$7 as YoungTable, _default$2 as YoungTimeRange, _default$3 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useImagePreview, useVerifyCode };
+declare const useKeyUp: (e: KeyboardEvent, fn: Function, key?: string) => void;
+
+export { SelectOptionItem, TableDataItem, TableHeadItem, _default$2 as YoungDateRange, _default$6 as YoungDialog, _default$1 as YoungImageViewer, YoungImageViewerConf, _default$7 as YoungPagination, _default as YoungSearchForm, YoungSearchFormItem, _default$5 as YoungSelect, _default$8 as YoungTable, _default$3 as YoungTimeRange, _default$4 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useImagePreview, useKeyUp, useVerifyCode };

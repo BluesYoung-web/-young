@@ -1,8 +1,8 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-09 09:41:37
- * @LastEditTime: 2023-01-09 11:36:10
- * @Description: 
+ * @LastEditTime: 2023-03-19 10:45:37
+ * @Description:
  */
 import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
@@ -18,19 +18,31 @@ export type SelectOptionItem<T extends any = any> = {
 
 export default defineComponent({
   props: {
+    modelValue: {
+      type: Object,
+      required: false
+    },
     options: {
       type: Object as PropType<SelectOptionItem[]>,
-      required: true
+      required: true,
     },
   },
-  setup(props, { attrs }) {
+  emits: ['update:modelValue', 'change'],
+  setup(props, { attrs, emit }) {
     const randomSeed = randomId();
     return () => (
-      <ElSelect {...attrs}>
-        {
-          props.options.map((op, index) => <ElOption {...op} key={index + randomSeed} />)
-        }
+      <ElSelect
+        modelValue={props.modelValue}
+        onUpdate:modelValue={(v) => {
+          emit('update:modelValue', v);
+          emit('change', v);
+        }}
+        {...attrs}
+      >
+        {props.options.map((op, index) => (
+          <ElOption {...op} key={index + randomSeed} />
+        ))}
       </ElSelect>
-    )
-  }
+    );
+  },
 });
