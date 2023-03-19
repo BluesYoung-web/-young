@@ -265,7 +265,7 @@ type SelectOptionItem<T extends any = any> = {
 };
 declare const _default$5: vue.DefineComponent<{
     modelValue: {
-        type: ObjectConstructor;
+        type: (NumberConstructor | StringConstructor | ArrayConstructor)[];
         required: false;
     };
     options: {
@@ -274,7 +274,7 @@ declare const _default$5: vue.DefineComponent<{
     };
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     modelValue: {
-        type: ObjectConstructor;
+        type: (NumberConstructor | StringConstructor | ArrayConstructor)[];
         required: false;
     };
     options: {
@@ -438,9 +438,12 @@ type YoungSearchFormItem = {
      */
     attrs?: Record<string, any>;
 };
+type YoungSearchScheme<T extends any = any> = {
+    [prop in keyof T]?: YoungSearchFormItem;
+};
 declare const _default: vue.DefineComponent<{
     modelValue: PropType<Record<string, any>>;
-    searchScheme: PropType<Record<string, YoungSearchFormItem>>;
+    searchScheme: PropType<YoungSearchScheme<any>>;
     fastSearch: {
         type: BooleanConstructor;
         default: boolean;
@@ -448,10 +451,14 @@ declare const _default: vue.DefineComponent<{
     onSearch: {
         type: FunctionConstructor;
         default: () => void;
+    };
+    dateTimeKey: {
+        type: ArrayConstructor;
+        default: () => string[];
     };
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     modelValue: PropType<Record<string, any>>;
-    searchScheme: PropType<Record<string, YoungSearchFormItem>>;
+    searchScheme: PropType<YoungSearchScheme<any>>;
     fastSearch: {
         type: BooleanConstructor;
         default: boolean;
@@ -459,12 +466,17 @@ declare const _default: vue.DefineComponent<{
     onSearch: {
         type: FunctionConstructor;
         default: () => void;
+    };
+    dateTimeKey: {
+        type: ArrayConstructor;
+        default: () => string[];
     };
 }>> & {
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {
     fastSearch: boolean;
     onSearch: Function;
+    dateTimeKey: unknown[];
 }>;
 
 interface UseAutoLoad<T extends any = any> {
@@ -537,4 +549,4 @@ declare const useImagePreview: (conf: YoungImageViewerConf, zIndex?: number) => 
 
 declare const useKeyUp: (e: KeyboardEvent, fn: Function, key?: string) => void;
 
-export { SelectOptionItem, TableDataItem, TableHeadItem, _default$2 as YoungDateRange, _default$6 as YoungDialog, _default$1 as YoungImageViewer, YoungImageViewerConf, _default$7 as YoungPagination, _default as YoungSearchForm, YoungSearchFormItem, _default$5 as YoungSelect, _default$8 as YoungTable, _default$3 as YoungTimeRange, _default$4 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useImagePreview, useKeyUp, useVerifyCode };
+export { SelectOptionItem, TableDataItem, TableHeadItem, _default$2 as YoungDateRange, _default$6 as YoungDialog, _default$1 as YoungImageViewer, YoungImageViewerConf, _default$7 as YoungPagination, _default as YoungSearchForm, YoungSearchFormItem, YoungSearchScheme, _default$5 as YoungSelect, _default$8 as YoungTable, _default$3 as YoungTimeRange, _default$4 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useImagePreview, useKeyUp, useVerifyCode };

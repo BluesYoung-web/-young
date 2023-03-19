@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-09 09:41:37
- * @LastEditTime: 2023-03-19 10:45:37
+ * @LastEditTime: 2023-03-19 14:57:15
  * @Description:
  */
 import { defineComponent } from 'vue';
@@ -19,7 +19,7 @@ export type SelectOptionItem<T extends any = any> = {
 export default defineComponent({
   props: {
     modelValue: {
-      type: Object,
+      type: [String, Number, Array],
       required: false
     },
     options: {

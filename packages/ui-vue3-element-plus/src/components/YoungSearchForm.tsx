@@ -1,15 +1,15 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-13 17:49:07
- * @LastEditTime: 2023-03-19 11:27:49
+ * @LastEditTime: 2023-03-19 16:45:28
  * @Description: 快速生成搜索部分
  */
-import { defineComponent } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import type { SelectOptionItem } from './YoungSelect';
 import type { PropType } from 'vue';
-import { ElRow, ElCol, ElForm, ElFormItem, ElInput, ElButton, ElInputNumber } from 'element-plus';
+import { ElRow, ElCol, ElForm, ElFormItem, ElButton, ElInputNumber, ElInput } from 'element-plus';
 import { YoungSelect, YoungDateRange, useKeyUp } from '..';
-import { randomId } from '@bluesyoung/utils';
+import { deepClone, randomId } from '@bluesyoung/utils';
 
 export type YoungSearchFormType = 'input' | 'number' | 'select' | 'datetimerange';
 
@@ -32,33 +32,37 @@ export type YoungSearchFormItem = {
   attrs?: Record<string, any>;
 };
 
-export const defineYoungSearchScheme = <T extends Record<string, YoungSearchFormItem>>(args: T) =>
-  args;
+export type YoungSearchScheme<T extends any = any> = {
+  [prop in keyof T]?: YoungSearchFormItem;
+};
 
 export default defineComponent({
   props: {
     modelValue: Object as PropType<Record<string, any>>,
-    searchScheme: Object as PropType<Record<string, YoungSearchFormItem>>,
+    searchScheme: Object as PropType<YoungSearchScheme>,
     fastSearch: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     onSearch: {
       type: Function,
       default: () => console.log('---表单元素触发请求---'),
     },
+    dateTimeKey: {
+      type: Array,
+      default: () => ['startcreatetime', 'endcreatetime']
+    },
   },
   emits: ['update:modelValue'],
   setup(props, { attrs, emit, slots }) {
-    const update = (args: Record<string, any>) => {
-      emit('update:modelValue', {
-        // @ts-ignore
-        ...props.modelValue,
-        ...args,
-      });
-    };
+    const form = ref<Record<string, any>>({});
 
-    const search = () => {
+    watch(() => props.modelValue, (v) => {
+      form.value = deepClone(v);
+    }, { immediate: true, deep: true });
+
+    const update = () => {
+      emit('update:modelValue', { ...form.value });
       props.fastSearch && props.onSearch();
     };
 
@@ -69,57 +73,54 @@ export default defineComponent({
         conf.attrs = {};
       }
 
+      const wrapTip = (el: JSX.Element, tip?: string) => tip ? <ElFormItem label={conf.tip}>{el}</ElFormItem> : el;
+
+      const [start, end] = props.dateTimeKey as [string, string];
+
       const EleMap: Record<YoungSearchFormType, (key: string) => JSX.Element> = {
-        input: (key) => (
-          <ElFormItem label={conf.tip}>
-            <ElInput
-              modelValue={props.modelValue[key]}
-              onUpdate:modelValue={(v) => update({ [key]: v })}
-              // @ts-ignore
-              onKeyup={(e: KeyboardEvent) => useKeyUp(e, () => search())}
-              style={{ width: '220px' }}
-              {...conf.attrs}
-            />
-          </ElFormItem>
+        input: () => wrapTip(
+          <ElInput
+            modelValue={form.value[key]}
+            onUpdate:modelValue={(v) => form.value[key] = v}
+            onBlur={update}
+            // @ts-ignore
+            onKeyup={(e: KeyboardEvent) => useKeyUp(e, () => update())}
+          />,
+          conf.tip
         ),
-        number: (key) => (
-          <ElFormItem label={conf.tip}>
-            <ElInputNumber
-              modelValue={props.modelValue[key]}
-              onUpdate:modelValue={(e) => update({ [key]: e })}
-              onChange={search}
-              style={{ width: '120px' }}
-              {...conf.attrs}
-            />
-          </ElFormItem>
+        number: (key) => wrapTip(
+          <ElInputNumber
+            modelValue={form.value[key]}
+            onUpdate:modelValue={(v) => form.value[key] = v}
+            onChange={update}
+            style={{ width: '120px' }}
+            {...conf.attrs} />,
+          conf.tip
         ),
-        select: (key) => (
-          <ElFormItem label={conf.tip}>
-            <YoungSelect
-              modelValue={props.modelValue[key]}
-              options={conf.options || []}
-              onUpdate:modelValue={(e) => update({ [key]: e })}
-              onChange={search}
-              {...conf.attrs}
-            />
-          </ElFormItem>
+        select: (key) => wrapTip(
+          <YoungSelect
+            modelValue={form.value[key]}
+            options={conf.options || []}
+            onUpdate:modelValue={(v) => form.value[key] = v}
+            onChange={update}
+            {...conf.attrs} />,
+          conf.tip
         ),
-        datetimerange: (key) => (
-          <ElFormItem label={conf.tip}>
-            <YoungDateRange
-              start={props.modelValue[key].start}
-              end={props.modelValue[key].end}
-              onUpdate:start={(v) => {
-                update({ [key]: { start: v, end: props.modelValue[key].end } });
-                search();
-              }}
-              onUpdate:end={(v) => {
-                update({ [key]: { start: props.modelValue[key].start, end: v } });
-                search();
-              }}
-              {...conf.attrs}
-            />
-          </ElFormItem>
+        // ! 时间范围选择，通常全局只有一个
+        datetimerange: (key) => wrapTip(
+          <YoungDateRange
+            start={form.value[start]}
+            end={form.value[end]}
+            onUpdate:start={(v) => {
+              form.value[start] = v;
+              update();
+            }}
+            onUpdate:end={(v) => {
+              form.value[end] = v;
+              update();
+            }}
+            {...conf.attrs} />,
+          conf.tip
         ),
       };
 
@@ -130,6 +131,9 @@ export default defineComponent({
         throw new Error('unknown search form type');
       }
     };
+
+    // !直接在界面上调用，会导致频繁刷新引起意外的 bug，比如：输入框输入一个字符之后就会失去焦点
+    const randomSeed = randomId();
 
     return () => (
       <div style={{ maxWidth: '100%', margin: 'auto', padding: '20px' }} {...attrs}>
@@ -149,21 +153,23 @@ export default defineComponent({
             }
             `}
           </style>
-          <ElRow gutter={20}>
+          <ElRow>
             {Object.keys(props.searchScheme).map((key, index) => (
-              <ElCol span={8} key={index + randomId()}>
+              <ElCol xs={24} sm={8} lg={6} key={index + randomSeed}>
                 {renderItem(key)}
               </ElCol>
             ))}
 
-            {/* 其他元素 */}
-            {slots.custom && <ElCol span={8}>{slots.custom()}</ElCol>}
+            {/* 其他暂未包含的类型 */}
+            <ElCol xs={24} sm={8} lg={6}>
+              {slots.custom?.()}
+            </ElCol>
           </ElRow>
 
           <ElRow justify="end">
             <ElCol>
               <ElFormItem>
-                <ElButton type="primary" onClick={() => props.onSearch}>
+                <ElButton type="primary" onClick={() => props.onSearch()}>
                   搜索
                 </ElButton>
                 {/* 其他按钮 */}
