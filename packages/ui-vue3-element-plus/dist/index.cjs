@@ -71518,7 +71518,7 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
       </ElRow>
       <ElRow justify="end"><ElCol><ElFormItem>
         <ElButton type="primary" onClick={() => props.onSearch()}>{"\u641C\u7D22"}</ElButton>
-        <ElButton onClick={props.onReset()}>{"\u91CD\u7F6E"}</ElButton>
+        <ElButton onClick={() => props.onReset()}>{"\u91CD\u7F6E"}</ElButton>
         {
           /* 其他按钮 */
         }

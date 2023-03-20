@@ -645,7 +645,7 @@ const Qd = kr({
               }, {
                 default: () => [Gn("搜索")]
               }), fe(rn, {
-                onClick: e.onReset()
+                onClick: () => e.onReset()
               }, {
                 default: () => [Gn("重置")]
               }), (o = n.btns) == null ? void 0 : o.call(n)];
