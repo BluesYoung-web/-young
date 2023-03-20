@@ -71431,10 +71431,6 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
       emit2("update:modelValue", { ...form.value });
       props.fastSearch && props.onSearch();
     };
-    const reset = () => {
-      props.onReset();
-      props.onSearch();
-    };
     const renderItem = (key) => {
       const conf = props.searchScheme[key];
       if (!conf.attrs) {
@@ -71522,7 +71518,7 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
       </ElRow>
       <ElRow justify="end"><ElCol><ElFormItem>
         <ElButton type="primary" onClick={() => props.onSearch()}>{"\u641C\u7D22"}</ElButton>
-        <ElButton onClick={reset}>{"\u91CD\u7F6E"}</ElButton>
+        <ElButton onClick={props.onReset()}>{"\u91CD\u7F6E"}</ElButton>
         {
           /* 其他按钮 */
         }

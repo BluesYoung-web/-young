@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-13 17:49:07
- * @LastEditTime: 2023-03-20 09:19:17
+ * @LastEditTime: 2023-03-20 09:27:53
  * @Description: 快速生成搜索部分
  */
 import { defineComponent, ref, watch } from 'vue';
@@ -78,11 +78,6 @@ export default defineComponent({
     const update = () => {
       emit('update:modelValue', { ...form.value });
       props.fastSearch && props.onSearch();
-    };
-
-    const reset = () => {
-      props.onReset();
-      props.onSearch();
     };
 
     const renderItem = (key: string) => {
@@ -200,7 +195,7 @@ export default defineComponent({
                 <ElButton type="primary" onClick={() => props.onSearch()}>
                   搜索
                 </ElButton>
-                <ElButton onClick={reset}>重置</ElButton>
+                <ElButton onClick={props.onReset()}>重置</ElButton>
                 {/* 其他按钮 */}
                 {slots.btns?.()}
               </ElFormItem>
