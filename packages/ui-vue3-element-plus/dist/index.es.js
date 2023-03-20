@@ -557,7 +557,6 @@ const Qd = kr({
         input: () => c(fe(sf, qe({
           modelValue: a.value[o],
           "onUpdate:modelValue": (h) => a.value[o] = h,
-          onBlur: i,
           onKeyup: (h) => Hd(h, () => i())
         }, l.attrs), null), l.tip),
         number: (h) => c(fe(ff, qe({

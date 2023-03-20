@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-13 17:49:07
- * @LastEditTime: 2023-03-20 09:36:37
+ * @LastEditTime: 2023-03-20 10:00:40
  * @Description: 快速生成搜索部分
  */
 import { defineComponent, ref, watch } from 'vue';
@@ -98,7 +98,6 @@ export default defineComponent({
             <ElInput
               modelValue={form.value[key]}
               onUpdate:modelValue={(v) => (form.value[key] = v)}
-              onBlur={update}
               // @ts-ignore
               onKeyup={(e: KeyboardEvent) => useKeyUp(e, () => update())}
               {...conf.attrs}

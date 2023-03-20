@@ -71443,7 +71443,6 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
           <ElInput
             modelValue={form.value[key]}
             onUpdate:modelValue={(v2) => form.value[key] = v2}
-            onBlur={update}
             onKeyup={(e) => useKeyUp(e, () => update())}
             {...conf.attrs}
           />,
