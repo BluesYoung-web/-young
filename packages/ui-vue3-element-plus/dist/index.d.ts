@@ -436,7 +436,13 @@ type YoungSearchFormItem = {
     /**
      * 透传给元素的其他属性
      */
-    attrs?: Record<string, any>;
+    attrs?: {
+        placeholder?: string;
+        title?: string;
+        class?: string;
+        style?: string;
+        [props: string]: any;
+    };
 };
 type YoungSearchScheme<T extends any = any> = {
     [prop in keyof T]?: YoungSearchFormItem;
@@ -449,6 +455,10 @@ declare const _default: vue.DefineComponent<{
         default: boolean;
     };
     onSearch: {
+        type: FunctionConstructor;
+        default: () => void;
+    };
+    onReset: {
         type: FunctionConstructor;
         default: () => void;
     };
@@ -467,6 +477,10 @@ declare const _default: vue.DefineComponent<{
         type: FunctionConstructor;
         default: () => void;
     };
+    onReset: {
+        type: FunctionConstructor;
+        default: () => void;
+    };
     dateTimeKey: {
         type: ArrayConstructor;
         default: () => string[];
@@ -474,6 +488,7 @@ declare const _default: vue.DefineComponent<{
 }>> & {
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {
+    onReset: Function;
     fastSearch: boolean;
     onSearch: Function;
     dateTimeKey: unknown[];

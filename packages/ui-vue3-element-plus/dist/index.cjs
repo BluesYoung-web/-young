@@ -71408,6 +71408,10 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
       type: Function,
       default: () => console.log("---\u8868\u5355\u5143\u7D20\u89E6\u53D1\u8BF7\u6C42---")
     },
+    onReset: {
+      type: Function,
+      default: () => console.log("---\u89E6\u53D1\u91CD\u7F6E\u8BF7\u6C42---")
+    },
     dateTimeKey: {
       type: Array,
       default: () => ["startcreatetime", "endcreatetime"]
@@ -71416,12 +71420,20 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
   emits: ["update:modelValue"],
   setup(props, { attrs, emit: emit2, slots }) {
     const form = (0, vue_exports.ref)({});
-    (0, vue_exports.watch)(() => props.modelValue, (v2) => {
-      form.value = O(v2);
-    }, { immediate: true, deep: true });
+    (0, vue_exports.watch)(
+      () => props.modelValue,
+      (v2) => {
+        form.value = O(v2);
+      },
+      { immediate: true, deep: true }
+    );
     const update = () => {
       emit2("update:modelValue", { ...form.value });
       props.fastSearch && props.onSearch();
+    };
+    const reset = () => {
+      props.onReset();
+      props.onSearch();
     };
     const renderItem = (key) => {
       const conf = props.searchScheme[key];
@@ -71437,6 +71449,7 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
             onUpdate:modelValue={(v2) => form.value[key] = v2}
             onBlur={update}
             onKeyup={(e) => useKeyUp(e, () => update())}
+            {...conf.attrs}
           />,
           conf.tip
         ),
@@ -71509,6 +71522,7 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
       </ElRow>
       <ElRow justify="end"><ElCol><ElFormItem>
         <ElButton type="primary" onClick={() => props.onSearch()}>{"\u641C\u7D22"}</ElButton>
+        <ElButton onClick={reset}>{"\u91CD\u7F6E"}</ElButton>
         {
           /* 其他按钮 */
         }

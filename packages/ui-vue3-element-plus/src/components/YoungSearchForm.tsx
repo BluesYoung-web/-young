@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-13 17:49:07
- * @LastEditTime: 2023-03-19 16:45:28
+ * @LastEditTime: 2023-03-20 09:19:17
  * @Description: 快速生成搜索部分
  */
 import { defineComponent, ref, watch } from 'vue';
@@ -29,7 +29,13 @@ export type YoungSearchFormItem = {
   /**
    * 透传给元素的其他属性
    */
-  attrs?: Record<string, any>;
+  attrs?: {
+    placeholder?: string;
+    title?: string;
+    class?: string;
+    style?: string;
+    [props: string]: any;
+  };
 };
 
 export type YoungSearchScheme<T extends any = any> = {
@@ -48,22 +54,35 @@ export default defineComponent({
       type: Function,
       default: () => console.log('---表单元素触发请求---'),
     },
+    onReset: {
+      type: Function,
+      default: () => console.log('---触发重置请求---'),
+    },
     dateTimeKey: {
       type: Array,
-      default: () => ['startcreatetime', 'endcreatetime']
+      default: () => ['startcreatetime', 'endcreatetime'],
     },
   },
   emits: ['update:modelValue'],
   setup(props, { attrs, emit, slots }) {
     const form = ref<Record<string, any>>({});
 
-    watch(() => props.modelValue, (v) => {
-      form.value = deepClone(v);
-    }, { immediate: true, deep: true });
+    watch(
+      () => props.modelValue,
+      (v) => {
+        form.value = deepClone(v);
+      },
+      { immediate: true, deep: true },
+    );
 
     const update = () => {
       emit('update:modelValue', { ...form.value });
       props.fastSearch && props.onSearch();
+    };
+
+    const reset = () => {
+      props.onReset();
+      props.onSearch();
     };
 
     const renderItem = (key: string) => {
@@ -73,55 +92,64 @@ export default defineComponent({
         conf.attrs = {};
       }
 
-      const wrapTip = (el: JSX.Element, tip?: string) => tip ? <ElFormItem label={conf.tip}>{el}</ElFormItem> : el;
+      const wrapTip = (el: JSX.Element, tip?: string) =>
+        tip ? <ElFormItem label={conf.tip}>{el}</ElFormItem> : el;
 
       const [start, end] = props.dateTimeKey as [string, string];
 
       const EleMap: Record<YoungSearchFormType, (key: string) => JSX.Element> = {
-        input: () => wrapTip(
-          <ElInput
-            modelValue={form.value[key]}
-            onUpdate:modelValue={(v) => form.value[key] = v}
-            onBlur={update}
-            // @ts-ignore
-            onKeyup={(e: KeyboardEvent) => useKeyUp(e, () => update())}
-          />,
-          conf.tip
-        ),
-        number: (key) => wrapTip(
-          <ElInputNumber
-            modelValue={form.value[key]}
-            onUpdate:modelValue={(v) => form.value[key] = v}
-            onChange={update}
-            style={{ width: '120px' }}
-            {...conf.attrs} />,
-          conf.tip
-        ),
-        select: (key) => wrapTip(
-          <YoungSelect
-            modelValue={form.value[key]}
-            options={conf.options || []}
-            onUpdate:modelValue={(v) => form.value[key] = v}
-            onChange={update}
-            {...conf.attrs} />,
-          conf.tip
-        ),
+        input: () =>
+          wrapTip(
+            <ElInput
+              modelValue={form.value[key]}
+              onUpdate:modelValue={(v) => (form.value[key] = v)}
+              onBlur={update}
+              // @ts-ignore
+              onKeyup={(e: KeyboardEvent) => useKeyUp(e, () => update())}
+              {...conf.attrs}
+            />,
+            conf.tip,
+          ),
+        number: (key) =>
+          wrapTip(
+            <ElInputNumber
+              modelValue={form.value[key]}
+              onUpdate:modelValue={(v) => (form.value[key] = v)}
+              onChange={update}
+              style={{ width: '120px' }}
+              {...conf.attrs}
+            />,
+            conf.tip,
+          ),
+        select: (key) =>
+          wrapTip(
+            <YoungSelect
+              modelValue={form.value[key]}
+              options={conf.options || []}
+              onUpdate:modelValue={(v) => (form.value[key] = v)}
+              onChange={update}
+              {...conf.attrs}
+            />,
+            conf.tip,
+          ),
         // ! 时间范围选择，通常全局只有一个
-        datetimerange: (key) => wrapTip(
-          <YoungDateRange
-            start={form.value[start]}
-            end={form.value[end]}
-            onUpdate:start={(v) => {
-              form.value[start] = v;
-              update();
-            }}
-            onUpdate:end={(v) => {
-              form.value[end] = v;
-              update();
-            }}
-            {...conf.attrs} />,
-          conf.tip
-        ),
+        datetimerange: (key) =>
+          wrapTip(
+            <YoungDateRange
+              start={form.value[start]}
+              end={form.value[end]}
+              onUpdate:start={(v) => {
+                form.value[start] = v;
+                update();
+              }}
+              onUpdate:end={(v) => {
+                form.value[end] = v;
+                update();
+              }}
+              {...conf.attrs}
+            />,
+            conf.tip,
+          ),
       };
 
       const elRender = EleMap[conf.type];
@@ -172,6 +200,7 @@ export default defineComponent({
                 <ElButton type="primary" onClick={() => props.onSearch()}>
                   搜索
                 </ElButton>
+                <ElButton onClick={reset}>重置</ElButton>
                 {/* 其他按钮 */}
                 {slots.btns?.()}
               </ElFormItem>
