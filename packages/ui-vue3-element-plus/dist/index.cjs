@@ -71484,7 +71484,8 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
             {...conf.attrs}
           />,
           conf.tip
-        )
+        ),
+        custom: (key2) => wrapTip(conf.render(), conf.tip)
       };
       const elRender = EleMap[conf.type];
       if (elRender) {

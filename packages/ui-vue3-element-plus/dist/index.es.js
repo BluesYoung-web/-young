@@ -583,7 +583,8 @@ const Qd = kr({
           "onUpdate:end": (m) => {
             a.value[u] = m, i();
           }
-        }, l.attrs), null), l.tip)
+        }, l.attrs), null), l.tip),
+        custom: (h) => c(l.render(), l.tip)
       }[l.type];
       if (_)
         return _(o);

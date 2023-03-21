@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-13 17:49:07
- * @LastEditTime: 2023-03-20 10:00:40
+ * @LastEditTime: 2023-03-21 15:57:22
  * @Description: 快速生成搜索部分
  */
 import { defineComponent, ref, watch } from 'vue';
@@ -11,7 +11,7 @@ import { ElRow, ElCol, ElForm, ElFormItem, ElButton, ElInputNumber, ElInput } fr
 import { YoungSelect, YoungDateRange, useKeyUp } from '..';
 import { deepClone, randomId } from '@bluesyoung/utils';
 
-export type YoungSearchFormType = 'input' | 'number' | 'select' | 'datetimerange';
+export type YoungSearchFormType = 'input' | 'number' | 'select' | 'datetimerange' | 'custom';
 
 export type YoungSearchFormItem = {
   /**
@@ -26,6 +26,10 @@ export type YoungSearchFormItem = {
    * 下拉专属选项
    */
   options?: SelectOptionItem[];
+  /**
+   * 自定义搜索项的渲染函数
+   */
+  render?: () => JSX.Element;
   /**
    * 透传给元素的其他属性
    */
@@ -144,6 +148,7 @@ export default defineComponent({
             />,
             conf.tip,
           ),
+        custom: (key) => wrapTip(conf.render(), conf.tip),
       };
 
       const elRender = EleMap[conf.type];

@@ -419,7 +419,7 @@ declare const _default$1: vue.DefineComponent<{
     onDestroy: Function;
 }>;
 
-type YoungSearchFormType = 'input' | 'number' | 'select' | 'datetimerange';
+type YoungSearchFormType = 'input' | 'number' | 'select' | 'datetimerange' | 'custom';
 type YoungSearchFormItem = {
     /**
      * 表单元素的类型
@@ -433,6 +433,10 @@ type YoungSearchFormItem = {
      * 下拉专属选项
      */
     options?: SelectOptionItem[];
+    /**
+     * 自定义搜索项的渲染函数
+     */
+    render?: () => JSX.Element;
     /**
      * 透传给元素的其他属性
      */
