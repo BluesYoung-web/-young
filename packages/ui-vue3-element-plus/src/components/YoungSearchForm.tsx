@@ -1,13 +1,13 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-13 17:49:07
- * @LastEditTime: 2023-03-21 15:57:22
+ * @LastEditTime: 2023-03-21 16:46:20
  * @Description: 快速生成搜索部分
  */
 import { defineComponent, ref, watch } from 'vue';
 import type { SelectOptionItem } from './YoungSelect';
 import type { PropType } from 'vue';
-import { ElRow, ElCol, ElForm, ElFormItem, ElButton, ElInputNumber, ElInput } from 'element-plus';
+import { ElForm, ElFormItem, ElButton, ElInputNumber, ElInput } from 'element-plus';
 import { YoungSelect, YoungDateRange, useKeyUp } from '..';
 import { deepClone, randomId } from '@bluesyoung/utils';
 
@@ -165,46 +165,21 @@ export default defineComponent({
     return () => (
       <div style={{ maxWidth: '100%', margin: 'auto', padding: '20px' }} {...attrs}>
         <ElForm model={props.modelValue}>
-          <style>
-            {`
-            .el-row {
-              display: flex;
-              flex-wrap: wrap;
-              margin-right: -10px;
-              margin-left: -10px;
-            }
-
-            .el-col {
-              padding-right: 10px;
-              padding-left: 10px;
-            }
-            `}
-          </style>
-          <ElRow>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 20px' }}>
             {Object.keys(props.searchScheme).map((key, index) => (
-              <ElCol xs={24} sm={8} lg={6} key={index + randomSeed}>
-                {renderItem(key)}
-              </ElCol>
+              <div key={index + randomSeed}>{renderItem(key)}</div>
             ))}
-
             {/* 其他暂未包含的类型 */}
-            <ElCol xs={24} sm={8} lg={6}>
-              {slots.custom?.()}
-            </ElCol>
-          </ElRow>
-
-          <ElRow justify="end">
-            <ElCol>
-              <ElFormItem>
-                <ElButton type="primary" onClick={() => props.onSearch()}>
-                  搜索
-                </ElButton>
-                <ElButton onClick={() => props.onReset()}>重置</ElButton>
-                {/* 其他按钮 */}
-                {slots.btns?.()}
-              </ElFormItem>
-            </ElCol>
-          </ElRow>
+            <div>{slots.custom?.()}</div>
+          </div>
+          <div style={{ display: 'flex' }}>
+            <ElButton type="primary" onClick={() => props.onSearch()}>
+              搜索
+            </ElButton>
+            <ElButton onClick={() => props.onReset()}>重置</ElButton>
+            {/* 其他按钮 */}
+            {slots.btns?.()}
+          </div>
         </ElForm>
       </div>
     );

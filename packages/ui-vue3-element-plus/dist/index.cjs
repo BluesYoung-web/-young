@@ -71496,34 +71496,21 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
     };
     const randomSeed = Q();
     return () => <div style={{ maxWidth: "100%", margin: "auto", padding: "20px" }} {...attrs}><ElForm model={props.modelValue}>
-      <style>{`
-            .el-row {
-              display: flex;
-              flex-wrap: wrap;
-              margin-right: -10px;
-              margin-left: -10px;
-            }
-
-            .el-col {
-              padding-right: 10px;
-              padding-left: 10px;
-            }
-            `}</style>
-      <ElRow>
-        {Object.keys(props.searchScheme).map((key, index2) => <ElCol xs={24} sm={8} lg={6} key={index2 + randomSeed}>{renderItem(key)}</ElCol>)}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px 20px" }}>
+        {Object.keys(props.searchScheme).map((key, index2) => <div key={index2 + randomSeed}>{renderItem(key)}</div>)}
         {
           /* 其他暂未包含的类型 */
         }
-        <ElCol xs={24} sm={8} lg={6}>{slots.custom?.()}</ElCol>
-      </ElRow>
-      <ElRow justify="end"><ElCol><ElFormItem>
+        <div>{slots.custom?.()}</div>
+      </div>
+      <div style={{ display: "flex" }}>
         <ElButton type="primary" onClick={() => props.onSearch()}>{"\u641C\u7D22"}</ElButton>
         <ElButton onClick={() => props.onReset()}>{"\u91CD\u7F6E"}</ElButton>
         {
           /* 其他按钮 */
         }
         {slots.btns?.()}
-      </ElFormItem></ElCol></ElRow>
+      </div>
     </ElForm></div>;
   }
 });
