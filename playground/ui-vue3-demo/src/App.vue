@@ -1,11 +1,11 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-03-19 16:48:09
+ * @LastEditTime: 2023-03-21 15:59:22
  * @Description: 
 -->
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, h } from 'vue';
 import 'element-plus/dist/index.css';
 import { ElButton } from 'element-plus'
 import { YoungSearchForm, type YoungSearchScheme } from '../../../packages/ui-vue3-element-plus/src';
@@ -18,6 +18,9 @@ interface Query {
   op2?: string,
   startcreatetime?: undefined,
   endcreatetime?: undefined,
+
+  custom1?: undefined;
+  custom2?: undefined;
 }
 
 const query = reactive<Query>({
@@ -41,6 +44,11 @@ const scheme: YoungSearchScheme<Query> = {
       min: 18,
       max: 30
     },
+  },
+  custom1: {
+    type: 'custom',
+    tip: '自定义1',
+    render: () => h(ElButton, { type: 'primary' }, { default: () => h('div', '自定义默认1') })
   },
   op: {
     type: 'select',
@@ -73,8 +81,12 @@ const scheme: YoungSearchScheme<Query> = {
   startcreatetime: {
     type: 'datetimerange',
     tip: '创建时间'
+  },
+  custom2: {
+    type: 'custom',
+    tip: '自定义2',
+    render: () => h(ElButton, { type: 'success' }, { default: () => h('div', '自定义默认2') })
   }
-
 }
 
 const log = console.log.bind(null, 'xxxxxxxxxxxxxx: ');
