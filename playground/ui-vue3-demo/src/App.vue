@@ -1,14 +1,15 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-03-21 15:59:22
+ * @LastEditTime: 2023-03-21 16:42:41
  * @Description: 
 -->
 <script setup lang="ts">
-import { reactive, h } from 'vue';
+import { ref, h } from 'vue';
 import 'element-plus/dist/index.css';
 import { ElButton } from 'element-plus'
 import { YoungSearchForm, type YoungSearchScheme } from '../../../packages/ui-vue3-element-plus/src';
+// import { YoungSearchForm, type YoungSearchScheme } from '@bluesyoung/ui-vue3-element-plus';
 
 interface Query {
   name: string,
@@ -23,7 +24,7 @@ interface Query {
   custom2?: undefined;
 }
 
-const query = reactive<Query>({
+const query = ref<Query>({
   name: '',
   age: 18,
   op: '',
