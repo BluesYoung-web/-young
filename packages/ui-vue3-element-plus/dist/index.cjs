@@ -71427,9 +71427,9 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
       },
       { immediate: true, deep: true }
     );
-    const update = () => {
+    const update = (up2 = true) => {
       emit2("update:modelValue", { ...form.value });
-      props.fastSearch && props.onSearch();
+      props.fastSearch && up2 && props.onSearch();
     };
     const renderItem = (key) => {
       const conf = props.searchScheme[key];
@@ -71443,6 +71443,7 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
           <ElInput
             modelValue={form.value[key]}
             onUpdate:modelValue={(v2) => form.value[key] = v2}
+            onChange={() => update(false)}
             onKeyup={(e) => useKeyUp(e, () => update())}
             {...conf.attrs}
           />,
@@ -71452,7 +71453,7 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
           <ElInputNumber
             modelValue={form.value[key2]}
             onUpdate:modelValue={(v2) => form.value[key2] = v2}
-            onChange={update}
+            onChange={() => update()}
             style={{ width: "120px" }}
             {...conf.attrs}
           />,
@@ -71463,7 +71464,7 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
             modelValue={form.value[key2]}
             options={conf.options || []}
             onUpdate:modelValue={(v2) => form.value[key2] = v2}
-            onChange={update}
+            onChange={() => update()}
             {...conf.attrs}
           />,
           conf.tip

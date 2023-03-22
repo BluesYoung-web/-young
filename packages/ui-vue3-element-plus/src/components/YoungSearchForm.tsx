@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-13 17:49:07
- * @LastEditTime: 2023-03-21 16:46:20
+ * @LastEditTime: 2023-03-22 19:42:26
  * @Description: 快速生成搜索部分
  */
 import { defineComponent, ref, watch } from 'vue';
@@ -79,9 +79,9 @@ export default defineComponent({
       { immediate: true, deep: true },
     );
 
-    const update = () => {
+    const update = (up = true) => {
       emit('update:modelValue', { ...form.value });
-      props.fastSearch && props.onSearch();
+      props.fastSearch && up && props.onSearch();
     };
 
     const renderItem = (key: string) => {
@@ -102,6 +102,7 @@ export default defineComponent({
             <ElInput
               modelValue={form.value[key]}
               onUpdate:modelValue={(v) => (form.value[key] = v)}
+              onChange={() => update(false)}
               // @ts-ignore
               onKeyup={(e: KeyboardEvent) => useKeyUp(e, () => update())}
               {...conf.attrs}
@@ -113,7 +114,7 @@ export default defineComponent({
             <ElInputNumber
               modelValue={form.value[key]}
               onUpdate:modelValue={(v) => (form.value[key] = v)}
-              onChange={update}
+              onChange={() => update()}
               style={{ width: '120px' }}
               {...conf.attrs}
             />,
@@ -125,7 +126,7 @@ export default defineComponent({
               modelValue={form.value[key]}
               options={conf.options || []}
               onUpdate:modelValue={(v) => (form.value[key] = v)}
-              onChange={update}
+              onChange={() => update()}
               {...conf.attrs}
             />,
             conf.tip,

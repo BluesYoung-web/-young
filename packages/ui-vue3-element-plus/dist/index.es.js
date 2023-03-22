@@ -542,10 +542,10 @@ const qd = kr({
       immediate: !0,
       deep: !0
     });
-    const i = () => {
+    const i = (o = !0) => {
       r("update:modelValue", {
         ...a.value
-      }), e.fastSearch && e.onSearch();
+      }), e.fastSearch && o && e.onSearch();
     }, s = (o) => {
       const l = e.searchScheme[o];
       l.attrs || (l.attrs = {});
@@ -557,12 +557,13 @@ const qd = kr({
         input: () => c(oe(rf, qe({
           modelValue: a.value[o],
           "onUpdate:modelValue": (h) => a.value[o] = h,
+          onChange: () => i(!1),
           onKeyup: (h) => Ud(h, () => i())
         }, l.attrs), null), l.tip),
         number: (h) => c(oe(tf, qe({
           modelValue: a.value[h],
           "onUpdate:modelValue": (m) => a.value[h] = m,
-          onChange: i,
+          onChange: () => i(),
           style: {
             width: "120px"
           }
@@ -571,7 +572,7 @@ const qd = kr({
           modelValue: a.value[h],
           options: l.options || [],
           "onUpdate:modelValue": (m) => a.value[h] = m,
-          onChange: i
+          onChange: () => i()
         }, l.attrs), null), l.tip),
         // ! 时间范围选择，通常全局只有一个
         datetimerange: (h) => c(oe(yf, qe({
