@@ -71442,7 +71442,7 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
         input: () => {
           return wrapTip(
             <ElInput
-              modelValue={form.value[key]?.trim?.()}
+              modelValue={form.value[key]}
               onUpdate:modelValue={(v2) => form.value[key] = v2?.trim?.()}
               onChange={() => update(false)}
               onKeyup={(e) => useKeyUp(e, () => update())}

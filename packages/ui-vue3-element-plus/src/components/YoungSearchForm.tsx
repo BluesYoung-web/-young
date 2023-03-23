@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-13 17:49:07
- * @LastEditTime: 2023-03-23 12:20:56
+ * @LastEditTime: 2023-03-23 13:58:15
  * @Description: 快速生成搜索部分
  */
 import { defineComponent, ref, watch } from 'vue';
@@ -100,7 +100,7 @@ export default defineComponent({
         input: () => {
           return wrapTip(
             <ElInput
-              modelValue={form.value[key]?.trim?.()}
+              modelValue={form.value[key]}
               onUpdate:modelValue={(v) => (form.value[key] = v?.trim?.())}
               onChange={() => update(false)}
               // @ts-ignore
