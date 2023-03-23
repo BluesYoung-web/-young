@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-13 17:49:07
- * @LastEditTime: 2023-03-22 19:42:26
+ * @LastEditTime: 2023-03-23 12:20:56
  * @Description: 快速生成搜索部分
  */
 import { defineComponent, ref, watch } from 'vue';
@@ -97,18 +97,19 @@ export default defineComponent({
       const [start, end] = props.dateTimeKey as [string, string];
 
       const EleMap: Record<YoungSearchFormType, (key: string) => JSX.Element> = {
-        input: () =>
-          wrapTip(
+        input: () => {
+          return wrapTip(
             <ElInput
-              modelValue={form.value[key]}
-              onUpdate:modelValue={(v) => (form.value[key] = v)}
+              modelValue={form.value[key]?.trim?.()}
+              onUpdate:modelValue={(v) => (form.value[key] = v?.trim?.())}
               onChange={() => update(false)}
               // @ts-ignore
               onKeyup={(e: KeyboardEvent) => useKeyUp(e, () => update())}
               {...conf.attrs}
             />,
             conf.tip,
-          ),
+          )
+        },
         number: (key) =>
           wrapTip(
             <ElInputNumber

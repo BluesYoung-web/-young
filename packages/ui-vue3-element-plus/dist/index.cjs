@@ -71439,16 +71439,18 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
       const wrapTip = (el, tip) => tip ? <ElFormItem label={conf.tip}>{el}</ElFormItem> : el;
       const [start, end2] = props.dateTimeKey;
       const EleMap = {
-        input: () => wrapTip(
-          <ElInput
-            modelValue={form.value[key]}
-            onUpdate:modelValue={(v2) => form.value[key] = v2}
-            onChange={() => update(false)}
-            onKeyup={(e) => useKeyUp(e, () => update())}
-            {...conf.attrs}
-          />,
-          conf.tip
-        ),
+        input: () => {
+          return wrapTip(
+            <ElInput
+              modelValue={form.value[key]?.trim?.()}
+              onUpdate:modelValue={(v2) => form.value[key] = v2?.trim?.()}
+              onChange={() => update(false)}
+              onKeyup={(e) => useKeyUp(e, () => update())}
+              {...conf.attrs}
+            />,
+            conf.tip
+          );
+        },
         number: (key2) => wrapTip(
           <ElInputNumber
             modelValue={form.value[key2]}
