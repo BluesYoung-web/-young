@@ -108,7 +108,7 @@ export default defineComponent({
               {...conf.attrs}
             />,
             conf.tip,
-          )
+          );
         },
         number: (key) =>
           wrapTip(
@@ -140,12 +140,11 @@ export default defineComponent({
               end={form.value[end]}
               onUpdate:start={(v) => {
                 form.value[start] = v;
-                update();
               }}
               onUpdate:end={(v) => {
                 form.value[end] = v;
-                update();
               }}
+              onChange={update}
               {...conf.attrs}
             />,
             conf.tip,

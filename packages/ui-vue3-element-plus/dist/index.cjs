@@ -71291,7 +71291,7 @@ var YoungDateRange_default = (0, vue_exports.defineComponent)({
       default: false
     }
   },
-  emits: ["update:start", "update:end"],
+  emits: ["update:start", "update:end", "change"],
   setup(props, { attrs, emit: emit2 }) {
     const datePicker = (0, vue_exports.ref)();
     (0, vue_exports.watchEffect)(() => {
@@ -71330,6 +71330,7 @@ var YoungDateRange_default = (0, vue_exports.defineComponent)({
       default-time={f()}
       clearable
       onUpdate:modelValue={(e) => update(e)}
+      onChange={() => emit2("change")}
     />;
   }
 });
@@ -71478,12 +71479,11 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
             end={form.value[end2]}
             onUpdate:start={(v2) => {
               form.value[start] = v2;
-              update();
             }}
             onUpdate:end={(v2) => {
               form.value[end2] = v2;
-              update();
             }}
+            onChange={update}
             {...conf.attrs}
           />,
           conf.tip

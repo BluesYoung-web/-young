@@ -429,7 +429,7 @@ const Ff = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"
       default: !1
     }
   },
-  emits: ["update:start", "update:end"],
+  emits: ["update:start", "update:end", "change"],
   setup(e, {
     attrs: t,
     emit: r
@@ -453,7 +453,8 @@ const Ff = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"
       "end-placeholder": "结束日期",
       "default-time": Gs(),
       clearable: !0,
-      "onUpdate:modelValue": (i) => a(i)
+      "onUpdate:modelValue": (i) => a(i),
+      onChange: () => r("change")
     }), null);
   }
 }), Cf = kr({
@@ -582,11 +583,12 @@ const qd = kr({
           start: a.value[x],
           end: a.value[u],
           "onUpdate:start": (m) => {
-            a.value[x] = m, i();
+            a.value[x] = m;
           },
           "onUpdate:end": (m) => {
-            a.value[u] = m, i();
-          }
+            a.value[u] = m;
+          },
+          onChange: i
         }, l.attrs), null), l.tip),
         custom: (h) => c(l.render(), l.tip)
       }[l.type];

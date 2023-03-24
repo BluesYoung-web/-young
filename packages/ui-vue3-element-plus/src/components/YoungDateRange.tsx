@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-02-11 11:06:39
- * @LastEditTime: 2023-02-11 14:01:12
+ * @LastEditTime: 2023-03-24 11:50:22
  * @Description:
  */
 import { defineComponent, ref, watchEffect } from 'vue';
@@ -23,7 +23,7 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: ['update:start', 'update:end'],
+  emits: ['update:start', 'update:end', 'change'],
   setup(props, { attrs, emit }) {
     const datePicker = ref<[Date, Date]>();
     watchEffect(() => {
@@ -64,6 +64,8 @@ export default defineComponent({
         default-time={recentDay()}
         clearable
         onUpdate:modelValue={(e) => update(e)}
+        // @ts-ignore
+        onChange={() => emit('change')}
       />
     );
   },

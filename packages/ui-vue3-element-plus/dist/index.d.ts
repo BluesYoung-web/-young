@@ -364,7 +364,7 @@ declare const _default$2: vue.DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
-}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("update:start" | "update:end")[], "update:start" | "update:end", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("change" | "update:start" | "update:end")[], "change" | "update:start" | "update:end", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     start: {
         type: (NumberConstructor | StringConstructor)[];
         default: string;
@@ -378,6 +378,7 @@ declare const _default$2: vue.DefineComponent<{
         default: boolean;
     };
 }>> & {
+    onChange?: (...args: any[]) => any;
     "onUpdate:start"?: (...args: any[]) => any;
     "onUpdate:end"?: (...args: any[]) => any;
 }, {
