@@ -569,4 +569,22 @@ declare const useImagePreview: (conf: YoungImageViewerConf, zIndex?: number) => 
 
 declare const useKeyUp: (e: KeyboardEvent, fn: Function, key?: string) => void;
 
-export { SelectOptionItem, TableDataItem, TableHeadItem, _default$2 as YoungDateRange, _default$6 as YoungDialog, _default$1 as YoungImageViewer, YoungImageViewerConf, _default$7 as YoungPagination, _default as YoungSearchForm, YoungSearchFormItem, YoungSearchScheme, _default$5 as YoungSelect, _default$8 as YoungTable, _default$3 as YoungTimeRange, _default$4 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useImagePreview, useKeyUp, useVerifyCode };
+declare const useQuery: <T>(QUERY_TEMP: T, cbk: Function) => {
+    query: vue.Ref<vue.UnwrapRef<T>>;
+    reset: () => void;
+};
+
+declare const useRemoteSearch: (cbk: (key: string) => Promise<SelectOptionItem[] | void>) => {
+    loading: vue.Ref<boolean>;
+    search: (str: string) => Promise<void>;
+    searchStr: vue.Ref<string | number | string[] | number[]>;
+    options: vue.Ref<{
+        label: string;
+        value: any;
+        disabled?: boolean;
+        children?: any[];
+    }[]>;
+    init: vue.Ref<boolean>;
+};
+
+export { SelectOptionItem, TableDataItem, TableHeadItem, _default$2 as YoungDateRange, _default$6 as YoungDialog, _default$1 as YoungImageViewer, YoungImageViewerConf, _default$7 as YoungPagination, _default as YoungSearchForm, YoungSearchFormItem, YoungSearchScheme, _default$5 as YoungSelect, _default$8 as YoungTable, _default$3 as YoungTimeRange, _default$4 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useImagePreview, useKeyUp, useQuery, useRemoteSearch, useVerifyCode };

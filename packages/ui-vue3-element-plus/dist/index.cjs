@@ -6261,32 +6261,32 @@ function markRaw(value) {
   def(value, "__v_skip", true);
   return value;
 }
-function trackRefValue(ref156) {
+function trackRefValue(ref158) {
   if (shouldTrack && activeEffect) {
-    ref156 = toRaw(ref156);
+    ref158 = toRaw(ref158);
     if (process.env.NODE_ENV !== "production") {
-      trackEffects(ref156.dep || (ref156.dep = createDep()), {
-        target: ref156,
+      trackEffects(ref158.dep || (ref158.dep = createDep()), {
+        target: ref158,
         type: "get",
         key: "value"
       });
     } else {
-      trackEffects(ref156.dep || (ref156.dep = createDep()));
+      trackEffects(ref158.dep || (ref158.dep = createDep()));
     }
   }
 }
-function triggerRefValue(ref156, newVal) {
-  ref156 = toRaw(ref156);
-  if (ref156.dep) {
+function triggerRefValue(ref158, newVal) {
+  ref158 = toRaw(ref158);
+  if (ref158.dep) {
     if (process.env.NODE_ENV !== "production") {
-      triggerEffects(ref156.dep, {
-        target: ref156,
+      triggerEffects(ref158.dep, {
+        target: ref158,
         type: "set",
         key: "value",
         newValue: newVal
       });
     } else {
-      triggerEffects(ref156.dep);
+      triggerEffects(ref158.dep);
     }
   }
 }
@@ -6305,11 +6305,11 @@ function createRef(rawValue, shallow) {
   }
   return new RefImpl(rawValue, shallow);
 }
-function triggerRef(ref156) {
-  triggerRefValue(ref156, process.env.NODE_ENV !== "production" ? ref156.value : void 0);
+function triggerRef(ref158) {
+  triggerRefValue(ref158, process.env.NODE_ENV !== "production" ? ref158.value : void 0);
 }
-function unref(ref156) {
-  return isRef(ref156) ? ref156.value : ref156;
+function unref(ref158) {
+  return isRef(ref158) ? ref158.value : ref158;
 }
 function proxyRefs(objectWithRefs) {
   return isReactive(objectWithRefs) ? objectWithRefs : new Proxy(objectWithRefs, shallowUnwrapHandlers);
@@ -8446,9 +8446,9 @@ function defineAsyncComponent(source) {
   });
 }
 function createInnerComp(comp, parent) {
-  const { ref: ref156, props, children, ce: ce2 } = parent.vnode;
+  const { ref: ref158, props, children, ce: ce2 } = parent.vnode;
   const vnode = createVNode(comp, props, children);
-  vnode.ref = ref156;
+  vnode.ref = ref158;
   vnode.ce = ce2;
   delete parent.vnode.ce;
   return vnode;
@@ -9712,7 +9712,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   }
   const refValue = vnode.shapeFlag & 4 ? getExposeProxy(vnode.component) || vnode.component.proxy : vnode.el;
   const value = isUnmount ? null : refValue;
-  const { i: owner, r: ref156 } = rawRef;
+  const { i: owner, r: ref158 } = rawRef;
   if (process.env.NODE_ENV !== "production" && !owner) {
     warn2(`Missing ref owner context. ref cannot be used on hoisted vnodes. A vnode with ref must be created inside the render function.`);
     return;
@@ -9720,7 +9720,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   const oldRef = oldRawRef && oldRawRef.r;
   const refs = owner.refs === EMPTY_OBJ ? owner.refs = {} : owner.refs;
   const setupState = owner.setupState;
-  if (oldRef != null && oldRef !== ref156) {
+  if (oldRef != null && oldRef !== ref158) {
     if (isString(oldRef)) {
       refs[oldRef] = null;
       if (hasOwn(setupState, oldRef)) {
@@ -9730,44 +9730,44 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
       oldRef.value = null;
     }
   }
-  if (isFunction(ref156)) {
-    callWithErrorHandling(ref156, owner, 12, [value, refs]);
+  if (isFunction(ref158)) {
+    callWithErrorHandling(ref158, owner, 12, [value, refs]);
   } else {
-    const _isString = isString(ref156);
-    const _isRef = isRef(ref156);
+    const _isString = isString(ref158);
+    const _isRef = isRef(ref158);
     if (_isString || _isRef) {
       const doSet = () => {
         if (rawRef.f) {
-          const existing = _isString ? hasOwn(setupState, ref156) ? setupState[ref156] : refs[ref156] : ref156.value;
+          const existing = _isString ? hasOwn(setupState, ref158) ? setupState[ref158] : refs[ref158] : ref158.value;
           if (isUnmount) {
             isArray(existing) && remove(existing, refValue);
           } else {
             if (!isArray(existing)) {
               if (_isString) {
-                refs[ref156] = [refValue];
-                if (hasOwn(setupState, ref156)) {
-                  setupState[ref156] = refs[ref156];
+                refs[ref158] = [refValue];
+                if (hasOwn(setupState, ref158)) {
+                  setupState[ref158] = refs[ref158];
                 }
               } else {
-                ref156.value = [refValue];
+                ref158.value = [refValue];
                 if (rawRef.k)
-                  refs[rawRef.k] = ref156.value;
+                  refs[rawRef.k] = ref158.value;
               }
             } else if (!existing.includes(refValue)) {
               existing.push(refValue);
             }
           }
         } else if (_isString) {
-          refs[ref156] = value;
-          if (hasOwn(setupState, ref156)) {
-            setupState[ref156] = value;
+          refs[ref158] = value;
+          if (hasOwn(setupState, ref158)) {
+            setupState[ref158] = value;
           }
         } else if (_isRef) {
-          ref156.value = value;
+          ref158.value = value;
           if (rawRef.k)
             refs[rawRef.k] = value;
         } else if (process.env.NODE_ENV !== "production") {
-          warn2("Invalid template ref type:", ref156, `(${typeof ref156})`);
+          warn2("Invalid template ref type:", ref158, `(${typeof ref158})`);
         }
       };
       if (value) {
@@ -9777,7 +9777,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
         doSet();
       }
     } else if (process.env.NODE_ENV !== "production") {
-      warn2("Invalid template ref type:", ref156, `(${typeof ref156})`);
+      warn2("Invalid template ref type:", ref158, `(${typeof ref158})`);
     }
   }
 }
@@ -9802,7 +9802,7 @@ function createHydrationFunctions(rendererInternals) {
   const hydrateNode = (node, vnode, parentComponent, parentSuspense, slotScopeIds, optimized = false) => {
     const isFragmentStart = isComment(node) && node.data === "[";
     const onMismatch = () => handleMismatch(node, vnode, parentComponent, parentSuspense, slotScopeIds, isFragmentStart);
-    const { type: type4, ref: ref156, shapeFlag, patchFlag } = vnode;
+    const { type: type4, ref: ref158, shapeFlag, patchFlag } = vnode;
     let domType = node.nodeType;
     vnode.el = node;
     if (patchFlag === -2) {
@@ -9903,8 +9903,8 @@ function createHydrationFunctions(rendererInternals) {
           warn2("Invalid HostVNode type:", type4, `(${typeof type4})`);
         }
     }
-    if (ref156 != null) {
-      setRef(ref156, null, parentSuspense, vnode);
+    if (ref158 != null) {
+      setRef(ref158, null, parentSuspense, vnode);
     }
     return nextNode;
   };
@@ -10125,7 +10125,7 @@ function baseCreateRenderer(options, createHydrationFns) {
       optimized = false;
       n2.dynamicChildren = null;
     }
-    const { type: type4, ref: ref156, shapeFlag } = n2;
+    const { type: type4, ref: ref158, shapeFlag } = n2;
     switch (type4) {
       case Text:
         processText(n1, n2, container, anchor);
@@ -10156,8 +10156,8 @@ function baseCreateRenderer(options, createHydrationFns) {
           warn2("Invalid VNode type:", type4, `(${typeof type4})`);
         }
     }
-    if (ref156 != null && parentComponent) {
-      setRef(ref156, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
+    if (ref158 != null && parentComponent) {
+      setRef(ref158, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
     }
   };
   const processText = (n1, n2, container, anchor) => {
@@ -10908,9 +10908,9 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
   };
   const unmount = (vnode, parentComponent, parentSuspense, doRemove = false, optimized = false) => {
-    const { type: type4, props, ref: ref156, children, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
-    if (ref156 != null) {
-      setRef(ref156, null, parentSuspense, vnode, true);
+    const { type: type4, props, ref: ref158, children, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
+    if (ref158 != null) {
+      setRef(ref158, null, parentSuspense, vnode, true);
     }
     if (shapeFlag & 256) {
       parentComponent.ctx.deactivate(vnode);
@@ -11372,7 +11372,7 @@ function guardReactiveProps(props) {
   return isProxy(props) || InternalObjectKey in props ? extend({}, props) : props;
 }
 function cloneVNode(vnode, extraProps, mergeRef = false) {
-  const { props, ref: ref156, patchFlag, children } = vnode;
+  const { props, ref: ref158, patchFlag, children } = vnode;
   const mergedProps = extraProps ? mergeProps(props || {}, extraProps) : props;
   const cloned = {
     __v_isVNode: true,
@@ -11384,8 +11384,8 @@ function cloneVNode(vnode, extraProps, mergeRef = false) {
       // #2078 in the case of <component :is="vnode" ref="extra"/>
       // if the vnode itself already has a ref, cloneVNode will need to merge
       // the refs so the single vnode can be set on multiple refs
-      mergeRef && ref156 ? isArray(ref156) ? ref156.concat(normalizeRef(extraProps)) : [ref156, normalizeRef(extraProps)] : normalizeRef(extraProps)
-    ) : ref156,
+      mergeRef && ref158 ? isArray(ref158) ? ref158.concat(normalizeRef(extraProps)) : [ref158, normalizeRef(extraProps)] : normalizeRef(extraProps)
+    ) : ref158,
     scopeId: vnode.scopeId,
     slotScopeIds: vnode.slotScopeIds,
     children: process.env.NODE_ENV !== "production" && patchFlag === -1 && isArray(children) ? children.map(deepCloneVNode) : children,
@@ -13183,8 +13183,8 @@ var init_runtime_core_esm_bundler = __esm({
     };
     InternalObjectKey = `__vInternal`;
     normalizeKey = ({ key }) => key != null ? key : null;
-    normalizeRef = ({ ref: ref156, ref_key, ref_for }) => {
-      return ref156 != null ? isString(ref156) || isRef(ref156) || isFunction(ref156) ? { i: currentRenderingInstance, r: ref156, k: ref_key, f: !!ref_for } : ref156 : null;
+    normalizeRef = ({ ref: ref158, ref_key, ref_for }) => {
+      return ref158 != null ? isString(ref158) || isRef(ref158) || isFunction(ref158) ? { i: currentRenderingInstance, r: ref158, k: ref_key, f: !!ref_for } : ref158 : null;
     };
     createVNode = process.env.NODE_ENV !== "production" ? createVNodeWithArgsTransform : _createVNode;
     emptyAppContext = createAppContext();
@@ -18400,6 +18400,8 @@ __export(src_exports, {
   useFormMode: () => useFormMode,
   useImagePreview: () => useImagePreview,
   useKeyUp: () => useKeyUp,
+  useQuery: () => useQuery,
+  useRemoteSearch: () => useRemoteSearch,
   useVerifyCode: () => useVerifyCode
 });
 module.exports = __toCommonJS(src_exports);
@@ -22926,11 +22928,11 @@ var withNoopInstall = (component2) => {
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/utils/vue/refs.mjs
 var composeRefs = (...refs) => {
   return (el) => {
-    refs.forEach((ref156) => {
-      if (isFunction4(ref156)) {
-        ref156(el);
+    refs.forEach((ref158) => {
+      if (isFunction4(ref158)) {
+        ref158(el);
       } else {
-        ref156.value = el;
+        ref158.value = el;
       }
     });
   };
@@ -23255,11 +23257,11 @@ var useDisabled = (fallback) => {
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/hooks/use-deprecated/index.mjs
-var useDeprecated = ({ from, replacement, scope, version: version6, ref: ref156, type: type4 = "API" }, condition) => {
+var useDeprecated = ({ from, replacement, scope, version: version6, ref: ref158, type: type4 = "API" }, condition) => {
   (0, vue_exports.watch)(() => (0, vue_exports.unref)(condition), (val) => {
     if (val) {
       debugWarn(scope, `[${type4}] ${from} is about to be deprecated in version ${version6}, please use ${replacement} instead.
-For more detail, please visit: ${ref156}
+For more detail, please visit: ${ref158}
 `);
     }
   }, {
@@ -24422,27 +24424,27 @@ function toRaw2(observed) {
 }
 var toReactive2 = (value) => isObject4(value) ? reactive4(value) : value;
 var toReadonly2 = (value) => isObject4(value) ? readonly4(value) : value;
-function trackRefValue2(ref156) {
+function trackRefValue2(ref158) {
   if (shouldTrack2 && activeEffect2) {
-    ref156 = toRaw2(ref156);
+    ref158 = toRaw2(ref158);
     if (process.env.NODE_ENV !== "production") {
-      trackEffects2(ref156.dep || (ref156.dep = createDep2()), {
-        target: ref156,
+      trackEffects2(ref158.dep || (ref158.dep = createDep2()), {
+        target: ref158,
         type: "get",
         key: "value"
       });
     } else {
-      trackEffects2(ref156.dep || (ref156.dep = createDep2()));
+      trackEffects2(ref158.dep || (ref158.dep = createDep2()));
     }
   }
 }
-function triggerRefValue2(ref156, newVal) {
-  ref156 = toRaw2(ref156);
-  const dep = ref156.dep;
+function triggerRefValue2(ref158, newVal) {
+  ref158 = toRaw2(ref158);
+  const dep = ref158.dep;
   if (dep) {
     if (process.env.NODE_ENV !== "production") {
       triggerEffects2(dep, {
-        target: ref156,
+        target: ref158,
         type: "set",
         key: "value",
         newValue: newVal
@@ -65574,17 +65576,17 @@ var Node2 = class {
     }
     this.updateLeafState();
   }
-  insertBefore(child, ref156) {
+  insertBefore(child, ref158) {
     let index2;
-    if (ref156) {
-      index2 = this.childNodes.indexOf(ref156);
+    if (ref158) {
+      index2 = this.childNodes.indexOf(ref158);
     }
     this.insertChild(child, index2);
   }
-  insertAfter(child, ref156) {
+  insertAfter(child, ref158) {
     let index2;
-    if (ref156) {
-      index2 = this.childNodes.indexOf(ref156);
+    if (ref158) {
+      index2 = this.childNodes.indexOf(ref158);
       if (index2 !== -1)
         index2 += 1;
     }
@@ -72245,6 +72247,41 @@ var useKeyUp = (e, fn2, key = "enter") => {
     fn2();
   }
 };
+
+// src/hooks/useQuery.ts
+var useQuery = (QUERY_TEMP, cbk) => {
+  const query = (0, vue_exports.ref)(O(QUERY_TEMP));
+  const reset = () => {
+    query.value = O(QUERY_TEMP);
+    cbk();
+  };
+  return {
+    query,
+    reset
+  };
+};
+
+// src/hooks/useRemoteSearch.ts
+var useRemoteSearch = (cbk) => {
+  const loading = (0, vue_exports.ref)(false);
+  const searchStr = (0, vue_exports.ref)("");
+  const options = (0, vue_exports.ref)([]);
+  const search = async (str) => {
+    str = str.trim();
+    const res = await cbk(str);
+    if (res) {
+      options.value = res;
+    }
+  };
+  const init = (0, vue_exports.ref)(false);
+  return {
+    loading,
+    search,
+    searchStr,
+    options,
+    init
+  };
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   YoungDateRange,
@@ -72261,6 +72298,8 @@ var useKeyUp = (e, fn2, key = "enter") => {
   useFormMode,
   useImagePreview,
   useKeyUp,
+  useQuery,
+  useRemoteSearch,
   useVerifyCode
 });
 /*! Bundled license information:
