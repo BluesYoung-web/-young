@@ -8,17 +8,8 @@ yarn add @bluesyoung/ui-vue3-element-plus
 pnpm add @bluesyoung/ui-vue3-element-plus
 ```
 
-## 组件列表
+## 使用说明
 
-```bash
-src/components
-├── YoungCmdPopup.tsx
-├── YoungContextMenu.tsx
-├── YoungTab.tsx
-```
+[组件使用说明](./src/components/README.md)
 
-## 使用
-
-```ts
-import { YoungCmdPopup } from '@bluesyoung/ui-vue3-element-plus';
-```
+[方法使用说明](./src/hooks/README.md)
