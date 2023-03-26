@@ -11,6 +11,11 @@
       "require": "./dist/index.cjs.js",
       "import": "./dist/index.es.js",
       "types": "./dist/index.d.ts"
+    },
+    "./resolver": {
+      "types": "./dist/resolver.d.ts",
+      "require": "./dist/resolver.es.js",
+      "import": "./dist/resolver.cjs.js"
     }
   },
   "scripts": {

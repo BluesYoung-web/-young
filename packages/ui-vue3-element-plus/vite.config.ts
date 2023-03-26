@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-10-19 10:48:36
- * @LastEditTime: 2023-03-10 17:09:28
+ * @LastEditTime: 2023-03-25 20:22:44
  * @Description:
  */
 /// <reference types="vite/client" />
@@ -17,10 +17,13 @@ export default defineConfig({
     },
   },
   build: {
-    lib: {
-      entry: resolve(__dirname, './src/index.ts'),
+    lib:{
+      entry: [
+        resolve(__dirname, './src/index.ts'),
+        resolve(__dirname, './src/resolver.ts'),
+      ],
       formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format}.js`,
+      fileName: (format) => `[name].${format}.js`,
     },
     sourcemap: true,
     rollupOptions: {
