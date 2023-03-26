@@ -14,8 +14,8 @@
     },
     "./resolver": {
       "types": "./dist/resolver.d.ts",
-      "require": "./dist/resolver.es.js",
-      "import": "./dist/resolver.cjs.js"
+      "require": "./dist/resolver.cjs.js",
+      "import": "./dist/resolver.es.js"
     }
   },
   "scripts": {

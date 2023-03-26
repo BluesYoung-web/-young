@@ -1,4 +1,4 @@
-const t = "@bluesyoung/ui-vue3-element-plus", o = "0.8.0", u = "vue3 + element-plus ui components", n = "module", i = "dist/index.cjs.js", r = "dist/index.es.js", p = "dist/index.d.ts", c = {
+const t = "@bluesyoung/ui-vue3-element-plus", o = "0.9.0", u = "vue3 + element-plus ui components", n = "module", i = "dist/index.cjs.js", r = "dist/index.es.js", p = "dist/index.d.ts", c = {
   ".": {
     require: "./dist/index.cjs.js",
     import: "./dist/index.es.js",
@@ -6,8 +6,8 @@ const t = "@bluesyoung/ui-vue3-element-plus", o = "0.8.0", u = "vue3 + element-p
   },
   "./resolver": {
     types: "./dist/resolver.d.ts",
-    require: "./dist/resolver.es.js",
-    import: "./dist/resolver.cjs.js"
+    require: "./dist/resolver.cjs.js",
+    import: "./dist/resolver.es.js"
   }
 }, l = {
   test: "vitest",

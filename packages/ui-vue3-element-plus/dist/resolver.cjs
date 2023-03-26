@@ -27,7 +27,7 @@ module.exports = __toCommonJS(resolver_exports);
 // package.json
 var package_default = {
   name: "@bluesyoung/ui-vue3-element-plus",
-  version: "0.8.0",
+  version: "0.9.0",
   description: "vue3 + element-plus ui components",
   type: "module",
   main: "dist/index.cjs.js",
@@ -41,8 +41,8 @@ var package_default = {
     },
     "./resolver": {
       types: "./dist/resolver.d.ts",
-      require: "./dist/resolver.es.js",
-      import: "./dist/resolver.cjs.js"
+      require: "./dist/resolver.cjs.js",
+      import: "./dist/resolver.es.js"
     }
   },
   scripts: {
