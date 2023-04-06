@@ -1,4 +1,4 @@
-declare type GetParamsSign<T> = T extends (arg: infer P) => void ? P : never;
+type GetParamsSign<T> = T extends (arg: infer P) => void ? P : never;
 declare namespace Young {
     type Cbk = {
         success: (e: any) => void;
@@ -18,11 +18,11 @@ declare class YoungRPCSlave<R extends Record<string, any>> {
     constructor(shakeHandsMsg?: string);
     shakeHands(): void;
     trigger<T extends keyof R>(cmd: T, params?: GetParamsSign<R[T]>): void;
-    setHandler<T extends keyof R>(cmd: T, { success, fail }?: Young.Cbk): (params: GetParamsSign<R[T]>) => void;
+    setHandler<T extends keyof R>(cmd: T, { success, fail }?: Young.Cbk): (params: GetParamsSign<R[T]>) => ReturnType<R[T]>;
 }
 
-declare type MasterCbk<R extends Record<string, any>, T extends keyof R> = (params: GetParamsSign<R[T]>) => any | Promise<any>;
-declare type MasterHandlers<R extends Record<string, any>> = {
+type MasterCbk<R extends Record<string, any>, T extends keyof R> = (params: GetParamsSign<R[T]>) => any | Promise<any>;
+type MasterHandlers<R extends Record<string, any>> = {
     [P in keyof R]?: MasterCbk<R, P>;
 };
 declare class YoungRPCMaster<R extends Record<string, any>> {

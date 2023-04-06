@@ -65,6 +65,6 @@ export class YoungRPCSlave<R extends Record<string, any>> {
         await fail?.(data);
       }
     };
-    return this.trigger.bind(this, cmd) as (params: GetParamsSign<R[T]>) => void;
+    return this.trigger.bind(this, cmd) as (params: GetParamsSign<R[T]>) => ReturnType<R[T]>;
   }
 };

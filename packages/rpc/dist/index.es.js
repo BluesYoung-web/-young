@@ -1,82 +1,51 @@
-const SHAKE_HANDS_MSG = "---young-rpc-shake-hands-message-request---";
-class YoungRPCSlave {
-  constructor(shakeHandsMsg = SHAKE_HANDS_MSG) {
-    this.shakeHandsMsg = shakeHandsMsg;
-    this.handlersMap = {};
-    if (window.opener && window.opener !== window) {
-      this.masterWindow = window.opener;
-    } else if (window.parent && window.parent !== window) {
-      this.masterWindow = window.parent;
-    }
-    this.shakeHands();
+const r = "---young-rpc-shake-hands-message-request---";
+class i {
+  constructor(s = r) {
+    this.shakeHandsMsg = s, this.handlersMap = {}, window.opener && window.opener !== window ? this.masterWindow = window.opener : window.parent && window.parent !== window && (this.masterWindow = window.parent), this.shakeHands();
   }
   shakeHands() {
-    if (!this.masterWindow) {
+    if (!this.masterWindow)
       throw new Error("YoungRPCSlave can only be used in sub window");
-    }
-    const channel = new MessageChannel();
-    this.port = channel.port1;
-    this.port.onmessage = (e) => {
-      const { data, isTrusted } = e;
-      if (isTrusted && data) {
-        if (data.cmd && typeof data.cmd === "string" && this.handlersMap[data.cmd]) {
-          this.handlersMap[data.cmd](data);
-        } else {
-          console.warn("\u{1F680}unknown msg", data);
-        }
-      }
-    };
-    this.port.onmessageerror = (e) => {
-      console.error("\u{1F680} ~ YoungRPCSlave ~ e", e);
-    };
-    this.masterWindow.postMessage(this.shakeHandsMsg, "*", [channel.port2]);
+    const s = new MessageChannel();
+    this.port = s.port1, this.port.onmessage = (n) => {
+      const { data: e, isTrusted: t } = n;
+      t && e && (e.cmd && typeof e.cmd == "string" && this.handlersMap[e.cmd] ? this.handlersMap[e.cmd](e) : console.warn("🚀unknown msg", e));
+    }, this.port.onmessageerror = (n) => {
+      console.error("🚀 ~ YoungRPCSlave ~ e", n);
+    }, this.masterWindow.postMessage(this.shakeHandsMsg, "*", [s.port2]);
   }
-  trigger(cmd, params = {}) {
-    this.port.postMessage({ cmd, params });
+  trigger(s, n = {}) {
+    this.port.postMessage({ cmd: s, params: n });
   }
-  setHandler(cmd, { success, fail } = {}) {
-    this.handlersMap[cmd] = async ({ ok, data }) => {
-      if (ok) {
-        await (success == null ? void 0 : success(data));
-      } else {
-        await (fail == null ? void 0 : fail(data));
-      }
-    };
-    return this.trigger.bind(this, cmd);
+  setHandler(s, { success: n, fail: e } = {}) {
+    return this.handlersMap[s] = async ({ ok: t, data: o }) => {
+      t ? await (n == null ? void 0 : n(o)) : await (e == null ? void 0 : e(o));
+    }, this.trigger.bind(this, s);
   }
 }
-class YoungRPCMaster {
-  constructor(shakeHandsMsg = SHAKE_HANDS_MSG) {
-    this.handlersMap = {};
-    window.addEventListener("message", async (e) => {
-      if (e.data === shakeHandsMsg) {
-        this.port = e.ports[0];
-        this.port.onmessage = (e2) => {
-          const { data, isTrusted } = e2;
-          if (isTrusted && data) {
-            if (data.cmd && typeof data.cmd === "string" && this.handlersMap[data.cmd]) {
-              this.handlersMap[data.cmd](data.params);
-            } else {
-              console.warn("\u{1F680}unknown msg", data);
-            }
-          }
-        };
-        this.port.onmessageerror = (e2) => {
-          console.error("\u{1F680} ~ YoungRPCMaster ~ ", e2);
-        };
-        console.log("\u{1F680}\u{1F680}\u{1F680} master app is ready \u{1F680}\u{1F680}\u{1F680}, shakeHandsMsg: ", shakeHandsMsg);
-      }
+class d {
+  constructor(s = r) {
+    this.handlersMap = {}, window.addEventListener("message", async (n) => {
+      n.data === s && (this.port = n.ports[0], this.port.onmessage = (e) => {
+        const { data: t, isTrusted: o } = e;
+        o && t && (t.cmd && typeof t.cmd == "string" && this.handlersMap[t.cmd] ? this.handlersMap[t.cmd](t.params) : console.warn("🚀unknown msg", t));
+      }, this.port.onmessageerror = (e) => {
+        console.error("🚀 ~ YoungRPCMaster ~ ", e);
+      }, console.log("🚀🚀🚀 master app is ready 🚀🚀🚀, shakeHandsMsg: ", s));
     });
   }
-  setHandler(cmd, cbk) {
-    this.handlersMap[cmd] = cbk;
+  setHandler(s, n) {
+    this.handlersMap[s] = n;
   }
   close() {
     this.port.close();
   }
-  sendMsg(data) {
-    this.port.postMessage(data);
+  sendMsg(s) {
+    this.port.postMessage(s);
   }
 }
-export { YoungRPCMaster, YoungRPCSlave };
+export {
+  d as YoungRPCMaster,
+  i as YoungRPCSlave
+};
 //# sourceMappingURL=index.es.js.map

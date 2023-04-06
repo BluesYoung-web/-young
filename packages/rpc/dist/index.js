@@ -15,6 +15,26 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
 
 // src/index.ts
 var src_exports = {};
@@ -64,13 +84,13 @@ var YoungRPCSlave = class {
     this.port.postMessage({ cmd, params });
   }
   setHandler(cmd, { success, fail } = {}) {
-    this.handlersMap[cmd] = async ({ ok, data }) => {
+    this.handlersMap[cmd] = (_0) => __async(this, [_0], function* ({ ok, data }) {
       if (ok) {
-        await (success == null ? void 0 : success(data));
+        yield success == null ? void 0 : success(data);
       } else {
-        await (fail == null ? void 0 : fail(data));
+        yield fail == null ? void 0 : fail(data);
       }
-    };
+    });
     return this.trigger.bind(this, cmd);
   }
 };
@@ -79,7 +99,7 @@ var YoungRPCSlave = class {
 var YoungRPCMaster = class {
   constructor(shakeHandsMsg = SHAKE_HANDS_MSG) {
     this.handlersMap = {};
-    window.addEventListener("message", async (e) => {
+    window.addEventListener("message", (e) => __async(this, null, function* () {
       if (e.data === shakeHandsMsg) {
         this.port = e.ports[0];
         this.port.onmessage = (e2) => {
@@ -97,7 +117,7 @@ var YoungRPCMaster = class {
         };
         console.log("\u{1F680}\u{1F680}\u{1F680} master app is ready \u{1F680}\u{1F680}\u{1F680}, shakeHandsMsg: ", shakeHandsMsg);
       }
-    });
+    }));
   }
   setHandler(cmd, cbk) {
     this.handlersMap[cmd] = cbk;
