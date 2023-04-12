@@ -38,6 +38,8 @@ export type YoungSearchFormItem = {
     title?: string;
     class?: string;
     style?: string;
+    clearable?: boolean;
+    disabled?: boolean;
     [props: string]: any;
   };
 };
