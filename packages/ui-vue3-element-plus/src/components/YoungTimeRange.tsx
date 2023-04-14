@@ -1,11 +1,11 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-02-11 11:06:39
- * @LastEditTime: 2023-02-11 11:13:25
+ * @LastEditTime: 2023-04-13 09:05:37
  * @Description:
  */
-import { defineComponent } from 'vue';
-import { ElTimeSelect } from 'element-plus';
+import { defineComponent, ref, watchEffect } from 'vue';
+import { ElTimeSelect, ElTimePicker } from 'element-plus';
 
 export default defineComponent({
   props: {
@@ -29,35 +29,75 @@ export default defineComponent({
       type: String,
       default: '00:01',
     },
+    /**
+     * 是否精确到秒
+     */
+    second: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['update:start', 'update:end'],
   setup(props, { attrs, emit }) {
-    return () => (
-      <>
-        <ElTimeSelect
+    const timePicker = ref<[Date, Date]>();
+    watchEffect(() => {
+      if (props.start && props.end) {
+        timePicker.value = [
+          new Date(`2022 02 02 ${props.start}`),
+          new Date(`2022 02 02 ${props.end}`),
+        ];
+      } else {
+        timePicker.value = undefined;
+      }
+    });
+
+    const update = (v: [Date, Date] | null) => {
+      if (!v) {
+        emit('update:start', '');
+        emit('update:end', '');
+      } else {
+        const [start, end] = v;
+        emit('update:start', start.toLocaleString().match(/\d\d:\d\d:\d\d/)?.[0] ?? '');
+        emit('update:end', end.toLocaleString().match(/\d\d:\d\d:\d\d/)?.[0] ?? '');
+      }
+    };
+
+    return () =>
+      !props.second ? (
+        <>
+          <ElTimeSelect
+            {...attrs}
+            modelValue={props.start}
+            class="w-120px mr-2"
+            maxTime={props.end}
+            placeholder="开始时间"
+            start={props.startTime}
+            step={props.step}
+            end={props.endTime}
+            onUpdate:modelValue={(v) => emit('update:start', v)}
+          />
+          - &nbsp;
+          <ElTimeSelect
+            {...attrs}
+            modelValue={props.end}
+            class="w-120px"
+            minTime={props.start}
+            placeholder="结束时间"
+            start={props.startTime}
+            step={props.step}
+            end={props.endTime}
+            onUpdate:modelValue={(v) => emit('update:end', v)}
+          />
+        </>
+      ) : (
+        <ElTimePicker
           {...attrs}
-          modelValue={props.start}
-          class="w-120px mr-2"
-          maxTime={props.end}
-          placeholder="开始时间"
-          start={props.startTime}
-          step={props.step}
-          end={props.endTime}
-          onUpdate:modelValue={(v) => emit('update:start', v)}
+          modelValue={timePicker.value}
+          isRange
+          startPlaceholder='开始时间'
+          endPlaceholder='结束时间'
+          onUpdate:modelValue={update}
         />
-        - &nbsp;
-        <ElTimeSelect
-          {...attrs}
-          modelValue={props.end}
-          class="w-120px"
-          minTime={props.start}
-          placeholder="结束时间"
-          start={props.startTime}
-          step={props.step}
-          end={props.endTime}
-          onUpdate:modelValue={(v) => emit('update:end', v)}
-        />
-      </>
-    );
+      );
   },
 });

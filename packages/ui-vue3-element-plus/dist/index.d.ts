@@ -321,6 +321,13 @@ declare const _default$3: vue.DefineComponent<{
         type: StringConstructor;
         default: string;
     };
+    /**
+     * 是否精确到秒
+     */
+    second: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("update:start" | "update:end")[], "update:start" | "update:end", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     start: {
         type: StringConstructor;
@@ -342,6 +349,13 @@ declare const _default$3: vue.DefineComponent<{
         type: StringConstructor;
         default: string;
     };
+    /**
+     * 是否精确到秒
+     */
+    second: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }>> & {
     "onUpdate:start"?: (...args: any[]) => any;
     "onUpdate:end"?: (...args: any[]) => any;
@@ -349,6 +363,7 @@ declare const _default$3: vue.DefineComponent<{
     startTime: string;
     endTime: string;
     step: string;
+    second: boolean;
 }>;
 
 declare const _default$2: vue.DefineComponent<{
@@ -446,6 +461,8 @@ type YoungSearchFormItem = {
         title?: string;
         class?: string;
         style?: string;
+        clearable?: boolean;
+        disabled?: boolean;
         [props: string]: any;
     };
 };

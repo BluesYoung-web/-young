@@ -6261,32 +6261,32 @@ function markRaw(value) {
   def(value, "__v_skip", true);
   return value;
 }
-function trackRefValue(ref158) {
+function trackRefValue(ref159) {
   if (shouldTrack && activeEffect) {
-    ref158 = toRaw(ref158);
+    ref159 = toRaw(ref159);
     if (process.env.NODE_ENV !== "production") {
-      trackEffects(ref158.dep || (ref158.dep = createDep()), {
-        target: ref158,
+      trackEffects(ref159.dep || (ref159.dep = createDep()), {
+        target: ref159,
         type: "get",
         key: "value"
       });
     } else {
-      trackEffects(ref158.dep || (ref158.dep = createDep()));
+      trackEffects(ref159.dep || (ref159.dep = createDep()));
     }
   }
 }
-function triggerRefValue(ref158, newVal) {
-  ref158 = toRaw(ref158);
-  if (ref158.dep) {
+function triggerRefValue(ref159, newVal) {
+  ref159 = toRaw(ref159);
+  if (ref159.dep) {
     if (process.env.NODE_ENV !== "production") {
-      triggerEffects(ref158.dep, {
-        target: ref158,
+      triggerEffects(ref159.dep, {
+        target: ref159,
         type: "set",
         key: "value",
         newValue: newVal
       });
     } else {
-      triggerEffects(ref158.dep);
+      triggerEffects(ref159.dep);
     }
   }
 }
@@ -6305,11 +6305,11 @@ function createRef(rawValue, shallow) {
   }
   return new RefImpl(rawValue, shallow);
 }
-function triggerRef(ref158) {
-  triggerRefValue(ref158, process.env.NODE_ENV !== "production" ? ref158.value : void 0);
+function triggerRef(ref159) {
+  triggerRefValue(ref159, process.env.NODE_ENV !== "production" ? ref159.value : void 0);
 }
-function unref(ref158) {
-  return isRef(ref158) ? ref158.value : ref158;
+function unref(ref159) {
+  return isRef(ref159) ? ref159.value : ref159;
 }
 function proxyRefs(objectWithRefs) {
   return isReactive(objectWithRefs) ? objectWithRefs : new Proxy(objectWithRefs, shallowUnwrapHandlers);
@@ -8446,9 +8446,9 @@ function defineAsyncComponent(source) {
   });
 }
 function createInnerComp(comp, parent) {
-  const { ref: ref158, props, children, ce: ce2 } = parent.vnode;
+  const { ref: ref159, props, children, ce: ce2 } = parent.vnode;
   const vnode = createVNode(comp, props, children);
-  vnode.ref = ref158;
+  vnode.ref = ref159;
   vnode.ce = ce2;
   delete parent.vnode.ce;
   return vnode;
@@ -9712,7 +9712,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   }
   const refValue = vnode.shapeFlag & 4 ? getExposeProxy(vnode.component) || vnode.component.proxy : vnode.el;
   const value = isUnmount ? null : refValue;
-  const { i: owner, r: ref158 } = rawRef;
+  const { i: owner, r: ref159 } = rawRef;
   if (process.env.NODE_ENV !== "production" && !owner) {
     warn2(`Missing ref owner context. ref cannot be used on hoisted vnodes. A vnode with ref must be created inside the render function.`);
     return;
@@ -9720,7 +9720,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   const oldRef = oldRawRef && oldRawRef.r;
   const refs = owner.refs === EMPTY_OBJ ? owner.refs = {} : owner.refs;
   const setupState = owner.setupState;
-  if (oldRef != null && oldRef !== ref158) {
+  if (oldRef != null && oldRef !== ref159) {
     if (isString(oldRef)) {
       refs[oldRef] = null;
       if (hasOwn(setupState, oldRef)) {
@@ -9730,44 +9730,44 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
       oldRef.value = null;
     }
   }
-  if (isFunction(ref158)) {
-    callWithErrorHandling(ref158, owner, 12, [value, refs]);
+  if (isFunction(ref159)) {
+    callWithErrorHandling(ref159, owner, 12, [value, refs]);
   } else {
-    const _isString = isString(ref158);
-    const _isRef = isRef(ref158);
+    const _isString = isString(ref159);
+    const _isRef = isRef(ref159);
     if (_isString || _isRef) {
       const doSet = () => {
         if (rawRef.f) {
-          const existing = _isString ? hasOwn(setupState, ref158) ? setupState[ref158] : refs[ref158] : ref158.value;
+          const existing = _isString ? hasOwn(setupState, ref159) ? setupState[ref159] : refs[ref159] : ref159.value;
           if (isUnmount) {
             isArray(existing) && remove(existing, refValue);
           } else {
             if (!isArray(existing)) {
               if (_isString) {
-                refs[ref158] = [refValue];
-                if (hasOwn(setupState, ref158)) {
-                  setupState[ref158] = refs[ref158];
+                refs[ref159] = [refValue];
+                if (hasOwn(setupState, ref159)) {
+                  setupState[ref159] = refs[ref159];
                 }
               } else {
-                ref158.value = [refValue];
+                ref159.value = [refValue];
                 if (rawRef.k)
-                  refs[rawRef.k] = ref158.value;
+                  refs[rawRef.k] = ref159.value;
               }
             } else if (!existing.includes(refValue)) {
               existing.push(refValue);
             }
           }
         } else if (_isString) {
-          refs[ref158] = value;
-          if (hasOwn(setupState, ref158)) {
-            setupState[ref158] = value;
+          refs[ref159] = value;
+          if (hasOwn(setupState, ref159)) {
+            setupState[ref159] = value;
           }
         } else if (_isRef) {
-          ref158.value = value;
+          ref159.value = value;
           if (rawRef.k)
             refs[rawRef.k] = value;
         } else if (process.env.NODE_ENV !== "production") {
-          warn2("Invalid template ref type:", ref158, `(${typeof ref158})`);
+          warn2("Invalid template ref type:", ref159, `(${typeof ref159})`);
         }
       };
       if (value) {
@@ -9777,7 +9777,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
         doSet();
       }
     } else if (process.env.NODE_ENV !== "production") {
-      warn2("Invalid template ref type:", ref158, `(${typeof ref158})`);
+      warn2("Invalid template ref type:", ref159, `(${typeof ref159})`);
     }
   }
 }
@@ -9802,7 +9802,7 @@ function createHydrationFunctions(rendererInternals) {
   const hydrateNode = (node, vnode, parentComponent, parentSuspense, slotScopeIds, optimized = false) => {
     const isFragmentStart = isComment(node) && node.data === "[";
     const onMismatch = () => handleMismatch(node, vnode, parentComponent, parentSuspense, slotScopeIds, isFragmentStart);
-    const { type: type4, ref: ref158, shapeFlag, patchFlag } = vnode;
+    const { type: type4, ref: ref159, shapeFlag, patchFlag } = vnode;
     let domType = node.nodeType;
     vnode.el = node;
     if (patchFlag === -2) {
@@ -9903,8 +9903,8 @@ function createHydrationFunctions(rendererInternals) {
           warn2("Invalid HostVNode type:", type4, `(${typeof type4})`);
         }
     }
-    if (ref158 != null) {
-      setRef(ref158, null, parentSuspense, vnode);
+    if (ref159 != null) {
+      setRef(ref159, null, parentSuspense, vnode);
     }
     return nextNode;
   };
@@ -10125,7 +10125,7 @@ function baseCreateRenderer(options, createHydrationFns) {
       optimized = false;
       n2.dynamicChildren = null;
     }
-    const { type: type4, ref: ref158, shapeFlag } = n2;
+    const { type: type4, ref: ref159, shapeFlag } = n2;
     switch (type4) {
       case Text:
         processText(n1, n2, container, anchor);
@@ -10156,8 +10156,8 @@ function baseCreateRenderer(options, createHydrationFns) {
           warn2("Invalid VNode type:", type4, `(${typeof type4})`);
         }
     }
-    if (ref158 != null && parentComponent) {
-      setRef(ref158, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
+    if (ref159 != null && parentComponent) {
+      setRef(ref159, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
     }
   };
   const processText = (n1, n2, container, anchor) => {
@@ -10908,9 +10908,9 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
   };
   const unmount = (vnode, parentComponent, parentSuspense, doRemove = false, optimized = false) => {
-    const { type: type4, props, ref: ref158, children, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
-    if (ref158 != null) {
-      setRef(ref158, null, parentSuspense, vnode, true);
+    const { type: type4, props, ref: ref159, children, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
+    if (ref159 != null) {
+      setRef(ref159, null, parentSuspense, vnode, true);
     }
     if (shapeFlag & 256) {
       parentComponent.ctx.deactivate(vnode);
@@ -11372,7 +11372,7 @@ function guardReactiveProps(props) {
   return isProxy(props) || InternalObjectKey in props ? extend({}, props) : props;
 }
 function cloneVNode(vnode, extraProps, mergeRef = false) {
-  const { props, ref: ref158, patchFlag, children } = vnode;
+  const { props, ref: ref159, patchFlag, children } = vnode;
   const mergedProps = extraProps ? mergeProps(props || {}, extraProps) : props;
   const cloned = {
     __v_isVNode: true,
@@ -11384,8 +11384,8 @@ function cloneVNode(vnode, extraProps, mergeRef = false) {
       // #2078 in the case of <component :is="vnode" ref="extra"/>
       // if the vnode itself already has a ref, cloneVNode will need to merge
       // the refs so the single vnode can be set on multiple refs
-      mergeRef && ref158 ? isArray(ref158) ? ref158.concat(normalizeRef(extraProps)) : [ref158, normalizeRef(extraProps)] : normalizeRef(extraProps)
-    ) : ref158,
+      mergeRef && ref159 ? isArray(ref159) ? ref159.concat(normalizeRef(extraProps)) : [ref159, normalizeRef(extraProps)] : normalizeRef(extraProps)
+    ) : ref159,
     scopeId: vnode.scopeId,
     slotScopeIds: vnode.slotScopeIds,
     children: process.env.NODE_ENV !== "production" && patchFlag === -1 && isArray(children) ? children.map(deepCloneVNode) : children,
@@ -13183,8 +13183,8 @@ var init_runtime_core_esm_bundler = __esm({
     };
     InternalObjectKey = `__vInternal`;
     normalizeKey = ({ key }) => key != null ? key : null;
-    normalizeRef = ({ ref: ref158, ref_key, ref_for }) => {
-      return ref158 != null ? isString(ref158) || isRef(ref158) || isFunction(ref158) ? { i: currentRenderingInstance, r: ref158, k: ref_key, f: !!ref_for } : ref158 : null;
+    normalizeRef = ({ ref: ref159, ref_key, ref_for }) => {
+      return ref159 != null ? isString(ref159) || isRef(ref159) || isFunction(ref159) ? { i: currentRenderingInstance, r: ref159, k: ref_key, f: !!ref_for } : ref159 : null;
     };
     createVNode = process.env.NODE_ENV !== "production" ? createVNodeWithArgsTransform : _createVNode;
     emptyAppContext = createAppContext();
@@ -22928,11 +22928,11 @@ var withNoopInstall = (component2) => {
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/utils/vue/refs.mjs
 var composeRefs = (...refs) => {
   return (el) => {
-    refs.forEach((ref158) => {
-      if (isFunction4(ref158)) {
-        ref158(el);
+    refs.forEach((ref159) => {
+      if (isFunction4(ref159)) {
+        ref159(el);
       } else {
-        ref158.value = el;
+        ref159.value = el;
       }
     });
   };
@@ -23257,11 +23257,11 @@ var useDisabled = (fallback) => {
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/hooks/use-deprecated/index.mjs
-var useDeprecated = ({ from, replacement, scope, version: version6, ref: ref158, type: type4 = "API" }, condition) => {
+var useDeprecated = ({ from, replacement, scope, version: version6, ref: ref159, type: type4 = "API" }, condition) => {
   (0, vue_exports.watch)(() => (0, vue_exports.unref)(condition), (val) => {
     if (val) {
       debugWarn(scope, `[${type4}] ${from} is about to be deprecated in version ${version6}, please use ${replacement} instead.
-For more detail, please visit: ${ref158}
+For more detail, please visit: ${ref159}
 `);
     }
   }, {
@@ -24424,27 +24424,27 @@ function toRaw2(observed) {
 }
 var toReactive2 = (value) => isObject4(value) ? reactive4(value) : value;
 var toReadonly2 = (value) => isObject4(value) ? readonly4(value) : value;
-function trackRefValue2(ref158) {
+function trackRefValue2(ref159) {
   if (shouldTrack2 && activeEffect2) {
-    ref158 = toRaw2(ref158);
+    ref159 = toRaw2(ref159);
     if (process.env.NODE_ENV !== "production") {
-      trackEffects2(ref158.dep || (ref158.dep = createDep2()), {
-        target: ref158,
+      trackEffects2(ref159.dep || (ref159.dep = createDep2()), {
+        target: ref159,
         type: "get",
         key: "value"
       });
     } else {
-      trackEffects2(ref158.dep || (ref158.dep = createDep2()));
+      trackEffects2(ref159.dep || (ref159.dep = createDep2()));
     }
   }
 }
-function triggerRefValue2(ref158, newVal) {
-  ref158 = toRaw2(ref158);
-  const dep = ref158.dep;
+function triggerRefValue2(ref159, newVal) {
+  ref159 = toRaw2(ref159);
+  const dep = ref159.dep;
   if (dep) {
     if (process.env.NODE_ENV !== "production") {
       triggerEffects2(dep, {
-        target: ref158,
+        target: ref159,
         type: "set",
         key: "value",
         newValue: newVal
@@ -65576,17 +65576,17 @@ var Node2 = class {
     }
     this.updateLeafState();
   }
-  insertBefore(child, ref158) {
+  insertBefore(child, ref159) {
     let index2;
-    if (ref158) {
-      index2 = this.childNodes.indexOf(ref158);
+    if (ref159) {
+      index2 = this.childNodes.indexOf(ref159);
     }
     this.insertChild(child, index2);
   }
-  insertAfter(child, ref158) {
+  insertAfter(child, ref159) {
     let index2;
-    if (ref158) {
-      index2 = this.childNodes.indexOf(ref158);
+    if (ref159) {
+      index2 = this.childNodes.indexOf(ref159);
       if (index2 !== -1)
         index2 += 1;
     }
@@ -71245,11 +71245,39 @@ var YoungTimeRange_default = (0, vue_exports.defineComponent)({
     step: {
       type: String,
       default: "00:01"
+    },
+    /**
+     * 是否精确到秒
+     */
+    second: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ["update:start", "update:end"],
   setup(props, { attrs, emit: emit2 }) {
-    return () => <>
+    const timePicker = (0, vue_exports.ref)();
+    (0, vue_exports.watchEffect)(() => {
+      if (props.start && props.end) {
+        timePicker.value = [
+          /* @__PURE__ */ new Date(`2022 02 02 ${props.start}`),
+          /* @__PURE__ */ new Date(`2022 02 02 ${props.end}`)
+        ];
+      } else {
+        timePicker.value = void 0;
+      }
+    });
+    const update = (v2) => {
+      if (!v2) {
+        emit2("update:start", "");
+        emit2("update:end", "");
+      } else {
+        const [start, end2] = v2;
+        emit2("update:start", start.toLocaleString().match(/\d\d:\d\d:\d\d/)?.[0] ?? "");
+        emit2("update:end", end2.toLocaleString().match(/\d\d:\d\d:\d\d/)?.[0] ?? "");
+      }
+    };
+    return () => !props.second ? <>
       <ElTimeSelect
         {...attrs}
         modelValue={props.start}
@@ -71273,7 +71301,14 @@ var YoungTimeRange_default = (0, vue_exports.defineComponent)({
         end={props.endTime}
         onUpdate:modelValue={(v2) => emit2("update:end", v2)}
       />
-    </>;
+    </> : <ElTimePicker
+      {...attrs}
+      modelValue={timePicker.value}
+      isRange
+      startPlaceholder={"\u5F00\u59CB\u65F6\u95F4"}
+      endPlaceholder={"\u7ED3\u675F\u65F6\u95F4"}
+      onUpdate:modelValue={update}
+    />;
   }
 });
 
