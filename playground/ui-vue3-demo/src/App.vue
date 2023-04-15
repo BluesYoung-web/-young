@@ -1,14 +1,14 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-03-21 16:42:41
+ * @LastEditTime: 2023-04-13 09:07:17
  * @Description: 
 -->
 <script setup lang="ts">
-import { ref, h } from 'vue';
+import { ref, h, watchEffect } from 'vue';
 import 'element-plus/dist/index.css';
 import { ElButton } from 'element-plus'
-import { YoungSearchForm, type YoungSearchScheme } from '../../../packages/ui-vue3-element-plus/src';
+import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange } from '../../../packages/ui-vue3-element-plus/src';
 // import { YoungSearchForm, type YoungSearchScheme } from '@bluesyoung/ui-vue3-element-plus';
 
 interface Query {
@@ -92,6 +92,12 @@ const scheme: YoungSearchScheme<Query> = {
 
 const log = console.log.bind(null, 'xxxxxxxxxxxxxx: ');
 
+const start = ref('00:00');
+const end = ref('23:59');
+
+watchEffect(() => {
+  console.log(start.value, end.value);
+});
 </script>
 
 <template>
@@ -102,5 +108,7 @@ const log = console.log.bind(null, 'xxxxxxxxxxxxxx: ');
         <ElButton>我是其他的按钮2</ElButton>
       </template>
     </YoungSearchForm>
+
+    <YoungTimeRange v-model:start="start" v-model:end="end" second />
   </div>
 </template>
