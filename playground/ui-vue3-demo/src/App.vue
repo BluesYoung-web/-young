@@ -8,7 +8,7 @@
 import { ref, h, watchEffect } from 'vue';
 import 'element-plus/dist/index.css';
 import { ElButton } from 'element-plus'
-import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange } from '../../../packages/ui-vue3-element-plus/src';
+import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange, YoungRotateTip } from '../../../packages/ui-vue3-element-plus/src';
 // import { YoungSearchForm, type YoungSearchScheme } from '@bluesyoung/ui-vue3-element-plus';
 
 interface Query {
@@ -110,5 +110,6 @@ watchEffect(() => {
     </YoungSearchForm>
 
     <YoungTimeRange v-model:start="start" v-model:end="end" second />
+    <YoungRotateTip />
   </div>
 </template>
