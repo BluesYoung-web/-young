@@ -53,7 +53,7 @@ interface TableHeadItem<T extends any = any> {
 type TableDataItem<T extends any = any> = {
     [key in keyof T]: T[key];
 } & Record<string, any>;
-declare const _default$8: vue.DefineComponent<{
+declare const _default$9: vue.DefineComponent<{
     tableData: {
         type: PropType<TableDataItem<any>[]>;
         required: true;
@@ -103,7 +103,7 @@ declare const _default$8: vue.DefineComponent<{
     rowDraggable: boolean;
 }>;
 
-declare const _default$7: vue.DefineComponent<{
+declare const _default$8: vue.DefineComponent<{
     total: {
         readonly type: NumberConstructor;
         readonly required: true;
@@ -181,7 +181,7 @@ declare const _default$7: vue.DefineComponent<{
     autoScroll: boolean;
 }>;
 
-declare const _default$6: vue.DefineComponent<{
+declare const _default$7: vue.DefineComponent<{
     modelValue: BooleanConstructor;
     realTitle: StringConstructor;
     sureText: {
@@ -263,7 +263,7 @@ type SelectOptionItem<T extends any = any> = {
     disabled?: boolean;
     children?: SelectOptionItem<T>[];
 };
-declare const _default$5: vue.DefineComponent<{
+declare const _default$6: vue.DefineComponent<{
     modelValue: {
         type: (NumberConstructor | StringConstructor | ArrayConstructor)[];
         required: false;
@@ -286,7 +286,7 @@ declare const _default$5: vue.DefineComponent<{
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {}>;
 
-declare const _default$4: vue.DefineComponent<{
+declare const _default$5: vue.DefineComponent<{
     modelValue: {
         type: PropType<number[]>;
         required: true;
@@ -300,7 +300,7 @@ declare const _default$4: vue.DefineComponent<{
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {}>;
 
-declare const _default$3: vue.DefineComponent<{
+declare const _default$4: vue.DefineComponent<{
     start: {
         type: StringConstructor;
         required: true;
@@ -366,7 +366,7 @@ declare const _default$3: vue.DefineComponent<{
     second: boolean;
 }>;
 
-declare const _default$2: vue.DefineComponent<{
+declare const _default$3: vue.DefineComponent<{
     start: {
         type: (NumberConstructor | StringConstructor)[];
         default: string;
@@ -412,7 +412,7 @@ type YoungImageViewerConf = {
      */
     index?: number;
 };
-declare const _default$1: vue.DefineComponent<{
+declare const _default$2: vue.DefineComponent<{
     onDestroy: {
         type: FunctionConstructor;
         default: () => void;
@@ -469,7 +469,7 @@ type YoungSearchFormItem = {
 type YoungSearchScheme<T extends any = any> = {
     [prop in keyof T]?: YoungSearchFormItem;
 };
-declare const _default: vue.DefineComponent<{
+declare const _default$1: vue.DefineComponent<{
     modelValue: PropType<Record<string, any>>;
     searchScheme: PropType<YoungSearchScheme<any>>;
     fastSearch: {
@@ -514,6 +514,20 @@ declare const _default: vue.DefineComponent<{
     fastSearch: boolean;
     onSearch: Function;
     dateTimeKey: unknown[];
+}>;
+
+declare const _default: vue.DefineComponent<{
+    maxWidth: {
+        type: NumberConstructor;
+        default: number;
+    };
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, {}, string, vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+    maxWidth: {
+        type: NumberConstructor;
+        default: number;
+    };
+}>>, {
+    maxWidth: number;
 }>;
 
 interface UseAutoLoad<T extends any = any> {
@@ -604,4 +618,4 @@ declare const useRemoteSearch: (cbk: (key: string) => Promise<SelectOptionItem[]
     init: vue.Ref<boolean>;
 };
 
-export { SelectOptionItem, TableDataItem, TableHeadItem, _default$2 as YoungDateRange, _default$6 as YoungDialog, _default$1 as YoungImageViewer, YoungImageViewerConf, _default$7 as YoungPagination, _default as YoungSearchForm, YoungSearchFormItem, YoungSearchScheme, _default$5 as YoungSelect, _default$8 as YoungTable, _default$3 as YoungTimeRange, _default$4 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useImagePreview, useKeyUp, useQuery, useRemoteSearch, useVerifyCode };
+export { SelectOptionItem, TableDataItem, TableHeadItem, _default$3 as YoungDateRange, _default$7 as YoungDialog, _default$2 as YoungImageViewer, YoungImageViewerConf, _default$8 as YoungPagination, _default as YoungRotateTip, _default$1 as YoungSearchForm, YoungSearchFormItem, YoungSearchScheme, _default$6 as YoungSelect, _default$9 as YoungTable, _default$4 as YoungTimeRange, _default$5 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useImagePreview, useKeyUp, useQuery, useRemoteSearch, useVerifyCode };

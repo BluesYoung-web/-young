@@ -6261,32 +6261,32 @@ function markRaw(value) {
   def(value, "__v_skip", true);
   return value;
 }
-function trackRefValue(ref159) {
+function trackRefValue(ref160) {
   if (shouldTrack && activeEffect) {
-    ref159 = toRaw(ref159);
+    ref160 = toRaw(ref160);
     if (process.env.NODE_ENV !== "production") {
-      trackEffects(ref159.dep || (ref159.dep = createDep()), {
-        target: ref159,
+      trackEffects(ref160.dep || (ref160.dep = createDep()), {
+        target: ref160,
         type: "get",
         key: "value"
       });
     } else {
-      trackEffects(ref159.dep || (ref159.dep = createDep()));
+      trackEffects(ref160.dep || (ref160.dep = createDep()));
     }
   }
 }
-function triggerRefValue(ref159, newVal) {
-  ref159 = toRaw(ref159);
-  if (ref159.dep) {
+function triggerRefValue(ref160, newVal) {
+  ref160 = toRaw(ref160);
+  if (ref160.dep) {
     if (process.env.NODE_ENV !== "production") {
-      triggerEffects(ref159.dep, {
-        target: ref159,
+      triggerEffects(ref160.dep, {
+        target: ref160,
         type: "set",
         key: "value",
         newValue: newVal
       });
     } else {
-      triggerEffects(ref159.dep);
+      triggerEffects(ref160.dep);
     }
   }
 }
@@ -6305,11 +6305,11 @@ function createRef(rawValue, shallow) {
   }
   return new RefImpl(rawValue, shallow);
 }
-function triggerRef(ref159) {
-  triggerRefValue(ref159, process.env.NODE_ENV !== "production" ? ref159.value : void 0);
+function triggerRef(ref160) {
+  triggerRefValue(ref160, process.env.NODE_ENV !== "production" ? ref160.value : void 0);
 }
-function unref(ref159) {
-  return isRef(ref159) ? ref159.value : ref159;
+function unref(ref160) {
+  return isRef(ref160) ? ref160.value : ref160;
 }
 function proxyRefs(objectWithRefs) {
   return isReactive(objectWithRefs) ? objectWithRefs : new Proxy(objectWithRefs, shallowUnwrapHandlers);
@@ -8446,9 +8446,9 @@ function defineAsyncComponent(source) {
   });
 }
 function createInnerComp(comp, parent) {
-  const { ref: ref159, props, children, ce: ce2 } = parent.vnode;
+  const { ref: ref160, props, children, ce: ce2 } = parent.vnode;
   const vnode = createVNode(comp, props, children);
-  vnode.ref = ref159;
+  vnode.ref = ref160;
   vnode.ce = ce2;
   delete parent.vnode.ce;
   return vnode;
@@ -9712,7 +9712,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   }
   const refValue = vnode.shapeFlag & 4 ? getExposeProxy(vnode.component) || vnode.component.proxy : vnode.el;
   const value = isUnmount ? null : refValue;
-  const { i: owner, r: ref159 } = rawRef;
+  const { i: owner, r: ref160 } = rawRef;
   if (process.env.NODE_ENV !== "production" && !owner) {
     warn2(`Missing ref owner context. ref cannot be used on hoisted vnodes. A vnode with ref must be created inside the render function.`);
     return;
@@ -9720,7 +9720,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   const oldRef = oldRawRef && oldRawRef.r;
   const refs = owner.refs === EMPTY_OBJ ? owner.refs = {} : owner.refs;
   const setupState = owner.setupState;
-  if (oldRef != null && oldRef !== ref159) {
+  if (oldRef != null && oldRef !== ref160) {
     if (isString(oldRef)) {
       refs[oldRef] = null;
       if (hasOwn(setupState, oldRef)) {
@@ -9730,44 +9730,44 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
       oldRef.value = null;
     }
   }
-  if (isFunction(ref159)) {
-    callWithErrorHandling(ref159, owner, 12, [value, refs]);
+  if (isFunction(ref160)) {
+    callWithErrorHandling(ref160, owner, 12, [value, refs]);
   } else {
-    const _isString = isString(ref159);
-    const _isRef = isRef(ref159);
+    const _isString = isString(ref160);
+    const _isRef = isRef(ref160);
     if (_isString || _isRef) {
       const doSet = () => {
         if (rawRef.f) {
-          const existing = _isString ? hasOwn(setupState, ref159) ? setupState[ref159] : refs[ref159] : ref159.value;
+          const existing = _isString ? hasOwn(setupState, ref160) ? setupState[ref160] : refs[ref160] : ref160.value;
           if (isUnmount) {
             isArray(existing) && remove(existing, refValue);
           } else {
             if (!isArray(existing)) {
               if (_isString) {
-                refs[ref159] = [refValue];
-                if (hasOwn(setupState, ref159)) {
-                  setupState[ref159] = refs[ref159];
+                refs[ref160] = [refValue];
+                if (hasOwn(setupState, ref160)) {
+                  setupState[ref160] = refs[ref160];
                 }
               } else {
-                ref159.value = [refValue];
+                ref160.value = [refValue];
                 if (rawRef.k)
-                  refs[rawRef.k] = ref159.value;
+                  refs[rawRef.k] = ref160.value;
               }
             } else if (!existing.includes(refValue)) {
               existing.push(refValue);
             }
           }
         } else if (_isString) {
-          refs[ref159] = value;
-          if (hasOwn(setupState, ref159)) {
-            setupState[ref159] = value;
+          refs[ref160] = value;
+          if (hasOwn(setupState, ref160)) {
+            setupState[ref160] = value;
           }
         } else if (_isRef) {
-          ref159.value = value;
+          ref160.value = value;
           if (rawRef.k)
             refs[rawRef.k] = value;
         } else if (process.env.NODE_ENV !== "production") {
-          warn2("Invalid template ref type:", ref159, `(${typeof ref159})`);
+          warn2("Invalid template ref type:", ref160, `(${typeof ref160})`);
         }
       };
       if (value) {
@@ -9777,7 +9777,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
         doSet();
       }
     } else if (process.env.NODE_ENV !== "production") {
-      warn2("Invalid template ref type:", ref159, `(${typeof ref159})`);
+      warn2("Invalid template ref type:", ref160, `(${typeof ref160})`);
     }
   }
 }
@@ -9802,7 +9802,7 @@ function createHydrationFunctions(rendererInternals) {
   const hydrateNode = (node, vnode, parentComponent, parentSuspense, slotScopeIds, optimized = false) => {
     const isFragmentStart = isComment(node) && node.data === "[";
     const onMismatch = () => handleMismatch(node, vnode, parentComponent, parentSuspense, slotScopeIds, isFragmentStart);
-    const { type: type4, ref: ref159, shapeFlag, patchFlag } = vnode;
+    const { type: type4, ref: ref160, shapeFlag, patchFlag } = vnode;
     let domType = node.nodeType;
     vnode.el = node;
     if (patchFlag === -2) {
@@ -9903,8 +9903,8 @@ function createHydrationFunctions(rendererInternals) {
           warn2("Invalid HostVNode type:", type4, `(${typeof type4})`);
         }
     }
-    if (ref159 != null) {
-      setRef(ref159, null, parentSuspense, vnode);
+    if (ref160 != null) {
+      setRef(ref160, null, parentSuspense, vnode);
     }
     return nextNode;
   };
@@ -10125,7 +10125,7 @@ function baseCreateRenderer(options, createHydrationFns) {
       optimized = false;
       n2.dynamicChildren = null;
     }
-    const { type: type4, ref: ref159, shapeFlag } = n2;
+    const { type: type4, ref: ref160, shapeFlag } = n2;
     switch (type4) {
       case Text:
         processText(n1, n2, container, anchor);
@@ -10156,8 +10156,8 @@ function baseCreateRenderer(options, createHydrationFns) {
           warn2("Invalid VNode type:", type4, `(${typeof type4})`);
         }
     }
-    if (ref159 != null && parentComponent) {
-      setRef(ref159, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
+    if (ref160 != null && parentComponent) {
+      setRef(ref160, n1 && n1.ref, parentSuspense, n2 || n1, !n2);
     }
   };
   const processText = (n1, n2, container, anchor) => {
@@ -10908,9 +10908,9 @@ function baseCreateRenderer(options, createHydrationFns) {
     }
   };
   const unmount = (vnode, parentComponent, parentSuspense, doRemove = false, optimized = false) => {
-    const { type: type4, props, ref: ref159, children, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
-    if (ref159 != null) {
-      setRef(ref159, null, parentSuspense, vnode, true);
+    const { type: type4, props, ref: ref160, children, dynamicChildren, shapeFlag, patchFlag, dirs } = vnode;
+    if (ref160 != null) {
+      setRef(ref160, null, parentSuspense, vnode, true);
     }
     if (shapeFlag & 256) {
       parentComponent.ctx.deactivate(vnode);
@@ -11372,7 +11372,7 @@ function guardReactiveProps(props) {
   return isProxy(props) || InternalObjectKey in props ? extend({}, props) : props;
 }
 function cloneVNode(vnode, extraProps, mergeRef = false) {
-  const { props, ref: ref159, patchFlag, children } = vnode;
+  const { props, ref: ref160, patchFlag, children } = vnode;
   const mergedProps = extraProps ? mergeProps(props || {}, extraProps) : props;
   const cloned = {
     __v_isVNode: true,
@@ -11384,8 +11384,8 @@ function cloneVNode(vnode, extraProps, mergeRef = false) {
       // #2078 in the case of <component :is="vnode" ref="extra"/>
       // if the vnode itself already has a ref, cloneVNode will need to merge
       // the refs so the single vnode can be set on multiple refs
-      mergeRef && ref159 ? isArray(ref159) ? ref159.concat(normalizeRef(extraProps)) : [ref159, normalizeRef(extraProps)] : normalizeRef(extraProps)
-    ) : ref159,
+      mergeRef && ref160 ? isArray(ref160) ? ref160.concat(normalizeRef(extraProps)) : [ref160, normalizeRef(extraProps)] : normalizeRef(extraProps)
+    ) : ref160,
     scopeId: vnode.scopeId,
     slotScopeIds: vnode.slotScopeIds,
     children: process.env.NODE_ENV !== "production" && patchFlag === -1 && isArray(children) ? children.map(deepCloneVNode) : children,
@@ -12043,9 +12043,9 @@ function initCustomFormatter() {
     if (instance.data !== EMPTY_OBJ) {
       blocks.push(createInstanceBlock("data", toRaw(instance.data)));
     }
-    const computed184 = extractKeys(instance, "computed");
-    if (computed184) {
-      blocks.push(createInstanceBlock("computed", computed184));
+    const computed185 = extractKeys(instance, "computed");
+    if (computed185) {
+      blocks.push(createInstanceBlock("computed", computed185));
     }
     const injected = extractKeys(instance, "inject");
     if (injected) {
@@ -13183,8 +13183,8 @@ var init_runtime_core_esm_bundler = __esm({
     };
     InternalObjectKey = `__vInternal`;
     normalizeKey = ({ key }) => key != null ? key : null;
-    normalizeRef = ({ ref: ref159, ref_key, ref_for }) => {
-      return ref159 != null ? isString(ref159) || isRef(ref159) || isFunction(ref159) ? { i: currentRenderingInstance, r: ref159, k: ref_key, f: !!ref_for } : ref159 : null;
+    normalizeRef = ({ ref: ref160, ref_key, ref_for }) => {
+      return ref160 != null ? isString(ref160) || isRef(ref160) || isFunction(ref160) ? { i: currentRenderingInstance, r: ref160, k: ref_key, f: !!ref_for } : ref160 : null;
     };
     createVNode = process.env.NODE_ENV !== "production" ? createVNodeWithArgsTransform : _createVNode;
     emptyAppContext = createAppContext();
@@ -18390,6 +18390,7 @@ __export(src_exports, {
   YoungDialog: () => YoungDialog_default,
   YoungImageViewer: () => YoungImageViewer_default,
   YoungPagination: () => YoungPagination_default,
+  YoungRotateTip: () => YoungRotateTip_default,
   YoungSearchForm: () => YoungSearchForm_default,
   YoungSelect: () => YoungSelect_default,
   YoungTable: () => YoungTable_default,
@@ -20972,22 +20973,22 @@ function baseUniq(array4, iteratee, comparator2) {
   }
   outer:
     while (++index2 < length) {
-      var value = array4[index2], computed184 = iteratee ? iteratee(value) : value;
+      var value = array4[index2], computed185 = iteratee ? iteratee(value) : value;
       value = comparator2 || value !== 0 ? value : 0;
-      if (isCommon && computed184 === computed184) {
+      if (isCommon && computed185 === computed185) {
         var seenIndex = seen2.length;
         while (seenIndex--) {
-          if (seen2[seenIndex] === computed184) {
+          if (seen2[seenIndex] === computed185) {
             continue outer;
           }
         }
         if (iteratee) {
-          seen2.push(computed184);
+          seen2.push(computed185);
         }
         result.push(value);
-      } else if (!includes(seen2, computed184, comparator2)) {
+      } else if (!includes(seen2, computed185, comparator2)) {
         if (seen2 !== result) {
-          seen2.push(computed184);
+          seen2.push(computed185);
         }
         result.push(value);
       }
@@ -21007,8 +21008,8 @@ var FOCUSABLE_ELEMENT_SELECTORS = `a[href],button:not([disabled]),button:not([hi
 var isVisible = (element) => {
   if (process.env.NODE_ENV === "test")
     return true;
-  const computed184 = getComputedStyle(element);
-  return computed184.position === "fixed" ? false : element.offsetParent !== null;
+  const computed185 = getComputedStyle(element);
+  return computed185.position === "fixed" ? false : element.offsetParent !== null;
 };
 var obtainAllFocusableElements = (element) => {
   return Array.from(element.querySelectorAll(FOCUSABLE_ELEMENT_SELECTORS)).filter((item) => isFocusable(item) && isVisible(item));
@@ -21934,8 +21935,8 @@ var getStyle = (element, styleName) => {
     const style = element.style[key];
     if (style)
       return style;
-    const computed184 = (_a4 = document.defaultView) == null ? void 0 : _a4.getComputedStyle(element, "");
-    return computed184 ? computed184[key] : "";
+    const computed185 = (_a4 = document.defaultView) == null ? void 0 : _a4.getComputedStyle(element, "");
+    return computed185 ? computed185[key] : "";
   } catch (e) {
     return element.style[key];
   }
@@ -22928,11 +22929,11 @@ var withNoopInstall = (component2) => {
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/utils/vue/refs.mjs
 var composeRefs = (...refs) => {
   return (el) => {
-    refs.forEach((ref159) => {
-      if (isFunction4(ref159)) {
-        ref159(el);
+    refs.forEach((ref160) => {
+      if (isFunction4(ref160)) {
+        ref160(el);
       } else {
-        ref159.value = el;
+        ref160.value = el;
       }
     });
   };
@@ -23257,11 +23258,11 @@ var useDisabled = (fallback) => {
 };
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/hooks/use-deprecated/index.mjs
-var useDeprecated = ({ from, replacement, scope, version: version6, ref: ref159, type: type4 = "API" }, condition) => {
+var useDeprecated = ({ from, replacement, scope, version: version6, ref: ref160, type: type4 = "API" }, condition) => {
   (0, vue_exports.watch)(() => (0, vue_exports.unref)(condition), (val) => {
     if (val) {
       debugWarn(scope, `[${type4}] ${from} is about to be deprecated in version ${version6}, please use ${replacement} instead.
-For more detail, please visit: ${ref159}
+For more detail, please visit: ${ref160}
 `);
     }
   }, {
@@ -24424,27 +24425,27 @@ function toRaw2(observed) {
 }
 var toReactive2 = (value) => isObject4(value) ? reactive4(value) : value;
 var toReadonly2 = (value) => isObject4(value) ? readonly4(value) : value;
-function trackRefValue2(ref159) {
+function trackRefValue2(ref160) {
   if (shouldTrack2 && activeEffect2) {
-    ref159 = toRaw2(ref159);
+    ref160 = toRaw2(ref160);
     if (process.env.NODE_ENV !== "production") {
-      trackEffects2(ref159.dep || (ref159.dep = createDep2()), {
-        target: ref159,
+      trackEffects2(ref160.dep || (ref160.dep = createDep2()), {
+        target: ref160,
         type: "get",
         key: "value"
       });
     } else {
-      trackEffects2(ref159.dep || (ref159.dep = createDep2()));
+      trackEffects2(ref160.dep || (ref160.dep = createDep2()));
     }
   }
 }
-function triggerRefValue2(ref159, newVal) {
-  ref159 = toRaw2(ref159);
-  const dep = ref159.dep;
+function triggerRefValue2(ref160, newVal) {
+  ref160 = toRaw2(ref160);
+  const dep = ref160.dep;
   if (dep) {
     if (process.env.NODE_ENV !== "production") {
       triggerEffects2(dep, {
-        target: ref159,
+        target: ref160,
         type: "set",
         key: "value",
         newValue: newVal
@@ -65576,17 +65577,17 @@ var Node2 = class {
     }
     this.updateLeafState();
   }
-  insertBefore(child, ref159) {
+  insertBefore(child, ref160) {
     let index2;
-    if (ref159) {
-      index2 = this.childNodes.indexOf(ref159);
+    if (ref160) {
+      index2 = this.childNodes.indexOf(ref160);
     }
     this.insertChild(child, index2);
   }
-  insertAfter(child, ref159) {
+  insertAfter(child, ref160) {
     let index2;
-    if (ref159) {
-      index2 = this.childNodes.indexOf(ref159);
+    if (ref160) {
+      index2 = this.childNodes.indexOf(ref160);
       if (index2 !== -1)
         index2 += 1;
     }
@@ -71555,6 +71556,76 @@ var YoungSearchForm_default = (0, vue_exports.defineComponent)({
   }
 });
 
+// src/components/YoungRotateTip.tsx
+var landscape = "https://g2021-cdn.laiyouxi.com/image/21Store/laiyouxi_guid/website/landscape.png";
+var YoungRotateTip_default = (0, vue_exports.defineComponent)({
+  props: {
+    maxWidth: {
+      type: Number,
+      default: 768
+    }
+  },
+  setup(props, { attrs }) {
+    const element = (0, vue_exports.ref)();
+    const showTip = (0, vue_exports.ref)(false);
+    const show = () => showTip.value = true;
+    const hide2 = () => showTip.value = false;
+    const { width, height } = useWindowSize();
+    const isSmallDevices = (0, vue_exports.computed)(
+      () => width.value < height.value || width.value < props.maxWidth
+    );
+    (0, vue_exports.watchEffect)(() => {
+      if (isSmallDevices.value) {
+        show();
+      } else {
+        hide2();
+      }
+    });
+    useEventListener(element, "animationend", (e) => {
+      hide2();
+    });
+    return () => <>{showTip.value && <ElOverlay mask style={{ width: "100vw", height: "100vh" }} {...attrs}><div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+    >
+      <style>{`
+                @keyframes rotate {
+                  from {
+                    transform: rotate(0);
+                  }
+                
+                  to {
+                    transform: rotate(90deg);
+                  }
+                }
+                .rotate-tip {
+                  width: 200px;
+                  animation-name: rotate;
+                  animation-iteration-count: 6;
+                  animation-duration: 1s;
+                  animation-direction: alternate;
+                  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                }
+                `}</style>
+      <img ref={element} src={landscape} class="rotate-tip" />
+      <div
+        style={{
+          color: "white",
+          marginTop: "2.5rem",
+          fontSize: "1.25rem",
+          lineHeight: "1.75rem"
+        }}
+      >{"\u4E3A\u4E86\u66F4\u597D\u7684\u7528\u6237\u4F53\u9A8C\uFF0C\u8BF7\u6A2A\u5C4F\u4F7F\u7528"}</div>
+    </div></ElOverlay>}</>;
+  }
+});
+
 // src/hooks/useAutoLoad.ts
 var useAutoLoad = (list, allData, pageSize = 10, pause = (0, vue_exports.ref)(false)) => {
   const elArr = (0, vue_exports.ref)([]);
@@ -72323,6 +72394,7 @@ var useRemoteSearch = (cbk) => {
   YoungDialog,
   YoungImageViewer,
   YoungPagination,
+  YoungRotateTip,
   YoungSearchForm,
   YoungSelect,
   YoungTable,
