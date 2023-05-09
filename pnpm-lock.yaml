@@ -185,6 +185,14 @@ importers:
     devDependencies:
       '@vitest/ui': 0.25.7
 
+  packages/logger:
+    specifiers:
+      consola: ^3.1.0
+      defu: ^6.1.2
+    dependencies:
+      consola: 3.1.0
+      defu: 6.1.2
+
   packages/priview-gallary:
     specifiers:
       lit: ^2.2.7
@@ -3614,6 +3622,10 @@ packages:
 
   /consola/2.15.3:
     resolution: {integrity: sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==}
+
+  /consola/3.1.0:
+    resolution: {integrity: sha512-rrrJE6rP0qzl/Srg+C9x/AE5Kxfux7reVm1Wh0wCjuXvih6DqZgqDZe8auTD28fzJ9TF0mHlSDrPpWlujQRo1Q==}
+    dev: false
 
   /convert-source-map/1.9.0:
     resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==}
