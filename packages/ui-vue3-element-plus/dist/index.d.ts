@@ -74,6 +74,10 @@ declare const _default$9: vue.DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    enableCustomHead: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, "row-drag-change"[], "row-drag-change", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     tableData: {
         type: PropType<TableDataItem<any>[]>;
@@ -95,12 +99,17 @@ declare const _default$9: vue.DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    enableCustomHead: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }>> & {
     "onRow-drag-change"?: (...args: any[]) => any;
 }, {
     tableHeight: number;
     selectable: boolean;
     rowDraggable: boolean;
+    enableCustomHead: boolean;
 }>;
 
 declare const _default$8: vue.DefineComponent<{
@@ -174,8 +183,8 @@ declare const _default$8: vue.DefineComponent<{
     "onUpdate:page"?: (...args: any[]) => any;
     "onUpdate:limit"?: (...args: any[]) => any;
 }, {
-    layout: string;
     hidden: boolean;
+    layout: string;
     background: boolean;
     pageSizes: number[];
     autoScroll: boolean;
@@ -242,9 +251,9 @@ declare const _default$7: vue.DefineComponent<{
         default: any;
     };
 }>> & {
+    "onUpdate:modelValue"?: (...args: any[]) => any;
     onClear?: (...args: any[]) => any;
     onSure?: (...args: any[]) => any;
-    "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {
     modelValue: boolean;
     sureText: string;
