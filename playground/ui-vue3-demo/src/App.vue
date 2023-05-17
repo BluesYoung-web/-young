@@ -1,15 +1,15 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-04-13 09:07:17
+ * @LastEditTime: 2023-05-11 16:09:33
  * @Description: 
 -->
 <script setup lang="ts">
 import { ref, h, watchEffect } from 'vue';
 import 'element-plus/dist/index.css';
 import { ElButton } from 'element-plus'
-import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange, YoungRotateTip } from '../../../packages/ui-vue3-element-plus/src';
-// import { YoungSearchForm, type YoungSearchScheme } from '@bluesyoung/ui-vue3-element-plus';
+import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange, YoungRotateTip, YoungTable } from '../../../packages/ui-vue3-element-plus/src';
+import type { TableHeadItem, TableDataItem } from '@bluesyoung/ui-vue3-element-plus';
 
 interface Query {
   name: string,
@@ -98,18 +98,22 @@ const end = ref('23:59');
 watchEffect(() => {
   console.log(start.value, end.value);
 });
+
+const tableHead: TableHeadItem[] = new Array(10).fill(0).map((_, v) => ({ label: v.toString(), prop: v.toString() }));
+const tableData: TableDataItem[] = new Array(10).fill(0).map((_, v) => ({ [v]: v }));
 </script>
 
 <template>
   <div>
+    <YoungTimeRange v-model:start="start" v-model:end="end" second />
     <YoungSearchForm v-model="query" :search-scheme="scheme" :on-search="() => log(query)">
       <template #btns>
         <ElButton>我是其他的按钮1</ElButton>
         <ElButton>我是其他的按钮2</ElButton>
       </template>
     </YoungSearchForm>
-
-    <YoungTimeRange v-model:start="start" v-model:end="end" second />
     <YoungRotateTip />
+
+    <YoungTable :table-head="tableHead" :table-data="tableData" enable-custom-head />
   </div>
 </template>
