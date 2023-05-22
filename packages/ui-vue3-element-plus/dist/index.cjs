@@ -39638,7 +39638,7 @@ var _sfc_main62 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
     const { t, lang } = useLocale();
     const pickerBase = (0, vue_exports.inject)("EP_PICKER_BASE");
     const popper = (0, vue_exports.inject)(TOOLTIP_INJECTION_KEY);
-    const { shortcuts, disabledDate: disabledDate2, cellClassName, defaultTime, arrowControl } = pickerBase.props;
+    const { shortcuts: shortcuts2, disabledDate: disabledDate2, cellClassName, defaultTime, arrowControl } = pickerBase.props;
     const defaultValue = (0, vue_exports.toRef)(pickerBase.props, "defaultValue");
     const currentViewRef = (0, vue_exports.ref)();
     const innerDate = (0, vue_exports.ref)((0, import_dayjs11.default)().locale(lang.value));
@@ -39740,7 +39740,7 @@ var _sfc_main62 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
     const keyboardMode = (0, vue_exports.computed)(() => {
       return selectionMode.value === "date" ? currentView.value : selectionMode.value;
     });
-    const hasShortcuts = (0, vue_exports.computed)(() => !!shortcuts.length);
+    const hasShortcuts = (0, vue_exports.computed)(() => !!shortcuts2.length);
     const handleMonthPick = async (month2) => {
       innerDate.value = innerDate.value.startOf("month").month(month2);
       if (selectionMode.value === "month") {
@@ -40027,7 +40027,7 @@ var _sfc_main62 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
             key: 0,
             class: (0, vue_exports.normalizeClass)((0, vue_exports.unref)(ppNs).e("sidebar"))
           }, [
-            ((0, vue_exports.openBlock)(true), (0, vue_exports.createElementBlock)(vue_exports.Fragment, null, (0, vue_exports.renderList)((0, vue_exports.unref)(shortcuts), (shortcut, key) => {
+            ((0, vue_exports.openBlock)(true), (0, vue_exports.createElementBlock)(vue_exports.Fragment, null, (0, vue_exports.renderList)((0, vue_exports.unref)(shortcuts2), (shortcut, key) => {
               return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("button", {
                 key,
                 type: "button",
@@ -40383,7 +40383,7 @@ var _sfc_main63 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       arrowControl,
       clearable
     } = pickerBase.props;
-    const shortcuts = (0, vue_exports.toRef)(pickerBase.props, "shortcuts");
+    const shortcuts2 = (0, vue_exports.toRef)(pickerBase.props, "shortcuts");
     const defaultValue = (0, vue_exports.toRef)(pickerBase.props, "defaultValue");
     const { lang } = useLocale();
     const leftDate = (0, vue_exports.ref)((0, import_dayjs13.default)().locale(lang.value));
@@ -40432,7 +40432,7 @@ var _sfc_main63 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
     const rightMonth = (0, vue_exports.computed)(() => {
       return rightDate.value.month();
     });
-    const hasShortcuts = (0, vue_exports.computed)(() => !!shortcuts.value.length);
+    const hasShortcuts = (0, vue_exports.computed)(() => !!shortcuts2.value.length);
     const minVisibleDate = (0, vue_exports.computed)(() => {
       if (dateUserInput.value.min !== null)
         return dateUserInput.value.min;
@@ -40702,7 +40702,7 @@ var _sfc_main63 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
             key: 0,
             class: (0, vue_exports.normalizeClass)((0, vue_exports.unref)(ppNs).e("sidebar"))
           }, [
-            ((0, vue_exports.openBlock)(true), (0, vue_exports.createElementBlock)(vue_exports.Fragment, null, (0, vue_exports.renderList)((0, vue_exports.unref)(shortcuts), (shortcut, key) => {
+            ((0, vue_exports.openBlock)(true), (0, vue_exports.createElementBlock)(vue_exports.Fragment, null, (0, vue_exports.renderList)((0, vue_exports.unref)(shortcuts2), (shortcut, key) => {
               return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("button", {
                 key,
                 type: "button",
@@ -41078,7 +41078,7 @@ var _sfc_main64 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
     const props = __props;
     const { lang } = useLocale();
     const pickerBase = (0, vue_exports.inject)("EP_PICKER_BASE");
-    const { shortcuts, disabledDate: disabledDate2, format: format2 } = pickerBase.props;
+    const { shortcuts: shortcuts2, disabledDate: disabledDate2, format: format2 } = pickerBase.props;
     const defaultValue = (0, vue_exports.toRef)(pickerBase.props, "defaultValue");
     const leftDate = (0, vue_exports.ref)((0, import_dayjs14.default)().locale(lang.value));
     const rightDate = (0, vue_exports.ref)((0, import_dayjs14.default)().locale(lang.value).add(1, unit2));
@@ -41099,7 +41099,7 @@ var _sfc_main64 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
       unit: unit2,
       onParsedValueChanged
     });
-    const hasShortcuts = (0, vue_exports.computed)(() => !!shortcuts.length);
+    const hasShortcuts = (0, vue_exports.computed)(() => !!shortcuts2.length);
     const {
       leftPrevYear,
       rightNextYear,
@@ -41162,7 +41162,7 @@ var _sfc_main64 = /* @__PURE__ */ (0, vue_exports.defineComponent)({
             key: 0,
             class: (0, vue_exports.normalizeClass)((0, vue_exports.unref)(ppNs).e("sidebar"))
           }, [
-            ((0, vue_exports.openBlock)(true), (0, vue_exports.createElementBlock)(vue_exports.Fragment, null, (0, vue_exports.renderList)((0, vue_exports.unref)(shortcuts), (shortcut, key) => {
+            ((0, vue_exports.openBlock)(true), (0, vue_exports.createElementBlock)(vue_exports.Fragment, null, (0, vue_exports.renderList)((0, vue_exports.unref)(shortcuts2), (shortcut, key) => {
               return (0, vue_exports.openBlock)(), (0, vue_exports.createElementBlock)("button", {
                 key,
                 type: "button",
@@ -71322,6 +71322,104 @@ var YoungTimeRange_default = (0, vue_exports.defineComponent)({
 });
 
 // src/components/YoungDateRange.tsx
+var shortcuts = [
+  {
+    text: "\u4ECA\u5929",
+    value: (() => {
+      const end2 = /* @__PURE__ */ new Date();
+      const start = /* @__PURE__ */ new Date();
+      start.setHours(0, 0, 0);
+      end2.setHours(23, 59, 59);
+      return [start, end2];
+    })()
+  },
+  {
+    text: "\u6628\u5929",
+    value: (() => {
+      const end2 = /* @__PURE__ */ new Date();
+      const start = /* @__PURE__ */ new Date();
+      end2.setTime(start.getTime() - 3600 * 1e3 * 24 * 1);
+      start.setTime(start.getTime() - 3600 * 1e3 * 24 * 1);
+      start.setHours(0, 0, 0);
+      end2.setHours(23, 59, 59);
+      return [start, end2];
+    })()
+  },
+  {
+    text: "\u672C\u5468",
+    value: (() => {
+      const end2 = /* @__PURE__ */ new Date();
+      const start = /* @__PURE__ */ new Date();
+      var weekday = start.getDay() || 7;
+      start.setDate(start.getDate() - weekday + 1);
+      start.setHours(0, 0, 0);
+      end2.setHours(23, 59, 59);
+      return [start, end2];
+    })()
+  },
+  {
+    text: "\u4E0A\u5468",
+    value: (() => {
+      const now2 = /* @__PURE__ */ new Date();
+      const weekStart = new Date(now2.getTime() - 7 * 24 * 3600 * 1e3);
+      const weekEnd = new Date(now2.getTime() - 7 * 24 * 3600 * 1e3);
+      const day = weekStart.getDay();
+      const time = weekStart.getDate() - day + (day === 0 ? -6 : 1);
+      const start = new Date(weekStart.setDate(time));
+      const end2 = new Date(weekEnd.setDate(time + 6));
+      start.setHours(0, 0, 0);
+      end2.setHours(23, 59, 59);
+      return [start, end2];
+    })()
+  },
+  {
+    text: "\u672C\u6708",
+    value: (() => {
+      const start = /* @__PURE__ */ new Date();
+      const end2 = /* @__PURE__ */ new Date();
+      start.setDate(1);
+      start.setHours(0, 0, 0);
+      end2.setHours(23, 59, 59);
+      return [start, end2];
+    })()
+  },
+  {
+    text: "\u4E0A\u6708",
+    value: (() => {
+      const dayMSec = 24 * 3600 * 1e3;
+      const today = /* @__PURE__ */ new Date();
+      const start = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+      const nowMonthFirstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+      const lastMonthLastDayMSec = nowMonthFirstDay.getTime() - 1 * dayMSec;
+      const end2 = new Date(lastMonthLastDayMSec);
+      start.setHours(0, 0, 0);
+      end2.setHours(23, 59, 59);
+      return [start, end2];
+    })()
+  },
+  {
+    text: "\u6700\u8FD17\u5929",
+    value: (() => {
+      const end2 = /* @__PURE__ */ new Date();
+      const start = /* @__PURE__ */ new Date();
+      start.setTime(start.getTime() - 3600 * 1e3 * 24 * 6);
+      start.setHours(0, 0, 0);
+      end2.setHours(23, 59, 59);
+      return [start, end2];
+    })()
+  },
+  {
+    text: "\u6700\u8FD130\u5929",
+    value: (() => {
+      const end2 = /* @__PURE__ */ new Date();
+      const start = /* @__PURE__ */ new Date();
+      start.setTime(start.getTime() - 3600 * 1e3 * 24 * 30);
+      start.setHours(0, 0, 0);
+      end2.setHours(23, 59, 59);
+      return [start, end2];
+    })()
+  }
+];
 var YoungDateRange_default = (0, vue_exports.defineComponent)({
   props: {
     start: {
@@ -71334,6 +71432,22 @@ var YoungDateRange_default = (0, vue_exports.defineComponent)({
     },
     unix: {
       type: Boolean,
+      default: false
+    },
+    /**
+     * 是否精确到秒
+     */
+    second: {
+      type: Boolean,
+      default: false
+    },
+    /**
+     * 是否展示快捷选项
+     * @cond1 传入 true，使用默认的快捷选项
+     * @cond2 传入数组，使用数组作为快捷选项
+     */
+    shortcuts: {
+      type: [Boolean, Array],
       default: false
     }
   },
@@ -71370,10 +71484,11 @@ var YoungDateRange_default = (0, vue_exports.defineComponent)({
     return () => <ElDatePicker
       {...attrs}
       modelValue={datePicker.value}
-      type="daterange"
+      type={props.second ? "datetimerange" : "daterange"}
       start-placeholder={"\u5F00\u59CB\u65E5\u671F"}
       end-placeholder={"\u7ED3\u675F\u65E5\u671F"}
       default-time={f()}
+      shortcuts={props.shortcuts ? m(props.shortcuts) ? props.shortcuts : shortcuts : void 0}
       clearable
       onUpdate:modelValue={(e) => update(e)}
       onChange={() => emit2("change")}

@@ -1,4 +1,4 @@
-const t = "@bluesyoung/ui-vue3-element-plus", o = "0.9.2", u = "vue3 + element-plus ui components", n = "module", i = "dist/index.cjs.js", r = "dist/index.es.js", p = "dist/index.d.ts", c = {
+const t = "@bluesyoung/ui-vue3-element-plus", o = "0.9.3", u = "vue3 + element-plus ui components", n = "module", i = "dist/index.cjs.js", r = "dist/index.es.js", p = "dist/index.d.ts", c = {
   ".": {
     require: "./dist/index.cjs.js",
     import: "./dist/index.es.js",

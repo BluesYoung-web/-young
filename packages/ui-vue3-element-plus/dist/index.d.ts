@@ -388,6 +388,22 @@ declare const _default$3: vue.DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    /**
+     * 是否精确到秒
+     */
+    second: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    /**
+     * 是否展示快捷选项
+     * @cond1 传入 true，使用默认的快捷选项
+     * @cond2 传入数组，使用数组作为快捷选项
+     */
+    shortcuts: {
+        type: (BooleanConstructor | ArrayConstructor)[];
+        default: boolean;
+    };
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("change" | "update:start" | "update:end")[], "change" | "update:start" | "update:end", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     start: {
         type: (NumberConstructor | StringConstructor)[];
@@ -401,6 +417,22 @@ declare const _default$3: vue.DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    /**
+     * 是否精确到秒
+     */
+    second: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    /**
+     * 是否展示快捷选项
+     * @cond1 传入 true，使用默认的快捷选项
+     * @cond2 传入数组，使用数组作为快捷选项
+     */
+    shortcuts: {
+        type: (BooleanConstructor | ArrayConstructor)[];
+        default: boolean;
+    };
 }>> & {
     onChange?: (...args: any[]) => any;
     "onUpdate:start"?: (...args: any[]) => any;
@@ -408,6 +440,8 @@ declare const _default$3: vue.DefineComponent<{
 }, {
     end: string | number;
     start: string | number;
+    second: boolean;
+    shortcuts: boolean | unknown[];
     unix: boolean;
 }>;
 
