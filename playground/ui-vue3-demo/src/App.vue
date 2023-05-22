@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-05-11 16:09:33
+ * @LastEditTime: 2023-05-22 14:50:25
  * @Description: 
 -->
 <script setup lang="ts">
@@ -81,7 +81,11 @@ const scheme: YoungSearchScheme<Query> = {
   },
   startcreatetime: {
     type: 'datetimerange',
-    tip: '创建时间'
+    tip: '创建时间',
+    attrs: {
+      second: true,
+      shortcuts: true
+    }
   },
   custom2: {
     type: 'custom',
