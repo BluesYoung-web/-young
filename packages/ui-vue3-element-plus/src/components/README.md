@@ -15,6 +15,8 @@
 
 - `rowDraggable`: 行是否可拖动，类型为 `Boolean`，默认为 `false`
 
+- `enableCustomHead`: 是否启用自定义表头，默认展示全部，可以勾选想要展示的
+
 - <del>`colDraggable`: 列是否可拖动，类型为 `Boolean`，默认为 `false`（该选项因存在 `bug` 暂未放出）</del>
 
 - **其他属性和方法会被 `<ElTable>` 自动继承**
