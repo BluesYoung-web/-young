@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-05-22 14:50:25
+ * @LastEditTime: 2023-05-22 16:51:14
  * @Description: 
 -->
 <script setup lang="ts">
@@ -10,6 +10,8 @@ import 'element-plus/dist/index.css';
 import { ElButton } from 'element-plus'
 import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange, YoungRotateTip, YoungTable } from '../../../packages/ui-vue3-element-plus/src';
 import type { TableHeadItem, TableDataItem } from '@bluesyoung/ui-vue3-element-plus';
+
+import { YoungTab } from '../../../packages/ui-vue3/src'
 
 interface Query {
   name: string,
@@ -117,6 +119,15 @@ const tableData: TableDataItem[] = new Array(10).fill(0).map((_, v) => ({ [v]: v
       </template>
     </YoungSearchForm>
     <YoungRotateTip />
+
+    <YoungTab :titles="['全部菜单', '门店菜单']">
+      <template #index_0>
+        111111
+      </template>
+      <template #index_1>
+        2222222
+      </template>
+    </YoungTab>
 
     <YoungTable :table-head="tableHead" :table-data="tableData" enable-custom-head />
   </div>
