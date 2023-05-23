@@ -1,4 +1,4 @@
-import { defineComponent as D, ref as w, onMounted as O, onUnmounted as E, createVNode as o, Teleport as R, nextTick as _, Fragment as K, watch as F, reactive as G, computed as B, mergeProps as J } from "vue";
+import { defineComponent as D, ref as x, onMounted as O, onUnmounted as E, createVNode as o, Teleport as R, nextTick as _, Fragment as K, watch as F, reactive as G, computed as P, mergeProps as J } from "vue";
 import { useMouse as Q } from "@vueuse/core";
 const te = D({
   props: {
@@ -9,30 +9,30 @@ const te = D({
   },
   setup(a, {
     expose: c,
-    slots: f
+    slots: h
   }) {
-    const u = w(!1), g = () => u.value = !0, d = () => u.value = !1, X = (l) => {
+    const u = x(!1), f = () => u.value = !0, d = () => u.value = !1, S = (l) => {
       l.composedPath()[0] === l.currentTarget && d();
     };
     c({
-      show: g,
+      show: f,
       hide: d
     });
-    const e = w(), v = (l) => {
-      l.ctrlKey && l.key.toLocaleLowerCase() === "k" && (l.preventDefault(), u.value ? d() : (g(), _(() => {
+    const e = x(), g = (l) => {
+      l.ctrlKey && l.key.toLocaleLowerCase() === "k" && (l.preventDefault(), u.value ? d() : (f(), _(() => {
         var r;
         (r = e.value) == null || r.focus();
       })));
     };
     return O(() => {
-      window.addEventListener("keydown", v);
+      window.addEventListener("keydown", g);
     }), E(() => {
-      window.removeEventListener("keydown", v);
+      window.removeEventListener("keydown", g);
     }), () => o(R, {
       to: "body"
     }, {
       default: () => [o("div", {
-        onClick: (l) => X(l),
+        onClick: (l) => S(l),
         style: {
           display: u.value ? "block" : "none",
           backgroundColor: "rgba(0, 0, 0, 0.6)",
@@ -58,7 +58,7 @@ const te = D({
           padding: "2rem",
           boxShadow: "rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0, 0 4px 6px -1px rgb(0 0 0/0.1), 0 2px 4px -2px rgb(0 0 0/0.1)"
         }
-      }, [f.default ? f.default({
+      }, [h.default ? h.default({
         el: e
       }) : o("input", {
         ref: e,
@@ -70,15 +70,26 @@ const te = D({
   props: {
     titleStyle: {
       type: Object,
-      default: () => ({})
+      default: () => ({
+        fontSize: "24px",
+        width: "220px"
+      })
     },
     activeStyle: {
       type: [Object, String],
-      required: !0
+      default: () => ({
+        color: "#409eff",
+        cursor: "pointer",
+        borderBottom: "2px solid #409eff",
+        marginBottom: "20px"
+      })
     },
     inactiveStyle: {
       type: [Object, String],
-      required: !0
+      default: () => ({
+        cursor: "pointer",
+        marginBottom: "20px"
+      })
     },
     titles: {
       type: Array,
@@ -88,7 +99,7 @@ const te = D({
   setup(a, {
     slots: c
   }) {
-    const f = w(0);
+    const h = x(0);
     return () => {
       var u;
       return o(K, null, [o("div", {
@@ -98,11 +109,11 @@ const te = D({
           justifyContent: "space-between",
           ...a.titleStyle
         }
-      }, [a.titles.map((g, d) => o("div", {
+      }, [a.titles.map((f, d) => o("div", {
         key: d + "adjhskse",
-        style: d === f.value ? a.activeStyle : a.inactiveStyle,
-        onClick: () => f.value = d
-      }, [g]))]), (u = c[`index_${f.value}`]) == null ? void 0 : u.call(c)]);
+        style: d === h.value ? a.activeStyle : a.inactiveStyle,
+        onClick: () => h.value = d
+      }, [f]))]), (u = c[`index_${h.value}`]) == null ? void 0 : u.call(c)]);
     };
   }
 }), ne = D({
@@ -121,25 +132,25 @@ const te = D({
     emit: c
   }) {
     const {
-      x: f,
+      x: h,
       y: u
-    } = Q(), g = w(0), d = w(0), X = w();
+    } = Q(), f = x(0), d = x(0), S = x();
     F(() => a.modelValue, (l, r) => {
       l && !r && _(() => {
-        console.log(X.value);
+        console.log(S.value);
         const {
-          width: b,
+          width: w,
           height: Y
-        } = window.getComputedStyle(X.value), {
+        } = window.getComputedStyle(S.value), {
           innerWidth: z,
           innerHeight: M
-        } = window, C = f.value, T = u.value, k = parseFloat(b), s = parseFloat(Y);
-        g.value = z - C > k ? C : z - k, d.value = M - T > s ? T : M - s;
+        } = window, C = h.value, T = u.value, k = parseFloat(w), s = parseFloat(Y);
+        f.value = z - C > k ? C : z - k, d.value = M - T > s ? T : M - s;
       });
     });
     const e = (l) => {
       c("clickItem", l);
-    }, v = () => {
+    }, g = () => {
       c("update:modelValue", !1);
     };
     return () => o(R, {
@@ -154,11 +165,11 @@ const te = D({
           top: 0,
           zIndex: 1001
         },
-        onClick: () => v()
+        onClick: () => g()
       }, [o("ul", {
-        ref: X,
+        ref: S,
         style: {
-          left: g.value + "px",
+          left: f.value + "px",
           top: d.value + "px",
           margin: 0,
           background: "#fff",
@@ -179,36 +190,54 @@ const te = D({
           padding: "7px 16px",
           cursor: "pointer"
         },
-        onClick: (b) => {
-          b.stopPropagation(), e(l.handlerName);
+        onClick: (w) => {
+          w.stopPropagation(), e(l.handlerName);
         },
-        onMouseover: (b) => b.currentTarget.style.background = "#eee",
-        onMouseleave: (b) => b.currentTarget.style.background = "#fff"
+        onMouseover: (w) => w.currentTarget.style.background = "#eee",
+        onMouseleave: (w) => w.currentTarget.style.background = "#fff"
       }, [l.title]))])])]
     });
   }
 }), ie = D({
   props: {
+    /**
+     * 主 canvas 的宽
+     */
     canvasWidth: {
       type: Number,
       default: 310
     },
+    /**
+     * 主 canvas 的高
+     */
     canvasHeight: {
       type: Number,
       default: 160
     },
+    /**
+     * 是否出现，由父级控制
+     */
     show: {
       type: Boolean,
       default: !1
     },
+    /**
+     * 拼图块的大小缩放比例
+     */
     puzzleScale: {
       type: Number,
       default: 1
     },
+    /**
+     * 滑块的大小
+     */
     sliderSize: {
       type: Number,
       default: 50
     },
+    /**
+     * 允许的偏差值
+     */
     range: {
       type: Number,
       default: 10
@@ -219,15 +248,15 @@ const te = D({
     },
     successText: {
       type: String,
-      default: "\u9A8C\u8BC1\u901A\u8FC7\uFF01"
+      default: "验证通过！"
     },
     failText: {
       type: String,
-      default: "\u9A8C\u8BC1\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5"
+      default: "验证失败，请重试"
     },
     sliderText: {
       type: String,
-      default: "\u62D6\u52A8\u6ED1\u5757\u5B8C\u6210\u62FC\u56FE"
+      default: "拖动滑块完成拼图"
     },
     zIndex: {
       type: Number,
@@ -237,9 +266,9 @@ const te = D({
   emits: ["success", "fail", "close"],
   setup(a, {
     emit: c,
-    attrs: f
+    attrs: h
   }) {
-    const u = w(), g = w(), d = w(), X = w(), e = G({
+    const u = x(), f = x(), d = x(), S = x(), e = G({
       mouseDown: !1,
       startWidth: 50,
       startX: 0,
@@ -261,18 +290,18 @@ const te = D({
     F(() => a.show, (n) => {
       n ? (document.body.classList.add("vue-puzzle-overflow"), W()) : (e.isSubmting = !1, e.isSuccess = !1, e.infoBoxShow = !1, document.body.classList.remove("vue-puzzle-overflow"));
     });
-    const v = B(() => {
+    const g = P(() => {
       const n = e.startWidth + e.newX - e.startX;
       return n < r.value ? r.value : n > a.canvasWidth ? a.canvasWidth : n;
-    }), l = B(() => Math.round(Math.max(Math.min(a.puzzleScale, 2), 0.2) * 52.5 + 6)), r = B(() => Math.max(Math.min(Math.round(a.sliderSize), Math.round(a.canvasWidth * 0.5)), 10)), b = () => {
+    }), l = P(() => Math.round(Math.max(Math.min(a.puzzleScale, 2), 0.2) * 52.5 + 6)), r = P(() => Math.max(Math.min(Math.round(a.sliderSize), Math.round(a.canvasWidth * 0.5)), 10)), w = () => {
       e.mouseDown || (e.timer1 && clearTimeout(e.timer1), c("close"));
     }, Y = () => {
       e.closeDown = !0;
     }, z = () => {
-      e.closeDown && b(), e.closeDown = !1;
+      e.closeDown && w(), e.closeDown = !1;
     }, M = (n) => {
-      var t, h;
-      e.isCanSlide && (e.mouseDown = !0, e.startWidth = (h = (t = u.value) == null ? void 0 : t.clientWidth) != null ? h : 0, e.newX = n.clientX || n.changedTouches[0].clientX, e.startX = n.clientX || n.changedTouches[0].clientX);
+      var t;
+      e.isCanSlide && (e.mouseDown = !0, e.startWidth = ((t = u.value) == null ? void 0 : t.clientWidth) ?? 0, e.newX = n.clientX || n.changedTouches[0].clientX, e.startX = n.clientX || n.changedTouches[0].clientX);
     }, C = (n) => {
       e.mouseDown && (n.preventDefault(), e.newX = n.clientX || n.changedTouches[0].clientX);
     }, T = () => {
@@ -282,33 +311,34 @@ const te = D({
       if (e.loading && !n)
         return;
       e.loading = !0, e.isCanSlide = !1;
-      const t = g.value, h = d.value, m = X.value, i = t == null ? void 0 : t.getContext("2d"), y = h == null ? void 0 : h.getContext("2d"), p = m == null ? void 0 : m.getContext("2d");
-      if (!i || !y || !p) {
+      const t = f.value, X = d.value, v = S.value, i = t == null ? void 0 : t.getContext("2d"), b = X == null ? void 0 : X.getContext("2d"), m = v == null ? void 0 : v.getContext("2d");
+      if (!i || !b || !m) {
         console.error("not found ctx / ctx2 / ctx3");
         return;
       }
-      const q = navigator.userAgent.indexOf("Firefox") >= 0 && navigator.userAgent.indexOf("Windows") >= 0, S = document.createElement("img");
-      if (i.fillStyle = "rgba(255,255,255,1)", p.fillStyle = "rgba(255,255,255,1)", i.clearRect(0, 0, a.canvasWidth, a.canvasHeight), y.clearRect(0, 0, a.canvasWidth, a.canvasHeight), e.pinX = s(l.value + 20, a.canvasWidth - l.value - 10), e.pinY = s(20, a.canvasHeight - l.value - 10), S.crossOrigin = "anonymous", S.onload = () => {
-        const [x, H, $, P] = N(S);
-        i.save(), I(i), i.closePath(), q ? (i.clip(), i.save(), i.shadowOffsetX = 0, i.shadowOffsetY = 0, i.shadowColor = "#000", i.shadowBlur = 3, i.fill(), i.restore()) : (i.shadowOffsetX = 0, i.shadowOffsetY = 0, i.shadowColor = "#000", i.shadowBlur = 3, i.fill(), i.clip()), i.drawImage(S, x, H, $, P), p.fillRect(0, 0, a.canvasWidth, a.canvasHeight), p.drawImage(S, x, H, $, P), i.globalCompositeOperation = "source-atop", I(i), i.arc(e.pinX + Math.ceil(l.value / 2), e.pinY + Math.ceil(l.value / 2), l.value * 1.2, 0, Math.PI * 2, !0), i.closePath(), i.shadowColor = "rgba(255, 255, 255, .8)", i.shadowOffsetX = -1, i.shadowOffsetY = -1, i.shadowBlur = Math.min(Math.ceil(8 * a.puzzleScale), 12), i.fillStyle = "#ffffaa", i.fill();
-        const U = i.getImageData(
+      const U = navigator.userAgent.indexOf("Firefox") >= 0 && navigator.userAgent.indexOf("Windows") >= 0, y = document.createElement("img");
+      if (i.fillStyle = "rgba(255,255,255,1)", m.fillStyle = "rgba(255,255,255,1)", i.clearRect(0, 0, a.canvasWidth, a.canvasHeight), b.clearRect(0, 0, a.canvasWidth, a.canvasHeight), e.pinX = s(l.value + 20, a.canvasWidth - l.value - 10), e.pinY = s(20, a.canvasHeight - l.value - 10), y.crossOrigin = "anonymous", y.onload = () => {
+        const [p, H, $, B] = N(y);
+        i.save(), I(i), i.closePath(), U ? (i.clip(), i.save(), i.shadowOffsetX = 0, i.shadowOffsetY = 0, i.shadowColor = "#000", i.shadowBlur = 3, i.fill(), i.restore()) : (i.shadowOffsetX = 0, i.shadowOffsetY = 0, i.shadowColor = "#000", i.shadowBlur = 3, i.fill(), i.clip()), i.drawImage(y, p, H, $, B), m.fillRect(0, 0, a.canvasWidth, a.canvasHeight), m.drawImage(y, p, H, $, B), i.globalCompositeOperation = "source-atop", I(i), i.arc(e.pinX + Math.ceil(l.value / 2), e.pinY + Math.ceil(l.value / 2), l.value * 1.2, 0, Math.PI * 2, !0), i.closePath(), i.shadowColor = "rgba(255, 255, 255, .8)", i.shadowOffsetX = -1, i.shadowOffsetY = -1, i.shadowBlur = Math.min(Math.ceil(8 * a.puzzleScale), 12), i.fillStyle = "#ffffaa", i.fill();
+        const q = i.getImageData(
           e.pinX - 3,
+          // 为了阴影 是从-3px开始截取，判定的时候要+3px
           e.pinY - 20,
           e.pinX + l.value + 5,
           e.pinY + l.value + 5
         );
-        y.putImageData(U, 0, e.pinY - 20), i.restore(), i.clearRect(0, 0, a.canvasWidth, a.canvasHeight), i.save(), I(i), i.globalAlpha = 0.8, i.fillStyle = "#ffffff", i.fill(), i.restore(), i.save(), i.globalCompositeOperation = "source-atop", I(i), i.arc(e.pinX + Math.ceil(l.value / 2), e.pinY + Math.ceil(l.value / 2), l.value * 1.2, 0, Math.PI * 2, !0), i.shadowColor = "#000", i.shadowOffsetX = 2, i.shadowOffsetY = 2, i.shadowBlur = 16, i.fill(), i.restore(), i.save(), i.globalCompositeOperation = "destination-over", i.drawImage(S, x, H, $, P), i.restore(), e.loading = !1, e.isCanSlide = !0;
-      }, S.onerror = () => {
+        b.putImageData(q, 0, e.pinY - 20), i.restore(), i.clearRect(0, 0, a.canvasWidth, a.canvasHeight), i.save(), I(i), i.globalAlpha = 0.8, i.fillStyle = "#ffffff", i.fill(), i.restore(), i.save(), i.globalCompositeOperation = "source-atop", I(i), i.arc(e.pinX + Math.ceil(l.value / 2), e.pinY + Math.ceil(l.value / 2), l.value * 1.2, 0, Math.PI * 2, !0), i.shadowColor = "#000", i.shadowOffsetX = 2, i.shadowOffsetY = 2, i.shadowBlur = 16, i.fill(), i.restore(), i.save(), i.globalCompositeOperation = "destination-over", i.drawImage(y, p, H, $, B), i.restore(), e.loading = !1, e.isCanSlide = !0;
+      }, y.onerror = () => {
         k(!0);
-      }, !n && ((L = a.imgs) == null ? void 0 : L.length)) {
-        let x = s(0, a.imgs.length - 1);
-        x === e.imgIndex && (x === a.imgs.length - 1 ? x = 0 : x++), e.imgIndex = x, S.src = a.imgs[x];
+      }, !n && ((L = a.imgs) != null && L.length)) {
+        let p = s(0, a.imgs.length - 1);
+        p === e.imgIndex && (p === a.imgs.length - 1 ? p = 0 : p++), e.imgIndex = p, y.src = a.imgs[p];
       } else
-        S.src = V();
+        y.src = V();
     }, s = (n, t) => Math.ceil(Math.random() * (t - n) + n), N = (n) => {
-      const t = n.width / n.height, h = a.canvasWidth / a.canvasHeight;
-      let m = 0, i = 0, y = 0, p = 0;
-      return t > h ? (p = a.canvasHeight, y = t * p, i = 0, m = (a.canvasWidth - y) / 2) : (y = a.canvasWidth, p = y / t, m = 0, i = (a.canvasHeight - p) / 2), [m, i, y, p];
+      const t = n.width / n.height, X = a.canvasWidth / a.canvasHeight;
+      let v = 0, i = 0, b = 0, m = 0;
+      return t > X ? (m = a.canvasHeight, b = t * m, i = 0, v = (a.canvasWidth - b) / 2) : (b = a.canvasWidth, m = b / t, v = 0, i = (a.canvasHeight - m) / 2), [v, i, b, m];
     }, I = (n) => {
       const t = Math.ceil(15 * a.puzzleScale);
       n.beginPath(), n.moveTo(e.pinX, e.pinY), n.lineTo(e.pinX + t, e.pinY), n.arcTo(e.pinX + t, e.pinY - t / 2, e.pinX + t + t / 2, e.pinY - t / 2, t / 2), n.arcTo(e.pinX + t + t, e.pinY - t / 2, e.pinX + t + t, e.pinY, t / 2), n.lineTo(e.pinX + t + t + t, e.pinY), n.lineTo(e.pinX + t + t + t, e.pinY + t), n.arcTo(e.pinX + t + t + t + t / 2, e.pinY + t, e.pinX + t + t + t + t / 2, e.pinY + t + t / 2, t / 2), n.arcTo(e.pinX + t + t + t + t / 2, e.pinY + t + t, e.pinX + t + t + t, e.pinY + t + t, t / 2), n.lineTo(e.pinX + t + t + t, e.pinY + t + t + t), n.lineTo(e.pinX, e.pinY + t + t + t), n.lineTo(e.pinX, e.pinY + t + t), n.arcTo(e.pinX + t / 2, e.pinY + t + t, e.pinX + t / 2, e.pinY + t + t / 2, t / 2), n.arcTo(e.pinX + t / 2, e.pinY + t, e.pinX, e.pinY + t, t / 2), n.lineTo(e.pinX, e.pinY);
@@ -317,18 +347,18 @@ const te = D({
       if (!t)
         return console.error("not found ctx"), "";
       n.width = a.canvasWidth, n.height = a.canvasHeight, t.fillStyle = `rgb(${s(100, 255)},${s(100, 255)},${s(100, 255)})`, t.fillRect(0, 0, a.canvasWidth, a.canvasHeight);
-      for (let h = 0; h < 12; h++)
+      for (let X = 0; X < 12; X++)
         if (t.fillStyle = `rgb(${s(100, 255)},${s(100, 255)},${s(100, 255)})`, t.strokeStyle = `rgb(${s(100, 255)},${s(100, 255)},${s(100, 255)})`, s(0, 2) > 1)
           t.save(), t.rotate(s(-90, 90) * Math.PI / 180), t.fillRect(s(-20, n.width - 20), s(-20, n.height - 20), s(10, n.width / 2 + 10), s(10, n.height / 2 + 10)), t.restore();
         else {
           t.beginPath();
-          const m = s(-Math.PI, Math.PI);
-          t.arc(s(0, n.width), s(0, n.height), s(10, n.height / 2 + 10), m, m + Math.PI * 1.5), t.closePath(), t.fill();
+          const v = s(-Math.PI, Math.PI);
+          t.arc(s(0, n.width), s(0, n.height), s(10, n.height / 2 + 10), v, v + Math.PI * 1.5), t.closePath(), t.fill();
         }
       return n.toDataURL("image/png");
     }, j = () => {
       e.isSubmting = !0;
-      const n = Math.abs(e.pinX - (v.value - r.value) + (l.value - r.value) * ((v.value - r.value) / (a.canvasWidth - r.value)) - 3);
+      const n = Math.abs(e.pinX - (g.value - r.value) + (l.value - r.value) * ((g.value - r.value) / (a.canvasWidth - r.value)) - 3);
       n < a.range ? (e.infoText = a.successText, e.infoBoxFail = !1, e.infoBoxShow = !0, e.isCanSlide = !1, e.isSuccess = !0, e.timer1 && clearTimeout(e.timer1), e.timer1 = setTimeout(() => {
         e.isSubmting = !1, c("success", n);
       }, 800)) : (e.infoText = a.failText, e.infoBoxFail = !0, e.infoBoxShow = !0, e.isCanSlide = !1, c("fail", n), e.timer1 && clearTimeout(e.timer1), e.timer1 = setTimeout(() => {
@@ -345,7 +375,7 @@ const te = D({
       }), document.addEventListener("touchend", T, !1), a.show && (document.body.classList.add("vue-puzzle-overflow"), W());
     }), E(() => {
       e.timer1 && clearTimeout(e.timer1), document.removeEventListener("mousemove", C, !1), document.removeEventListener("mouseup", T, !1), document.removeEventListener("touchmove", C), document.removeEventListener("touchend", T, !1);
-    }), () => o("div", J(f, {
+    }), () => o("div", J(h, {
       style: {
         position: "fixed",
         top: 0,
@@ -495,7 +525,7 @@ const te = D({
         height: `${a.canvasHeight}px`
       }
     }, [o("canvas", {
-      ref: g,
+      ref: f,
       width: a.canvasWidth,
       height: a.canvasHeight,
       style: {
@@ -503,7 +533,7 @@ const te = D({
         height: `${a.canvasHeight}px`
       }
     }, null), o("canvas", {
-      ref: X,
+      ref: S,
       style: {
         position: "absolute",
         top: 0,
@@ -525,7 +555,7 @@ const te = D({
         width: `${l.value}px`,
         height: `${a.canvasHeight}px`,
         zIndex: 2,
-        transform: `translateX(${v.value - r.value - (l.value - r.value) * ((v.value - r.value) / (a.canvasWidth - r.value))}px)`
+        transform: `translateX(${g.value - r.value - (l.value - r.value) * ((g.value - r.value) / (a.canvasWidth - r.value))}px)`
       },
       width: l.value,
       height: a.canvasHeight
@@ -613,7 +643,7 @@ const te = D({
       }
     }, null), o("img", {
       class: "reset_",
-      title: "\u5237\u65B0",
+      title: "刷新",
       onClick: W,
       src: "data:image/svg+xml;utf8,%3Csvg preserveAspectRatio='xMidYMid meet' viewBox='0 0 21 24' width='1em' height='1em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='%2343CF96' d='m7.5 21l2.999-3v1.5a7.501 7.501 0 0 0 5.299-12.811l2.114-2.124A10.465 10.465 0 0 1 21 12.002C21 17.8 16.3 22.5 10.502 22.5H10.5V24zM0 12C.007 6.204 4.704 1.507 10.499 1.5h.001V0l3 3l-3 3V4.5h-.002a7.502 7.502 0 0 0-5.299 12.812l-2.112 2.124a10.397 10.397 0 0 1-3.088-7.407v-.03v.002z'/%3E%3C/svg%3E"
     }, null)]), o("div", {
@@ -629,7 +659,7 @@ const te = D({
       ref: u,
       class: "range-slider",
       style: {
-        width: `${v.value}px`
+        width: `${g.value}px`
       }
     }, [o("div", {
       class: `${e.mouseDown ? "range-btn isDown" : "range-btn"}`,

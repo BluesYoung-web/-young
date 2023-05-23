@@ -18,15 +18,26 @@ declare const _default$3: vue.DefineComponent<{
 declare const _default$2: vue.DefineComponent<{
     titleStyle: {
         type: ObjectConstructor;
-        default: () => {};
+        default: () => {
+            fontSize: string;
+            width: string;
+        };
     };
     activeStyle: {
         type: (ObjectConstructor | StringConstructor)[];
-        required: true;
+        default: () => {
+            color: string;
+            cursor: string;
+            borderBottom: string;
+            marginBottom: string;
+        };
     };
     inactiveStyle: {
         type: (ObjectConstructor | StringConstructor)[];
-        required: true;
+        default: () => {
+            cursor: string;
+            marginBottom: string;
+        };
     };
     titles: {
         type: ArrayConstructor;
@@ -35,15 +46,26 @@ declare const _default$2: vue.DefineComponent<{
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, {}, string, vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     titleStyle: {
         type: ObjectConstructor;
-        default: () => {};
+        default: () => {
+            fontSize: string;
+            width: string;
+        };
     };
     activeStyle: {
         type: (ObjectConstructor | StringConstructor)[];
-        required: true;
+        default: () => {
+            color: string;
+            cursor: string;
+            borderBottom: string;
+            marginBottom: string;
+        };
     };
     inactiveStyle: {
         type: (ObjectConstructor | StringConstructor)[];
-        required: true;
+        default: () => {
+            cursor: string;
+            marginBottom: string;
+        };
     };
     titles: {
         type: ArrayConstructor;
@@ -51,6 +73,8 @@ declare const _default$2: vue.DefineComponent<{
     };
 }>>, {
     titleStyle: Record<string, any>;
+    activeStyle: string | Record<string, any>;
+    inactiveStyle: string | Record<string, any>;
 }>;
 
 interface ContextMenuItem {

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-26 09:03:46
- * @LastEditTime: 2022-12-26 09:27:58
+ * @LastEditTime: 2023-05-22 16:41:49
  * @Description: 
  */
 import { defineComponent, ref } from 'vue';
@@ -10,15 +10,26 @@ export default defineComponent({
   props: {
     titleStyle: {
       type: Object,
-      default: () => ({})
+      default: () => ({
+        fontSize: '24px',
+        width: '220px'
+      })
     },
     activeStyle: {
       type: [Object, String],
-      required: true
+      default: () => ({
+        color: '#409eff',
+        cursor: 'pointer',
+        borderBottom: '2px solid #409eff',
+        marginBottom: '20px'
+      })
     },
     inactiveStyle: {
       type: [Object, String],
-      required: true
+      default: () => ({
+        cursor: 'pointer',
+        marginBottom: '20px'
+      })
     },
     titles: {
       type: Array,
