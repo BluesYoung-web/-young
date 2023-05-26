@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-05-22 16:51:14
+ * @LastEditTime: 2023-05-26 12:08:03
  * @Description: 
 -->
 <script setup lang="ts">
@@ -105,8 +105,8 @@ watchEffect(() => {
   console.log(start.value, end.value);
 });
 
-const tableHead: TableHeadItem[] = new Array(10).fill(0).map((_, v) => ({ label: v.toString(), prop: v.toString() }));
-const tableData: TableDataItem[] = new Array(10).fill(0).map((_, v) => ({ [v]: v }));
+const tableHead: TableHeadItem[] = new Array(20).fill(0).map((_, v) => ({ label: v.toString().repeat(10), prop: v.toString() }));
+const tableData: TableDataItem[] = new Array(20).fill(0).map((_, v) => ({ [v]: v }));
 </script>
 
 <template>
