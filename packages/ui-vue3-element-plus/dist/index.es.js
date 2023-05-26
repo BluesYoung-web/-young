@@ -149,7 +149,9 @@ const ed = Ar({
         })), (l = n.switch) == null ? void 0 : l.call(n), (c = n.operate) == null ? void 0 : c.call(n)];
       }
     }), e.enableCustomHead && se(qs, {
-      trigger: "click"
+      trigger: "click",
+      placement: "bottom-end",
+      width: 200
     }, {
       reference: () => se("div", {
         style: {
@@ -178,14 +180,22 @@ const ed = Ar({
             fontWeight: "bold"
           }
         }, [It("自定义展示的表头")]), se(Ra, {
+          style: {
+            maxHeight: "350px",
+            overflowY: "auto"
+          },
           modelValue: s.value.map((c) => c.prop),
           "onUpdate:modelValue": o
-        }, Of(l = e.tableHead.filter((c) => !c.only_export).map((c, x) => se(Na, {
-          label: c.prop,
-          key: x
-        }, {
-          default: () => [c.label]
-        }))) ? l : {
+        }, Of(l = e.tableHead.filter((c) => !c.only_export).map((c, x) => (
+          // @ts-ignore
+          se(Na, {
+            label: c.prop,
+            key: x,
+            title: c.label
+          }, {
+            default: () => [c.label]
+          })
+        ))) ? l : {
           default: () => [l]
         })]);
       }
