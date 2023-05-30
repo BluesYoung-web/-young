@@ -1,15 +1,12 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-05-30 10:48:05
- * @Description: 
+ * @LastEditTime: 2023-05-30 12:11:32
+ * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
 import type { PropType } from 'vue';
-import {
-  ElTable,
-  ElTableColumn,
-} from 'element-plus';
+import { ElTable, ElTableColumn } from 'element-plus';
 import type { TableHeadItemPro, TableDataItem } from '..';
 import CustomHead from './sub/CustomHead';
 import { randomId } from '@bluesyoung/utils';
@@ -71,14 +68,14 @@ export default defineComponent({
      * 被勾选的表头
      */
     const filterHeader = computed(() => {
-      return initData.value.filter(d => d.check);
+      return initData.value.filter((d) => d.check);
     });
 
     /**
      * 获取表头高度 给设置按钮设置高度
      */
     const getHeaderHeight = () => {
-      const tr = document.querySelector('.el-table__header')
+      const tr = document.querySelector('.el-table__header');
       // @ts-ignore
       if (tr.offsetHeight === 0) {
         setTimeout(() => {
@@ -100,7 +97,7 @@ export default defineComponent({
     };
 
     const handleChange = (item: TableHeadItemPro, check: boolean) => {
-      const index = tableHeadCheck.value.findIndex(e => e === item.prop)
+      const index = tableHeadCheck.value.findIndex((e) => e === item.prop);
       if (!check && index != -1) {
         tableHeadCheck.value.splice(index, 1);
       } else {
@@ -117,49 +114,60 @@ export default defineComponent({
     return () => (
       <>
         <style>
-          {
-            `
+          {`
           .nowarp {
             word-break: normal;
           }
-          `
-          }
+          `}
         </style>
-        <div style="position: relative;">
+        <div style='position: relative;'>
           <ElTable
             {...attrs}
             ref={tableRef}
-            header-cell-class-name="nowarp"
+            header-cell-class-name='nowarp'
             data={tableData_1.value}
             style={{ width: '100%' }}
             height={props.tableHeight}
             border
             onHeader-dragend={handleHeaderDragend}
           >
-            {
-              props.selectable && <ElTableColumn type='selection' width='55' />
-            }
-            {
-              filterHeader.value.map((item, index) => (
-                <ElTableColumn
-                  key={item.prop.toString() + index + randomKey}
-                  prop={item.prop as string}
-                  label={item.label}
-                  width={item.width}
-                >
-                  {{
-                    header: () => <span class="nowarp" title={item.label}>{item.label}</span>,
-                    default: (row: TableHeadItemPro) => <span class="nowarp" title={row[item.prop as string]}>{row[item.prop as string]}</span>,
-                  }}
-                </ElTableColumn>
-              ))
-            }
+            {props.selectable && <ElTableColumn type='selection' width='55' />}
+            {filterHeader.value.map((item, index) => (
+              <ElTableColumn
+                key={item.prop.toString() + index + randomKey}
+                prop={item.prop as string}
+                label={item.label}
+                width={item.width || ''}
+                sortable={item.sortable || false}
+                fixed={item.fixed || false}
+                align={item.aligin || 'left'}
+                showOverflowTooltip={item.show_overflow_tooltip ?? true}
+              >
+                {{
+                  header: () => (
+                    <span class='nowarp' title={item.label}>
+                      {item.label}
+                    </span>
+                  ),
+                  default: ({ row, $index }: { row: TableHeadItemPro; $index: number }) => {
+                    if (item.render) {
+                      return item.render(row, $index);
+                    } else {
+                      return <span>{row[item.prop as string]}</span>;
+                    }
+                  },
+                }}
+              </ElTableColumn>
+            ))}
           </ElTable>
-          <CustomHead height={`${settingHeight.value}px`} tableHead={initData.value} onDrag-end={handleDragend} onChange={handleChange} />
+          <CustomHead
+            height={`${settingHeight.value}px`}
+            tableHead={initData.value}
+            onDrag-end={handleDragend}
+            onChange={handleChange}
+          />
         </div>
       </>
-
     );
-  }
+  },
 });
-
