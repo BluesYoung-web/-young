@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-05-29 14:03:39
+ * @LastEditTime: 2023-05-30 10:49:05
  * @Description: 
 -->
 <script setup lang="ts">
@@ -12,7 +12,7 @@ import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange, YoungRotateTip
 import type { TableHeadItem, TableDataItem } from '@bluesyoung/ui-vue3-element-plus';
 
 import { YoungTab } from '../../../packages/ui-vue3/src'
-import Table from './components/table.vue';
+import { YoungTablePro } from '../../../packages/ui-vue3-element-plus/src';
 interface Query {
   name: string,
   age: number,
@@ -105,7 +105,7 @@ watchEffect(() => {
   console.log(start.value, end.value);
 });
 
-const tableHead: TableHeadItem[] = new Array(20).fill(0).map((_, v) => ({ label: v.toString().repeat(10), prop: v.toString() }));
+const tableHead: TableHeadItem[] = new Array(20).fill(0).map((_, v) => ({ label: v.toString().repeat(10), prop: v.toString(), width: v === 19 ? '320' : undefined }));
 const tableData: TableDataItem[] = new Array(20).fill(0).map((_, v) => ({ [v]: v }));
 </script>
 
@@ -129,6 +129,6 @@ const tableData: TableDataItem[] = new Array(20).fill(0).map((_, v) => ({ [v]: v
       </template>
     </YoungTab>
     <!-- <YoungTable :table-head="tableHead" :table-data="tableData" enable-custom-head /> -->
-    <Table :table-head="tableHead" :table-data="tableData" enable-custom-head></Table>
+    <YoungTablePro :table-head="tableHead" :table-data="tableData" />
   </div>
 </template>
