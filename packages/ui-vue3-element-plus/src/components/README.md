@@ -94,6 +94,22 @@ export type TableDataItem<T extends any = any> = {
 } & Record<string, any>;
 ```
 
+## YoungTablePro
+
+### Prop
+
+- `tableData`: 表格的数据，类型为 `TableDataItem[]`，必需
+
+- `tableHead`: 表格的表头配置，类型为 `TableHeadItem[]`，必需
+
+- `tableHeight`: 表格的高度，类型为 `Number`，默认值为 `600`
+
+- `selectable`: 是否显示选择框，类型为 `Boolean`，默认为 `false`
+
+- **其他属性和方法会被 `<ElTable>` 自动继承**
+
+> **主要是扩展了表头的自定义操作**，其他基础操作同 `YoungTable`
+
 
 ## YoungPagination
 
