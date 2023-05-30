@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-02 10:57:17
- * @LastEditTime: 2023-05-08 15:12:09
+ * @LastEditTime: 2023-05-30 10:28:36
  * @Description:
  */
 export { default as YoungTable } from './YoungTable';
@@ -18,3 +18,6 @@ export type { YoungImageViewerConf } from './YoungImageViewer';
 export { default as YoungSearchForm } from './YoungSearchForm';
 export type { YoungSearchFormItem, YoungSearchScheme } from './YoungSearchForm';
 export { default as YoungRotateTip } from './YoungRotateTip';
+
+export type { TableHeadItemPro } from './sub/Drag';
+export { default as YoungTablePro } from './YoungTablePro';
