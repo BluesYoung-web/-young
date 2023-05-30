@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
- * @LastEditTime: 2023-05-26 12:14:52
+ * @LastEditTime: 2023-05-30 10:13:36
  * @Description:
  */
 import { nextTick, onActivated, ref, watchEffect, defineComponent, onMounted } from 'vue';
@@ -73,7 +73,7 @@ export default defineComponent({
       required: true,
     },
     tableHead: {
-      type: Object as PropType<TableDataItem[]>,
+      type: Object as PropType<TableHeadItem[]>,
       required: true,
     },
     tableHeight: {
@@ -123,7 +123,7 @@ export default defineComponent({
     /**
      * 引用表格元素
      */
-    const tableRef = ref<any>(null);
+    const tableRef = ref<InstanceType<typeof ElTable>>();
     // 修复表格切换时，显示出现错位的 bug
     onActivated(() => {
       nextTick(() => {
