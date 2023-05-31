@@ -21168,6 +21168,9 @@ function createFilterWrapper(filter, fn2) {
   }
   return wrapper;
 }
+var bypassFilter = (invoke) => {
+  return invoke();
+};
 function debounceFilter(ms, options = {}) {
   let timer;
   let maxTimer;
@@ -21255,6 +21258,20 @@ function throttleFilter(ms, trailing = true, leading = true, rejectOnCancel = fa
   };
   return filter;
 }
+function pausableFilter(extendFilter = bypassFilter) {
+  const isActive = (0, lib_exports.ref)(true);
+  function pause() {
+    isActive.value = false;
+  }
+  function resume() {
+    isActive.value = true;
+  }
+  const eventFilter = (...args) => {
+    if (isActive.value)
+      extendFilter(...args);
+  };
+  return { isActive, pause, resume, eventFilter };
+}
 function identity2(arg) {
   return arg;
 }
@@ -21323,6 +21340,72 @@ function useTimeoutFn(cb, interval, options = {}) {
     start,
     stop: stop2
   };
+}
+var __getOwnPropSymbols$6 = Object.getOwnPropertySymbols;
+var __hasOwnProp$6 = Object.prototype.hasOwnProperty;
+var __propIsEnum$6 = Object.prototype.propertyIsEnumerable;
+var __objRest$5 = (source, exclude) => {
+  var target = {};
+  for (var prop in source)
+    if (__hasOwnProp$6.call(source, prop) && exclude.indexOf(prop) < 0)
+      target[prop] = source[prop];
+  if (source != null && __getOwnPropSymbols$6)
+    for (var prop of __getOwnPropSymbols$6(source)) {
+      if (exclude.indexOf(prop) < 0 && __propIsEnum$6.call(source, prop))
+        target[prop] = source[prop];
+    }
+  return target;
+};
+function watchWithFilter(source, cb, options = {}) {
+  const _a4 = options, {
+    eventFilter = bypassFilter
+  } = _a4, watchOptions = __objRest$5(_a4, [
+    "eventFilter"
+  ]);
+  return (0, lib_exports.watch)(source, createFilterWrapper(eventFilter, cb), watchOptions);
+}
+var __defProp$2 = Object.defineProperty;
+var __defProps$2 = Object.defineProperties;
+var __getOwnPropDescs$2 = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols$2 = Object.getOwnPropertySymbols;
+var __hasOwnProp$2 = Object.prototype.hasOwnProperty;
+var __propIsEnum$2 = Object.prototype.propertyIsEnumerable;
+var __defNormalProp$2 = (obj, key, value) => key in obj ? __defProp$2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues$2 = (a3, b2) => {
+  for (var prop in b2 || (b2 = {}))
+    if (__hasOwnProp$2.call(b2, prop))
+      __defNormalProp$2(a3, prop, b2[prop]);
+  if (__getOwnPropSymbols$2)
+    for (var prop of __getOwnPropSymbols$2(b2)) {
+      if (__propIsEnum$2.call(b2, prop))
+        __defNormalProp$2(a3, prop, b2[prop]);
+    }
+  return a3;
+};
+var __spreadProps$2 = (a3, b2) => __defProps$2(a3, __getOwnPropDescs$2(b2));
+var __objRest$1 = (source, exclude) => {
+  var target = {};
+  for (var prop in source)
+    if (__hasOwnProp$2.call(source, prop) && exclude.indexOf(prop) < 0)
+      target[prop] = source[prop];
+  if (source != null && __getOwnPropSymbols$2)
+    for (var prop of __getOwnPropSymbols$2(source)) {
+      if (exclude.indexOf(prop) < 0 && __propIsEnum$2.call(source, prop))
+        target[prop] = source[prop];
+    }
+  return target;
+};
+function watchPausable(source, cb, options = {}) {
+  const _a4 = options, {
+    eventFilter: filter
+  } = _a4, watchOptions = __objRest$1(_a4, [
+    "eventFilter"
+  ]);
+  const { eventFilter, pause, resume, isActive } = pausableFilter(filter);
+  const stop2 = watchWithFilter(source, cb, __spreadProps$2(__spreadValues$2({}, watchOptions), {
+    eventFilter
+  }));
+  return { stop: stop2, pause, resume, isActive };
 }
 
 // ../../node_modules/.pnpm/@vueuse+core@9.10.0_vue@3.2.45/node_modules/@vueuse/core/index.mjs
@@ -21443,6 +21526,162 @@ var _global = typeof globalThis !== "undefined" ? globalThis : typeof window !==
 var globalKey = "__vueuse_ssr_handlers__";
 _global[globalKey] = _global[globalKey] || {};
 var handlers = _global[globalKey];
+function getSSRHandler(key, fallback) {
+  return handlers[key] || fallback;
+}
+function guessSerializerType(rawInit) {
+  return rawInit == null ? "any" : rawInit instanceof Set ? "set" : rawInit instanceof Map ? "map" : rawInit instanceof Date ? "date" : typeof rawInit === "boolean" ? "boolean" : typeof rawInit === "string" ? "string" : typeof rawInit === "object" ? "object" : !Number.isNaN(rawInit) ? "number" : "any";
+}
+var __defProp$j = Object.defineProperty;
+var __getOwnPropSymbols$l = Object.getOwnPropertySymbols;
+var __hasOwnProp$l = Object.prototype.hasOwnProperty;
+var __propIsEnum$l = Object.prototype.propertyIsEnumerable;
+var __defNormalProp$j = (obj, key, value) => key in obj ? __defProp$j(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues$j = (a3, b2) => {
+  for (var prop in b2 || (b2 = {}))
+    if (__hasOwnProp$l.call(b2, prop))
+      __defNormalProp$j(a3, prop, b2[prop]);
+  if (__getOwnPropSymbols$l)
+    for (var prop of __getOwnPropSymbols$l(b2)) {
+      if (__propIsEnum$l.call(b2, prop))
+        __defNormalProp$j(a3, prop, b2[prop]);
+    }
+  return a3;
+};
+var StorageSerializers = {
+  boolean: {
+    read: (v2) => v2 === "true",
+    write: (v2) => String(v2)
+  },
+  object: {
+    read: (v2) => JSON.parse(v2),
+    write: (v2) => JSON.stringify(v2)
+  },
+  number: {
+    read: (v2) => Number.parseFloat(v2),
+    write: (v2) => String(v2)
+  },
+  any: {
+    read: (v2) => v2,
+    write: (v2) => String(v2)
+  },
+  string: {
+    read: (v2) => v2,
+    write: (v2) => String(v2)
+  },
+  map: {
+    read: (v2) => new Map(JSON.parse(v2)),
+    write: (v2) => JSON.stringify(Array.from(v2.entries()))
+  },
+  set: {
+    read: (v2) => new Set(JSON.parse(v2)),
+    write: (v2) => JSON.stringify(Array.from(v2))
+  },
+  date: {
+    read: (v2) => new Date(v2),
+    write: (v2) => v2.toISOString()
+  }
+};
+function useStorage(key, defaults2, storage, options = {}) {
+  var _a4;
+  const {
+    flush = "pre",
+    deep = true,
+    listenToStorageChanges = true,
+    writeDefaults = true,
+    mergeDefaults: mergeDefaults2 = false,
+    shallow,
+    window: window2 = defaultWindow,
+    eventFilter,
+    onError = (e) => {
+      console.error(e);
+    }
+  } = options;
+  const data = (shallow ? lib_exports.shallowRef : lib_exports.ref)(defaults2);
+  if (!storage) {
+    try {
+      storage = getSSRHandler("getDefaultStorage", () => {
+        var _a22;
+        return (_a22 = defaultWindow) == null ? void 0 : _a22.localStorage;
+      })();
+    } catch (e) {
+      onError(e);
+    }
+  }
+  if (!storage)
+    return data;
+  const rawInit = resolveUnref(defaults2);
+  const type4 = guessSerializerType(rawInit);
+  const serializer = (_a4 = options.serializer) != null ? _a4 : StorageSerializers[type4];
+  const { pause: pauseWatch, resume: resumeWatch } = watchPausable(data, () => write2(data.value), { flush, deep, eventFilter });
+  if (window2 && listenToStorageChanges)
+    useEventListener(window2, "storage", update);
+  update();
+  return data;
+  function write2(v2) {
+    try {
+      if (v2 == null) {
+        storage.removeItem(key);
+      } else {
+        const serialized = serializer.write(v2);
+        const oldValue = storage.getItem(key);
+        if (oldValue !== serialized) {
+          storage.setItem(key, serialized);
+          if (window2) {
+            window2 == null ? void 0 : window2.dispatchEvent(new StorageEvent("storage", {
+              key,
+              oldValue,
+              newValue: serialized,
+              storageArea: storage
+            }));
+          }
+        }
+      }
+    } catch (e) {
+      onError(e);
+    }
+  }
+  function read(event) {
+    const rawValue = event ? event.newValue : storage.getItem(key);
+    if (rawValue == null) {
+      if (writeDefaults && rawInit !== null)
+        storage.setItem(key, serializer.write(rawInit));
+      return rawInit;
+    } else if (!event && mergeDefaults2) {
+      const value = serializer.read(rawValue);
+      if (isFunction3(mergeDefaults2))
+        return mergeDefaults2(value, rawInit);
+      else if (type4 === "object" && !Array.isArray(value))
+        return __spreadValues$j(__spreadValues$j({}, rawInit), value);
+      return value;
+    } else if (typeof rawValue !== "string") {
+      return rawValue;
+    } else {
+      return serializer.read(rawValue);
+    }
+  }
+  function update(event) {
+    if (event && event.storageArea !== storage)
+      return;
+    if (event && event.key == null) {
+      data.value = rawInit;
+      return;
+    }
+    if (event && event.key !== key)
+      return;
+    pauseWatch();
+    try {
+      data.value = read(event);
+    } catch (e) {
+      onError(e);
+    } finally {
+      if (event)
+        (0, lib_exports.nextTick)(resumeWatch);
+      else
+        resumeWatch();
+    }
+  }
+}
 function useCssVar(prop, target, { window: window2 = defaultWindow, initialValue = "" } = {}) {
   const variable = (0, lib_exports.ref)(initialValue);
   const elRef = (0, lib_exports.computed)(() => {
@@ -21612,6 +21851,10 @@ function useIntersectionObserver(target, callback, options = {}) {
     isSupported: isSupported2,
     stop: stop2
   };
+}
+function useLocalStorage(key, initialValue, options = {}) {
+  const { window: window2 = defaultWindow } = options;
+  return useStorage(key, initialValue, window2 == null ? void 0 : window2.localStorage, options);
 }
 var SwipeDirection;
 (function(SwipeDirection2) {
@@ -72065,7 +72308,7 @@ var CustomHead_default = (0, vue_exports.defineComponent)({
               />
             </svg></div>
           </div>
-          <div class="popover_content"><Drag_default list={props.tableHead} onDrag-end={handleDragend} onChange={handleChange} /></div>
+          <div class="popover_content" onClick={(e) => e.stopPropagation()}><Drag_default list={props.tableHead} onDrag-end={handleDragend} onChange={handleChange} /></div>
         </>
       }}</ElPopover>
     </>;
@@ -72083,6 +72326,13 @@ var YoungTablePro_default = (0, vue_exports.defineComponent)({
       type: Object,
       required: true
     },
+    /**
+     * 默认勾选表头
+     */
+    tableHeadCheck: {
+      type: Object,
+      required: false
+    },
     tableHeight: {
       type: Number,
       default: 600
@@ -72090,9 +72340,23 @@ var YoungTablePro_default = (0, vue_exports.defineComponent)({
     selectable: {
       type: Boolean,
       default: false
+    },
+    /**
+     * 是否开启保存表头格式按钮
+     */
+    saveTableHead: {
+      type: Boolean,
+      default: true
+    },
+    /**
+     * 使用历史保存的表头 没有历史表头使用默认勾选表头
+     */
+    history: {
+      type: Boolean,
+      default: true
     }
   },
-  setup(props, { emit: emit2, attrs }) {
+  setup(props, { emit: emit2, attrs, expose }) {
     const tableRef = (0, vue_exports.ref)();
     (0, vue_exports.onActivated)(() => {
       (0, vue_exports.nextTick)(() => {
@@ -72101,19 +72365,34 @@ var YoungTablePro_default = (0, vue_exports.defineComponent)({
     });
     const tableData_1 = (0, vue_exports.ref)([]);
     const tableHead_1 = (0, vue_exports.ref)([]);
-    const tableHeadCheck = (0, vue_exports.ref)([]);
+    const tableHeadCheck_1 = (0, vue_exports.ref)([]);
     const settingHeight = (0, vue_exports.ref)(0);
     (0, vue_exports.watchEffect)(() => {
       tableData_1.value = props.tableData;
-      tableHead_1.value = props.tableHead;
-      tableHeadCheck.value = props.tableHead.map((item) => item.prop.toString());
       (0, vue_exports.nextTick)(() => {
-        handleHeaderDragend();
+        initHead();
+        getHeaderHeight();
       });
     });
+    const historyHead = useLocalStorage("table_pro_tableHead", {});
+    const initHead = () => {
+      if (props.history) {
+        tableHead_1.value = historyHead.value?.tableHead ?? [];
+        tableHeadCheck_1.value = historyHead.value?.tableHeadCheck ?? [];
+        if (tableHeadCheck_1.value.length === 0) {
+          initDefaultData();
+        }
+      } else {
+        initDefaultData();
+      }
+    };
+    const initDefaultData = () => {
+      tableHead_1.value = O(props.tableHead);
+      tableHeadCheck_1.value = props.tableHeadCheck?.length ? O(props.tableHeadCheck) : props.tableHead.map((t) => t.prop);
+    };
     const initData = (0, vue_exports.computed)(() => {
       return tableHead_1.value.map((t) => {
-        t.check = tableHeadCheck.value.includes(t.prop);
+        t.check = tableHeadCheck_1.value.includes(t.prop);
         return t;
       });
     });
@@ -72130,67 +72409,99 @@ var YoungTablePro_default = (0, vue_exports.defineComponent)({
         settingHeight.value = tr.offsetHeight - 1;
       }
     };
-    const handleHeaderDragend = () => {
+    const handleHeaderDragend = (newWidth, oldWidth, column2, event) => {
+      const changeHead = tableHead_1.value.find((t) => t.prop === column2.property);
+      changeHead.width = newWidth;
       (0, vue_exports.nextTick)(() => {
         getHeaderHeight();
       });
     };
     const handleChange = (item, check) => {
-      const index2 = tableHeadCheck.value.findIndex((e) => e === item.prop);
+      const index2 = tableHeadCheck_1.value.findIndex((e) => e === item.prop);
       if (!check && index2 != -1) {
-        tableHeadCheck.value.splice(index2, 1);
+        tableHeadCheck_1.value.splice(index2, 1);
       } else {
-        tableHeadCheck.value.push(item.prop);
+        tableHeadCheck_1.value.push(item.prop);
       }
     };
     const handleDragend = (list) => {
       tableHead_1.value = list;
     };
+    const saveTableHead = () => {
+      historyHead.value = {
+        tableHead: initData.value,
+        tableHeadCheck: tableHeadCheck_1.value
+      };
+      ElMessage.success("\u4FDD\u5B58\u6210\u529F");
+    };
+    const resetTableHead = () => {
+      ElMessageBox.confirm("\u786E\u5B9A\u91CD\u7F6E\u8868\u5934\u5417\uFF1F", "\u63D0\u793A", {
+        confirmButtonText: "\u786E\u5B9A",
+        cancelButtonText: "\u53D6\u6D88",
+        type: "warning"
+      }).then(() => {
+        historyHead.value = {};
+        ElMessage.success("\u91CD\u7F6E\u6210\u529F");
+        (0, vue_exports.nextTick)(() => {
+          initHead();
+        });
+      });
+    };
     const randomKey = Q();
+    expose({
+      saveTableHead,
+      resetTableHead
+    });
     return () => <>
       <style>{`
           .nowarp {
             word-break: normal;
           }
           `}</style>
-      <div style="position: relative;">
-        <ElTable
-          {...attrs}
-          ref={tableRef}
-          header-cell-class-name="nowarp"
-          data={tableData_1.value}
-          style={{ width: "100%" }}
-          height={props.tableHeight}
-          border
-          onHeader-dragend={handleHeaderDragend}
-        >
-          {props.selectable && <ElTableColumn2 type="selection" width="55" />}
-          {filterHeader.value.map((item, index2) => <ElTableColumn2
-            key={item.prop.toString() + index2 + randomKey}
-            prop={item.prop}
-            label={item.label}
-            width={item.width || ""}
-            sortable={item.sortable || false}
-            fixed={item.fixed || false}
-            align={item.aligin || "left"}
-            showOverflowTooltip={item.show_overflow_tooltip ?? true}
-          >{{
-            header: () => <span class="nowarp" title={item.label}>{item.label}</span>,
-            default: ({ row, $index }) => {
-              if (item.render) {
-                return item.render(row, $index);
-              } else {
-                return <span>{row[item.prop]}</span>;
+      <div>
+        {props.saveTableHead && <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "5px" }}>
+          <ElButton type="success" onClick={saveTableHead}>{"\u4FDD\u5B58\u8868\u5934"}</ElButton>
+          <ElButton type="primary" onClick={resetTableHead}>{"\u91CD\u7F6E\u8868\u5934"}</ElButton>
+        </div>}
+        <div style="position: relative;">
+          <ElTable
+            {...attrs}
+            ref={tableRef}
+            header-cell-class-name="nowarp"
+            data={tableData_1.value}
+            style={{ width: "100%" }}
+            height={props.tableHeight}
+            border
+            onHeader-dragend={handleHeaderDragend}
+          >
+            {props.selectable && <ElTableColumn2 type="selection" width="55" />}
+            {filterHeader.value.map((item, index2) => <ElTableColumn2
+              key={item.prop.toString() + index2 + randomKey}
+              prop={item.prop}
+              label={item.label}
+              width={item.width || ""}
+              sortable={item.sortable || false}
+              fixed={item.fixed || false}
+              align={item.aligin || "left"}
+              showOverflowTooltip={item.show_overflow_tooltip ?? true}
+            >{{
+              header: () => <span class="nowarp" title={item.label}>{item.label}</span>,
+              default: ({ row, $index }) => {
+                if (item.render) {
+                  return item.render(row, $index);
+                } else {
+                  return <span>{row[item.prop]}</span>;
+                }
               }
-            }
-          }}</ElTableColumn2>)}
-        </ElTable>
-        <CustomHead_default
-          height={`${settingHeight.value}px`}
-          tableHead={initData.value}
-          onDrag-end={handleDragend}
-          onChange={handleChange}
-        />
+            }}</ElTableColumn2>)}
+          </ElTable>
+          <CustomHead_default
+            height={`${settingHeight.value}px`}
+            tableHead={initData.value}
+            onDrag-end={handleDragend}
+            onChange={handleChange}
+          />
+        </div>
       </div>
     </>;
   }

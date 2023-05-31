@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-05-31 14:18:54
+ * @LastEditTime: 2023-05-31 14:54:45
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -10,6 +10,7 @@ import { ElMessage, ElTable, ElTableColumn, ElButton, ElMessageBox } from 'eleme
 import type { TableHeadItemPro, TableDataItem } from '..';
 import CustomHead from './sub/CustomHead';
 import { deepClone, randomId } from '@bluesyoung/utils';
+import { useLocalStorage } from '@vueuse/core';
 
 export default defineComponent({
   props: {
@@ -75,13 +76,17 @@ export default defineComponent({
       });
     });
 
+    const historyHead = useLocalStorage<{
+      tableHead?: TableHeadItemPro[];
+      tableHeadCheck?: string[];
+    }>('table_pro_tableHead', {});
+
     const initHead = () => {
       if (props.history) {
-        try {
-          const historyHead = JSON.parse(localStorage.getItem('table_pro_tableHead') || '{}');
-          tableHead_1.value = historyHead.tableHead;
-          tableHeadCheck_1.value = [...historyHead.tableHeadCheck];
-        } catch (error) {
+        tableHead_1.value = historyHead.value?.tableHead ?? [];
+        tableHeadCheck_1.value = historyHead.value?.tableHeadCheck ?? [];
+
+        if (tableHeadCheck_1.value.length === 0) {
           initDefaultData();
         }
       } else {
@@ -151,13 +156,10 @@ export default defineComponent({
     };
 
     const saveTableHead = () => {
-      localStorage.setItem(
-        'table_pro_tableHead',
-        JSON.stringify({
-          tableHead: initData.value,
-          tableHeadCheck: tableHeadCheck_1.value,
-        }),
-      );
+      historyHead.value = {
+        tableHead: initData.value,
+        tableHeadCheck: tableHeadCheck_1.value,
+      };
       ElMessage.success('保存成功');
     };
     const resetTableHead = () => {
@@ -166,7 +168,7 @@ export default defineComponent({
         cancelButtonText: '取消',
         type: 'warning',
       }).then(() => {
-        localStorage.removeItem('table_pro_tableHead');
+        historyHead.value = {};
         ElMessage.success('重置成功');
         nextTick(() => {
           initHead();

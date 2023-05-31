@@ -586,11 +586,32 @@ declare const _default: vue.DefineComponent<{
         type: PropType<TableHeadItemPro[]>;
         required: true;
     };
+    /**
+     * 默认勾选表头
+     */
+    tableHeadCheck: {
+        type: PropType<string[]>;
+        required: false;
+    };
     tableHeight: {
         type: NumberConstructor;
         default: number;
     };
     selectable: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    /**
+     * 是否开启保存表头格式按钮
+     */
+    saveTableHead: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    /**
+     * 使用历史保存的表头 没有历史表头使用默认勾选表头
+     */
+    history: {
         type: BooleanConstructor;
         default: boolean;
     };
@@ -603,6 +624,13 @@ declare const _default: vue.DefineComponent<{
         type: PropType<TableHeadItemPro[]>;
         required: true;
     };
+    /**
+     * 默认勾选表头
+     */
+    tableHeadCheck: {
+        type: PropType<string[]>;
+        required: false;
+    };
     tableHeight: {
         type: NumberConstructor;
         default: number;
@@ -611,9 +639,25 @@ declare const _default: vue.DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    /**
+     * 是否开启保存表头格式按钮
+     */
+    saveTableHead: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    /**
+     * 使用历史保存的表头 没有历史表头使用默认勾选表头
+     */
+    history: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }>>, {
     tableHeight: number;
     selectable: boolean;
+    saveTableHead: boolean;
+    history: boolean;
 }>;
 
 interface UseAutoLoad<T extends any = any> {
