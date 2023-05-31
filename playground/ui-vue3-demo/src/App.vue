@@ -1,8 +1,8 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-05-30 10:49:05
- * @Description: 
+ * @LastEditTime: 2023-05-31 14:20:21
+ * @Description:
 -->
 <script setup lang="ts">
 import { ref, h, watchEffect } from 'vue';
@@ -96,6 +96,8 @@ const scheme: YoungSearchScheme<Query> = {
   }
 }
 
+const YoungTableProRef = ref<typeof YoungTablePro>()
+
 const log = console.log.bind(null, 'xxxxxxxxxxxxxx: ');
 
 const start = ref('00:00');
@@ -107,6 +109,9 @@ watchEffect(() => {
 
 const tableHead: TableHeadItem[] = new Array(20).fill(0).map((_, v) => ({ label: v.toString().repeat(10), prop: v.toString(), width: v === 19 ? '320' : undefined }));
 const tableData: TableDataItem[] = new Array(20).fill(0).map((_, v) => ({ [v]: v }));
+
+const tableHeadCheck = tableHead.map(t => t.prop as string)
+
 </script>
 
 <template>
@@ -129,6 +134,7 @@ const tableData: TableDataItem[] = new Array(20).fill(0).map((_, v) => ({ [v]: v
       </template>
     </YoungTab>
     <!-- <YoungTable :table-head="tableHead" :table-data="tableData" enable-custom-head /> -->
-    <YoungTablePro :table-head="tableHead" :table-data="tableData" />
+    <YoungTablePro ref="YoungTableProRef" :table-head="tableHead" :table-head-check="tableHeadCheck"
+      :table-data="tableData" />
   </div>
 </template>

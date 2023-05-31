@@ -1,15 +1,15 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-05-30 12:11:32
+ * @LastEditTime: 2023-05-31 14:18:54
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
 import type { PropType } from 'vue';
-import { ElTable, ElTableColumn } from 'element-plus';
+import { ElMessage, ElTable, ElTableColumn, ElButton, ElMessageBox } from 'element-plus';
 import type { TableHeadItemPro, TableDataItem } from '..';
 import CustomHead from './sub/CustomHead';
-import { randomId } from '@bluesyoung/utils';
+import { deepClone, randomId } from '@bluesyoung/utils';
 
 export default defineComponent({
   props: {
@@ -21,6 +21,13 @@ export default defineComponent({
       type: Object as PropType<TableHeadItemPro[]>,
       required: true,
     },
+    /**
+     * 默认勾选表头
+     */
+    tableHeadCheck: {
+      type: Object as PropType<string[]>,
+      required: false,
+    },
     tableHeight: {
       type: Number,
       default: 600,
@@ -29,8 +36,22 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    /**
+     * 是否开启保存表头格式按钮
+     */
+    saveTableHead: {
+      type: Boolean,
+      default: true,
+    },
+    /**
+     * 使用历史保存的表头 没有历史表头使用默认勾选表头
+     */
+    history: {
+      type: Boolean,
+      default: true,
+    },
   },
-  setup(props, { emit, attrs }) {
+  setup(props, { emit, attrs, expose }) {
     /**
      * 引用表格元素
      */
@@ -44,23 +65,41 @@ export default defineComponent({
 
     const tableData_1 = ref<TableDataItem[]>([]);
     const tableHead_1 = ref<TableHeadItemPro[]>([]);
-    const tableHeadCheck = ref<string[]>([]);
+    const tableHeadCheck_1 = ref<string[]>([]);
     const settingHeight = ref(0);
     watchEffect(() => {
       tableData_1.value = props.tableData;
-      tableHead_1.value = props.tableHead;
-      tableHeadCheck.value = props.tableHead.map((item) => item.prop.toString());
       nextTick(() => {
-        handleHeaderDragend();
+        initHead();
+        getHeaderHeight();
       });
     });
 
+    const initHead = () => {
+      if (props.history) {
+        try {
+          const historyHead = JSON.parse(localStorage.getItem('table_pro_tableHead') || '{}');
+          tableHead_1.value = historyHead.tableHead;
+          tableHeadCheck_1.value = [...historyHead.tableHeadCheck];
+        } catch (error) {
+          initDefaultData();
+        }
+      } else {
+        initDefaultData();
+      }
+    };
+    const initDefaultData = () => {
+      tableHead_1.value = deepClone(props.tableHead);
+      tableHeadCheck_1.value = props.tableHeadCheck?.length
+        ? deepClone(props.tableHeadCheck)
+        : props.tableHead.map((t) => t.prop as string);
+    };
     /**
      * 所有表头初始化 设置check属性 true：被勾选 false:没被勾选
      */
     const initData = computed(() => {
       return tableHead_1.value.map((t) => {
-        t.check = tableHeadCheck.value.includes(t.prop as string);
+        t.check = tableHeadCheck_1.value.includes(t.prop as string);
         return t;
       });
     });
@@ -90,18 +129,20 @@ export default defineComponent({
     /**
      * 拖动表头后重新获取表头高度
      */
-    const handleHeaderDragend = () => {
+    const handleHeaderDragend = (newWidth, oldWidth, column, event) => {
+      const changeHead = tableHead_1.value.find((t) => t.prop === column.property);
+      changeHead.width = newWidth;
       nextTick(() => {
         getHeaderHeight();
       });
     };
 
     const handleChange = (item: TableHeadItemPro, check: boolean) => {
-      const index = tableHeadCheck.value.findIndex((e) => e === item.prop);
+      const index = tableHeadCheck_1.value.findIndex((e) => e === item.prop);
       if (!check && index != -1) {
-        tableHeadCheck.value.splice(index, 1);
+        tableHeadCheck_1.value.splice(index, 1);
       } else {
-        tableHeadCheck.value.push(item.prop as string);
+        tableHeadCheck_1.value.push(item.prop as string);
       }
     };
 
@@ -109,8 +150,36 @@ export default defineComponent({
       tableHead_1.value = list;
     };
 
+    const saveTableHead = () => {
+      localStorage.setItem(
+        'table_pro_tableHead',
+        JSON.stringify({
+          tableHead: initData.value,
+          tableHeadCheck: tableHeadCheck_1.value,
+        }),
+      );
+      ElMessage.success('保存成功');
+    };
+    const resetTableHead = () => {
+      ElMessageBox.confirm('确定重置表头吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }).then(() => {
+        localStorage.removeItem('table_pro_tableHead');
+        ElMessage.success('重置成功');
+        nextTick(() => {
+          initHead();
+        });
+      });
+    };
+
     const randomKey = randomId();
 
+    expose({
+      saveTableHead,
+      resetTableHead,
+    });
     return () => (
       <>
         <style>
@@ -120,52 +189,64 @@ export default defineComponent({
           }
           `}
         </style>
-        <div style='position: relative;'>
-          <ElTable
-            {...attrs}
-            ref={tableRef}
-            header-cell-class-name='nowarp'
-            data={tableData_1.value}
-            style={{ width: '100%' }}
-            height={props.tableHeight}
-            border
-            onHeader-dragend={handleHeaderDragend}
-          >
-            {props.selectable && <ElTableColumn type='selection' width='55' />}
-            {filterHeader.value.map((item, index) => (
-              <ElTableColumn
-                key={item.prop.toString() + index + randomKey}
-                prop={item.prop as string}
-                label={item.label}
-                width={item.width || ''}
-                sortable={item.sortable || false}
-                fixed={item.fixed || false}
-                align={item.aligin || 'left'}
-                showOverflowTooltip={item.show_overflow_tooltip ?? true}
-              >
-                {{
-                  header: () => (
-                    <span class='nowarp' title={item.label}>
-                      {item.label}
-                    </span>
-                  ),
-                  default: ({ row, $index }: { row: TableHeadItemPro; $index: number }) => {
-                    if (item.render) {
-                      return item.render(row, $index);
-                    } else {
-                      return <span>{row[item.prop as string]}</span>;
-                    }
-                  },
-                }}
-              </ElTableColumn>
-            ))}
-          </ElTable>
-          <CustomHead
-            height={`${settingHeight.value}px`}
-            tableHead={initData.value}
-            onDrag-end={handleDragend}
-            onChange={handleChange}
-          />
+        <div>
+          {props.saveTableHead && (
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '5px' }}>
+              <ElButton type='success' onClick={saveTableHead}>
+                保存表头
+              </ElButton>
+              <ElButton type='primary' onClick={resetTableHead}>
+                重置表头
+              </ElButton>
+            </div>
+          )}
+          <div style='position: relative;'>
+            <ElTable
+              {...attrs}
+              ref={tableRef}
+              header-cell-class-name='nowarp'
+              data={tableData_1.value}
+              style={{ width: '100%' }}
+              height={props.tableHeight}
+              border
+              onHeader-dragend={handleHeaderDragend}
+            >
+              {props.selectable && <ElTableColumn type='selection' width='55' />}
+              {filterHeader.value.map((item, index) => (
+                <ElTableColumn
+                  key={item.prop.toString() + index + randomKey}
+                  prop={item.prop as string}
+                  label={item.label}
+                  width={item.width || ''}
+                  sortable={item.sortable || false}
+                  fixed={item.fixed || false}
+                  align={item.aligin || 'left'}
+                  showOverflowTooltip={item.show_overflow_tooltip ?? true}
+                >
+                  {{
+                    header: () => (
+                      <span class='nowarp' title={item.label}>
+                        {item.label}
+                      </span>
+                    ),
+                    default: ({ row, $index }: { row: TableHeadItemPro; $index: number }) => {
+                      if (item.render) {
+                        return item.render(row, $index);
+                      } else {
+                        return <span>{row[item.prop as string]}</span>;
+                      }
+                    },
+                  }}
+                </ElTableColumn>
+              ))}
+            </ElTable>
+            <CustomHead
+              height={`${settingHeight.value}px`}
+              tableHead={initData.value}
+              onDrag-end={handleDragend}
+              onChange={handleChange}
+            />
+          </div>
         </div>
       </>
     );

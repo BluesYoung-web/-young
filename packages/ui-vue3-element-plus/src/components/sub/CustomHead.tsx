@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:25:24
- * @LastEditTime: 2023-05-30 12:19:32
+ * @LastEditTime: 2023-05-31 10:33:40
  * @Description:
  */
 import { ElPopover } from 'element-plus';
@@ -173,7 +173,7 @@ export default defineComponent({
                     </svg>
                   </div>
                 </div>
-                <div class='popover_content'>
+                <div class='popover_content' onClick={(e) => e.stopPropagation()}>
                   <Drag list={props.tableHead} onDrag-end={handleDragend} onChange={handleChange} />
                 </div>
               </>
