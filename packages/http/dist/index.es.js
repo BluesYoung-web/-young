@@ -7,22 +7,22 @@ const { toString: pe } = Object.prototype, { getPrototypeOf: G } = Object, Q = (
   const n = pe.call(t);
   return e[n] || (e[n] = n.slice(8, -1).toLowerCase());
 })(/* @__PURE__ */ Object.create(null)), A = (e) => (e = e.toLowerCase(), (t) => Q(t) === e), M = (e) => (t) => typeof t === e, { isArray: P } = Array, C = M("undefined");
-function Be(e) {
-  return e !== null && !C(e) && e.constructor !== null && !C(e.constructor) && g(e.constructor.isBuffer) && e.constructor.isBuffer(e);
+function Le(e) {
+  return e !== null && !C(e) && e.constructor !== null && !C(e.constructor) && T(e.constructor.isBuffer) && e.constructor.isBuffer(e);
 }
 const me = A("ArrayBuffer");
-function Le(e) {
+function Be(e) {
   let t;
   return typeof ArrayBuffer < "u" && ArrayBuffer.isView ? t = ArrayBuffer.isView(e) : t = e && e.buffer && me(e.buffer), t;
 }
-const Ue = M("string"), g = M("function"), ye = M("number"), Y = (e) => e !== null && typeof e == "object", je = (e) => e === !0 || e === !1, L = (e) => {
+const Ue = M("string"), T = M("function"), ye = M("number"), Y = (e) => e !== null && typeof e == "object", je = (e) => e === !0 || e === !1, B = (e) => {
   if (Q(e) !== "object")
     return !1;
   const t = G(e);
   return (t === null || t === Object.prototype || Object.getPrototypeOf(t) === null) && !(Symbol.toStringTag in e) && !(Symbol.iterator in e);
-}, ke = A("Date"), He = A("File"), Me = A("Blob"), Ie = A("FileList"), Je = (e) => Y(e) && g(e.pipe), qe = (e) => {
+}, ke = A("Date"), He = A("File"), Me = A("Blob"), Ie = A("FileList"), Je = (e) => Y(e) && T(e.pipe), qe = (e) => {
   const t = "[object FormData]";
-  return e && (typeof FormData == "function" && e instanceof FormData || pe.call(e) === t || g(e.toString) && e.toString() === t);
+  return e && (typeof FormData == "function" && e instanceof FormData || pe.call(e) === t || T(e.toString) && e.toString() === t);
 }, ze = A("URLSearchParams"), $e = (e) => e.trim ? e.trim() : e.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
 function F(e, t, { allOwnKeys: n = !1 } = {}) {
   if (e === null || typeof e > "u")
@@ -51,14 +51,14 @@ const we = typeof self > "u" ? typeof global > "u" ? globalThis : global : self,
 function W() {
   const { caseless: e } = be(this) && this || {}, t = {}, n = (r, s) => {
     const o = e && Ee(t, s) || s;
-    L(t[o]) && L(r) ? t[o] = W(t[o], r) : L(r) ? t[o] = W({}, r) : P(r) ? t[o] = r.slice() : t[o] = r;
+    B(t[o]) && B(r) ? t[o] = W(t[o], r) : B(r) ? t[o] = W({}, r) : P(r) ? t[o] = r.slice() : t[o] = r;
   };
   for (let r = 0, s = arguments.length; r < s; r++)
     arguments[r] && F(arguments[r], n);
   return t;
 }
 const Ve = (e, t, n, { allOwnKeys: r } = {}) => (F(t, (s, o) => {
-  n && g(s) ? e[o] = he(s, n) : e[o] = s;
+  n && T(s) ? e[o] = he(s, n) : e[o] = s;
 }, { allOwnKeys: r }), e), We = (e) => (e.charCodeAt(0) === 65279 && (e = e.slice(1)), e), Ke = (e, t, n, r) => {
   e.prototype = Object.create(t.prototype, r), e.prototype.constructor = e, Object.defineProperty(e, "super", {
     value: t.prototype
@@ -115,10 +115,10 @@ const Ve = (e, t, n, { allOwnKeys: r } = {}) => (F(t, (s, o) => {
   }), Object.defineProperties(e, r);
 }, rt = (e) => {
   Oe(e, (t, n) => {
-    if (g(e) && ["arguments", "caller", "callee"].indexOf(n) !== -1)
+    if (T(e) && ["arguments", "caller", "callee"].indexOf(n) !== -1)
       return !1;
     const r = e[n];
-    if (g(r)) {
+    if (T(r)) {
       if (t.enumerable = !1, "writable" in t) {
         t.writable = !1;
         return;
@@ -156,20 +156,20 @@ const Ve = (e, t, n, { allOwnKeys: r } = {}) => (F(t, (s, o) => {
 }, a = {
   isArray: P,
   isArrayBuffer: me,
-  isBuffer: Be,
+  isBuffer: Le,
   isFormData: qe,
-  isArrayBufferView: Le,
+  isArrayBufferView: Be,
   isString: Ue,
   isNumber: ye,
   isBoolean: je,
   isObject: Y,
-  isPlainObject: L,
+  isPlainObject: B,
   isUndefined: C,
   isDate: ke,
   isFile: He,
   isBlob: Me,
   isRegExp: nt,
-  isFunction: g,
+  isFunction: T,
   isStream: Je,
   isURLSearchParams: ze,
   isTypedArray: Qe,
@@ -302,11 +302,11 @@ function I(e, t, n) {
       if (a.endsWith(m, "{}"))
         m = r ? m : m.slice(0, -2), f = JSON.stringify(f);
       else if (a.isArray(f) && lt(f) || a.isFileList(f) || a.endsWith(m, "[]") && (b = a.toArray(f)))
-        return m = Ae(m), b.forEach(function(B, De) {
-          !(a.isUndefined(B) || B === null) && t.append(
+        return m = Ae(m), b.forEach(function(L, De) {
+          !(a.isUndefined(L) || L === null) && t.append(
             // eslint-disable-next-line no-nested-ternary
             i === !0 ? se([m], De, o) : i === null ? m : m + "[]",
-            c(B)
+            c(L)
           );
         }), !1;
     }
@@ -353,11 +353,11 @@ function oe(e) {
 function Z(e, t) {
   this._pairs = [], e && I(e, this, t);
 }
-const Te = Z.prototype;
-Te.append = function(t, n) {
+const ge = Z.prototype;
+ge.append = function(t, n) {
   this._pairs.push([t, n]);
 };
-Te.toString = function(t) {
+ge.toString = function(t) {
   const n = t ? function(r) {
     return t.call(this, r, oe);
   } : oe;
@@ -368,7 +368,7 @@ Te.toString = function(t) {
 function ht(e) {
   return encodeURIComponent(e).replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+").replace(/%5B/gi, "[").replace(/%5D/gi, "]");
 }
-function ge(e, t, n) {
+function Te(e, t, n) {
   if (!t)
     return e;
   const r = n && n.encode || ht, s = n && n.serialize;
@@ -566,7 +566,7 @@ a.forEach(["delete", "get", "head"], function(t) {
 a.forEach(["post", "put", "patch"], function(t) {
   J.headers[t] = a.merge(Rt);
 });
-const ee = J, Tt = a.toObjectSet([
+const ee = J, gt = a.toObjectSet([
   "age",
   "authorization",
   "content-length",
@@ -584,12 +584,12 @@ const ee = J, Tt = a.toObjectSet([
   "referer",
   "retry-after",
   "user-agent"
-]), gt = (e) => {
+]), Tt = (e) => {
   const t = {};
   let n, r, s;
   return e && e.split(`
 `).forEach(function(i) {
-    s = i.indexOf(":"), n = i.substring(0, s).trim().toLowerCase(), r = i.substring(s + 1).trim(), !(!n || t[n] && Tt[n]) && (n === "set-cookie" ? t[n] ? t[n].push(r) : t[n] = [r] : t[n] = t[n] ? t[n] + ", " + r : r);
+    s = i.indexOf(":"), n = i.substring(0, s).trim().toLowerCase(), r = i.substring(s + 1).trim(), !(!n || t[n] && gt[n]) && (n === "set-cookie" ? t[n] ? t[n].push(r) : t[n] = [r] : t[n] = t[n] ? t[n] + ", " + r : r);
   }), t;
 }, ae = Symbol("internals");
 function _(e) {
@@ -646,7 +646,7 @@ class q {
       (!h || s[h] === void 0 || c === !0 || c === void 0 && s[h] !== !1) && (s[h || d] = U(u));
     }
     const i = (u, d) => a.forEach(u, (c, l) => o(c, l, d));
-    return a.isPlainObject(t) || t instanceof this.constructor ? i(t, n) : a.isString(t) && (t = t.trim()) && !Nt(t) ? i(gt(t), n) : t != null && o(n, t, r), this;
+    return a.isPlainObject(t) || t instanceof this.constructor ? i(t, n) : a.isString(t) && (t = t.trim()) && !Nt(t) ? i(Tt(t), n) : t != null && o(n, t, r), this;
   }
   get(t, n) {
     if (t = _(t), t) {
@@ -797,14 +797,14 @@ const Dt = O.isStandardBrowserEnv ? (
     };
   }()
 );
-function Bt(e) {
+function Lt(e) {
   return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(e);
 }
-function Lt(e, t) {
+function Bt(e, t) {
   return t ? e.replace(/\/+$/, "") + "/" + t.replace(/^\/+/, "") : e;
 }
 function _e(e, t) {
-  return e && !Bt(t) ? Lt(e, t) : t;
+  return e && !Lt(t) ? Bt(e, t) : t;
 }
 const Ut = O.isStandardBrowserEnv ? (
   // Standard browser envs have full support of the APIs needed to test
@@ -891,7 +891,7 @@ const Ht = typeof XMLHttpRequest < "u", Mt = Ht && function(e) {
       o.set("Authorization", "Basic " + btoa(E + ":" + f));
     }
     const l = _e(e.baseURL, e.url);
-    c.open(e.method.toUpperCase(), ge(l, e.params, e.paramsSerializer), !0), c.timeout = e.timeout;
+    c.open(e.method.toUpperCase(), Te(l, e.params, e.paramsSerializer), !0), c.timeout = e.timeout;
     function h() {
       if (!c)
         return;
@@ -1108,7 +1108,7 @@ function Jt(e, t, n) {
 const v = {
   assertOptions: Jt,
   validators: te
-}, T = v.validators;
+}, g = v.validators;
 class H {
   constructor(t) {
     this.defaults = t, this.interceptors = {
@@ -1128,12 +1128,12 @@ class H {
     typeof t == "string" ? (n = n || {}, n.url = t) : n = t || {}, n = N(this.defaults, n);
     const { transitional: r, paramsSerializer: s, headers: o } = n;
     r !== void 0 && v.assertOptions(r, {
-      silentJSONParsing: T.transitional(T.boolean),
-      forcedJSONParsing: T.transitional(T.boolean),
-      clarifyTimeoutError: T.transitional(T.boolean)
+      silentJSONParsing: g.transitional(g.boolean),
+      forcedJSONParsing: g.transitional(g.boolean),
+      clarifyTimeoutError: g.transitional(g.boolean)
     }, !1), s !== void 0 && v.assertOptions(s, {
-      encode: T.function,
-      serialize: T.function
+      encode: g.function,
+      serialize: g.function
     }, !0), n.method = (n.method || this.defaults.method || "get").toLowerCase();
     let i;
     i = o && a.merge(
@@ -1184,7 +1184,7 @@ class H {
   getUri(t) {
     t = N(this.defaults, t);
     const n = _e(t.baseURL, t.url);
-    return ge(n, t.params, t.paramsSerializer);
+    return Te(n, t.params, t.paramsSerializer);
   }
 }
 a.forEach(["delete", "get", "head", "options"], function(t) {
@@ -1356,11 +1356,11 @@ const Xt = {
     adapter: d
   });
   return h.interceptors.request.use(
-    (p) => (c.start(), p.baseURL || (p.baseURL = (r == null ? void 0 : r()) ?? n), p),
+    (p) => (!p.notLoading && c.start(), p.baseURL || (p.baseURL = (r == null ? void 0 : r()) ?? n), p),
     (p) => (l(p), Promise.reject(p))
   ), h.interceptors.response.use(
     (p) => {
-      c.end();
+      !p.config.notLoading && c.end();
       const E = p.data;
       try {
         return u(E);
@@ -1369,7 +1369,7 @@ const Xt = {
       }
     },
     (p) => {
-      c.end(), l(p);
+      !p.config.notLoading && c.end(), l(p);
     }
   ), {
     get: void 0,

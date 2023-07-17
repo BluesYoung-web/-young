@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-03-09 17:11:19
+ * @LastEditTime: 2023-07-17 16:41:32
  * @Description:
  */
 import type { AxiosInstance, AxiosRequestConfig, Method, AxiosAdapter } from 'axios';
@@ -15,9 +15,9 @@ type Simplify<T> = {
 type SetRequired<T, K extends keyof T> = Simplify<
   // 将要设置为可选类型的结构取出并设置为必选
   Required<Pick<T, K>> &
-    // 取并集
-    // 排除需要设置为可选属性的结构，其余的保持不变
-    Pick<T, Exclude<keyof T, K>>
+  // 取并集
+  // 排除需要设置为可选属性的结构，其余的保持不变
+  Pick<T, Exclude<keyof T, K>>
 >;
 
 export type AllMethod = Lowercase<Method>;
@@ -133,6 +133,16 @@ const defaultConfig: DefaultHttpConfig = {
   },
 };
 
+declare module 'axios' {
+  export interface AxiosRequestConfig {
+    /**
+     * 禁用 loading 动画
+     * @default false
+     */
+    notLoading?: boolean;
+  }
+}
+
 export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extends Cbks = Cbks>(
   config: Partial<DefaultHttpConfig<Msg>> = {},
 ) => {
@@ -150,7 +160,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
 
   net.interceptors.request.use(
     (req) => {
-      loading.start();
+      !req.notLoading && loading.start();
       if (!req.baseURL) {
         req.baseURL = lazyBaseURL?.() ?? baseURL;
       }
@@ -164,7 +174,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
 
   net.interceptors.response.use(
     (response) => {
-      loading.end();
+      !response.config.notLoading && loading.end();
       const data = response.data;
 
       try {
@@ -174,8 +184,8 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
         fail(err);
       }
     },
-    (error: Error) => {
-      loading.end();
+    (error) => {
+      !error.config.notLoading && loading.end();
       // http 异常
       fail(error);
     },

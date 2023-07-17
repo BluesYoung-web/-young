@@ -14,7 +14,7 @@
     }
   },
   "scripts": {
-    "test": "vitest --ui",
+    "test": "vitest",
     "build": "vite build && tsup",
     "release": "pnpm build && bumpp --commit",
     "push": "pnpm publish --access public"

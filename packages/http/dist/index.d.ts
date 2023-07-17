@@ -90,6 +90,15 @@ interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
      */
     adapter?: AxiosAdapter;
 }
+declare module 'axios' {
+    interface AxiosRequestConfig {
+        /**
+         * 禁用 loading 动画
+         * @default false
+         */
+        notLoading?: boolean;
+    }
+}
 declare const useHttp: <Msg extends Record<string, any> = DefaultMsg, Fns extends Cbks = Cbks>(config?: Partial<DefaultHttpConfig<Msg>>) => Handlers<Fns> & Prototype;
 
 export { AllMethod, Cbks, DefaultHttpConfig, DefaultMsg, Fn, UsefulContentTypes, useHttp };
