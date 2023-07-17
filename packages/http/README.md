@@ -92,3 +92,4 @@ const httpInstance = useHttp({
 ## 更多
 
 [参见测试用例](./test/index.test.ts)
+[参见测试用例](./test/notLoading.test.ts)
