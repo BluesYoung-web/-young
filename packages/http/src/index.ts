@@ -1,10 +1,10 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-07-17 16:41:32
+ * @LastEditTime: 2023-07-21 09:39:07
  * @Description:
  */
-import type { AxiosInstance, AxiosRequestConfig, Method, AxiosAdapter } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, Method } from 'axios';
 import axios from 'axios';
 import { defu } from 'defu';
 
@@ -110,11 +110,6 @@ export interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
      */
     getAuthHeaders?: () => Headers;
   };
-  /**
-   * 自定义适配器
-   * 微信小程序等其他非标准环境时传入
-   */
-  adapter?: AxiosAdapter;
 }
 
 const defaultConfig: DefaultHttpConfig = {
@@ -148,14 +143,13 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
 ) => {
   const finalConfig = defu(config, defaultConfig);
 
-  const { baseURL, lazyBaseURL, method, timeout, headers, checkFn, adapter, loading, fail } =
+  const { baseURL, lazyBaseURL, method, timeout, headers, checkFn, loading, fail } =
     finalConfig;
 
   const net = axios.create({
     method,
     timeout,
     headers: headers.getCommonHeaders(),
-    adapter,
   });
 
   net.interceptors.request.use(
@@ -229,3 +223,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
       }),
   } as unknown as Handlers<Fns> & Prototype;
 };
+
+export type YoungHttp = ReturnType<typeof useHttp>;
+export type YoungHttpFreeReq = YoungHttp['freeReq'];
+export type YoungHttpAuthReq = YoungHttp['authReq'];
