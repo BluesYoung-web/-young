@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-07-21 09:39:07
+ * @LastEditTime: 2023-07-21 09:42:46
  * @Description:
  */
 import type { AxiosInstance, AxiosRequestConfig, Method } from 'axios';
@@ -179,7 +179,9 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
       }
     },
     (error) => {
-      !error.config.notLoading && loading.end();
+      if (error && error.config && !error.config.notLoading) {
+        loading.end();
+      }
       // http 异常
       fail(error);
     },

@@ -58,12 +58,11 @@ var defaultConfig = {
 };
 var useHttp = (config = {}) => {
   const finalConfig = (0, import_defu.defu)(config, defaultConfig);
-  const { baseURL, lazyBaseURL, method, timeout, headers, checkFn, adapter, loading, fail } = finalConfig;
+  const { baseURL, lazyBaseURL, method, timeout, headers, checkFn, loading, fail } = finalConfig;
   const net = import_axios.default.create({
     method,
     timeout,
-    headers: headers.getCommonHeaders(),
-    adapter
+    headers: headers.getCommonHeaders()
   });
   net.interceptors.request.use(
     (req) => {
@@ -89,7 +88,9 @@ var useHttp = (config = {}) => {
       }
     },
     (error) => {
-      !error.config.notLoading && loading.end();
+      if (error && error.config && !error.config.notLoading) {
+        loading.end();
+      }
       fail(error);
     }
   );

@@ -145,8 +145,8 @@ const Ve = (e, t, n, { allOwnKeys: r } = {}) => (F(t, (s, o) => {
         t[s] = r;
         const o = P(r) ? [] : {};
         return F(r, (i, u) => {
-          const d = n(i, s + 1);
-          !C(d) && (o[u] = d);
+          const h = n(i, s + 1);
+          !C(h) && (o[u] = h);
         }), t[s] = void 0, o;
       }
     }
@@ -202,10 +202,10 @@ const Ve = (e, t, n, { allOwnKeys: r } = {}) => (F(t, (s, o) => {
   isContextDefined: be,
   toJSONObject: at
 };
-function y(e, t, n, r, s) {
+function m(e, t, n, r, s) {
   Error.call(this), Error.captureStackTrace ? Error.captureStackTrace(this, this.constructor) : this.stack = new Error().stack, this.message = e, this.name = "AxiosError", t && (this.code = t), n && (this.config = n), r && (this.request = r), s && (this.response = s);
 }
-a.inherits(y, Error, {
+a.inherits(m, Error, {
   toJSON: function() {
     return {
       // Standard
@@ -226,7 +226,7 @@ a.inherits(y, Error, {
     };
   }
 });
-const Se = y.prototype, Re = {};
+const Se = m.prototype, Re = {};
 [
   "ERR_BAD_OPTION_VALUE",
   "ERR_BAD_OPTION",
@@ -244,13 +244,13 @@ const Se = y.prototype, Re = {};
 ].forEach((e) => {
   Re[e] = { value: e };
 });
-Object.defineProperties(y, Re);
+Object.defineProperties(m, Re);
 Object.defineProperty(Se, "isAxiosError", { value: !0 });
-y.from = (e, t, n, r, s, o) => {
+m.from = (e, t, n, r, s, o) => {
   const i = Object.create(Se);
-  return a.toFlatObject(e, i, function(d) {
-    return d !== Error.prototype;
-  }, (u) => u !== "isAxiosError"), y.call(i, e.message, t, n, r, s), i.cause = e, i.name = e.name, o && Object.assign(i, o), i;
+  return a.toFlatObject(e, i, function(h) {
+    return h !== Error.prototype;
+  }, (u) => u !== "isAxiosError"), m.call(i, e.message, t, n, r, s), i.cause = e, i.name = e.name, o && Object.assign(i, o), i;
 };
 var ct = typeof self == "object" ? self.FormData : window.FormData;
 const ut = ct;
@@ -281,60 +281,60 @@ function I(e, t, n) {
     metaTokens: !0,
     dots: !1,
     indexes: !1
-  }, !1, function(m, S) {
-    return !a.isUndefined(S[m]);
+  }, !1, function(p, S) {
+    return !a.isUndefined(S[p]);
   });
-  const r = n.metaTokens, s = n.visitor || l, o = n.dots, i = n.indexes, d = (n.Blob || typeof Blob < "u" && Blob) && dt(t);
+  const r = n.metaTokens, s = n.visitor || f, o = n.dots, i = n.indexes, h = (n.Blob || typeof Blob < "u" && Blob) && dt(t);
   if (!a.isFunction(s))
     throw new TypeError("visitor must be a function");
-  function c(f) {
-    if (f === null)
+  function c(d) {
+    if (d === null)
       return "";
-    if (a.isDate(f))
-      return f.toISOString();
-    if (!d && a.isBlob(f))
-      throw new y("Blob is not supported. Use a Buffer instead.");
-    return a.isArrayBuffer(f) || a.isTypedArray(f) ? d && typeof Blob == "function" ? new Blob([f]) : Buffer.from(f) : f;
+    if (a.isDate(d))
+      return d.toISOString();
+    if (!h && a.isBlob(d))
+      throw new m("Blob is not supported. Use a Buffer instead.");
+    return a.isArrayBuffer(d) || a.isTypedArray(d) ? h && typeof Blob == "function" ? new Blob([d]) : Buffer.from(d) : d;
   }
-  function l(f, m, S) {
-    let b = f;
-    if (f && !S && typeof f == "object") {
-      if (a.endsWith(m, "{}"))
-        m = r ? m : m.slice(0, -2), f = JSON.stringify(f);
-      else if (a.isArray(f) && lt(f) || a.isFileList(f) || a.endsWith(m, "[]") && (b = a.toArray(f)))
-        return m = Ae(m), b.forEach(function(L, De) {
+  function f(d, p, S) {
+    let b = d;
+    if (d && !S && typeof d == "object") {
+      if (a.endsWith(p, "{}"))
+        p = r ? p : p.slice(0, -2), d = JSON.stringify(d);
+      else if (a.isArray(d) && lt(d) || a.isFileList(d) || a.endsWith(p, "[]") && (b = a.toArray(d)))
+        return p = Ae(p), b.forEach(function(L, De) {
           !(a.isUndefined(L) || L === null) && t.append(
             // eslint-disable-next-line no-nested-ternary
-            i === !0 ? se([m], De, o) : i === null ? m : m + "[]",
+            i === !0 ? se([p], De, o) : i === null ? p : p + "[]",
             c(L)
           );
         }), !1;
     }
-    return K(f) ? !0 : (t.append(se(S, m, o), c(f)), !1);
+    return K(d) ? !0 : (t.append(se(S, p, o), c(d)), !1);
   }
-  const h = [], p = Object.assign(ft, {
-    defaultVisitor: l,
+  const l = [], E = Object.assign(ft, {
+    defaultVisitor: f,
     convertValue: c,
     isVisitable: K
   });
-  function E(f, m) {
-    if (!a.isUndefined(f)) {
-      if (h.indexOf(f) !== -1)
-        throw Error("Circular reference detected in " + m.join("."));
-      h.push(f), a.forEach(f, function(b, x) {
+  function y(d, p) {
+    if (!a.isUndefined(d)) {
+      if (l.indexOf(d) !== -1)
+        throw Error("Circular reference detected in " + p.join("."));
+      l.push(d), a.forEach(d, function(b, x) {
         (!(a.isUndefined(b) || b === null) && s.call(
           t,
           b,
           a.isString(x) ? x.trim() : x,
-          m,
-          p
-        )) === !0 && E(b, m ? m.concat(x) : [x]);
-      }), h.pop();
+          p,
+          E
+        )) === !0 && y(b, p ? p.concat(x) : [x]);
+      }), l.pop();
     }
   }
   if (!a.isObject(e))
     throw new TypeError("data must be an object");
-  return E(e), t;
+  return y(e), t;
 }
 function oe(e) {
   const t = {
@@ -473,8 +473,8 @@ function St(e) {
 function Ne(e) {
   function t(n, r, s, o) {
     let i = n[o++];
-    const u = Number.isFinite(+i), d = o >= n.length;
-    return i = !i && a.isArray(s) ? s.length : i, d ? (a.hasOwnProp(s, i) ? s[i] = [s[i], r] : s[i] = r, !u) : ((!s[i] || !a.isObject(s[i])) && (s[i] = []), t(n, r, s[i], o) && a.isArray(s[i]) && (s[i] = St(s[i])), !u);
+    const u = Number.isFinite(+i), h = o >= n.length;
+    return i = !i && a.isArray(s) ? s.length : i, h ? (a.hasOwnProp(s, i) ? s[i] = [s[i], r] : s[i] = r, !u) : ((!s[i] || !a.isObject(s[i])) && (s[i] = []), t(n, r, s[i], o) && a.isArray(s[i]) && (s[i] = St(s[i])), !u);
   }
   if (a.isFormData(e) && a.isFunction(e.entries)) {
     const n = {};
@@ -515,10 +515,10 @@ const J = {
       if (r.indexOf("application/x-www-form-urlencoded") > -1)
         return bt(t, this.formSerializer).toString();
       if ((u = a.isFileList(t)) || r.indexOf("multipart/form-data") > -1) {
-        const d = this.env && this.env.FormData;
+        const h = this.env && this.env.FormData;
         return I(
           u ? { "files[]": t } : t,
-          d && new d(),
+          h && new h(),
           this.formSerializer
         );
       }
@@ -533,7 +533,7 @@ const J = {
         return JSON.parse(t);
       } catch (u) {
         if (i)
-          throw u.name === "SyntaxError" ? y.from(u, y.ERR_BAD_RESPONSE, this, null, this.response) : u;
+          throw u.name === "SyntaxError" ? m.from(u, m.ERR_BAD_RESPONSE, this, null, this.response) : u;
       }
     }
     return t;
@@ -638,14 +638,14 @@ class q {
   }
   set(t, n, r) {
     const s = this;
-    function o(u, d, c) {
-      const l = _(d);
-      if (!l)
+    function o(u, h, c) {
+      const f = _(h);
+      if (!f)
         throw new Error("header name must be a non-empty string");
-      const h = a.findKey(s, l);
-      (!h || s[h] === void 0 || c === !0 || c === void 0 && s[h] !== !1) && (s[h || d] = U(u));
+      const l = a.findKey(s, f);
+      (!l || s[l] === void 0 || c === !0 || c === void 0 && s[l] !== !1) && (s[l || h] = U(u));
     }
-    const i = (u, d) => a.forEach(u, (c, l) => o(c, l, d));
+    const i = (u, h) => a.forEach(u, (c, f) => o(c, f, h));
     return a.isPlainObject(t) || t instanceof this.constructor ? i(t, n) : a.isString(t) && (t = t.trim()) && !Nt(t) ? i(Tt(t), n) : t != null && o(n, t, r), this;
   }
   get(t, n) {
@@ -750,17 +750,17 @@ function Pe(e) {
   return !!(e && e.__CANCEL__);
 }
 function D(e, t, n) {
-  y.call(this, e ?? "canceled", y.ERR_CANCELED, t, n), this.name = "CanceledError";
+  m.call(this, e ?? "canceled", m.ERR_CANCELED, t, n), this.name = "CanceledError";
 }
-a.inherits(D, y, {
+a.inherits(D, m, {
   __CANCEL__: !0
 });
 const Ct = null;
 function Ft(e, t, n) {
   const r = n.config.validateStatus;
-  !n.status || !r || r(n.status) ? e(n) : t(new y(
+  !n.status || !r || r(n.status) ? e(n) : t(new m(
     "Request failed with status code " + n.status,
-    [y.ERR_BAD_REQUEST, y.ERR_BAD_RESPONSE][Math.floor(n.status / 100) - 4],
+    [m.ERR_BAD_REQUEST, m.ERR_BAD_RESPONSE][Math.floor(n.status / 100) - 4],
     n.config,
     n.request,
     n
@@ -771,8 +771,8 @@ const Dt = O.isStandardBrowserEnv ? (
   function() {
     return {
       write: function(n, r, s, o, i, u) {
-        const d = [];
-        d.push(n + "=" + encodeURIComponent(r)), a.isNumber(s) && d.push("expires=" + new Date(s).toGMTString()), a.isString(o) && d.push("path=" + o), a.isString(i) && d.push("domain=" + i), u === !0 && d.push("secure"), document.cookie = d.join("; ");
+        const h = [];
+        h.push(n + "=" + encodeURIComponent(r)), a.isNumber(s) && h.push("expires=" + new Date(s).toGMTString()), a.isString(o) && h.push("path=" + o), a.isString(i) && h.push("domain=" + i), u === !0 && h.push("secure"), document.cookie = h.join("; ");
       },
       read: function(n) {
         const r = document.cookie.match(new RegExp("(^|;\\s*)(" + n + ")=([^;]*)"));
@@ -846,34 +846,34 @@ function kt(e, t) {
   e = e || 10;
   const n = new Array(e), r = new Array(e);
   let s = 0, o = 0, i;
-  return t = t !== void 0 ? t : 1e3, function(d) {
-    const c = Date.now(), l = r[o];
-    i || (i = c), n[s] = d, r[s] = c;
-    let h = o, p = 0;
-    for (; h !== s; )
-      p += n[h++], h = h % e;
+  return t = t !== void 0 ? t : 1e3, function(h) {
+    const c = Date.now(), f = r[o];
+    i || (i = c), n[s] = h, r[s] = c;
+    let l = o, E = 0;
+    for (; l !== s; )
+      E += n[l++], l = l % e;
     if (s = (s + 1) % e, s === o && (o = (o + 1) % e), c - i < t)
       return;
-    const E = l && c - l;
-    return E ? Math.round(p * 1e3 / E) : void 0;
+    const y = f && c - f;
+    return y ? Math.round(E * 1e3 / y) : void 0;
   };
 }
 function ue(e, t) {
   let n = 0;
   const r = kt(50, 250);
   return (s) => {
-    const o = s.loaded, i = s.lengthComputable ? s.total : void 0, u = o - n, d = r(u), c = o <= i;
+    const o = s.loaded, i = s.lengthComputable ? s.total : void 0, u = o - n, h = r(u), c = o <= i;
     n = o;
-    const l = {
+    const f = {
       loaded: o,
       total: i,
       progress: i ? o / i : void 0,
       bytes: u,
-      rate: d || void 0,
-      estimated: d && i && c ? (i - o) / d : void 0,
+      rate: h || void 0,
+      estimated: h && i && c ? (i - o) / h : void 0,
       event: s
     };
-    l[t ? "download" : "upload"] = !0, e(l);
+    f[t ? "download" : "upload"] = !0, e(f);
   };
 }
 const Ht = typeof XMLHttpRequest < "u", Mt = Ht && function(e) {
@@ -881,63 +881,63 @@ const Ht = typeof XMLHttpRequest < "u", Mt = Ht && function(e) {
     let s = e.data;
     const o = R.from(e.headers).normalize(), i = e.responseType;
     let u;
-    function d() {
+    function h() {
       e.cancelToken && e.cancelToken.unsubscribe(u), e.signal && e.signal.removeEventListener("abort", u);
     }
     a.isFormData(s) && (O.isStandardBrowserEnv || O.isStandardBrowserWebWorkerEnv) && o.setContentType(!1);
     let c = new XMLHttpRequest();
     if (e.auth) {
-      const E = e.auth.username || "", f = e.auth.password ? unescape(encodeURIComponent(e.auth.password)) : "";
-      o.set("Authorization", "Basic " + btoa(E + ":" + f));
+      const y = e.auth.username || "", d = e.auth.password ? unescape(encodeURIComponent(e.auth.password)) : "";
+      o.set("Authorization", "Basic " + btoa(y + ":" + d));
     }
-    const l = _e(e.baseURL, e.url);
-    c.open(e.method.toUpperCase(), Te(l, e.params, e.paramsSerializer), !0), c.timeout = e.timeout;
-    function h() {
+    const f = _e(e.baseURL, e.url);
+    c.open(e.method.toUpperCase(), Te(f, e.params, e.paramsSerializer), !0), c.timeout = e.timeout;
+    function l() {
       if (!c)
         return;
-      const E = R.from(
+      const y = R.from(
         "getAllResponseHeaders" in c && c.getAllResponseHeaders()
-      ), m = {
+      ), p = {
         data: !i || i === "text" || i === "json" ? c.responseText : c.response,
         status: c.status,
         statusText: c.statusText,
-        headers: E,
+        headers: y,
         config: e,
         request: c
       };
       Ft(function(b) {
-        n(b), d();
+        n(b), h();
       }, function(b) {
-        r(b), d();
-      }, m), c = null;
+        r(b), h();
+      }, p), c = null;
     }
-    if ("onloadend" in c ? c.onloadend = h : c.onreadystatechange = function() {
-      !c || c.readyState !== 4 || c.status === 0 && !(c.responseURL && c.responseURL.indexOf("file:") === 0) || setTimeout(h);
+    if ("onloadend" in c ? c.onloadend = l : c.onreadystatechange = function() {
+      !c || c.readyState !== 4 || c.status === 0 && !(c.responseURL && c.responseURL.indexOf("file:") === 0) || setTimeout(l);
     }, c.onabort = function() {
-      c && (r(new y("Request aborted", y.ECONNABORTED, e, c)), c = null);
+      c && (r(new m("Request aborted", m.ECONNABORTED, e, c)), c = null);
     }, c.onerror = function() {
-      r(new y("Network Error", y.ERR_NETWORK, e, c)), c = null;
+      r(new m("Network Error", m.ERR_NETWORK, e, c)), c = null;
     }, c.ontimeout = function() {
-      let f = e.timeout ? "timeout of " + e.timeout + "ms exceeded" : "timeout exceeded";
-      const m = e.transitional || xe;
-      e.timeoutErrorMessage && (f = e.timeoutErrorMessage), r(new y(
-        f,
-        m.clarifyTimeoutError ? y.ETIMEDOUT : y.ECONNABORTED,
+      let d = e.timeout ? "timeout of " + e.timeout + "ms exceeded" : "timeout exceeded";
+      const p = e.transitional || xe;
+      e.timeoutErrorMessage && (d = e.timeoutErrorMessage), r(new m(
+        d,
+        p.clarifyTimeoutError ? m.ETIMEDOUT : m.ECONNABORTED,
         e,
         c
       )), c = null;
     }, O.isStandardBrowserEnv) {
-      const E = (e.withCredentials || Ut(l)) && e.xsrfCookieName && Dt.read(e.xsrfCookieName);
-      E && o.set(e.xsrfHeaderName, E);
+      const y = (e.withCredentials || Ut(f)) && e.xsrfCookieName && Dt.read(e.xsrfCookieName);
+      y && o.set(e.xsrfHeaderName, y);
     }
-    s === void 0 && o.setContentType(null), "setRequestHeader" in c && a.forEach(o.toJSON(), function(f, m) {
-      c.setRequestHeader(m, f);
-    }), a.isUndefined(e.withCredentials) || (c.withCredentials = !!e.withCredentials), i && i !== "json" && (c.responseType = e.responseType), typeof e.onDownloadProgress == "function" && c.addEventListener("progress", ue(e.onDownloadProgress, !0)), typeof e.onUploadProgress == "function" && c.upload && c.upload.addEventListener("progress", ue(e.onUploadProgress)), (e.cancelToken || e.signal) && (u = (E) => {
-      c && (r(!E || E.type ? new D(null, e, c) : E), c.abort(), c = null);
+    s === void 0 && o.setContentType(null), "setRequestHeader" in c && a.forEach(o.toJSON(), function(d, p) {
+      c.setRequestHeader(p, d);
+    }), a.isUndefined(e.withCredentials) || (c.withCredentials = !!e.withCredentials), i && i !== "json" && (c.responseType = e.responseType), typeof e.onDownloadProgress == "function" && c.addEventListener("progress", ue(e.onDownloadProgress, !0)), typeof e.onUploadProgress == "function" && c.upload && c.upload.addEventListener("progress", ue(e.onUploadProgress)), (e.cancelToken || e.signal) && (u = (y) => {
+      c && (r(!y || y.type ? new D(null, e, c) : y), c.abort(), c = null);
     }, e.cancelToken && e.cancelToken.subscribe(u), e.signal && (e.signal.aborted ? u() : e.signal.addEventListener("abort", u)));
-    const p = jt(l);
-    if (p && O.protocols.indexOf(p) === -1) {
-      r(new y("Unsupported protocol " + p + ":", y.ERR_BAD_REQUEST, e));
+    const E = jt(f);
+    if (E && O.protocols.indexOf(E) === -1) {
+      r(new m("Unsupported protocol " + E + ":", m.ERR_BAD_REQUEST, e));
       return;
     }
     c.send(s || null);
@@ -963,7 +963,7 @@ const It = {
     for (let s = 0; s < t && (n = e[s], !(r = a.isString(n) ? j[n.toLowerCase()] : n)); s++)
       ;
     if (!r)
-      throw r === !1 ? new y(
+      throw r === !1 ? new m(
         `Adapter ${n} is not supported by the environment`,
         "ERR_NOT_SUPPORT"
       ) : new Error(
@@ -1001,34 +1001,34 @@ const fe = (e) => e instanceof R ? e.toJSON() : e;
 function N(e, t) {
   t = t || {};
   const n = {};
-  function r(c, l, h) {
-    return a.isPlainObject(c) && a.isPlainObject(l) ? a.merge.call({ caseless: h }, c, l) : a.isPlainObject(l) ? a.merge({}, l) : a.isArray(l) ? l.slice() : l;
+  function r(c, f, l) {
+    return a.isPlainObject(c) && a.isPlainObject(f) ? a.merge.call({ caseless: l }, c, f) : a.isPlainObject(f) ? a.merge({}, f) : a.isArray(f) ? f.slice() : f;
   }
-  function s(c, l, h) {
-    if (a.isUndefined(l)) {
+  function s(c, f, l) {
+    if (a.isUndefined(f)) {
       if (!a.isUndefined(c))
-        return r(void 0, c, h);
+        return r(void 0, c, l);
     } else
-      return r(c, l, h);
+      return r(c, f, l);
   }
-  function o(c, l) {
-    if (!a.isUndefined(l))
-      return r(void 0, l);
+  function o(c, f) {
+    if (!a.isUndefined(f))
+      return r(void 0, f);
   }
-  function i(c, l) {
-    if (a.isUndefined(l)) {
+  function i(c, f) {
+    if (a.isUndefined(f)) {
       if (!a.isUndefined(c))
         return r(void 0, c);
     } else
-      return r(void 0, l);
+      return r(void 0, f);
   }
-  function u(c, l, h) {
-    if (h in t)
-      return r(c, l);
-    if (h in e)
+  function u(c, f, l) {
+    if (l in t)
+      return r(c, f);
+    if (l in e)
       return r(void 0, c);
   }
-  const d = {
+  const h = {
     url: o,
     method: o,
     data: o,
@@ -1056,11 +1056,11 @@ function N(e, t) {
     socketPath: i,
     responseEncoding: i,
     validateStatus: u,
-    headers: (c, l) => s(fe(c), fe(l), !0)
+    headers: (c, f) => s(fe(c), fe(f), !0)
   };
-  return a.forEach(Object.keys(e).concat(Object.keys(t)), function(l) {
-    const h = d[l] || s, p = h(e[l], t[l], l);
-    a.isUndefined(p) && h !== u || (n[l] = p);
+  return a.forEach(Object.keys(e).concat(Object.keys(t)), function(f) {
+    const l = h[f] || s, E = l(e[f], t[f], f);
+    a.isUndefined(E) && l !== u || (n[f] = E);
   }), n;
 }
 const Ce = "1.2.1", te = {};
@@ -1076,9 +1076,9 @@ te.transitional = function(t, n, r) {
   }
   return (o, i, u) => {
     if (t === !1)
-      throw new y(
+      throw new m(
         s(i, " has been removed" + (n ? " in " + n : "")),
-        y.ERR_DEPRECATED
+        m.ERR_DEPRECATED
       );
     return n && !de[i] && (de[i] = !0, console.warn(
       s(
@@ -1090,19 +1090,19 @@ te.transitional = function(t, n, r) {
 };
 function Jt(e, t, n) {
   if (typeof e != "object")
-    throw new y("options must be an object", y.ERR_BAD_OPTION_VALUE);
+    throw new m("options must be an object", m.ERR_BAD_OPTION_VALUE);
   const r = Object.keys(e);
   let s = r.length;
   for (; s-- > 0; ) {
     const o = r[s], i = t[o];
     if (i) {
-      const u = e[o], d = u === void 0 || i(u, o, e);
-      if (d !== !0)
-        throw new y("option " + o + " must be " + d, y.ERR_BAD_OPTION_VALUE);
+      const u = e[o], h = u === void 0 || i(u, o, e);
+      if (h !== !0)
+        throw new m("option " + o + " must be " + h, m.ERR_BAD_OPTION_VALUE);
       continue;
     }
     if (n !== !0)
-      throw new y("Unknown option " + o, y.ERR_BAD_OPTION);
+      throw new m("Unknown option " + o, m.ERR_BAD_OPTION);
   }
 }
 const v = {
@@ -1141,45 +1141,45 @@ class H {
       o[n.method]
     ), i && a.forEach(
       ["delete", "get", "head", "post", "put", "patch", "common"],
-      (f) => {
-        delete o[f];
+      (d) => {
+        delete o[d];
       }
     ), n.headers = R.concat(i, o);
     const u = [];
-    let d = !0;
-    this.interceptors.request.forEach(function(m) {
-      typeof m.runWhen == "function" && m.runWhen(n) === !1 || (d = d && m.synchronous, u.unshift(m.fulfilled, m.rejected));
+    let h = !0;
+    this.interceptors.request.forEach(function(p) {
+      typeof p.runWhen == "function" && p.runWhen(n) === !1 || (h = h && p.synchronous, u.unshift(p.fulfilled, p.rejected));
     });
     const c = [];
-    this.interceptors.response.forEach(function(m) {
-      c.push(m.fulfilled, m.rejected);
+    this.interceptors.response.forEach(function(p) {
+      c.push(p.fulfilled, p.rejected);
     });
-    let l, h = 0, p;
-    if (!d) {
-      const f = [le.bind(this), void 0];
-      for (f.unshift.apply(f, u), f.push.apply(f, c), p = f.length, l = Promise.resolve(n); h < p; )
-        l = l.then(f[h++], f[h++]);
-      return l;
+    let f, l = 0, E;
+    if (!h) {
+      const d = [le.bind(this), void 0];
+      for (d.unshift.apply(d, u), d.push.apply(d, c), E = d.length, f = Promise.resolve(n); l < E; )
+        f = f.then(d[l++], d[l++]);
+      return f;
     }
-    p = u.length;
-    let E = n;
-    for (h = 0; h < p; ) {
-      const f = u[h++], m = u[h++];
+    E = u.length;
+    let y = n;
+    for (l = 0; l < E; ) {
+      const d = u[l++], p = u[l++];
       try {
-        E = f(E);
+        y = d(y);
       } catch (S) {
-        m.call(this, S);
+        p.call(this, S);
         break;
       }
     }
     try {
-      l = le.call(this, E);
-    } catch (f) {
-      return Promise.reject(f);
+      f = le.call(this, y);
+    } catch (d) {
+      return Promise.reject(d);
     }
-    for (h = 0, p = c.length; h < p; )
-      l = l.then(c[h++], c[h++]);
-    return l;
+    for (l = 0, E = c.length; l < E; )
+      f = f.then(c[l++], c[l++]);
+    return f;
   }
   getUri(t) {
     t = N(this.defaults, t);
@@ -1302,7 +1302,7 @@ w.CancelToken = qt;
 w.isCancel = Pe;
 w.VERSION = Ce;
 w.toFormData = I;
-w.AxiosError = y;
+w.AxiosError = m;
 w.Cancel = w.CanceledError;
 w.all = function(t) {
   return Promise.all(t);
@@ -1349,27 +1349,26 @@ const Xt = {
     getAuthHeaders: () => ({})
   }
 }, Gt = (e = {}) => {
-  const t = Kt(e, Xt), { baseURL: n, lazyBaseURL: r, method: s, timeout: o, headers: i, checkFn: u, adapter: d, loading: c, fail: l } = t, h = Vt.create({
+  const t = Kt(e, Xt), { baseURL: n, lazyBaseURL: r, method: s, timeout: o, headers: i, checkFn: u, loading: h, fail: c } = t, f = Vt.create({
     method: s,
     timeout: o,
-    headers: i.getCommonHeaders(),
-    adapter: d
+    headers: i.getCommonHeaders()
   });
-  return h.interceptors.request.use(
-    (p) => (!p.notLoading && c.start(), p.baseURL || (p.baseURL = (r == null ? void 0 : r()) ?? n), p),
-    (p) => (l(p), Promise.reject(p))
-  ), h.interceptors.response.use(
-    (p) => {
-      !p.config.notLoading && c.end();
-      const E = p.data;
+  return f.interceptors.request.use(
+    (l) => (!l.notLoading && h.start(), l.baseURL || (l.baseURL = (r == null ? void 0 : r()) ?? n), l),
+    (l) => (c(l), Promise.reject(l))
+  ), f.interceptors.response.use(
+    (l) => {
+      !l.config.notLoading && h.end();
+      const E = l.data;
       try {
         return u(E);
-      } catch (f) {
-        l(f);
+      } catch (y) {
+        c(y);
       }
     },
-    (p) => {
-      !p.config.notLoading && c.end(), l(p);
+    (l) => {
+      l && l.config && !l.config.notLoading && h.end(), c(l);
     }
   ), {
     get: void 0,
@@ -1382,24 +1381,24 @@ const Xt = {
     options: void 0,
     link: void 0,
     unlink: void 0,
-    __instance__: h,
-    __mixin__(p) {
-      for (const E in p)
-        if (Object.prototype.hasOwnProperty.call(p, E)) {
-          const f = this[E] || {}, m = p[E];
+    __instance__: f,
+    __mixin__(l) {
+      for (const E in l)
+        if (Object.prototype.hasOwnProperty.call(l, E)) {
+          const y = this[E] || {}, d = l[E];
           this[E] = {
-            ...f,
-            ...m
+            ...y,
+            ...d
           };
         }
       return this;
     },
-    freeReq: h.request,
-    authReq: (p) => h.request({
-      ...p,
+    freeReq: f.request,
+    authReq: (l) => f.request({
+      ...l,
       headers: {
         ...i.getAuthHeaders(),
-        ...p == null ? void 0 : p.headers
+        ...l == null ? void 0 : l.headers
       }
     })
   };

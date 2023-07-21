@@ -1,4 +1,4 @@
-import { Method, AxiosAdapter, AxiosInstance, AxiosRequestConfig } from 'axios';
+import { Method, AxiosInstance, AxiosRequestConfig } from 'axios';
 
 type Simplify<T> = {
     [P in keyof T]: T[P];
@@ -84,11 +84,6 @@ interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
          */
         getAuthHeaders?: () => Headers;
     };
-    /**
-     * 自定义适配器
-     * 微信小程序等其他非标准环境时传入
-     */
-    adapter?: AxiosAdapter;
 }
 declare module 'axios' {
     interface AxiosRequestConfig {
@@ -100,5 +95,8 @@ declare module 'axios' {
     }
 }
 declare const useHttp: <Msg extends Record<string, any> = DefaultMsg, Fns extends Cbks = Cbks>(config?: Partial<DefaultHttpConfig<Msg>>) => Handlers<Fns> & Prototype;
+type YoungHttp = ReturnType<typeof useHttp>;
+type YoungHttpFreeReq = YoungHttp['freeReq'];
+type YoungHttpAuthReq = YoungHttp['authReq'];
 
-export { AllMethod, Cbks, DefaultHttpConfig, DefaultMsg, Fn, UsefulContentTypes, useHttp };
+export { AllMethod, Cbks, DefaultHttpConfig, DefaultMsg, Fn, UsefulContentTypes, YoungHttp, YoungHttpAuthReq, YoungHttpFreeReq, useHttp };
