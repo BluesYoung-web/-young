@@ -1,16 +1,65 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-05-31 14:54:45
+ * @LastEditTime: 2023-07-26 09:28:27
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
-import type { PropType } from 'vue';
-import { ElMessage, ElTable, ElTableColumn, ElButton, ElMessageBox } from 'element-plus';
+import type { PropType, VNode } from 'vue';
+import { ElMessage, ElTable, ElTableColumn, ElButton, ElMessageBox, ElTooltip } from 'element-plus';
 import type { TableHeadItemPro, TableDataItem } from '..';
 import CustomHead from './sub/CustomHead';
 import { deepClone, randomId } from '@bluesyoung/utils';
 import { useLocalStorage } from '@vueuse/core';
+export type TableHeadAligin = 'left' | 'center' | 'right' | undefined;
+export interface TableHeadItem<T extends any = any> {
+  /**
+   * 参数名
+   */
+  prop: keyof T;
+  /**
+   * 展示标题
+   */
+  label: string;
+  /**
+   * 列宽
+   */
+  width?: string;
+  /**
+   * 是否可排序
+   */
+  sortable?: boolean;
+  /**
+   * 是否固定表头
+   */
+  fixed?: boolean | 'left' | 'right';
+  /**
+   * 表格位置
+   */
+  aligin?: TableHeadAligin;
+  /**
+   * 表头提示
+   */
+  tool_content?: string;
+  /**
+   * 仅导出，不展示
+   */
+  only_export?: boolean;
+  /**
+   * 仅展示，不导出
+   */
+  only_display?: boolean;
+  /**
+   * 渲染函数
+   * @param row 当前行的数据
+   */
+  render?: (row: T, index: number) => VNode;
+  /**
+   * 当内容过长时，hover 展示全部
+   */
+  show_overflow_tooltip?: boolean;
+  [x: string]: any;
+}
 
 export default defineComponent({
   props: {
@@ -19,7 +68,7 @@ export default defineComponent({
       required: true,
     },
     tableHead: {
-      type: Object as PropType<TableHeadItemPro[]>,
+      type: Object as PropType<TableHeadItem[]>,
       required: true,
     },
     /**
@@ -226,11 +275,45 @@ export default defineComponent({
                   showOverflowTooltip={item.show_overflow_tooltip ?? true}
                 >
                   {{
-                    header: () => (
-                      <span class='nowarp' title={item.label}>
-                        {item.label}
-                      </span>
-                    ),
+                    header: (scope) => {
+                      if (tableHead_1.value[index].tool_content) {
+                        return (
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <span class='nowarp' title={item.label}>
+                              {scope.column.label}
+                            </span>
+                            <ElTooltip
+                              placement='bottom'
+                              v-slots={{ content: () => tableHead_1.value[index].tool_content }}
+                            >
+                              <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                width='1.2em'
+                                height='1.2em'
+                                viewBox='0 0 256 256'
+                              >
+                                <path
+                                  fill='currentColor'
+                                  d='M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24Zm0 168a12 12 0 1 1 12-12a12 12 0 0 1-12 12Zm8-48.72v.72a8 8 0 0 1-16 0v-8a8 8 0 0 1 8-8c13.23 0 24-9 24-20s-10.77-20-24-20s-24 9-24 20v4a8 8 0 0 1-16 0v-4c0-19.85 17.94-36 40-36s40 16.15 40 36c0 17.38-13.76 31.93-32 35.28Z'
+                                ></path>
+                              </svg>
+                            </ElTooltip>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <span class='nowarp' title={item.label}>
+                            {scope.column.label}
+                          </span>
+                        );
+                      }
+                    },
                     default: ({ row, $index }: { row: TableHeadItemPro; $index: number }) => {
                       if (item.render) {
                         return item.render(row, $index);
