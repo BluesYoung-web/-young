@@ -615,6 +615,13 @@ declare const _default: vue.DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    /**
+     * 存储历史id
+     */
+    historyId: {
+        type: StringConstructor;
+        default: string;
+    };
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, {}, string, vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     tableData: {
         type: PropType<TableDataItem<any>[]>;
@@ -653,11 +660,19 @@ declare const _default: vue.DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    /**
+     * 存储历史id
+     */
+    historyId: {
+        type: StringConstructor;
+        default: string;
+    };
 }>>, {
     tableHeight: number;
     selectable: boolean;
     saveTableHead: boolean;
     history: boolean;
+    historyId: string;
 }>;
 
 interface UseAutoLoad<T extends any = any> {

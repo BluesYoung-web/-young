@@ -1,65 +1,16 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-07-26 09:28:27
+ * @LastEditTime: 2023-07-26 09:47:43
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
-import type { PropType, VNode } from 'vue';
+import type { PropType } from 'vue';
 import { ElMessage, ElTable, ElTableColumn, ElButton, ElMessageBox, ElTooltip } from 'element-plus';
 import type { TableHeadItemPro, TableDataItem } from '..';
 import CustomHead from './sub/CustomHead';
 import { deepClone, randomId } from '@bluesyoung/utils';
 import { useLocalStorage } from '@vueuse/core';
-export type TableHeadAligin = 'left' | 'center' | 'right' | undefined;
-export interface TableHeadItem<T extends any = any> {
-  /**
-   * 参数名
-   */
-  prop: keyof T;
-  /**
-   * 展示标题
-   */
-  label: string;
-  /**
-   * 列宽
-   */
-  width?: string;
-  /**
-   * 是否可排序
-   */
-  sortable?: boolean;
-  /**
-   * 是否固定表头
-   */
-  fixed?: boolean | 'left' | 'right';
-  /**
-   * 表格位置
-   */
-  aligin?: TableHeadAligin;
-  /**
-   * 表头提示
-   */
-  tool_content?: string;
-  /**
-   * 仅导出，不展示
-   */
-  only_export?: boolean;
-  /**
-   * 仅展示，不导出
-   */
-  only_display?: boolean;
-  /**
-   * 渲染函数
-   * @param row 当前行的数据
-   */
-  render?: (row: T, index: number) => VNode;
-  /**
-   * 当内容过长时，hover 展示全部
-   */
-  show_overflow_tooltip?: boolean;
-  [x: string]: any;
-}
 
 export default defineComponent({
   props: {
@@ -68,7 +19,7 @@ export default defineComponent({
       required: true,
     },
     tableHead: {
-      type: Object as PropType<TableHeadItem[]>,
+      type: Object as PropType<TableHeadItemPro[]>,
       required: true,
     },
     /**
@@ -100,6 +51,13 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    /**
+     * 存储历史id
+     */
+    historyId: {
+      type: String,
+      default: location.href.replace(location.origin, ''),
+    }
   },
   setup(props, { emit, attrs, expose }) {
     /**
@@ -128,7 +86,7 @@ export default defineComponent({
     const historyHead = useLocalStorage<{
       tableHead?: TableHeadItemPro[];
       tableHeadCheck?: string[];
-    }>('table_pro_tableHead', {});
+    }>(`table_pro_tableHead_${props.historyId}`, {});
 
     const initHead = () => {
       if (props.history) {
