@@ -20,8 +20,8 @@ const id = or({
       required: !0
     },
     tableHeight: {
-      type: Number,
-      default: 600
+      type: [Number, String],
+      default: "100%"
     },
     selectable: {
       type: Boolean,
@@ -1161,8 +1161,8 @@ const Hf = or({
       required: !1
     },
     tableHeight: {
-      type: Number,
-      default: 600
+      type: [Number, String],
+      default: "100%"
     },
     selectable: {
       type: Boolean,
@@ -1263,7 +1263,6 @@ const Hf = or({
     }, {
       default: () => [Wr("保存表头")]
     }), X(vt, {
-      type: "primary",
       onClick: y
     }, {
       default: () => [Wr("重置表头")]

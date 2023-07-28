@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-07-26 09:47:43
+ * @LastEditTime: 2023-07-26 14:00:04
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -30,8 +30,8 @@ export default defineComponent({
       required: false,
     },
     tableHeight: {
-      type: Number,
-      default: 600,
+      type: [Number, String],
+      default: '100%',
     },
     selectable: {
       type: Boolean,
@@ -57,7 +57,7 @@ export default defineComponent({
     historyId: {
       type: String,
       default: location.href.replace(location.origin, ''),
-    }
+    },
   },
   setup(props, { emit, attrs, expose }) {
     /**
@@ -204,7 +204,7 @@ export default defineComponent({
               <ElButton type='success' onClick={saveTableHead}>
                 保存表头
               </ElButton>
-              <ElButton type='primary' onClick={resetTableHead}>
+              <ElButton onClick={resetTableHead}>
                 重置表头
               </ElButton>
             </div>

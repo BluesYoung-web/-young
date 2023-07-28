@@ -63,8 +63,8 @@ declare const _default$a: vue.DefineComponent<{
         required: true;
     };
     tableHeight: {
-        type: NumberConstructor;
-        default: number;
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
     };
     selectable: {
         type: BooleanConstructor;
@@ -88,8 +88,8 @@ declare const _default$a: vue.DefineComponent<{
         required: true;
     };
     tableHeight: {
-        type: NumberConstructor;
-        default: number;
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
     };
     selectable: {
         type: BooleanConstructor;
@@ -106,7 +106,7 @@ declare const _default$a: vue.DefineComponent<{
 }>> & {
     "onRow-drag-change"?: (...args: any[]) => any;
 }, {
-    tableHeight: number;
+    tableHeight: string | number;
     selectable: boolean;
     rowDraggable: boolean;
     enableCustomHead: boolean;
@@ -594,8 +594,8 @@ declare const _default: vue.DefineComponent<{
         required: false;
     };
     tableHeight: {
-        type: NumberConstructor;
-        default: number;
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
     };
     selectable: {
         type: BooleanConstructor;
@@ -639,8 +639,8 @@ declare const _default: vue.DefineComponent<{
         required: false;
     };
     tableHeight: {
-        type: NumberConstructor;
-        default: number;
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
     };
     selectable: {
         type: BooleanConstructor;
@@ -668,7 +668,7 @@ declare const _default: vue.DefineComponent<{
         default: string;
     };
 }>>, {
-    tableHeight: number;
+    tableHeight: string | number;
     selectable: boolean;
     saveTableHead: boolean;
     history: boolean;
