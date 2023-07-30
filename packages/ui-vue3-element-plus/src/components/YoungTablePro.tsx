@@ -1,12 +1,12 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-07-26 14:00:04
+ * @LastEditTime: 2023-07-30 15:59:23
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
 import type { PropType } from 'vue';
-import { ElMessage, ElTable, ElTableColumn, ElButton, ElMessageBox, ElTooltip } from 'element-plus';
+import { ElMessage, ElTable, ElTableColumn, ElMessageBox, ElTooltip } from 'element-plus';
 import type { TableHeadItemPro, TableDataItem } from '..';
 import CustomHead from './sub/CustomHead';
 import { deepClone, randomId } from '@bluesyoung/utils';
@@ -74,12 +74,10 @@ export default defineComponent({
     const tableData_1 = ref<TableDataItem[]>([]);
     const tableHead_1 = ref<TableHeadItemPro[]>([]);
     const tableHeadCheck_1 = ref<string[]>([]);
-    const settingHeight = ref(0);
     watchEffect(() => {
       tableData_1.value = props.tableData;
       nextTick(() => {
         initHead();
-        getHeaderHeight();
       });
     });
 
@@ -123,30 +121,11 @@ export default defineComponent({
     });
 
     /**
-     * 获取表头高度 给设置按钮设置高度
-     */
-    const getHeaderHeight = () => {
-      const tr = document.querySelector('.el-table__header');
-      // @ts-ignore
-      if (tr.offsetHeight === 0) {
-        setTimeout(() => {
-          getHeaderHeight();
-        }, 100);
-      } else {
-        // @ts-ignore
-        settingHeight.value = tr.offsetHeight - 1;
-      }
-    };
-
-    /**
      * 拖动表头后重新获取表头高度
      */
     const handleHeaderDragend = (newWidth, oldWidth, column, event) => {
       const changeHead = tableHead_1.value.find((t) => t.prop === column.property);
       changeHead.width = newWidth;
-      nextTick(() => {
-        getHeaderHeight();
-      });
     };
 
     const handleChange = (item: TableHeadItemPro, check: boolean) => {
@@ -200,14 +179,13 @@ export default defineComponent({
         </style>
         <div>
           {props.saveTableHead && (
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '5px' }}>
-              <ElButton type='success' onClick={saveTableHead}>
-                保存表头
-              </ElButton>
-              <ElButton onClick={resetTableHead}>
-                重置表头
-              </ElButton>
-            </div>
+            <CustomHead
+              tableHead={initData.value}
+              onDrag-end={handleDragend}
+              onChange={handleChange}
+              onSave={saveTableHead}
+              onReset={resetTableHead}
+            />
           )}
           <div style='position: relative;'>
             <ElTable
@@ -283,12 +261,6 @@ export default defineComponent({
                 </ElTableColumn>
               ))}
             </ElTable>
-            <CustomHead
-              height={`${settingHeight.value}px`}
-              tableHead={initData.value}
-              onDrag-end={handleDragend}
-              onChange={handleChange}
-            />
           </div>
         </div>
       </>
