@@ -1,15 +1,15 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:51:59
- * @LastEditTime: 2023-01-06 12:03:47
- * @Description: 
+ * @LastEditTime: 2023-07-30 16:23:06
+ * @Description:
  */
 import { ElPagination } from 'element-plus';
 import { defineComponent, type PropType } from 'vue';
 
 const RequiredNumber = {
   type: Number,
-  required: true
+  required: true,
 } as const;
 
 export default defineComponent({
@@ -19,24 +19,24 @@ export default defineComponent({
     limit: RequiredNumber,
     pageSizes: {
       type: Object as PropType<number[]>,
-      default: () => ([10, 20, 30, 50])
+      default: () => [10, 20, 30, 50],
     },
     layout: {
       type: String,
-      default: 'total, sizes, prev, pager, next, jumper'
+      default: 'total, sizes, prev, pager, next, jumper',
     },
     background: {
       type: Boolean,
-      default: true
+      default: true,
     },
     autoScroll: {
       type: Boolean,
-      default: true
+      default: true,
     },
     hidden: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   emits: ['page-change', 'update:page', 'update:limit'],
   setup(props, { emit, attrs }) {
@@ -51,19 +51,18 @@ export default defineComponent({
     };
 
     return () => (
-      <div style="background: white; padding-top: 20px;">
-        <ElPagination
-          {...attrs}
-          background={props.background}
-          currentPage={props.page}
-          pageSize={props.limit}
-          layout={props.layout}
-          pageSizes={props.pageSizes}
-          total={props.total}
-          onUpdate:page-size={(v) => sizeChange(v)}
-          onUpdate:current-page={(v) => pageChange(v)}
-        />
-      </div>
+      <ElPagination
+        style={{ background: 'white', paddingTop: '20px', display: 'flex', flexWrap: 'wrap' }}
+        {...attrs}
+        background={props.background}
+        currentPage={props.page}
+        pageSize={props.limit}
+        layout={props.layout}
+        pageSizes={props.pageSizes}
+        total={props.total}
+        onUpdate:page-size={(v) => sizeChange(v)}
+        onUpdate:current-page={(v) => pageChange(v)}
+      />
     );
-  }
+  },
 });
