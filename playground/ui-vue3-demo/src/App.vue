@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-05-31 14:20:21
+ * @LastEditTime: 2023-07-30 16:05:16
  * @Description:
 -->
 <script setup lang="ts">
@@ -12,7 +12,7 @@ import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange, YoungRotateTip
 import type { TableHeadItem, TableDataItem } from '@bluesyoung/ui-vue3-element-plus';
 
 import { YoungTab } from '../../../packages/ui-vue3/src'
-import { YoungTablePro } from '../../../packages/ui-vue3-element-plus/src';
+import { YoungTablePro, YoungPagination } from '../../../packages/ui-vue3-element-plus/src';
 interface Query {
   name: string,
   age: number,
@@ -116,7 +116,7 @@ const tableHeadCheck = tableHead.map(t => t.prop as string)
 
 <template>
   <div>
-    <YoungTimeRange v-model:start="start" v-model:end="end" second />
+    <!-- <YoungTimeRange v-model:start="start" v-model:end="end" second />
     <YoungSearchForm v-model="query" :search-scheme="scheme" :on-search="() => log(query)">
       <template #btns>
         <ElButton>我是其他的按钮1</ElButton>
@@ -132,9 +132,11 @@ const tableHeadCheck = tableHead.map(t => t.prop as string)
       <template #index_1>
         2222222
       </template>
-    </YoungTab>
+    </YoungTab> -->
     <!-- <YoungTable :table-head="tableHead" :table-data="tableData" enable-custom-head /> -->
     <YoungTablePro ref="YoungTableProRef" :table-head="tableHead" :table-head-check="tableHeadCheck"
       :table-data="tableData" />
+
+    <YoungPagination :page="1" :limit="10" :total="100" />
   </div>
 </template>
