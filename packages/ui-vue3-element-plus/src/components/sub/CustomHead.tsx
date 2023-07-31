@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:25:24
- * @LastEditTime: 2023-07-30 15:57:43
+ * @LastEditTime: 2023-07-31 09:47:51
  * @Description:
  */
 import { ElButton, ElDrawer, ElTooltip } from 'element-plus';
@@ -9,7 +9,7 @@ import { defineComponent, onMounted, ref } from 'vue';
 import type { PropType } from 'vue';
 import type { TableHeadItemPro } from '..';
 import Drag from './Drag';
-import { useEventListener } from '@vueuse/core';
+import { useEventListener, useMediaQuery } from '@vueuse/core';
 
 export default defineComponent({
   props: {
@@ -36,10 +36,17 @@ export default defineComponent({
       });
     });
 
+    const ltSm = useMediaQuery('(max-width: 639.9px)');
+
     return () => (
       <>
         <div
-          style={{ textAlign: 'right', marginRight: '10px', cursor: 'pointer' }}
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            paddingBottom: '10px',
+            cursor: 'pointer',
+          }}
           onClick={(e) => {
             e.stopPropagation();
             showPopover.value = true;
@@ -62,21 +69,30 @@ export default defineComponent({
           modelValue={showPopover.value}
           withHeader={false}
           onUpdate:modelValue={(e) => (showPopover.value = e)}
+          size={ltSm.value ? '75%' : '30%'}
         >
-          <div style={{ color: '#ccc', textAlign: 'left', padding: '10px' }}>
-            拖动可排序，点击可以切换显示/隐藏状态
-          </div>
-          <Drag list={props.tableHead} onDrag-end={handleDragend} onChange={handleChange} />
-          <div style={{ textAlign: 'left', padding: '10px' }}>
-            <ElTooltip content='保存配置到本地，如果不保存，则页面刷新之后会丢失现有的个性化配置'>
-              <ElButton type='primary' onClick={() => emit('save')}>
-                保存
-              </ElButton>
-            </ElTooltip>
-            <ElTooltip content='快速恢复默认配置'>
-              <ElButton onClick={() => emit('reset')}>重置</ElButton>
-            </ElTooltip>
-          </div>
+          {{
+            default: () => (
+              <>
+                <div style={{ color: '#999', textAlign: 'center', padding: '10px' }}>
+                  拖动可排序，点击可以切换展示状态
+                </div>
+                <Drag list={props.tableHead} onDrag-end={handleDragend} onChange={handleChange} />
+              </>
+            ),
+            footer: () => (
+              <div style={{ textAlign: 'left' }}>
+                <ElTooltip content='保存配置到本地，如果不保存，则页面刷新之后会丢失现有的个性化配置'>
+                  <ElButton type='primary' onClick={() => emit('save')}>
+                    保存
+                  </ElButton>
+                </ElTooltip>
+                <ElTooltip content='快速恢复默认配置'>
+                  <ElButton onClick={() => emit('reset')}>重置</ElButton>
+                </ElTooltip>
+              </div>
+            ),
+          }}
         </ElDrawer>
       </>
     );

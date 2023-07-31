@@ -6383,6 +6383,9 @@ function refDebounced(value, ms = 200, options = {}) {
 function useThrottleFn(fn2, ms = 200, trailing = false, leading = true, rejectOnCancel = false) {
   return createFilterWrapper(throttleFilter(ms, trailing, leading, rejectOnCancel), fn2);
 }
+function resolveRef(r) {
+  return typeof r === "function" ? (0, lib_exports.computed)(r) : (0, lib_exports.ref)(r);
+}
 function tryOnMounted(fn2, sync = true) {
   if ((0, lib_exports.getCurrentInstance)())
     (0, lib_exports.onMounted)(fn2);
@@ -6605,6 +6608,34 @@ function useSupported(callback, sync = false) {
   update();
   tryOnMounted(update, sync);
   return isSupported;
+}
+function useMediaQuery(query, options = {}) {
+  const { window: window2 = defaultWindow } = options;
+  const isSupported = useSupported(() => window2 && "matchMedia" in window2 && typeof window2.matchMedia === "function");
+  let mediaQuery;
+  const matches2 = (0, lib_exports.ref)(false);
+  const cleanup = () => {
+    if (!mediaQuery)
+      return;
+    if ("removeEventListener" in mediaQuery)
+      mediaQuery.removeEventListener("change", update);
+    else
+      mediaQuery.removeListener(update);
+  };
+  const update = () => {
+    if (!isSupported.value)
+      return;
+    cleanup();
+    mediaQuery = window2.matchMedia(resolveRef(query).value);
+    matches2.value = mediaQuery.matches;
+    if ("addEventListener" in mediaQuery)
+      mediaQuery.addEventListener("change", update);
+    else
+      mediaQuery.addListener(update);
+  };
+  (0, lib_exports.watchEffect)(update);
+  tryOnScopeDispose(() => cleanup());
+  return matches2;
 }
 function cloneFnJSON(source) {
   return JSON.parse(JSON.stringify(source));
@@ -57419,9 +57450,15 @@ var CustomHead_default = (0, import_vue619.defineComponent)({
         showPopover.value = false;
       });
     });
+    const ltSm = useMediaQuery("(max-width: 639.9px)");
     return () => <>
       <div
-        style={{ textAlign: "right", marginRight: "10px", cursor: "pointer" }}
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          paddingBottom: "10px",
+          cursor: "pointer"
+        }}
         onClick={(e) => {
           e.stopPropagation();
           showPopover.value = true;
@@ -57440,14 +57477,17 @@ var CustomHead_default = (0, import_vue619.defineComponent)({
         modelValue={showPopover.value}
         withHeader={false}
         onUpdate:modelValue={(e) => showPopover.value = e}
-      >
-        <div style={{ color: "#ccc", textAlign: "left", padding: "10px" }}>{"\u62D6\u52A8\u53EF\u6392\u5E8F\uFF0C\u70B9\u51FB\u53EF\u4EE5\u5207\u6362\u663E\u793A/\u9690\u85CF\u72B6\u6001"}</div>
-        <Drag_default list={props.tableHead} onDrag-end={handleDragend} onChange={handleChange} />
-        <div style={{ textAlign: "left", padding: "10px" }}>
+        size={ltSm.value ? "75%" : "30%"}
+      >{{
+        default: () => <>
+          <div style={{ color: "#999", textAlign: "center", padding: "10px" }}>{"\u62D6\u52A8\u53EF\u6392\u5E8F\uFF0C\u70B9\u51FB\u53EF\u4EE5\u5207\u6362\u5C55\u793A\u72B6\u6001"}</div>
+          <Drag_default list={props.tableHead} onDrag-end={handleDragend} onChange={handleChange} />
+        </>,
+        footer: () => <div style={{ textAlign: "left" }}>
           <ElTooltip content={"\u4FDD\u5B58\u914D\u7F6E\u5230\u672C\u5730\uFF0C\u5982\u679C\u4E0D\u4FDD\u5B58\uFF0C\u5219\u9875\u9762\u5237\u65B0\u4E4B\u540E\u4F1A\u4E22\u5931\u73B0\u6709\u7684\u4E2A\u6027\u5316\u914D\u7F6E"}><ElButton type="primary" onClick={() => emit("save")}>{"\u4FDD\u5B58"}</ElButton></ElTooltip>
           <ElTooltip content={"\u5FEB\u901F\u6062\u590D\u9ED8\u8BA4\u914D\u7F6E"}><ElButton onClick={() => emit("reset")}>{"\u91CD\u7F6E"}</ElButton></ElTooltip>
         </div>
-      </ElDrawer>
+      }}</ElDrawer>
     </>;
   }
 });
@@ -57541,10 +57581,6 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
     const filterHeader = (0, import_vue620.computed)(() => {
       return initData.value.filter((d2) => d2.check);
     });
-    const handleHeaderDragend = (newWidth, oldWidth, column2, event) => {
-      const changeHead = tableHead_1.value.find((t) => t.prop === column2.property);
-      changeHead.width = newWidth;
-    };
     const handleChange = (item, check) => {
       const index2 = tableHeadCheck_1.value.findIndex((e) => e === item.prop);
       if (!check && index2 != -1) {
@@ -57596,14 +57632,13 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
           onReset={resetTableHead}
         />}
         <div style="position: relative;"><ElTable
-          {...attrs}
           ref={tableRef}
           header-cell-class-name="nowarp"
           data={tableData_1.value}
           style={{ width: "100%" }}
           height={props.tableHeight}
           border
-          onHeader-dragend={handleHeaderDragend}
+          {...attrs}
         >
           {props.selectable && <ElTableColumn2 type="selection" width="55" />}
           {filterHeader.value.map((item, index2) => <ElTableColumn2

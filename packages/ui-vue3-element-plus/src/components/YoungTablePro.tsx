@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-07-30 15:59:23
+ * @LastEditTime: 2023-07-31 09:50:39
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -67,7 +67,7 @@ export default defineComponent({
     // 修复表格切换时，显示出现错位的 bug
     onActivated(() => {
       nextTick(() => {
-        tableRef.value.doLayout();
+        tableRef.value!.doLayout();
       });
     });
 
@@ -119,14 +119,6 @@ export default defineComponent({
     const filterHeader = computed(() => {
       return initData.value.filter((d) => d.check);
     });
-
-    /**
-     * 拖动表头后重新获取表头高度
-     */
-    const handleHeaderDragend = (newWidth, oldWidth, column, event) => {
-      const changeHead = tableHead_1.value.find((t) => t.prop === column.property);
-      changeHead.width = newWidth;
-    };
 
     const handleChange = (item: TableHeadItemPro, check: boolean) => {
       const index = tableHeadCheck_1.value.findIndex((e) => e === item.prop);
@@ -189,14 +181,13 @@ export default defineComponent({
           )}
           <div style='position: relative;'>
             <ElTable
-              {...attrs}
               ref={tableRef}
               header-cell-class-name='nowarp'
               data={tableData_1.value}
               style={{ width: '100%' }}
               height={props.tableHeight}
               border
-              onHeader-dragend={handleHeaderDragend}
+              {...attrs}
             >
               {props.selectable && <ElTableColumn type='selection' width='55' />}
               {filterHeader.value.map((item, index) => (
@@ -211,7 +202,7 @@ export default defineComponent({
                   showOverflowTooltip={item.show_overflow_tooltip ?? true}
                 >
                   {{
-                    header: (scope) => {
+                    header: (scope: any) => {
                       if (tableHead_1.value[index].tool_content) {
                         return (
                           <div
