@@ -193,6 +193,10 @@ declare const _default$9: vue.DefineComponent<{
 declare const _default$8: vue.DefineComponent<{
     modelValue: BooleanConstructor;
     realTitle: StringConstructor;
+    width: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
+    };
     sureText: {
         type: StringConstructor;
         default: string;
@@ -223,6 +227,10 @@ declare const _default$8: vue.DefineComponent<{
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("clear" | "sure" | "update:modelValue")[], "clear" | "sure" | "update:modelValue", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     modelValue: BooleanConstructor;
     realTitle: StringConstructor;
+    width: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
+    };
     sureText: {
         type: StringConstructor;
         default: string;
@@ -255,6 +263,7 @@ declare const _default$8: vue.DefineComponent<{
     onClear?: (...args: any[]) => any;
     onSure?: (...args: any[]) => any;
 }, {
+    width: string | number;
     modelValue: boolean;
     sureText: string;
     cancelText: string;

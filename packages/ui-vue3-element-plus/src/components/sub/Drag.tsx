@@ -1,13 +1,16 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:26:58
- * @LastEditTime: 2023-07-30 15:24:01
+ * @LastEditTime: 2023-07-31 10:43:09
  * @Description:
  */
-import { ref, defineComponent, TransitionGroup } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 import type { PropType } from 'vue';
 import type { TableHeadItem } from '..';
 import { ElSwitch } from 'element-plus';
+import Sortable from 'sortablejs';
+import type { SortableEvent } from 'sortablejs';
+import { deepClone } from '@bluesyoung/utils';
 
 export type TableHeadItemPro = TableHeadItem & {
   check?: boolean;
@@ -22,55 +25,35 @@ export default defineComponent({
   },
   emits: ['drag-end', 'change'],
   setup(props, { emit }) {
-    const draggable = ref(false);
-    const isDrag = ref(false);
+    onMounted(() => {
+      const el = document.querySelector('.young-drap-list') as HTMLDivElement;
 
-    let dragIndex = -1;
-    let timeout: NodeJS.Timeout;
+      new Sortable(el, {
+        animation: 150,
+        onEnd: ({ oldIndex, newIndex }: SortableEvent) => {
+          // 因为内联了一个 style 标签，所以索引是从 1 开始的
+          oldIndex--;
+          newIndex--;
 
-    function dragstart(index: number) {
-      dragIndex = index;
-    }
-
-    function dragenter(e: DragEvent, index: number) {
-      e.preventDefault();
-      if (timeout !== null) {
-        clearTimeout(timeout);
-      }
-      isDrag.value = true;
-      // 拖拽事件的防抖
-      timeout = setTimeout(() => {
-        if (dragIndex !== index) {
-          const source = props.list[dragIndex];
-          props.list.splice(dragIndex, 1);
-          props.list.splice(index, 0, source);
-          // 排序变化后目标对象的索引变成源对象的索引
-          dragIndex = index;
-        }
-        isDrag.value = false;
-      }, 100);
-    }
-
-    function dragend() {
-      if (!isDrag.value) {
-        emit('drag-end', props.list);
-      } else {
-        setTimeout(() => {
-          dragend();
-        }, 100);
-      }
-    }
-
-    function dragover(e: DragEvent, index: number) {
-      e.preventDefault();
-    }
+          console.log(oldIndex, newIndex);
+          if (oldIndex === newIndex) {
+            return;
+          }
+          const data = props.list;
+          const row = deepClone(data[oldIndex]);
+          data.splice(oldIndex, 1);
+          data.splice(newIndex, 0, row);
+          emit('drag-end', data);
+        },
+      });
+    });
 
     function handleChangeCheck(item: TableHeadItemPro) {
       emit('change', item, !item.check);
     }
 
     return () => (
-      <div>
+      <div class='young-drap-list'>
         <style>
           {`
           .young-drag-list {
@@ -78,7 +61,6 @@ export default defineComponent({
           }
           
           .young-drag-list-item {
-            transition: transform .3s;
             cursor: move;
             border-radius: 4px;
             color: #333;
@@ -117,65 +99,51 @@ export default defineComponent({
           }
           `}
         </style>
-        <TransitionGroup>
-          {props.list.map((item, index) => (
-            <div
-              class={`young-drag-list-item ${item.check ? 'active' : ''}`}
-              key={item.label}
-              onDragstart={() => dragstart(index)}
-              onDragenter={(e) => dragenter(e, index)}
-              onDragover={(e) => dragover(e, index)}
-              onDragend={dragend}
-              draggable={draggable.value}
-            >
-              <div
-                class='draggable'
-                title='拖动可排序'
-                onMouseover={() => (draggable.value = true)}
-                onMouseout={() => (draggable.value = false)}
+        {props.list.map((item, index) => (
+          <div class={`young-drag-list-item ${item.check ? 'active' : ''}`} key={item.label}>
+            <div class='draggable' title='拖动可排序'>
+              <svg
+                class='icon'
+                viewBox='0 0 1024 1024'
+                version='1.1'
+                xmlns='http://www.w3.org/2000/svg'
+                p-id='6483'
+                width='16'
+                height='16'
               >
-                <svg
-                  class='icon'
-                  viewBox='0 0 1024 1024'
-                  version='1.1'
-                  xmlns='http://www.w3.org/2000/svg'
-                  p-id='6483'
-                  width='16'
-                  height='16'
-                >
-                  <path
-                    d='M867.995 459.647h-711.99c-27.921 0-52.353 24.434-52.353 52.353s24.434 52.353 52.353 52.353h711.99c27.921 0 52.353-24.434 52.353-52.353s-24.434-52.353-52.353-52.353z'
-                    p-id='6484'
-                  ></path>
-                  <path
-                    d='M867.995 763.291h-711.99c-27.921 0-52.353 24.434-52.353 52.353s24.434 52.353 52.353 52.353h711.99c27.921 0 52.353-24.434 52.353-52.353s-24.434-52.353-52.353-52.353z'
-                    p-id='6485'
-                  ></path>
-                  <path
-                    d='M156.005 260.709h711.99c27.921 0 52.353-24.434 52.353-52.353s-24.434-52.353-52.353-52.353h-711.99c-27.921 0-52.353 24.434-52.353 52.353s24.434 52.353 52.353 52.353z'
-                    p-id='6486'
-                  ></path>
-                </svg>
-              </div>
-
-              <div
-                class='label'
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleChangeCheck(item);
-                }}
-                title={item.label}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <span>{item.label}</span>
-                <ElSwitch modelValue={item.check} />
-              </div>
+                <path
+                  d='M867.995 459.647h-711.99c-27.921 0-52.353 24.434-52.353 52.353s24.434 52.353 52.353 52.353h711.99c27.921 0 52.353-24.434 52.353-52.353s-24.434-52.353-52.353-52.353z'
+                  p-id='6484'
+                ></path>
+                <path
+                  d='M867.995 763.291h-711.99c-27.921 0-52.353 24.434-52.353 52.353s24.434 52.353 52.353 52.353h711.99c27.921 0 52.353-24.434 52.353-52.353s-24.434-52.353-52.353-52.353z'
+                  p-id='6485'
+                ></path>
+                <path
+                  d='M156.005 260.709h711.99c27.921 0 52.353-24.434 52.353-52.353s-24.434-52.353-52.353-52.353h-711.99c-27.921 0-52.353 24.434-52.353 52.353s24.434 52.353 52.353 52.353z'
+                  p-id='6486'
+                ></path>
+              </svg>
             </div>
-          ))}
-        </TransitionGroup>
+
+            <div
+              class='label'
+              onClick={(e) => {
+                e.stopPropagation();
+                handleChangeCheck(item);
+              }}
+              title={item.label}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+              draggable={false}
+            >
+              <span>{item.label}</span>
+              <ElSwitch modelValue={item.check} />
+            </div>
+          </div>
+        ))}
       </div>
     );
   },
