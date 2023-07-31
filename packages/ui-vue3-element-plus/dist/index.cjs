@@ -56538,7 +56538,8 @@ var YoungPagination_default = (0, import_vue609.defineComponent)({
       emit("update:page", val);
       emit("page-change");
     };
-    return () => <div style="background: white; padding-top: 20px;"><ElPagination
+    return () => <ElPagination
+      style={{ background: "white", paddingTop: "20px", display: "flex", flexWrap: "wrap" }}
       {...attrs}
       background={props.background}
       currentPage={props.page}
@@ -56548,7 +56549,7 @@ var YoungPagination_default = (0, import_vue609.defineComponent)({
       total={props.total}
       onUpdate:page-size={(v2) => sizeChange(v2)}
       onUpdate:current-page={(v2) => pageChange(v2)}
-    /></div>;
+    />;
   }
 });
 
@@ -57339,18 +57340,7 @@ var Drag_default = (0, import_vue618.defineComponent)({
             padding: 0 12px;
             height: 100%;
           }
-          
-          .young-drag-list-item .check {
-            text-align: center;
-            display: flex;
-            align-items: center;
-            padding: 0 12px;
-            height: 100%;
-          }
           `}</style>
-      {
-        /* @ts-ignore */
-      }
       <import_vue618.TransitionGroup>{props.list.map((item, index2) => <div
         class={`young-drag-list-item ${item.check ? "active" : ""}`}
         key={item.label}
@@ -57360,7 +57350,12 @@ var Drag_default = (0, import_vue618.defineComponent)({
         onDragend={dragend}
         draggable={draggable2.value}
       >
-        <div class="draggable" onMouseover={() => draggable2.value = true} onMouseout={() => draggable2.value = false}><svg
+        <div
+          class="draggable"
+          title={"\u62D6\u52A8\u53EF\u6392\u5E8F"}
+          onMouseover={() => draggable2.value = true}
+          onMouseout={() => draggable2.value = false}
+        ><svg
           class="icon"
           viewBox="0 0 1024 1024"
           version="1.1"
@@ -57382,26 +57377,21 @@ var Drag_default = (0, import_vue618.defineComponent)({
             p-id="6486"
           />
         </svg></div>
-        <div class="label" onClick={(e) => {
-          e.stopPropagation();
-          handleChangeCheck(item);
-        }} title={item.label}>{item.label}</div>
-        {item.check !== false && <div class="check" onClick={(e) => {
-          e.stopPropagation();
-          handleChangeCheck(item);
-        }}><svg
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="7463"
-          width="18"
-          height="18"
-        ><path
-          d="M186.4 480.3l219.5 253.8c7.8 9 21.4 10 30.4 2.2 0.6-0.5 1.2-1.1 1.7-1.7L839.6 300c7.6-8.2 7.6-20.9-0.1-29.1-7.7-8.2-20.4-9.1-29.2-2.1L433.8 573.6c-7.3 5.9-17.5 6.4-25.3 1.3l-194-126.3c-9-5.8-20.8-4.2-27.9 3.8-7.1 7.9-7.1 19.9-0.2 27.9z"
-          fill="#409eff "
-          p-id="7464"
-        /></svg></div>}
+        <div
+          class="label"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleChangeCheck(item);
+          }}
+          title={item.label}
+          style={{
+            display: "flex",
+            justifyContent: "space-between"
+          }}
+        >
+          <span>{item.label}</span>
+          <ElSwitch modelValue={item.check} />
+        </div>
       </div>)}</import_vue618.TransitionGroup>
     </div>;
   }
@@ -57413,13 +57403,9 @@ var CustomHead_default = (0, import_vue619.defineComponent)({
     tableHead: {
       required: true,
       type: Object
-    },
-    height: {
-      type: String,
-      default: "100%"
     }
   },
-  emits: ["drag-end", "change"],
+  emits: ["drag-end", "change", "save", "reset"],
   setup(props, { emit }) {
     const showPopover = (0, import_vue619.ref)(false);
     const handleDragend = (list) => {
@@ -57434,127 +57420,34 @@ var CustomHead_default = (0, import_vue619.defineComponent)({
       });
     });
     return () => <>
-      <style>{`
-            .young-table-pro-setting {
-              position: absolute;
-              top: 0;
-              right: 0;
-              z-index: 2;
-              cursor: pointer;
-              background: #fff;
-              /* padding: 0 5px; */
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            }
-            
-            .young-table-pro-border {
-              border-left: 1px solid #ebeef5;
-            }
-            
-            .popover_title {
-              height: 24px;
-              line-height: 24px;
-              text-align: center;
-              font-weight: bold;
-              color: #333;
-              border-bottom: 1px solid #ebeef5;
-              position: relative;
-              padding: 12px;
-              box-sizing: content-box;
-            }
-            
-            .popover_title .svg {
-              position: absolute;
-              right: 12px;
-              top: 15px;
-              cursor: pointer;
-            }
-            
-            .popover_content {
-              height: 400px;
-              overflow-y: auto;
-            }
-            
-            /* \u9488\u5BF9 Webkit \u6D4F\u89C8\u5668 */
-            ::-webkit-scrollbar {
-              width: 0;
-              height: 0;
-            }
-            
-            /* \u9488\u5BF9 Firefox \u6D4F\u89C8\u5668 */
-            ::-moz-scrollbar {
-              width: 0;
-              height: 0;
-            }
-            
-            .popover_content .header_item {
-              padding: 8px;
-              cursor: pointer;
-            }
-            
-            .popover_content .header_item:hover {
-              background: #eee;
-            }
-            `}</style>
-      <ElPopover
-        trigger="click"
-        visible={showPopover.value}
-        placement="bottom-end"
-        popperStyle="padding:0"
-        width={250}
-        showArrow={false}
-      >{{
-        reference: () => <div
-          class="young-table-pro-setting young-table-pro-border"
-          style={{ height: props.height, width: props.height }}
-          onClick={(e) => {
-            e.stopPropagation();
-            showPopover.value = true;
-          }}
-          title={"\u8868\u5934\u914D\u7F6E"}
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="1.5rem"
-          height="1.5rem"
-          viewBox="0 0 24 24"
-        ><path
-          fill="currentColor"
-          d="M13.875 22h-3.75q-.375 0-.65-.25t-.325-.625l-.3-2.325q-.325-.125-.613-.3t-.562-.375l-2.175.9q-.35.125-.7.025t-.55-.425L2.4 15.4q-.2-.325-.125-.7t.375-.6l1.875-1.425Q4.5 12.5 4.5 12.337v-.674q0-.163.025-.338L2.65 9.9q-.3-.225-.375-.6t.125-.7l1.85-3.225q.175-.35.537-.438t.713.038l2.175.9q.275-.2.575-.375t.6-.3l.3-2.325q.05-.375.325-.625t.65-.25h3.75q.375 0 .65.25t.325.625l.3 2.325q.325.125.613.3t.562.375l2.175-.9q.35-.125.7-.025t.55.425L21.6 8.6q.2.325.125.7t-.375.6l-1.875 1.425q.025.175.025.338v.674q0 .163-.05.338l1.875 1.425q.3.225.375.6t-.125.7l-1.85 3.2q-.2.325-.563.438t-.712-.013l-2.125-.9q-.275.2-.575.375t-.6.3l-.3 2.325q-.05.375-.325.625t-.65.25Zm-1.825-6.5q1.45 0 2.475-1.025T15.55 12q0-1.45-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12q0 1.45 1.012 2.475T12.05 15.5Zm0-2q-.625 0-1.063-.438T10.55 12q0-.625.438-1.063t1.062-.437q.625 0 1.063.438T13.55 12q0 .625-.438 1.063t-1.062.437ZM12 12Zm-1 8h1.975l.35-2.65q.775-.2 1.438-.588t1.212-.937l2.475 1.025l.975-1.7l-2.15-1.625q.125-.35.175-.737T17.5 12q0-.4-.05-.787t-.175-.738l2.15-1.625l-.975-1.7l-2.475 1.05q-.55-.575-1.212-.962t-1.438-.588L13 4h-1.975l-.35 2.65q-.775.2-1.437.588t-1.213.937L5.55 7.15l-.975 1.7l2.15 1.6q-.125.375-.175.75t-.05.8q0 .4.05.775t.175.75l-2.15 1.625l.975 1.7l2.475-1.05q.55.575 1.213.963t1.437.587L11 20Z"
-        /></svg></div>,
-        default: () => <>
-          <div class="popover_title" onClick={(e) => e.stopPropagation()}>
-            {"\u8868\u5934\u8BBE\u7F6E"}
-            <div
-              class="svg"
-              onClick={(e) => {
-                e.stopPropagation();
-                showPopover.value = false;
-              }}
-            ><svg
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="5481"
-              width="18"
-              height="18"
-            >
-              <path
-                d="M512 1024C229.376 1024 0 794.624 0 512S229.376 0 512 0s512 229.376 512 512-229.376 512-512 512z m0-975.36C257.024 48.64 48.64 257.024 48.64 512c0 254.976 207.872 463.36 463.36 463.36S975.36 767.488 975.36 512 766.976 48.64 512 48.64z"
-                fill="#8A8A8A"
-                p-id="5482"
-              />
-              <path
-                d="M548.864 512l195.072-195.072c9.728-9.728 9.728-25.6 0-36.864l-1.536-1.536c-9.728-9.728-25.6-9.728-35.328 0L512 475.136 316.928 280.064c-9.728-9.728-25.6-9.728-35.328 0l-1.536 1.536c-9.728 9.728-9.728 25.6 0 36.864L475.136 512 280.064 707.072c-9.728 9.728-9.728 25.6 0 36.864l1.536 1.536c9.728 9.728 25.6 9.728 35.328 0L512 548.864l195.072 195.072c9.728 9.728 25.6 9.728 35.328 0l1.536-1.536c9.728-9.728 9.728-25.6 0-36.864L548.864 512z"
-                fill="#8A8A8A"
-                p-id="5483"
-              />
-            </svg></div>
-          </div>
-          <div class="popover_content" onClick={(e) => e.stopPropagation()}><Drag_default list={props.tableHead} onDrag-end={handleDragend} onChange={handleChange} /></div>
-        </>
-      }}</ElPopover>
+      <div
+        style={{ textAlign: "right", marginRight: "10px", cursor: "pointer" }}
+        onClick={(e) => {
+          e.stopPropagation();
+          showPopover.value = true;
+        }}
+        title={"\u8868\u5934\u914D\u7F6E"}
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1.5rem"
+        height="1.5rem"
+        viewBox="0 0 24 24"
+      ><path
+        fill="currentColor"
+        d="M13.875 22h-3.75q-.375 0-.65-.25t-.325-.625l-.3-2.325q-.325-.125-.613-.3t-.562-.375l-2.175.9q-.35.125-.7.025t-.55-.425L2.4 15.4q-.2-.325-.125-.7t.375-.6l1.875-1.425Q4.5 12.5 4.5 12.337v-.674q0-.163.025-.338L2.65 9.9q-.3-.225-.375-.6t.125-.7l1.85-3.225q.175-.35.537-.438t.713.038l2.175.9q.275-.2.575-.375t.6-.3l.3-2.325q.05-.375.325-.625t.65-.25h3.75q.375 0 .65.25t.325.625l.3 2.325q.325.125.613.3t.562.375l2.175-.9q.35-.125.7-.025t.55.425L21.6 8.6q.2.325.125.7t-.375.6l-1.875 1.425q.025.175.025.338v.674q0 .163-.05.338l1.875 1.425q.3.225.375.6t-.125.7l-1.85 3.2q-.2.325-.563.438t-.712-.013l-2.125-.9q-.275.2-.575.375t-.6.3l-.3 2.325q-.05.375-.325.625t-.65.25Zm-1.825-6.5q1.45 0 2.475-1.025T15.55 12q0-1.45-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12q0 1.45 1.012 2.475T12.05 15.5Zm0-2q-.625 0-1.063-.438T10.55 12q0-.625.438-1.063t1.062-.437q.625 0 1.063.438T13.55 12q0 .625-.438 1.063t-1.062.437ZM12 12Zm-1 8h1.975l.35-2.65q.775-.2 1.438-.588t1.212-.937l2.475 1.025l.975-1.7l-2.15-1.625q.125-.35.175-.737T17.5 12q0-.4-.05-.787t-.175-.738l2.15-1.625l-.975-1.7l-2.475 1.05q-.55-.575-1.212-.962t-1.438-.588L13 4h-1.975l-.35 2.65q-.775.2-1.437.588t-1.213.937L5.55 7.15l-.975 1.7l2.15 1.6q-.125.375-.175.75t-.05.8q0 .4.05.775t.175.75l-2.15 1.625l.975 1.7l2.475-1.05q.55.575 1.213.963t1.437.587L11 20Z"
+      /></svg></div>
+      <ElDrawer
+        modelValue={showPopover.value}
+        withHeader={false}
+        onUpdate:modelValue={(e) => showPopover.value = e}
+      >
+        <div style={{ color: "#ccc", textAlign: "left", padding: "10px" }}>{"\u62D6\u52A8\u53EF\u6392\u5E8F\uFF0C\u70B9\u51FB\u53EF\u4EE5\u5207\u6362\u663E\u793A/\u9690\u85CF\u72B6\u6001"}</div>
+        <Drag_default list={props.tableHead} onDrag-end={handleDragend} onChange={handleChange} />
+        <div style={{ textAlign: "left", padding: "10px" }}>
+          <ElTooltip content={"\u4FDD\u5B58\u914D\u7F6E\u5230\u672C\u5730\uFF0C\u5982\u679C\u4E0D\u4FDD\u5B58\uFF0C\u5219\u9875\u9762\u5237\u65B0\u4E4B\u540E\u4F1A\u4E22\u5931\u73B0\u6709\u7684\u4E2A\u6027\u5316\u914D\u7F6E"}><ElButton type="primary" onClick={() => emit("save")}>{"\u4FDD\u5B58"}</ElButton></ElTooltip>
+          <ElTooltip content={"\u5FEB\u901F\u6062\u590D\u9ED8\u8BA4\u914D\u7F6E"}><ElButton onClick={() => emit("reset")}>{"\u91CD\u7F6E"}</ElButton></ElTooltip>
+        </div>
+      </ElDrawer>
     </>;
   }
 });
@@ -57617,12 +57510,10 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
     const tableData_1 = (0, import_vue620.ref)([]);
     const tableHead_1 = (0, import_vue620.ref)([]);
     const tableHeadCheck_1 = (0, import_vue620.ref)([]);
-    const settingHeight = (0, import_vue620.ref)(0);
     (0, import_vue620.watchEffect)(() => {
       tableData_1.value = props.tableData;
       (0, import_vue620.nextTick)(() => {
         initHead();
-        getHeaderHeight();
       });
     });
     const historyHead = useLocalStorage(`table_pro_tableHead_${props.historyId}`, {});
@@ -57650,22 +57541,9 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
     const filterHeader = (0, import_vue620.computed)(() => {
       return initData.value.filter((d2) => d2.check);
     });
-    const getHeaderHeight = () => {
-      const tr = document.querySelector(".el-table__header");
-      if (tr.offsetHeight === 0) {
-        setTimeout(() => {
-          getHeaderHeight();
-        }, 100);
-      } else {
-        settingHeight.value = tr.offsetHeight - 1;
-      }
-    };
     const handleHeaderDragend = (newWidth, oldWidth, column2, event) => {
       const changeHead = tableHead_1.value.find((t) => t.prop === column2.property);
       changeHead.width = newWidth;
-      (0, import_vue620.nextTick)(() => {
-        getHeaderHeight();
-      });
     };
     const handleChange = (item, check) => {
       const index2 = tableHeadCheck_1.value.findIndex((e) => e === item.prop);
@@ -57710,75 +57588,70 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
           }
           `}</style>
       <div>
-        {props.saveTableHead && <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "5px" }}>
-          <ElButton type="success" onClick={saveTableHead}>{"\u4FDD\u5B58\u8868\u5934"}</ElButton>
-          <ElButton onClick={resetTableHead}>{"\u91CD\u7F6E\u8868\u5934"}</ElButton>
-        </div>}
-        <div style="position: relative;">
-          <ElTable
-            {...attrs}
-            ref={tableRef}
-            header-cell-class-name="nowarp"
-            data={tableData_1.value}
-            style={{ width: "100%" }}
-            height={props.tableHeight}
-            border
-            onHeader-dragend={handleHeaderDragend}
-          >
-            {props.selectable && <ElTableColumn2 type="selection" width="55" />}
-            {filterHeader.value.map((item, index2) => <ElTableColumn2
-              key={item.prop.toString() + index2 + randomKey}
-              prop={item.prop}
-              label={item.label}
-              width={item.width || ""}
-              sortable={item.sortable || false}
-              fixed={item.fixed || false}
-              align={item.aligin || "left"}
-              showOverflowTooltip={item.show_overflow_tooltip ?? true}
-            >{{
-              header: (scope) => {
-                if (tableHead_1.value[index2].tool_content) {
-                  return <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center"
-                    }}
-                  >
-                    <span class="nowarp" title={item.label}>{scope.column.label}</span>
-                    <ElTooltip
-                      placement="bottom"
-                      v-slots={{ content: () => tableHead_1.value[index2].tool_content }}
-                    ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="1.2em"
-                      height="1.2em"
-                      viewBox="0 0 256 256"
-                    ><path
-                      fill="currentColor"
-                      d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24Zm0 168a12 12 0 1 1 12-12a12 12 0 0 1-12 12Zm8-48.72v.72a8 8 0 0 1-16 0v-8a8 8 0 0 1 8-8c13.23 0 24-9 24-20s-10.77-20-24-20s-24 9-24 20v4a8 8 0 0 1-16 0v-4c0-19.85 17.94-36 40-36s40 16.15 40 36c0 17.38-13.76 31.93-32 35.28Z"
-                    /></svg></ElTooltip>
-                  </div>;
-                } else {
-                  return <span class="nowarp" title={item.label}>{scope.column.label}</span>;
-                }
-              },
-              default: ({ row, $index }) => {
-                if (item.render) {
-                  return item.render(row, $index);
-                } else {
-                  return <span>{row[item.prop]}</span>;
-                }
+        {props.saveTableHead && <CustomHead_default
+          tableHead={initData.value}
+          onDrag-end={handleDragend}
+          onChange={handleChange}
+          onSave={saveTableHead}
+          onReset={resetTableHead}
+        />}
+        <div style="position: relative;"><ElTable
+          {...attrs}
+          ref={tableRef}
+          header-cell-class-name="nowarp"
+          data={tableData_1.value}
+          style={{ width: "100%" }}
+          height={props.tableHeight}
+          border
+          onHeader-dragend={handleHeaderDragend}
+        >
+          {props.selectable && <ElTableColumn2 type="selection" width="55" />}
+          {filterHeader.value.map((item, index2) => <ElTableColumn2
+            key={item.prop.toString() + index2 + randomKey}
+            prop={item.prop}
+            label={item.label}
+            width={item.width || ""}
+            sortable={item.sortable || false}
+            fixed={item.fixed || false}
+            align={item.aligin || "left"}
+            showOverflowTooltip={item.show_overflow_tooltip ?? true}
+          >{{
+            header: (scope) => {
+              if (tableHead_1.value[index2].tool_content) {
+                return <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <span class="nowarp" title={item.label}>{scope.column.label}</span>
+                  <ElTooltip
+                    placement="bottom"
+                    v-slots={{ content: () => tableHead_1.value[index2].tool_content }}
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1.2em"
+                    height="1.2em"
+                    viewBox="0 0 256 256"
+                  ><path
+                    fill="currentColor"
+                    d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24Zm0 168a12 12 0 1 1 12-12a12 12 0 0 1-12 12Zm8-48.72v.72a8 8 0 0 1-16 0v-8a8 8 0 0 1 8-8c13.23 0 24-9 24-20s-10.77-20-24-20s-24 9-24 20v4a8 8 0 0 1-16 0v-4c0-19.85 17.94-36 40-36s40 16.15 40 36c0 17.38-13.76 31.93-32 35.28Z"
+                  /></svg></ElTooltip>
+                </div>;
+              } else {
+                return <span class="nowarp" title={item.label}>{scope.column.label}</span>;
               }
-            }}</ElTableColumn2>)}
-          </ElTable>
-          <CustomHead_default
-            height={`${settingHeight.value}px`}
-            tableHead={initData.value}
-            onDrag-end={handleDragend}
-            onChange={handleChange}
-          />
-        </div>
+            },
+            default: ({ row, $index }) => {
+              if (item.render) {
+                return item.render(row, $index);
+              } else {
+                return <span>{row[item.prop]}</span>;
+              }
+            }
+          }}</ElTableColumn2>)}
+        </ElTable></div>
       </div>
     </>;
   }
