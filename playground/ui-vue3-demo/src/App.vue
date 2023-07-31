@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-07-30 16:05:16
+ * @LastEditTime: 2023-07-31 10:29:29
  * @Description:
 -->
 <script setup lang="ts">
@@ -115,7 +115,7 @@ const tableHeadCheck = tableHead.map(t => t.prop as string)
 </script>
 
 <template>
-  <div>
+  <div style="width: 90vw; overflow: auto;">
     <!-- <YoungTimeRange v-model:start="start" v-model:end="end" second />
     <YoungSearchForm v-model="query" :search-scheme="scheme" :on-search="() => log(query)">
       <template #btns>
