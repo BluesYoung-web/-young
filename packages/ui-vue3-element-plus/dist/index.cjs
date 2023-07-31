@@ -56569,13 +56569,14 @@ var YoungPagination_default = (0, import_vue609.defineComponent)({
       emit("update:page", val);
       emit("page-change");
     };
+    const ltSm = useMediaQuery("(max-width: 639.9px)");
     return () => <ElPagination
       style={{ background: "white", paddingTop: "20px", display: "flex", flexWrap: "wrap" }}
       {...attrs}
       background={props.background}
       currentPage={props.page}
       pageSize={props.limit}
-      layout={props.layout}
+      layout={ltSm.value ? "total, sizes, jumper" : props.layout}
       pageSizes={props.pageSizes}
       total={props.total}
       onUpdate:page-size={(v2) => sizeChange(v2)}
@@ -57518,7 +57519,7 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
       default: location.href.replace(location.origin, "")
     }
   },
-  setup(props, { emit, attrs, expose }) {
+  setup(props, { attrs, expose, slots }) {
     const tableRef = (0, import_vue620.ref)();
     (0, import_vue620.onActivated)(() => {
       (0, import_vue620.nextTick)(() => {
@@ -57664,6 +57665,8 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
               }
             }
           }}</ElTableColumn2>)}
+          {slots.switch?.()}
+          {slots.operate?.()}
         </ElTable></div>
       </div>
     </>;

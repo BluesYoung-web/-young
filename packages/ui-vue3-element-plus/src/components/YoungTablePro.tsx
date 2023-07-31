@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-07-31 09:50:39
+ * @LastEditTime: 2023-07-31 14:27:30
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -59,7 +59,7 @@ export default defineComponent({
       default: location.href.replace(location.origin, ''),
     },
   },
-  setup(props, { emit, attrs, expose }) {
+  setup(props, { attrs, expose, slots }) {
     /**
      * 引用表格元素
      */
@@ -251,6 +251,9 @@ export default defineComponent({
                   }}
                 </ElTableColumn>
               ))}
+
+              {slots.switch?.()}
+              {slots.operate?.()}
             </ElTable>
           </div>
         </div>

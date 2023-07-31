@@ -1,9 +1,10 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:51:59
- * @LastEditTime: 2023-07-30 16:23:06
+ * @LastEditTime: 2023-07-31 11:50:34
  * @Description:
  */
+import { useMediaQuery } from '@vueuse/core';
 import { ElPagination } from 'element-plus';
 import { defineComponent, type PropType } from 'vue';
 
@@ -49,6 +50,7 @@ export default defineComponent({
       emit('update:page', val);
       emit('page-change');
     };
+    const ltSm = useMediaQuery('(max-width: 639.9px)');
 
     return () => (
       <ElPagination
@@ -57,7 +59,7 @@ export default defineComponent({
         background={props.background}
         currentPage={props.page}
         pageSize={props.limit}
-        layout={props.layout}
+        layout={ltSm.value ? 'total, sizes, jumper' : props.layout}
         pageSizes={props.pageSizes}
         total={props.total}
         onUpdate:page-size={(v) => sizeChange(v)}
