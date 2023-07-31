@@ -1,9 +1,10 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 18:03:54
- * @LastEditTime: 2023-03-08 16:45:34
+ * @LastEditTime: 2023-07-31 10:07:24
  * @Description:
  */
+import { useMediaQuery } from '@vueuse/core';
 import { ElButton, ElDialog, ElMessageBox } from 'element-plus';
 import { Teleport, computed, defineComponent, watch, ref } from 'vue';
 
@@ -11,6 +12,10 @@ export default defineComponent({
   props: {
     modelValue: Boolean,
     realTitle: String,
+    width: {
+      type: [String, Number],
+      default: '50%'
+    },
     sureText: {
       type: String,
       default: '确定',
@@ -114,6 +119,8 @@ export default defineComponent({
           .catch(() => null);
       }
     };
+    
+    const ltLg = useMediaQuery('(max-width: 1023.9px)');
 
     return () => (
       <Teleport to="body">
@@ -121,6 +128,7 @@ export default defineComponent({
           {...attrs}
           modelValue={props.modelValue || showDialog.value}
           title={props.realTitle || title.value}
+          width={ltLg.value ? '96%' : props.width}
           closeOnClickModal={true}
           closeOnPressEscape={false}
           beforeClose={beforeClose}
