@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-07-31 14:27:30
+ * @LastEditTime: 2023-08-03 09:09:09
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -117,7 +117,7 @@ export default defineComponent({
      * 被勾选的表头
      */
     const filterHeader = computed(() => {
-      return initData.value.filter((d) => d.check);
+      return initData.value.filter((d) => !d.only_export && d.check);
     });
 
     const handleChange = (item: TableHeadItemPro, check: boolean) => {
@@ -172,7 +172,7 @@ export default defineComponent({
         <div>
           {props.saveTableHead && (
             <CustomHead
-              tableHead={initData.value}
+              tableHead={initData.value.filter((th) => !th.only_export)}
               onDrag-end={handleDragend}
               onChange={handleChange}
               onSave={saveTableHead}

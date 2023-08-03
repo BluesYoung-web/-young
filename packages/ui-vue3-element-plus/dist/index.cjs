@@ -57558,7 +57558,7 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
       });
     });
     const filterHeader = (0, import_vue620.computed)(() => {
-      return initData.value.filter((d2) => d2.check);
+      return initData.value.filter((d2) => !d2.only_export && d2.check);
     });
     const handleChange = (item, check) => {
       const index2 = tableHeadCheck_1.value.findIndex((e) => e === item.prop);
@@ -57604,7 +57604,7 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
           `}</style>
       <div>
         {props.saveTableHead && <CustomHead_default
-          tableHead={initData.value}
+          tableHead={initData.value.filter((th) => !th.only_export)}
           onDrag-end={handleDragend}
           onChange={handleChange}
           onSave={saveTableHead}
