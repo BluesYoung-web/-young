@@ -16,6 +16,10 @@ declare const isSymbol: (s: any) => s is Symbol;
 declare const isNull: (n: any) => n is null;
 declare const isUndefined: (u: any) => u is undefined;
 
+declare function polyfillNumber(num: number | string): number;
+declare function fen2yuan(num: number | string): string;
+declare function yuan2fen(num: number | string): number;
+declare function fen2yuanWithCurrency(num: string | number, withFlag?: boolean): string;
 /**
  * 加入财务分隔符
  */
@@ -267,7 +271,7 @@ declare const RGBToHSL: (r: number, g: number, b: number) => number[];
  */
 declare const HSLToRGB: (h: number, s: number, l: number) => number[];
 
-declare type Simplify<T> = {
+type Simplify<T> = {
     [P in keyof T]: T[P];
 };
 /**
@@ -275,19 +279,19 @@ declare type Simplify<T> = {
  * T 接口
  * K 属性(联合类型)
  */
-declare type SetOptional<T, K extends keyof T> = Simplify<Partial<Pick<T, K>> & Pick<T, Exclude<keyof T, K>>>;
+type SetOptional<T, K extends keyof T> = Simplify<Partial<Pick<T, K>> & Pick<T, Exclude<keyof T, K>>>;
 /**
  * 设置必选属性
  * T 接口
  * K 属性(联合类型)
  */
-declare type setRequired<T, K extends keyof T> = Simplify<Required<Pick<T, K>> & Pick<T, Exclude<keyof T, K>>>;
+type setRequired<T, K extends keyof T> = Simplify<Required<Pick<T, K>> & Pick<T, Exclude<keyof T, K>>>;
 /**
  * 筛选特定类型的属性
  * T 接口
  * K 要筛选的属性的类型
  */
-declare type ConditionalPick<T, K> = {
+type ConditionalPick<T, K> = {
     [P in keyof T as T[P] extends K ? P : never]: T[P];
 };
 /**
@@ -295,11 +299,11 @@ declare type ConditionalPick<T, K> = {
  * T 函数类型
  * A 参数类型
  */
-declare type AppendArgument<F, A> = F extends (...args: infer Args) => infer Return ? (x: A, ...args: Args) => Return : never;
+type AppendArgument<F, A> = F extends (...args: infer Args) => infer Return ? (x: A, ...args: Args) => Return : never;
 /**
  * 数组(元组)扁平化
  */
-declare type NaiveFlat<T extends any[]> = {
+type NaiveFlat<T extends any[]> = {
     [P in keyof T]: T[P] extends any[] ? T[P][number] : T[P];
 }[number];
 /**
@@ -307,57 +311,57 @@ declare type NaiveFlat<T extends any[]> = {
  * T1 接口
  * T2 属性(联合类型)
  */
-declare type Exclusive<T1, T2 extends T1> = {
+type Exclusive<T1, T2 extends T1> = {
     [K in keyof T2]: K extends keyof T1 ? T2[K] : never;
 };
 /**
  * 确保数组(元组)非空
  * T 类型
  */
-declare type NotEmpty<T> = [T, ...T[]];
+type NotEmpty<T> = [T, ...T[]];
 /**
  * 使用指定分隔符拼接字符串数组(元组)
  * Arr 数组(元组)
  * Separator 分隔符
  */
-declare type JoinStrArray<Arr extends string[], Separator extends string> = Arr extends [
+type JoinStrArray<Arr extends string[], Separator extends string> = Arr extends [
     infer A,
     ...infer B
 ] ? `${A extends string ? A : ''}${B extends [string, ...string[]] ? `${Separator}${JoinStrArray<B, Separator>}` : ''}` : '';
 /**
  * 对于字符串字面量类型进行去空格处理
  */
-declare type TrimLeft<V extends string> = V extends ` ${infer R}` ? TrimLeft<R> : V;
-declare type TrimRight<V extends string> = V extends `${infer R} ` ? TrimRight<R> : V;
-declare type Trim<V extends string> = TrimLeft<TrimRight<V>>;
+type TrimLeft<V extends string> = V extends ` ${infer R}` ? TrimLeft<R> : V;
+type TrimRight<V extends string> = V extends `${infer R} ` ? TrimRight<R> : V;
+type Trim<V extends string> = TrimLeft<TrimRight<V>>;
 /**
  * 比较两个类型是否相等
  */
-declare type IsEqual<A, B> = A extends B ? (B extends A ? true : false) : false;
+type IsEqual<A, B> = A extends B ? (B extends A ? true : false) : false;
 /**
  * 获取数组(元组)第一个元素的类型
  */
-declare type Head<T extends any[]> = T extends [infer H, ...infer R] ? H : never;
+type Head<T extends any[]> = T extends [infer H, ...infer R] ? H : never;
 /**
  * 获取数组(元组)除第一个元素之外的剩余元素
  */
-declare type Tail<T extends any[]> = T extends [infer H, ...infer R] ? R : [];
+type Tail<T extends any[]> = T extends [infer H, ...infer R] ? R : [];
 /**
  * Unshift
  */
-declare type Unshift<T extends any[], E> = [E, ...T];
+type Unshift<T extends any[], E> = [E, ...T];
 /**
  * Shift
  */
-declare type Shift<T extends any[]> = T extends [infer F, ...infer R] ? R : [];
+type Shift<T extends any[]> = T extends [infer F, ...infer R] ? R : [];
 /**
  * Push
  */
-declare type Push<T extends any[], E> = [...T, E];
+type Push<T extends any[], E> = [...T, E];
 /**
  * Includes
  */
-declare type Includes<T extends any[], E> = T extends [first: infer F, ...args: infer R] ? IsEqual<F, E> extends true ? true : Includes<R, E> : false;
+type Includes<T extends any[], E> = T extends [first: infer F, ...args: infer R] ? IsEqual<F, E> extends true ? true : Includes<R, E> : false;
 /**
  * 联合类型转交叉类型
  */
@@ -365,12 +369,12 @@ declare type Includes<T extends any[], E> = T extends [first: infer F, ...args: 
  * 将联合类型转为对应的交叉函数类型
  * @template U 联合类型
  */
-declare type UnionToInterFunction<U> = (U extends any ? (k: () => U) => void : never) extends (k: infer I) => void ? I : never;
+type UnionToInterFunction<U> = (U extends any ? (k: () => U) => void : never) extends (k: infer I) => void ? I : never;
 /**
  * 获取联合类型中的最后一个类型
  * @template U 联合类型
  */
-declare type GetUnionLast<U> = UnionToInterFunction<U> extends {
+type GetUnionLast<U> = UnionToInterFunction<U> extends {
     (): infer A;
 } ? A : never;
 /**
@@ -378,81 +382,81 @@ declare type GetUnionLast<U> = UnionToInterFunction<U> extends {
  * @template Tuple 元组类型
  * @template E 新的类型
  */
-declare type Prepend<Tuple extends any[], E> = [E, ...Tuple];
+type Prepend<Tuple extends any[], E> = [E, ...Tuple];
 /**
  * 联合类型转元组类型；
  * @template Union 联合类型
  * @template T 初始元组类型
  * @template Last 传入联合类型中的最后一个类型（元素），自动生成，内部使用
  */
-declare type UnionToTuple<Union, T extends any[] = [], Last = GetUnionLast<Union>> = {
+type UnionToTuple<Union, T extends any[] = [], Last = GetUnionLast<Union>> = {
     0: T;
     1: UnionToTuple<Exclude<Union, Last>, Prepend<T, Last>>;
 }[[Union] extends [never] ? 0 : 1];
-declare type TupleToIntersection<T extends any[]> = T extends [infer F, ...infer U] ? U extends [] ? F : F & TupleToIntersection<U> : never;
-declare type UnionToIntersection<U> = TupleToIntersection<UnionToTuple<U>>;
+type TupleToIntersection<T extends any[]> = T extends [infer F, ...infer U] ? U extends [] ? F : F & TupleToIntersection<U> : never;
+type UnionToIntersection<U> = TupleToIntersection<UnionToTuple<U>>;
 /**
  * 获取对象类型中所有的可选属性
  */
-declare type OptionalKeys<T> = NonNullable<{
+type OptionalKeys<T> = NonNullable<{
     [key in keyof T]: undefined extends T[key] ? key : never;
 }[keyof T]>;
-declare type FirstAsArray<T extends any[]> = T extends [...infer A, infer B, infer C] ? A extends [] ? T extends [...infer A, infer B] ? A : never : T extends [...infer A, infer B] ? FirstAsArray<A> : never : T;
+type FirstAsArray<T extends any[]> = T extends [...infer A, infer B, infer C] ? A extends [] ? T extends [...infer A, infer B] ? A : never : T extends [...infer A, infer B] ? FirstAsArray<A> : never : T;
 /**
  * 函数类型柯里化
  */
-declare type Curry<F extends (...args: any[]) => any, P extends any[] = Parameters<F>, R = ReturnType<F>> = P extends [infer A, infer B, ...infer C] ? P extends [infer A, ...infer B] ? Curry<F, FirstAsArray<P>, Curry<F, B, R>> : never : (...args: P) => R;
+type Curry<F extends (...args: any[]) => any, P extends any[] = Parameters<F>, R = ReturnType<F>> = P extends [infer A, infer B, ...infer C] ? P extends [infer A, ...infer B] ? Curry<F, FirstAsArray<P>, Curry<F, B, R>> : never : (...args: P) => R;
 /**
  * Merge
  * F2 优先级高于 F1
  */
-declare type Merge<F1, F2> = {
+type Merge<F1, F2> = {
     [K in keyof (F1 & F2)]: K extends keyof F2 ? F2[K] : K extends keyof F1 ? F1[K] : never;
 };
 /**
  * 至少包含一个给定的属性
  */
-declare type RequireAtLeastOne<ObjectType, KeysType extends keyof ObjectType = keyof ObjectType> = KeysType extends unknown ? ObjectType & {
+type RequireAtLeastOne<ObjectType, KeysType extends keyof ObjectType = keyof ObjectType> = KeysType extends unknown ? ObjectType & {
     [K in KeysType]-?: ObjectType[K];
 } : never;
 /**
  * 移除索引签名
  */
-declare type RemoveIndexSignature<T> = {
+type RemoveIndexSignature<T> = {
     [k in keyof T as string extends k ? never : number extends k ? never : k]: T[k];
 };
 /**
  * 移除部分属性的 readonly 修饰符
  * 默认全部移除
  */
-declare type Mutable<T, Keys extends keyof T = keyof T> = {
+type Mutable<T, Keys extends keyof T = keyof T> = {
     -readonly [k in Keys]: T[k];
 } & Pick<T, Exclude<keyof T, Keys>>;
 /**
  * 判断是否为联合类型
  */
-declare type IsUnion<T, U = T> = T extends U ? ([U] extends [T] ? false : true) : never;
+type IsUnion<T, U = T> = T extends U ? ([U] extends [T] ? false : true) : never;
 /**
  * 判断是否为 never
  */
-declare type IsNever<T> = [T] extends [never] ? true : false;
+type IsNever<T> = [T] extends [never] ? true : false;
 /**
  * 数组(元组)翻转
  */
-declare type Reverse<T extends Array<any>, R extends Array<any> = []> = Head<T> extends never ? R : Reverse<Tail<T>, Unshift<R, Head<T>>>;
+type Reverse<T extends Array<any>, R extends Array<any> = []> = Head<T> extends never ? R : Reverse<Tail<T>, Unshift<R, Head<T>>>;
 /**
  * 字符串分割
  */
-declare type Split<S extends string, Delimiter extends string> = S extends `${infer First}${Delimiter}${infer Rest}` ? [First, ...Split<Rest, Delimiter>] : [S];
-declare type Str2Tuple<S extends string> = S extends `${infer First}[${infer Second}]` ? [First, Second] : [S];
+type Split<S extends string, Delimiter extends string> = S extends `${infer First}${Delimiter}${infer Rest}` ? [First, ...Split<Rest, Delimiter>] : [S];
+type Str2Tuple<S extends string> = S extends `${infer First}[${infer Second}]` ? [First, Second] : [S];
 /**
  * 属性访问转数组(元组)
  */
-declare type ToPath<S extends string> = S extends `${infer A}.${infer R}` ? [...Str2Tuple<A>, ...ToPath<R>] : [S];
+type ToPath<S extends string> = S extends `${infer A}.${infer R}` ? [...Str2Tuple<A>, ...ToPath<R>] : [S];
 /**
  * 链式调用进行类型扩展，实现动态类型推导
  */
-declare type Chainable<T = {}> = {
+type Chainable<T = {}> = {
     option<V, S extends string>(key: S, value: V): Chainable<T & {
         [P in keyof {
             S: S;
@@ -463,15 +467,15 @@ declare type Chainable<T = {}> = {
 /**
  * Repeat
  */
-declare type Repeat<T, C extends number, R extends Array<any> = []> = R['length'] extends C ? R : Repeat<T, C, Push<R, T>>;
+type Repeat<T, C extends number, R extends Array<any> = []> = R['length'] extends C ? R : Repeat<T, C, Push<R, T>>;
 /**
  * RepeatString
  */
-declare type RepeatString<T extends string, C extends number, R extends string = '', A extends any[] = []> = A['length'] extends C ? R : RepeatString<T, C, `${R}${T}`, Push<A, T>>;
+type RepeatString<T extends string, C extends number, R extends string = '', A extends any[] = []> = A['length'] extends C ? R : RepeatString<T, C, `${R}${T}`, Push<A, T>>;
 /**
  * 数字字符串转数字
  */
-declare type ToNumber<T extends string, S extends any[] = [], L extends number = S['length']> = `${L}` extends T ? L : ToNumber<T, [...S, 1]>;
+type ToNumber<T extends string, S extends any[] = [], L extends number = S['length']> = `${L}` extends T ? L : ToNumber<T, [...S, 1]>;
 
 declare abstract class YoungStorage {
     /**
@@ -497,4 +501,4 @@ declare class YoungLocalStorage extends YoungStorage {
     get<T>(key: string): T | undefined;
 }
 
-export { AppendArgument, Chainable, ConditionalPick, Curry, Exclusive, FirstAsArray, GetUnionLast, HSBToRGB, HSLToRGB, Head, Includes, IsEqual, IsNever, IsUnion, JoinStrArray, Merge, Mutable, NaiveFlat, NotEmpty, OptionalKeys, Prepend, Push, RGBToHSB, RGBToHSL, RGBToHex, RemoveIndexSignature, Repeat, RepeatString, RequireAtLeastOne, Reverse, SetOptional, Shift, Simplify, Split, Str2Tuple, Tail, ToNumber, ToPath, Trim, TrimLeft, TrimRight, TupleToIntersection, UnionToInterFunction, UnionToIntersection, UnionToTuple, Unshift, YoungLocalStorage, YoungStorage, deepClone, disableScroll, enableScroll, encodedStrParse, exitFullscreen, extendHex, formatCurrency, formatDate, formatUrl, getClientHeight, getDateRange, hexToRGB, idMasaike, isAndroid, isArray, isArrayBuffer, isBoolean, isChinese, isCurrencyStr, isDate, isDecimal, isDisabledDate, isEmail, isFunction, isHttpUrl, isISODate, isIdCard, isInteger, isJsonStr, isLandline, isLetter, isLicensePlate, isMap, isMobile, isNull, isNumber, isObject, isRegExp, isSet, isString, isSymbol, isUndefined, isWeChat, isWeakMap, isWeakSet, isWebSocketUrl, isiOS, lastMonthDay, nameMasaike, nextDay, randomHexColorCode, randomId, recentDay, recentMonth, safeJsonParse, scrollToBottom, scrollToTop, setRequired, shortcuts, sleep, smoothScroll, telMasaike, thisMonth, thisMonthDay, toFullScreen, toRGBArray, toRGBObject, ymdParse };
+export { AppendArgument, Chainable, ConditionalPick, Curry, Exclusive, FirstAsArray, GetUnionLast, HSBToRGB, HSLToRGB, Head, Includes, IsEqual, IsNever, IsUnion, JoinStrArray, Merge, Mutable, NaiveFlat, NotEmpty, OptionalKeys, Prepend, Push, RGBToHSB, RGBToHSL, RGBToHex, RemoveIndexSignature, Repeat, RepeatString, RequireAtLeastOne, Reverse, SetOptional, Shift, Simplify, Split, Str2Tuple, Tail, ToNumber, ToPath, Trim, TrimLeft, TrimRight, TupleToIntersection, UnionToInterFunction, UnionToIntersection, UnionToTuple, Unshift, YoungLocalStorage, YoungStorage, deepClone, disableScroll, enableScroll, encodedStrParse, exitFullscreen, extendHex, fen2yuan, fen2yuanWithCurrency, formatCurrency, formatDate, formatUrl, getClientHeight, getDateRange, hexToRGB, idMasaike, isAndroid, isArray, isArrayBuffer, isBoolean, isChinese, isCurrencyStr, isDate, isDecimal, isDisabledDate, isEmail, isFunction, isHttpUrl, isISODate, isIdCard, isInteger, isJsonStr, isLandline, isLetter, isLicensePlate, isMap, isMobile, isNull, isNumber, isObject, isRegExp, isSet, isString, isSymbol, isUndefined, isWeChat, isWeakMap, isWeakSet, isWebSocketUrl, isiOS, lastMonthDay, nameMasaike, nextDay, polyfillNumber, randomHexColorCode, randomId, recentDay, recentMonth, safeJsonParse, scrollToBottom, scrollToTop, setRequired, shortcuts, sleep, smoothScroll, telMasaike, thisMonth, thisMonthDay, toFullScreen, toRGBArray, toRGBObject, ymdParse, yuan2fen };

@@ -32,6 +32,8 @@ __export(src_exports, {
   encodedStrParse: () => encodedStrParse,
   exitFullscreen: () => exitFullscreen,
   extendHex: () => extendHex,
+  fen2yuan: () => fen2yuan,
+  fen2yuanWithCurrency: () => fen2yuanWithCurrency,
   formatCurrency: () => formatCurrency,
   formatDate: () => formatDate,
   formatUrl: () => formatUrl,
@@ -76,6 +78,7 @@ __export(src_exports, {
   lastMonthDay: () => lastMonthDay,
   nameMasaike: () => nameMasaike,
   nextDay: () => nextDay,
+  polyfillNumber: () => polyfillNumber,
   randomHexColorCode: () => randomHexColorCode,
   randomId: () => randomId,
   recentDay: () => recentDay,
@@ -92,7 +95,8 @@ __export(src_exports, {
   toFullScreen: () => toFullScreen,
   toRGBArray: () => toRGBArray,
   toRGBObject: () => toRGBObject,
-  ymdParse: () => ymdParse
+  ymdParse: () => ymdParse,
+  yuan2fen: () => yuan2fen
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -152,6 +156,18 @@ var deepClone = (obj) => {
 };
 
 // src/core/numFormat.ts
+function polyfillNumber(num) {
+  return +num || 0;
+}
+function fen2yuan(num) {
+  return (polyfillNumber(num) / 100).toFixed(2);
+}
+function yuan2fen(num) {
+  return polyfillNumber(num) * 100;
+}
+function fen2yuanWithCurrency(num, withFlag = false) {
+  return formatCurrency(fen2yuan(num), withFlag);
+}
 var formatCurrency = (num, withFlag = false) => {
   if (num) {
     num = num.toString().replace(/\$|\,/g, "");
@@ -219,7 +235,7 @@ function formatNumber(n) {
   return temp[1] ? temp : "0" + temp;
 }
 var lastMonthDay = () => {
-  const d = new Date();
+  const d = /* @__PURE__ */ new Date();
   const year = d.getFullYear();
   const month = d.getMonth();
   if (month === 0) {
@@ -233,13 +249,13 @@ var lastMonthDay = () => {
   return d;
 };
 var thisMonthDay = () => {
-  const d = new Date();
+  const d = /* @__PURE__ */ new Date();
   d.setDate(1);
   d.setHours(0, 0, 0, 0);
   return d;
 };
 var recentDay = () => {
-  const start = new Date();
+  const start = /* @__PURE__ */ new Date();
   start.setDate(start.getDate() - 1);
   start.setHours(0, 0, 0, 0);
   const end = new Date(start.getTime() + 1e3 * 60 * 60 * 24);
@@ -255,7 +271,7 @@ var ymdParse = (daytte, sep = "-") => {
   return str.join("");
 };
 var nextDay = (h = 0, m = 0, s = 0) => {
-  const d = new Date();
+  const d = /* @__PURE__ */ new Date();
   d.setDate(d.getDate() + 1);
   d.setHours(h, m, s);
   return d;
@@ -264,16 +280,16 @@ var shortcuts = [
   {
     text: "\u4ECA\u5929",
     value: (() => {
-      const end = new Date();
-      const start = new Date();
+      const end = /* @__PURE__ */ new Date();
+      const start = /* @__PURE__ */ new Date();
       return [start, end];
     })()
   },
   {
     text: "\u6628\u5929",
     value: (() => {
-      const end = new Date();
-      const start = new Date();
+      const end = /* @__PURE__ */ new Date();
+      const start = /* @__PURE__ */ new Date();
       end.setTime(start.getTime() - 3600 * 1e3 * 24 * 1);
       start.setTime(start.getTime() - 3600 * 1e3 * 24 * 1);
       return [start, end];
@@ -282,8 +298,8 @@ var shortcuts = [
   {
     text: "\u672C\u5468",
     value: (() => {
-      const end = new Date();
-      const start = new Date();
+      const end = /* @__PURE__ */ new Date();
+      const start = /* @__PURE__ */ new Date();
       var weekday = start.getDay() || 7;
       start.setDate(start.getDate() - weekday + 1);
       return [start, end];
@@ -292,7 +308,7 @@ var shortcuts = [
   {
     text: "\u4E0A\u5468",
     value: (() => {
-      let myDate = new Date();
+      let myDate = /* @__PURE__ */ new Date();
       let weekDate = new Date(myDate.getTime() - 7 * 24 * 3600 * 1e3);
       let weekDate2 = new Date(myDate.getTime() - 7 * 24 * 3600 * 1e3);
       let day = weekDate.getDay();
@@ -305,8 +321,8 @@ var shortcuts = [
   {
     text: "\u672C\u6708",
     value: (() => {
-      const end = new Date();
-      const start = new Date();
+      const end = /* @__PURE__ */ new Date();
+      const start = /* @__PURE__ */ new Date();
       start.setDate(1);
       start.setHours(0);
       start.setSeconds(0);
@@ -318,7 +334,7 @@ var shortcuts = [
     text: "\u4E0A\u6708",
     value: (() => {
       let dayMSec = 24 * 3600 * 1e3;
-      let today = new Date();
+      let today = /* @__PURE__ */ new Date();
       let lastMonthFirstDay = new Date(today.getFullYear(), today.getMonth() - 1, 1);
       let nowMonthFirstDay = new Date(today.getFullYear(), today.getMonth(), 1);
       let lastMonthLastDayMSec = nowMonthFirstDay.getTime() - 1 * dayMSec;
@@ -329,8 +345,8 @@ var shortcuts = [
   {
     text: "\u6700\u8FD17\u5929",
     value: (() => {
-      const end = new Date();
-      const start = new Date();
+      const end = /* @__PURE__ */ new Date();
+      const start = /* @__PURE__ */ new Date();
       start.setTime(start.getTime() - 3600 * 1e3 * 24 * 6);
       return [start, end];
     })()
@@ -338,15 +354,15 @@ var shortcuts = [
   {
     text: "\u6700\u8FD130\u5929",
     value: (() => {
-      const end = new Date();
-      const start = new Date();
+      const end = /* @__PURE__ */ new Date();
+      const start = /* @__PURE__ */ new Date();
       start.setTime(start.getTime() - 3600 * 1e3 * 24 * 30);
       return [start, end];
     })()
   }
 ];
 var isDisabledDate = (d) => {
-  const now = new Date().setHours(23, 59, 59);
+  const now = (/* @__PURE__ */ new Date()).setHours(23, 59, 59);
   const e = d.getTime();
   return e > now;
 };
@@ -465,8 +481,7 @@ var scrollToBottom = () => {
   window.scrollTo(0, document.documentElement.clientHeight);
 };
 var smoothScroll = (element) => {
-  var _a;
-  (_a = document.querySelector(element)) == null ? void 0 : _a.scrollIntoView({
+  document.querySelector(element)?.scrollIntoView({
     behavior: "smooth"
   });
 };
@@ -544,14 +559,10 @@ var hexToRGB = (hex) => {
 };
 var extendHex = (shortHex) => "#" + shortHex.slice(shortHex.length === 4 ? 1 : 0).split("").map((x) => x + x).join("");
 var toRGBObject = (rgbStr) => {
-  var _a;
-  const [red, green, blue] = ((_a = rgbStr.match(/\d+/g)) == null ? void 0 : _a.map((n) => +n)) ?? [0, 0, 0];
+  const [red, green, blue] = rgbStr.match(/\d+/g)?.map((n) => +n) ?? [0, 0, 0];
   return { red, green, blue };
 };
-var toRGBArray = (rgbStr) => {
-  var _a;
-  return ((_a = rgbStr.match(/\d+/g)) == null ? void 0 : _a.map((n) => +n)) ?? [0, 0, 0];
-};
+var toRGBArray = (rgbStr) => rgbStr.match(/\d+/g)?.map((n) => +n) ?? [0, 0, 0];
 var RGBToHSB = (r, g, b) => {
   r /= 255;
   g /= 255;
@@ -596,11 +607,20 @@ var YoungStorage = class {
 
 // src/storage/localStorage.ts
 var YoungLocalStorage = class extends YoungStorage {
+  /**
+   * 存储
+   * @param key 键名
+   * @param value 键值
+   * @param exp 过期时间(天)，默认 1 天后
+   */
   set(key, value, exp = 1) {
-    localStorage.setItem(key, JSON.stringify({
-      exp: new Date(Date.now() + 1e3 * 3600 * 24 * exp).getTime(),
-      data: value
-    }));
+    localStorage.setItem(
+      key,
+      JSON.stringify({
+        exp: new Date(Date.now() + 1e3 * 3600 * 24 * exp).getTime(),
+        data: value
+      })
+    );
   }
   remove(key) {
     localStorage.removeItem(key);
@@ -639,6 +659,8 @@ var YoungLocalStorage = class extends YoungStorage {
   encodedStrParse,
   exitFullscreen,
   extendHex,
+  fen2yuan,
+  fen2yuanWithCurrency,
   formatCurrency,
   formatDate,
   formatUrl,
@@ -683,6 +705,7 @@ var YoungLocalStorage = class extends YoungStorage {
   lastMonthDay,
   nameMasaike,
   nextDay,
+  polyfillNumber,
   randomHexColorCode,
   randomId,
   recentDay,
@@ -699,5 +722,6 @@ var YoungLocalStorage = class extends YoungStorage {
   toFullScreen,
   toRGBArray,
   toRGBObject,
-  ymdParse
+  ymdParse,
+  yuan2fen
 });

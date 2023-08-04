@@ -1,9 +1,25 @@
 /*
  * @Author: zhangyang
  * @Date: 2020-08-14 10:59:06
- * @LastEditTime: 2023-01-05 16:17:18
+ * @LastEditTime: 2023-08-04 09:50:28
  * @Description: 处理数值
  */
+
+export function polyfillNumber(num: number | string) {
+  return +num || 0;
+}
+
+export function fen2yuan(num: number | string) {
+  return (polyfillNumber(num) / 100).toFixed(2);
+}
+
+export function yuan2fen(num: number | string) {
+  return polyfillNumber(num) * 100;
+}
+
+export function fen2yuanWithCurrency(num: string | number, withFlag = false) {
+  return formatCurrency(fen2yuan(num), withFlag);
+}
 
 /**
  * 加入财务分隔符
