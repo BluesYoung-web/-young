@@ -53,7 +53,7 @@ interface TableHeadItem<T extends any = any> {
 type TableDataItem<T extends any = any> = {
     [key in keyof T]: T[key];
 } & Record<string, any>;
-declare const _default$a: vue.DefineComponent<{
+declare const _default$b: vue.DefineComponent<{
     tableData: {
         type: PropType<TableDataItem<any>[]>;
         required: true;
@@ -112,7 +112,7 @@ declare const _default$a: vue.DefineComponent<{
     enableCustomHead: boolean;
 }>;
 
-declare const _default$9: vue.DefineComponent<{
+declare const _default$a: vue.DefineComponent<{
     total: {
         readonly type: NumberConstructor;
         readonly required: true;
@@ -190,7 +190,7 @@ declare const _default$9: vue.DefineComponent<{
     autoScroll: boolean;
 }>;
 
-declare const _default$8: vue.DefineComponent<{
+declare const _default$9: vue.DefineComponent<{
     modelValue: BooleanConstructor;
     realTitle: StringConstructor;
     width: {
@@ -281,7 +281,7 @@ type SelectOptionItem<T extends any = any> = {
     disabled?: boolean;
     children?: SelectOptionItem<T>[];
 };
-declare const _default$7: vue.DefineComponent<{
+declare const _default$8: vue.DefineComponent<{
     modelValue: {
         type: (NumberConstructor | StringConstructor | ArrayConstructor)[];
         required: false;
@@ -304,7 +304,7 @@ declare const _default$7: vue.DefineComponent<{
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {}>;
 
-declare const _default$6: vue.DefineComponent<{
+declare const _default$7: vue.DefineComponent<{
     modelValue: {
         type: PropType<number[]>;
         required: true;
@@ -318,7 +318,7 @@ declare const _default$6: vue.DefineComponent<{
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {}>;
 
-declare const _default$5: vue.DefineComponent<{
+declare const _default$6: vue.DefineComponent<{
     start: {
         type: StringConstructor;
         required: true;
@@ -384,7 +384,7 @@ declare const _default$5: vue.DefineComponent<{
     second: boolean;
 }>;
 
-declare const _default$4: vue.DefineComponent<{
+declare const _default$5: vue.DefineComponent<{
     start: {
         type: (NumberConstructor | StringConstructor)[];
         default: string;
@@ -464,7 +464,7 @@ type YoungImageViewerConf = {
      */
     index?: number;
 };
-declare const _default$3: vue.DefineComponent<{
+declare const _default$4: vue.DefineComponent<{
     onDestroy: {
         type: FunctionConstructor;
         default: () => void;
@@ -521,7 +521,7 @@ type YoungSearchFormItem = {
 type YoungSearchScheme<T extends any = any> = {
     [prop in keyof T]?: YoungSearchFormItem;
 };
-declare const _default$2: vue.DefineComponent<{
+declare const _default$3: vue.DefineComponent<{
     modelValue: PropType<Record<string, any>>;
     searchScheme: PropType<YoungSearchScheme<any>>;
     fastSearch: {
@@ -568,7 +568,7 @@ declare const _default$2: vue.DefineComponent<{
     dateTimeKey: unknown[];
 }>;
 
-declare const _default$1: vue.DefineComponent<{
+declare const _default$2: vue.DefineComponent<{
     maxWidth: {
         type: NumberConstructor;
         default: number;
@@ -586,7 +586,7 @@ type TableHeadItemPro = TableHeadItem & {
     check?: boolean;
 };
 
-declare const _default: vue.DefineComponent<{
+declare const _default$1: vue.DefineComponent<{
     tableData: {
         type: PropType<TableDataItem<any>[]>;
         required: true;
@@ -684,6 +684,58 @@ declare const _default: vue.DefineComponent<{
     historyId: string;
 }>;
 
+type YoungUploadFn = (file: File) => string;
+declare const _default: vue.DefineComponent<{
+    modelValue: {
+        type: PropType<string[]>;
+        required: true;
+    };
+    limit: {
+        type: NumberConstructor;
+        default: number;
+    };
+    type: {
+        type: PropType<"image" | "file">;
+        default: string;
+    };
+    accept: {
+        type: StringConstructor;
+        default: string;
+    };
+    uploadFn: {
+        type: PropType<YoungUploadFn>;
+        required: true;
+    };
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+    modelValue: {
+        type: PropType<string[]>;
+        required: true;
+    };
+    limit: {
+        type: NumberConstructor;
+        default: number;
+    };
+    type: {
+        type: PropType<"image" | "file">;
+        default: string;
+    };
+    accept: {
+        type: StringConstructor;
+        default: string;
+    };
+    uploadFn: {
+        type: PropType<YoungUploadFn>;
+        required: true;
+    };
+}>> & {
+    onChange?: (...args: any[]) => any;
+    "onUpdate:modelValue"?: (...args: any[]) => any;
+}, {
+    type: "image" | "file";
+    limit: number;
+    accept: string;
+}>;
+
 interface UseAutoLoad<T extends any = any> {
     (list: Ref<T[]>, allData: Ref<T[]>, pageSize?: number, pause?: Ref<boolean>): {
         elArr: Ref<any[]>;
@@ -772,4 +824,4 @@ declare const useRemoteSearch: (cbk: (key: string) => Promise<SelectOptionItem[]
     init: vue.Ref<boolean>;
 };
 
-export { SelectOptionItem, TableDataItem, TableHeadItem, TableHeadItemPro, _default$4 as YoungDateRange, _default$8 as YoungDialog, _default$3 as YoungImageViewer, YoungImageViewerConf, _default$9 as YoungPagination, _default$1 as YoungRotateTip, _default$2 as YoungSearchForm, YoungSearchFormItem, YoungSearchScheme, _default$7 as YoungSelect, _default$a as YoungTable, _default as YoungTablePro, _default$5 as YoungTimeRange, _default$6 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useImagePreview, useKeyUp, useQuery, useRemoteSearch, useVerifyCode };
+export { SelectOptionItem, TableDataItem, TableHeadItem, TableHeadItemPro, _default$5 as YoungDateRange, _default$9 as YoungDialog, _default$4 as YoungImageViewer, YoungImageViewerConf, _default$a as YoungPagination, _default$2 as YoungRotateTip, _default$3 as YoungSearchForm, YoungSearchFormItem, YoungSearchScheme, _default$8 as YoungSelect, _default$b as YoungTable, _default$1 as YoungTablePro, _default$6 as YoungTimeRange, _default as YoungUpload, YoungUploadFn, _default$7 as YoungWeekday, useAutoLoad, useExport2Excel, useFormMode, useImagePreview, useKeyUp, useQuery, useRemoteSearch, useVerifyCode };

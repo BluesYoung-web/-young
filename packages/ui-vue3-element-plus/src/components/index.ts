@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-02 10:57:17
- * @LastEditTime: 2023-05-30 10:28:36
+ * @LastEditTime: 2023-08-06 10:37:07
  * @Description:
  */
 export { default as YoungTable } from './YoungTable';
@@ -21,3 +21,5 @@ export { default as YoungRotateTip } from './YoungRotateTip';
 
 export type { TableHeadItemPro } from './sub/Drag';
 export { default as YoungTablePro } from './YoungTablePro';
+export type { YoungUploadFn } from './YoungUpload';
+export { default as YoungUpload } from './YoungUpload';
