@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-07-31 10:29:29
+ * @LastEditTime: 2023-08-06 10:40:11
  * @Description:
 -->
 <script setup lang="ts">
@@ -12,7 +12,7 @@ import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange, YoungRotateTip
 import type { TableHeadItem, TableDataItem } from '@bluesyoung/ui-vue3-element-plus';
 
 import { YoungTab } from '../../../packages/ui-vue3/src'
-import { YoungTablePro, YoungPagination } from '../../../packages/ui-vue3-element-plus/src';
+import { YoungTablePro, YoungPagination, YoungUpload } from '../../../packages/ui-vue3-element-plus/src';
 interface Query {
   name: string,
   age: number,
@@ -110,7 +110,14 @@ watchEffect(() => {
 const tableHead: TableHeadItem[] = new Array(20).fill(0).map((_, v) => ({ label: v.toString().repeat(10), prop: v.toString(), width: v === 19 ? '320' : undefined }));
 const tableData: TableDataItem[] = new Array(20).fill(0).map((_, v) => ({ [v]: v }));
 
-const tableHeadCheck = tableHead.map(t => t.prop as string)
+const tableHeadCheck = tableHead.map(t => t.prop as string);
+
+
+const imgToUpload = ref<string[]>([]);
+const upload = (f: File) => {
+  console.log("🚀 ~ file: App.vue:116 ~ upload ~ f:", f);
+  return 'https://avatars.githubusercontent.com/u/55608642?v=4';
+}
 
 </script>
 
@@ -134,6 +141,9 @@ const tableHeadCheck = tableHead.map(t => t.prop as string)
       </template>
     </YoungTab> -->
     <!-- <YoungTable :table-head="tableHead" :table-data="tableData" enable-custom-head /> -->
+
+    <YoungUpload v-model="imgToUpload" :upload-fn="upload" />
+
     <YoungTablePro ref="YoungTableProRef" :table-head="tableHead" :table-head-check="tableHeadCheck"
       :table-data="tableData" />
 
