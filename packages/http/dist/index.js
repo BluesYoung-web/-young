@@ -123,7 +123,7 @@ var useHttp = (config = {}) => {
     authReq: (args) => net.request({
       ...args,
       headers: {
-        ...headers.getAuthHeaders(),
+        ...headers.getAuthHeaders(args),
         ...args == null ? void 0 : args.headers
       }
     })

@@ -1397,7 +1397,7 @@ const Xt = {
     authReq: (l) => f.request({
       ...l,
       headers: {
-        ...i.getAuthHeaders(),
+        ...i.getAuthHeaders(l),
         ...l == null ? void 0 : l.headers
       }
     })

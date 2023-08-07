@@ -1,4 +1,4 @@
-import { Method, AxiosInstance, AxiosRequestConfig } from 'axios';
+import { Method, AxiosError, AxiosRequestConfig, AxiosInstance } from 'axios';
 
 type Simplify<T> = {
     [P in keyof T]: T[P];
@@ -62,7 +62,7 @@ interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
      * 接受各种抛出的错误
      * @default console.error
      */
-    fail: (err: string | number | Error | Msg) => void;
+    fail: (err: string | number | Error | AxiosError | Msg) => void;
     /**
      * 结果校验 + 数据解析，判断此次请求是否正常，正常则返回解包数据，否则抛出异常
      * 不传则默认使用标准 http 状态码作为判断结果，并原样返回
@@ -82,7 +82,7 @@ interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
          * 生成鉴权请求头
          * @default () => {}
          */
-        getAuthHeaders?: () => Headers;
+        getAuthHeaders?: (args: AxiosRequestConfig) => Headers;
     };
 }
 declare module 'axios' {

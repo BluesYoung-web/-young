@@ -1,10 +1,10 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-07-21 09:42:46
+ * @LastEditTime: 2023-08-07 09:49:16
  * @Description:
  */
-import type { AxiosInstance, AxiosRequestConfig, Method } from 'axios';
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, Method } from 'axios';
 import axios from 'axios';
 import { defu } from 'defu';
 
@@ -15,9 +15,9 @@ type Simplify<T> = {
 type SetRequired<T, K extends keyof T> = Simplify<
   // 将要设置为可选类型的结构取出并设置为必选
   Required<Pick<T, K>> &
-  // 取并集
-  // 排除需要设置为可选属性的结构，其余的保持不变
-  Pick<T, Exclude<keyof T, K>>
+    // 取并集
+    // 排除需要设置为可选属性的结构，其余的保持不变
+    Pick<T, Exclude<keyof T, K>>
 >;
 
 export type AllMethod = Lowercase<Method>;
@@ -88,7 +88,7 @@ export interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
    * 接受各种抛出的错误
    * @default console.error
    */
-  fail: (err: string | number | Error | Msg) => void;
+  fail: (err: string | number | Error | AxiosError | Msg) => void;
   /**
    * 结果校验 + 数据解析，判断此次请求是否正常，正常则返回解包数据，否则抛出异常
    * 不传则默认使用标准 http 状态码作为判断结果，并原样返回
@@ -108,7 +108,7 @@ export interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
      * 生成鉴权请求头
      * @default () => {}
      */
-    getAuthHeaders?: () => Headers;
+    getAuthHeaders?: (args: AxiosRequestConfig) => Headers;
   };
 }
 
@@ -143,8 +143,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
 ) => {
   const finalConfig = defu(config, defaultConfig);
 
-  const { baseURL, lazyBaseURL, method, timeout, headers, checkFn, loading, fail } =
-    finalConfig;
+  const { baseURL, lazyBaseURL, method, timeout, headers, checkFn, loading, fail } = finalConfig;
 
   const net = axios.create({
     method,
@@ -219,7 +218,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
       net.request({
         ...args,
         headers: {
-          ...headers.getAuthHeaders(),
+          ...headers.getAuthHeaders(args),
           ...args?.headers,
         },
       }),
