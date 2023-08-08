@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2021-03-22 11:44:01
- * @LastEditTime: 2022-12-07 09:31:56
+ * @LastEditTime: 2023-08-07 17:00:34
  * @Description: 时间处理
  */
 export function formatDate(number: number, format: string = 'Y-M-D h:m:s') {
@@ -213,3 +213,31 @@ export const getDateRange = (year: number, month: number) => {
     dateEnd.getDate().toString().padStart(2, '0'),
   ];
 };
+
+/**
+ * 0 -> 00:00:00
+ * 86399 -> 23:59:59
+ */
+export function secondsToTime(seconds: number) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  const formattedHours = String(hours).padStart(2, '0');
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+  return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+}
+
+/**
+ * 00:00:00 -> 0
+ * 23:59:59 -> 86399
+ */
+export function timeToSeconds(time: string) {
+  const [hours, minutes, seconds] = time.split(':').map(Number);
+
+  const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+
+  return totalSeconds;
+}
