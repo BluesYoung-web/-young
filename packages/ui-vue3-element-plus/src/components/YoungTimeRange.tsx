@@ -44,7 +44,7 @@ export default defineComponent({
       if (props.start && props.end) {
         timePicker.value = [
           new Date(`2022 02 02 ${props.start}`),
-          new Date(`2022 02 02 ${props.end}`),
+          new Date(`2022 02 02 ${props.end}${props.second ? ':59' : ''}`),
         ];
       } else {
         timePicker.value = undefined;
@@ -68,9 +68,9 @@ export default defineComponent({
           <ElTimeSelect
             {...attrs}
             modelValue={props.start}
-            class="w-120px mr-2"
+            class='w-120px mr-2'
             maxTime={props.end}
-            placeholder="开始时间"
+            placeholder='开始时间'
             start={props.startTime}
             step={props.step}
             end={props.endTime}
@@ -80,9 +80,9 @@ export default defineComponent({
           <ElTimeSelect
             {...attrs}
             modelValue={props.end}
-            class="w-120px"
+            class='w-120px'
             minTime={props.start}
-            placeholder="结束时间"
+            placeholder='结束时间'
             start={props.startTime}
             step={props.step}
             end={props.endTime}
