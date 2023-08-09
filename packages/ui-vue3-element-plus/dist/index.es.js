@@ -328,7 +328,10 @@ const od = nr({
         t("clear"), t("update:modelValue", !1);
         return;
       } else
-        t0.confirm("\u6570\u636E\u672A\u4FDD\u5B58\uFF0C\u5173\u95ED\u5C06\u4E22\u5931\u6570\u636E\uFF0C\u786E\u8BA4\u5173\u95ED\uFF1F", "\u63D0\u793A").then(() => {
+        t0.confirm("\u6570\u636E\u672A\u4FDD\u5B58\uFF0C\u5173\u95ED\u5C06\u4E22\u5931\u6570\u636E\uFF0C\u786E\u8BA4\u5173\u95ED\uFF1F", "\u63D0\u793A", {
+          confirmButtonText: "\u786E\u8BA4",
+          cancelButtonText: "\u53D6\u6D88"
+        }).then(() => {
           t("update:modelValue", !1), t("clear");
         }).catch(() => null);
     }, l = n0("(max-width: 1023.9px)");
@@ -464,7 +467,7 @@ const Mf = ["\u5468\u4E00", "\u5468\u4E8C", "\u5468\u4E09", "\u5468\u56DB", "\u5
   }) {
     const n = ue();
     _t(() => {
-      e.start && e.end ? n.value = [new Date(`2022 02 02 ${e.start}`), new Date(`2022 02 02 ${e.end}`)] : n.value = void 0;
+      e.start && e.end ? n.value = [new Date(`2022 02 02 ${e.start}`), new Date(`2022 02 02 ${e.end}${e.second ? ":59" : ""}`)] : n.value = void 0;
     });
     const a = (i) => {
       var s, f, c, l;
@@ -1343,6 +1346,8 @@ const dd = nr({
     form: h,
     del: (R) => {
       t0.confirm(c, "\u63D0\u793A", {
+        confirmButtonText: "\u786E\u8BA4",
+        cancelButtonText: "\u53D6\u6D88",
         type: "warning"
       }).then(async () => {
         await (n == null ? void 0 : n(R)), i == null || i();

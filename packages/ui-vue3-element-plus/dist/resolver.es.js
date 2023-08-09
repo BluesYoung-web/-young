@@ -18,7 +18,6 @@ const t = "@bluesyoung/ui-vue3-element-plus", o = "0.11.2", u = "vue3 + element-
   "@bluesyoung/ui-vue3": "workspace:*",
   "@bluesyoung/utils": "workspace:*",
   "@types/sortablejs": "^1.15.0",
-  "@types/xlsx": "^0.0.36",
   "@vitejs/plugin-vue-jsx": "^2.1.1",
   "@vue/shared": "^3.2.47",
   "@vueuse/core": "^9.10.0",
@@ -36,7 +35,7 @@ const t = "@bluesyoung/ui-vue3-element-plus", o = "0.11.2", u = "vue3 + element-
   "element-plus"
 ], a = "BluesYoung-web", v = "MIT", y = {
   url: "https://github.com/BluesYoung-web/young/issues"
-}, b = "https://github.com/BluesYoung-web/young#readme", x = {
+}, b = "https://github.com/BluesYoung-web/young#readme", h = {
   "file-saver": "^2.0.5",
   xlsx: "^0.18.5"
 }, s = {
@@ -56,9 +55,9 @@ const t = "@bluesyoung/ui-vue3-element-plus", o = "0.11.2", u = "vue3 + element-
   license: v,
   bugs: y,
   homepage: b,
-  dependencies: x
+  dependencies: h
 };
-function h() {
+function x() {
   return {
     [s.name]: [
       "useAutoLoad",
@@ -82,7 +81,7 @@ function j() {
   };
 }
 export {
-  h as YoungApisResolver,
+  x as YoungApisResolver,
   j as YoungComponentsResolver
 };
 //# sourceMappingURL=resolver.es.js.map

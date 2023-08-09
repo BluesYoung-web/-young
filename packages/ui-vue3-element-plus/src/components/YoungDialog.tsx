@@ -111,7 +111,10 @@ export default defineComponent({
         emit('update:modelValue', false);
         return;
       } else {
-        ElMessageBox.confirm('数据未保存，关闭将丢失数据，确认关闭？', '提示')
+        ElMessageBox.confirm('数据未保存，关闭将丢失数据，确认关闭？', '提示', {
+          confirmButtonText: '确认',
+          cancelButtonText: '取消',
+        })
           .then(() => {
             emit('update:modelValue', false);
             emit('clear');

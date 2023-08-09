@@ -55,6 +55,8 @@ export const useFormMode = <T>(
 
   const del = (row: any) => {
     ElMessageBox.confirm(tip, '提示', {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
       type: 'warning',
     })
       .then(async () => {

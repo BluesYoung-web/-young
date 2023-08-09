@@ -56683,7 +56683,10 @@ var YoungDialog_default = (0, import_vue610.defineComponent)({
         emit("update:modelValue", false);
         return;
       } else {
-        ElMessageBox.confirm("\u6570\u636E\u672A\u4FDD\u5B58\uFF0C\u5173\u95ED\u5C06\u4E22\u5931\u6570\u636E\uFF0C\u786E\u8BA4\u5173\u95ED\uFF1F", "\u63D0\u793A").then(() => {
+        ElMessageBox.confirm("\u6570\u636E\u672A\u4FDD\u5B58\uFF0C\u5173\u95ED\u5C06\u4E22\u5931\u6570\u636E\uFF0C\u786E\u8BA4\u5173\u95ED\uFF1F", "\u63D0\u793A", {
+          confirmButtonText: "\u786E\u8BA4",
+          cancelButtonText: "\u53D6\u6D88"
+        }).then(() => {
           emit("update:modelValue", false);
           emit("clear");
         }).catch(() => null);
@@ -56797,7 +56800,7 @@ var YoungTimeRange_default = (0, import_vue613.defineComponent)({
       if (props.start && props.end) {
         timePicker.value = [
           /* @__PURE__ */ new Date(`2022 02 02 ${props.start}`),
-          /* @__PURE__ */ new Date(`2022 02 02 ${props.end}`)
+          /* @__PURE__ */ new Date(`2022 02 02 ${props.end}${props.second ? ":59" : ""}`)
         ];
       } else {
         timePicker.value = void 0;
@@ -57855,6 +57858,8 @@ var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, clea
   };
   const del2 = (row) => {
     ElMessageBox.confirm(tip, "\u63D0\u793A", {
+      confirmButtonText: "\u786E\u8BA4",
+      cancelButtonText: "\u53D6\u6D88",
       type: "warning"
     }).then(async () => {
       await delCbk?.(row);

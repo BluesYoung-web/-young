@@ -55,7 +55,6 @@ var package_default = {
     "@bluesyoung/ui-vue3": "workspace:*",
     "@bluesyoung/utils": "workspace:*",
     "@types/sortablejs": "^1.15.0",
-    "@types/xlsx": "^0.0.36",
     "@vitejs/plugin-vue-jsx": "^2.1.1",
     "@vue/shared": "^3.2.47",
     "@vueuse/core": "^9.10.0",
