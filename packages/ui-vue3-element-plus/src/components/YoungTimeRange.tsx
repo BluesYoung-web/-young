@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-02-11 11:06:39
- * @LastEditTime: 2023-04-13 09:05:37
+ * @LastEditTime: 2023-08-10 18:45:19
  * @Description:
  */
 import { defineComponent, ref, watchEffect } from 'vue';
@@ -37,7 +37,7 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: ['update:start', 'update:end'],
+  emits: ['update:start', 'update:end', 'change'],
   setup(props, { attrs, emit }) {
     const timePicker = ref<[Date, Date]>();
     watchEffect(() => {
@@ -60,6 +60,7 @@ export default defineComponent({
         emit('update:start', start.toLocaleString().match(/\d\d:\d\d:\d\d/)?.[0] ?? '');
         emit('update:end', end.toLocaleString().match(/\d\d:\d\d:\d\d/)?.[0] ?? '');
       }
+      emit('change');
     };
 
     return () =>

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-02-11 10:57:05
- * @LastEditTime: 2023-02-11 11:01:34
+ * @LastEditTime: 2023-08-10 18:47:21
  * @Description:
  */
 import { defineComponent } from 'vue';
@@ -18,14 +18,20 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'change'],
   setup(props, { attrs, emit }) {
     const randomSeed = randomId();
+    const update = (v: number[]) => {
+      emit('update:modelValue', v);
+      emit('change', v);
+    };
     return () => (
-      <ElCheckboxGroup {...attrs} modelValue={props.modelValue} onChange={(v) => emit('update:modelValue', v)}>
-        {
-          Weeks.map((w, i) => <ElCheckbox label={i + 1} key={i + randomSeed}>{w}</ElCheckbox>)
-        }
+      <ElCheckboxGroup {...attrs} modelValue={props.modelValue} onChange={update}>
+        {Weeks.map((w, i) => (
+          <ElCheckbox label={i + 1} key={i + randomSeed}>
+            {w}
+          </ElCheckbox>
+        ))}
       </ElCheckboxGroup>
     );
   },
