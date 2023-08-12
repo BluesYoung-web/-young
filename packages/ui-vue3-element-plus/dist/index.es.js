@@ -412,24 +412,26 @@ const Mf = ["\u5468\u4E00", "\u5468\u4E8C", "\u5468\u4E09", "\u5468\u56DB", "\u5
       required: !0
     }
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "change"],
   setup(e, {
     attrs: t,
     emit: r
   }) {
-    const n = Gt();
+    const n = Gt(), a = (i) => {
+      r("update:modelValue", i), r("change", i);
+    };
     return () => {
-      let a;
+      let i;
       return W(Ma, Le(t, {
         modelValue: e.modelValue,
-        onChange: (i) => r("update:modelValue", i)
-      }), W0(a = Mf.map((i, s) => W(ba, {
-        label: s + 1,
-        key: s + n
-      }, W0(i) ? i : {
+        onChange: a
+      }), W0(i = Mf.map((s, f) => W(ba, {
+        label: f + 1,
+        key: f + n
+      }, W0(s) ? s : {
+        default: () => [s]
+      }))) ? i : {
         default: () => [i]
-      }))) ? a : {
-        default: () => [a]
       });
     };
   }
@@ -460,7 +462,7 @@ const Mf = ["\u5468\u4E00", "\u5468\u4E8C", "\u5468\u4E09", "\u5468\u56DB", "\u5
       default: !1
     }
   },
-  emits: ["update:start", "update:end"],
+  emits: ["update:start", "update:end", "change"],
   setup(e, {
     attrs: t,
     emit: r
@@ -477,6 +479,7 @@ const Mf = ["\u5468\u4E00", "\u5468\u4E8C", "\u5468\u4E09", "\u5468\u56DB", "\u5
         const [o, u] = i;
         r("update:start", (f = (s = o.toLocaleString().match(/\d\d:\d\d:\d\d/)) == null ? void 0 : s[0]) != null ? f : ""), r("update:end", (l = (c = u.toLocaleString().match(/\d\d:\d\d:\d\d/)) == null ? void 0 : c[0]) != null ? l : "");
       }
+      r("change");
     };
     return () => e.second ? W(nf, Le(t, {
       modelValue: n.value,

@@ -56754,10 +56754,14 @@ var YoungWeekday_default = (0, import_vue612.defineComponent)({
       required: true
     }
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "change"],
   setup(props, { attrs, emit }) {
     const randomSeed = ne();
-    return () => <ElCheckboxGroup {...attrs} modelValue={props.modelValue} onChange={(v2) => emit("update:modelValue", v2)}>{Weeks.map((w3, i) => <ElCheckbox label={i + 1} key={i + randomSeed}>{w3}</ElCheckbox>)}</ElCheckboxGroup>;
+    const update = (v2) => {
+      emit("update:modelValue", v2);
+      emit("change", v2);
+    };
+    return () => <ElCheckboxGroup {...attrs} modelValue={props.modelValue} onChange={update}>{Weeks.map((w3, i) => <ElCheckbox label={i + 1} key={i + randomSeed}>{w3}</ElCheckbox>)}</ElCheckboxGroup>;
   }
 });
 
@@ -56793,7 +56797,7 @@ var YoungTimeRange_default = (0, import_vue613.defineComponent)({
       default: false
     }
   },
-  emits: ["update:start", "update:end"],
+  emits: ["update:start", "update:end", "change"],
   setup(props, { attrs, emit }) {
     const timePicker = (0, import_vue613.ref)();
     (0, import_vue613.watchEffect)(() => {
@@ -56815,6 +56819,7 @@ var YoungTimeRange_default = (0, import_vue613.defineComponent)({
         emit("update:start", start.toLocaleString().match(/\d\d:\d\d:\d\d/)?.[0] ?? "");
         emit("update:end", end2.toLocaleString().match(/\d\d:\d\d:\d\d/)?.[0] ?? "");
       }
+      emit("change");
     };
     return () => !props.second ? <>
       <ElTimeSelect

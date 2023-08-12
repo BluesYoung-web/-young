@@ -309,12 +309,13 @@ declare const _default$7: vue.DefineComponent<{
         type: PropType<number[]>;
         required: true;
     };
-}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     modelValue: {
         type: PropType<number[]>;
         required: true;
     };
 }>> & {
+    onChange?: (...args: any[]) => any;
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {}>;
 
@@ -346,7 +347,7 @@ declare const _default$6: vue.DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
-}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("update:start" | "update:end")[], "update:start" | "update:end", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
+}, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("change" | "update:start" | "update:end")[], "change" | "update:start" | "update:end", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     start: {
         type: StringConstructor;
         required: true;
@@ -375,6 +376,7 @@ declare const _default$6: vue.DefineComponent<{
         default: boolean;
     };
 }>> & {
+    onChange?: (...args: any[]) => any;
     "onUpdate:start"?: (...args: any[]) => any;
     "onUpdate:end"?: (...args: any[]) => any;
 }, {
