@@ -40,13 +40,13 @@ var require_dayjs_min = __commonJS({
       "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = e() : "function" == typeof define && define.amd ? define(e) : (t = "undefined" != typeof globalThis ? globalThis : t || self).dayjs = e();
     }(exports2, function() {
       "use strict";
-      var t = 1e3, e = 6e4, n = 36e5, r = "millisecond", i = "second", s2 = "minute", u2 = "hour", a3 = "day", o2 = "week", f2 = "month", h29 = "quarter", c2 = "year", d2 = "date", l2 = "Invalid Date", $ = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/, y = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, M2 = { name: "en", weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_"), ordinal: function(t2) {
+      var t = 1e3, e = 6e4, n = 36e5, r = "millisecond", i = "second", s2 = "minute", u2 = "hour", a3 = "day", o2 = "week", f2 = "month", h29 = "quarter", c2 = "year", d2 = "date", l2 = "Invalid Date", $2 = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/, y2 = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, M3 = { name: "en", weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_"), ordinal: function(t2) {
         var e2 = ["th", "st", "nd", "rd"], n2 = t2 % 100;
         return "[" + t2 + (e2[(n2 - 20) % 10] || e2[n2] || e2[0]) + "]";
       } }, m3 = function(t2, e2, n2) {
         var r2 = String(t2);
         return !r2 || r2.length >= e2 ? t2 : "" + Array(e2 + 1 - r2.length).join(n2) + t2;
-      }, v2 = { s: m3, z: function(t2) {
+      }, v3 = { s: m3, z: function(t2) {
         var e2 = -t2.utcOffset(), n2 = Math.abs(e2), r2 = Math.floor(n2 / 60), i2 = n2 % 60;
         return (e2 <= 0 ? "+" : "-") + m3(r2, 2, "0") + ":" + m3(i2, 2, "0");
       }, m: function t2(e2, n2) {
@@ -60,23 +60,23 @@ var require_dayjs_min = __commonJS({
         return { M: f2, y: c2, w: o2, d: a3, D: d2, h: u2, m: s2, s: i, ms: r, Q: h29 }[t2] || String(t2 || "").toLowerCase().replace(/s$/, "");
       }, u: function(t2) {
         return void 0 === t2;
-      } }, g = "en", D2 = {};
-      D2[g] = M2;
+      } }, g = "en", D3 = {};
+      D3[g] = M3;
       var p2 = function(t2) {
         return t2 instanceof _2;
-      }, S2 = function t2(e2, n2, r2) {
+      }, S3 = function t2(e2, n2, r2) {
         var i2;
         if (!e2)
           return g;
         if ("string" == typeof e2) {
           var s3 = e2.toLowerCase();
-          D2[s3] && (i2 = s3), n2 && (D2[s3] = n2, i2 = s3);
+          D3[s3] && (i2 = s3), n2 && (D3[s3] = n2, i2 = s3);
           var u3 = e2.split("-");
           if (!i2 && u3.length > 1)
             return t2(u3[0]);
         } else {
           var a4 = e2.name;
-          D2[a4] = e2, i2 = a4;
+          D3[a4] = e2, i2 = a4;
         }
         return !r2 && i2 && (g = i2), i2 || !r2 && g;
       }, w3 = function(t2, e2) {
@@ -84,26 +84,26 @@ var require_dayjs_min = __commonJS({
           return t2.clone();
         var n2 = "object" == typeof e2 ? e2 : {};
         return n2.date = t2, n2.args = arguments, new _2(n2);
-      }, O2 = v2;
-      O2.l = S2, O2.i = p2, O2.w = function(t2, e2) {
+      }, O3 = v3;
+      O3.l = S3, O3.i = p2, O3.w = function(t2, e2) {
         return w3(t2, { locale: e2.$L, utc: e2.$u, x: e2.$x, $offset: e2.$offset });
       };
       var _2 = function() {
-        function M3(t2) {
-          this.$L = S2(t2.locale, null, true), this.parse(t2);
+        function M4(t2) {
+          this.$L = S3(t2.locale, null, true), this.parse(t2);
         }
-        var m4 = M3.prototype;
+        var m4 = M4.prototype;
         return m4.parse = function(t2) {
           this.$d = function(t3) {
             var e2 = t3.date, n2 = t3.utc;
             if (null === e2)
               return /* @__PURE__ */ new Date(NaN);
-            if (O2.u(e2))
+            if (O3.u(e2))
               return /* @__PURE__ */ new Date();
             if (e2 instanceof Date)
               return new Date(e2);
             if ("string" == typeof e2 && !/Z$/i.test(e2)) {
-              var r2 = e2.match($);
+              var r2 = e2.match($2);
               if (r2) {
                 var i2 = r2[2] - 1 || 0, s3 = (r2[7] || "0").substring(0, 3);
                 return n2 ? new Date(Date.UTC(r2[1], i2, r2[3] || 1, r2[4] || 0, r2[5] || 0, r2[6] || 0, s3)) : new Date(r2[1], i2, r2[3] || 1, r2[4] || 0, r2[5] || 0, r2[6] || 0, s3);
@@ -115,7 +115,7 @@ var require_dayjs_min = __commonJS({
           var t2 = this.$d;
           this.$y = t2.getFullYear(), this.$M = t2.getMonth(), this.$D = t2.getDate(), this.$W = t2.getDay(), this.$H = t2.getHours(), this.$m = t2.getMinutes(), this.$s = t2.getSeconds(), this.$ms = t2.getMilliseconds();
         }, m4.$utils = function() {
-          return O2;
+          return O3;
         }, m4.isValid = function() {
           return !(this.$d.toString() === l2);
         }, m4.isSame = function(t2, e2) {
@@ -126,102 +126,102 @@ var require_dayjs_min = __commonJS({
         }, m4.isBefore = function(t2, e2) {
           return this.endOf(e2) < w3(t2);
         }, m4.$g = function(t2, e2, n2) {
-          return O2.u(t2) ? this[e2] : this.set(n2, t2);
+          return O3.u(t2) ? this[e2] : this.set(n2, t2);
         }, m4.unix = function() {
           return Math.floor(this.valueOf() / 1e3);
         }, m4.valueOf = function() {
           return this.$d.getTime();
         }, m4.startOf = function(t2, e2) {
-          var n2 = this, r2 = !!O2.u(e2) || e2, h30 = O2.p(t2), l3 = function(t3, e3) {
-            var i2 = O2.w(n2.$u ? Date.UTC(n2.$y, e3, t3) : new Date(n2.$y, e3, t3), n2);
+          var n2 = this, r2 = !!O3.u(e2) || e2, h30 = O3.p(t2), l3 = function(t3, e3) {
+            var i2 = O3.w(n2.$u ? Date.UTC(n2.$y, e3, t3) : new Date(n2.$y, e3, t3), n2);
             return r2 ? i2 : i2.endOf(a3);
-          }, $2 = function(t3, e3) {
-            return O2.w(n2.toDate()[t3].apply(n2.toDate("s"), (r2 ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e3)), n2);
-          }, y2 = this.$W, M4 = this.$M, m5 = this.$D, v3 = "set" + (this.$u ? "UTC" : "");
+          }, $3 = function(t3, e3) {
+            return O3.w(n2.toDate()[t3].apply(n2.toDate("s"), (r2 ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e3)), n2);
+          }, y3 = this.$W, M5 = this.$M, m5 = this.$D, v4 = "set" + (this.$u ? "UTC" : "");
           switch (h30) {
             case c2:
               return r2 ? l3(1, 0) : l3(31, 11);
             case f2:
-              return r2 ? l3(1, M4) : l3(0, M4 + 1);
+              return r2 ? l3(1, M5) : l3(0, M5 + 1);
             case o2:
-              var g2 = this.$locale().weekStart || 0, D3 = (y2 < g2 ? y2 + 7 : y2) - g2;
-              return l3(r2 ? m5 - D3 : m5 + (6 - D3), M4);
+              var g2 = this.$locale().weekStart || 0, D4 = (y3 < g2 ? y3 + 7 : y3) - g2;
+              return l3(r2 ? m5 - D4 : m5 + (6 - D4), M5);
             case a3:
             case d2:
-              return $2(v3 + "Hours", 0);
+              return $3(v4 + "Hours", 0);
             case u2:
-              return $2(v3 + "Minutes", 1);
+              return $3(v4 + "Minutes", 1);
             case s2:
-              return $2(v3 + "Seconds", 2);
+              return $3(v4 + "Seconds", 2);
             case i:
-              return $2(v3 + "Milliseconds", 3);
+              return $3(v4 + "Milliseconds", 3);
             default:
               return this.clone();
           }
         }, m4.endOf = function(t2) {
           return this.startOf(t2, false);
         }, m4.$set = function(t2, e2) {
-          var n2, o3 = O2.p(t2), h30 = "set" + (this.$u ? "UTC" : ""), l3 = (n2 = {}, n2[a3] = h30 + "Date", n2[d2] = h30 + "Date", n2[f2] = h30 + "Month", n2[c2] = h30 + "FullYear", n2[u2] = h30 + "Hours", n2[s2] = h30 + "Minutes", n2[i] = h30 + "Seconds", n2[r] = h30 + "Milliseconds", n2)[o3], $2 = o3 === a3 ? this.$D + (e2 - this.$W) : e2;
+          var n2, o3 = O3.p(t2), h30 = "set" + (this.$u ? "UTC" : ""), l3 = (n2 = {}, n2[a3] = h30 + "Date", n2[d2] = h30 + "Date", n2[f2] = h30 + "Month", n2[c2] = h30 + "FullYear", n2[u2] = h30 + "Hours", n2[s2] = h30 + "Minutes", n2[i] = h30 + "Seconds", n2[r] = h30 + "Milliseconds", n2)[o3], $3 = o3 === a3 ? this.$D + (e2 - this.$W) : e2;
           if (o3 === f2 || o3 === c2) {
-            var y2 = this.clone().set(d2, 1);
-            y2.$d[l3]($2), y2.init(), this.$d = y2.set(d2, Math.min(this.$D, y2.daysInMonth())).$d;
+            var y3 = this.clone().set(d2, 1);
+            y3.$d[l3]($3), y3.init(), this.$d = y3.set(d2, Math.min(this.$D, y3.daysInMonth())).$d;
           } else
-            l3 && this.$d[l3]($2);
+            l3 && this.$d[l3]($3);
           return this.init(), this;
         }, m4.set = function(t2, e2) {
           return this.clone().$set(t2, e2);
         }, m4.get = function(t2) {
-          return this[O2.p(t2)]();
+          return this[O3.p(t2)]();
         }, m4.add = function(r2, h30) {
           var d3, l3 = this;
           r2 = Number(r2);
-          var $2 = O2.p(h30), y2 = function(t2) {
+          var $3 = O3.p(h30), y3 = function(t2) {
             var e2 = w3(l3);
-            return O2.w(e2.date(e2.date() + Math.round(t2 * r2)), l3);
+            return O3.w(e2.date(e2.date() + Math.round(t2 * r2)), l3);
           };
-          if ($2 === f2)
+          if ($3 === f2)
             return this.set(f2, this.$M + r2);
-          if ($2 === c2)
+          if ($3 === c2)
             return this.set(c2, this.$y + r2);
-          if ($2 === a3)
-            return y2(1);
-          if ($2 === o2)
-            return y2(7);
-          var M4 = (d3 = {}, d3[s2] = e, d3[u2] = n, d3[i] = t, d3)[$2] || 1, m5 = this.$d.getTime() + r2 * M4;
-          return O2.w(m5, this);
+          if ($3 === a3)
+            return y3(1);
+          if ($3 === o2)
+            return y3(7);
+          var M5 = (d3 = {}, d3[s2] = e, d3[u2] = n, d3[i] = t, d3)[$3] || 1, m5 = this.$d.getTime() + r2 * M5;
+          return O3.w(m5, this);
         }, m4.subtract = function(t2, e2) {
           return this.add(-1 * t2, e2);
         }, m4.format = function(t2) {
           var e2 = this, n2 = this.$locale();
           if (!this.isValid())
             return n2.invalidDate || l2;
-          var r2 = t2 || "YYYY-MM-DDTHH:mm:ssZ", i2 = O2.z(this), s3 = this.$H, u3 = this.$m, a4 = this.$M, o3 = n2.weekdays, f3 = n2.months, h30 = function(t3, n3, i3, s4) {
+          var r2 = t2 || "YYYY-MM-DDTHH:mm:ssZ", i2 = O3.z(this), s3 = this.$H, u3 = this.$m, a4 = this.$M, o3 = n2.weekdays, f3 = n2.months, h30 = function(t3, n3, i3, s4) {
             return t3 && (t3[n3] || t3(e2, r2)) || i3[n3].slice(0, s4);
           }, c3 = function(t3) {
-            return O2.s(s3 % 12 || 12, t3, "0");
+            return O3.s(s3 % 12 || 12, t3, "0");
           }, d3 = n2.meridiem || function(t3, e3, n3) {
             var r3 = t3 < 12 ? "AM" : "PM";
             return n3 ? r3.toLowerCase() : r3;
-          }, $2 = { YY: String(this.$y).slice(-2), YYYY: this.$y, M: a4 + 1, MM: O2.s(a4 + 1, 2, "0"), MMM: h30(n2.monthsShort, a4, f3, 3), MMMM: h30(f3, a4), D: this.$D, DD: O2.s(this.$D, 2, "0"), d: String(this.$W), dd: h30(n2.weekdaysMin, this.$W, o3, 2), ddd: h30(n2.weekdaysShort, this.$W, o3, 3), dddd: o3[this.$W], H: String(s3), HH: O2.s(s3, 2, "0"), h: c3(1), hh: c3(2), a: d3(s3, u3, true), A: d3(s3, u3, false), m: String(u3), mm: O2.s(u3, 2, "0"), s: String(this.$s), ss: O2.s(this.$s, 2, "0"), SSS: O2.s(this.$ms, 3, "0"), Z: i2 };
-          return r2.replace(y, function(t3, e3) {
-            return e3 || $2[t3] || i2.replace(":", "");
+          }, $3 = { YY: String(this.$y).slice(-2), YYYY: this.$y, M: a4 + 1, MM: O3.s(a4 + 1, 2, "0"), MMM: h30(n2.monthsShort, a4, f3, 3), MMMM: h30(f3, a4), D: this.$D, DD: O3.s(this.$D, 2, "0"), d: String(this.$W), dd: h30(n2.weekdaysMin, this.$W, o3, 2), ddd: h30(n2.weekdaysShort, this.$W, o3, 3), dddd: o3[this.$W], H: String(s3), HH: O3.s(s3, 2, "0"), h: c3(1), hh: c3(2), a: d3(s3, u3, true), A: d3(s3, u3, false), m: String(u3), mm: O3.s(u3, 2, "0"), s: String(this.$s), ss: O3.s(this.$s, 2, "0"), SSS: O3.s(this.$ms, 3, "0"), Z: i2 };
+          return r2.replace(y2, function(t3, e3) {
+            return e3 || $3[t3] || i2.replace(":", "");
           });
         }, m4.utcOffset = function() {
           return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
         }, m4.diff = function(r2, d3, l3) {
-          var $2, y2 = O2.p(d3), M4 = w3(r2), m5 = (M4.utcOffset() - this.utcOffset()) * e, v3 = this - M4, g2 = O2.m(this, M4);
-          return g2 = ($2 = {}, $2[c2] = g2 / 12, $2[f2] = g2, $2[h29] = g2 / 3, $2[o2] = (v3 - m5) / 6048e5, $2[a3] = (v3 - m5) / 864e5, $2[u2] = v3 / n, $2[s2] = v3 / e, $2[i] = v3 / t, $2)[y2] || v3, l3 ? g2 : O2.a(g2);
+          var $3, y3 = O3.p(d3), M5 = w3(r2), m5 = (M5.utcOffset() - this.utcOffset()) * e, v4 = this - M5, g2 = O3.m(this, M5);
+          return g2 = ($3 = {}, $3[c2] = g2 / 12, $3[f2] = g2, $3[h29] = g2 / 3, $3[o2] = (v4 - m5) / 6048e5, $3[a3] = (v4 - m5) / 864e5, $3[u2] = v4 / n, $3[s2] = v4 / e, $3[i] = v4 / t, $3)[y3] || v4, l3 ? g2 : O3.a(g2);
         }, m4.daysInMonth = function() {
           return this.endOf(f2).$D;
         }, m4.$locale = function() {
-          return D2[this.$L];
+          return D3[this.$L];
         }, m4.locale = function(t2, e2) {
           if (!t2)
             return this.$L;
-          var n2 = this.clone(), r2 = S2(t2, e2, true);
+          var n2 = this.clone(), r2 = S3(t2, e2, true);
           return r2 && (n2.$L = r2), n2;
         }, m4.clone = function() {
-          return O2.w(this.$d, this);
+          return O3.w(this.$d, this);
         }, m4.toDate = function() {
           return new Date(this.valueOf());
         }, m4.toJSON = function() {
@@ -230,17 +230,17 @@ var require_dayjs_min = __commonJS({
           return this.$d.toISOString();
         }, m4.toString = function() {
           return this.$d.toUTCString();
-        }, M3;
-      }(), T2 = _2.prototype;
-      return w3.prototype = T2, [["$ms", r], ["$s", i], ["$m", s2], ["$H", u2], ["$W", a3], ["$M", f2], ["$y", c2], ["$D", d2]].forEach(function(t2) {
-        T2[t2[1]] = function(e2) {
+        }, M4;
+      }(), T3 = _2.prototype;
+      return w3.prototype = T3, [["$ms", r], ["$s", i], ["$m", s2], ["$H", u2], ["$W", a3], ["$M", f2], ["$y", c2], ["$D", d2]].forEach(function(t2) {
+        T3[t2[1]] = function(e2) {
           return this.$g(e2, t2[0], t2[1]);
         };
       }), w3.extend = function(t2, e2) {
         return t2.$i || (t2(e2, _2, w3), t2.$i = true), w3;
-      }, w3.locale = S2, w3.isDayjs = p2, w3.unix = function(t2) {
+      }, w3.locale = S3, w3.isDayjs = p2, w3.unix = function(t2) {
         return w3(1e3 * t2);
-      }, w3.en = D2[g], w3.Ls = D2, w3.p = {}, w3;
+      }, w3.en = D3[g], w3.Ls = D3, w3.p = {}, w3;
     });
   }
 });
@@ -356,10 +356,10 @@ var require_customParseFormat = __commonJS({
               try {
                 if (["x", "X"].indexOf(t4) > -1)
                   return new Date(("X" === t4 ? 1e3 : 1) * e4);
-                var r4 = c2(t4)(e4), i3 = r4.year, o3 = r4.month, s4 = r4.day, a5 = r4.hours, f4 = r4.minutes, h31 = r4.seconds, u4 = r4.milliseconds, d4 = r4.zone, l3 = /* @__PURE__ */ new Date(), m4 = s4 || (i3 || o3 ? 1 : l3.getDate()), M3 = i3 || l3.getFullYear(), Y2 = 0;
-                i3 && !o3 || (Y2 = o3 > 0 ? o3 - 1 : l3.getMonth());
-                var p2 = a5 || 0, v2 = f4 || 0, D2 = h31 || 0, g = u4 || 0;
-                return d4 ? new Date(Date.UTC(M3, Y2, m4, p2, v2, D2, g + 60 * d4.offset * 1e3)) : n3 ? new Date(Date.UTC(M3, Y2, m4, p2, v2, D2, g)) : new Date(M3, Y2, m4, p2, v2, D2, g);
+                var r4 = c2(t4)(e4), i3 = r4.year, o3 = r4.month, s4 = r4.day, a5 = r4.hours, f4 = r4.minutes, h31 = r4.seconds, u4 = r4.milliseconds, d4 = r4.zone, l3 = /* @__PURE__ */ new Date(), m4 = s4 || (i3 || o3 ? 1 : l3.getDate()), M4 = i3 || l3.getFullYear(), Y3 = 0;
+                i3 && !o3 || (Y3 = o3 > 0 ? o3 - 1 : l3.getMonth());
+                var p2 = a5 || 0, v3 = f4 || 0, D3 = h31 || 0, g = u4 || 0;
+                return d4 ? new Date(Date.UTC(M4, Y3, m4, p2, v3, D3, g + 60 * d4.offset * 1e3)) : n3 ? new Date(Date.UTC(M4, Y3, m4, p2, v3, D3, g)) : new Date(M4, Y3, m4, p2, v3, D3, g);
               } catch (e5) {
                 return /* @__PURE__ */ new Date("");
               }
@@ -367,9 +367,9 @@ var require_customParseFormat = __commonJS({
           } else if (a4 instanceof Array)
             for (var l2 = a4.length, m3 = 1; m3 <= l2; m3 += 1) {
               s3[1] = a4[m3 - 1];
-              var M2 = n2.apply(this, s3);
-              if (M2.isValid()) {
-                this.$d = M2.$d, this.$L = M2.$L, this.init();
+              var M3 = n2.apply(this, s3);
+              if (M3.isValid()) {
+                this.$d = M3.$d, this.$L = M3.$L, this.init();
                 break;
               }
               m3 === l2 && (this.$d = /* @__PURE__ */ new Date(""));
@@ -1088,17 +1088,17 @@ function cancelThrottle() {
   clearTimeout(_throttleTimeout);
   _throttleTimeout = void 0;
 }
-function scrollBy(el, x2, y) {
-  el.scrollLeft += x2;
-  el.scrollTop += y;
+function scrollBy(el, x3, y2) {
+  el.scrollLeft += x3;
+  el.scrollTop += y2;
 }
 function clone2(el) {
   var Polymer = window.Polymer;
-  var $ = window.jQuery || window.Zepto;
+  var $2 = window.jQuery || window.Zepto;
   if (Polymer && Polymer.dom) {
     return Polymer.dom(el).cloneNode(true);
-  } else if ($) {
-    return $(el).clone(true)[0];
+  } else if ($2) {
+    return $2(el).clone(true)[0];
   } else {
     return el.cloneNode(true);
   }
@@ -1525,23 +1525,23 @@ function AutoScrollPlugin() {
     },
     _handleAutoScroll: function _handleAutoScroll(evt, fallback) {
       var _this = this;
-      var x2 = (evt.touches ? evt.touches[0] : evt).clientX, y = (evt.touches ? evt.touches[0] : evt).clientY, elem = document.elementFromPoint(x2, y);
+      var x3 = (evt.touches ? evt.touches[0] : evt).clientX, y2 = (evt.touches ? evt.touches[0] : evt).clientY, elem = document.elementFromPoint(x3, y2);
       touchEvt$1 = evt;
       if (fallback || this.options.forceAutoScrollFallback || Edge || IE11OrLess || Safari) {
         autoScroll(evt, this.options, elem, fallback);
         var ogElemScroller = getParentAutoScrollElement(elem, true);
-        if (scrolling && (!pointerElemChangedInterval || x2 !== lastAutoScrollX || y !== lastAutoScrollY)) {
+        if (scrolling && (!pointerElemChangedInterval || x3 !== lastAutoScrollX || y2 !== lastAutoScrollY)) {
           pointerElemChangedInterval && clearPointerElemChangedInterval();
           pointerElemChangedInterval = setInterval(function() {
-            var newElem = getParentAutoScrollElement(document.elementFromPoint(x2, y), true);
+            var newElem = getParentAutoScrollElement(document.elementFromPoint(x3, y2), true);
             if (newElem !== ogElemScroller) {
               ogElemScroller = newElem;
               clearAutoScrolls();
             }
             autoScroll(evt, _this.options, newElem, fallback);
           }, 10);
-          lastAutoScrollX = x2;
-          lastAutoScrollY = y;
+          lastAutoScrollX = x3;
+          lastAutoScrollY = y2;
         }
       } else {
         if (!this.options.bubbleScroll || getParentAutoScrollElement(elem, true) === getWindowScrollingElement()) {
@@ -1750,8 +1750,8 @@ function MultiDragPlugin() {
       multiDragElements.forEach(function(multiDragElement) {
         multiDragElement.sortableIndex = index(multiDragElement);
       });
-      multiDragElements = multiDragElements.sort(function(a3, b2) {
-        return a3.sortableIndex - b2.sortableIndex;
+      multiDragElements = multiDragElements.sort(function(a3, b3) {
+        return a3.sortableIndex - b3.sortableIndex;
       });
       dragStarted = true;
     },
@@ -2309,13 +2309,13 @@ var init_sortable_esm = __esm({
       var dragElS1Opp = vertical ? dragRect.left : dragRect.top, dragElS2Opp = vertical ? dragRect.right : dragRect.bottom, dragElOppLength = vertical ? dragRect.width : dragRect.height, targetS1Opp = vertical ? targetRect.left : targetRect.top, targetS2Opp = vertical ? targetRect.right : targetRect.bottom, targetOppLength = vertical ? targetRect.width : targetRect.height;
       return dragElS1Opp === targetS1Opp || dragElS2Opp === targetS2Opp || dragElS1Opp + dragElOppLength / 2 === targetS1Opp + targetOppLength / 2;
     };
-    _detectNearestEmptySortable = function _detectNearestEmptySortable2(x2, y) {
+    _detectNearestEmptySortable = function _detectNearestEmptySortable2(x3, y2) {
       var ret;
       sortables.some(function(sortable) {
         var threshold = sortable[expando].options.emptyInsertThreshold;
         if (!threshold || lastChild(sortable))
           return;
-        var rect = getRect(sortable), insideHorizontally = x2 >= rect.left - threshold && x2 <= rect.right + threshold, insideVertically = y >= rect.top - threshold && y <= rect.bottom + threshold;
+        var rect = getRect(sortable), insideHorizontally = x3 >= rect.left - threshold && x3 <= rect.right + threshold, insideVertically = y2 >= rect.top - threshold && y2 <= rect.bottom + threshold;
         if (insideHorizontally && insideVertically) {
           return ret = sortable;
         }
@@ -3339,7 +3339,7 @@ var init_sortable_esm = __esm({
     autoScroll = throttle2(function(evt, options, rootEl2, isFallback) {
       if (!options.scroll)
         return;
-      var x2 = (evt.touches ? evt.touches[0] : evt).clientX, y = (evt.touches ? evt.touches[0] : evt).clientY, sens = options.scrollSensitivity, speed = options.scrollSpeed, winScroller = getWindowScrollingElement();
+      var x3 = (evt.touches ? evt.touches[0] : evt).clientX, y2 = (evt.touches ? evt.touches[0] : evt).clientY, sens = options.scrollSensitivity, speed = options.scrollSpeed, winScroller = getWindowScrollingElement();
       var scrollThisInstance = false, scrollCustomFn;
       if (scrollRootEl !== rootEl2) {
         scrollRootEl = rootEl2;
@@ -3361,8 +3361,8 @@ var init_sortable_esm = __esm({
           canScrollX = width < scrollWidth && (elCSS.overflowX === "auto" || elCSS.overflowX === "scroll");
           canScrollY = height < scrollHeight && (elCSS.overflowY === "auto" || elCSS.overflowY === "scroll");
         }
-        var vx = canScrollX && (Math.abs(right2 - x2) <= sens && scrollPosX + width < scrollWidth) - (Math.abs(left2 - x2) <= sens && !!scrollPosX);
-        var vy = canScrollY && (Math.abs(bottom - y) <= sens && scrollPosY + height < scrollHeight) - (Math.abs(top - y) <= sens && !!scrollPosY);
+        var vx = canScrollX && (Math.abs(right2 - x3) <= sens && scrollPosX + width < scrollWidth) - (Math.abs(left2 - x3) <= sens && !!scrollPosX);
+        var vy = canScrollY && (Math.abs(bottom - y2) <= sens && scrollPosY + height < scrollHeight) - (Math.abs(top - y2) <= sens && !!scrollPosY);
         if (!autoScrolls[layersOut]) {
           for (var i = 0; i <= layersOut; i++) {
             if (!autoScrolls[i]) {
@@ -3514,7 +3514,7 @@ var I = (e) => {
     let c2 = s2;
     typeof o2 < "u" && (c2 = s2[o2] = m(r) ? [] : {});
     for (let [d2, l2] of Object.entries(r))
-      typeof l2 == "object" && l2 !== null && ![Date, RegExp, Function].some((y) => l2 instanceof y) ? n.push({
+      typeof l2 == "object" && l2 !== null && ![Date, RegExp, Function].some((y2) => l2 instanceof y2) ? n.push({
         parent: c2,
         key: d2,
         data: l2
@@ -4913,8 +4913,8 @@ function getAllKeysIn(object4) {
 var getAllKeysIn_default = getAllKeysIn;
 
 // ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/_DataView.js
-var DataView = getNative_default(root_default, "DataView");
-var DataView_default = DataView;
+var DataView2 = getNative_default(root_default, "DataView");
+var DataView_default = DataView2;
 
 // ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/_Promise.js
 var Promise2 = getNative_default(root_default, "Promise");
@@ -6213,18 +6213,18 @@ var __getOwnPropSymbols$b = Object.getOwnPropertySymbols;
 var __hasOwnProp$b = Object.prototype.hasOwnProperty;
 var __propIsEnum$b = Object.prototype.propertyIsEnumerable;
 var __defNormalProp$9 = (obj, key, value) => key in obj ? __defProp$9(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues$9 = (a3, b2) => {
-  for (var prop in b2 || (b2 = {}))
-    if (__hasOwnProp$b.call(b2, prop))
-      __defNormalProp$9(a3, prop, b2[prop]);
+var __spreadValues$9 = (a3, b3) => {
+  for (var prop in b3 || (b3 = {}))
+    if (__hasOwnProp$b.call(b3, prop))
+      __defNormalProp$9(a3, prop, b3[prop]);
   if (__getOwnPropSymbols$b)
-    for (var prop of __getOwnPropSymbols$b(b2)) {
-      if (__propIsEnum$b.call(b2, prop))
-        __defNormalProp$9(a3, prop, b2[prop]);
+    for (var prop of __getOwnPropSymbols$b(b3)) {
+      if (__propIsEnum$b.call(b3, prop))
+        __defNormalProp$9(a3, prop, b3[prop]);
     }
   return a3;
 };
-var __spreadProps$6 = (a3, b2) => __defProps$6(a3, __getOwnPropDescs$6(b2));
+var __spreadProps$6 = (a3, b3) => __defProps$6(a3, __getOwnPropDescs$6(b3));
 function computedEager(fn2, options) {
   var _a2;
   const result = (0, lib_exports.shallowRef)();
@@ -6462,18 +6462,18 @@ var __getOwnPropSymbols$2 = Object.getOwnPropertySymbols;
 var __hasOwnProp$2 = Object.prototype.hasOwnProperty;
 var __propIsEnum$2 = Object.prototype.propertyIsEnumerable;
 var __defNormalProp$2 = (obj, key, value) => key in obj ? __defProp$2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues$2 = (a3, b2) => {
-  for (var prop in b2 || (b2 = {}))
-    if (__hasOwnProp$2.call(b2, prop))
-      __defNormalProp$2(a3, prop, b2[prop]);
+var __spreadValues$2 = (a3, b3) => {
+  for (var prop in b3 || (b3 = {}))
+    if (__hasOwnProp$2.call(b3, prop))
+      __defNormalProp$2(a3, prop, b3[prop]);
   if (__getOwnPropSymbols$2)
-    for (var prop of __getOwnPropSymbols$2(b2)) {
-      if (__propIsEnum$2.call(b2, prop))
-        __defNormalProp$2(a3, prop, b2[prop]);
+    for (var prop of __getOwnPropSymbols$2(b3)) {
+      if (__propIsEnum$2.call(b3, prop))
+        __defNormalProp$2(a3, prop, b3[prop]);
     }
   return a3;
 };
-var __spreadProps$2 = (a3, b2) => __defProps$2(a3, __getOwnPropDescs$2(b2));
+var __spreadProps$2 = (a3, b3) => __defProps$2(a3, __getOwnPropDescs$2(b3));
 var __objRest$1 = (source, exclude) => {
   var target = {};
   for (var prop in source)
@@ -6656,49 +6656,49 @@ var __getOwnPropSymbols$l = Object.getOwnPropertySymbols;
 var __hasOwnProp$l = Object.prototype.hasOwnProperty;
 var __propIsEnum$l = Object.prototype.propertyIsEnumerable;
 var __defNormalProp$j = (obj, key, value) => key in obj ? __defProp$j(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues$j = (a3, b2) => {
-  for (var prop in b2 || (b2 = {}))
-    if (__hasOwnProp$l.call(b2, prop))
-      __defNormalProp$j(a3, prop, b2[prop]);
+var __spreadValues$j = (a3, b3) => {
+  for (var prop in b3 || (b3 = {}))
+    if (__hasOwnProp$l.call(b3, prop))
+      __defNormalProp$j(a3, prop, b3[prop]);
   if (__getOwnPropSymbols$l)
-    for (var prop of __getOwnPropSymbols$l(b2)) {
-      if (__propIsEnum$l.call(b2, prop))
-        __defNormalProp$j(a3, prop, b2[prop]);
+    for (var prop of __getOwnPropSymbols$l(b3)) {
+      if (__propIsEnum$l.call(b3, prop))
+        __defNormalProp$j(a3, prop, b3[prop]);
     }
   return a3;
 };
 var StorageSerializers = {
   boolean: {
-    read: (v2) => v2 === "true",
-    write: (v2) => String(v2)
+    read: (v3) => v3 === "true",
+    write: (v3) => String(v3)
   },
   object: {
-    read: (v2) => JSON.parse(v2),
-    write: (v2) => JSON.stringify(v2)
+    read: (v3) => JSON.parse(v3),
+    write: (v3) => JSON.stringify(v3)
   },
   number: {
-    read: (v2) => Number.parseFloat(v2),
-    write: (v2) => String(v2)
+    read: (v3) => Number.parseFloat(v3),
+    write: (v3) => String(v3)
   },
   any: {
-    read: (v2) => v2,
-    write: (v2) => String(v2)
+    read: (v3) => v3,
+    write: (v3) => String(v3)
   },
   string: {
-    read: (v2) => v2,
-    write: (v2) => String(v2)
+    read: (v3) => v3,
+    write: (v3) => String(v3)
   },
   map: {
-    read: (v2) => new Map(JSON.parse(v2)),
-    write: (v2) => JSON.stringify(Array.from(v2.entries()))
+    read: (v3) => new Map(JSON.parse(v3)),
+    write: (v3) => JSON.stringify(Array.from(v3.entries()))
   },
   set: {
-    read: (v2) => new Set(JSON.parse(v2)),
-    write: (v2) => JSON.stringify(Array.from(v2))
+    read: (v3) => new Set(JSON.parse(v3)),
+    write: (v3) => JSON.stringify(Array.from(v3))
   },
   date: {
-    read: (v2) => new Date(v2),
-    write: (v2) => v2.toISOString()
+    read: (v3) => new Date(v3),
+    write: (v3) => v3.toISOString()
   }
 };
 function useStorage(key, defaults2, storage, options = {}) {
@@ -6737,12 +6737,12 @@ function useStorage(key, defaults2, storage, options = {}) {
     useEventListener(window2, "storage", update);
   update();
   return data;
-  function write2(v2) {
+  function write2(v3) {
     try {
-      if (v2 == null) {
+      if (v3 == null) {
         storage.removeItem(key);
       } else {
-        const serialized = serializer.write(v2);
+        const serialized = serializer.write(v3);
         const oldValue = storage.getItem(key);
         if (oldValue !== serialized) {
           storage.setItem(key, serialized);
@@ -6885,8 +6885,8 @@ function useElementBounding(target, options = {}) {
   const right2 = (0, lib_exports.ref)(0);
   const top = (0, lib_exports.ref)(0);
   const width = (0, lib_exports.ref)(0);
-  const x2 = (0, lib_exports.ref)(0);
-  const y = (0, lib_exports.ref)(0);
+  const x3 = (0, lib_exports.ref)(0);
+  const y2 = (0, lib_exports.ref)(0);
   function update() {
     const el = unrefElement(target);
     if (!el) {
@@ -6897,8 +6897,8 @@ function useElementBounding(target, options = {}) {
         right2.value = 0;
         top.value = 0;
         width.value = 0;
-        x2.value = 0;
-        y.value = 0;
+        x3.value = 0;
+        y2.value = 0;
       }
       return;
     }
@@ -6909,8 +6909,8 @@ function useElementBounding(target, options = {}) {
     right2.value = rect.right;
     top.value = rect.top;
     width.value = rect.width;
-    x2.value = rect.x;
-    y.value = rect.y;
+    x3.value = rect.x;
+    y2.value = rect.y;
   }
   useResizeObserver(target, update);
   (0, lib_exports.watch)(() => unrefElement(target), (ele) => !ele && update());
@@ -6929,8 +6929,8 @@ function useElementBounding(target, options = {}) {
     right: right2,
     top,
     width,
-    x: x2,
-    y,
+    x: x3,
+    y: y2,
     update
   };
 }
@@ -6988,14 +6988,14 @@ var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp2 = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a3, b2) => {
-  for (var prop in b2 || (b2 = {}))
-    if (__hasOwnProp2.call(b2, prop))
-      __defNormalProp(a3, prop, b2[prop]);
+var __spreadValues = (a3, b3) => {
+  for (var prop in b3 || (b3 = {}))
+    if (__hasOwnProp2.call(b3, prop))
+      __defNormalProp(a3, prop, b3[prop]);
   if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b2)) {
-      if (__propIsEnum.call(b2, prop))
-        __defNormalProp(a3, prop, b2[prop]);
+    for (var prop of __getOwnPropSymbols(b3)) {
+      if (__propIsEnum.call(b3, prop))
+        __defNormalProp(a3, prop, b3[prop]);
     }
   return a3;
 };
@@ -7056,10 +7056,10 @@ function useVModel(props, key, emit, options = {}) {
   if (passive) {
     const initialValue = getValue3();
     const proxy = (0, lib_exports.ref)(initialValue);
-    (0, lib_exports.watch)(() => props[key], (v2) => proxy.value = cloneFn(v2));
-    (0, lib_exports.watch)(proxy, (v2) => {
-      if (v2 !== props[key] || deep)
-        _emit(event, v2);
+    (0, lib_exports.watch)(() => props[key], (v3) => proxy.value = cloneFn(v3));
+    (0, lib_exports.watch)(proxy, (v3) => {
+      if (v3 !== props[key] || deep)
+        _emit(event, v3);
     }, { deep });
     return proxy;
   } else {
@@ -8546,11 +8546,11 @@ var withNoopInstall = (component2) => {
 var import_shared11 = require("@vue/shared");
 var composeRefs = (...refs) => {
   return (el) => {
-    refs.forEach((ref161) => {
-      if ((0, import_shared11.isFunction)(ref161)) {
-        ref161(el);
+    refs.forEach((ref162) => {
+      if ((0, import_shared11.isFunction)(ref162)) {
+        ref162(el);
       } else {
-        ref161.value = el;
+        ref162.value = el;
       }
     });
   };
@@ -8851,12 +8851,12 @@ var provideGlobalConfig = (config, app, global2 = false) => {
   }
   return context;
 };
-var mergeConfig = (a3, b2) => {
+var mergeConfig = (a3, b3) => {
   var _a2;
-  const keys2 = [.../* @__PURE__ */ new Set([...keysOf(a3), ...keysOf(b2)])];
+  const keys2 = [.../* @__PURE__ */ new Set([...keysOf(a3), ...keysOf(b3)])];
   const obj = {};
   for (const key of keys2) {
-    obj[key] = (_a2 = b2[key]) != null ? _a2 : a3[key];
+    obj[key] = (_a2 = b3[key]) != null ? _a2 : a3[key];
   }
   return obj;
 };
@@ -8883,11 +8883,11 @@ var useDisabled = (fallback) => {
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/hooks/use-deprecated/index.mjs
 var import_vue301 = require("vue");
-var useDeprecated = ({ from, replacement, scope, version: version5, ref: ref161, type: type4 = "API" }, condition) => {
+var useDeprecated = ({ from, replacement, scope, version: version5, ref: ref162, type: type4 = "API" }, condition) => {
   (0, import_vue301.watch)(() => (0, import_vue301.unref)(condition), (val) => {
     if (val) {
       debugWarn(scope, `[${type4}] ${from} is about to be deprecated in version ${version5}, please use ${replacement} instead.
-For more detail, please visit: ${ref161}
+For more detail, please visit: ${ref162}
 `);
     }
   }, {
@@ -8991,7 +8991,7 @@ var _bem = (namespace, block, blockSuffix, element, modifier) => {
 };
 var useNamespace = (block) => {
   const namespace = useGlobalConfig("namespace", defaultNamespace);
-  const b2 = (blockSuffix = "") => _bem(namespace.value, block, blockSuffix, "", "");
+  const b3 = (blockSuffix = "") => _bem(namespace.value, block, blockSuffix, "", "");
   const e = (element) => element ? _bem(namespace.value, block, "", element, "") : "";
   const m3 = (modifier) => modifier ? _bem(namespace.value, block, "", "", modifier) : "";
   const be2 = (blockSuffix, element) => blockSuffix && element ? _bem(namespace.value, block, blockSuffix, element, "") : "";
@@ -9024,7 +9024,7 @@ var useNamespace = (block) => {
   const cssVarBlockName = (name) => `--${namespace.value}-${block}-${name}`;
   return {
     namespace,
-    b: b2,
+    b: b3,
     e,
     m: m3,
     be: be2,
@@ -9640,8 +9640,8 @@ var Tt = function(t, e) {
 function Ht(t) {
   var e, n = t.state, r = t.name, o2 = t.options, i = n.elements.arrow, a3 = n.modifiersData.popperOffsets, s2 = q(n.placement), f2 = Le(s2), c2 = [P, W].indexOf(s2) >= 0, u2 = c2 ? "height" : "width";
   if (!(!i || !a3)) {
-    var m3 = Tt(o2.padding, n), v2 = ke(i), l2 = f2 === "y" ? E : P, h29 = f2 === "y" ? R : W, p2 = n.rects.reference[u2] + n.rects.reference[f2] - a3[f2] - n.rects.popper[u2], g = a3[f2] - n.rects.reference[f2], x2 = se(i), y = x2 ? f2 === "y" ? x2.clientHeight || 0 : x2.clientWidth || 0 : 0, $ = p2 / 2 - g / 2, d2 = m3[l2], b2 = y - v2[u2] - m3[h29], w3 = y / 2 - v2[u2] / 2 + $, O2 = fe(d2, w3, b2), j = f2;
-    n.modifiersData[r] = (e = {}, e[j] = O2, e.centerOffset = O2 - w3, e);
+    var m3 = Tt(o2.padding, n), v3 = ke(i), l2 = f2 === "y" ? E : P, h29 = f2 === "y" ? R : W, p2 = n.rects.reference[u2] + n.rects.reference[f2] - a3[f2] - n.rects.popper[u2], g = a3[f2] - n.rects.reference[f2], x3 = se(i), y2 = x3 ? f2 === "y" ? x3.clientHeight || 0 : x3.clientWidth || 0 : 0, $2 = p2 / 2 - g / 2, d2 = m3[l2], b3 = y2 - v3[u2] - m3[h29], w3 = y2 / 2 - v3[u2] / 2 + $2, O3 = fe(d2, w3, b3), j = f2;
+    n.modifiersData[r] = (e = {}, e[j] = O3, e.centerOffset = O3 - w3, e);
   }
 }
 function Ct(t) {
@@ -9658,28 +9658,28 @@ function Vt(t) {
   return { x: Z(e * o2) / o2 || 0, y: Z(n * o2) / o2 || 0 };
 }
 function ut(t) {
-  var e, n = t.popper, r = t.popperRect, o2 = t.placement, i = t.variation, a3 = t.offsets, s2 = t.position, f2 = t.gpuAcceleration, c2 = t.adaptive, u2 = t.roundOffsets, m3 = t.isFixed, v2 = a3.x, l2 = v2 === void 0 ? 0 : v2, h29 = a3.y, p2 = h29 === void 0 ? 0 : h29, g = typeof u2 == "function" ? u2({ x: l2, y: p2 }) : { x: l2, y: p2 };
+  var e, n = t.popper, r = t.popperRect, o2 = t.placement, i = t.variation, a3 = t.offsets, s2 = t.position, f2 = t.gpuAcceleration, c2 = t.adaptive, u2 = t.roundOffsets, m3 = t.isFixed, v3 = a3.x, l2 = v3 === void 0 ? 0 : v3, h29 = a3.y, p2 = h29 === void 0 ? 0 : h29, g = typeof u2 == "function" ? u2({ x: l2, y: p2 }) : { x: l2, y: p2 };
   l2 = g.x, p2 = g.y;
-  var x2 = a3.hasOwnProperty("x"), y = a3.hasOwnProperty("y"), $ = P, d2 = E, b2 = window;
+  var x3 = a3.hasOwnProperty("x"), y2 = a3.hasOwnProperty("y"), $2 = P, d2 = E, b3 = window;
   if (c2) {
-    var w3 = se(n), O2 = "clientHeight", j = "clientWidth";
-    if (w3 === H(n) && (w3 = I2(n), N(w3).position !== "static" && s2 === "absolute" && (O2 = "scrollHeight", j = "scrollWidth")), w3 = w3, o2 === E || (o2 === P || o2 === W) && i === J) {
+    var w3 = se(n), O3 = "clientHeight", j = "clientWidth";
+    if (w3 === H(n) && (w3 = I2(n), N(w3).position !== "static" && s2 === "absolute" && (O3 = "scrollHeight", j = "scrollWidth")), w3 = w3, o2 === E || (o2 === P || o2 === W) && i === J) {
       d2 = R;
-      var A2 = m3 && w3 === b2 && b2.visualViewport ? b2.visualViewport.height : w3[O2];
-      p2 -= A2 - r.height, p2 *= f2 ? 1 : -1;
+      var A3 = m3 && w3 === b3 && b3.visualViewport ? b3.visualViewport.height : w3[O3];
+      p2 -= A3 - r.height, p2 *= f2 ? 1 : -1;
     }
     if (o2 === P || (o2 === E || o2 === R) && i === J) {
-      $ = W;
-      var k = m3 && w3 === b2 && b2.visualViewport ? b2.visualViewport.width : w3[j];
-      l2 -= k - r.width, l2 *= f2 ? 1 : -1;
+      $2 = W;
+      var k2 = m3 && w3 === b3 && b3.visualViewport ? b3.visualViewport.width : w3[j];
+      l2 -= k2 - r.width, l2 *= f2 ? 1 : -1;
     }
   }
-  var D2 = Object.assign({ position: s2 }, c2 && qt), S2 = u2 === true ? Vt({ x: l2, y: p2 }) : { x: l2, y: p2 };
-  if (l2 = S2.x, p2 = S2.y, f2) {
-    var L;
-    return Object.assign({}, D2, (L = {}, L[d2] = y ? "0" : "", L[$] = x2 ? "0" : "", L.transform = (b2.devicePixelRatio || 1) <= 1 ? "translate(" + l2 + "px, " + p2 + "px)" : "translate3d(" + l2 + "px, " + p2 + "px, 0)", L));
+  var D3 = Object.assign({ position: s2 }, c2 && qt), S3 = u2 === true ? Vt({ x: l2, y: p2 }) : { x: l2, y: p2 };
+  if (l2 = S3.x, p2 = S3.y, f2) {
+    var L2;
+    return Object.assign({}, D3, (L2 = {}, L2[d2] = y2 ? "0" : "", L2[$2] = x3 ? "0" : "", L2.transform = (b3.devicePixelRatio || 1) <= 1 ? "translate(" + l2 + "px, " + p2 + "px)" : "translate3d(" + l2 + "px, " + p2 + "px, 0)", L2));
   }
-  return Object.assign({}, D2, (e = {}, e[d2] = y ? p2 + "px" : "", e[$] = x2 ? l2 + "px" : "", e.transform = "", e));
+  return Object.assign({}, D3, (e = {}, e[d2] = y2 ? p2 + "px" : "", e[$2] = x3 ? l2 + "px" : "", e.transform = "", e));
 }
 function Nt(t) {
   var e = t.state, n = t.options, r = n.gpuAcceleration, o2 = r === void 0 ? true : r, i = n.adaptive, a3 = i === void 0 ? true : i, s2 = n.roundOffsets, f2 = s2 === void 0 ? true : s2, c2 = { placement: q(e.placement), variation: te(e.placement), popper: e.elements.popper, popperRect: e.rects.popper, gpuAcceleration: o2, isFixed: e.options.strategy === "fixed" };
@@ -9796,12 +9796,12 @@ function mt(t) {
 }
 function ne2(t, e) {
   e === void 0 && (e = {});
-  var n = e, r = n.placement, o2 = r === void 0 ? t.placement : r, i = n.boundary, a3 = i === void 0 ? Xe : i, s2 = n.rootBoundary, f2 = s2 === void 0 ? je : s2, c2 = n.elementContext, u2 = c2 === void 0 ? K2 : c2, m3 = n.altBoundary, v2 = m3 === void 0 ? false : m3, l2 = n.padding, h29 = l2 === void 0 ? 0 : l2, p2 = ft(typeof h29 != "number" ? h29 : ct(h29, G)), g = u2 === K2 ? Ye : K2, x2 = t.rects.popper, y = t.elements[v2 ? g : u2], $ = Gt(Q(y) ? y : y.contextElement || I2(t.elements.popper), a3, f2), d2 = ee(t.elements.reference), b2 = mt({ reference: d2, element: x2, strategy: "absolute", placement: o2 }), w3 = Te(Object.assign({}, x2, b2)), O2 = u2 === K2 ? w3 : d2, j = { top: $.top - O2.top + p2.top, bottom: O2.bottom - $.bottom + p2.bottom, left: $.left - O2.left + p2.left, right: O2.right - $.right + p2.right }, A2 = t.modifiersData.offset;
-  if (u2 === K2 && A2) {
-    var k = A2[o2];
-    Object.keys(j).forEach(function(D2) {
-      var S2 = [W, R].indexOf(D2) >= 0 ? 1 : -1, L = [E, R].indexOf(D2) >= 0 ? "y" : "x";
-      j[D2] += k[L] * S2;
+  var n = e, r = n.placement, o2 = r === void 0 ? t.placement : r, i = n.boundary, a3 = i === void 0 ? Xe : i, s2 = n.rootBoundary, f2 = s2 === void 0 ? je : s2, c2 = n.elementContext, u2 = c2 === void 0 ? K2 : c2, m3 = n.altBoundary, v3 = m3 === void 0 ? false : m3, l2 = n.padding, h29 = l2 === void 0 ? 0 : l2, p2 = ft(typeof h29 != "number" ? h29 : ct(h29, G)), g = u2 === K2 ? Ye : K2, x3 = t.rects.popper, y2 = t.elements[v3 ? g : u2], $2 = Gt(Q(y2) ? y2 : y2.contextElement || I2(t.elements.popper), a3, f2), d2 = ee(t.elements.reference), b3 = mt({ reference: d2, element: x3, strategy: "absolute", placement: o2 }), w3 = Te(Object.assign({}, x3, b3)), O3 = u2 === K2 ? w3 : d2, j = { top: $2.top - O3.top + p2.top, bottom: O3.bottom - $2.bottom + p2.bottom, left: $2.left - O3.left + p2.left, right: O3.right - $2.right + p2.right }, A3 = t.modifiersData.offset;
+  if (u2 === K2 && A3) {
+    var k2 = A3[o2];
+    Object.keys(j).forEach(function(D3) {
+      var S3 = [W, R].indexOf(D3) >= 0 ? 1 : -1, L2 = [E, R].indexOf(D3) >= 0 ? "y" : "x";
+      j[D3] += k2[L2] * S3;
     });
   }
   return j;
@@ -9810,11 +9810,11 @@ function Jt(t, e) {
   e === void 0 && (e = {});
   var n = e, r = n.placement, o2 = n.boundary, i = n.rootBoundary, a3 = n.padding, s2 = n.flipVariations, f2 = n.allowedAutoPlacements, c2 = f2 === void 0 ? Ee : f2, u2 = te(r), m3 = u2 ? s2 ? De : De.filter(function(h29) {
     return te(h29) === u2;
-  }) : G, v2 = m3.filter(function(h29) {
+  }) : G, v3 = m3.filter(function(h29) {
     return c2.indexOf(h29) >= 0;
   });
-  v2.length === 0 && (v2 = m3);
-  var l2 = v2.reduce(function(h29, p2) {
+  v3.length === 0 && (v3 = m3);
+  var l2 = v3.reduce(function(h29, p2) {
     return h29[p2] = ne2(t, { placement: p2, boundary: o2, rootBoundary: i, padding: a3 })[q(p2)], h29;
   }, {});
   return Object.keys(l2).sort(function(h29, p2) {
@@ -9830,37 +9830,37 @@ function Kt(t) {
 function Qt(t) {
   var e = t.state, n = t.options, r = t.name;
   if (!e.modifiersData[r]._skip) {
-    for (var o2 = n.mainAxis, i = o2 === void 0 ? true : o2, a3 = n.altAxis, s2 = a3 === void 0 ? true : a3, f2 = n.fallbackPlacements, c2 = n.padding, u2 = n.boundary, m3 = n.rootBoundary, v2 = n.altBoundary, l2 = n.flipVariations, h29 = l2 === void 0 ? true : l2, p2 = n.allowedAutoPlacements, g = e.options.placement, x2 = q(g), y = x2 === g, $ = f2 || (y || !h29 ? [be(g)] : Kt(g)), d2 = [g].concat($).reduce(function(z, V) {
-      return z.concat(q(V) === me ? Jt(e, { placement: V, boundary: u2, rootBoundary: m3, padding: c2, flipVariations: h29, allowedAutoPlacements: p2 }) : V);
-    }, []), b2 = e.rects.reference, w3 = e.rects.popper, O2 = /* @__PURE__ */ new Map(), j = true, A2 = d2[0], k = 0; k < d2.length; k++) {
-      var D2 = d2[k], S2 = q(D2), L = te(D2) === U, re = [E, R].indexOf(S2) >= 0, oe = re ? "width" : "height", M2 = ne2(e, { placement: D2, boundary: u2, rootBoundary: m3, altBoundary: v2, padding: c2 }), T2 = re ? L ? W : P : L ? R : E;
-      b2[oe] > w3[oe] && (T2 = be(T2));
-      var pe = be(T2), _2 = [];
-      if (i && _2.push(M2[S2] <= 0), s2 && _2.push(M2[T2] <= 0, M2[pe] <= 0), _2.every(function(z) {
-        return z;
+    for (var o2 = n.mainAxis, i = o2 === void 0 ? true : o2, a3 = n.altAxis, s2 = a3 === void 0 ? true : a3, f2 = n.fallbackPlacements, c2 = n.padding, u2 = n.boundary, m3 = n.rootBoundary, v3 = n.altBoundary, l2 = n.flipVariations, h29 = l2 === void 0 ? true : l2, p2 = n.allowedAutoPlacements, g = e.options.placement, x3 = q(g), y2 = x3 === g, $2 = f2 || (y2 || !h29 ? [be(g)] : Kt(g)), d2 = [g].concat($2).reduce(function(z2, V) {
+      return z2.concat(q(V) === me ? Jt(e, { placement: V, boundary: u2, rootBoundary: m3, padding: c2, flipVariations: h29, allowedAutoPlacements: p2 }) : V);
+    }, []), b3 = e.rects.reference, w3 = e.rects.popper, O3 = /* @__PURE__ */ new Map(), j = true, A3 = d2[0], k2 = 0; k2 < d2.length; k2++) {
+      var D3 = d2[k2], S3 = q(D3), L2 = te(D3) === U, re = [E, R].indexOf(S3) >= 0, oe = re ? "width" : "height", M3 = ne2(e, { placement: D3, boundary: u2, rootBoundary: m3, altBoundary: v3, padding: c2 }), T3 = re ? L2 ? W : P : L2 ? R : E;
+      b3[oe] > w3[oe] && (T3 = be(T3));
+      var pe = be(T3), _2 = [];
+      if (i && _2.push(M3[S3] <= 0), s2 && _2.push(M3[T3] <= 0, M3[pe] <= 0), _2.every(function(z2) {
+        return z2;
       })) {
-        A2 = D2, j = false;
+        A3 = D3, j = false;
         break;
       }
-      O2.set(D2, _2);
+      O3.set(D3, _2);
     }
     if (j)
-      for (var ue = h29 ? 3 : 1, xe = function(z) {
+      for (var ue = h29 ? 3 : 1, xe = function(z2) {
         var V = d2.find(function(de) {
-          var ae = O2.get(de);
+          var ae = O3.get(de);
           if (ae)
-            return ae.slice(0, z).every(function(Y2) {
-              return Y2;
+            return ae.slice(0, z2).every(function(Y3) {
+              return Y3;
             });
         });
         if (V)
-          return A2 = V, "break";
+          return A3 = V, "break";
       }, ie = ue; ie > 0; ie--) {
         var le = xe(ie);
         if (le === "break")
           break;
       }
-    e.placement !== A2 && (e.modifiersData[r]._skip = true, e.placement = A2, e.reset = true);
+    e.placement !== A3 && (e.modifiersData[r]._skip = true, e.placement = A3, e.reset = true);
   }
 }
 var vt = { name: "flip", enabled: true, phase: "main", fn: Qt, requiresIfExists: ["offset"], data: { _skip: false } };
@@ -9897,17 +9897,17 @@ function rn(t) {
   return t === "x" ? "y" : "x";
 }
 function on(t) {
-  var e = t.state, n = t.options, r = t.name, o2 = n.mainAxis, i = o2 === void 0 ? true : o2, a3 = n.altAxis, s2 = a3 === void 0 ? false : a3, f2 = n.boundary, c2 = n.rootBoundary, u2 = n.altBoundary, m3 = n.padding, v2 = n.tether, l2 = v2 === void 0 ? true : v2, h29 = n.tetherOffset, p2 = h29 === void 0 ? 0 : h29, g = ne2(e, { boundary: f2, rootBoundary: c2, padding: m3, altBoundary: u2 }), x2 = q(e.placement), y = te(e.placement), $ = !y, d2 = Le(x2), b2 = rn(d2), w3 = e.modifiersData.popperOffsets, O2 = e.rects.reference, j = e.rects.popper, A2 = typeof p2 == "function" ? p2(Object.assign({}, e.rects, { placement: e.placement })) : p2, k = typeof A2 == "number" ? { mainAxis: A2, altAxis: A2 } : Object.assign({ mainAxis: 0, altAxis: 0 }, A2), D2 = e.modifiersData.offset ? e.modifiersData.offset[e.placement] : null, S2 = { x: 0, y: 0 };
+  var e = t.state, n = t.options, r = t.name, o2 = n.mainAxis, i = o2 === void 0 ? true : o2, a3 = n.altAxis, s2 = a3 === void 0 ? false : a3, f2 = n.boundary, c2 = n.rootBoundary, u2 = n.altBoundary, m3 = n.padding, v3 = n.tether, l2 = v3 === void 0 ? true : v3, h29 = n.tetherOffset, p2 = h29 === void 0 ? 0 : h29, g = ne2(e, { boundary: f2, rootBoundary: c2, padding: m3, altBoundary: u2 }), x3 = q(e.placement), y2 = te(e.placement), $2 = !y2, d2 = Le(x3), b3 = rn(d2), w3 = e.modifiersData.popperOffsets, O3 = e.rects.reference, j = e.rects.popper, A3 = typeof p2 == "function" ? p2(Object.assign({}, e.rects, { placement: e.placement })) : p2, k2 = typeof A3 == "number" ? { mainAxis: A3, altAxis: A3 } : Object.assign({ mainAxis: 0, altAxis: 0 }, A3), D3 = e.modifiersData.offset ? e.modifiersData.offset[e.placement] : null, S3 = { x: 0, y: 0 };
   if (w3) {
     if (i) {
-      var L, re = d2 === "y" ? E : P, oe = d2 === "y" ? R : W, M2 = d2 === "y" ? "height" : "width", T2 = w3[d2], pe = T2 + g[re], _2 = T2 - g[oe], ue = l2 ? -j[M2] / 2 : 0, xe = y === U ? O2[M2] : j[M2], ie = y === U ? -j[M2] : -O2[M2], le = e.elements.arrow, z = l2 && le ? ke(le) : { width: 0, height: 0 }, V = e.modifiersData["arrow#persistent"] ? e.modifiersData["arrow#persistent"].padding : st(), de = V[re], ae = V[oe], Y2 = fe(0, O2[M2], z[M2]), jt = $ ? O2[M2] / 2 - ue - Y2 - de - k.mainAxis : xe - Y2 - de - k.mainAxis, Dt = $ ? -O2[M2] / 2 + ue + Y2 + ae + k.mainAxis : ie + Y2 + ae + k.mainAxis, Oe = e.elements.arrow && se(e.elements.arrow), Et = Oe ? d2 === "y" ? Oe.clientTop || 0 : Oe.clientLeft || 0 : 0, Ce = (L = D2 == null ? void 0 : D2[d2]) != null ? L : 0, Pt = T2 + jt - Ce - Et, At = T2 + Dt - Ce, qe = fe(l2 ? ve(pe, Pt) : pe, T2, l2 ? X(_2, At) : _2);
-      w3[d2] = qe, S2[d2] = qe - T2;
+      var L2, re = d2 === "y" ? E : P, oe = d2 === "y" ? R : W, M3 = d2 === "y" ? "height" : "width", T3 = w3[d2], pe = T3 + g[re], _2 = T3 - g[oe], ue = l2 ? -j[M3] / 2 : 0, xe = y2 === U ? O3[M3] : j[M3], ie = y2 === U ? -j[M3] : -O3[M3], le = e.elements.arrow, z2 = l2 && le ? ke(le) : { width: 0, height: 0 }, V = e.modifiersData["arrow#persistent"] ? e.modifiersData["arrow#persistent"].padding : st(), de = V[re], ae = V[oe], Y3 = fe(0, O3[M3], z2[M3]), jt = $2 ? O3[M3] / 2 - ue - Y3 - de - k2.mainAxis : xe - Y3 - de - k2.mainAxis, Dt = $2 ? -O3[M3] / 2 + ue + Y3 + ae + k2.mainAxis : ie + Y3 + ae + k2.mainAxis, Oe = e.elements.arrow && se(e.elements.arrow), Et = Oe ? d2 === "y" ? Oe.clientTop || 0 : Oe.clientLeft || 0 : 0, Ce = (L2 = D3 == null ? void 0 : D3[d2]) != null ? L2 : 0, Pt = T3 + jt - Ce - Et, At = T3 + Dt - Ce, qe = fe(l2 ? ve(pe, Pt) : pe, T3, l2 ? X(_2, At) : _2);
+      w3[d2] = qe, S3[d2] = qe - T3;
     }
     if (s2) {
-      var Ve, kt = d2 === "x" ? E : P, Lt = d2 === "x" ? R : W, F2 = w3[b2], he = b2 === "y" ? "height" : "width", Ne = F2 + g[kt], Ie = F2 - g[Lt], $e = [E, P].indexOf(x2) !== -1, _e = (Ve = D2 == null ? void 0 : D2[b2]) != null ? Ve : 0, ze = $e ? Ne : F2 - O2[he] - j[he] - _e + k.altAxis, Fe = $e ? F2 + O2[he] + j[he] - _e - k.altAxis : Ie, Ue = l2 && $e ? St(ze, F2, Fe) : fe(l2 ? ze : Ne, F2, l2 ? Fe : Ie);
-      w3[b2] = Ue, S2[b2] = Ue - F2;
+      var Ve, kt = d2 === "x" ? E : P, Lt = d2 === "x" ? R : W, F2 = w3[b3], he = b3 === "y" ? "height" : "width", Ne = F2 + g[kt], Ie = F2 - g[Lt], $e = [E, P].indexOf(x3) !== -1, _e = (Ve = D3 == null ? void 0 : D3[b3]) != null ? Ve : 0, ze = $e ? Ne : F2 - O3[he] - j[he] - _e + k2.altAxis, Fe = $e ? F2 + O3[he] + j[he] - _e - k2.altAxis : Ie, Ue = l2 && $e ? St(ze, F2, Fe) : fe(l2 ? ze : Ne, F2, l2 ? Fe : Ie);
+      w3[b3] = Ue, S3[b3] = Ue - F2;
     }
-    e.modifiersData[r] = S2;
+    e.modifiersData[r] = S3;
   }
 }
 var xt = { name: "preventOverflow", enabled: true, phase: "main", fn: on, requiresIfExists: ["offset"] };
@@ -9985,49 +9985,49 @@ function we(t) {
   var e = t, n = e.defaultModifiers, r = n === void 0 ? [] : n, o2 = e.defaultOptions, i = o2 === void 0 ? Ot : o2;
   return function(a3, s2, f2) {
     f2 === void 0 && (f2 = i);
-    var c2 = { placement: "bottom", orderedModifiers: [], options: Object.assign({}, Ot, i), modifiersData: {}, elements: { reference: a3, popper: s2 }, attributes: {}, styles: {} }, u2 = [], m3 = false, v2 = { state: c2, setOptions: function(p2) {
+    var c2 = { placement: "bottom", orderedModifiers: [], options: Object.assign({}, Ot, i), modifiersData: {}, elements: { reference: a3, popper: s2 }, attributes: {}, styles: {} }, u2 = [], m3 = false, v3 = { state: c2, setOptions: function(p2) {
       var g = typeof p2 == "function" ? p2(c2.options) : p2;
       h29(), c2.options = Object.assign({}, i, c2.options, g), c2.scrollParents = { reference: Q(a3) ? ce(a3) : a3.contextElement ? ce(a3.contextElement) : [], popper: ce(s2) };
-      var x2 = un(dn([].concat(r, c2.options.modifiers)));
-      return c2.orderedModifiers = x2.filter(function(y) {
-        return y.enabled;
-      }), l2(), v2.update();
+      var x3 = un(dn([].concat(r, c2.options.modifiers)));
+      return c2.orderedModifiers = x3.filter(function(y2) {
+        return y2.enabled;
+      }), l2(), v3.update();
     }, forceUpdate: function() {
       if (!m3) {
-        var p2 = c2.elements, g = p2.reference, x2 = p2.popper;
-        if ($t(g, x2)) {
-          c2.rects = { reference: cn(g, se(x2), c2.options.strategy === "fixed"), popper: ke(x2) }, c2.reset = false, c2.placement = c2.options.placement, c2.orderedModifiers.forEach(function(j) {
+        var p2 = c2.elements, g = p2.reference, x3 = p2.popper;
+        if ($t(g, x3)) {
+          c2.rects = { reference: cn(g, se(x3), c2.options.strategy === "fixed"), popper: ke(x3) }, c2.reset = false, c2.placement = c2.options.placement, c2.orderedModifiers.forEach(function(j) {
             return c2.modifiersData[j.name] = Object.assign({}, j.data);
           });
-          for (var y = 0; y < c2.orderedModifiers.length; y++) {
+          for (var y2 = 0; y2 < c2.orderedModifiers.length; y2++) {
             if (c2.reset === true) {
-              c2.reset = false, y = -1;
+              c2.reset = false, y2 = -1;
               continue;
             }
-            var $ = c2.orderedModifiers[y], d2 = $.fn, b2 = $.options, w3 = b2 === void 0 ? {} : b2, O2 = $.name;
-            typeof d2 == "function" && (c2 = d2({ state: c2, options: w3, name: O2, instance: v2 }) || c2);
+            var $2 = c2.orderedModifiers[y2], d2 = $2.fn, b3 = $2.options, w3 = b3 === void 0 ? {} : b3, O3 = $2.name;
+            typeof d2 == "function" && (c2 = d2({ state: c2, options: w3, name: O3, instance: v3 }) || c2);
           }
         }
       }
     }, update: ln(function() {
       return new Promise(function(p2) {
-        v2.forceUpdate(), p2(c2);
+        v3.forceUpdate(), p2(c2);
       });
     }), destroy: function() {
       h29(), m3 = true;
     } };
     if (!$t(a3, s2))
-      return v2;
-    v2.setOptions(f2).then(function(p2) {
+      return v3;
+    v3.setOptions(f2).then(function(p2) {
       !m3 && f2.onFirstUpdate && f2.onFirstUpdate(p2);
     });
     function l2() {
       c2.orderedModifiers.forEach(function(p2) {
-        var g = p2.name, x2 = p2.options, y = x2 === void 0 ? {} : x2, $ = p2.effect;
-        if (typeof $ == "function") {
-          var d2 = $({ state: c2, name: g, instance: v2, options: y }), b2 = function() {
+        var g = p2.name, x3 = p2.options, y2 = x3 === void 0 ? {} : x3, $2 = p2.effect;
+        if (typeof $2 == "function") {
+          var d2 = $2({ state: c2, name: g, instance: v3, options: y2 }), b3 = function() {
           };
-          u2.push(d2 || b2);
+          u2.push(d2 || b3);
         }
       });
     }
@@ -10036,7 +10036,7 @@ function we(t) {
         return p2();
       }), u2 = [];
     }
-    return v2;
+    return v3;
   };
 }
 var hn = we();
@@ -10366,8 +10366,8 @@ var computePosition = async (reference, floating, config) => {
     strategy
   });
   let {
-    x: x2,
-    y
+    x: x3,
+    y: y2
   } = computeCoordsFromPlacement(rects, placement, rtl);
   let statefulPlacement = placement;
   let middlewareData = {};
@@ -10383,8 +10383,8 @@ var computePosition = async (reference, floating, config) => {
       data,
       reset
     } = await fn2({
-      x: x2,
-      y,
+      x: x3,
+      y: y2,
       initialPlacement: placement,
       placement: statefulPlacement,
       strategy,
@@ -10396,8 +10396,8 @@ var computePosition = async (reference, floating, config) => {
         floating
       }
     });
-    x2 = nextX != null ? nextX : x2;
-    y = nextY != null ? nextY : y;
+    x3 = nextX != null ? nextX : x3;
+    y2 = nextY != null ? nextY : y2;
     middlewareData = {
       ...middlewareData,
       [name]: {
@@ -10424,8 +10424,8 @@ var computePosition = async (reference, floating, config) => {
           }) : reset.rects;
         }
         ({
-          x: x2,
-          y
+          x: x3,
+          y: y2
         } = computeCoordsFromPlacement(rects, statefulPlacement, rtl));
       }
       i = -1;
@@ -10433,8 +10433,8 @@ var computePosition = async (reference, floating, config) => {
     }
   }
   return {
-    x: x2,
-    y,
+    x: x3,
+    y: y2,
     placement: statefulPlacement,
     strategy,
     middlewareData
@@ -10480,8 +10480,8 @@ var arrow = (options) => ({
       padding = 0
     } = options || {};
     const {
-      x: x2,
-      y,
+      x: x3,
+      y: y2,
       placement,
       rects,
       platform: platform2
@@ -10494,8 +10494,8 @@ var arrow = (options) => ({
     }
     const paddingObject = getSideObjectFromPadding(padding);
     const coords = {
-      x: x2,
-      y
+      x: x3,
+      y: y2
     };
     const axis = getMainAxisFromPlacement(placement);
     const length = getLengthFromAxis(axis);
@@ -10572,13 +10572,13 @@ var offset = function(value) {
     options: value,
     async fn(middlewareArguments) {
       const {
-        x: x2,
-        y
+        x: x3,
+        y: y2
       } = middlewareArguments;
       const diffCoords = await convertValueToCoords(middlewareArguments, value);
       return {
-        x: x2 + diffCoords.x,
-        y: y + diffCoords.y,
+        x: x3 + diffCoords.x,
+        y: y2 + diffCoords.y,
         data: diffCoords
       };
     }
@@ -10692,17 +10692,17 @@ function getScale(element) {
     height,
     fallback
   } = getCssDimensions(domElement);
-  let x2 = (fallback ? round(rect.width) : rect.width) / width;
-  let y = (fallback ? round(rect.height) : rect.height) / height;
-  if (!x2 || !Number.isFinite(x2)) {
-    x2 = 1;
+  let x3 = (fallback ? round(rect.width) : rect.width) / width;
+  let y2 = (fallback ? round(rect.height) : rect.height) / height;
+  if (!x3 || !Number.isFinite(x3)) {
+    x3 = 1;
   }
-  if (!y || !Number.isFinite(y)) {
-    y = 1;
+  if (!y2 || !Number.isFinite(y2)) {
+    y2 = 1;
   }
   return {
-    x: x2,
-    y
+    x: x3,
+    y: y2
   };
 }
 function getBoundingClientRect(element, includeScale, isFixedStrategy, offsetParent) {
@@ -10727,8 +10727,8 @@ function getBoundingClientRect(element, includeScale, isFixedStrategy, offsetPar
   }
   const win = domElement ? getWindow(domElement) : window;
   const addVisualOffsets = !isLayoutViewport() && isFixedStrategy;
-  let x2 = (clientRect.left + (addVisualOffsets ? ((_win$visualViewport = win.visualViewport) == null ? void 0 : _win$visualViewport.offsetLeft) || 0 : 0)) / scale.x;
-  let y = (clientRect.top + (addVisualOffsets ? ((_win$visualViewport2 = win.visualViewport) == null ? void 0 : _win$visualViewport2.offsetTop) || 0 : 0)) / scale.y;
+  let x3 = (clientRect.left + (addVisualOffsets ? ((_win$visualViewport = win.visualViewport) == null ? void 0 : _win$visualViewport.offsetLeft) || 0 : 0)) / scale.x;
+  let y2 = (clientRect.top + (addVisualOffsets ? ((_win$visualViewport2 = win.visualViewport) == null ? void 0 : _win$visualViewport2.offsetTop) || 0 : 0)) / scale.y;
   let width = clientRect.width / scale.x;
   let height = clientRect.height / scale.y;
   if (domElement) {
@@ -10741,24 +10741,24 @@ function getBoundingClientRect(element, includeScale, isFixedStrategy, offsetPar
       const css2 = getComputedStyle(currentIFrame);
       iframeRect.x += (currentIFrame.clientLeft + parseFloat(css2.paddingLeft)) * iframeScale.x;
       iframeRect.y += (currentIFrame.clientTop + parseFloat(css2.paddingTop)) * iframeScale.y;
-      x2 *= iframeScale.x;
-      y *= iframeScale.y;
+      x3 *= iframeScale.x;
+      y2 *= iframeScale.y;
       width *= iframeScale.x;
       height *= iframeScale.y;
-      x2 += iframeRect.x;
-      y += iframeRect.y;
+      x3 += iframeRect.x;
+      y2 += iframeRect.y;
       currentIFrame = getWindow(currentIFrame).frameElement;
     }
   }
   return {
     width,
     height,
-    top: y,
-    right: x2 + width,
-    bottom: y + height,
-    left: x2,
-    x: x2,
-    y
+    top: y2,
+    right: x3 + width,
+    bottom: y2 + height,
+    left: x3,
+    x: x3,
+    y: y2
   };
 }
 function getDocumentElement(node) {
@@ -10901,22 +10901,22 @@ function getViewportRect(element, strategy) {
   const visualViewport = win.visualViewport;
   let width = html.clientWidth;
   let height = html.clientHeight;
-  let x2 = 0;
-  let y = 0;
+  let x3 = 0;
+  let y2 = 0;
   if (visualViewport) {
     width = visualViewport.width;
     height = visualViewport.height;
     const layoutViewport = isLayoutViewport();
     if (layoutViewport || !layoutViewport && strategy === "fixed") {
-      x2 = visualViewport.offsetLeft;
-      y = visualViewport.offsetTop;
+      x3 = visualViewport.offsetLeft;
+      y2 = visualViewport.offsetTop;
     }
   }
   return {
     width,
     height,
-    x: x2,
-    y
+    x: x3,
+    y: y2
   };
 }
 function getDocumentRect(element) {
@@ -10926,16 +10926,16 @@ function getDocumentRect(element) {
   const body = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
   const width = max2(html.scrollWidth, html.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
   const height = max2(html.scrollHeight, html.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
-  let x2 = -scroll.scrollLeft + getWindowScrollBarX(element);
-  const y = -scroll.scrollTop;
+  let x3 = -scroll.scrollLeft + getWindowScrollBarX(element);
+  const y2 = -scroll.scrollTop;
   if (getComputedStyle$1(body || html).direction === "rtl") {
-    x2 += max2(html.clientWidth, body ? body.clientWidth : 0) - width;
+    x3 += max2(html.clientWidth, body ? body.clientWidth : 0) - width;
   }
   return {
     width,
     height,
-    x: x2,
-    y
+    x: x3,
+    y: y2
   };
 }
 function getNearestOverflowAncestor(node) {
@@ -10971,15 +10971,15 @@ function getInnerBoundingClientRect(element, strategy) {
   };
   const width = element.clientWidth * scale.x;
   const height = element.clientHeight * scale.y;
-  const x2 = left2 * scale.x;
-  const y = top * scale.y;
+  const x3 = left2 * scale.x;
+  const y2 = top * scale.y;
   return {
-    top: y,
-    left: x2,
-    right: x2 + width,
-    bottom: y + height,
-    x: x2,
-    y,
+    top: y2,
+    left: x3,
+    right: x3 + width,
+    bottom: y2 + height,
+    x: x3,
+    y: y2,
     width,
     height
   };
@@ -11104,12 +11104,12 @@ var useFloating = ({
 }) => {
   const referenceRef = (0, import_vue315.ref)();
   const contentRef = (0, import_vue315.ref)();
-  const x2 = (0, import_vue315.ref)();
-  const y = (0, import_vue315.ref)();
+  const x3 = (0, import_vue315.ref)();
+  const y2 = (0, import_vue315.ref)();
   const middlewareData = (0, import_vue315.ref)({});
   const states = {
-    x: x2,
-    y,
+    x: x3,
+    y: y2,
     placement,
     strategy,
     middlewareData
@@ -15195,19 +15195,19 @@ function pad2(c2) {
 }
 
 // ../../node_modules/.pnpm/@ctrl+tinycolor@3.4.1/node_modules/@ctrl/tinycolor/dist/module/conversion.js
-function rgbToRgb(r, g, b2) {
+function rgbToRgb(r, g, b3) {
   return {
     r: bound01(r, 255) * 255,
     g: bound01(g, 255) * 255,
-    b: bound01(b2, 255) * 255
+    b: bound01(b3, 255) * 255
   };
 }
-function rgbToHsl(r, g, b2) {
+function rgbToHsl(r, g, b3) {
   r = bound01(r, 255);
   g = bound01(g, 255);
-  b2 = bound01(b2, 255);
-  var max4 = Math.max(r, g, b2);
-  var min4 = Math.min(r, g, b2);
+  b3 = bound01(b3, 255);
+  var max4 = Math.max(r, g, b3);
+  var min4 = Math.min(r, g, b3);
   var h29 = 0;
   var s2 = 0;
   var l2 = (max4 + min4) / 2;
@@ -15219,12 +15219,12 @@ function rgbToHsl(r, g, b2) {
     s2 = l2 > 0.5 ? d2 / (2 - max4 - min4) : d2 / (max4 + min4);
     switch (max4) {
       case r:
-        h29 = (g - b2) / d2 + (g < b2 ? 6 : 0);
+        h29 = (g - b3) / d2 + (g < b3 ? 6 : 0);
         break;
       case g:
-        h29 = (b2 - r) / d2 + 2;
+        h29 = (b3 - r) / d2 + 2;
         break;
-      case b2:
+      case b3:
         h29 = (r - g) / d2 + 4;
         break;
       default:
@@ -15255,31 +15255,31 @@ function hue2rgb(p2, q2, t) {
 function hslToRgb(h29, s2, l2) {
   var r;
   var g;
-  var b2;
+  var b3;
   h29 = bound01(h29, 360);
   s2 = bound01(s2, 100);
   l2 = bound01(l2, 100);
   if (s2 === 0) {
     g = l2;
-    b2 = l2;
+    b3 = l2;
     r = l2;
   } else {
     var q2 = l2 < 0.5 ? l2 * (1 + s2) : l2 + s2 - l2 * s2;
     var p2 = 2 * l2 - q2;
     r = hue2rgb(p2, q2, h29 + 1 / 3);
     g = hue2rgb(p2, q2, h29);
-    b2 = hue2rgb(p2, q2, h29 - 1 / 3);
+    b3 = hue2rgb(p2, q2, h29 - 1 / 3);
   }
-  return { r: r * 255, g: g * 255, b: b2 * 255 };
+  return { r: r * 255, g: g * 255, b: b3 * 255 };
 }
-function rgbToHsv(r, g, b2) {
+function rgbToHsv(r, g, b3) {
   r = bound01(r, 255);
   g = bound01(g, 255);
-  b2 = bound01(b2, 255);
-  var max4 = Math.max(r, g, b2);
-  var min4 = Math.min(r, g, b2);
+  b3 = bound01(b3, 255);
+  var max4 = Math.max(r, g, b3);
+  var min4 = Math.min(r, g, b3);
   var h29 = 0;
-  var v2 = max4;
+  var v3 = max4;
   var d2 = max4 - min4;
   var s2 = max4 === 0 ? 0 : d2 / max4;
   if (max4 === min4) {
@@ -15287,12 +15287,12 @@ function rgbToHsv(r, g, b2) {
   } else {
     switch (max4) {
       case r:
-        h29 = (g - b2) / d2 + (g < b2 ? 6 : 0);
+        h29 = (g - b3) / d2 + (g < b3 ? 6 : 0);
         break;
       case g:
-        h29 = (b2 - r) / d2 + 2;
+        h29 = (b3 - r) / d2 + 2;
         break;
-      case b2:
+      case b3:
         h29 = (r - g) / d2 + 4;
         break;
       default:
@@ -15300,39 +15300,39 @@ function rgbToHsv(r, g, b2) {
     }
     h29 /= 6;
   }
-  return { h: h29, s: s2, v: v2 };
+  return { h: h29, s: s2, v: v3 };
 }
-function hsvToRgb(h29, s2, v2) {
+function hsvToRgb(h29, s2, v3) {
   h29 = bound01(h29, 360) * 6;
   s2 = bound01(s2, 100);
-  v2 = bound01(v2, 100);
+  v3 = bound01(v3, 100);
   var i = Math.floor(h29);
   var f2 = h29 - i;
-  var p2 = v2 * (1 - s2);
-  var q2 = v2 * (1 - f2 * s2);
-  var t = v2 * (1 - (1 - f2) * s2);
+  var p2 = v3 * (1 - s2);
+  var q2 = v3 * (1 - f2 * s2);
+  var t = v3 * (1 - (1 - f2) * s2);
   var mod = i % 6;
-  var r = [v2, q2, p2, p2, t, v2][mod];
-  var g = [t, v2, v2, q2, p2, p2][mod];
-  var b2 = [p2, p2, t, v2, v2, q2][mod];
-  return { r: r * 255, g: g * 255, b: b2 * 255 };
+  var r = [v3, q2, p2, p2, t, v3][mod];
+  var g = [t, v3, v3, q2, p2, p2][mod];
+  var b3 = [p2, p2, t, v3, v3, q2][mod];
+  return { r: r * 255, g: g * 255, b: b3 * 255 };
 }
-function rgbToHex(r, g, b2, allow3Char) {
+function rgbToHex(r, g, b3, allow3Char) {
   var hex2 = [
     pad2(Math.round(r).toString(16)),
     pad2(Math.round(g).toString(16)),
-    pad2(Math.round(b2).toString(16))
+    pad2(Math.round(b3).toString(16))
   ];
   if (allow3Char && hex2[0].startsWith(hex2[0].charAt(1)) && hex2[1].startsWith(hex2[1].charAt(1)) && hex2[2].startsWith(hex2[2].charAt(1))) {
     return hex2[0].charAt(0) + hex2[1].charAt(0) + hex2[2].charAt(0);
   }
   return hex2.join("");
 }
-function rgbaToHex(r, g, b2, a3, allow4Char) {
+function rgbaToHex(r, g, b3, a3, allow4Char) {
   var hex2 = [
     pad2(Math.round(r).toString(16)),
     pad2(Math.round(g).toString(16)),
-    pad2(Math.round(b2).toString(16)),
+    pad2(Math.round(b3).toString(16)),
     pad2(convertDecimalToHex(a3))
   ];
   if (allow4Char && hex2[0].startsWith(hex2[0].charAt(1)) && hex2[1].startsWith(hex2[1].charAt(1)) && hex2[2].startsWith(hex2[2].charAt(1)) && hex2[3].startsWith(hex2[3].charAt(1))) {
@@ -15514,7 +15514,7 @@ function inputToRGB(color) {
   var rgb = { r: 0, g: 0, b: 0 };
   var a3 = 1;
   var s2 = null;
-  var v2 = null;
+  var v3 = null;
   var l2 = null;
   var ok = false;
   var format2 = false;
@@ -15528,8 +15528,8 @@ function inputToRGB(color) {
       format2 = String(color.r).substr(-1) === "%" ? "prgb" : "rgb";
     } else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.v)) {
       s2 = convertToPercentage(color.s);
-      v2 = convertToPercentage(color.v);
-      rgb = hsvToRgb(color.h, s2, v2);
+      v3 = convertToPercentage(color.v);
+      rgb = hsvToRgb(color.h, s2, v3);
       ok = true;
       format2 = "hsv";
     } else if (isValidCSSUnit(color.h) && isValidCSSUnit(color.s) && isValidCSSUnit(color.l)) {
@@ -15704,7 +15704,7 @@ var TinyColor = (
       var rgb = this.toRgb();
       var R2;
       var G2;
-      var B2;
+      var B3;
       var RsRGB = rgb.r / 255;
       var GsRGB = rgb.g / 255;
       var BsRGB = rgb.b / 255;
@@ -15719,11 +15719,11 @@ var TinyColor = (
         G2 = Math.pow((GsRGB + 0.055) / 1.055, 2.4);
       }
       if (BsRGB <= 0.03928) {
-        B2 = BsRGB / 12.92;
+        B3 = BsRGB / 12.92;
       } else {
-        B2 = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
+        B3 = Math.pow((BsRGB + 0.055) / 1.055, 2.4);
       }
-      return 0.2126 * R2 + 0.7152 * G2 + 0.0722 * B2;
+      return 0.2126 * R2 + 0.7152 * G2 + 0.0722 * B3;
     };
     TinyColor2.prototype.getAlpha = function() {
       return this.a;
@@ -15741,8 +15741,8 @@ var TinyColor = (
       var hsv = rgbToHsv(this.r, this.g, this.b);
       var h29 = Math.round(hsv.h * 360);
       var s2 = Math.round(hsv.s * 100);
-      var v2 = Math.round(hsv.v * 100);
-      return this.a === 1 ? "hsv(".concat(h29, ", ").concat(s2, "%, ").concat(v2, "%)") : "hsva(".concat(h29, ", ").concat(s2, "%, ").concat(v2, "%, ").concat(this.roundA, ")");
+      var v3 = Math.round(hsv.v * 100);
+      return this.a === 1 ? "hsv(".concat(h29, ", ").concat(s2, "%, ").concat(v3, "%)") : "hsva(".concat(h29, ", ").concat(s2, "%, ").concat(v3, "%, ").concat(this.roundA, ")");
     };
     TinyColor2.prototype.toHsl = function() {
       var hsl = rgbToHsl(this.r, this.g, this.b);
@@ -15790,12 +15790,12 @@ var TinyColor = (
     TinyColor2.prototype.toRgbString = function() {
       var r = Math.round(this.r);
       var g = Math.round(this.g);
-      var b2 = Math.round(this.b);
-      return this.a === 1 ? "rgb(".concat(r, ", ").concat(g, ", ").concat(b2, ")") : "rgba(".concat(r, ", ").concat(g, ", ").concat(b2, ", ").concat(this.roundA, ")");
+      var b3 = Math.round(this.b);
+      return this.a === 1 ? "rgb(".concat(r, ", ").concat(g, ", ").concat(b3, ")") : "rgba(".concat(r, ", ").concat(g, ", ").concat(b3, ", ").concat(this.roundA, ")");
     };
     TinyColor2.prototype.toPercentageRgb = function() {
-      var fmt = function(x2) {
-        return "".concat(Math.round(bound01(x2, 255) * 100), "%");
+      var fmt = function(x3) {
+        return "".concat(Math.round(bound01(x3, 255) * 100), "%");
       };
       return {
         r: fmt(this.r),
@@ -15805,8 +15805,8 @@ var TinyColor = (
       };
     };
     TinyColor2.prototype.toPercentageRgbString = function() {
-      var rnd = function(x2) {
-        return Math.round(bound01(x2, 255) * 100);
+      var rnd = function(x3) {
+        return Math.round(bound01(x3, 255) * 100);
       };
       return this.a === 1 ? "rgb(".concat(rnd(this.r), "%, ").concat(rnd(this.g), "%, ").concat(rnd(this.b), "%)") : "rgba(".concat(rnd(this.r), "%, ").concat(rnd(this.g), "%, ").concat(rnd(this.b), "%, ").concat(this.roundA, ")");
     };
@@ -15983,12 +15983,12 @@ var TinyColor = (
       var hsv = this.toHsv();
       var h29 = hsv.h;
       var s2 = hsv.s;
-      var v2 = hsv.v;
+      var v3 = hsv.v;
       var res = [];
       var modification = 1 / results;
       while (results--) {
-        res.push(new TinyColor2({ h: h29, s: s2, v: v2 }));
-        v2 = (v2 + modification) % 1;
+        res.push(new TinyColor2({ h: h29, s: s2, v: v3 }));
+        v3 = (v3 + modification) % 1;
       }
       return res;
     };
@@ -16248,28 +16248,28 @@ var extractDateFormat = (format2) => {
 var extractTimeFormat = (format2) => {
   return format2.replace(/\W?D{1,2}|\W?Do|\W?d{1,4}|\W?M{1,4}|\W?Y{2,4}/g, "").trim();
 };
-var dateEquals = function(a3, b2) {
+var dateEquals = function(a3, b3) {
   const aIsDate = (0, import_shared25.isDate)(a3);
-  const bIsDate = (0, import_shared25.isDate)(b2);
+  const bIsDate = (0, import_shared25.isDate)(b3);
   if (aIsDate && bIsDate) {
-    return a3.getTime() === b2.getTime();
+    return a3.getTime() === b3.getTime();
   }
   if (!aIsDate && !bIsDate) {
-    return a3 === b2;
+    return a3 === b3;
   }
   return false;
 };
-var valueEquals = function(a3, b2) {
+var valueEquals = function(a3, b3) {
   const aIsArray = (0, import_shared25.isArray)(a3);
-  const bIsArray = (0, import_shared25.isArray)(b2);
+  const bIsArray = (0, import_shared25.isArray)(b3);
   if (aIsArray && bIsArray) {
-    if (a3.length !== b2.length) {
+    if (a3.length !== b3.length) {
       return false;
     }
-    return a3.every((item, index2) => dateEquals(item, b2[index2]));
+    return a3.every((item, index2) => dateEquals(item, b3[index2]));
   }
   if (!aIsArray && !bIsArray) {
-    return dateEquals(a3, b2);
+    return dateEquals(a3, b3);
   }
   return false;
 };
@@ -22513,8 +22513,8 @@ var _sfc_main49 = (0, import_vue388.defineComponent)({
     }
     function getBackground() {
       if (props.color && props.color.value) {
-        const { r, g, b: b2 } = props.color.toRgb();
-        return `linear-gradient(to right, rgba(${r}, ${g}, ${b2}, 0) 0%, rgba(${r}, ${g}, ${b2}, 1) 100%)`;
+        const { r, g, b: b3 } = props.color.toRgb();
+        return `linear-gradient(to right, rgba(${r}, ${g}, ${b3}, 0) 0%, rgba(${r}, ${g}, ${b3}, 1) 100%)`;
       }
       return "";
     }
@@ -22803,10 +22803,10 @@ var hexOne = (value) => {
   const low = value % 16;
   return `${INT_HEX_MAP[high] || high}${INT_HEX_MAP[low] || low}`;
 };
-var toHex = function({ r, g, b: b2 }) {
-  if (Number.isNaN(+r) || Number.isNaN(+g) || Number.isNaN(+b2))
+var toHex = function({ r, g, b: b3 }) {
+  if (Number.isNaN(+r) || Number.isNaN(+g) || Number.isNaN(+b3))
     return "";
-  return `#${hexOne(r)}${hexOne(g)}${hexOne(b2)}`;
+  return `#${hexOne(r)}${hexOne(g)}${hexOne(b3)}`;
 };
 var HEX_INT_MAP = {
   A: 10,
@@ -22830,22 +22830,22 @@ var hsl2hsv = function(hue, sat, light) {
   light *= 2;
   sat *= light <= 1 ? light : 2 - light;
   smin *= lmin <= 1 ? lmin : 2 - lmin;
-  const v2 = (light + sat) / 2;
+  const v3 = (light + sat) / 2;
   const sv = light === 0 ? 2 * smin / (lmin + smin) : 2 * sat / (light + sat);
   return {
     h: hue,
     s: sv * 100,
-    v: v2 * 100
+    v: v3 * 100
   };
 };
-var rgb2hsv = (r, g, b2) => {
+var rgb2hsv = (r, g, b3) => {
   r = bound012(r, 255);
   g = bound012(g, 255);
-  b2 = bound012(b2, 255);
-  const max4 = Math.max(r, g, b2);
-  const min4 = Math.min(r, g, b2);
+  b3 = bound012(b3, 255);
+  const max4 = Math.max(r, g, b3);
+  const min4 = Math.min(r, g, b3);
   let h29;
-  const v2 = max4;
+  const v3 = max4;
   const d2 = max4 - min4;
   const s2 = max4 === 0 ? 0 : d2 / max4;
   if (max4 === min4) {
@@ -22853,39 +22853,39 @@ var rgb2hsv = (r, g, b2) => {
   } else {
     switch (max4) {
       case r: {
-        h29 = (g - b2) / d2 + (g < b2 ? 6 : 0);
+        h29 = (g - b3) / d2 + (g < b3 ? 6 : 0);
         break;
       }
       case g: {
-        h29 = (b2 - r) / d2 + 2;
+        h29 = (b3 - r) / d2 + 2;
         break;
       }
-      case b2: {
+      case b3: {
         h29 = (r - g) / d2 + 4;
         break;
       }
     }
     h29 /= 6;
   }
-  return { h: h29 * 360, s: s2 * 100, v: v2 * 100 };
+  return { h: h29 * 360, s: s2 * 100, v: v3 * 100 };
 };
-var hsv2rgb = function(h29, s2, v2) {
+var hsv2rgb = function(h29, s2, v3) {
   h29 = bound012(h29, 360) * 6;
   s2 = bound012(s2, 100);
-  v2 = bound012(v2, 100);
+  v3 = bound012(v3, 100);
   const i = Math.floor(h29);
   const f2 = h29 - i;
-  const p2 = v2 * (1 - s2);
-  const q2 = v2 * (1 - f2 * s2);
-  const t = v2 * (1 - (1 - f2) * s2);
+  const p2 = v3 * (1 - s2);
+  const q2 = v3 * (1 - f2 * s2);
+  const t = v3 * (1 - (1 - f2) * s2);
   const mod = i % 6;
-  const r = [v2, q2, p2, p2, t, v2][mod];
-  const g = [t, v2, v2, q2, p2, p2][mod];
-  const b2 = [p2, p2, t, v2, v2, q2][mod];
+  const r = [v3, q2, p2, p2, t, v3][mod];
+  const g = [t, v3, v3, q2, p2, p2][mod];
+  const b3 = [p2, p2, t, v3, v3, q2][mod];
   return {
     r: Math.round(r * 255),
     g: Math.round(g * 255),
-    b: Math.round(b2 * 255)
+    b: Math.round(b3 * 255)
   };
 };
 var Color = class {
@@ -22938,10 +22938,10 @@ var Color = class {
       this.doOnChange();
       return;
     }
-    const fromHSV = (h29, s2, v2) => {
+    const fromHSV = (h29, s2, v3) => {
       this._hue = Math.max(0, Math.min(360, h29));
       this._saturation = Math.max(0, Math.min(100, s2));
-      this._value = Math.max(0, Math.min(100, v2));
+      this._value = Math.max(0, Math.min(100, v3));
       this.doOnChange();
     };
     if (value.includes("hsl")) {
@@ -22952,8 +22952,8 @@ var Color = class {
         this._alpha = 100;
       }
       if (parts.length >= 3) {
-        const { h: h29, s: s2, v: v2 } = hsl2hsv(parts[0], parts[1], parts[2]);
-        fromHSV(h29, s2, v2);
+        const { h: h29, s: s2, v: v3 } = hsl2hsv(parts[0], parts[1], parts[2]);
+        fromHSV(h29, s2, v3);
       }
     } else if (value.includes("hsv")) {
       const parts = value.replace(/hsva|hsv|\(|\)/gm, "").split(/\s|,/g).filter((val) => val !== "").map((val, index2) => index2 > 2 ? Number.parseFloat(val) : Number.parseInt(val, 10));
@@ -22973,30 +22973,30 @@ var Color = class {
         this._alpha = 100;
       }
       if (parts.length >= 3) {
-        const { h: h29, s: s2, v: v2 } = rgb2hsv(parts[0], parts[1], parts[2]);
-        fromHSV(h29, s2, v2);
+        const { h: h29, s: s2, v: v3 } = rgb2hsv(parts[0], parts[1], parts[2]);
+        fromHSV(h29, s2, v3);
       }
     } else if (value.includes("#")) {
       const hex2 = value.replace("#", "").trim();
       if (!/^[0-9a-fA-F]{3}$|^[0-9a-fA-F]{6}$|^[0-9a-fA-F]{8}$/.test(hex2))
         return;
-      let r, g, b2;
+      let r, g, b3;
       if (hex2.length === 3) {
         r = parseHexChannel(hex2[0] + hex2[0]);
         g = parseHexChannel(hex2[1] + hex2[1]);
-        b2 = parseHexChannel(hex2[2] + hex2[2]);
+        b3 = parseHexChannel(hex2[2] + hex2[2]);
       } else if (hex2.length === 6 || hex2.length === 8) {
         r = parseHexChannel(hex2.slice(0, 2));
         g = parseHexChannel(hex2.slice(2, 4));
-        b2 = parseHexChannel(hex2.slice(4, 6));
+        b3 = parseHexChannel(hex2.slice(4, 6));
       }
       if (hex2.length === 8) {
         this._alpha = parseHexChannel(hex2.slice(6)) / 255 * 100;
       } else if (hex2.length === 3 || hex2.length === 6) {
         this._alpha = 100;
       }
-      const { h: h29, s: s2, v: v2 } = rgb2hsv(r, g, b2);
-      fromHSV(h29, s2, v2);
+      const { h: h29, s: s2, v: v3 } = rgb2hsv(r, g, b3);
+      fromHSV(h29, s2, v3);
     }
   }
   compare(color) {
@@ -23020,8 +23020,8 @@ var Color = class {
           break;
         }
         default: {
-          const { r, g, b: b2 } = hsv2rgb(_hue, _saturation, _value);
-          this.value = `rgba(${r}, ${g}, ${b2}, ${this.get("alpha") / 100})`;
+          const { r, g, b: b3 } = hsv2rgb(_hue, _saturation, _value);
+          this.value = `rgba(${r}, ${g}, ${b3}, ${this.get("alpha") / 100})`;
         }
       }
     } else {
@@ -23036,8 +23036,8 @@ var Color = class {
           break;
         }
         case "rgb": {
-          const { r, g, b: b2 } = hsv2rgb(_hue, _saturation, _value);
-          this.value = `rgb(${r}, ${g}, ${b2})`;
+          const { r, g, b: b3 } = hsv2rgb(_hue, _saturation, _value);
+          this.value = `rgb(${r}, ${g}, ${b3})`;
           break;
         }
         default: {
@@ -23280,8 +23280,8 @@ var _sfc_main53 = /* @__PURE__ */ (0, import_vue392.defineComponent)({
       if (!(color2 instanceof Color)) {
         throw new TypeError("color should be instance of _color Class");
       }
-      const { r, g, b: b2 } = color2.toRgb();
-      return showAlpha ? `rgba(${r}, ${g}, ${b2}, ${color2.get("alpha") / 100})` : `rgb(${r}, ${g}, ${b2})`;
+      const { r, g, b: b3 } = color2.toRgb();
+      return showAlpha ? `rgba(${r}, ${g}, ${b3}, ${color2.get("alpha") / 100})` : `rgb(${r}, ${g}, ${b3})`;
     }
     function setShowPicker(value) {
       showPicker.value = value;
@@ -27613,7 +27613,7 @@ var createCollectionWithScope = (name) => {
           return [];
         const orderedNodes = Array.from(collectionEl.querySelectorAll(`[${COLLECTION_ITEM_SIGN}]`));
         const items = [...itemMap.values()];
-        return items.sort((a3, b2) => orderedNodes.indexOf(a3.ref) - orderedNodes.indexOf(b2.ref));
+        return items.sort((a3, b3) => orderedNodes.indexOf(a3.ref) - orderedNodes.indexOf(b3.ref));
       };
       (0, import_vue422.provide)(COLLECTION_INJECTION_KEY3, {
         itemMap,
@@ -29232,14 +29232,14 @@ function format(template) {
     return template.apply(null, args);
   }
   if (typeof template === "string") {
-    var str = template.replace(formatRegExp, function(x2) {
-      if (x2 === "%%") {
+    var str = template.replace(formatRegExp, function(x3) {
+      if (x3 === "%%") {
         return "%";
       }
       if (i >= len) {
-        return x2;
+        return x3;
       }
-      switch (x2) {
+      switch (x3) {
         case "%s":
           return String(args[i++]);
         case "%d":
@@ -29252,7 +29252,7 @@ function format(template) {
           }
           break;
         default:
-          return x2;
+          return x3;
       }
     });
     return str;
@@ -29309,8 +29309,8 @@ function asyncSerialArray(arr, func, callback) {
 }
 function flattenObjArr(objArr) {
   var ret = [];
-  Object.keys(objArr).forEach(function(k) {
-    ret.push.apply(ret, objArr[k] || []);
+  Object.keys(objArr).forEach(function(k2) {
+    ret.push.apply(ret, objArr[k2] || []);
   });
   return ret;
 }
@@ -29376,14 +29376,14 @@ function isErrorObj(obj) {
   return !!(obj && obj.message !== void 0);
 }
 function getValue2(value, path) {
-  var v2 = value;
+  var v3 = value;
   for (var i = 0; i < path.length; i++) {
-    if (v2 == void 0) {
-      return v2;
+    if (v3 == void 0) {
+      return v3;
     }
-    v2 = v2[path[i]];
+    v3 = v3[path[i]];
   }
-  return v2;
+  return v3;
 }
 function complementError(rule, source) {
   return function(oe) {
@@ -29436,7 +29436,7 @@ var getUrlRegex = function() {
     return urlReg;
   }
   var word = "[a-fA-F\\d:]";
-  var b2 = function b3(options) {
+  var b3 = function b4(options) {
     return options && options.includeBoundaries ? "(?:(?<=\\s|^)(?=" + word + ")|(?<=" + word + ")(?=\\s|$))" : "";
   };
   var v4 = "(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)){3}";
@@ -29446,13 +29446,13 @@ var getUrlRegex = function() {
   var v4exact = new RegExp("^" + v4 + "$");
   var v6exact = new RegExp("^" + v6 + "$");
   var ip = function ip2(options) {
-    return options && options.exact ? v46Exact : new RegExp("(?:" + b2(options) + v4 + b2(options) + ")|(?:" + b2(options) + v6 + b2(options) + ")", "g");
+    return options && options.exact ? v46Exact : new RegExp("(?:" + b3(options) + v4 + b3(options) + ")|(?:" + b3(options) + v6 + b3(options) + ")", "g");
   };
   ip.v4 = function(options) {
-    return options && options.exact ? v4exact : new RegExp("" + b2(options) + v4 + b2(options), "g");
+    return options && options.exact ? v4exact : new RegExp("" + b3(options) + v4 + b3(options), "g");
   };
   ip.v6 = function(options) {
-    return options && options.exact ? v6exact : new RegExp("" + b2(options) + v6 + b2(options), "g");
+    return options && options.exact ? v6exact : new RegExp("" + b3(options) + v6 + b3(options), "g");
   };
   var protocol = "(?:(?:[a-z]+:)?//)";
   var auth = "(?:\\S+(?::\\S*)?@)?";
@@ -29982,16 +29982,16 @@ var Schema = /* @__PURE__ */ function() {
     }
     var series = {};
     var keys2 = options.keys || Object.keys(this.rules);
-    keys2.forEach(function(z) {
-      var arr = _this2.rules[z];
-      var value = source[z];
+    keys2.forEach(function(z2) {
+      var arr = _this2.rules[z2];
+      var value = source[z2];
       arr.forEach(function(r) {
         var rule = r;
         if (typeof rule.transform === "function") {
           if (source === source_) {
             source = _extends({}, source);
           }
-          value = source[z] = rule.transform(value);
+          value = source[z2] = rule.transform(value);
         }
         if (typeof rule === "function") {
           rule = {
@@ -30004,15 +30004,15 @@ var Schema = /* @__PURE__ */ function() {
         if (!rule.validator) {
           return;
         }
-        rule.field = z;
-        rule.fullField = rule.fullField || z;
+        rule.field = z2;
+        rule.fullField = rule.fullField || z2;
         rule.type = _this2.getType(rule);
-        series[z] = series[z] || [];
-        series[z].push({
+        series[z2] = series[z2] || [];
+        series[z2].push({
           rule,
           value,
           source,
-          field: z
+          field: z2
         });
       });
     });
@@ -33019,12 +33019,12 @@ function useOption(props, states) {
       });
     }
   };
-  const isEqual3 = (a3, b2) => {
+  const isEqual3 = (a3, b3) => {
     if (!isObject27.value) {
-      return a3 === b2;
+      return a3 === b3;
     } else {
       const { valueKey } = select.props;
-      return get_default(a3, valueKey) === get_default(b2, valueKey);
+      return get_default(a3, valueKey) === get_default(b3, valueKey);
     }
   };
   const hoverItem = () => {
@@ -35022,7 +35022,7 @@ var _sfc_main101 = /* @__PURE__ */ (0, import_vue462.defineComponent)({
 var Pager = /* @__PURE__ */ _export_sfc(_sfc_main101, [["__file", "/home/runner/work/element-plus/element-plus/packages/components/pagination/src/components/pager.vue"]]);
 
 // ../../node_modules/.pnpm/element-plus@2.2.28_vue@3.2.45/node_modules/element-plus/es/components/pagination/src/pagination.mjs
-var isAbsent = (v2) => typeof v2 !== "number";
+var isAbsent = (v3) => typeof v3 !== "number";
 var paginationProps = buildProps({
   total: Number,
   pageSize: Number,
@@ -35115,13 +35115,13 @@ var Pagination = (0, import_vue463.defineComponent)({
       get() {
         return isAbsent(props.pageSize) ? innerPageSize.value : props.pageSize;
       },
-      set(v2) {
+      set(v3) {
         if (isAbsent(props.pageSize)) {
-          innerPageSize.value = v2;
+          innerPageSize.value = v3;
         }
         if (hasPageSizeListener) {
-          emit("update:page-size", v2);
-          emit("size-change", v2);
+          emit("update:page-size", v3);
+          emit("size-change", v3);
         }
       }
     });
@@ -35138,11 +35138,11 @@ var Pagination = (0, import_vue463.defineComponent)({
       get() {
         return isAbsent(props.currentPage) ? innerCurrentPage.value : props.currentPage;
       },
-      set(v2) {
-        let newCurrentPage = v2;
-        if (v2 < 1) {
+      set(v3) {
+        let newCurrentPage = v3;
+        if (v3 < 1) {
           newCurrentPage = 1;
-        } else if (v2 > pageCountBridge.value) {
+        } else if (v3 > pageCountBridge.value) {
           newCurrentPage = pageCountBridge.value;
         }
         if (isAbsent(props.currentPage)) {
@@ -35788,7 +35788,7 @@ var _sfc_main104 = /* @__PURE__ */ (0, import_vue466.defineComponent)({
         }
         return seriesColor;
       });
-      return seriesColors.sort((a3, b2) => a3.percentage - b2.percentage);
+      return seriesColors.sort((a3, b3) => a3.percentage - b3.percentage);
     }
     const getCurrentColor = (percentage) => {
       var _a2;
@@ -36012,7 +36012,7 @@ var _sfc_main105 = /* @__PURE__ */ (0, import_vue467.defineComponent)({
         const val = map2[key];
         const excluded = isExcludedObject(val) ? val.excluded : false;
         return excluded ? value < key : value <= key;
-      }).sort((a3, b2) => a3 - b2);
+      }).sort((a3, b3) => a3 - b3);
       const matchedValue = map2[matchedKeys[0]];
       return isExcludedObject(matchedValue) && matchedValue.value || matchedValue;
     }
@@ -36858,10 +36858,10 @@ var ScrollBar = (0, import_vue471.defineComponent)({
       state.traveled = Math.max(0, Math.min(distance, totalSteps.value));
       emit("scroll", distance, totalSteps.value);
     };
-    (0, import_vue471.watch)(() => props.scrollFrom, (v2) => {
+    (0, import_vue471.watch)(() => props.scrollFrom, (v3) => {
       if (state.isDragging)
         return;
-      state.traveled = Math.ceil(v2 * totalSteps.value);
+      state.traveled = Math.ceil(v3 * totalSteps.value);
     });
     (0, import_vue471.onBeforeUnmount)(() => {
       detachEvents();
@@ -37465,28 +37465,28 @@ var useGridWheel = ({ atXEndEdge, atXStartEdge, atYEndEdge, atYStartEdge }, onWh
   let frameHandle = null;
   let xOffset = 0;
   let yOffset = 0;
-  const hasReachedEdge = (x2, y) => {
-    const xEdgeReached = x2 < 0 && atXStartEdge.value || x2 > 0 && atXEndEdge.value;
-    const yEdgeReached = y < 0 && atYStartEdge.value || y > 0 && atYEndEdge.value;
+  const hasReachedEdge = (x3, y2) => {
+    const xEdgeReached = x3 < 0 && atXStartEdge.value || x3 > 0 && atXEndEdge.value;
+    const yEdgeReached = y2 < 0 && atYStartEdge.value || y2 > 0 && atYEndEdge.value;
     return xEdgeReached && yEdgeReached;
   };
   const onWheel = (e) => {
     cAF(frameHandle);
-    let x2 = e.deltaX;
-    let y = e.deltaY;
-    if (Math.abs(x2) > Math.abs(y)) {
-      y = 0;
+    let x3 = e.deltaX;
+    let y2 = e.deltaY;
+    if (Math.abs(x3) > Math.abs(y2)) {
+      y2 = 0;
     } else {
-      x2 = 0;
+      x3 = 0;
     }
-    if (e.shiftKey && y !== 0) {
-      x2 = y;
-      y = 0;
+    if (e.shiftKey && y2 !== 0) {
+      x3 = y2;
+      y2 = 0;
     }
-    if (hasReachedEdge(xOffset, yOffset) && hasReachedEdge(xOffset + x2, yOffset + y))
+    if (hasReachedEdge(xOffset, yOffset) && hasReachedEdge(xOffset + x3, yOffset + y2))
       return;
-    xOffset += x2;
-    yOffset += y;
+    xOffset += x3;
+    yOffset += y2;
     if (!isFirefox()) {
       e.preventDefault();
     }
@@ -37700,15 +37700,15 @@ var createGrid = ({
         atXEndEdge: (0, import_vue473.computed)(() => states.value.scrollLeft >= estimatedTotalWidth.value),
         atYStartEdge: (0, import_vue473.computed)(() => states.value.scrollTop <= 0),
         atYEndEdge: (0, import_vue473.computed)(() => states.value.scrollTop >= estimatedTotalHeight.value)
-      }, (x2, y) => {
+      }, (x3, y2) => {
         var _a2, _b, _c, _d;
         (_b = (_a2 = hScrollbar.value) == null ? void 0 : _a2.onMouseUp) == null ? void 0 : _b.call(_a2);
         (_d = (_c = hScrollbar.value) == null ? void 0 : _c.onMouseUp) == null ? void 0 : _d.call(_c);
         const width = (0, import_vue473.unref)(parsedWidth);
         const height = (0, import_vue473.unref)(parsedHeight);
         scrollTo({
-          scrollLeft: Math.min(states.value.scrollLeft + x2, estimatedTotalWidth.value - width),
-          scrollTop: Math.min(states.value.scrollTop + y, estimatedTotalHeight.value - height)
+          scrollLeft: Math.min(states.value.scrollLeft + x3, estimatedTotalWidth.value - width),
+          scrollTop: Math.min(states.value.scrollTop + y2, estimatedTotalHeight.value - height)
         });
       });
       const scrollTo = ({
@@ -38960,22 +38960,22 @@ var useSelect2 = (props, emit) => {
     if (props.loading) {
       return [];
     }
-    return flattenOptions(props.options.concat(states.createdOptions).map((v2) => {
-      if ((0, import_shared78.isArray)(v2.options)) {
-        const filtered = v2.options.filter(isValidOption);
+    return flattenOptions(props.options.concat(states.createdOptions).map((v3) => {
+      if ((0, import_shared78.isArray)(v3.options)) {
+        const filtered = v3.options.filter(isValidOption);
         if (filtered.length > 0) {
           return {
-            ...v2,
+            ...v3,
             options: filtered
           };
         }
       } else {
-        if (props.remote || isValidOption(v2)) {
-          return v2;
+        if (props.remote || isValidOption(v3)) {
+          return v3;
         }
       }
       return null;
-    }).filter((v2) => v2 !== null));
+    }).filter((v3) => v3 !== null));
   });
   const optionsAllDisabled = (0, import_vue479.computed)(() => filteredOptions.value.every((option2) => option2.disabled));
   const selectSize = useSize();
@@ -40151,7 +40151,7 @@ var useMarks = (props) => {
       return [];
     }
     const marksKeys = Object.keys(props.marks);
-    return marksKeys.map(Number.parseFloat).sort((a3, b2) => a3 - b2).filter((point) => point <= props.max && point >= props.min).map((point) => ({
+    return marksKeys.map(Number.parseFloat).sort((a3, b3) => a3 - b3).filter((point) => point <= props.max && point >= props.min).map((point) => ({
       point,
       position: (point - props.min) * 100 / (props.max - props.min),
       mark: props.marks[point]
@@ -41031,9 +41031,9 @@ function useSpace(props) {
   (0, import_vue493.watchEffect)(() => {
     const { size: size2 = "small", wrap, direction: dir, fill } = props;
     if ((0, import_shared82.isArray)(size2)) {
-      const [h29 = 0, v2 = 0] = size2;
+      const [h29 = 0, v3 = 0] = size2;
       horizontalSize.value = h29;
-      verticalSize.value = v2;
+      verticalSize.value = v3;
     } else {
       let val;
       if (isNumber(size2)) {
@@ -42065,15 +42065,15 @@ var orderBy = function(array4, sortKey, reverse, sortMethod, sortBy) {
     }
     return [(0, import_shared87.isObject)(value) ? get_default(value, sortKey) : value];
   };
-  const compare = function(a3, b2) {
+  const compare = function(a3, b3) {
     if (sortMethod) {
-      return sortMethod(a3.value, b2.value);
+      return sortMethod(a3.value, b3.value);
     }
     for (let i = 0, len = a3.key.length; i < len; i++) {
-      if (a3.key[i] < b2.key[i]) {
+      if (a3.key[i] < b3.key[i]) {
         return -1;
       }
-      if (a3.key[i] > b2.key[i]) {
+      if (a3.key[i] > b3.key[i]) {
         return 1;
       }
     }
@@ -42085,10 +42085,10 @@ var orderBy = function(array4, sortKey, reverse, sortMethod, sortBy) {
       index: index2,
       key: getKey ? getKey(value, index2) : null
     };
-  }).sort((a3, b2) => {
-    let order = compare(a3, b2);
+  }).sort((a3, b3) => {
+    let order = compare(a3, b3);
     if (!order) {
-      order = a3.index - b2.index;
+      order = a3.index - b3.index;
     }
     return order * +reverse;
   }).map((item) => item.value);
@@ -42204,7 +42204,7 @@ function compose(...funcs) {
   if (funcs.length === 1) {
     return funcs[0];
   }
-  return funcs.reduce((a3, b2) => (...args) => a3(b2(...args)));
+  return funcs.reduce((a3, b3) => (...args) => a3(b3(...args)));
 }
 function toggleRowStatus(statusArr, row, newVal) {
   let changed = false;
@@ -46244,7 +46244,7 @@ function useRender2(props, slots, owner) {
         let children = null;
         if (slots.default) {
           const vnodes = slots.default(data);
-          children = vnodes.some((v2) => v2.type !== import_vue525.Comment) ? vnodes : originRenderCell(data);
+          children = vnodes.some((v3) => v3.type !== import_vue525.Comment) ? vnodes : originRenderCell(data);
         } else {
           children = originRenderCell(data);
         }
@@ -46825,9 +46825,9 @@ var useData = (props, { expandedRowKeys, lastRenderedRowIndex, resetAfterIndex }
       return data2;
     const array4 = [];
     const keysSet = /* @__PURE__ */ new Set();
-    _expandedRowKeys.forEach((x2) => keysSet.add(x2));
+    _expandedRowKeys.forEach((x3) => keysSet.add(x3));
     let copy = data2.slice();
-    copy.forEach((x2) => depths[x2[rowKey2]] = 0);
+    copy.forEach((x3) => depths[x3[rowKey2]] = 0);
     while (copy.length > 0) {
       const item = copy.shift();
       array4.push(item);
@@ -49929,7 +49929,7 @@ var _sfc_main129 = /* @__PURE__ */ (0, import_vue565.defineComponent)({
     const placement = (0, import_vue565.ref)(props.placement);
     const strategy = (0, import_vue565.ref)(props.strategy);
     const arrowRef = (0, import_vue565.ref)(null);
-    const { referenceRef, contentRef, middlewareData, x: x2, y, update } = useFloating({
+    const { referenceRef, contentRef, middlewareData, x: x3, y: y2, update } = useFloating({
       placement,
       strategy,
       middleware: (0, import_vue565.computed)(() => {
@@ -49950,8 +49950,8 @@ var _sfc_main129 = /* @__PURE__ */ (0, import_vue565.defineComponent)({
     const contentStyle = (0, import_vue565.computed)(() => {
       return {
         position: (0, import_vue565.unref)(strategy),
-        top: `${(0, import_vue565.unref)(y) || 0}px`,
-        left: `${(0, import_vue565.unref)(x2) || 0}px`,
+        top: `${(0, import_vue565.unref)(y2) || 0}px`,
+        left: `${(0, import_vue565.unref)(x3) || 0}px`,
         zIndex: zIndex2
       };
     });
@@ -50352,7 +50352,7 @@ var useCheck = (props, panelState, emit) => {
   (0, import_vue570.watch)(() => panelState.checked, (val, oldVal) => {
     updateAllChecked();
     if (panelState.checkChangeByUser) {
-      const movedKeys = val.concat(oldVal).filter((v2) => !val.includes(v2) || !oldVal.includes(v2));
+      const movedKeys = val.concat(oldVal).filter((v3) => !val.includes(v3) || !oldVal.includes(v3));
       emit(CHECKED_CHANGE_EVENT, val, movedKeys);
     } else {
       emit(CHECKED_CHANGE_EVENT, val);
@@ -50987,17 +50987,17 @@ var Node2 = class {
     }
     this.updateLeafState();
   }
-  insertBefore(child, ref161) {
+  insertBefore(child, ref162) {
     let index2;
-    if (ref161) {
-      index2 = this.childNodes.indexOf(ref161);
+    if (ref162) {
+      index2 = this.childNodes.indexOf(ref162);
     }
     this.insertChild(child, index2);
   }
-  insertAfter(child, ref161) {
+  insertAfter(child, ref162) {
     let index2;
-    if (ref161) {
-      index2 = this.childNodes.indexOf(ref161);
+    if (ref162) {
+      index2 = this.childNodes.indexOf(ref162);
       if (index2 !== -1)
         index2 += 1;
     }
@@ -51394,7 +51394,7 @@ var TreeStore = class {
     }
   }
   _setCheckedKeys(key, leafOnly = false, checkedKeys) {
-    const allNodes = this._getAllNodes().sort((a3, b2) => b2.level - a3.level);
+    const allNodes = this._getAllNodes().sort((a3, b3) => b3.level - a3.level);
     const cache2 = /* @__PURE__ */ Object.create(null);
     const keys2 = Object.keys(checkedKeys);
     allNodes.forEach((node) => node.setChecked(false, false));
@@ -56580,8 +56580,8 @@ var YoungPagination_default = (0, import_vue609.defineComponent)({
       layout={ltSm.value ? "total, sizes, jumper" : props.layout}
       pageSizes={props.pageSizes}
       total={props.total}
-      onUpdate:page-size={(v2) => sizeChange(v2)}
-      onUpdate:current-page={(v2) => pageChange(v2)}
+      onUpdate:page-size={(v3) => sizeChange(v3)}
+      onUpdate:current-page={(v3) => pageChange(v3)}
     />;
   }
 });
@@ -56639,20 +56639,20 @@ var YoungDialog_default = (0, import_vue610.defineComponent)({
     });
     const showDialog = (0, import_vue610.computed)({
       get: () => props.isAdd || props.isMore || props.isEdit,
-      set: (v2) => null
+      set: (v3) => null
     });
     props.diffForm && (0, import_vue610.watch)(
       () => showDialog.value,
-      (v2, o2) => {
-        if (v2 && !o2) {
+      (v3, o2) => {
+        if (v3 && !o2) {
           formHash_before.value = JSON.stringify(props.diffForm);
         }
       }
     );
     props.diffForm && (0, import_vue610.watch)(
       () => props.modelValue,
-      (v2, o2) => {
-        if (v2 && !o2) {
+      (v3, o2) => {
+        if (v3 && !o2) {
           formHash_before.value = JSON.stringify(props.diffForm);
         }
       }
@@ -56735,9 +56735,9 @@ var YoungSelect_default = (0, import_vue611.defineComponent)({
     const randomSeed = ne();
     return () => <ElSelect
       modelValue={props.modelValue}
-      onUpdate:modelValue={(v2) => {
-        emit("update:modelValue", v2);
-        emit("change", v2);
+      onUpdate:modelValue={(v3) => {
+        emit("update:modelValue", v3);
+        emit("change", v3);
       }}
       {...attrs}
     >{props.options.map((op, index2) => <ElOption {...op} key={index2 + randomSeed} />)}</ElSelect>;
@@ -56757,9 +56757,9 @@ var YoungWeekday_default = (0, import_vue612.defineComponent)({
   emits: ["update:modelValue", "change"],
   setup(props, { attrs, emit }) {
     const randomSeed = ne();
-    const update = (v2) => {
-      emit("update:modelValue", v2);
-      emit("change", v2);
+    const update = (v3) => {
+      emit("update:modelValue", v3);
+      emit("change", v3);
     };
     return () => <ElCheckboxGroup {...attrs} modelValue={props.modelValue} onChange={update}>{Weeks.map((w3, i) => <ElCheckbox label={i + 1} key={i + randomSeed}>{w3}</ElCheckbox>)}</ElCheckboxGroup>;
   }
@@ -56810,12 +56810,12 @@ var YoungTimeRange_default = (0, import_vue613.defineComponent)({
         timePicker.value = void 0;
       }
     });
-    const update = (v2) => {
-      if (!v2) {
+    const update = (v3) => {
+      if (!v3) {
         emit("update:start", "");
         emit("update:end", "");
       } else {
-        const [start, end2] = v2;
+        const [start, end2] = v3;
         emit("update:start", start.toLocaleString().match(/\d\d:\d\d:\d\d/)?.[0] ?? "");
         emit("update:end", end2.toLocaleString().match(/\d\d:\d\d:\d\d/)?.[0] ?? "");
       }
@@ -56831,7 +56831,7 @@ var YoungTimeRange_default = (0, import_vue613.defineComponent)({
         start={props.startTime}
         step={props.step}
         end={props.endTime}
-        onUpdate:modelValue={(v2) => emit("update:start", v2)}
+        onUpdate:modelValue={(v3) => emit("update:start", v3)}
       />
       {"- \xA0"}
       <ElTimeSelect
@@ -56843,7 +56843,7 @@ var YoungTimeRange_default = (0, import_vue613.defineComponent)({
         start={props.startTime}
         step={props.step}
         end={props.endTime}
-        onUpdate:modelValue={(v2) => emit("update:end", v2)}
+        onUpdate:modelValue={(v3) => emit("update:end", v3)}
       />
     </> : <ElTimePicker
       {...attrs}
@@ -57122,8 +57122,8 @@ var YoungSearchForm_default = (0, import_vue616.defineComponent)({
     const form = (0, import_vue616.ref)({});
     (0, import_vue616.watch)(
       () => props.modelValue,
-      (v2) => {
-        form.value = I(v2);
+      (v3) => {
+        form.value = I(v3);
       },
       { immediate: true, deep: true }
     );
@@ -57143,7 +57143,7 @@ var YoungSearchForm_default = (0, import_vue616.defineComponent)({
           return wrapTip(
             <ElInput
               modelValue={form.value[key]}
-              onUpdate:modelValue={(v2) => form.value[key] = v2?.trim?.()}
+              onUpdate:modelValue={(v3) => form.value[key] = v3?.trim?.()}
               onChange={() => update(false)}
               onKeyup={(e) => useKeyUp(e, () => update())}
               {...conf.attrs}
@@ -57154,7 +57154,7 @@ var YoungSearchForm_default = (0, import_vue616.defineComponent)({
         number: (key2) => wrapTip(
           <ElInputNumber
             modelValue={form.value[key2]}
-            onUpdate:modelValue={(v2) => form.value[key2] = v2}
+            onUpdate:modelValue={(v3) => form.value[key2] = v3}
             onChange={() => update()}
             style={{ width: "120px" }}
             {...conf.attrs}
@@ -57165,7 +57165,7 @@ var YoungSearchForm_default = (0, import_vue616.defineComponent)({
           <YoungSelect_default
             modelValue={form.value[key2]}
             options={conf.options || []}
-            onUpdate:modelValue={(v2) => form.value[key2] = v2}
+            onUpdate:modelValue={(v3) => form.value[key2] = v3}
             onChange={() => update()}
             {...conf.attrs}
           />,
@@ -57176,11 +57176,11 @@ var YoungSearchForm_default = (0, import_vue616.defineComponent)({
           <YoungDateRange_default
             start={form.value[start]}
             end={form.value[end2]}
-            onUpdate:start={(v2) => {
-              form.value[start] = v2;
+            onUpdate:start={(v3) => {
+              form.value[start] = v3;
             }}
-            onUpdate:end={(v2) => {
-              form.value[end2] = v2;
+            onUpdate:end={(v3) => {
+              form.value[end2] = v3;
             }}
             onChange={update}
             {...conf.attrs}
@@ -57683,8 +57683,1080 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
 });
 
 // src/components/YoungUpload.tsx
+var import_vue622 = require("vue");
+
+// ../../node_modules/.pnpm/vue-cropper@1.0.9/node_modules/vue-cropper/dist/vue-cropper.es.js
 var import_vue621 = require("vue");
-var YoungUpload_default = (0, import_vue621.defineComponent)({
+var Y2 = {};
+Y2.getData = (t) => new Promise((e, i) => {
+  let s2 = {};
+  I4(t).then((r) => {
+    s2.arrayBuffer = r, s2.orientation = k(r), e(s2);
+  }).catch((r) => {
+    i(r);
+  });
+});
+function I4(t) {
+  let e = null;
+  return new Promise((i, s2) => {
+    if (t.src)
+      if (/^data\:/i.test(t.src))
+        e = L(t.src), i(e);
+      else if (/^blob\:/i.test(t.src)) {
+        var r = new FileReader();
+        r.onload = function(h29) {
+          e = h29.target.result, i(e);
+        }, E3(t.src, function(h29) {
+          r.readAsArrayBuffer(h29);
+        });
+      } else {
+        var o2 = new XMLHttpRequest();
+        o2.onload = function() {
+          if (this.status == 200 || this.status === 0)
+            e = o2.response, i(e);
+          else
+            throw "Could not load image";
+          o2 = null;
+        }, o2.open("GET", t.src, true), o2.responseType = "arraybuffer", o2.send(null);
+      }
+    else
+      s2("img error");
+  });
+}
+function E3(t, e) {
+  var i = new XMLHttpRequest();
+  i.open("GET", t, true), i.responseType = "blob", i.onload = function(s2) {
+    (this.status == 200 || this.status === 0) && e(this.response);
+  }, i.send();
+}
+function L(t) {
+  t = t.replace(/^data\:([^\;]+)\;base64,/gmi, "");
+  for (var e = atob(t), i = e.length, s2 = new ArrayBuffer(i), r = new Uint8Array(s2), o2 = 0; o2 < i; o2++)
+    r[o2] = e.charCodeAt(o2);
+  return s2;
+}
+function T2(t, e, i) {
+  var s2 = "", r;
+  for (r = e, i += e; r < i; r++)
+    s2 += String.fromCharCode(t.getUint8(r));
+  return s2;
+}
+function k(t) {
+  var e = new DataView(t), i = e.byteLength, s2, r, o2, h29, n, l2, c2, a3, p2, f2;
+  if (e.getUint8(0) === 255 && e.getUint8(1) === 216)
+    for (p2 = 2; p2 < i; ) {
+      if (e.getUint8(p2) === 255 && e.getUint8(p2 + 1) === 225) {
+        c2 = p2;
+        break;
+      }
+      p2++;
+    }
+  if (c2 && (r = c2 + 4, o2 = c2 + 10, T2(e, r, 4) === "Exif" && (l2 = e.getUint16(o2), n = l2 === 18761, (n || l2 === 19789) && e.getUint16(o2 + 2, n) === 42 && (h29 = e.getUint32(o2 + 4, n), h29 >= 8 && (a3 = o2 + h29)))), a3) {
+    for (i = e.getUint16(a3, n), f2 = 0; f2 < i; f2++)
+      if (p2 = a3 + f2 * 12 + 2, e.getUint16(p2, n) === 274) {
+        p2 += 8, s2 = e.getUint16(p2, n);
+        break;
+      }
+  }
+  return s2;
+}
+var N3 = (t, e) => {
+  const i = t.__vccOpts || t;
+  for (const [s2, r] of e)
+    i[s2] = r;
+  return i;
+};
+var A2 = (0, import_vue621.defineComponent)({
+  data: function() {
+    return {
+      // 容器高宽
+      w: 0,
+      h: 0,
+      // 图片缩放比例
+      scale: 1,
+      // 图片偏移x轴
+      x: 0,
+      // 图片偏移y轴
+      y: 0,
+      // 图片加载
+      loading: true,
+      // 图片真实宽度
+      trueWidth: 0,
+      // 图片真实高度
+      trueHeight: 0,
+      move: true,
+      // 移动的x
+      moveX: 0,
+      // 移动的y
+      moveY: 0,
+      // 开启截图
+      crop: false,
+      // 正在截图
+      cropping: false,
+      // 裁剪框大小
+      cropW: 0,
+      cropH: 0,
+      cropOldW: 0,
+      cropOldH: 0,
+      // 判断是否能够改变
+      canChangeX: false,
+      canChangeY: false,
+      // 改变的基准点
+      changeCropTypeX: 1,
+      changeCropTypeY: 1,
+      // 裁剪框的坐标轴
+      cropX: 0,
+      cropY: 0,
+      cropChangeX: 0,
+      cropChangeY: 0,
+      cropOffsertX: 0,
+      cropOffsertY: 0,
+      // 支持的滚动事件
+      support: "",
+      // 移动端手指缩放
+      touches: [],
+      touchNow: false,
+      // 图片旋转
+      rotate: 0,
+      isIos: false,
+      orientation: 0,
+      imgs: "",
+      // 图片缩放系数
+      coe: 0.2,
+      // 是否正在多次缩放
+      scaling: false,
+      scalingSet: "",
+      coeStatus: "",
+      // 控制emit触发频率
+      isCanShow: true
+    };
+  },
+  props: {
+    img: {
+      type: [String, Blob, null, File],
+      default: ""
+    },
+    // 输出图片压缩比
+    outputSize: {
+      type: Number,
+      default: 1
+    },
+    outputType: {
+      type: String,
+      default: "jpeg"
+    },
+    info: {
+      type: Boolean,
+      default: true
+    },
+    // 是否开启滚轮放大缩小
+    canScale: {
+      type: Boolean,
+      default: true
+    },
+    // 是否自成截图框
+    autoCrop: {
+      type: Boolean,
+      default: false
+    },
+    autoCropWidth: {
+      type: [Number, String],
+      default: 0
+    },
+    autoCropHeight: {
+      type: [Number, String],
+      default: 0
+    },
+    // 是否开启固定宽高比
+    fixed: {
+      type: Boolean,
+      default: false
+    },
+    // 宽高比 w/h
+    fixedNumber: {
+      type: Array,
+      default: () => [1, 1]
+    },
+    // 固定大小 禁止改变截图框大小
+    fixedBox: {
+      type: Boolean,
+      default: false
+    },
+    // 输出截图是否缩放
+    full: {
+      type: Boolean,
+      default: false
+    },
+    // 是否可以拖动图片
+    canMove: {
+      type: Boolean,
+      default: true
+    },
+    // 是否可以拖动截图框
+    canMoveBox: {
+      type: Boolean,
+      default: true
+    },
+    // 上传图片按照原始比例显示
+    original: {
+      type: Boolean,
+      default: false
+    },
+    // 截图框能否超过图片
+    centerBox: {
+      type: Boolean,
+      default: false
+    },
+    // 是否根据dpr输出高清图片
+    high: {
+      type: Boolean,
+      default: true
+    },
+    // 截图框展示宽高类型
+    infoTrue: {
+      type: Boolean,
+      default: false
+    },
+    // 可以压缩图片宽高  默认不超过200
+    maxImgSize: {
+      type: [Number, String],
+      default: 2e3
+    },
+    // 倍数  可渲染当前截图框的n倍 0 - 1000;
+    enlarge: {
+      type: [Number, String],
+      default: 1
+    },
+    // 自动预览的固定宽度
+    preW: {
+      type: [Number, String],
+      default: 0
+    },
+    /*
+      图片布局方式 mode 实现和css背景一样的效果
+      contain  居中布局 默认不会缩放 保证图片在容器里面 mode: 'contain'
+      cover    拉伸布局 填充整个容器  mode: 'cover'
+      如果仅有一个数值被给定，这个数值将作为宽度值大小，高度值将被设定为auto。 mode: '50px'
+      如果有两个数值被给定，第一个将作为宽度值大小，第二个作为高度值大小。 mode: '50px 60px'
+    */
+    mode: {
+      type: String,
+      default: "contain"
+    },
+    //限制最小区域,可传1以上的数字和字符串，限制长宽都是这么大
+    // 也可以传数组[90,90] 
+    limitMinSize: {
+      type: [Number, Array, String],
+      default: () => 10,
+      validator: function(t) {
+        return Array.isArray(t) ? Number(t[0]) >= 0 && Number(t[1]) >= 0 : Number(t) >= 0;
+      }
+    },
+    // 导出时,填充背景颜色
+    fillColor: {
+      type: String,
+      default: ""
+    }
+  },
+  computed: {
+    cropInfo() {
+      let t = {};
+      if (t.top = this.cropOffsertY > 21 ? "-21px" : "0px", t.width = this.cropW > 0 ? this.cropW : 0, t.height = this.cropH > 0 ? this.cropH : 0, this.infoTrue) {
+        let e = 1;
+        this.high && !this.full && (e = window.devicePixelRatio), this.enlarge !== 1 & !this.full && (e = Math.abs(Number(this.enlarge))), t.width = t.width * e, t.height = t.height * e, this.full && (t.width = t.width / this.scale, t.height = t.height / this.scale);
+      }
+      return t.width = t.width.toFixed(0), t.height = t.height.toFixed(0), t;
+    },
+    isIE() {
+      return !!window.ActiveXObject || "ActiveXObject" in window;
+    },
+    passive() {
+      return this.isIE ? null : {
+        passive: false
+      };
+    }
+  },
+  watch: {
+    // 如果图片改变， 重新布局
+    img() {
+      this.checkedImg();
+    },
+    imgs(t) {
+      t !== "" && this.reload();
+    },
+    cropW() {
+      this.showPreview();
+    },
+    cropH() {
+      this.showPreview();
+    },
+    cropOffsertX() {
+      this.showPreview();
+    },
+    cropOffsertY() {
+      this.showPreview();
+    },
+    scale(t, e) {
+      this.showPreview();
+    },
+    x() {
+      this.showPreview();
+    },
+    y() {
+      this.showPreview();
+    },
+    autoCrop(t) {
+      t && this.goAutoCrop();
+    },
+    // 修改了自动截图框
+    autoCropWidth() {
+      this.autoCrop && this.goAutoCrop();
+    },
+    autoCropHeight() {
+      this.autoCrop && this.goAutoCrop();
+    },
+    mode() {
+      this.checkedImg();
+    },
+    rotate() {
+      this.showPreview(), this.autoCrop ? this.goAutoCrop(this.cropW, this.cropH) : (this.cropW > 0 || this.cropH > 0) && this.goAutoCrop(this.cropW, this.cropH);
+    }
+  },
+  methods: {
+    getVersion(t) {
+      var e = navigator.userAgent.split(" "), i = "";
+      let s2 = 0;
+      const r = new RegExp(t, "i");
+      for (var o2 = 0; o2 < e.length; o2++)
+        r.test(e[o2]) && (i = e[o2]);
+      return i ? s2 = i.split("/")[1].split(".") : s2 = ["0", "0", "0"], s2;
+    },
+    checkOrientationImage(t, e, i, s2) {
+      if (this.getVersion("chrome")[0] >= 81)
+        e = -1;
+      else if (this.getVersion("safari")[0] >= 605) {
+        const h29 = this.getVersion("version");
+        h29[0] > 13 && h29[1] > 1 && (e = -1);
+      } else {
+        const h29 = navigator.userAgent.toLowerCase().match(/cpu iphone os (.*?) like mac os/);
+        if (h29) {
+          let n = h29[1];
+          n = n.split("_"), (n[0] > 13 || n[0] >= 13 && n[1] >= 4) && (e = -1);
+        }
+      }
+      let r = document.createElement("canvas"), o2 = r.getContext("2d");
+      switch (o2.save(), e) {
+        case 2:
+          r.width = i, r.height = s2, o2.translate(i, 0), o2.scale(-1, 1);
+          break;
+        case 3:
+          r.width = i, r.height = s2, o2.translate(i / 2, s2 / 2), o2.rotate(180 * Math.PI / 180), o2.translate(-i / 2, -s2 / 2);
+          break;
+        case 4:
+          r.width = i, r.height = s2, o2.translate(0, s2), o2.scale(1, -1);
+          break;
+        case 5:
+          r.height = i, r.width = s2, o2.rotate(0.5 * Math.PI), o2.scale(1, -1);
+          break;
+        case 6:
+          r.width = s2, r.height = i, o2.translate(s2 / 2, i / 2), o2.rotate(90 * Math.PI / 180), o2.translate(-i / 2, -s2 / 2);
+          break;
+        case 7:
+          r.height = i, r.width = s2, o2.rotate(0.5 * Math.PI), o2.translate(i, -s2), o2.scale(-1, 1);
+          break;
+        case 8:
+          r.height = i, r.width = s2, o2.translate(s2 / 2, i / 2), o2.rotate(-90 * Math.PI / 180), o2.translate(-i / 2, -s2 / 2);
+          break;
+        default:
+          r.width = i, r.height = s2;
+      }
+      o2.drawImage(t, 0, 0, i, s2), o2.restore(), r.toBlob(
+        (h29) => {
+          let n = URL.createObjectURL(h29);
+          URL.revokeObjectURL(this.imgs), this.imgs = n;
+        },
+        "image/" + this.outputType,
+        1
+      );
+    },
+    // checkout img
+    checkedImg() {
+      if (this.img === null || this.img === "") {
+        this.imgs = "", this.clearCrop();
+        return;
+      }
+      this.loading = true, this.scale = 1, this.rotate = 0, this.clearCrop();
+      let t = new Image();
+      if (t.onload = () => {
+        if (this.img === "")
+          return this.$emit("img-load", "error"), false;
+        let i = t.width, s2 = t.height;
+        Y2.getData(t).then((r) => {
+          this.orientation = r.orientation || 1;
+          let o2 = Number(this.maxImgSize);
+          if (!this.orientation && i < o2 & s2 < o2) {
+            this.imgs = this.img;
+            return;
+          }
+          i > o2 && (s2 = s2 / i * o2, i = o2), s2 > o2 && (i = i / s2 * o2, s2 = o2), this.checkOrientationImage(t, this.orientation, i, s2);
+        });
+      }, t.onerror = () => {
+        this.$emit("img-load", "error");
+      }, this.img.substr(0, 4) !== "data" && (t.crossOrigin = ""), this.isIE) {
+        var e = new XMLHttpRequest();
+        e.onload = function() {
+          var i = URL.createObjectURL(this.response);
+          t.src = i;
+        }, e.open("GET", this.img, true), e.responseType = "blob", e.send();
+      } else
+        t.src = this.img;
+    },
+    // 当按下鼠标键
+    startMove(t) {
+      if (t.preventDefault(), this.move && !this.crop) {
+        if (!this.canMove)
+          return false;
+        this.moveX = ("clientX" in t ? t.clientX : t.touches[0].clientX) - this.x, this.moveY = ("clientY" in t ? t.clientY : t.touches[0].clientY) - this.y, t.touches ? (window.addEventListener("touchmove", this.moveImg), window.addEventListener("touchend", this.leaveImg), t.touches.length == 2 && (this.touches = t.touches, window.addEventListener("touchmove", this.touchScale), window.addEventListener("touchend", this.cancelTouchScale))) : (window.addEventListener("mousemove", this.moveImg), window.addEventListener("mouseup", this.leaveImg)), this.$emit("img-moving", {
+          moving: true,
+          axis: this.getImgAxis()
+        });
+      } else
+        this.cropping = true, window.addEventListener("mousemove", this.createCrop), window.addEventListener("mouseup", this.endCrop), window.addEventListener("touchmove", this.createCrop), window.addEventListener("touchend", this.endCrop), this.cropOffsertX = t.offsetX ? t.offsetX : t.touches[0].pageX - this.$refs.cropper.offsetLeft, this.cropOffsertY = t.offsetY ? t.offsetY : t.touches[0].pageY - this.$refs.cropper.offsetTop, this.cropX = "clientX" in t ? t.clientX : t.touches[0].clientX, this.cropY = "clientY" in t ? t.clientY : t.touches[0].clientY, this.cropChangeX = this.cropOffsertX, this.cropChangeY = this.cropOffsertY, this.cropW = 0, this.cropH = 0;
+    },
+    // 移动端缩放
+    touchScale(t) {
+      t.preventDefault();
+      let e = this.scale;
+      var i = {
+        x: this.touches[0].clientX,
+        y: this.touches[0].clientY
+      }, s2 = {
+        x: t.touches[0].clientX,
+        y: t.touches[0].clientY
+      }, r = {
+        x: this.touches[1].clientX,
+        y: this.touches[1].clientY
+      }, o2 = {
+        x: t.touches[1].clientX,
+        y: t.touches[1].clientY
+      }, h29 = Math.sqrt(
+        Math.pow(i.x - r.x, 2) + Math.pow(i.y - r.y, 2)
+      ), n = Math.sqrt(
+        Math.pow(s2.x - o2.x, 2) + Math.pow(s2.y - o2.y, 2)
+      ), l2 = n - h29, c2 = 1;
+      c2 = c2 / this.trueWidth > c2 / this.trueHeight ? c2 / this.trueHeight : c2 / this.trueWidth, c2 = c2 > 0.1 ? 0.1 : c2;
+      var a3 = c2 * l2;
+      if (!this.touchNow) {
+        if (this.touchNow = true, l2 > 0 ? e += Math.abs(a3) : l2 < 0 && e > Math.abs(a3) && (e -= Math.abs(a3)), this.touches = t.touches, setTimeout(() => {
+          this.touchNow = false;
+        }, 8), !this.checkoutImgAxis(this.x, this.y, e))
+          return false;
+        this.scale = e;
+      }
+    },
+    cancelTouchScale(t) {
+      window.removeEventListener("touchmove", this.touchScale);
+    },
+    // 移动图片
+    moveImg(t) {
+      if (t.preventDefault(), t.touches && t.touches.length === 2)
+        return this.touches = t.touches, window.addEventListener("touchmove", this.touchScale), window.addEventListener("touchend", this.cancelTouchScale), window.removeEventListener("touchmove", this.moveImg), false;
+      let e = "clientX" in t ? t.clientX : t.touches[0].clientX, i = "clientY" in t ? t.clientY : t.touches[0].clientY, s2, r;
+      s2 = e - this.moveX, r = i - this.moveY, this.$nextTick(() => {
+        if (this.centerBox) {
+          let o2 = this.getImgAxis(s2, r, this.scale), h29 = this.getCropAxis(), n = this.trueHeight * this.scale, l2 = this.trueWidth * this.scale, c2, a3, p2, f2;
+          switch (this.rotate) {
+            case 1:
+            case -1:
+            case 3:
+            case -3:
+              c2 = this.cropOffsertX - this.trueWidth * (1 - this.scale) / 2 + (n - l2) / 2, a3 = this.cropOffsertY - this.trueHeight * (1 - this.scale) / 2 + (l2 - n) / 2, p2 = c2 - n + this.cropW, f2 = a3 - l2 + this.cropH;
+              break;
+            default:
+              c2 = this.cropOffsertX - this.trueWidth * (1 - this.scale) / 2, a3 = this.cropOffsertY - this.trueHeight * (1 - this.scale) / 2, p2 = c2 - l2 + this.cropW, f2 = a3 - n + this.cropH;
+              break;
+          }
+          o2.x1 >= h29.x1 && (s2 = c2), o2.y1 >= h29.y1 && (r = a3), o2.x2 <= h29.x2 && (s2 = p2), o2.y2 <= h29.y2 && (r = f2);
+        }
+        this.x = s2, this.y = r, this.$emit("img-moving", {
+          moving: true,
+          axis: this.getImgAxis()
+        });
+      });
+    },
+    // 移动图片结束
+    leaveImg(t) {
+      window.removeEventListener("mousemove", this.moveImg), window.removeEventListener("touchmove", this.moveImg), window.removeEventListener("mouseup", this.leaveImg), window.removeEventListener("touchend", this.leaveImg), this.$emit("img-moving", {
+        moving: false,
+        axis: this.getImgAxis()
+      });
+    },
+    // 缩放图片
+    scaleImg() {
+      this.canScale && window.addEventListener(this.support, this.changeSize, this.passive);
+    },
+    // 移出框
+    cancelScale() {
+      this.canScale && window.removeEventListener(this.support, this.changeSize);
+    },
+    // 改变大小函数
+    changeSize(t) {
+      t.preventDefault();
+      let e = this.scale;
+      var i = t.deltaY || t.wheelDelta, s2 = navigator.userAgent.indexOf("Firefox");
+      i = s2 > 0 ? i * 30 : i, this.isIE && (i = -i);
+      var r = this.coe;
+      r = r / this.trueWidth > r / this.trueHeight ? r / this.trueHeight : r / this.trueWidth;
+      var o2 = r * i;
+      o2 < 0 ? e += Math.abs(o2) : e > Math.abs(o2) && (e -= Math.abs(o2));
+      let h29 = o2 < 0 ? "add" : "reduce";
+      if (h29 !== this.coeStatus && (this.coeStatus = h29, this.coe = 0.2), this.scaling || (this.scalingSet = setTimeout(() => {
+        this.scaling = false, this.coe = this.coe += 0.01;
+      }, 50)), this.scaling = true, !this.checkoutImgAxis(this.x, this.y, e))
+        return false;
+      this.scale = e;
+    },
+    // 修改图片大小函数
+    changeScale(t) {
+      let e = this.scale;
+      t = t || 1;
+      var i = 20;
+      if (i = i / this.trueWidth > i / this.trueHeight ? i / this.trueHeight : i / this.trueWidth, t = t * i, t > 0 ? e += Math.abs(t) : e > Math.abs(t) && (e -= Math.abs(t)), !this.checkoutImgAxis(this.x, this.y, e))
+        return false;
+      this.scale = e;
+    },
+    // 创建截图框
+    createCrop(t) {
+      t.preventDefault();
+      var e = "clientX" in t ? t.clientX : t.touches ? t.touches[0].clientX : 0, i = "clientY" in t ? t.clientY : t.touches ? t.touches[0].clientY : 0;
+      this.$nextTick(() => {
+        var s2 = e - this.cropX, r = i - this.cropY;
+        if (s2 > 0 ? (this.cropW = s2 + this.cropChangeX > this.w ? this.w - this.cropChangeX : s2, this.cropOffsertX = this.cropChangeX) : (this.cropW = this.w - this.cropChangeX + Math.abs(s2) > this.w ? this.cropChangeX : Math.abs(s2), this.cropOffsertX = this.cropChangeX + s2 > 0 ? this.cropChangeX + s2 : 0), !this.fixed)
+          r > 0 ? (this.cropH = r + this.cropChangeY > this.h ? this.h - this.cropChangeY : r, this.cropOffsertY = this.cropChangeY) : (this.cropH = this.h - this.cropChangeY + Math.abs(r) > this.h ? this.cropChangeY : Math.abs(r), this.cropOffsertY = this.cropChangeY + r > 0 ? this.cropChangeY + r : 0);
+        else {
+          var o2 = this.cropW / this.fixedNumber[0] * this.fixedNumber[1];
+          o2 + this.cropOffsertY > this.h ? (this.cropH = this.h - this.cropOffsertY, this.cropW = this.cropH / this.fixedNumber[1] * this.fixedNumber[0], s2 > 0 ? this.cropOffsertX = this.cropChangeX : this.cropOffsertX = this.cropChangeX - this.cropW) : this.cropH = o2, this.cropOffsertY = this.cropOffsertY;
+        }
+      });
+    },
+    // 改变截图框大小
+    changeCropSize(t, e, i, s2, r) {
+      t.preventDefault(), window.addEventListener("mousemove", this.changeCropNow), window.addEventListener("mouseup", this.changeCropEnd), window.addEventListener("touchmove", this.changeCropNow), window.addEventListener("touchend", this.changeCropEnd), this.canChangeX = e, this.canChangeY = i, this.changeCropTypeX = s2, this.changeCropTypeY = r, this.cropX = "clientX" in t ? t.clientX : t.touches[0].clientX, this.cropY = "clientY" in t ? t.clientY : t.touches[0].clientY, this.cropOldW = this.cropW, this.cropOldH = this.cropH, this.cropChangeX = this.cropOffsertX, this.cropChangeY = this.cropOffsertY, this.fixed && this.canChangeX && this.canChangeY && (this.canChangeY = 0), this.$emit("change-crop-size", {
+        width: this.cropW,
+        height: this.cropH
+      });
+    },
+    // 正在改变
+    changeCropNow(t) {
+      t.preventDefault();
+      var e = "clientX" in t ? t.clientX : t.touches ? t.touches[0].clientX : 0, i = "clientY" in t ? t.clientY : t.touches ? t.touches[0].clientY : 0;
+      let s2 = this.w, r = this.h, o2 = 0, h29 = 0;
+      if (this.centerBox) {
+        let c2 = this.getImgAxis(), a3 = c2.x2, p2 = c2.y2;
+        o2 = c2.x1 > 0 ? c2.x1 : 0, h29 = c2.y1 > 0 ? c2.y1 : 0, s2 > a3 && (s2 = a3), r > p2 && (r = p2);
+      }
+      const [n, l2] = this.checkCropLimitSize();
+      this.$nextTick(() => {
+        var c2 = e - this.cropX, a3 = i - this.cropY;
+        if (this.canChangeX && (this.changeCropTypeX === 1 ? this.cropOldW - c2 < n ? (this.cropW = n, this.cropOffsertX = this.cropOldW + this.cropChangeX - o2 - n) : this.cropOldW - c2 > 0 ? (this.cropW = s2 - this.cropChangeX - c2 <= s2 - o2 ? this.cropOldW - c2 : this.cropOldW + this.cropChangeX - o2, this.cropOffsertX = s2 - this.cropChangeX - c2 <= s2 - o2 ? this.cropChangeX + c2 : o2) : (this.cropW = Math.abs(c2) + this.cropChangeX <= s2 ? Math.abs(c2) - this.cropOldW : s2 - this.cropOldW - this.cropChangeX, this.cropOffsertX = this.cropChangeX + this.cropOldW) : this.changeCropTypeX === 2 && (this.cropOldW + c2 < n ? this.cropW = n : this.cropOldW + c2 > 0 ? (this.cropW = this.cropOldW + c2 + this.cropOffsertX <= s2 ? this.cropOldW + c2 : s2 - this.cropOffsertX, this.cropOffsertX = this.cropChangeX) : (this.cropW = s2 - this.cropChangeX + Math.abs(c2 + this.cropOldW) <= s2 - o2 ? Math.abs(c2 + this.cropOldW) : this.cropChangeX - o2, this.cropOffsertX = s2 - this.cropChangeX + Math.abs(c2 + this.cropOldW) <= s2 - o2 ? this.cropChangeX - Math.abs(c2 + this.cropOldW) : o2))), this.canChangeY && (this.changeCropTypeY === 1 ? this.cropOldH - a3 < l2 ? (this.cropH = l2, this.cropOffsertY = this.cropOldH + this.cropChangeY - h29 - l2) : this.cropOldH - a3 > 0 ? (this.cropH = r - this.cropChangeY - a3 <= r - h29 ? this.cropOldH - a3 : this.cropOldH + this.cropChangeY - h29, this.cropOffsertY = r - this.cropChangeY - a3 <= r - h29 ? this.cropChangeY + a3 : h29) : (this.cropH = Math.abs(a3) + this.cropChangeY <= r ? Math.abs(a3) - this.cropOldH : r - this.cropOldH - this.cropChangeY, this.cropOffsertY = this.cropChangeY + this.cropOldH) : this.changeCropTypeY === 2 && (this.cropOldH + a3 < l2 ? this.cropH = l2 : this.cropOldH + a3 > 0 ? (this.cropH = this.cropOldH + a3 + this.cropOffsertY <= r ? this.cropOldH + a3 : r - this.cropOffsertY, this.cropOffsertY = this.cropChangeY) : (this.cropH = r - this.cropChangeY + Math.abs(a3 + this.cropOldH) <= r - h29 ? Math.abs(a3 + this.cropOldH) : this.cropChangeY - h29, this.cropOffsertY = r - this.cropChangeY + Math.abs(a3 + this.cropOldH) <= r - h29 ? this.cropChangeY - Math.abs(a3 + this.cropOldH) : h29))), this.canChangeX && this.fixed) {
+          var p2 = this.cropW / this.fixedNumber[0] * this.fixedNumber[1];
+          p2 < l2 ? (this.cropH = l2, this.cropW = this.fixedNumber[0] * l2 / this.fixedNumber[1], this.changeCropTypeX === 1 && (this.cropOffsertX = this.cropChangeX + (this.cropOldW - this.cropW))) : p2 + this.cropOffsertY > r ? (this.cropH = r - this.cropOffsertY, this.cropW = this.cropH / this.fixedNumber[1] * this.fixedNumber[0], this.changeCropTypeX === 1 && (this.cropOffsertX = this.cropChangeX + (this.cropOldW - this.cropW))) : this.cropH = p2;
+        }
+        if (this.canChangeY && this.fixed) {
+          var f2 = this.cropH / this.fixedNumber[1] * this.fixedNumber[0];
+          f2 < n ? (this.cropW = n, this.cropH = this.fixedNumber[1] * n / this.fixedNumber[0], this.cropOffsertY = this.cropOldH + this.cropChangeY - this.cropH) : f2 + this.cropOffsertX > s2 ? (this.cropW = s2 - this.cropOffsertX, this.cropH = this.cropW / this.fixedNumber[0] * this.fixedNumber[1]) : this.cropW = f2;
+        }
+      });
+    },
+    checkCropLimitSize() {
+      let { cropW: t, cropH: e, limitMinSize: i } = this, s2 = new Array();
+      return Array.isArray(i) ? s2 = i : s2 = [i, i], t = parseFloat(s2[0]), e = parseFloat(s2[1]), [t, e];
+    },
+    // 结束改变
+    changeCropEnd(t) {
+      window.removeEventListener("mousemove", this.changeCropNow), window.removeEventListener("mouseup", this.changeCropEnd), window.removeEventListener("touchmove", this.changeCropNow), window.removeEventListener("touchend", this.changeCropEnd);
+    },
+    // 根据比例x/y，最小宽度，最小高度，现有宽度，现有高度，得到应该有的宽度和高度
+    calculateSize(t, e, i, s2, r, o2) {
+      const h29 = t / e;
+      let n = r, l2 = o2;
+      return n < i && (n = i, l2 = Math.ceil(n / h29)), l2 < s2 && (l2 = s2, n = Math.ceil(l2 * h29), n < i && (n = i, l2 = Math.ceil(n / h29))), n < r && (n = r, l2 = Math.ceil(n / h29)), l2 < o2 && (l2 = o2, n = Math.ceil(l2 * h29)), { width: n, height: l2 };
+    },
+    // 创建完成
+    endCrop() {
+      this.cropW === 0 && this.cropH === 0 && (this.cropping = false);
+      let [t, e] = this.checkCropLimitSize();
+      const { width: i, height: s2 } = this.fixed ? this.calculateSize(
+        this.fixedNumber[0],
+        this.fixedNumber[1],
+        t,
+        e,
+        this.cropW,
+        this.cropH
+      ) : { width: t, height: e };
+      i > this.cropW && (this.cropW = i, this.cropOffsertX + i > this.w && (this.cropOffsertX = this.w - i)), s2 > this.cropH && (this.cropH = s2, this.cropOffsertY + s2 > this.h && (this.cropOffsertY = this.h - s2)), window.removeEventListener("mousemove", this.createCrop), window.removeEventListener("mouseup", this.endCrop), window.removeEventListener("touchmove", this.createCrop), window.removeEventListener("touchend", this.endCrop);
+    },
+    // 开始截图
+    startCrop() {
+      this.crop = true;
+    },
+    // 停止截图
+    stopCrop() {
+      this.crop = false;
+    },
+    // 清除截图
+    clearCrop() {
+      this.cropping = false, this.cropW = 0, this.cropH = 0;
+    },
+    // 截图移动
+    cropMove(t) {
+      if (t.preventDefault(), !this.canMoveBox)
+        return this.crop = false, this.startMove(t), false;
+      if (t.touches && t.touches.length === 2)
+        return this.crop = false, this.startMove(t), this.leaveCrop(), false;
+      window.addEventListener("mousemove", this.moveCrop), window.addEventListener("mouseup", this.leaveCrop), window.addEventListener("touchmove", this.moveCrop), window.addEventListener("touchend", this.leaveCrop);
+      let e = "clientX" in t ? t.clientX : t.touches[0].clientX, i = "clientY" in t ? t.clientY : t.touches[0].clientY, s2, r;
+      s2 = e - this.cropOffsertX, r = i - this.cropOffsertY, this.cropX = s2, this.cropY = r, this.$emit("crop-moving", {
+        moving: true,
+        axis: this.getCropAxis()
+      });
+    },
+    moveCrop(t, e) {
+      let i = 0, s2 = 0;
+      t && (t.preventDefault(), i = "clientX" in t ? t.clientX : t.touches[0].clientX, s2 = "clientY" in t ? t.clientY : t.touches[0].clientY), this.$nextTick(() => {
+        let r, o2, h29 = i - this.cropX, n = s2 - this.cropY;
+        if (e && (h29 = this.cropOffsertX, n = this.cropOffsertY), h29 <= 0 ? r = 0 : h29 + this.cropW > this.w ? r = this.w - this.cropW : r = h29, n <= 0 ? o2 = 0 : n + this.cropH > this.h ? o2 = this.h - this.cropH : o2 = n, this.centerBox) {
+          let l2 = this.getImgAxis();
+          r <= l2.x1 && (r = l2.x1), r + this.cropW > l2.x2 && (r = l2.x2 - this.cropW), o2 <= l2.y1 && (o2 = l2.y1), o2 + this.cropH > l2.y2 && (o2 = l2.y2 - this.cropH);
+        }
+        this.cropOffsertX = r, this.cropOffsertY = o2, this.$emit("crop-moving", {
+          moving: true,
+          axis: this.getCropAxis()
+        });
+      });
+    },
+    // 算出不同场景下面 图片相对于外层容器的坐标轴
+    getImgAxis(t, e, i) {
+      t = t || this.x, e = e || this.y, i = i || this.scale;
+      let s2 = {
+        x1: 0,
+        x2: 0,
+        y1: 0,
+        y2: 0
+      }, r = this.trueWidth * i, o2 = this.trueHeight * i;
+      switch (this.rotate) {
+        case 0:
+          s2.x1 = t + this.trueWidth * (1 - i) / 2, s2.x2 = s2.x1 + this.trueWidth * i, s2.y1 = e + this.trueHeight * (1 - i) / 2, s2.y2 = s2.y1 + this.trueHeight * i;
+          break;
+        case 1:
+        case -1:
+        case 3:
+        case -3:
+          s2.x1 = t + this.trueWidth * (1 - i) / 2 + (r - o2) / 2, s2.x2 = s2.x1 + this.trueHeight * i, s2.y1 = e + this.trueHeight * (1 - i) / 2 + (o2 - r) / 2, s2.y2 = s2.y1 + this.trueWidth * i;
+          break;
+        default:
+          s2.x1 = t + this.trueWidth * (1 - i) / 2, s2.x2 = s2.x1 + this.trueWidth * i, s2.y1 = e + this.trueHeight * (1 - i) / 2, s2.y2 = s2.y1 + this.trueHeight * i;
+          break;
+      }
+      return s2;
+    },
+    // 获取截图框的坐标轴
+    getCropAxis() {
+      let t = {
+        x1: 0,
+        x2: 0,
+        y1: 0,
+        y2: 0
+      };
+      return t.x1 = this.cropOffsertX, t.x2 = t.x1 + this.cropW, t.y1 = this.cropOffsertY, t.y2 = t.y1 + this.cropH, t;
+    },
+    leaveCrop(t) {
+      window.removeEventListener("mousemove", this.moveCrop), window.removeEventListener("mouseup", this.leaveCrop), window.removeEventListener("touchmove", this.moveCrop), window.removeEventListener("touchend", this.leaveCrop), this.$emit("crop-moving", {
+        moving: false,
+        axis: this.getCropAxis()
+      });
+    },
+    getCropChecked(t) {
+      let e = document.createElement("canvas"), i = new Image(), s2 = this.rotate, r = this.trueWidth, o2 = this.trueHeight, h29 = this.cropOffsertX, n = this.cropOffsertY;
+      i.onload = () => {
+        if (this.cropW !== 0) {
+          let a3 = e.getContext("2d"), p2 = 1;
+          this.high & !this.full && (p2 = window.devicePixelRatio), this.enlarge !== 1 & !this.full && (p2 = Math.abs(Number(this.enlarge)));
+          let f2 = this.cropW * p2, w3 = this.cropH * p2, u2 = r * this.scale * p2, d2 = o2 * this.scale * p2, g = (this.x - h29 + this.trueWidth * (1 - this.scale) / 2) * p2, m3 = (this.y - n + this.trueHeight * (1 - this.scale) / 2) * p2;
+          switch (c2(f2, w3), a3.save(), this.fillColor && (a3.fillStyle = this.fillColor, a3.fillRect(0, 0, e.width, e.height)), s2) {
+            case 0:
+              this.full ? (c2(f2 / this.scale, w3 / this.scale), a3.drawImage(
+                i,
+                g / this.scale,
+                m3 / this.scale,
+                u2 / this.scale,
+                d2 / this.scale
+              )) : a3.drawImage(i, g, m3, u2, d2);
+              break;
+            case 1:
+            case -3:
+              this.full ? (c2(f2 / this.scale, w3 / this.scale), g = g / this.scale + (u2 / this.scale - d2 / this.scale) / 2, m3 = m3 / this.scale + (d2 / this.scale - u2 / this.scale) / 2, a3.rotate(s2 * 90 * Math.PI / 180), a3.drawImage(
+                i,
+                m3,
+                -g - d2 / this.scale,
+                u2 / this.scale,
+                d2 / this.scale
+              )) : (g = g + (u2 - d2) / 2, m3 = m3 + (d2 - u2) / 2, a3.rotate(s2 * 90 * Math.PI / 180), a3.drawImage(i, m3, -g - d2, u2, d2));
+              break;
+            case 2:
+            case -2:
+              this.full ? (c2(f2 / this.scale, w3 / this.scale), a3.rotate(s2 * 90 * Math.PI / 180), g = g / this.scale, m3 = m3 / this.scale, a3.drawImage(
+                i,
+                -g - u2 / this.scale,
+                -m3 - d2 / this.scale,
+                u2 / this.scale,
+                d2 / this.scale
+              )) : (a3.rotate(s2 * 90 * Math.PI / 180), a3.drawImage(i, -g - u2, -m3 - d2, u2, d2));
+              break;
+            case 3:
+            case -1:
+              this.full ? (c2(f2 / this.scale, w3 / this.scale), g = g / this.scale + (u2 / this.scale - d2 / this.scale) / 2, m3 = m3 / this.scale + (d2 / this.scale - u2 / this.scale) / 2, a3.rotate(s2 * 90 * Math.PI / 180), a3.drawImage(
+                i,
+                -m3 - u2 / this.scale,
+                g,
+                u2 / this.scale,
+                d2 / this.scale
+              )) : (g = g + (u2 - d2) / 2, m3 = m3 + (d2 - u2) / 2, a3.rotate(s2 * 90 * Math.PI / 180), a3.drawImage(i, -m3 - u2, g, u2, d2));
+              break;
+            default:
+              this.full ? (c2(f2 / this.scale, w3 / this.scale), a3.drawImage(
+                i,
+                g / this.scale,
+                m3 / this.scale,
+                u2 / this.scale,
+                d2 / this.scale
+              )) : a3.drawImage(i, g, m3, u2, d2);
+          }
+          a3.restore();
+        } else {
+          let a3 = r * this.scale, p2 = o2 * this.scale, f2 = e.getContext("2d");
+          switch (f2.save(), this.fillColor && (f2.fillStyle = this.fillColor, f2.fillRect(0, 0, e.width, e.height)), s2) {
+            case 0:
+              c2(a3, p2), f2.drawImage(i, 0, 0, a3, p2);
+              break;
+            case 1:
+            case -3:
+              c2(p2, a3), f2.rotate(s2 * 90 * Math.PI / 180), f2.drawImage(i, 0, -p2, a3, p2);
+              break;
+            case 2:
+            case -2:
+              c2(a3, p2), f2.rotate(s2 * 90 * Math.PI / 180), f2.drawImage(i, -a3, -p2, a3, p2);
+              break;
+            case 3:
+            case -1:
+              c2(p2, a3), f2.rotate(s2 * 90 * Math.PI / 180), f2.drawImage(i, -a3, 0, a3, p2);
+              break;
+            default:
+              c2(a3, p2), f2.drawImage(i, 0, 0, a3, p2);
+          }
+          f2.restore();
+        }
+        t(e);
+      };
+      var l2 = this.img.substr(0, 4);
+      l2 !== "data" && (i.crossOrigin = "Anonymous"), i.src = this.imgs;
+      function c2(a3, p2) {
+        e.width = Math.round(a3), e.height = Math.round(p2);
+      }
+    },
+    // 获取转换成base64 的图片信息
+    getCropData(t) {
+      this.getCropChecked((e) => {
+        t(e.toDataURL("image/" + this.outputType, this.outputSize));
+      });
+    },
+    //canvas获取为blob对象
+    getCropBlob(t) {
+      this.getCropChecked((e) => {
+        e.toBlob(
+          (i) => t(i),
+          "image/" + this.outputType,
+          this.outputSize
+        );
+      });
+    },
+    // 自动预览函数
+    showPreview() {
+      if (this.isCanShow)
+        this.isCanShow = false, setTimeout(() => {
+          this.isCanShow = true;
+        }, 16);
+      else
+        return false;
+      let t = this.cropW, e = this.cropH, i = this.scale;
+      var s2 = {};
+      s2.div = {
+        width: `${t}px`,
+        height: `${e}px`
+      };
+      let r = (this.x - this.cropOffsertX) / i, o2 = (this.y - this.cropOffsertY) / i, h29 = 0;
+      s2.w = t, s2.h = e, s2.url = this.imgs, s2.img = {
+        width: `${this.trueWidth}px`,
+        height: `${this.trueHeight}px`,
+        transform: `scale(${i})translate3d(${r}px, ${o2}px, ${h29}px)rotateZ(${this.rotate * 90}deg)`
+      }, s2.html = `
+      <div class="show-preview" style="width: ${s2.w}px; height: ${s2.h}px,; overflow: hidden">
+        <div style="width: ${t}px; height: ${e}px">
+          <img src=${s2.url} style="width: ${this.trueWidth}px; height: ${this.trueHeight}px; transform:
+          scale(${i})translate3d(${r}px, ${o2}px, ${h29}px)rotateZ(${this.rotate * 90}deg)">
+        </div>
+      </div>`, this.$emit("real-time", s2);
+    },
+    // reload 图片布局函数
+    reload() {
+      let t = new Image();
+      t.onload = () => {
+        this.w = parseFloat(window.getComputedStyle(this.$refs.cropper).width), this.h = parseFloat(window.getComputedStyle(this.$refs.cropper).height), this.trueWidth = t.width, this.trueHeight = t.height, this.original ? this.scale = 1 : this.scale = this.checkedMode(), this.$nextTick(() => {
+          this.x = -(this.trueWidth - this.trueWidth * this.scale) / 2 + (this.w - this.trueWidth * this.scale) / 2, this.y = -(this.trueHeight - this.trueHeight * this.scale) / 2 + (this.h - this.trueHeight * this.scale) / 2, this.loading = false, this.autoCrop && this.goAutoCrop(), this.$emit("img-load", "success"), setTimeout(() => {
+            this.showPreview();
+          }, 20);
+        });
+      }, t.onerror = () => {
+        this.$emit("img-load", "error");
+      }, t.src = this.imgs;
+    },
+    // 背景布局的函数
+    checkedMode() {
+      let t = 1, e = this.trueWidth, i = this.trueHeight;
+      const s2 = this.mode.split(" ");
+      switch (s2[0]) {
+        case "contain":
+          this.trueWidth > this.w && (t = this.w / this.trueWidth), this.trueHeight * t > this.h && (t = this.h / this.trueHeight);
+          break;
+        case "cover":
+          e = this.w, t = e / this.trueWidth, i = i * t, i < this.h && (i = this.h, t = i / this.trueHeight);
+          break;
+        default:
+          try {
+            let r = s2[0];
+            if (r.search("px") !== -1) {
+              r = r.replace("px", ""), e = parseFloat(r);
+              const o2 = e / this.trueWidth;
+              let h29 = 1, n = s2[1];
+              n.search("px") !== -1 && (n = n.replace("px", ""), i = parseFloat(n), h29 = i / this.trueHeight), t = Math.min(o2, h29);
+            }
+            if (r.search("%") !== -1 && (r = r.replace("%", ""), e = parseFloat(r) / 100 * this.w, t = e / this.trueWidth), s2.length === 2 && r === "auto") {
+              let o2 = s2[1];
+              o2.search("px") !== -1 && (o2 = o2.replace("px", ""), i = parseFloat(o2), t = i / this.trueHeight), o2.search("%") !== -1 && (o2 = o2.replace("%", ""), i = parseFloat(o2) / 100 * this.h, t = i / this.trueHeight);
+            }
+          } catch {
+            t = 1;
+          }
+      }
+      return t;
+    },
+    // 自动截图函数
+    goAutoCrop(t, e) {
+      if (this.imgs === "" || this.imgs === null)
+        return;
+      this.clearCrop(), this.cropping = true;
+      let i = this.w, s2 = this.h;
+      if (this.centerBox) {
+        const h29 = Math.abs(this.rotate) % 2 > 0;
+        let n = (h29 ? this.trueHeight : this.trueWidth) * this.scale, l2 = (h29 ? this.trueWidth : this.trueHeight) * this.scale;
+        i = n < i ? n : i, s2 = l2 < s2 ? l2 : s2;
+      }
+      var r = t || parseFloat(this.autoCropWidth), o2 = e || parseFloat(this.autoCropHeight);
+      (r === 0 || o2 === 0) && (r = i * 0.8, o2 = s2 * 0.8), r = r > i ? i : r, o2 = o2 > s2 ? s2 : o2, this.fixed && (o2 = r / this.fixedNumber[0] * this.fixedNumber[1]), o2 > this.h && (o2 = this.h, r = o2 / this.fixedNumber[1] * this.fixedNumber[0]), this.changeCrop(r, o2);
+    },
+    // 手动改变截图框大小函数
+    changeCrop(t, e) {
+      if (this.centerBox) {
+        let i = this.getImgAxis();
+        t > i.x2 - i.x1 && (t = i.x2 - i.x1, e = t / this.fixedNumber[0] * this.fixedNumber[1]), e > i.y2 - i.y1 && (e = i.y2 - i.y1, t = e / this.fixedNumber[1] * this.fixedNumber[0]);
+      }
+      this.cropW = t, this.cropH = e, this.checkCropLimitSize(), this.$nextTick(() => {
+        this.cropOffsertX = (this.w - this.cropW) / 2, this.cropOffsertY = (this.h - this.cropH) / 2, this.centerBox && this.moveCrop(null, true);
+      });
+    },
+    // 重置函数， 恢复组件置初始状态
+    refresh() {
+      this.img, this.imgs = "", this.scale = 1, this.crop = false, this.rotate = 0, this.w = 0, this.h = 0, this.trueWidth = 0, this.trueHeight = 0, this.clearCrop(), this.$nextTick(() => {
+        this.checkedImg();
+      });
+    },
+    // 向左边旋转
+    rotateLeft() {
+      this.rotate = this.rotate <= -3 ? 0 : this.rotate - 1;
+    },
+    // 向右边旋转
+    rotateRight() {
+      this.rotate = this.rotate >= 3 ? 0 : this.rotate + 1;
+    },
+    // 清除旋转
+    rotateClear() {
+      this.rotate = 0;
+    },
+    // 图片坐标点校验
+    checkoutImgAxis(t, e, i) {
+      t = t || this.x, e = e || this.y, i = i || this.scale;
+      let s2 = true;
+      if (this.centerBox) {
+        let r = this.getImgAxis(t, e, i), o2 = this.getCropAxis();
+        r.x1 >= o2.x1 && (s2 = false), r.x2 <= o2.x2 && (s2 = false), r.y1 >= o2.y1 && (s2 = false), r.y2 <= o2.y2 && (s2 = false);
+      }
+      return s2;
+    }
+  },
+  mounted() {
+    this.support = "onwheel" in document.createElement("div") ? "wheel" : document.onmousewheel !== void 0 ? "mousewheel" : "DOMMouseScroll";
+    let t = this;
+    var e = navigator.userAgent;
+    this.isIOS = !!e.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), HTMLCanvasElement.prototype.toBlob || Object.defineProperty(HTMLCanvasElement.prototype, "toBlob", {
+      value: function(i, s2, r) {
+        for (var o2 = atob(this.toDataURL(s2, r).split(",")[1]), h29 = o2.length, n = new Uint8Array(h29), l2 = 0; l2 < h29; l2++)
+          n[l2] = o2.charCodeAt(l2);
+        i(new Blob([n], { type: t.type || "image/png" }));
+      }
+    }), this.showPreview(), this.checkedImg();
+  },
+  unmounted() {
+    window.removeEventListener("mousemove", this.moveCrop), window.removeEventListener("mouseup", this.leaveCrop), window.removeEventListener("touchmove", this.moveCrop), window.removeEventListener("touchend", this.leaveCrop), this.cancelScale();
+  }
+});
+var $ = {
+  key: 0,
+  class: "cropper-box"
+};
+var z = ["src"];
+var B2 = { class: "cropper-view-box" };
+var P3 = ["src"];
+var D2 = { key: 1 };
+function U3(t, e, i, s2, r, o2) {
+  return (0, import_vue621.openBlock)(), (0, import_vue621.createElementBlock)("div", {
+    class: "vue-cropper",
+    ref: "cropper",
+    onMouseover: e[28] || (e[28] = (...h29) => t.scaleImg && t.scaleImg(...h29)),
+    onMouseout: e[29] || (e[29] = (...h29) => t.cancelScale && t.cancelScale(...h29))
+  }, [
+    t.imgs ? ((0, import_vue621.openBlock)(), (0, import_vue621.createElementBlock)("div", $, [
+      (0, import_vue621.withDirectives)((0, import_vue621.createElementVNode)("div", {
+        class: "cropper-box-canvas",
+        style: (0, import_vue621.normalizeStyle)({
+          width: t.trueWidth + "px",
+          height: t.trueHeight + "px",
+          transform: "scale(" + t.scale + "," + t.scale + ") translate3d(" + t.x / t.scale + "px," + t.y / t.scale + "px,0)rotateZ(" + t.rotate * 90 + "deg)"
+        })
+      }, [
+        (0, import_vue621.createElementVNode)("img", {
+          src: t.imgs,
+          alt: "cropper-img",
+          ref: "cropperImg"
+        }, null, 8, z)
+      ], 4), [
+        [import_vue621.vShow, !t.loading]
+      ])
+    ])) : (0, import_vue621.createCommentVNode)("", true),
+    (0, import_vue621.createElementVNode)("div", {
+      class: (0, import_vue621.normalizeClass)(["cropper-drag-box", { "cropper-move": t.move && !t.crop, "cropper-crop": t.crop, "cropper-modal": t.cropping }]),
+      onMousedown: e[0] || (e[0] = (...h29) => t.startMove && t.startMove(...h29)),
+      onTouchstart: e[1] || (e[1] = (...h29) => t.startMove && t.startMove(...h29))
+    }, null, 34),
+    (0, import_vue621.withDirectives)((0, import_vue621.createElementVNode)("div", {
+      class: "cropper-crop-box",
+      style: (0, import_vue621.normalizeStyle)({
+        width: t.cropW + "px",
+        height: t.cropH + "px",
+        transform: "translate3d(" + t.cropOffsertX + "px," + t.cropOffsertY + "px,0)"
+      })
+    }, [
+      (0, import_vue621.createElementVNode)("span", B2, [
+        (0, import_vue621.createElementVNode)("img", {
+          style: (0, import_vue621.normalizeStyle)({
+            width: t.trueWidth + "px",
+            height: t.trueHeight + "px",
+            transform: "scale(" + t.scale + "," + t.scale + ") translate3d(" + (t.x - t.cropOffsertX) / t.scale + "px," + (t.y - t.cropOffsertY) / t.scale + "px,0)rotateZ(" + t.rotate * 90 + "deg)"
+          }),
+          src: t.imgs,
+          alt: "cropper-img"
+        }, null, 12, P3)
+      ]),
+      (0, import_vue621.createElementVNode)("span", {
+        class: "cropper-face cropper-move",
+        onMousedown: e[2] || (e[2] = (...h29) => t.cropMove && t.cropMove(...h29)),
+        onTouchstart: e[3] || (e[3] = (...h29) => t.cropMove && t.cropMove(...h29))
+      }, null, 32),
+      t.info ? ((0, import_vue621.openBlock)(), (0, import_vue621.createElementBlock)("span", {
+        key: 0,
+        class: "crop-info",
+        style: (0, import_vue621.normalizeStyle)({ top: t.cropInfo.top })
+      }, (0, import_vue621.toDisplayString)(t.cropInfo.width) + " \xD7 " + (0, import_vue621.toDisplayString)(t.cropInfo.height), 5)) : (0, import_vue621.createCommentVNode)("", true),
+      t.fixedBox ? (0, import_vue621.createCommentVNode)("", true) : ((0, import_vue621.openBlock)(), (0, import_vue621.createElementBlock)("span", D2, [
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-line line-w",
+          onMousedown: e[4] || (e[4] = (h29) => t.changeCropSize(h29, false, true, 0, 1)),
+          onTouchstart: e[5] || (e[5] = (h29) => t.changeCropSize(h29, false, true, 0, 1))
+        }, null, 32),
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-line line-a",
+          onMousedown: e[6] || (e[6] = (h29) => t.changeCropSize(h29, true, false, 1, 0)),
+          onTouchstart: e[7] || (e[7] = (h29) => t.changeCropSize(h29, true, false, 1, 0))
+        }, null, 32),
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-line line-s",
+          onMousedown: e[8] || (e[8] = (h29) => t.changeCropSize(h29, false, true, 0, 2)),
+          onTouchstart: e[9] || (e[9] = (h29) => t.changeCropSize(h29, false, true, 0, 2))
+        }, null, 32),
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-line line-d",
+          onMousedown: e[10] || (e[10] = (h29) => t.changeCropSize(h29, true, false, 2, 0)),
+          onTouchstart: e[11] || (e[11] = (h29) => t.changeCropSize(h29, true, false, 2, 0))
+        }, null, 32),
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-point point1",
+          onMousedown: e[12] || (e[12] = (h29) => t.changeCropSize(h29, true, true, 1, 1)),
+          onTouchstart: e[13] || (e[13] = (h29) => t.changeCropSize(h29, true, true, 1, 1))
+        }, null, 32),
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-point point2",
+          onMousedown: e[14] || (e[14] = (h29) => t.changeCropSize(h29, false, true, 0, 1)),
+          onTouchstart: e[15] || (e[15] = (h29) => t.changeCropSize(h29, false, true, 0, 1))
+        }, null, 32),
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-point point3",
+          onMousedown: e[16] || (e[16] = (h29) => t.changeCropSize(h29, true, true, 2, 1)),
+          onTouchstart: e[17] || (e[17] = (h29) => t.changeCropSize(h29, true, true, 2, 1))
+        }, null, 32),
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-point point4",
+          onMousedown: e[18] || (e[18] = (h29) => t.changeCropSize(h29, true, false, 1, 0)),
+          onTouchstart: e[19] || (e[19] = (h29) => t.changeCropSize(h29, true, false, 1, 0))
+        }, null, 32),
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-point point5",
+          onMousedown: e[20] || (e[20] = (h29) => t.changeCropSize(h29, true, false, 2, 0)),
+          onTouchstart: e[21] || (e[21] = (h29) => t.changeCropSize(h29, true, false, 2, 0))
+        }, null, 32),
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-point point6",
+          onMousedown: e[22] || (e[22] = (h29) => t.changeCropSize(h29, true, true, 1, 2)),
+          onTouchstart: e[23] || (e[23] = (h29) => t.changeCropSize(h29, true, true, 1, 2))
+        }, null, 32),
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-point point7",
+          onMousedown: e[24] || (e[24] = (h29) => t.changeCropSize(h29, false, true, 0, 2)),
+          onTouchstart: e[25] || (e[25] = (h29) => t.changeCropSize(h29, false, true, 0, 2))
+        }, null, 32),
+        (0, import_vue621.createElementVNode)("span", {
+          class: "crop-point point8",
+          onMousedown: e[26] || (e[26] = (h29) => t.changeCropSize(h29, true, true, 2, 2)),
+          onTouchstart: e[27] || (e[27] = (h29) => t.changeCropSize(h29, true, true, 2, 2))
+        }, null, 32)
+      ]))
+    ], 4), [
+      [import_vue621.vShow, t.cropping]
+    ])
+  ], 544);
+}
+var W2 = /* @__PURE__ */ N3(A2, [["render", U3], ["__scopeId", "data-v-18751258"]]);
+
+// src/components/YoungUpload.tsx
+var YoungUpload_default = (0, import_vue622.defineComponent)({
   props: {
     modelValue: {
       type: Array,
@@ -57705,11 +58777,23 @@ var YoungUpload_default = (0, import_vue621.defineComponent)({
     uploadFn: {
       type: Function,
       required: true
+    },
+    cropper: {
+      type: Boolean,
+      default: false
+    },
+    aspt: {
+      type: Object,
+      default: () => [1, 1]
+    },
+    cropperAttrs: {
+      type: Object,
+      default: () => ({})
     }
   },
   emits: ["update:modelValue", "change"],
   setup(props, { emit }) {
-    const files = (0, import_vue621.computed)(
+    const files = (0, import_vue622.computed)(
       () => props.modelValue.map((url2, index2) => ({
         uid: index2,
         name: url2,
@@ -57725,13 +58809,20 @@ var YoungUpload_default = (0, import_vue621.defineComponent)({
     };
     const upload = async (file) => {
       if (file) {
-        const url2 = await props.uploadFn(file.raw);
-        const arr = [
-          ...files.value.filter((item) => item.status === "success").map((item) => item.url),
-          url2
-        ];
-        emit("update:modelValue", arr);
-        emit("change", arr);
+        if (props.type === "image" && props.cropper) {
+          showClipPopup.value = true;
+          await (0, import_vue622.nextTick)();
+          coverFile.value = URL.createObjectURL(file.raw);
+          cropper.value.startCrop();
+        } else {
+          const url2 = await props.uploadFn(file.raw);
+          const arr = [
+            ...files.value.filter((item) => item.status === "success").map((item) => item.url),
+            url2
+          ];
+          emit("update:modelValue", arr);
+          emit("change", arr);
+        }
       }
     };
     const preView = (url2) => {
@@ -57741,10 +58832,36 @@ var YoungUpload_default = (0, import_vue621.defineComponent)({
         index: index2 === -1 ? 0 : index2
       });
     };
-    const limitStyle = (0, import_vue621.computed)(
+    const limitStyle = (0, import_vue622.computed)(
       () => props.modelValue.length < props.limit ? "inline-flex" : "none"
     );
     const id2 = "young-upload-" + ne();
+    const cropper = (0, import_vue622.ref)();
+    const coverFile = (0, import_vue622.ref)();
+    const showClipPopup = (0, import_vue622.ref)(false);
+    const sureClip = () => {
+      cropper.value.getCropBlob(async (blob) => {
+        const url2 = await props.uploadFn(blob);
+        const arr = [
+          ...files.value.filter((item) => item.status === "success").map((item) => item.url),
+          url2
+        ];
+        emit("update:modelValue", arr);
+        emit("change", arr);
+        coverFile.value = "";
+      });
+      showClipPopup.value = false;
+    };
+    const cancelClip = () => {
+      coverFile.value = "";
+      showClipPopup.value = false;
+      const arr = [
+        ...files.value.filter((item) => item.status === "success").map((item) => item.url)
+      ];
+      emit("update:modelValue", arr);
+      emit("change", arr);
+    };
+    const ltLg = useMediaQuery("(max-width: 1023.9px)");
     return () => <div id={id2}>
       <style>{`
           #${id2} .el-upload--picture-card {
@@ -57786,16 +58903,64 @@ var YoungUpload_default = (0, import_vue621.defineComponent)({
           {")"}
         </div>
       </ElUpload>
+      <YoungDialog_default
+        modelValue={showClipPopup.value}
+        onUpdate:modelValue={(v3) => showClipPopup.value = v3}
+        top="0"
+        width="96%"
+        realTitle={"\u56FE\u7247\u88C1\u526A"}
+        showCancel={false}
+        showSure={false}
+      >{{
+        body: () => <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
+        >
+          <div
+            style={{
+              width: ltLg.value ? "90vw" : "800px",
+              height: ltLg.value ? "90vh" : "72vh"
+            }}
+          ><W2
+            ref={cropper}
+            autoCrop
+            centerBox
+            fixedNumber={props.aspt}
+            img={coverFile.value}
+            outputType="webp"
+            fixed
+            {...props.cropperAttrs}
+          /></div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              height: "80px",
+              width: "96%",
+              padding: "0 20px"
+            }}
+          >
+            <ElButton style={{ width: "48%" }} onClick={cancelClip}>{"\u53D6\u6D88"}</ElButton>
+            <ElButton style={{ width: "48%" }} type="primary" onClick={sureClip}>{"\u88C1\u526A"}</ElButton>
+          </div>
+        </div>
+      }}</YoungDialog_default>
     </div>;
   }
 });
 
 // src/hooks/useAutoLoad.ts
-var import_vue622 = require("vue");
-var useAutoLoad = (list, allData, pageSize = 10, pause = (0, import_vue622.ref)(false)) => {
-  const elArr = (0, import_vue622.ref)([]);
-  const touchEndEl = (0, import_vue622.ref)(false);
-  const page = (0, import_vue622.ref)(1);
+var import_vue623 = require("vue");
+var useAutoLoad = (list, allData, pageSize = 10, pause = (0, import_vue623.ref)(false)) => {
+  const elArr = (0, import_vue623.ref)([]);
+  const touchEndEl = (0, import_vue623.ref)(false);
+  const page = (0, import_vue623.ref)(1);
   const load = () => {
     const { stop } = useIntersectionObserver(
       elArr.value[list.value.length - 1],
@@ -57807,7 +58972,7 @@ var useAutoLoad = (list, allData, pageSize = 10, pause = (0, import_vue622.ref)(
       }
     );
   };
-  (0, import_vue622.watchEffect)(async () => {
+  (0, import_vue623.watchEffect)(async () => {
     if (pause.value) {
       return;
     }
@@ -57822,7 +58987,7 @@ var useAutoLoad = (list, allData, pageSize = 10, pause = (0, import_vue622.ref)(
       }
       list.value.push(...slicePart);
       touchEndEl.value = false;
-      await (0, import_vue622.nextTick)();
+      await (0, import_vue623.nextTick)();
       load();
     }
   });
@@ -57835,13 +59000,13 @@ var useAutoLoad = (list, allData, pageSize = 10, pause = (0, import_vue622.ref)(
 };
 
 // src/hooks/useFormMode.ts
-var import_vue623 = require("vue");
+var import_vue624 = require("vue");
 var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, clearEffect, disableclear }, tip = "\u786E\u8BA4\u5220\u9664\u8BE5\u6761\u6570\u636E\uFF1F") => {
-  const isAdd = (0, import_vue623.ref)(false);
-  const isEdit = (0, import_vue623.ref)(false);
-  const isMore = (0, import_vue623.ref)(false);
-  const form = (0, import_vue623.ref)(I(FORM_TEMP));
-  const formRef = (0, import_vue623.ref)();
+  const isAdd = (0, import_vue624.ref)(false);
+  const isEdit = (0, import_vue624.ref)(false);
+  const isMore = (0, import_vue624.ref)(false);
+  const form = (0, import_vue624.ref)(I(FORM_TEMP));
+  const formRef = (0, import_vue624.ref)();
   const validForm = async () => {
     const res = await new Promise((resolve) => {
       formRef.value?.validate(async (valid) => {
@@ -57930,22 +59095,22 @@ function sheet_from_array_of_arrays(data) {
     }
   };
   for (let R2 = 0; R2 != data.length; ++R2) {
-    for (let C2 = 0; C2 != data[R2].length; ++C2) {
+    for (let C3 = 0; C3 != data[R2].length; ++C3) {
       if (range3.s.r > R2)
         range3.s.r = R2;
-      if (range3.s.c > C2)
-        range3.s.c = C2;
+      if (range3.s.c > C3)
+        range3.s.c = C3;
       if (range3.e.r < R2)
         range3.e.r = R2;
-      if (range3.e.c < C2)
-        range3.e.c = C2;
+      if (range3.e.c < C3)
+        range3.e.c = C3;
       const cell = {
-        v: data[R2][C2]
+        v: data[R2][C3]
       };
       if (cell.v == null)
         continue;
       const cell_ref = import_xlsx.utils.encode_cell({
-        c: C2,
+        c: C3,
         r: R2
       });
       if (typeof cell.v === "number") {
@@ -58043,9 +59208,9 @@ var useExport2Excel = async ({ filename, tableHead, tableData }) => {
         if (item.render) {
           const vnode = item.render(it2, i);
           if (vnode && Array.isArray(vnode.children) && vnode.children.length > 1) {
-            vnode.children.forEach((v2) => {
-              if (v2 && typeof v2.children === "string") {
-                v2.children += "\n";
+            vnode.children.forEach((v3) => {
+              if (v3 && typeof v3.children === "string") {
+                v3.children += "\n";
               }
             });
           }
@@ -58081,11 +59246,11 @@ var useExport2Excel = async ({ filename, tableHead, tableData }) => {
 };
 
 // src/hooks/useVerifyCode.ts
-var import_vue624 = require("vue");
+var import_vue625 = require("vue");
 var useVerifyCode = (cbk, default_wait = 60, default_tip = "\u83B7\u53D6\u9A8C\u8BC1\u7801") => {
-  const count = (0, import_vue624.ref)(default_wait);
-  const tip = (0, import_vue624.ref)(default_tip);
-  const timer = (0, import_vue624.ref)();
+  const count = (0, import_vue625.ref)(default_wait);
+  const tip = (0, import_vue625.ref)(default_tip);
+  const timer = (0, import_vue625.ref)();
   const startCountDown = () => {
     count.value--;
     tip.value = `${count.value} \u79D2\u540E\u91CD\u8BD5`;
@@ -58103,7 +59268,7 @@ var useVerifyCode = (cbk, default_wait = 60, default_tip = "\u83B7\u53D6\u9A8C\u
     tip.value = default_tip;
     clearInterval(timer.value);
   };
-  const showSlider = (0, import_vue624.ref)(false);
+  const showSlider = (0, import_vue625.ref)(false);
   const start = () => {
     showSlider.value = true;
   };
@@ -58133,16 +59298,16 @@ var useVerifyCode = (cbk, default_wait = 60, default_tip = "\u83B7\u53D6\u9A8C\u
 };
 
 // src/hooks/useImagePreview.ts
-var import_vue625 = require("vue");
+var import_vue626 = require("vue");
 var useImagePreview = (conf, zIndex2 = 9999) => {
   const appendTo = document.createElement("div");
-  const vnode = (0, import_vue625.createVNode)(YoungImageViewer_default, {
+  const vnode = (0, import_vue626.createVNode)(YoungImageViewer_default, {
     onDestroy: () => {
       document.body.removeChild(appendTo);
     },
     zIndex: zIndex2
   });
-  (0, import_vue625.render)(vnode, appendTo);
+  (0, import_vue626.render)(vnode, appendTo);
   document.body.appendChild(appendTo);
   vnode.component.exposed?.show(conf);
 };
@@ -58156,9 +59321,9 @@ var useKeyUp = (e, fn2, key = "enter") => {
 };
 
 // src/hooks/useQuery.ts
-var import_vue626 = require("vue");
+var import_vue627 = require("vue");
 var useQuery = (QUERY_TEMP, cbk) => {
-  const query = (0, import_vue626.ref)(I(QUERY_TEMP));
+  const query = (0, import_vue627.ref)(I(QUERY_TEMP));
   const reset = () => {
     query.value = I(QUERY_TEMP);
     cbk();
@@ -58170,11 +59335,11 @@ var useQuery = (QUERY_TEMP, cbk) => {
 };
 
 // src/hooks/useRemoteSearch.ts
-var import_vue627 = require("vue");
+var import_vue628 = require("vue");
 var useRemoteSearch = (cbk) => {
-  const loading = (0, import_vue627.ref)(false);
-  const searchStr = (0, import_vue627.ref)("");
-  const options = (0, import_vue627.ref)([]);
+  const loading = (0, import_vue628.ref)(false);
+  const searchStr = (0, import_vue628.ref)("");
+  const options = (0, import_vue628.ref)([]);
   const search = async (str) => {
     str = str.trim();
     const res = await cbk(str);
@@ -58182,7 +59347,7 @@ var useRemoteSearch = (cbk) => {
       options.value = res;
     }
   };
-  const init = (0, import_vue627.ref)(false);
+  const init = (0, import_vue628.ref)(false);
   return {
     loading,
     search,

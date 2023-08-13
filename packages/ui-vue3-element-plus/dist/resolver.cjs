@@ -61,7 +61,8 @@ var package_default = {
     "element-plus": "^2.2.28",
     sortablejs: "^1.15.0",
     vitest: "^0.29.2",
-    vue: "^3.2.45"
+    vue: "^3.2.45",
+    "vue-cropper": "^1.0.9"
   },
   repository: {
     type: "git",

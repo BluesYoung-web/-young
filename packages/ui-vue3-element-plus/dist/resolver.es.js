@@ -24,7 +24,8 @@ const t = "@bluesyoung/ui-vue3-element-plus", o = "0.11.4", u = "vue3 + element-
   "element-plus": "^2.2.28",
   sortablejs: "^1.15.0",
   vitest: "^0.29.2",
-  vue: "^3.2.45"
+  vue: "^3.2.45",
+  "vue-cropper": "^1.0.9"
 }, m = {
   type: "git",
   url: "git+ssh://git@github.com/BluesYoung-web/young.git",
@@ -33,7 +34,7 @@ const t = "@bluesyoung/ui-vue3-element-plus", o = "0.11.4", u = "vue3 + element-
   "ui components",
   "vue3",
   "element-plus"
-], a = "BluesYoung-web", v = "MIT", y = {
+], v = "BluesYoung-web", a = "MIT", y = {
   url: "https://github.com/BluesYoung-web/young/issues"
 }, b = "https://github.com/BluesYoung-web/young#readme", h = {
   "file-saver": "^2.0.5",
@@ -51,8 +52,8 @@ const t = "@bluesyoung/ui-vue3-element-plus", o = "0.11.4", u = "vue3 + element-
   devDependencies: d,
   repository: m,
   keywords: g,
-  author: a,
-  license: v,
+  author: v,
+  license: a,
   bugs: y,
   homepage: b,
   dependencies: h

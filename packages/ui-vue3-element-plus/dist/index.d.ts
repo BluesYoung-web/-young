@@ -708,6 +708,18 @@ declare const _default: vue.DefineComponent<{
         type: PropType<YoungUploadFn>;
         required: true;
     };
+    cropper: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    aspt: {
+        type: PropType<[number, number]>;
+        default: () => number[];
+    };
+    cropperAttrs: {
+        type: ObjectConstructor;
+        default: () => {};
+    };
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     modelValue: {
         type: PropType<string[]>;
@@ -729,6 +741,18 @@ declare const _default: vue.DefineComponent<{
         type: PropType<YoungUploadFn>;
         required: true;
     };
+    cropper: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    aspt: {
+        type: PropType<[number, number]>;
+        default: () => number[];
+    };
+    cropperAttrs: {
+        type: ObjectConstructor;
+        default: () => {};
+    };
 }>> & {
     onChange?: (...args: any[]) => any;
     "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -736,6 +760,9 @@ declare const _default: vue.DefineComponent<{
     type: "image" | "file";
     limit: number;
     accept: string;
+    cropper: boolean;
+    aspt: [number, number];
+    cropperAttrs: Record<string, any>;
 }>;
 
 interface UseAutoLoad<T extends any = any> {
