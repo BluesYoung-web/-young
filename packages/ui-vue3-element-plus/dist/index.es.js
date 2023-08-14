@@ -130,7 +130,7 @@ const Lp = tt({
           }, {
             header: (v) => s.value[x].tool_content ? U("div", {
               style: {
-                display: "flex",
+                display: h.sortable ? "inline-block" : "flex",
                 justifyContent: "center",
                 alignItems: "center"
               }

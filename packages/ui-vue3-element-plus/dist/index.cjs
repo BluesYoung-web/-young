@@ -56463,7 +56463,11 @@ var YoungTable_default = (0, import_vue608.defineComponent)({
             header: (scope) => {
               if (tableHead_1.value[index2].tool_content) {
                 return <div
-                  style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                  style={{
+                    display: head.sortable ? "inline-block" : "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
                 >
                   <span>{scope.column.label}</span>
                   <ElTooltip
