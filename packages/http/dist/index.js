@@ -61,8 +61,7 @@ var useHttp = (config = {}) => {
   const { baseURL, lazyBaseURL, method, timeout, headers, checkFn, loading, fail } = finalConfig;
   const net = import_axios.default.create({
     method,
-    timeout,
-    headers: headers.getCommonHeaders()
+    timeout
   });
   net.interceptors.request.use(
     (req) => {
@@ -119,10 +118,17 @@ var useHttp = (config = {}) => {
       }
       return this;
     },
-    freeReq: net.request,
+    freeReq: (args) => net.request({
+      ...args,
+      headers: {
+        ...headers.getCommonHeaders(),
+        ...args == null ? void 0 : args.headers
+      }
+    }),
     authReq: (args) => net.request({
       ...args,
       headers: {
+        ...headers.getCommonHeaders(),
         ...headers.getAuthHeaders(args),
         ...args == null ? void 0 : args.headers
       }

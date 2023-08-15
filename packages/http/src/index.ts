@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-08-07 09:49:16
+ * @LastEditTime: 2023-08-15 15:29:52
  * @Description:
  */
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, Method } from 'axios';
@@ -148,7 +148,6 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
   const net = axios.create({
     method,
     timeout,
-    headers: headers.getCommonHeaders(),
   });
 
   net.interceptors.request.use(
@@ -213,11 +212,19 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
       return this;
     },
 
-    freeReq: net.request,
+    freeReq: (args: AxiosRequestConfig) =>
+      net.request({
+        ...args,
+        headers: {
+          ...headers.getCommonHeaders(),
+          ...args?.headers,
+        },
+      }),
     authReq: (args: AxiosRequestConfig) =>
       net.request({
         ...args,
         headers: {
+          ...headers.getCommonHeaders(),
           ...headers.getAuthHeaders(args),
           ...args?.headers,
         },
