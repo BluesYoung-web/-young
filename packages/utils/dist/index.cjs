@@ -86,12 +86,14 @@ __export(src_exports, {
   safeJsonParse: () => safeJsonParse,
   scrollToBottom: () => scrollToBottom,
   scrollToTop: () => scrollToTop,
+  secondsToTime: () => secondsToTime,
   shortcuts: () => shortcuts,
   sleep: () => sleep,
   smoothScroll: () => smoothScroll,
   telMasaike: () => telMasaike,
   thisMonth: () => thisMonth,
   thisMonthDay: () => thisMonthDay,
+  timeToSeconds: () => timeToSeconds,
   toFullScreen: () => toFullScreen,
   toRGBArray: () => toRGBArray,
   toRGBObject: () => toRGBObject,
@@ -374,6 +376,20 @@ var getDateRange = (year, month) => {
     dateEnd.getDate().toString().padStart(2, "0")
   ];
 };
+function secondsToTime(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor(seconds % 3600 / 60);
+  const remainingSeconds = seconds % 60;
+  const formattedHours = String(hours).padStart(2, "0");
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(remainingSeconds).padStart(2, "0");
+  return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+}
+function timeToSeconds(time) {
+  const [hours, minutes, seconds] = time.split(":").map(Number);
+  const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+  return totalSeconds;
+}
 
 // src/core/tool.ts
 var sleep = async (n) => {
@@ -713,12 +729,14 @@ var YoungLocalStorage = class extends YoungStorage {
   safeJsonParse,
   scrollToBottom,
   scrollToTop,
+  secondsToTime,
   shortcuts,
   sleep,
   smoothScroll,
   telMasaike,
   thisMonth,
   thisMonthDay,
+  timeToSeconds,
   toFullScreen,
   toRGBArray,
   toRGBObject,

@@ -81,6 +81,16 @@ declare const isDisabledDate: (d: Date) => boolean;
  * 获取某月的开始日和结束日
  */
 declare const getDateRange: (year: number, month: number) => string[];
+/**
+ * 0 -> 00:00:00
+ * 86399 -> 23:59:59
+ */
+declare function secondsToTime(seconds: number): string;
+/**
+ * 00:00:00 -> 0
+ * 23:59:59 -> 86399
+ */
+declare function timeToSeconds(time: string): number;
 
 declare const sleep: (n: number) => Promise<unknown>;
 /**
@@ -501,4 +511,4 @@ declare class YoungLocalStorage extends YoungStorage {
     get<T>(key: string): T | undefined;
 }
 
-export { AppendArgument, Chainable, ConditionalPick, Curry, Exclusive, FirstAsArray, GetUnionLast, HSBToRGB, HSLToRGB, Head, Includes, IsEqual, IsNever, IsUnion, JoinStrArray, Merge, Mutable, NaiveFlat, NotEmpty, OptionalKeys, Prepend, Push, RGBToHSB, RGBToHSL, RGBToHex, RemoveIndexSignature, Repeat, RepeatString, RequireAtLeastOne, Reverse, SetOptional, Shift, Simplify, Split, Str2Tuple, Tail, ToNumber, ToPath, Trim, TrimLeft, TrimRight, TupleToIntersection, UnionToInterFunction, UnionToIntersection, UnionToTuple, Unshift, YoungLocalStorage, YoungStorage, deepClone, disableScroll, enableScroll, encodedStrParse, exitFullscreen, extendHex, fen2yuan, fen2yuanWithCurrency, formatCurrency, formatDate, formatUrl, getClientHeight, getDateRange, hexToRGB, idMasaike, isAndroid, isArray, isArrayBuffer, isBoolean, isChinese, isCurrencyStr, isDate, isDecimal, isDisabledDate, isEmail, isFunction, isHttpUrl, isISODate, isIdCard, isInteger, isJsonStr, isLandline, isLetter, isLicensePlate, isMap, isMobile, isNull, isNumber, isObject, isRegExp, isSet, isString, isSymbol, isUndefined, isWeChat, isWeakMap, isWeakSet, isWebSocketUrl, isiOS, lastMonthDay, nameMasaike, nextDay, polyfillNumber, randomHexColorCode, randomId, recentDay, recentMonth, safeJsonParse, scrollToBottom, scrollToTop, setRequired, shortcuts, sleep, smoothScroll, telMasaike, thisMonth, thisMonthDay, toFullScreen, toRGBArray, toRGBObject, ymdParse, yuan2fen };
+export { AppendArgument, Chainable, ConditionalPick, Curry, Exclusive, FirstAsArray, GetUnionLast, HSBToRGB, HSLToRGB, Head, Includes, IsEqual, IsNever, IsUnion, JoinStrArray, Merge, Mutable, NaiveFlat, NotEmpty, OptionalKeys, Prepend, Push, RGBToHSB, RGBToHSL, RGBToHex, RemoveIndexSignature, Repeat, RepeatString, RequireAtLeastOne, Reverse, SetOptional, Shift, Simplify, Split, Str2Tuple, Tail, ToNumber, ToPath, Trim, TrimLeft, TrimRight, TupleToIntersection, UnionToInterFunction, UnionToIntersection, UnionToTuple, Unshift, YoungLocalStorage, YoungStorage, deepClone, disableScroll, enableScroll, encodedStrParse, exitFullscreen, extendHex, fen2yuan, fen2yuanWithCurrency, formatCurrency, formatDate, formatUrl, getClientHeight, getDateRange, hexToRGB, idMasaike, isAndroid, isArray, isArrayBuffer, isBoolean, isChinese, isCurrencyStr, isDate, isDecimal, isDisabledDate, isEmail, isFunction, isHttpUrl, isISODate, isIdCard, isInteger, isJsonStr, isLandline, isLetter, isLicensePlate, isMap, isMobile, isNull, isNumber, isObject, isRegExp, isSet, isString, isSymbol, isUndefined, isWeChat, isWeakMap, isWeakSet, isWebSocketUrl, isiOS, lastMonthDay, nameMasaike, nextDay, polyfillNumber, randomHexColorCode, randomId, recentDay, recentMonth, safeJsonParse, scrollToBottom, scrollToTop, secondsToTime, setRequired, shortcuts, sleep, smoothScroll, telMasaike, thisMonth, thisMonthDay, timeToSeconds, toFullScreen, toRGBArray, toRGBObject, ymdParse, yuan2fen };
