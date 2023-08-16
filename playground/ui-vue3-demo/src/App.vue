@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-08-06 10:40:11
+ * @LastEditTime: 2023-08-13 15:07:43
  * @Description:
 -->
 <script setup lang="ts">
@@ -142,7 +142,7 @@ const upload = (f: File) => {
     </YoungTab> -->
     <!-- <YoungTable :table-head="tableHead" :table-data="tableData" enable-custom-head /> -->
 
-    <YoungUpload v-model="imgToUpload" :upload-fn="upload" />
+    <YoungUpload v-model="imgToUpload" :upload-fn="upload" cropper :aspt="[16, 9]" />
 
     <YoungTablePro ref="YoungTableProRef" :table-head="tableHead" :table-head-check="tableHeadCheck"
       :table-data="tableData" />
