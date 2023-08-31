@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-08-15 15:29:52
+ * @LastEditTime: 2023-08-31 11:39:33
  * @Description:
  */
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, Method } from 'axios';
@@ -150,9 +150,29 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
     timeout,
   });
 
+  // 全局保持一个 loading
+  let loadingCount = 0;
+
+  /**
+   * 显示loading
+   */
+  function startLoading() {
+    loadingCount++;
+    loading.start();
+  }
+
+  /**
+   * 隐藏loading
+   */
+  function endLoading() {
+    if (--loadingCount === 0) {
+      loading.end();
+    }
+  }
+
   net.interceptors.request.use(
     (req) => {
-      !req.notLoading && loading.start();
+      !req.notLoading && startLoading();
       if (!req.baseURL) {
         req.baseURL = lazyBaseURL?.() ?? baseURL;
       }
@@ -166,7 +186,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
 
   net.interceptors.response.use(
     (response) => {
-      !response.config.notLoading && loading.end();
+      !response.config.notLoading && endLoading();
       const data = response.data;
 
       try {
@@ -178,7 +198,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
     },
     (error) => {
       if (error && error.config && !error.config.notLoading) {
-        loading.end();
+        endLoading();
       }
       // http 异常
       fail(error);

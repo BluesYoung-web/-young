@@ -63,9 +63,19 @@ var useHttp = (config = {}) => {
     method,
     timeout
   });
+  let loadingCount = 0;
+  function startLoading() {
+    loadingCount++;
+    loading.start();
+  }
+  function endLoading() {
+    if (--loadingCount === 0) {
+      loading.end();
+    }
+  }
   net.interceptors.request.use(
     (req) => {
-      !req.notLoading && loading.start();
+      !req.notLoading && startLoading();
       if (!req.baseURL) {
         req.baseURL = (lazyBaseURL == null ? void 0 : lazyBaseURL()) ?? baseURL;
       }
@@ -78,7 +88,7 @@ var useHttp = (config = {}) => {
   );
   net.interceptors.response.use(
     (response) => {
-      !response.config.notLoading && loading.end();
+      !response.config.notLoading && endLoading();
       const data = response.data;
       try {
         return checkFn(data);
@@ -88,7 +98,7 @@ var useHttp = (config = {}) => {
     },
     (error) => {
       if (error && error.config && !error.config.notLoading) {
-        loading.end();
+        endLoading();
       }
       fail(error);
     }
