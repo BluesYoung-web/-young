@@ -52,19 +52,20 @@ export default defineComponent({
     };
     const ltSm = useMediaQuery('(max-width: 639.9px)');
 
-    return () => (
-      <ElPagination
-        style={{ background: 'white', paddingTop: '20px', display: 'flex', flexWrap: 'wrap' }}
-        {...attrs}
-        background={props.background}
-        currentPage={props.page}
-        pageSize={props.limit}
-        layout={ltSm.value ? 'total, sizes, jumper' : props.layout}
-        pageSizes={props.pageSizes}
-        total={props.total}
-        onUpdate:page-size={(v) => sizeChange(v)}
-        onUpdate:current-page={(v) => pageChange(v)}
-      />
-    );
+    return () =>
+      props.total > 0 && (
+        <ElPagination
+          style={{ background: 'white', paddingTop: '20px', display: 'flex', flexWrap: 'wrap' }}
+          {...attrs}
+          background={props.background}
+          currentPage={props.page}
+          pageSize={props.limit}
+          layout={ltSm.value ? 'total, sizes, jumper' : props.layout}
+          pageSizes={props.pageSizes}
+          total={props.total}
+          onUpdate:page-size={(v) => sizeChange(v)}
+          onUpdate:current-page={(v) => pageChange(v)}
+        />
+      );
   },
 });

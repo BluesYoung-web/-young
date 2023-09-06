@@ -241,7 +241,7 @@ const Lp = tt({
     }, i = (s) => {
       r("update:page", s), r("page-change");
     }, a = kn("(max-width: 639.9px)");
-    return () => U(lo, Pe({
+    return () => e.total > 0 && U(lo, Pe({
       style: {
         background: "white",
         paddingTop: "20px",
