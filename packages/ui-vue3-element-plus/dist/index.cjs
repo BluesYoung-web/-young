@@ -59028,6 +59028,7 @@ var useFormMode = (FORM_TEMP, { addCbk, modCbk, delCbk, cpEffect, cgEffect, clea
     isEdit.value = false;
     isMore.value = false;
     clearEffect?.();
+    formRef.value?.resetFields();
     form.value = I(FORM_TEMP);
   };
   const del2 = (row) => {

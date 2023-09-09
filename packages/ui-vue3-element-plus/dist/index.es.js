@@ -2389,7 +2389,8 @@ const Wp = tt({
       Y(!1);
     });
   }), u = () => {
-    f.value = !1, l.value = !1, h.value = !1, s == null || s(), x.value = rt(e);
+    var I;
+    f.value = !1, l.value = !1, h.value = !1, s == null || s(), (I = d.value) == null || I.resetFields(), x.value = rt(e);
   };
   return {
     isAdd: f,

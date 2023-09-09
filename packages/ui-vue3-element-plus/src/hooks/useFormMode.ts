@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:10:41
- * @LastEditTime: 2023-01-05 18:57:15
+ * @LastEditTime: 2023-09-09 18:41:03
  * @Description:
  */
 import { deepClone } from '@bluesyoung/utils';
@@ -49,6 +49,7 @@ export const useFormMode = <T>(
     isEdit.value = false;
     isMore.value = false;
     clearEffect?.();
+    formRef.value?.resetFields();
     // @ts-ignore
     form.value = deepClone(FORM_TEMP);
   };
