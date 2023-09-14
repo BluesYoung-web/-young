@@ -57552,6 +57552,7 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
     });
     const historyHead = useLocalStorage(`table_pro_tableHead_${props.historyId}`, {});
     const initHead = () => {
+      console.log("---------------young table pro init-----------------");
       if (props.history) {
         const heads = historyHead.value?.tableHead ?? [];
         heads.forEach((head, index2) => {
@@ -57612,6 +57613,7 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
       });
     };
     const randomKey = oe();
+    initHead();
     expose({
       saveTableHead,
       resetTableHead

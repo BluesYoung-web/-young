@@ -1120,7 +1120,7 @@ const sf = af(), Yp = tt({
     });
     const c = Do(`table_pro_tableHead_${e.historyId}`, {}), f = () => {
       var A, C, I, Y;
-      if (e.history) {
+      if (console.log("---------------young table pro init-----------------"), e.history) {
         const Z = (C = (A = c.value) == null ? void 0 : A.tableHead) != null ? C : [];
         Z.forEach((D, H) => {
           const P = e.tableHead.find((V) => V.prop === D.prop);
@@ -1152,7 +1152,7 @@ const sf = af(), Yp = tt({
         });
       });
     }, S = Yr();
-    return t({
+    return f(), t({
       saveTableHead: u,
       resetTableHead: g
     }), () => U(Vt, null, [U("style", null, [`

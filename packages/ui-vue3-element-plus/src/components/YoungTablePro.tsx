@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-09-14 10:11:26
+ * @LastEditTime: 2023-09-14 11:14:36
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -89,6 +89,7 @@ export default defineComponent({
     }>(`table_pro_tableHead_${props.historyId}`, {});
 
     const initHead = () => {
+      console.log('---------------young table pro init-----------------');
       if (props.history) {
         const heads = historyHead.value?.tableHead ?? []
 
@@ -165,6 +166,8 @@ export default defineComponent({
     };
 
     const randomKey = randomId();
+
+    initHead();
 
     expose({
       saveTableHead,
