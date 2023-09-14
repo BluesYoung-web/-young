@@ -27,7 +27,7 @@ module.exports = __toCommonJS(resolver_exports);
 // package.json
 var package_default = {
   name: "@bluesyoung/ui-vue3-element-plus",
-  version: "0.11.6",
+  version: "0.11.7",
   description: "vue3 + element-plus ui components",
   type: "module",
   main: "dist/index.cjs.js",
@@ -81,6 +81,7 @@ var package_default = {
   },
   homepage: "https://github.com/BluesYoung-web/young#readme",
   dependencies: {
+    defu: "^6.1.2",
     "file-saver": "^2.0.5",
     xlsx: "^0.18.5"
   }

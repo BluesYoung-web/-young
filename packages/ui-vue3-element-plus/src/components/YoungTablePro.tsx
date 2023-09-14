@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-08-03 09:09:09
+ * @LastEditTime: 2023-09-14 10:11:26
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -11,6 +11,7 @@ import type { TableHeadItemPro, TableDataItem } from '..';
 import CustomHead from './sub/CustomHead';
 import { deepClone, randomId } from '@bluesyoung/utils';
 import { useLocalStorage } from '@vueuse/core';
+import { defu } from 'defu';
 
 export default defineComponent({
   props: {
@@ -88,7 +89,15 @@ export default defineComponent({
 
     const initHead = () => {
       if (props.history) {
-        tableHead_1.value = historyHead.value?.tableHead ?? [];
+        const heads = historyHead.value?.tableHead ?? []
+
+        heads.forEach((head, index) => {
+          const ori = props.tableHead.find((v) => v.prop === head.prop)
+          heads[index] = defu(ori, head)
+        });
+
+        tableHead_1.value = heads;
+        
         tableHeadCheck_1.value = historyHead.value?.tableHeadCheck ?? [];
 
         if (tableHeadCheck_1.value.length === 0) {

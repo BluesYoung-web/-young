@@ -1,4 +1,4 @@
-const t = "@bluesyoung/ui-vue3-element-plus", o = "0.11.6", u = "vue3 + element-plus ui components", n = "module", i = "dist/index.cjs.js", r = "dist/index.es.js", p = "dist/index.d.ts", c = {
+const t = "@bluesyoung/ui-vue3-element-plus", o = "0.11.7", u = "vue3 + element-plus ui components", n = "module", i = "dist/index.cjs.js", r = "dist/index.es.js", p = "dist/index.d.ts", c = {
   ".": {
     require: "./dist/index.cjs.js",
     import: "./dist/index.es.js",
@@ -9,12 +9,12 @@ const t = "@bluesyoung/ui-vue3-element-plus", o = "0.11.6", u = "vue3 + element-
     require: "./dist/resolver.cjs.js",
     import: "./dist/resolver.es.js"
   }
-}, l = {
+}, d = {
   test: "vitest",
   build: "vite build && tsup",
   release: "pnpm build && bumpp --commit",
   push: "pnpm publish --access public"
-}, d = {
+}, l = {
   "@bluesyoung/ui-vue3": "workspace:*",
   "@bluesyoung/utils": "workspace:*",
   "@types/sortablejs": "^1.15.0",
@@ -37,6 +37,7 @@ const t = "@bluesyoung/ui-vue3-element-plus", o = "0.11.6", u = "vue3 + element-
 ], v = "BluesYoung-web", a = "MIT", y = {
   url: "https://github.com/BluesYoung-web/young/issues"
 }, b = "https://github.com/BluesYoung-web/young#readme", h = {
+  defu: "^6.1.2",
   "file-saver": "^2.0.5",
   xlsx: "^0.18.5"
 }, s = {
@@ -48,8 +49,8 @@ const t = "@bluesyoung/ui-vue3-element-plus", o = "0.11.6", u = "vue3 + element-
   module: r,
   types: p,
   exports: c,
-  scripts: l,
-  devDependencies: d,
+  scripts: d,
+  devDependencies: l,
   repository: m,
   keywords: g,
   author: v,

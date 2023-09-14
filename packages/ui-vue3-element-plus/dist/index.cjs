@@ -57485,6 +57485,7 @@ var CustomHead_default = (0, import_vue619.defineComponent)({
 });
 
 // src/components/YoungTablePro.tsx
+var import_defu = require("defu");
 var YoungTablePro_default = (0, import_vue620.defineComponent)({
   props: {
     tableData: {
@@ -57551,7 +57552,12 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
     const historyHead = useLocalStorage(`table_pro_tableHead_${props.historyId}`, {});
     const initHead = () => {
       if (props.history) {
-        tableHead_1.value = historyHead.value?.tableHead ?? [];
+        const heads = historyHead.value?.tableHead ?? [];
+        heads.forEach((head, index2) => {
+          const ori = props.tableHead.find((v3) => v3.prop === head.prop);
+          heads[index2] = (0, import_defu.defu)(ori, head);
+        });
+        tableHead_1.value = heads;
         tableHeadCheck_1.value = historyHead.value?.tableHeadCheck ?? [];
         if (tableHeadCheck_1.value.length === 0) {
           initDefaultData();
