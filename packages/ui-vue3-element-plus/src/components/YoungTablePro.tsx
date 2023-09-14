@@ -68,6 +68,7 @@ export default defineComponent({
     // 修复表格切换时，显示出现错位的 bug
     onActivated(() => {
       nextTick(() => {
+        initHead();
         tableRef.value!.doLayout();
       });
     });

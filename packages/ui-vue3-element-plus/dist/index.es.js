@@ -1109,7 +1109,7 @@ const sf = af(), Yp = tt({
     const i = he();
     Va(() => {
       It(() => {
-        i.value.doLayout();
+        f(), i.value.doLayout();
       });
     });
     const a = he([]), s = he([]), o = he([]);

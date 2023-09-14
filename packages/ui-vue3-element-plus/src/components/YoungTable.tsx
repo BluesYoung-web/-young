@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:08:17
- * @LastEditTime: 2023-08-14 11:44:20
+ * @LastEditTime: 2023-09-14 11:08:57
  * @Description:
  */
 import { nextTick, onActivated, ref, watchEffect, defineComponent, onMounted } from 'vue';
@@ -24,7 +24,7 @@ export interface TableHeadItem<T extends any = any> {
   /**
    * 参数名
    */
-  prop: keyof T;
+  prop: keyof T | 'op';
   /**
    * 展示标题
    */
@@ -66,6 +66,7 @@ export interface TableHeadItem<T extends any = any> {
    * 当内容过长时，hover 展示全部
    */
   show_overflow_tooltip?: boolean;
+
   [x: string]: any;
 }
 

@@ -6,7 +6,7 @@ interface TableHeadItem<T extends any = any> {
     /**
      * 参数名
      */
-    prop: keyof T;
+    prop: keyof T | 'op';
     /**
      * 展示标题
      */

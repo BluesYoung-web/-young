@@ -57537,6 +57537,7 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
     const tableRef = (0, import_vue620.ref)();
     (0, import_vue620.onActivated)(() => {
       (0, import_vue620.nextTick)(() => {
+        initHead();
         tableRef.value.doLayout();
       });
     });
