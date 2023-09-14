@@ -57530,14 +57530,13 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
      */
     historyId: {
       type: String,
-      default: location.href.replace(location.origin, "")
+      default: ""
     }
   },
   setup(props, { attrs, expose, slots }) {
     const tableRef = (0, import_vue620.ref)();
     (0, import_vue620.onActivated)(() => {
       (0, import_vue620.nextTick)(() => {
-        initHead();
         tableRef.value.doLayout();
       });
     });
@@ -57550,9 +57549,10 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
         initHead();
       });
     });
-    const historyHead = useLocalStorage(`table_pro_tableHead_${props.historyId}`, {});
+    const historyHead = useLocalStorage(`table_pro_tableHead_${props.historyId || location.href.replace(location.origin, "")}`, {});
     const initHead = () => {
       console.log("---------------young table pro init-----------------");
+      console.log(`table_pro_tableHead_${props.historyId || location.href.replace(location.origin, "")}`);
       if (props.history) {
         const heads = historyHead.value?.tableHead ?? [];
         heads.forEach((head, index2) => {
@@ -57613,7 +57613,6 @@ var YoungTablePro_default = (0, import_vue620.defineComponent)({
       });
     };
     const randomKey = oe();
-    initHead();
     expose({
       saveTableHead,
       resetTableHead

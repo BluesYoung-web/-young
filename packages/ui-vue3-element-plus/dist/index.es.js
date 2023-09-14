@@ -1098,7 +1098,7 @@ const sf = af(), Yp = tt({
     },
     historyId: {
       type: String,
-      default: location.href.replace(location.origin, "")
+      default: ""
     }
   },
   setup(e, {
@@ -1109,7 +1109,7 @@ const sf = af(), Yp = tt({
     const i = he();
     Va(() => {
       It(() => {
-        f(), i.value.doLayout();
+        i.value.doLayout();
       });
     });
     const a = he([]), s = he([]), o = he([]);
@@ -1118,9 +1118,9 @@ const sf = af(), Yp = tt({
         f();
       });
     });
-    const c = Do(`table_pro_tableHead_${e.historyId}`, {}), f = () => {
+    const c = Do(`table_pro_tableHead_${e.historyId || location.href.replace(location.origin, "")}`, {}), f = () => {
       var A, C, I, Y;
-      if (console.log("---------------young table pro init-----------------"), e.history) {
+      if (console.log("---------------young table pro init-----------------"), console.log(`table_pro_tableHead_${e.historyId || location.href.replace(location.origin, "")}`), e.history) {
         const Z = (C = (A = c.value) == null ? void 0 : A.tableHead) != null ? C : [];
         Z.forEach((D, H) => {
           const P = e.tableHead.find((V) => V.prop === D.prop);
@@ -1152,7 +1152,7 @@ const sf = af(), Yp = tt({
         });
       });
     }, S = Yr();
-    return f(), t({
+    return t({
       saveTableHead: u,
       resetTableHead: g
     }), () => U(Vt, null, [U("style", null, [`

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-30 09:24:26
- * @LastEditTime: 2023-09-14 11:14:36
+ * @LastEditTime: 2023-09-14 11:32:42
  * @Description:
  */
 import { computed, nextTick, onActivated, ref, watchEffect, defineComponent } from 'vue';
@@ -57,7 +57,7 @@ export default defineComponent({
      */
     historyId: {
       type: String,
-      default: location.href.replace(location.origin, ''),
+      default: '',
     },
   },
   setup(props, { attrs, expose, slots }) {
@@ -68,7 +68,6 @@ export default defineComponent({
     // 修复表格切换时，显示出现错位的 bug
     onActivated(() => {
       nextTick(() => {
-        initHead();
         tableRef.value!.doLayout();
       });
     });
@@ -86,10 +85,11 @@ export default defineComponent({
     const historyHead = useLocalStorage<{
       tableHead?: TableHeadItemPro[];
       tableHeadCheck?: string[];
-    }>(`table_pro_tableHead_${props.historyId}`, {});
+    }>(`table_pro_tableHead_${props.historyId || location.href.replace(location.origin, '')}`, {});
 
     const initHead = () => {
       console.log('---------------young table pro init-----------------');
+      console.log(`table_pro_tableHead_${props.historyId || location.href.replace(location.origin, '')}`);
       if (props.history) {
         const heads = historyHead.value?.tableHead ?? []
 
@@ -166,8 +166,6 @@ export default defineComponent({
     };
 
     const randomKey = randomId();
-
-    initHead();
 
     expose({
       saveTableHead,
