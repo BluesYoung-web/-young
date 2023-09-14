@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-08-13 15:07:43
+ * @LastEditTime: 2023-09-14 09:40:55
  * @Description:
 -->
 <script setup lang="ts">
@@ -110,7 +110,11 @@ watchEffect(() => {
 const tableHead: TableHeadItem[] = new Array(20).fill(0).map((_, v) => ({ label: v.toString().repeat(10), prop: v.toString(), width: v === 19 ? '320' : undefined }));
 const tableData: TableDataItem[] = new Array(20).fill(0).map((_, v) => ({ [v]: v }));
 
-const tableHeadCheck = tableHead.map(t => t.prop as string);
+tableHead.forEach((item, index) => {
+  if (index % 2 === 0) {
+    item.render = (row, index) => h('div', { style: 'color: red; font-weight: bold;' }, index)
+  }
+})
 
 
 const imgToUpload = ref<string[]>([]);
@@ -144,8 +148,7 @@ const upload = (f: File) => {
 
     <YoungUpload v-model="imgToUpload" :upload-fn="upload" cropper :aspt="[16, 9]" />
 
-    <YoungTablePro ref="YoungTableProRef" :table-head="tableHead" :table-head-check="tableHeadCheck"
-      :table-data="tableData" />
+    <YoungTablePro ref="YoungTableProRef" :table-head="tableHead" :table-data="tableData" />
 
     <YoungPagination :page="1" :limit="10" :total="100" />
   </div>
