@@ -224,6 +224,10 @@ declare const _default$9: vue.DefineComponent<{
         type: ObjectConstructor;
         default: any;
     };
+    as: {
+        type: PropType<"dialog" | "drawer">;
+        default: string;
+    };
 }, () => JSX.Element, unknown, {}, {}, vue.ComponentOptionsMixin, vue.ComponentOptionsMixin, ("clear" | "sure" | "update:modelValue")[], "clear" | "sure" | "update:modelValue", vue.VNodeProps & vue.AllowedComponentProps & vue.ComponentCustomProps, Readonly<vue.ExtractPropTypes<{
     modelValue: BooleanConstructor;
     realTitle: StringConstructor;
@@ -258,6 +262,10 @@ declare const _default$9: vue.DefineComponent<{
         type: ObjectConstructor;
         default: any;
     };
+    as: {
+        type: PropType<"dialog" | "drawer">;
+        default: string;
+    };
 }>> & {
     "onUpdate:modelValue"?: (...args: any[]) => any;
     onClear?: (...args: any[]) => any;
@@ -273,6 +281,7 @@ declare const _default$9: vue.DefineComponent<{
     isEdit: boolean;
     isMore: boolean;
     diffForm: Record<string, any>;
+    as: "dialog" | "drawer";
 }>;
 
 type SelectOptionItem<T extends any = any> = {

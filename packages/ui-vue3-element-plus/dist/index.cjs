@@ -56626,6 +56626,10 @@ var YoungDialog_default = (0, import_vue610.defineComponent)({
     diffForm: {
       type: Object,
       default: null
+    },
+    as: {
+      type: String,
+      default: "drawer"
     }
   },
   emits: ["sure", "clear", "update:modelValue"],
@@ -56633,12 +56637,10 @@ var YoungDialog_default = (0, import_vue610.defineComponent)({
     const formHash_before = (0, import_vue610.ref)("");
     const title = (0, import_vue610.computed)(() => {
       let str = "\u65B0\u5EFA";
-      if (props.isEdit) {
+      if (props.isEdit)
         str = "\u7F16\u8F91";
-      }
-      if (props.isMore) {
+      if (props.isMore)
         str = "\u8BE6\u60C5";
-      }
       return str;
     });
     const showDialog = (0, import_vue610.computed)({
@@ -56648,25 +56650,22 @@ var YoungDialog_default = (0, import_vue610.defineComponent)({
     props.diffForm && (0, import_vue610.watch)(
       () => showDialog.value,
       (v3, o2) => {
-        if (v3 && !o2) {
+        if (v3 && !o2)
           formHash_before.value = JSON.stringify(props.diffForm);
-        }
       }
     );
     props.diffForm && (0, import_vue610.watch)(
       () => props.modelValue,
       (v3, o2) => {
-        if (v3 && !o2) {
+        if (v3 && !o2)
           formHash_before.value = JSON.stringify(props.diffForm);
-        }
       }
     );
     const sure = async () => {
       if (props.sureFn) {
         const res = await props.sureFn();
-        if (res === false) {
+        if (res === false)
           return;
-        }
       }
       if (props.isMore) {
         emit("clear");
@@ -56685,7 +56684,6 @@ var YoungDialog_default = (0, import_vue610.defineComponent)({
       if (props.diffForm && formHash_before.value === formHash_after) {
         emit("clear");
         emit("update:modelValue", false);
-        return;
       } else {
         ElMessageBox.confirm("\u6570\u636E\u672A\u4FDD\u5B58\uFF0C\u5173\u95ED\u5C06\u4E22\u5931\u6570\u636E\uFF0C\u786E\u8BA4\u5173\u95ED\uFF1F", "\u63D0\u793A", {
           confirmButtonText: "\u786E\u8BA4",
@@ -56697,27 +56695,56 @@ var YoungDialog_default = (0, import_vue610.defineComponent)({
       }
     };
     const ltLg = useMediaQuery("(max-width: 1023.9px)");
-    return () => <import_vue610.Teleport to="body"><ElDialog
-      {...attrs}
-      modelValue={props.modelValue || showDialog.value}
-      title={props.realTitle || title.value}
-      width={ltLg.value ? "96%" : props.width}
-      closeOnClickModal={true}
-      closeOnPressEscape={false}
-      beforeClose={beforeClose}
-      v-slots={{
-        default: () => slots.body?.(),
-        footer: () => {
-          return <>
-            {slots.button?.()}
-            {props.showCancel && <ElButton onClick={() => beforeClose()}>{props.cancelText}</ElButton>}
-            {slots.step1?.()}
-            {slots.step2?.()}
-            {props.showSure && <ElButton type="primary" onClick={() => sure()}>{props.sureText}</ElButton>}
-          </>;
-        }
-      }}
-    /></import_vue610.Teleport>;
+    return () => <import_vue610.Teleport to="body">
+      {props.as === "dialog" && <ElDialog
+        {...attrs}
+        modelValue={props.modelValue || showDialog.value}
+        title={props.realTitle || title.value}
+        width={ltLg.value ? "96%" : props.width}
+        closeOnClickModal={true}
+        closeOnPressEscape={false}
+        beforeClose={beforeClose}
+        v-slots={{
+          default: () => <>
+            {slots.default?.()}
+            {slots.body?.()}
+          </>,
+          footer: () => {
+            return <>
+              {slots.button?.()}
+              {props.showCancel && <ElButton onClick={() => beforeClose()}>{props.cancelText}</ElButton>}
+              {slots.step1?.()}
+              {slots.step2?.()}
+              {props.showSure && <ElButton type="primary" onClick={() => sure()}>{props.sureText}</ElButton>}
+            </>;
+          }
+        }}
+      />}
+      {props.as === "drawer" && <ElDrawer
+        {...attrs}
+        modelValue={props.modelValue || showDialog.value}
+        title={props.realTitle || title.value}
+        size={ltLg.value ? "96%" : props.width}
+        closeOnClickModal={true}
+        closeOnPressEscape={false}
+        beforeClose={beforeClose}
+        v-slots={{
+          default: () => <>
+            {slots.default?.()}
+            {slots.body?.()}
+          </>,
+          footer: () => {
+            return <>
+              {slots.button?.()}
+              {props.showCancel && <ElButton onClick={() => beforeClose()}>{props.cancelText}</ElButton>}
+              {slots.step1?.()}
+              {slots.step2?.()}
+              {props.showSure && <ElButton type="primary" onClick={() => sure()}>{props.sureText}</ElButton>}
+            </>;
+          }
+        }}
+      />}
+    </import_vue610.Teleport>;
   }
 });
 
