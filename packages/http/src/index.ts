@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-08-31 11:39:33
+ * @LastEditTime: 2023-09-18 15:28:31
  * @Description:
  */
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, Method } from 'axios';
@@ -26,7 +26,7 @@ export type Cbks = {
   [k in AllMethod]?: Record<string, Fn>;
 };
 
-type Handlers<R extends Cbks> = {
+export type Handlers<R extends Cbks> = {
   [P in keyof R]?: R[P];
 };
 
@@ -34,7 +34,7 @@ type Headers = Record<string, string>;
 
 type Req = <X extends any = any>(config: AxiosRequestConfig<unknown>) => Promise<X>;
 
-type Prototype = {
+export type Prototype = {
   __instance__: AxiosInstance;
   __mixin__<T extends Cbks>(
     extentions: Handlers<T>,
@@ -112,7 +112,7 @@ export interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
   };
 }
 
-const defaultConfig: DefaultHttpConfig = {
+export const defaultConfig: DefaultHttpConfig = {
   baseURL: '/api',
   method: 'post',
   timeout: 5e3,

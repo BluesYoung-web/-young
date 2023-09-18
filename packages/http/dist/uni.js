@@ -26,22 +26,16 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/index.ts
-var src_exports = {};
-__export(src_exports, {
-  UsefulContentTypes: () => UsefulContentTypes,
-  defaultConfig: () => defaultConfig,
+// src/uni.ts
+var uni_exports = {};
+__export(uni_exports, {
   useHttp: () => useHttp
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(uni_exports);
+
+// src/index.ts
 var import_axios = __toESM(require("axios"));
 var import_defu = require("defu");
-var UsefulContentTypes = /* @__PURE__ */ ((UsefulContentTypes2) => {
-  UsefulContentTypes2["JSON"] = `application/json; charset=UTF-8`;
-  UsefulContentTypes2["URLEncoded"] = `application/x-www-form-urlencoded; charset=UTF-8`;
-  UsefulContentTypes2["FormData"] = `multipart/form-data; charset=UTF-8`;
-  return UsefulContentTypes2;
-})(UsefulContentTypes || {});
 var defaultConfig = {
   baseURL: "/api",
   method: "post",
@@ -57,12 +51,18 @@ var defaultConfig = {
     getAuthHeaders: () => ({})
   }
 };
+
+// src/uni.ts
+var import_defu2 = require("defu");
+var import_axios2 = __toESM(require("axios"));
+var import_axios_adapter = require("@uni-helper/axios-adapter");
 var useHttp = (config = {}) => {
-  const finalConfig = (0, import_defu.defu)(config, defaultConfig);
+  const finalConfig = (0, import_defu2.defu)(config, defaultConfig);
   const { baseURL, lazyBaseURL, method, timeout, headers, checkFn, loading, fail } = finalConfig;
-  const net = import_axios.default.create({
+  const net = import_axios2.default.create({
     method,
-    timeout
+    timeout,
+    adapter: (0, import_axios_adapter.createUniAppAxiosAdapter)()
   });
   let loadingCount = 0;
   function startLoading() {
@@ -148,7 +148,5 @@ var useHttp = (config = {}) => {
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  UsefulContentTypes,
-  defaultConfig,
   useHttp
 });

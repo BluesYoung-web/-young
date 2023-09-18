@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-04-28 16:27:49
- * @LastEditTime: 2022-12-11 15:30:50
+ * @LastEditTime: 2023-09-18 16:29:43
  * @Description:
  */
 /// <reference types="vitest" />
@@ -11,9 +11,12 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: [
+        resolve(__dirname, 'src/index.ts'),
+        resolve(__dirname, 'src/uni.ts'),
+      ],
       formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format}.js`,
+      fileName: (format, name) => `${name}.${format}.js`,
     },
     sourcemap: true,
   },
