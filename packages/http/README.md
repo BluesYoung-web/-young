@@ -60,6 +60,14 @@ apis.get.userInfo();
 apis.post.pwd({ old_pwd: '111111', new_pwd: '123456' });
 ```
 
+## uni-app 中使用
+
+[基于 @uni-helper/axios-adapter 的兼容层](https://github.com/uni-helper/axios-adapter)
+
+```ts
+import { useHttp } from '@bluesyoung/http/uni';
+```
+
 ## 自定义配置
 
 ```ts
