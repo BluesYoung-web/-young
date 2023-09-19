@@ -16,11 +16,12 @@
       "require": "./dist/uni.cjs.js",
       "import": "./dist/uni.es.js",
       "types": "./dist/uni.d.ts"
-    }
+    },
+    "./*": "./*"
   },
   "scripts": {
     "test": "vitest",
-    "build": "vite build && tsup",
+    "build": "vite build && tsup && node ./scripts/postbuild.mjs",
     "release": "pnpm build && bumpp --commit",
     "push": "pnpm publish --access public"
   },
@@ -47,6 +48,7 @@
   },
   "homepage": "https://github.com/BluesYoung-web/young#readme",
   "devDependencies": {
-    "@vitest/ui": "^0.25.7"
+    "@vitest/ui": "^0.25.7",
+    "execa": "^8.0.1"
   }
 }
