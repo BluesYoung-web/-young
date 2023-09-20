@@ -75,16 +75,16 @@ Object.defineProperty(exports, "YoungWeekday", {
     return _YoungWeekday.default;
   }
 });
-var _YoungTable = _interopRequireDefault(require("./YoungTable"));
-var _YoungPagination = _interopRequireDefault(require("./YoungPagination"));
-var _YoungDialog = _interopRequireDefault(require("./YoungDialog"));
-var _YoungSelect = _interopRequireDefault(require("./YoungSelect"));
-var _YoungWeekday = _interopRequireDefault(require("./YoungWeekday"));
-var _YoungTimeRange = _interopRequireDefault(require("./YoungTimeRange"));
-var _YoungDateRange = _interopRequireDefault(require("./YoungDateRange"));
-var _YoungImageViewer = _interopRequireDefault(require("./YoungImageViewer"));
-var _YoungSearchForm = _interopRequireDefault(require("./YoungSearchForm"));
-var _YoungRotateTip = _interopRequireDefault(require("./YoungRotateTip"));
-var _YoungTablePro = _interopRequireDefault(require("./YoungTablePro"));
-var _YoungUpload = _interopRequireDefault(require("./YoungUpload"));
+var _YoungTable = _interopRequireDefault(require("./YoungTable.vue"));
+var _YoungPagination = _interopRequireDefault(require("./YoungPagination.vue"));
+var _YoungDialog = _interopRequireDefault(require("./YoungDialog.vue"));
+var _YoungSelect = _interopRequireDefault(require("./YoungSelect.vue"));
+var _YoungWeekday = _interopRequireDefault(require("./YoungWeekday.vue"));
+var _YoungTimeRange = _interopRequireDefault(require("./YoungTimeRange.vue"));
+var _YoungDateRange = _interopRequireDefault(require("./YoungDateRange.vue"));
+var _YoungImageViewer = _interopRequireDefault(require("./YoungImageViewer.vue"));
+var _YoungSearchForm = _interopRequireDefault(require("./YoungSearchForm.vue"));
+var _YoungRotateTip = _interopRequireDefault(require("./YoungRotateTip.vue"));
+var _YoungTablePro = _interopRequireDefault(require("./YoungTablePro.vue"));
+var _YoungUpload = _interopRequireDefault(require("./YoungUpload.vue"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
