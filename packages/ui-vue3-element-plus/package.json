@@ -12,16 +12,11 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     },
-    "./resolver": {
-      "types": "./dist/resolver.d.ts",
-      "require": "./dist/resolver.js",
-      "import": "./dist/resolver.mjs"
-    },
     "./*": "./*"
   },
   "scripts": {
     "test": "vitest",
-    "build": "unbuild",
+    "build": "unbuild && node ./scripts/postbuild.mjs",
     "release": "pnpm build && bumpp --commit",
     "push": "pnpm publish --access public"
   },
