@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import { useFormMode } from '..';
+import { useFormMode } from '../src';
 import { describe, it, expect, vi } from 'vitest';
 
 describe('useFormMode', () => {
@@ -49,6 +49,7 @@ describe('useFormMode', () => {
           isEdit.value = false;
           isMore.value = false;
           clearEffect?.();
+          formRef.value?.resetFields();
           form.value = __vite_ssr_import_0__.deepClone(FORM_TEMP);
           }</div>
         <div>\\"[object Promise]\\"</div>

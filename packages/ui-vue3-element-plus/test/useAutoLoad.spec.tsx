@@ -1,13 +1,13 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-10 16:55:47
- * @LastEditTime: 2023-03-25 17:39:27
+ * @LastEditTime: 2023-09-19 15:31:26
  * @Description:
  */
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
 import { defineComponent, nextTick, ref } from 'vue';
 import { shallowMount } from '@vue/test-utils';
-import { useAutoLoad } from '..';
+import { useAutoLoad } from '../src';
 
 beforeAll(() => {
   vi.useFakeTimers();

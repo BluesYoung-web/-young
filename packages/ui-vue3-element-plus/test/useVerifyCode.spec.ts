@@ -1,11 +1,11 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-10 16:55:47
- * @LastEditTime: 2023-03-25 17:40:24
+ * @LastEditTime: 2023-09-19 15:31:45
  * @Description:
  */
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest';
-import { useVerifyCode } from '..';
+import { useVerifyCode } from '../src';
 
 beforeAll(() => {
   vi.useFakeTimers();
