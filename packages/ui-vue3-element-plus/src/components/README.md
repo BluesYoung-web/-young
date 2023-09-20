@@ -9,8 +9,6 @@
 
 - `tableHead`: 表格的表头配置，类型为 `TableHeadItem[]`，必需
 
-- `tableHeight`: 表格的高度，类型为 `Number`，默认值为 `600`
-
 - `selectable`: 是否显示选择框，类型为 `Boolean`，默认为 `false`
 
 - `rowDraggable`: 行是否可拖动，类型为 `Boolean`，默认为 `false`
@@ -98,17 +96,7 @@ export type TableDataItem<T extends any = any> = {
 
 ### Prop
 
-- `tableData`: 表格的数据，类型为 `TableDataItem[]`，必需
-
-- `tableHead`: 表格的表头配置，类型为 `TableHeadItem[]`，必需
-
-- `tableHeight`: 表格的高度，类型为 `Number`，默认值为 `600`
-
-- `selectable`: 是否显示选择框，类型为 `Boolean`，默认为 `false`
-
-- **其他属性和方法会被 `<ElTable>` 自动继承**
-
-> **主要是扩展了表头的自定义操作**，其他基础操作同 `YoungTable`
+> **主要是扩展了表头的自定义操作**，其他基础操作同 `YoungTable`，**墙裂推荐**
 
 
 ## YoungPagination
@@ -119,7 +107,7 @@ export type TableDataItem<T extends any = any> = {
 
 ```html
 <template>
-  <YoungPagination v-show="query.total > 0" v-model:page="query.pageNum" v-model:limit="query.pageSize" :total="query.total" @page-change="getList" />
+  <YoungPagination v-model:page="query.pageNum" v-model:limit="query.pageSize" :total="query.total" @page-change="getList" />
 </template>
 
 <script lang="ts" setup>
