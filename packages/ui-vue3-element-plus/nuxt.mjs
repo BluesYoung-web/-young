@@ -9,8 +9,8 @@ export default defineNuxtModule({
     },
   },
   setup(options, nuxt) {
-    // 工具函数自动导入
-    ["useAutoLoad","useFormMode","useExport2Excel","useVerifyCode","useImagePreview","useKeyUp","useQuery","useRemoteSearch"].forEach(fn => {
+    // 工具函数自动导入 & 组件导入(供 tsx 及 h 使用)
+    ["useAutoLoad","useFormMode","useExport2Excel","useVerifyCode","useImagePreview","useKeyUp","useQuery","useRemoteSearch","YoungTable","YoungPagination","YoungDialog","YoungSelect","YoungWeekday","YoungTimeRange","YoungDateRange","YoungImageViewer","YoungSearchForm","YoungTablePro","YoungUpload"].forEach(fn => {
       addImports({
         name: fn,
         from: '@bluesyoung/ui-vue3-element-plus'

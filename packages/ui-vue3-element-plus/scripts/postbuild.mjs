@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-20 09:03:04
- * @LastEditTime: 2023-09-20 10:34:46
+ * @LastEditTime: 2023-09-21 14:19:54
  * @Description: 生成 nuxt 模块
  */
 import { readFile, writeFile } from 'node:fs/promises';
@@ -48,8 +48,11 @@ export default defineNuxtModule({
     },
   },
   setup(options, nuxt) {
-    // 工具函数自动导入
-    ${JSON.stringify(FNS)}.forEach(fn => {
+    // 工具函数自动导入 & 组件导入(供 tsx 及 h 使用)
+    ${JSON.stringify([
+      ...FNS,
+      ...Components,
+    ])}.forEach(fn => {
       addImports({
         name: fn,
         from: '${NAME}'
