@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 14:09:31
- * @LastEditTime: 2023-09-21 08:51:33
+ * @LastEditTime: 2023-09-21 10:30:42
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -126,14 +126,13 @@ const ltLg = useMediaQuery('(max-width: 1023.9px)');
   <ElUpload v-bind="$attrs" :accept="accept ? accept : type === 'image' ? 'image/*' : '*'" :limit="limit"
     :list-type="type === 'image' ? 'picture-card' : undefined" :multiple="limit > 1" :file-list="files"
     :auto-upload="false" style="max-width: 500px;" @exceed="exceed" @change="upload" @remove="del"
-    @preview="({ url }) => type === 'image' && preView(url!)">
-    <div>
-      <div v-if="modelValue.length < limit && type === 'image'" style="font-size: 1.875rem; line-height: 2.25rem;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-          <path fill="currentColor"
-            d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2z" />
-        </svg>
-      </div>
+    @preview="f => type === 'image' && preView(f.url!)">
+    <div style="display: flex;">
+      <svg v-if="modelValue.length < limit && type === 'image'" style="font-size: 1.875rem; line-height: 2.25rem;"
+        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2z" />
+      </svg>
       <div v-else-if="modelValue.length < limit" style="margin-right: 0.5rem;">
         <ElButton type="primary">上传文件</ElButton>
       </div>
@@ -144,34 +143,14 @@ const ltLg = useMediaQuery('(max-width: 1023.9px)');
     </div>
   </ElUpload>
 
-  <YoungDialog v-model="showClipPopup" width="96%" real-title="图片裁剪" :show-cancel="false" :show-sure="false">
-    <template #body>
-      <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center;">
-        <div :style="{
-          width: ltLg ? '90vw' : '800px',
-          height: ltLg ? '90vh' : '72vh',
-        }">
-          <VueCropper ref="cropper" auto-crop center-box :fixed-number="aspt" :img="coverFile" :output-type="outputType"
-            fixed v-bind="cropperAttrs" />
-
-        </div>
-
-        <div
-          style="display: flex; align-items: center; justify-content: space-between; height: 80px; width: 96%; padding: 0 20px;">
-          <ElButton style="width: 48%;" @click="cancelClip">
-            取消
-          </ElButton>
-          <ElButton style="width: 48%;" @click="sureClip" type="primary">
-            裁剪
-          </ElButton>
-        </div>
-      </div>
-    </template>
+  <YoungDialog v-model="showClipPopup" width="75%" real-title="图片裁剪" sure-text="裁剪" @sure="sureClip" @clear="cancelClip">
+    <VueCropper ref="cropper" auto-crop center-box :fixed-number="aspt" :img="coverFile" :output-type="outputType" fixed
+      v-bind="cropperAttrs" />
   </YoungDialog>
 </template>
 
 <style lang="scss" scoped>
-::deep(.el-upload--picture-card) {
+:deep(.el-upload--picture-card) {
   display: v-bind('limitStyle');
 }
 </style>
