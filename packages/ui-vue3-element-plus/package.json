@@ -55,5 +55,9 @@
     "defu": "^6.1.2",
     "file-saver": "^2.0.5",
     "xlsx": "^0.18.5"
-  }
+  },
+  "files": [
+    "dist",
+    "nuxt.mjs"
+  ]
 }
