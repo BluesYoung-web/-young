@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:38:19
- * @LastEditTime: 2023-09-20 15:50:25
+ * @LastEditTime: 2023-09-21 10:24:00
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -129,6 +129,7 @@ const ltLg = useMediaQuery('(max-width: 1023.9px)')
         <slot name="body" />
       </template>
       <template #footer>
+        <slot name="footer" />
         <slot name="button" />
         <ElButton v-if="showCancel" @click="beforeClose">{{ cancelText }}</ElButton>
         <slot name="step1" />
@@ -143,6 +144,7 @@ const ltLg = useMediaQuery('(max-width: 1023.9px)')
         <slot name="body" />
       </template>
       <template #footer>
+        <slot name="footer" />
         <slot name="button" />
         <ElButton v-if="showCancel" @click="beforeClose">{{ cancelText }}</ElButton>
         <slot name="step1" />
