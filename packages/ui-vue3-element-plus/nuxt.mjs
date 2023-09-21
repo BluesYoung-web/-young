@@ -18,7 +18,7 @@ export default defineNuxtModule({
     });
 
     // 组件自动导入
-    ["YoungTable","YoungPagination","YoungDialog","YoungSelect","YoungWeekday","YoungTimeRange","YoungDateRange","YoungImageViewer","YoungSearchForm","YoungRotateTip","YoungTablePro","YoungUpload"].forEach(name => {
+    ["YoungTable","YoungPagination","YoungDialog","YoungSelect","YoungWeekday","YoungTimeRange","YoungDateRange","YoungImageViewer","YoungSearchForm","YoungTablePro","YoungUpload"].forEach(name => {
       addComponent({
         export: name,
         name,

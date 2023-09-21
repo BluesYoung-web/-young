@@ -27,12 +27,6 @@ Object.defineProperty(exports, "YoungPagination", {
     return _YoungPagination.default;
   }
 });
-Object.defineProperty(exports, "YoungRotateTip", {
-  enumerable: true,
-  get: function () {
-    return _YoungRotateTip.default;
-  }
-});
 Object.defineProperty(exports, "YoungSearchForm", {
   enumerable: true,
   get: function () {
@@ -84,7 +78,6 @@ var _YoungTimeRange = _interopRequireDefault(require("./YoungTimeRange.vue"));
 var _YoungDateRange = _interopRequireDefault(require("./YoungDateRange.vue"));
 var _YoungImageViewer = _interopRequireDefault(require("./YoungImageViewer.vue"));
 var _YoungSearchForm = _interopRequireDefault(require("./YoungSearchForm.vue"));
-var _YoungRotateTip = _interopRequireDefault(require("./YoungRotateTip.vue"));
 var _YoungTablePro = _interopRequireDefault(require("./YoungTablePro.vue"));
 var _YoungUpload = _interopRequireDefault(require("./YoungUpload.vue"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

@@ -8,6 +8,5 @@ export { default as YoungTimeRange } from './YoungTimeRange.vue';
 export { default as YoungDateRange } from './YoungDateRange.vue';
 export { default as YoungImageViewer } from './YoungImageViewer.vue';
 export { default as YoungSearchForm } from './YoungSearchForm.vue';
-export { default as YoungRotateTip } from './YoungRotateTip.vue';
 export { default as YoungTablePro } from './YoungTablePro.vue';
 export { default as YoungUpload } from './YoungUpload.vue';
