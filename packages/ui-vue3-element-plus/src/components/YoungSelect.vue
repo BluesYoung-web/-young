@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 14:33:13
- * @LastEditTime: 2023-09-20 16:48:13
+ * @LastEditTime: 2023-09-21 09:46:22
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -9,16 +9,18 @@ import { ElSelect, ElOption } from 'element-plus';
 import { randomId } from '@bluesyoung/utils';
 import type { SelectOptionItem } from '.';
 
-interface Props {
-  modelValue?: number | string | Array<number | string>;
-  options: SelectOptionItem[];
+interface Props<T extends any = string | number> {
+  modelValue?: T | T[];
+  options: SelectOptionItem<T>[];
 }
 
 defineProps<Props>();
 
+type UpdateValueType = Required<Props>['modelValue'];
+
 const emit = defineEmits<{
-  (e: 'update:modelValue', v: Props['modelValue']): void;
-  (e: 'change', v: Props['modelValue']): void;
+  (e: 'update:modelValue', v: UpdateValueType): void;
+  (e: 'change', v: UpdateValueType): void;
 }>();
 
 const randomSeed = randomId();
