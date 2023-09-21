@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 14:09:31
- * @LastEditTime: 2023-09-20 14:31:55
+ * @LastEditTime: 2023-09-21 08:51:33
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -14,14 +14,12 @@ import { VueCropper } from 'vue-cropper';
 import 'vue-cropper/dist/index.css';
 import { useMediaQuery } from '@vueuse/core';
 
-type YoungUploadFn = (file: File | Blob) => string;
-
 interface Porps {
   modelValue: string[];
   limit?: number;
   type?: 'image' | 'file';
   accept?: string;
-  uploadFn: YoungUploadFn;
+  uploadFn: (file: File) => Promise<string>;
   cropper?: boolean;
   aspt?: [number, number];
   outputType?: string;
