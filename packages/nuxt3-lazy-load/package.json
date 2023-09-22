@@ -1,6 +1,6 @@
 {
   "name": "@bluesyoung/nuxt3-lazy-load",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "资源懒加载",
   "repository": {
     "type": "git",
