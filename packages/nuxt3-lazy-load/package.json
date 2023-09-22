@@ -1,0 +1,54 @@
+{
+  "name": "@bluesyoung/nuxt3-lazy-load",
+  "version": "0.0.0",
+  "description": "资源懒加载",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/BluesYoung-web/young.git",
+    "directory": "packages/nuxt3-lazy-load"
+  },
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild"
+  },
+  "devDependencies": {
+    "@nuxt/kit": "^3.7.3",
+    "nuxt": "^3.7.3",
+    "unbuild": "^2.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/BluesYoung-web/young/issues"
+  },
+  "homepage": "https://github.com/BluesYoung-web/young#readme",
+  "author": {
+    "name": "BluesYoung-web",
+    "email": "bluesyoung_web@163.com"
+  },
+  "keywords": [
+    "nuxt3 懒加载",
+    "图片懒加载",
+    "视频懒加载",
+    "音频懒加载",
+    "iframe 懒加载",
+    "nuxt3 图片懒加载",
+    "nuxt3 视频懒加载",
+    "nuxt3 音频懒加载",
+    "nuxt-lazy-load",
+    "nuxt3-lazy-load"
+  ]
+}
