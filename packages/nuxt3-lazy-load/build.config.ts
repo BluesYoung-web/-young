@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-19 15:24:26
- * @LastEditTime: 2023-09-19 15:33:47
+ * @LastEditTime: 2023-09-22 16:45:38
  * @Description: 
  */
 import { defineBuildConfig } from "unbuild";
@@ -13,12 +13,6 @@ export default defineBuildConfig({
       input: './src/',
       outDir: './dist',
       format: 'esm'
-    },
-    {
-      builder: 'mkdist',
-      input: './src/',
-      outDir: './dist',
-      format: 'cjs'
     },
   ],
   externals: [
