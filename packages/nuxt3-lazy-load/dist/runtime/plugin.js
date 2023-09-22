@@ -71,6 +71,9 @@ var _default = (0, _app.defineNuxtPlugin)(nuxtApp => {
     mounted(el) {
       observer && observer.observe(el);
       _nuxt3LazyLoad.options.defaultImage && el.tagName.toLocaleLowerCase() === "img" && (el.src = _nuxt3LazyLoad.options.defaultImage);
+    },
+    getSSRProps() {
+      return {};
     }
   });
   nuxtApp.vueApp.directive("not-lazy", {
@@ -80,6 +83,9 @@ var _default = (0, _app.defineNuxtPlugin)(nuxtApp => {
         setAttribute(item, "srcset");
       }
       el.tagName.toLocaleLowerCase() !== "picture" && el.removeAttribute("data-not-lazy");
+    },
+    getSSRProps() {
+      return {};
     }
   });
 });

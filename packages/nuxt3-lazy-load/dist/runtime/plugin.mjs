@@ -69,6 +69,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     mounted(el) {
       observer && observer.observe(el);
       options.defaultImage && el.tagName.toLocaleLowerCase() === "img" && (el.src = options.defaultImage);
+    },
+    getSSRProps() {
+      return {};
     }
   });
   nuxtApp.vueApp.directive("not-lazy", {
@@ -78,6 +81,9 @@ export default defineNuxtPlugin((nuxtApp) => {
         setAttribute(item, "srcset");
       }
       el.tagName.toLocaleLowerCase() !== "picture" && el.removeAttribute("data-not-lazy");
+    },
+    getSSRProps() {
+      return {};
     }
   });
 });
