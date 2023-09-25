@@ -1,5 +1,6 @@
 import { defineNuxtPlugin } from "nuxt/app";
 import { options } from "#build/@bluesyoung/nuxt3-lazy-load";
+import { YoungOSSImageDefaultProcess } from "../types.mjs";
 function isPictureChild(el) {
   return el.parentNode && el.parentNode.nodeName.toLocaleLowerCase() === "picture";
 }
@@ -9,7 +10,25 @@ function setAttribute(el, attribute) {
     for (const e of el)
       setAttribute(e, attribute);
   } else if (el.getAttribute(dataAttribute)) {
-    el.setAttribute(attribute, el.getAttribute(dataAttribute));
+    const srcURL = new URL(el.getAttribute(dataAttribute));
+    const extendsSrc = (str) => {
+      const OSSProcess = new URLSearchParams(str);
+      for (const [key, value] of OSSProcess.entries()) {
+        srcURL.searchParams.set(key, value);
+      }
+    };
+    if (options.OSSProcess === false) {
+      null;
+    } else if (el.getAttribute("data-image-process")) {
+      extendsSrc(el.getAttribute("data-image-process"));
+    } else if (options.OSSProcess) {
+      extendsSrc(options.OSSProcess);
+    } else if (YoungOSSImageDefaultProcess[options.OSSProvider]) {
+      extendsSrc(YoungOSSImageDefaultProcess[options.OSSProvider]);
+    } else {
+      console.warn("[OSSProvider]: ", "unknown oss provider");
+    }
+    el.setAttribute(attribute, srcURL.toString());
     el.removeAttribute(dataAttribute);
     el.parentNode.load && el.parentNode.load();
   } else if (el.tagName.toLocaleLowerCase() === "picture") {

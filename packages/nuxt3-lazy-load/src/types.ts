@@ -1,10 +1,40 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-22 15:14:54
- * @LastEditTime: 2023-09-22 15:46:17
+ * @LastEditTime: 2023-09-25 11:56:51
  * @Description: 
  */
 export type YoungLazyloadType = 'images' | 'videos' | 'audios' | 'iframes'
+
+export type YoungOSSProvider = 'aliyun' | 'qiniu' | 'tencent' | 'baidu' | '163yun' | 'huawei'
+
+export const YoungOSSImageDefaultProcess: Record<YoungOSSProvider & string, string> = {
+  /**
+   * 官方文档 https://help.aliyun.com/zh/oss/user-guide/img-parameters/?spm=a2c4g.11186623.0.0.533b1210VUHgHP
+   */
+  'aliyun': 'x-oss-process=image/format,webp/quality,Q_75',
+  /**
+   * 官方文档 https://developer.qiniu.com/dora/1279/basic-processing-images-imageview2
+   */
+  'qiniu': 'imageView2/0/format/webp/q/75',
+  /**
+   * 官方文档 https://cloud.tencent.com/document/product/436/44883
+   */
+  'tencent': 'imageMogr2/format/webp/lquality/75',
+  /**
+   * 官方文档 https://cloud.baidu.com/doc/BOS/s/dldh5wp4s
+   * @description 自适应 webp，据文档所说挺厉害的
+   */
+  'baidu': 'x-bce-process=image/format,f_auto/quality,Q_75',
+  /**
+   * 官方文档 https://sf.163.com/help/documents/114078550521466880
+   */
+  '163yun': 'imageView&type=webp&quality=75',
+  /**
+   * 官方文档 https://support.huaweicloud.com/fg-obs/obs_01_0471.html
+   */
+  'huawei': 'x-image-process=image/format,webp/quality,Q_75'
+}
 
 export interface YoungLazyLoadOptions extends Record<YoungLazyloadType, boolean> {
   /**
@@ -43,6 +73,19 @@ export interface YoungLazyLoadOptions extends Record<YoungLazyloadType, boolean>
    * intersection observer config
    */
   observerConfig: IntersectionObserverInit
+
+  /**
+   * oss 服务提供商(暂时仅用于图片处理)
+   * @default aliyun
+   */
+  OSSProvider: YoungOSSProvider
+  /**
+   * 命令处理字符串
+   * @cond1 默认会使用 OSSProvider 对应的值
+   * @cond2 传入字符串的话，会覆盖
+   * @cond3 传入 false，禁用 OSS 图片处理
+   */
+  OSSProcess?: string | false
 }
 
 export type YoungReplaceRules = {

@@ -17,7 +17,8 @@ export default defineNuxtModule({
     loadedClass: "isLoaded",
     appendClass: "lazyLoad",
     observerConfig: {},
-    defaultImage: ""
+    defaultImage: "",
+    OSSProvider: "aliyun"
   },
   setup(options, nuxt) {
     extendViteConfig((config) => {

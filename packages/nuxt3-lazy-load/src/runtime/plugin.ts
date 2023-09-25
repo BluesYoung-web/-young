@@ -1,12 +1,13 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-22 11:00:24
- * @LastEditTime: 2023-09-22 16:32:26
+ * @LastEditTime: 2023-09-25 14:11:33
  * @Description:
  */
 import { defineNuxtPlugin } from 'nuxt/app';
 // @ts-ignore
 import { options } from '#build/@bluesyoung/nuxt3-lazy-load';
+import { YoungOSSImageDefaultProcess } from '../types';
 
 /**
  * 是否为 <picture> 的子元素
@@ -24,7 +25,29 @@ function setAttribute(el: HTMLElement | NodeList, attribute: string) {
   if (el instanceof NodeList) {
     for (const e of el) setAttribute(e as HTMLElement, attribute);
   } else if (el.getAttribute(dataAttribute)) {
-    el.setAttribute(attribute, el.getAttribute(dataAttribute)!);
+    const srcURL = new URL(el.getAttribute(dataAttribute) as string);
+
+    const extendsSrc = (str: string) => {
+      const OSSProcess = new URLSearchParams(str);
+      for (const [key, value] of OSSProcess.entries()) {
+        srcURL.searchParams.set(key, value);
+      }
+    }
+
+    if (options.OSSProcess === false) {
+      // 不进行处理
+      null;
+    } else if (el.getAttribute('data-image-process')) {
+      extendsSrc(el.getAttribute('data-image-process'));
+    } else if (options.OSSProcess) {
+      extendsSrc(options.OSSProcess);
+    } else if (YoungOSSImageDefaultProcess[options.OSSProvider]) {
+      extendsSrc(YoungOSSImageDefaultProcess[options.OSSProvider]);
+    } else {
+      console.warn('[OSSProvider]: ', 'unknown oss provider');
+    }
+
+    el.setAttribute(attribute, srcURL.toString());
     el.removeAttribute(dataAttribute);
 
     // @ts-expect-error

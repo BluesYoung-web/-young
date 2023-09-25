@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-22 09:23:29
- * @LastEditTime: 2023-09-25 12:22:02
+ * @LastEditTime: 2023-09-25 12:25:54
  * @Description:
  */
 import { addPlugin, addTemplate, createResolver, defineNuxtModule, extendViteConfig } from '@nuxt/kit'
@@ -27,13 +27,14 @@ export default defineNuxtModule<YoungLazyLoadOptions>({
     appendClass: 'lazyLoad',
     observerConfig: {},
     defaultImage: '',
+    OSSProvider: 'aliyun',
   },
   setup(options, nuxt) {
     extendViteConfig((config) => {
       if (!config.vue.template.transfromAssetUrls)
         config.vue.template.transfromAssetUrls = {}
 
-      // 属性值备份
+      // 地址处理
       config.vue.template.transfromAssetUrls['img'] = [
         'src',
         'data-src',

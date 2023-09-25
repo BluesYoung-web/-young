@@ -1,4 +1,6 @@
 export type YoungLazyloadType = 'images' | 'videos' | 'audios' | 'iframes';
+export type YoungOSSProvider = 'aliyun' | 'qiniu' | 'tencent' | 'baidu' | '163yun' | 'huawei';
+export declare const YoungOSSImageDefaultProcess: Record<YoungOSSProvider & string, string>;
 export interface YoungLazyLoadOptions extends Record<YoungLazyloadType, boolean> {
     /**
      * 是否仅使用原生的懒加载机制 (loading="lazy")
@@ -32,6 +34,18 @@ export interface YoungLazyLoadOptions extends Record<YoungLazyloadType, boolean>
      * intersection observer config
      */
     observerConfig: IntersectionObserverInit;
+    /**
+     * oss 服务提供商(暂时仅用于图片处理)
+     * @default aliyun
+     */
+    OSSProvider: YoungOSSProvider;
+    /**
+     * 命令处理字符串
+     * @cond1 默认会使用 OSSProvider 对应的值
+     * @cond2 传入字符串的话，会覆盖
+     * @cond3 传入 false，禁用 OSS 图片处理
+     */
+    OSSProcess?: string | false;
 }
 export type YoungReplaceRules = {
     from: RegExp;
