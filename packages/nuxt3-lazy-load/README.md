@@ -6,6 +6,7 @@
 - 🎧 音频懒加载
 - 📀 视频懒加载
 - 🖼️ iframe 懒加载
+- ✨ 基于 oss 托管服务商的图片处理能力
 
 ## 📦 安装
 
@@ -44,6 +45,8 @@ pnpm add @bluesyoung/nuxt3-lazy-load -D
 `loadedClass` | `isLoaded` | 加载完成时的类名
 `appendClass` | `lazyLoad` | 追加的类名
 `observerConfig` | `{}` | `IntersectionObserver` 的额外配置
+`OSSProvider` | `aliyun` | `oss` 托管服务商，可选值：`aliyun`、`tencent`、`qiniu`、`baidu`、`163yun`、`huawei`，选中对应的值，会自动添加对应的图片处理参数(转换为 `75%` 的 `webp`)
+`OSSProcess` | 非必须参数 | 1. 不配置则使用服务商配置 <br> 2. **传递字符串默认使用传入值进行处理*无需 `?`***<br> 3. 传递 `false` 则关闭基于 `oss` 的图片处理功能 <br> 4. 单独处理某个元素，设置元素属性： `data-image-process="具体服务商的查询参数"`, **优先级更高**
 
 ## 📝 使用示例
 

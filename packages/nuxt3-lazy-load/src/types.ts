@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-22 15:14:54
- * @LastEditTime: 2023-09-25 11:56:51
+ * @LastEditTime: 2023-09-25 14:20:29
  * @Description: 
  */
 export type YoungLazyloadType = 'images' | 'videos' | 'audios' | 'iframes'
@@ -81,7 +81,7 @@ export interface YoungLazyLoadOptions extends Record<YoungLazyloadType, boolean>
   OSSProvider: YoungOSSProvider
   /**
    * 命令处理字符串
-   * @cond1 默认会使用 OSSProvider 对应的值
+   * @cond1 默认会使用 OSSProvider 对应的默认值
    * @cond2 传入字符串的话，会覆盖
    * @cond3 传入 false，禁用 OSS 图片处理
    */
