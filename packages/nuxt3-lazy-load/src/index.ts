@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-22 09:23:29
- * @LastEditTime: 2023-09-22 15:58:07
+ * @LastEditTime: 2023-09-25 12:22:02
  * @Description:
  */
 import { addPlugin, addTemplate, createResolver, defineNuxtModule, extendViteConfig } from '@nuxt/kit'
@@ -126,3 +126,12 @@ export default defineNuxtModule<YoungLazyLoadOptions>({
     }
   },
 })
+
+declare module '@nuxt/schema' {
+  interface NuxtConfig {
+    [NAME]?: YoungLazyLoadOptions
+  }
+  interface NuxtOptions {
+    [NAME]?: YoungLazyLoadOptions
+  }
+}
