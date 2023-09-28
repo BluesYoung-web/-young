@@ -1,5 +1,7 @@
 # nuxt3 资源懒加载
 
+[English](./README-en.md)
+
 ## 🚀 特性
 
 - 🌠 图片懒加载
