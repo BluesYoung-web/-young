@@ -330,6 +330,9 @@ importers:
       file-saver:
         specifier: ^2.0.5
         version: 2.0.5
+      vue-cropper:
+        specifier: 1.0.9
+        version: 1.0.9
       xlsx:
         specifier: ^0.18.5
         version: 0.18.5
@@ -370,9 +373,6 @@ importers:
       vue:
         specifier: ^3.2.45
         version: 3.2.45
-      vue-cropper:
-        specifier: ^1.0.9
-        version: 1.0.9
 
   packages/unplugin-json-conf:
     dependencies:
@@ -12467,7 +12467,7 @@ packages:
 
   /vue-cropper@1.0.9:
     resolution: {integrity: sha512-JhQwxmjqmQohzI7sAp5O/Rfdxuw5HOEYkKjnp/De7iCi6c8Mv6M3N9HpMt9xgWCFchX3/DfXBv2axCZOCg3G8Q==}
-    dev: true
+    dev: false
 
   /vue-demi@0.13.11(vue@3.2.45):
     resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
