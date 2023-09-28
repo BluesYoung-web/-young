@@ -1,11 +1,10 @@
 /*
  * @Author: zhangyang
  * @Date: 2021-07-06 14:22:37
- * @LastEditTime: 2022-11-02 09:44:37
+ * @LastEditTime: 2023-09-28 12:45:09
  * @Description: 文件导出为 Excel
  */
 import { deepClone } from '@bluesyoung/utils';
-import { saveAs } from 'file-saver';
 import { utils, write } from 'xlsx';
 
 function sheet_from_array_of_arrays(data: any[]) {
@@ -70,7 +69,9 @@ interface ExportParams {
   header: any[];
 }
 
-export const export_json_to_excel = ({ header, data, filename }: ExportParams) => {
+export const export_json_to_excel = async ({ header, data, filename }: ExportParams) => {
+  const { saveAs } = await import('file-saver')
+
   data = deepClone(data);
   data.unshift(header);
   const ws_name = 'SheetJS';

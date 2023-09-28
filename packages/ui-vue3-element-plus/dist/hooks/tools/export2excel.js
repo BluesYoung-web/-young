@@ -5,7 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.export_json_to_excel = void 0;
 var _utils = require("@bluesyoung/utils");
-var _fileSaver = require("file-saver");
 var _xlsx = require("xlsx");
 function sheet_from_array_of_arrays(data) {
   const ws = {};
@@ -60,11 +59,14 @@ const s2ab = s => {
   }
   return buf;
 };
-const export_json_to_excel = ({
+const export_json_to_excel = async ({
   header,
   data,
   filename
 }) => {
+  const {
+    saveAs
+  } = await Promise.resolve().then(() => require("file-saver"));
   data = (0, _utils.deepClone)(data);
   data.unshift(header);
   const ws_name = "SheetJS";
@@ -103,7 +105,7 @@ const export_json_to_excel = ({
     bookSST: false,
     type: "binary"
   });
-  (0, _fileSaver.saveAs)(new Blob([s2ab(wbout)], {
+  saveAs(new Blob([s2ab(wbout)], {
     type: "application/octet-stream"
   }), `${filename}.xlsx`);
 };

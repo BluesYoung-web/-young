@@ -1,5 +1,4 @@
 import { deepClone } from "@bluesyoung/utils";
-import { saveAs } from "file-saver";
 import { utils, write } from "xlsx";
 function sheet_from_array_of_arrays(data) {
   const ws = {};
@@ -59,7 +58,8 @@ const s2ab = (s) => {
   }
   return buf;
 };
-export const export_json_to_excel = ({ header, data, filename }) => {
+export const export_json_to_excel = async ({ header, data, filename }) => {
+  const { saveAs } = await import("file-saver");
   data = deepClone(data);
   data.unshift(header);
   const ws_name = "SheetJS";
