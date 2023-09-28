@@ -16,9 +16,11 @@ function setAttribute(el, attribute) {
     }
     const srcURL = new URL(originURL);
     const extendsSrc = (str) => {
-      const OSSProcess = new URLSearchParams(str);
-      for (const [key, value] of OSSProcess.entries()) {
-        srcURL.searchParams.set(key, value);
+      if (el.tagName.toLocaleLowerCase() === "img" || isPictureChild(el)) {
+        const OSSProcess = new URLSearchParams(str);
+        for (const [key, value] of OSSProcess.entries()) {
+          srcURL.searchParams.set(key, value);
+        }
       }
     };
     if (options.OSSProcess === false) {
