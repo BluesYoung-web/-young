@@ -1,8 +1,9 @@
-import { ref } from "vue";
+import { ref, computed } from "vue";
 export const useVerifyCode = (cbk, default_wait = 60, default_tip = "\u83B7\u53D6\u9A8C\u8BC1\u7801") => {
   const count = ref(default_wait);
   const tip = ref(default_tip);
   const timer = ref();
+  const disabled = computed(() => count.value !== default_wait);
   const startCountDown = () => {
     count.value--;
     tip.value = `${count.value} \u79D2\u540E\u91CD\u8BD5`;
@@ -45,6 +46,7 @@ export const useVerifyCode = (cbk, default_wait = 60, default_tip = "\u83B7\u53D
     tip,
     showSlider,
     pass,
-    cancel
+    cancel,
+    disabled
   };
 };
