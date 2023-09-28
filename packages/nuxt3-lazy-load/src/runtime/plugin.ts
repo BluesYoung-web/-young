@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-22 11:00:24
- * @LastEditTime: 2023-09-25 14:11:33
+ * @LastEditTime: 2023-09-28 09:31:24
  * @Description:
  */
 import { defineNuxtPlugin } from 'nuxt/app';
@@ -25,7 +25,11 @@ function setAttribute(el: HTMLElement | NodeList, attribute: string) {
   if (el instanceof NodeList) {
     for (const e of el) setAttribute(e as HTMLElement, attribute);
   } else if (el.getAttribute(dataAttribute)) {
-    const srcURL = new URL(el.getAttribute(dataAttribute) as string);
+    let originURL = el.getAttribute(dataAttribute);
+    if (!['http://', 'https://'].some(proto => originURL.startsWith(proto))) {
+      originURL = new URL(originURL, location.href).toString();
+    }
+    const srcURL = new URL(originURL);
 
     const extendsSrc = (str: string) => {
       const OSSProcess = new URLSearchParams(str);

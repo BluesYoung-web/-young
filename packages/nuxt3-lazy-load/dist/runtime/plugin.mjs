@@ -10,7 +10,11 @@ function setAttribute(el, attribute) {
     for (const e of el)
       setAttribute(e, attribute);
   } else if (el.getAttribute(dataAttribute)) {
-    const srcURL = new URL(el.getAttribute(dataAttribute));
+    let originURL = el.getAttribute(dataAttribute);
+    if (!["http://", "https://"].some((proto) => originURL.startsWith(proto))) {
+      originURL = new URL(originURL, location.href).toString();
+    }
+    const srcURL = new URL(originURL);
     const extendsSrc = (str) => {
       const OSSProcess = new URLSearchParams(str);
       for (const [key, value] of OSSProcess.entries()) {
