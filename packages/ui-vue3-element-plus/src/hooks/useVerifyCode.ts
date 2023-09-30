@@ -1,10 +1,10 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-10 16:49:30
- * @LastEditTime: 2023-03-10 16:52:37
+ * @LastEditTime: 2023-09-28 17:24:04
  * @Description:
  */
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 export const useVerifyCode = (
   cbk: () => any | Promise<any>,
@@ -14,6 +14,8 @@ export const useVerifyCode = (
   const count = ref(default_wait);
   const tip = ref(default_tip);
   const timer = ref<NodeJS.Timer>();
+
+  const disabled = computed(() => count.value !== default_wait);
 
   const startCountDown = () => {
     count.value--;
@@ -62,5 +64,6 @@ export const useVerifyCode = (
     showSlider,
     pass,
     cancel,
+    disabled,
   };
 };

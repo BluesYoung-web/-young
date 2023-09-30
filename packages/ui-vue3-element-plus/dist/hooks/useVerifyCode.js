@@ -9,6 +9,7 @@ const useVerifyCode = (cbk, default_wait = 60, default_tip = "\u83B7\u53D6\u9A8C
   const count = (0, _vue.ref)(default_wait);
   const tip = (0, _vue.ref)(default_tip);
   const timer = (0, _vue.ref)();
+  const disabled = (0, _vue.computed)(() => count.value !== default_wait);
   const startCountDown = () => {
     count.value--;
     tip.value = `${count.value} \u79D2\u540E\u91CD\u8BD5`;
@@ -51,7 +52,8 @@ const useVerifyCode = (cbk, default_wait = 60, default_tip = "\u83B7\u53D6\u9A8C
     tip,
     showSlider,
     pass,
-    cancel
+    cancel,
+    disabled
   };
 };
 exports.useVerifyCode = useVerifyCode;

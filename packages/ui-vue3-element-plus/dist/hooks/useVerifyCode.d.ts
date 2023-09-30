@@ -4,4 +4,5 @@ export declare const useVerifyCode: (cbk: () => any | Promise<any>, default_wait
     showSlider: import("vue").Ref<boolean>;
     pass: () => Promise<void>;
     cancel: () => void;
+    disabled: import("vue").ComputedRef<boolean>;
 };

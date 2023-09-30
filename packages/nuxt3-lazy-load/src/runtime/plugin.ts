@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-22 11:00:24
- * @LastEditTime: 2023-09-28 09:31:24
+ * @LastEditTime: 2023-09-28 14:50:41
  * @Description:
  */
 import { defineNuxtPlugin } from 'nuxt/app';
@@ -32,9 +32,11 @@ function setAttribute(el: HTMLElement | NodeList, attribute: string) {
     const srcURL = new URL(originURL);
 
     const extendsSrc = (str: string) => {
-      const OSSProcess = new URLSearchParams(str);
-      for (const [key, value] of OSSProcess.entries()) {
-        srcURL.searchParams.set(key, value);
+      if (el.tagName.toLocaleLowerCase() === 'img' || isPictureChild(el)) {
+        const OSSProcess = new URLSearchParams(str);
+        for (const [key, value] of OSSProcess.entries()) {
+          srcURL.searchParams.set(key, value);
+        }
       }
     }
 
