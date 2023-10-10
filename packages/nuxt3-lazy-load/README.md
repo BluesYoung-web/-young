@@ -65,6 +65,7 @@ pnpm add @bluesyoung/nuxt3-lazy-load -D
 ### 自定义指令
 
 - `v-lazy-load`
+- `v-pre-load="true/false"` 是否与加载对应的图片
 - `v-not-lazy`
 
 ## 灵感来源

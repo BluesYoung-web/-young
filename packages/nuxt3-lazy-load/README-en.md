@@ -65,6 +65,7 @@ Type | Default Value | Description
 ### Custom Directives
 
 - `v-lazy-load`
+- `v-pre-load="true/false"` control the image will preload or not
 - `v-not-lazy`
 
 ## Inspiration
