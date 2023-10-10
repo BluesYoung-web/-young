@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-22 15:17:49
- * @LastEditTime: 2023-09-22 15:19:30
+ * @LastEditTime: 2023-10-10 14:20:52
  * @Description: 
  */
 
@@ -12,8 +12,8 @@ import type { YoungLazyLoadOptions, YoungLazyloadType, YoungReplaceRules } from 
  * @cond1 直接设置了 data-not-lazy
  * @cond2 对应类型禁用懒加载
  */
-export function isNotLazy(match: string): string
-export function isNotLazy(match: string, options: YoungLazyLoadOptions, type: YoungLazyloadType): string
+export function isNotLazy(match: string): boolean
+export function isNotLazy(match: string, options: YoungLazyLoadOptions, type: YoungLazyloadType): boolean
 export function isNotLazy(...args: any) {
   const [match, options, type] = args
   return match.includes('data-not-lazy') || (options && !options[type])

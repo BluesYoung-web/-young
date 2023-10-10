@@ -4,8 +4,8 @@ import type { YoungLazyLoadOptions, YoungLazyloadType, YoungReplaceRules } from 
  * @cond1 直接设置了 data-not-lazy
  * @cond2 对应类型禁用懒加载
  */
-export declare function isNotLazy(match: string): string;
-export declare function isNotLazy(match: string, options: YoungLazyLoadOptions, type: YoungLazyloadType): string;
+export declare function isNotLazy(match: string): boolean;
+export declare function isNotLazy(match: string, options: YoungLazyLoadOptions, type: YoungLazyloadType): boolean;
 /**
  * 属性替换
  */
