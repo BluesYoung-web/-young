@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-22 11:00:24
- * @LastEditTime: 2023-09-28 14:50:41
+ * @LastEditTime: 2023-10-10 17:25:09
  * @Description:
  */
 import { defineNuxtPlugin } from 'nuxt/app';
@@ -17,6 +17,40 @@ function isPictureChild(el: HTMLElement) {
 }
 
 /**
+ * oss 图片处理
+ */
+function ossImageProcess(el: HTMLElement, originURL: string) {
+  if (!['http://', 'https://'].some(proto => originURL.startsWith(proto))) {
+    originURL = new URL(originURL, location.href).toString();
+  }
+  const srcURL = new URL(originURL);
+
+  const extendsSrc = (str: string) => {
+    if (el.tagName.toLocaleLowerCase() === 'img' || isPictureChild(el)) {
+      const OSSProcess = new URLSearchParams(str);
+      for (const [key, value] of OSSProcess.entries()) {
+        srcURL.searchParams.set(key, value);
+      }
+    }
+  }
+
+  if (options.OSSProcess === false) {
+    // 不进行处理
+    null;
+  } else if (el.getAttribute('data-image-process')) {
+    extendsSrc(el.getAttribute('data-image-process'));
+  } else if (options.OSSProcess) {
+    extendsSrc(options.OSSProcess);
+  } else if (YoungOSSImageDefaultProcess[options.OSSProvider]) {
+    extendsSrc(YoungOSSImageDefaultProcess[options.OSSProvider]);
+  } else {
+    console.warn('[OSSProvider]: ', 'unknown oss provider');
+  }
+
+  return srcURL.toString();
+}
+
+/**
  * 设置属性
  */
 function setAttribute(el: HTMLElement | NodeList, attribute: string) {
@@ -25,35 +59,7 @@ function setAttribute(el: HTMLElement | NodeList, attribute: string) {
   if (el instanceof NodeList) {
     for (const e of el) setAttribute(e as HTMLElement, attribute);
   } else if (el.getAttribute(dataAttribute)) {
-    let originURL = el.getAttribute(dataAttribute);
-    if (!['http://', 'https://'].some(proto => originURL.startsWith(proto))) {
-      originURL = new URL(originURL, location.href).toString();
-    }
-    const srcURL = new URL(originURL);
-
-    const extendsSrc = (str: string) => {
-      if (el.tagName.toLocaleLowerCase() === 'img' || isPictureChild(el)) {
-        const OSSProcess = new URLSearchParams(str);
-        for (const [key, value] of OSSProcess.entries()) {
-          srcURL.searchParams.set(key, value);
-        }
-      }
-    }
-
-    if (options.OSSProcess === false) {
-      // 不进行处理
-      null;
-    } else if (el.getAttribute('data-image-process')) {
-      extendsSrc(el.getAttribute('data-image-process'));
-    } else if (options.OSSProcess) {
-      extendsSrc(options.OSSProcess);
-    } else if (YoungOSSImageDefaultProcess[options.OSSProvider]) {
-      extendsSrc(YoungOSSImageDefaultProcess[options.OSSProvider]);
-    } else {
-      console.warn('[OSSProvider]: ', 'unknown oss provider');
-    }
-
-    el.setAttribute(attribute, srcURL.toString());
+    el.setAttribute(attribute, ossImageProcess(el, el.getAttribute(dataAttribute)));
     el.removeAttribute(dataAttribute);
 
     // @ts-expect-error
@@ -131,6 +137,22 @@ export default defineNuxtPlugin((nuxtApp) => {
       options.defaultImage &&
         el.tagName.toLocaleLowerCase() === 'img' &&
         (el.src = options.defaultImage);
+
+      if (el.dataset.youngPreload) {
+        el.src = ossImageProcess(el, el.dataset.src || el.src)
+      }
+    },
+    getSSRProps() {
+      return {};
+    },
+  });
+
+  nuxtApp.vueApp.directive('pre-load', {
+    mounted(el, { value }) {
+      if (value) {
+        el.src = ossImageProcess(el, el.dataset.src || el.src)
+        el.dataset.youngPreload = true      
+      }
     },
     getSSRProps() {
       return {};
