@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-18 15:25:53
- * @LastEditTime: 2023-09-18 15:31:18
+ * @LastEditTime: 2023-10-19 17:00:41
  * @Description: 
  */
 import type { AxiosRequestConfig } from 'axios';
@@ -53,7 +53,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
       return req;
     },
     (error) => {
-      fail(error);
+      fail(error, error);
       return Promise.reject(error);
     },
   );
@@ -67,7 +67,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
         return checkFn(data);
       } catch (err) {
         // 应用逻辑异常
-        fail(err);
+        fail(err, response);
       }
     },
     (error) => {
@@ -75,7 +75,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
         endLoading();
       }
       // http 异常
-      fail(error);
+      fail(error, error);
     },
   );
 

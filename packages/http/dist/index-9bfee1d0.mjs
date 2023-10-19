@@ -1467,7 +1467,7 @@ const tn = {
   }
   return f.interceptors.request.use(
     (u) => (!u.notLoading && w(), u.baseURL || (u.baseURL = (r == null ? void 0 : r()) ?? n), u),
-    (u) => (c(u), Promise.reject(u))
+    (u) => (c(u, u), Promise.reject(u))
   ), f.interceptors.response.use(
     (u) => {
       !u.config.notLoading && y();
@@ -1475,11 +1475,11 @@ const tn = {
       try {
         return l(h);
       } catch (b) {
-        c(b);
+        c(b, u);
       }
     },
     (u) => {
-      u && u.config && !u.config.notLoading && y(), c(u);
+      u && u.config && !u.config.notLoading && y(), c(u, u);
     }
   ), {
     get: void 0,
@@ -1532,4 +1532,4 @@ export {
   kt as s,
   nn as u
 };
-//# sourceMappingURL=index-4b1c008c.mjs.map
+//# sourceMappingURL=index-9bfee1d0.mjs.map

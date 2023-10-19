@@ -1,10 +1,10 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-09-18 15:28:31
+ * @LastEditTime: 2023-10-19 17:02:59
  * @Description:
  */
-import type { AxiosError, AxiosInstance, AxiosRequestConfig, Method } from 'axios';
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 import axios from 'axios';
 import { defu } from 'defu';
 
@@ -86,9 +86,11 @@ export interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
   /**
    * 错误处理函数，进行错误处理或继续抛出错误
    * 接受各种抛出的错误
+   * @param err 自定义抛出的错误
+   * @param rawResponse 原始响应
    * @default console.error
    */
-  fail: (err: string | number | Error | AxiosError | Msg) => void;
+  fail: (err: string | number | Error | AxiosError | Msg, rawResponse: AxiosResponse) => void;
   /**
    * 结果校验 + 数据解析，判断此次请求是否正常，正常则返回解包数据，否则抛出异常
    * 不传则默认使用标准 http 状态码作为判断结果，并原样返回
@@ -179,7 +181,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
       return req;
     },
     (error) => {
-      fail(error);
+      fail(error, error);
       return Promise.reject(error);
     },
   );
@@ -193,7 +195,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
         return checkFn(data);
       } catch (err) {
         // 应用逻辑异常
-        fail(err);
+        fail(err, response);
       }
     },
     (error) => {
@@ -201,7 +203,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
         endLoading();
       }
       // http 异常
-      fail(error);
+      fail(error, error);
     },
   );
 

@@ -1,4 +1,4 @@
-import { Method, AxiosInstance, AxiosError, AxiosRequestConfig } from 'axios';
+import { Method, AxiosInstance, AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios';
 
 type Simplify<T> = {
     [P in keyof T]: T[P];
@@ -60,9 +60,11 @@ interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
     /**
      * 错误处理函数，进行错误处理或继续抛出错误
      * 接受各种抛出的错误
+     * @param err 自定义抛出的错误
+     * @param rawResponse 原始响应
      * @default console.error
      */
-    fail: (err: string | number | Error | AxiosError | Msg) => void;
+    fail: (err: string | number | Error | AxiosError | Msg, rawResponse: AxiosResponse) => void;
     /**
      * 结果校验 + 数据解析，判断此次请求是否正常，正常则返回解包数据，否则抛出异常
      * 不传则默认使用标准 http 状态码作为判断结果，并原样返回

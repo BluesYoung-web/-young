@@ -83,7 +83,7 @@ var useHttp = (config = {}) => {
       return req;
     },
     (error) => {
-      fail(error);
+      fail(error, error);
       return Promise.reject(error);
     }
   );
@@ -94,14 +94,14 @@ var useHttp = (config = {}) => {
       try {
         return checkFn(data);
       } catch (err) {
-        fail(err);
+        fail(err, response);
       }
     },
     (error) => {
       if (error && error.config && !error.config.notLoading) {
         endLoading();
       }
-      fail(error);
+      fail(error, error);
     }
   );
   return {
