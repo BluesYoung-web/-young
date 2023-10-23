@@ -1,14 +1,14 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 14:47:20
- * @LastEditTime: 2023-09-20 14:51:37
+ * @LastEditTime: 2023-10-23 10:57:40
  * @Description: 
 -->
 <script lang="ts" setup>
 import { useEventListener } from '@vueuse/core';
 import { ElImageViewer } from 'element-plus';
 import { reactive, ref } from 'vue';
-import { YoungImageViewerConf } from '.';
+import type { YoungImageViewerConf } from '.';
 
 interface Props {
   onDestroy?: () => void;
