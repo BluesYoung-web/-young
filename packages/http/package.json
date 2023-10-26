@@ -1,6 +1,6 @@
 {
   "name": "@bluesyoung/http",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "asiox http request",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
