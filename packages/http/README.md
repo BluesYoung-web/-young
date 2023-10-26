@@ -83,7 +83,13 @@ const defaultConfig: DefaultHttpConfig = {
     start: console.log.bind(null, '🚀 ~ http loading start'),
     end: console.log.bind(null, '🚀 ~ http loading end'),
   },
-  fail: console.error.bind(null, '🚀 ~ http loading error'),
+  /**
+   * @param err checkFn 手动抛出错误时，为正常的 response 对象; 否则为 AxiosError 对象
+   * @param rawResponse checkFn 手动抛出错误时，为正常的 response 对象; 否则为 AxiosError 对象
+   */
+  fail: (err, rawResponse) => {
+    console.log('🚀 ~ http fail', err, rawResponse);
+  },
   checkFn: (res) => res,
   headers: {
     getCommonHeaders: () => ({}),
