@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-10-19 17:02:59
+ * @LastEditTime: 2023-10-26 10:26:01
  * @Description:
  */
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, Method } from 'axios';
@@ -90,7 +90,7 @@ export interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
    * @param rawResponse 原始响应
    * @default console.error
    */
-  fail: (err: string | number | Error | AxiosError | Msg, rawResponse: AxiosResponse) => void;
+  fail: (err: string | number | Error | AxiosError | Msg, rawResponse: AxiosError | AxiosResponse) => void;
   /**
    * 结果校验 + 数据解析，判断此次请求是否正常，正常则返回解包数据，否则抛出异常
    * 不传则默认使用标准 http 状态码作为判断结果，并原样返回
