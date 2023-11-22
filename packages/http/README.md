@@ -84,7 +84,7 @@ const defaultConfig: DefaultHttpConfig = {
     end: console.log.bind(null, '🚀 ~ http loading end'),
   },
   /**
-   * @param err checkFn 手动抛出错误时，为正常的 response 对象; 否则为 AxiosError 对象
+   * @param err checkFn 手动抛出错误时，为抛出的错误; 否则为 AxiosError 对象
    * @param rawResponse checkFn 手动抛出错误时，为正常的 response 对象; 否则为 AxiosError 对象
    */
   fail: (err, rawResponse) => {
