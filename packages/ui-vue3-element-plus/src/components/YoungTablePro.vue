@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:21:30
- * @LastEditTime: 2023-09-20 17:44:11
+ * @LastEditTime: 2023-11-22 14:25:05
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -166,7 +166,7 @@ defineExpose({
       <ElTable v-bind="$attrs" ref="tableRef" header-cell-class-name='nowarp' :data="tableData_1" style="width: 100%"
         :height="tableHeight" border>
         <ElTableColumn v-if="selectable" type="selection" width="55" />
-        <ElTableColumn v-for="(head, index) in filterHeader" key="item.prop.toString() + index + randomKey"
+        <ElTableColumn v-for="(head, index) in filterHeader" :key="head.prop.toString() + index + randomKey"
           :prop="head.prop as string" :label="head.label" :width="head.width || ''" :sortable="head.sortable || false"
           :fixed="head.fixed || false" :align="head.align || 'left'"
           :show-overflow-tooltip="head.showOverflowTooltip ?? true">
