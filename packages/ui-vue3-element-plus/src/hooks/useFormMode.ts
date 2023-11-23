@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-01-05 17:10:41
- * @LastEditTime: 2023-09-09 18:41:03
+ * @LastEditTime: 2023-11-23 11:34:25
  * @Description:
  */
 import { deepClone } from '@bluesyoung/utils';
@@ -28,7 +28,7 @@ export const useFormMode = <T>(
   const isEdit = ref(false);
   const isMore = ref(false);
 
-  const form = ref<T>(deepClone(FORM_TEMP));
+  const form = ref(deepClone(FORM_TEMP));
   const formRef = ref();
   const validForm: ValidFn = async () => {
     const res = await new Promise((resolve) => {
@@ -50,11 +50,10 @@ export const useFormMode = <T>(
     isMore.value = false;
     clearEffect?.();
     formRef.value?.resetFields();
-    // @ts-ignore
-    form.value = deepClone(FORM_TEMP);
+    form.value = deepClone<any>(FORM_TEMP);
   };
 
-  const del = (row: any) => {
+  const del = (row: T) => {
     ElMessageBox.confirm(tip, '提示', {
       confirmButtonText: '确认',
       cancelButtonText: '取消',
@@ -83,14 +82,14 @@ export const useFormMode = <T>(
     cgEffect?.();
   };
 
-  const edit = async (row: any) => {
+  const edit = async (row: T) => {
     const res = await cpEffect?.(row);
-    form.value = deepClone(res || row);
+    form.value = deepClone<any>(res || row);
     isEdit.value = true;
   };
-  const more = async (row: any) => {
+  const more = async (row: T) => {
     const res = await cpEffect?.(row);
-    form.value = deepClone(res || row);
+    form.value = deepClone<any>(res || row);
     isMore.value = true;
   };
   return {

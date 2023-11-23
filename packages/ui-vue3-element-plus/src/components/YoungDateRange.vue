@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 12:01:31
- * @LastEditTime: 2023-09-20 17:46:06
+ * @LastEditTime: 2023-11-22 15:58:15
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -142,7 +142,7 @@ interface Props {
   shortcuts?: {
     text: string;
     value: [Date, Date];
-  } | boolean;
+  }[] | boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {

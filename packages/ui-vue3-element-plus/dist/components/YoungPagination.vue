@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 14:40:02
- * @LastEditTime: 2023-09-20 14:46:23
+ * @LastEditTime: 2023-11-22 14:45:31
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -15,16 +15,12 @@ interface Props {
   pageSizes?: number[];
   layout?: string;
   background?: boolean;
-  autoScroll?: boolean;
-  hidden?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   pageSizes: () => [10, 20, 30, 50],
   layout: 'total, sizes, prev, pager, next, jumper',
   background: true,
-  autoScroll: true,
-  hidden: false,
 });
 
 const emit = defineEmits<{

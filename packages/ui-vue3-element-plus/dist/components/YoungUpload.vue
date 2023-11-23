@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 14:09:31
- * @LastEditTime: 2023-09-21 10:30:42
+ * @LastEditTime: 2023-11-22 19:26:04
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -9,10 +9,8 @@ import { computed, ref, nextTick } from 'vue';
 import { ElUpload, ElButton, ElMessage } from 'element-plus';
 import type { UploadUserFile } from 'element-plus';
 import { YoungDialog, useImagePreview } from '..';
-import { randomId } from '@bluesyoung/utils';
 import { VueCropper } from 'vue-cropper';
 import 'vue-cropper/dist/index.css';
-import { useMediaQuery } from '@vueuse/core';
 
 interface Porps {
   modelValue: string[];
@@ -88,8 +86,6 @@ const limitStyle = computed(() =>
   props.modelValue.length < props.limit ? 'inline-flex' : 'none',
 );
 
-const id = 'young-upload-' + randomId();
-
 const cropper = ref();
 const coverFile = ref<string>();
 
@@ -118,8 +114,6 @@ const cancelClip = () => {
   emit('update:modelValue', arr);
   emit('change', arr);
 };
-
-const ltLg = useMediaQuery('(max-width: 1023.9px)');
 </script>
 
 <template>

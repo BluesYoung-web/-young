@@ -13,10 +13,10 @@ export declare const useFormMode: <T>(FORM_TEMP: T, { addCbk, modCbk, delCbk, cp
     isEdit: import("vue").Ref<boolean>;
     isMore: import("vue").Ref<boolean>;
     clear: () => void;
-    edit: (row: any) => Promise<void>;
-    more: (row: any) => Promise<void>;
+    edit: (row: T) => Promise<void>;
+    more: (row: T) => Promise<void>;
     form: import("vue").Ref<import("vue").UnwrapRef<T>>;
-    del: (row: any) => void;
+    del: (row: T) => void;
     sure: () => Promise<void>;
     formRef: import("vue").Ref<any>;
     validForm: ValidFn;
