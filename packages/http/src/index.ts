@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2022-12-08 09:58:28
- * @LastEditTime: 2023-10-26 10:26:01
+ * @LastEditTime: 2023-12-01 17:13:10
  * @Description:
  */
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, Method } from 'axios';
@@ -105,7 +105,7 @@ export interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
      * 生成公共请求头
      * @default () => {}
      */
-    getCommonHeaders?: () => Headers;
+    getCommonHeaders?: (args: AxiosRequestConfig) => Headers;
     /**
      * 生成鉴权请求头
      * @default () => {}
@@ -238,7 +238,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
       net.request({
         ...args,
         headers: {
-          ...headers.getCommonHeaders(),
+          ...headers.getCommonHeaders(args),
           ...args?.headers,
         },
       }),
@@ -246,7 +246,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
       net.request({
         ...args,
         headers: {
-          ...headers.getCommonHeaders(),
+          ...headers.getCommonHeaders(args),
           ...headers.getAuthHeaders(args),
           ...args?.headers,
         },

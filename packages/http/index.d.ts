@@ -79,7 +79,7 @@ interface DefaultHttpConfig<Msg extends any = DefaultMsg> {
          * 生成公共请求头
          * @default () => {}
          */
-        getCommonHeaders?: () => Headers;
+        getCommonHeaders?: (args: AxiosRequestConfig) => Headers;
         /**
          * 生成鉴权请求头
          * @default () => {}

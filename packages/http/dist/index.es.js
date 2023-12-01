@@ -1,4 +1,4 @@
-import { U as t, f, u as a } from "./index-9bfee1d0.mjs";
+import { U as t, f, u as a } from "./index-67a7e4df.mjs";
 export {
   t as UsefulContentTypes,
   f as defaultConfig,

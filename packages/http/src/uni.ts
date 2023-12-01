@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-18 15:25:53
- * @LastEditTime: 2023-10-19 17:00:41
+ * @LastEditTime: 2023-12-01 17:13:25
  * @Description: 
  */
 import type { AxiosRequestConfig } from 'axios';
@@ -110,7 +110,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
       net.request({
         ...args,
         headers: {
-          ...headers.getCommonHeaders(),
+          ...headers.getCommonHeaders(args),
           ...args?.headers,
         },
       }),
@@ -118,7 +118,7 @@ export const useHttp = <Msg extends Record<string, any> = DefaultMsg, Fns extend
       net.request({
         ...args,
         headers: {
-          ...headers.getCommonHeaders(),
+          ...headers.getCommonHeaders(args),
           ...headers.getAuthHeaders(args),
           ...args?.headers,
         },

@@ -132,14 +132,14 @@ var useHttp = (config = {}) => {
     freeReq: (args) => net.request({
       ...args,
       headers: {
-        ...headers.getCommonHeaders(),
+        ...headers.getCommonHeaders(args),
         ...args == null ? void 0 : args.headers
       }
     }),
     authReq: (args) => net.request({
       ...args,
       headers: {
-        ...headers.getCommonHeaders(),
+        ...headers.getCommonHeaders(args),
         ...headers.getAuthHeaders(args),
         ...args == null ? void 0 : args.headers
       }
