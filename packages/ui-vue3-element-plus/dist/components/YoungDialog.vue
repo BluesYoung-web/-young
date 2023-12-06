@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:38:19
- * @LastEditTime: 2023-09-21 10:24:00
+ * @LastEditTime: 2023-12-06 17:35:24
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -124,6 +124,9 @@ const ltLg = useMediaQuery('(max-width: 1023.9px)')
   <Teleport to="body">
     <ElDialog v-if="as === 'dialog'" v-bind="$attrs" :model-value="modelValue || showDialog" :title="realTitle || title"
       :width="ltLg ? '96%' : width" close-on-click-modal :close-on-press-escape="false" :before-close="beforeClose">
+      <template #header>
+        <slot name="header" />
+      </template>
       <template #default>
         <slot />
         <slot name="body" />
@@ -139,6 +142,9 @@ const ltLg = useMediaQuery('(max-width: 1023.9px)')
     </ElDialog>
     <ElDrawer v-else v-bind="$attrs" :model-value="modelValue || showDialog" :title="realTitle || title"
       :size="ltLg ? '96%' : width" close-on-click-modal :close-on-press-escape="false" :before-close="beforeClose">
+      <template #header>
+        <slot name="header" />
+      </template>
       <template #default>
         <slot />
         <slot name="body" />
