@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:38:19
- * @LastEditTime: 2024-01-19 09:44:22
+ * @LastEditTime: 2024-01-19 10:14:25
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -36,6 +36,22 @@ interface Props {
    * @default false
    */
   closeOnPressEscape?: boolean;
+
+  /**
+   * 关闭提示
+   * @default '数据未保存，关闭将丢失数据，确认关闭？'
+   */
+  tip?: string
+  /**
+   * 关闭提示的标题
+   * @default '提示'
+   */
+  tipTitle?: string
+  /**
+   * 操作描述词
+   * @default ''
+   */
+  desc?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -48,6 +64,9 @@ const props = withDefaults(defineProps<Props>(), {
   as: 'drawer',
   closeOnClickModal: true,
   closeOnPressEscape: false,
+  tip: '数据未保存，关闭将丢失数据，确认关闭？',
+  tipTitle: '提示',
+  desc: ''
 });
 
 const emit = defineEmits<{
@@ -58,12 +77,12 @@ const emit = defineEmits<{
 
 const formHash_before = ref('');
 const title = computed(() => {
-  let str = '新建'
+  let str = '新建' + props.desc
   if (props.isEdit)
-    str = '编辑'
+    str = '编辑' + props.desc
 
   if (props.isMore)
-    str = '详情'
+    str = props.desc + '详情'
 
   return str
 });
@@ -117,7 +136,7 @@ const beforeClose = () => {
     emit('update:modelValue', false)
   }
   else {
-    ElMessageBox.confirm('数据未保存，关闭将丢失数据，确认关闭？', '提示', {
+    ElMessageBox.confirm(props.tip, props.tipTitle, {
       confirmButtonText: '确认',
       cancelButtonText: '取消',
     })
