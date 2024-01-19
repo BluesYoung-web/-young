@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-10 16:49:30
- * @LastEditTime: 2023-09-28 17:24:04
+ * @LastEditTime: 2024-01-18 11:12:36
  * @Description:
  */
 import { ref, computed } from 'vue';
@@ -13,7 +13,7 @@ export const useVerifyCode = (
 ) => {
   const count = ref(default_wait);
   const tip = ref(default_tip);
-  const timer = ref<NodeJS.Timer>();
+  const timer = ref<NodeJS.Timeout>();
 
   const disabled = computed(() => count.value !== default_wait);
 

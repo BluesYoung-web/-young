@@ -31,29 +31,9 @@ const defaultConf: SdkConfig = {
 };
  */
 const auth = new YoungAuth();
-await auth.init();
 </script>
 
 <template>
-  <button @click="openHandler">启动APP</button>
+  <button @click="auth.init()">立即登录</button>
 </template>
 ```
-
-### 浏览器直接引入
-
-```html
-<!-- 国内推荐使用 jsdelivr -->
-<script src="//cdn.jsdelivr.net/npm/@bluesyoung/casdoor-auth"></script>
-<!-- or -->
-<script src="//unpkg.com/@bluesyoung/casdoor-auth"></script>
-
-<script>
-const auth = new window.YoungCasdoorAuth(config);
-
-auth.init();
-</script>
-```
-
-### 从主应用打开子应用无感登录
-
-[逻辑解耦，父子通信使用 @bluesyoung/rpc](../rpc/README.md)
