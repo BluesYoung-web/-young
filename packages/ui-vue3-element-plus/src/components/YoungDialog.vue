@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:38:19
- * @LastEditTime: 2023-12-06 17:35:24
+ * @LastEditTime: 2024-01-19 09:44:22
  * @Description: 
 -->
 <script lang="ts" setup>
@@ -26,6 +26,16 @@ interface Props {
    */
   diffForm?: any;
   as?: 'drawer' | 'dialog';
+  /**
+   * 点击遮罩关闭
+   * @default true
+   */
+  closeOnClickModal?: boolean;
+  /**
+   * esc 键关闭
+   * @default false
+   */
+  closeOnPressEscape?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -35,7 +45,9 @@ const props = withDefaults(defineProps<Props>(), {
   showSure: true,
   showCancel: true,
   diffForm: null,
-  as: 'drawer'
+  as: 'drawer',
+  closeOnClickModal: true,
+  closeOnPressEscape: false,
 });
 
 const emit = defineEmits<{
@@ -123,7 +135,8 @@ const ltLg = useMediaQuery('(max-width: 1023.9px)')
 <template>
   <Teleport to="body">
     <ElDialog v-if="as === 'dialog'" v-bind="$attrs" :model-value="modelValue || showDialog" :title="realTitle || title"
-      :width="ltLg ? '96%' : width" close-on-click-modal :close-on-press-escape="false" :before-close="beforeClose">
+      :width="ltLg ? '96%' : width" :close-on-click-modal="closeOnClickModal" :close-on-press-escape="closeOnPressEscape"
+      :before-close="beforeClose">
       <template #header>
         <slot name="header" />
       </template>
@@ -141,7 +154,8 @@ const ltLg = useMediaQuery('(max-width: 1023.9px)')
       </template>
     </ElDialog>
     <ElDrawer v-else v-bind="$attrs" :model-value="modelValue || showDialog" :title="realTitle || title"
-      :size="ltLg ? '96%' : width" close-on-click-modal :close-on-press-escape="false" :before-close="beforeClose">
+      :size="ltLg ? '96%' : width" :close-on-click-modal="closeOnClickModal" :close-on-press-escape="closeOnPressEscape"
+      :before-close="beforeClose">
       <template #header>
         <slot name="header" />
       </template>
