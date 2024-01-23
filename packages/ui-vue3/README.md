@@ -12,9 +12,10 @@ pnpm add @bluesyoung/ui-vue3
 
 ```bash
 src/components
-├── YoungCmdPopup.tsx
-├── YoungContextMenu.tsx
-├── YoungTab.tsx
+├── YoungCmdPopup.vue
+├── YoungContextMenu.vue
+├── YoungSlideVerify.vue
+├── YoungTab.vue
 ```
 
 ## 使用

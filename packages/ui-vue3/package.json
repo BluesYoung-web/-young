@@ -3,24 +3,25 @@
   "version": "0.1.1",
   "description": "vue3 ui components",
   "type": "module",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/index.cjs.js",
-      "import": "./dist/index.es.js",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./*": "./*"
   },
   "scripts": {
-    "build": "vite build && tsup",
+    "build": "unbuild",
     "release": "pnpm build && bumpp --commit",
     "push": "pnpm publish --access public"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue-jsx": "^2.1.1",
     "@vueuse/core": "^9.10.0",
+    "unbuild": "^2.0.0",
     "vue": "^3.2.45"
   },
   "repository": {
