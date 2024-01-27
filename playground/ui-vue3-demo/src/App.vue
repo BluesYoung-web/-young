@@ -1,17 +1,17 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2023-09-14 09:40:55
+ * @LastEditTime: 2024-01-23 16:57:58
  * @Description:
 -->
 <script setup lang="ts">
 import { ref, h, watchEffect } from 'vue';
 import 'element-plus/dist/index.css';
 import { ElButton } from 'element-plus'
-import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange, YoungRotateTip, YoungTable } from '../../../packages/ui-vue3-element-plus/src';
+import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange, YoungTable } from '../../../packages/ui-vue3-element-plus/src';
 import type { TableHeadItem, TableDataItem } from '@bluesyoung/ui-vue3-element-plus';
 
-import { YoungTab } from '../../../packages/ui-vue3/src'
+import { YoungTab, YoungCmdPopup, YoungContextMenu, YoungSlideVerify } from '../../../packages/ui-vue3/src'
 import { YoungTablePro, YoungPagination, YoungUpload } from '../../../packages/ui-vue3-element-plus/src';
 interface Query {
   name: string,
@@ -123,6 +123,7 @@ const upload = (f: File) => {
   return 'https://avatars.githubusercontent.com/u/55608642?v=4';
 }
 
+const showContextMenu = ref(false)
 </script>
 
 <template>
@@ -134,18 +135,31 @@ const upload = (f: File) => {
         <ElButton>我是其他的按钮2</ElButton>
       </template>
     </YoungSearchForm>
-    <YoungRotateTip />
+    <YoungRotateTip />-->
 
-    <YoungTab :titles="['全部菜单', '门店菜单']">
+    <YoungTab :titles="['全部菜单', '门店菜单']" @contextmenu.prevent="showContextMenu = true">
       <template #index_0>
         111111
       </template>
       <template #index_1>
         2222222
       </template>
-    </YoungTab> -->
+    </YoungTab>
+    <YoungContextMenu v-model="showContextMenu" :menu-list="[
+      {
+        title: 'm1',
+        handlerName: 'm1'
+      },
+      {
+        title: 'm2',
+        handlerName: 'm2'
+      }
+    ]" />
     <!-- <YoungTable :table-head="tableHead" :table-data="tableData" enable-custom-head /> -->
 
+    <YoungCmdPopup>
+      这是快捷面板
+    </YoungCmdPopup>
     <YoungUpload v-model="imgToUpload" :upload-fn="upload" cropper :aspt="[16, 9]" />
 
     <YoungTablePro ref="YoungTableProRef" :table-head="tableHead" :table-data="tableData" />
