@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2021-07-03 15:05:07
- * @LastEditTime: 2023-01-09 09:51:58
+ * @LastEditTime: 2024-03-04 16:43:50
  * @Description: 自定义工具函数
  */
 import { isObject, isString } from './isType';
@@ -41,9 +41,10 @@ export const encodedStrParse = (str: string) => {
 
 /**
  * 安全解析 JSON 字符串
- * @param {string} str
+ * @param {string | T} str
+ * @cond string 解析，否则原样返回；解析出错返回 exp
  */
-export const safeJsonParse = <T extends any = any>(str: string, exp: any = {}): T => {
+export const safeJsonParse = <T extends any = any>(str: string | T, exp: any = {}): T => {
   if (isString(str)) {
     try {
       const obj = JSON.parse(str);
@@ -56,7 +57,7 @@ export const safeJsonParse = <T extends any = any>(str: string, exp: any = {}): 
       return exp;
     }
   }
-  return exp;
+  return str;
 };
 
 /**
