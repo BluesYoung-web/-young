@@ -21,14 +21,14 @@ const a = (e, t) => Object.prototype.toString.call(e) === `[object ${t.name}]`, 
   }
   return t;
 };
-function D(e) {
+function p(e) {
   return +e || 0;
 }
 function y(e) {
-  return (D(e) / 100).toFixed(2);
+  return (p(e) / 100).toFixed(2);
 }
 function P(e) {
-  return D(e) * 100;
+  return p(e) * 100;
 }
 function U(e, t = !1) {
   return M(y(e), t);
@@ -73,12 +73,12 @@ const v = () => {
 }, b = () => {
   const e = new Date();
   return e.setDate(1), e.setHours(0, 0, 0, 0), e;
-}, p = () => {
+}, D = () => {
   const e = new Date();
   e.setDate(e.getDate() - 1), e.setHours(0, 0, 0, 0);
   const t = new Date(e.getTime() + 1e3 * 60 * 60 * 24);
   return t.setHours(23, 59, 59), [e, t];
-}, J = () => [v(), p()[1]], Y = () => [b(), p()[1]], z = (e, t = "-") => {
+}, J = () => [v(), D()[1]], Y = () => [b(), D()[1]], z = (e, t = "-") => {
   let n = String(e).split("");
   return n.splice(4, 0, t), n.splice(7, 0, t), n.join("");
 }, G = (e = 0, t = 0, n = 0) => {
@@ -176,11 +176,11 @@ const ee = async (e) => new Promise((t) => setTimeout(t, e * 1e3)), h = (e, t = 
     } catch {
       return t;
     }
-  return t;
+  return e;
 }, se = (e) => e.indexOf("http") !== -1 ? e : `//${e}`, oe = () => Math.random().toString(36).slice(8), re = (e) => /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(e), ae = (e) => /^1[23456789]\d{9}$/.test(e), ce = (e) => /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/.test(e), ie = (e) => /ws(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/.test(e), le = (e) => !/Invalid|NaN/.test(new Date(e).toString()), ue = (e) => /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(new Date(e).toString()), de = (e) => /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(e + ""), me = (e) => /^\d+$/.test(e + ""), he = (e) => /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(e + ""), ge = (e) => {
   const t = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/, n = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
   return e.length === 7 ? n.test(e) : e.length === 8 ? t.test(e) : !1;
-}, fe = (e) => /^[\u4e00-\u9fa5]+$/gi.test(e), De = (e) => /^[a-zA-Z]+$/.test(e), pe = (e) => /^\d{3,4}-\d{7,8}(-\d{3,4})?$/.test(e), we = (e) => {
+}, fe = (e) => /^[\u4e00-\u9fa5]+$/gi.test(e), pe = (e) => /^[a-zA-Z]+$/.test(e), De = (e) => /^\d{3,4}-\d{7,8}(-\d{3,4})?$/.test(e), we = (e) => {
   if (f(e))
     try {
       const t = JSON.parse(e);
@@ -327,8 +327,8 @@ export {
   he as isIdCard,
   me as isInteger,
   we as isJsonStr,
-  pe as isLandline,
-  De as isLetter,
+  De as isLandline,
+  pe as isLetter,
   ge as isLicensePlate,
   A as isMap,
   ae as isMobile,
@@ -348,10 +348,10 @@ export {
   v as lastMonthDay,
   Z as nameMasaike,
   G as nextDay,
-  D as polyfillNumber,
+  p as polyfillNumber,
   $e as randomHexColorCode,
   oe as randomId,
-  p as recentDay,
+  D as recentDay,
   J as recentMonth,
   ne as safeJsonParse,
   be as scrollToBottom,

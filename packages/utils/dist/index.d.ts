@@ -100,9 +100,10 @@ declare const sleep: (n: number) => Promise<unknown>;
 declare const encodedStrParse: (str: string) => string;
 /**
  * 安全解析 JSON 字符串
- * @param {string} str
+ * @param {string | T} str
+ * @cond string 解析，否则原样返回；解析出错返回 exp
  */
-declare const safeJsonParse: <T extends unknown = any>(str: string, exp?: any) => T;
+declare const safeJsonParse: <T extends unknown = any>(str: string | T, exp?: any) => T;
 /**
  * 链接地址兼容
  */

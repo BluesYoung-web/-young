@@ -433,7 +433,7 @@ var safeJsonParse = (str, exp = {}) => {
       return exp;
     }
   }
-  return exp;
+  return str;
 };
 var formatUrl = (url) => url.indexOf("http") !== -1 ? url : `//${url}`;
 var randomId = () => Math.random().toString(36).slice(8);
