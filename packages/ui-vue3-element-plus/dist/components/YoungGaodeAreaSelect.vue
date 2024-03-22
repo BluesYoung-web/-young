@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-03-21 16:28:09
- * @LastEditTime: 2024-03-22 08:55:50
+ * @LastEditTime: 2024-03-22 14:42:22
  * @Description: 地址选择组件
 -->
 <script lang="ts" setup>
@@ -51,13 +51,6 @@ const emit = defineEmits<{
     address: string[]
   }): void
 }>()
-
-declare global {
-  interface Window {
-    _AMapSecurityConfig: any
-    AMap: any
-  }
-}
 
 const district = ref<{
   search: (
@@ -122,13 +115,18 @@ const propsObj: CascaderProps = {
   },
 }
 
-function update(args: string[]) {
-  const pathLabels = cas.value.getCheckedNodes()[0].pathLabels as string[]
-
-  emit('change', {
-    adcode: args?.pop?.() ?? '',
-    address: pathLabels
-  })
+function update(args: string[] | null) {
+  if (args) {
+    emit('change', {
+      adcode: args?.pop?.() ?? '',
+      address: cas.value.getCheckedNodes()?.[0]?.pathLabels ?? []
+    })
+  } else {
+    emit('change', {
+      adcode: '',
+      address: []
+    })
+  }
 }
 
 defineExpose({
@@ -137,5 +135,5 @@ defineExpose({
 </script>
 
 <template>
-  <ElCascader ref="cas" :props="propsObj" class="w-260px" clearable placeholder="请选择地址" @change="update" />
+  <ElCascader ref="cas" :props="propsObj" class="w-260px" placeholder="请选择地址" @change="update" />
 </template>
