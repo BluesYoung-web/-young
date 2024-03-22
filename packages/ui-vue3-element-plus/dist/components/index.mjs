@@ -9,3 +9,5 @@ export { default as YoungImageViewer } from "./YoungImageViewer.vue";
 export { default as YoungSearchForm } from "./YoungSearchForm.vue";
 export { default as YoungTablePro } from "./YoungTablePro.vue";
 export { default as YoungUpload } from "./YoungUpload.vue";
+export { default as YoungGaodeMap } from "./YoungGaodeMap.vue";
+export { default as YoungGaodeAreaSelect } from "./YoungGaodeAreaSelect.vue";

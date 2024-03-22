@@ -91,3 +91,14 @@ Object.keys(_useRemoteSearch).forEach(function (key) {
     }
   });
 });
+var _amap = require("./tools/amap");
+Object.keys(_amap).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _amap[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _amap[key];
+    }
+  });
+});

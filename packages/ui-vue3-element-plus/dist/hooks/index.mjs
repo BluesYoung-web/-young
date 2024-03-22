@@ -6,3 +6,4 @@ export * from "./useImagePreview.mjs";
 export * from "./useKeyboardFn.mjs";
 export * from "./useQuery.mjs";
 export * from "./useRemoteSearch.mjs";
+export * from "./tools/amap.mjs";

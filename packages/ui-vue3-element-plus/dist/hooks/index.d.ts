@@ -6,3 +6,4 @@ export * from './useImagePreview';
 export * from './useKeyboardFn';
 export * from './useQuery';
 export * from './useRemoteSearch';
+export * from './tools/amap';
