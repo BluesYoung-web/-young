@@ -301,3 +301,39 @@ const queryScheme: YoungSearchScheme<Query> = {
 | --- | --- |
 | custom | 自定义搜索项 |
 | btns | 添加其他按钮 |
+
+
+## YoungGaodeMap
+
+**高德地图组件(选择具体的经纬度)**
+
+### Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| sk | `String` | **必传** | 高德地图的密钥(`key`) |
+| secret | `String` | **必传** | 高德地图的密钥(`window.AMapSecurityConfig.securityJsCode`) |
+| sdkUrl | `String` | `'//webapi.amap.com/maps?v=2.0&key='` | 高德地图的 SDK 链接 |
+| city | `String` | `''` | 地图搜索范围(eg: '420902') |
+| width | `String` | `'580px'` | 地图容器的宽度 |
+| height | `String` | `'360px'` | 地图容器的高度 |
+| longitude | `String` | `'114.410386'` | 经度 |
+| latitude | `String` | `'30.501635'` | 纬度 |
+| disabled | `Boolean` | `false` | 是否禁用地图组件 |
+| addr | `String` | `''` | 地址标记的描述 |
+| delay | `Number` | `500` | 延迟初始化搜索组件的时间(单位: 毫秒) |
+
+## YoungGaodeAreaSelect
+
+**高德地图组件(选择具体的区域)**
+
+### Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| sk | `String` | **必传** | 高德地图的密钥(`key`) |
+| secret | `String` | **必传** | 高德地图的密钥(`window.AMapSecurityConfig.securityJsCode`) |
+| sdkUrl | `String` | `'//webapi.amap.com/maps?v=2.0&key='` | 高德地图的 SDK 链接 |
+| level | `'province','city','district','street'` | `'street'` | 选择区域的精确度 |
+
+**注意：回显请主动传递 `placeholder`**
