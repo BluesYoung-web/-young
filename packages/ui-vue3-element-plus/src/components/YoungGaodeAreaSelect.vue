@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-03-21 16:28:09
- * @LastEditTime: 2024-03-22 08:33:28
+ * @LastEditTime: 2024-03-22 08:55:50
  * @Description: 地址选择组件
 -->
 <script lang="ts" setup>
@@ -13,9 +13,9 @@ import { initAMapSDK } from '..'
 interface Props {
   /**
    * 精度
-   * 1 = 省 2 = 市 3 = 区 4 = 街道
+   * 省 市 区 街道
    */
-  precision?: number
+  level?: 'province' | 'city' | 'district' | 'street'
 
   /**
    * 密钥
@@ -35,7 +35,7 @@ interface AMapResultItem {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  precision: 4
+  level: 'street'
 })
 
 const emit = defineEmits<{
@@ -89,20 +89,13 @@ async function initMap() {
     })
 }
 
-const LeafObj: Record<AMapResultItem['level'], number> = {
-  province: 1,
-  city: 2,
-  district: 3,
-  street: 4,
-}
-
 function parseArea(status: string, result: any, resolve: Function) {
   if (status == 'complete' && result.info == 'OK') {
-    const arr = result.districtList[0].districtList.map(item => {
+    const arr = result.districtList[0].districtList.map((item: AMapResultItem) => {
       return {
         value: item.adcode,
         label: item.name,
-        leaf: LeafObj[item.level] >= props.precision
+        leaf: item.level === props.level
       }
     })
 
