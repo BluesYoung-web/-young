@@ -1,9 +1,10 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 14:09:31
- * @LastEditTime: 2023-11-22 19:26:04
+ * @LastEditTime: 2024-04-09 09:15:56
  * @Description: 
 -->
+
 <script lang="ts" setup>
 import { computed, ref, nextTick } from 'vue';
 import { ElUpload, ElButton, ElMessage } from 'element-plus';
@@ -12,8 +13,9 @@ import { YoungDialog, useImagePreview } from '..';
 import { VueCropper } from 'vue-cropper';
 import 'vue-cropper/dist/index.css';
 
-interface Porps {
+interface Props {
   modelValue: string[];
+  names?: string[];
   limit?: number;
   type?: 'image' | 'file';
   accept?: string;
@@ -24,7 +26,7 @@ interface Porps {
   cropperAttrs?: Record<string, any>;
 }
 
-const props = withDefaults(defineProps<Porps>(), {
+const props = withDefaults(defineProps<Props>(), {
   limit: 1,
   type: 'image',
   accept: '',
@@ -36,21 +38,26 @@ const props = withDefaults(defineProps<Porps>(), {
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string[]): void;
+  (e: 'update:names', value: string[]): void;
   (e: 'change', value: string[]): void;
 }>();
+
+const fileNames = ref<string[]>(props.names || []);
 
 const files = computed<UploadUserFile[]>(() =>
   props.modelValue.map((url, index) => ({
     uid: index,
-    name: url,
+    name: props.names?.[index] ?? fileNames.value?.[index] ?? url,
     status: 'success',
     url,
   })),
 );
 
 const exceed = () => ElMessage.error('超出数量限制！！！');
-const del = (_: any, all: UploadUserFile[]) => {
+const del = (_: UploadUserFile, all: UploadUserFile[]) => {
   const arr = all.map((item) => item.url!);
+  fileNames.value = fileNames.value.filter((item) => item !== _.name);
+  emit('update:names', fileNames.value);
   emit('update:modelValue', arr);
   emit('change', arr);
 };
@@ -63,12 +70,15 @@ const upload = async (file: UploadUserFile) => {
       coverFile.value = URL.createObjectURL(file.raw as Blob);
       cropper.value.startCrop();
     } else {
+      const name = file.name
+      fileNames.value.push(name);
       const url = await props.uploadFn(file.raw as unknown as File);
       const arr = [
         ...files.value.filter((item) => item.status === 'success').map((item) => item.url!),
         url,
       ];
       emit('update:modelValue', arr);
+      emit('update:names', fileNames.value);
       emit('change', arr);
     }
   }
@@ -137,7 +147,8 @@ const cancelClip = () => {
     </div>
   </ElUpload>
 
-  <YoungDialog v-model="showClipPopup" width="75%" real-title="图片裁剪" sure-text="裁剪" @sure="sureClip" @clear="cancelClip">
+  <YoungDialog v-model="showClipPopup" width="75%" real-title="图片裁剪" sure-text="裁剪" @sure="sureClip"
+    @clear="cancelClip">
     <VueCropper ref="cropper" auto-crop center-box :fixed-number="aspt" :img="coverFile" :output-type="outputType" fixed
       v-bind="cropperAttrs" />
   </YoungDialog>
