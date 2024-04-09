@@ -1,9 +1,10 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2024-01-23 16:57:58
+ * @LastEditTime: 2024-04-09 09:19:15
  * @Description:
 -->
+
 <script setup lang="ts">
 import { ref, h, watchEffect } from 'vue';
 import 'element-plus/dist/index.css';
@@ -117,11 +118,17 @@ tableHead.forEach((item, index) => {
 })
 
 
-const imgToUpload = ref<string[]>([]);
-const upload = (f: File) => {
+const imgToUpload = ref<string[]>(['https://avatars.githubusercontent.com/u/55608642?v=4']);
+const uploadNames = ref<string[]>(['零零零点.txt']);
+const upload = async (f: File) => {
   console.log("🚀 ~ file: App.vue:116 ~ upload ~ f:", f);
   return 'https://avatars.githubusercontent.com/u/55608642?v=4';
 }
+
+watchEffect(() => {
+  console.log(imgToUpload.value);
+  console.log(uploadNames.value);
+})
 
 const showContextMenu = ref(false)
 </script>
@@ -134,13 +141,15 @@ const showContextMenu = ref(false)
         <ElButton>我是其他的按钮1</ElButton>
         <ElButton>我是其他的按钮2</ElButton>
       </template>
-    </YoungSearchForm>
-    <YoungRotateTip />-->
+</YoungSearchForm>
+<YoungRotateTip />-->
 
     <YoungTab :titles="['全部菜单', '门店菜单']" @contextmenu.prevent="showContextMenu = true">
+
       <template #index_0>
         111111
       </template>
+
       <template #index_1>
         2222222
       </template>
@@ -161,6 +170,8 @@ const showContextMenu = ref(false)
       这是快捷面板
     </YoungCmdPopup>
     <YoungUpload v-model="imgToUpload" :upload-fn="upload" cropper :aspt="[16, 9]" />
+    <YoungUpload v-model="imgToUpload" v-model:names="uploadNames" type="file" :upload-fn="upload" cropper
+      :aspt="[16, 9]" />
 
     <YoungTablePro ref="YoungTableProRef" :table-head="tableHead" :table-data="tableData" />
 
