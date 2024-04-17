@@ -1,6 +1,8 @@
+var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __export = (target, all) => {
   for (var name in all)
@@ -14,6 +16,14 @@ var __copyProps = (to, from, except, desc) => {
   }
   return to;
 };
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
@@ -39,6 +49,7 @@ __export(src_exports, {
   formatUrl: () => formatUrl,
   getClientHeight: () => getClientHeight,
   getDateRange: () => getDateRange,
+  getFingerprint: () => getFingerprint,
   hexToRGB: () => hexToRGB,
   idMasaike: () => idMasaike,
   isAndroid: () => isAndroid,
@@ -76,11 +87,13 @@ __export(src_exports, {
   isWebSocketUrl: () => isWebSocketUrl,
   isiOS: () => isiOS,
   lastMonthDay: () => lastMonthDay,
+  md5: () => import_md5.default,
   nameMasaike: () => nameMasaike,
   nextDay: () => nextDay,
   polyfillNumber: () => polyfillNumber,
   randomHexColorCode: () => randomHexColorCode,
   randomId: () => randomId,
+  randomUUID: () => randomUUID,
   recentDay: () => recentDay,
   recentMonth: () => recentMonth,
   safeJsonParse: () => safeJsonParse,
@@ -392,6 +405,7 @@ function timeToSeconds(time) {
 }
 
 // src/core/tool.ts
+var import_md5 = __toESM(require("md5"), 1);
 var sleep = async (n) => {
   return new Promise((resolve) => setTimeout(resolve, n * 1e3));
 };
@@ -437,6 +451,49 @@ var safeJsonParse = (str, exp = {}) => {
 };
 var formatUrl = (url) => url.indexOf("http") !== -1 ? url : `//${url}`;
 var randomId = () => Math.random().toString(36).slice(8);
+var randomUUID = () => {
+  let res = "";
+  const template = "xxxxxxxx-xxxx-6xxx-yxxx-xxxxxxxxxxxx";
+  for (let i = 0, len = template.length; i < len; i += 1) {
+    const s = template[i];
+    const r = Math.random() * 16 | 0;
+    const v = s === "x" ? r : s === "y" ? r & 3 | 8 : s;
+    res += v.toString(16);
+  }
+  return res;
+};
+function getFingerprint() {
+  try {
+    const c = "bluesyoung_web@163.com <canvas> 1.0";
+    const canvas = document.createElement("canvas");
+    canvas.setAttribute("width", "220");
+    canvas.setAttribute("height", "30");
+    const canvasContext = canvas.getContext("2d");
+    canvasContext.textBaseline = "top";
+    canvasContext.font = "14px 'Arial'";
+    canvasContext.textBaseline = "alphabetic";
+    canvasContext.fillStyle = "#f60";
+    canvasContext.fillRect(125, 1, 62, 20);
+    canvasContext.fillStyle = "#069";
+    canvasContext.fillText(c, 2, 15);
+    canvasContext.fillStyle = "rgba(102, 204, 0, 0.7)";
+    canvasContext.fillText(c, 4, 17);
+    const base64Str = canvas.toDataURL().split(",")[1];
+    const askiiStr = atob(base64Str);
+    let result = "";
+    for (let i = 0; i < askiiStr.length; i++) {
+      const askii = askiiStr.charCodeAt(i);
+      if (askii <= 15) {
+        result += "0";
+      }
+      result += askii.toString(16).toLocaleUpperCase();
+    }
+    return (0, import_md5.default)(result).toUpperCase();
+  } catch (error) {
+    console.log("\u{1F680} ~ getFingerprint ~ error:", error);
+    throw new Error("getFingerprint error, your envrionment is not support");
+  }
+}
 
 // src/core/valid.ts
 var isEmail = (email) => /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(email);
@@ -682,6 +739,7 @@ var YoungLocalStorage = class extends YoungStorage {
   formatUrl,
   getClientHeight,
   getDateRange,
+  getFingerprint,
   hexToRGB,
   idMasaike,
   isAndroid,
@@ -719,11 +777,13 @@ var YoungLocalStorage = class extends YoungStorage {
   isWebSocketUrl,
   isiOS,
   lastMonthDay,
+  md5,
   nameMasaike,
   nextDay,
   polyfillNumber,
   randomHexColorCode,
   randomId,
+  randomUUID,
   recentDay,
   recentMonth,
   safeJsonParse,

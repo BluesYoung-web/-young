@@ -33,5 +33,9 @@
   "bugs": {
     "url": "https://github.com/BluesYoung-web/young/issues"
   },
-  "homepage": "https://github.com/BluesYoung-web/young#readme"
+  "homepage": "https://github.com/BluesYoung-web/young#readme",
+  "dependencies": {
+    "@types/md5": "^2.3.5",
+    "md5": "^2.3.0"
+  }
 }
