@@ -1,9 +1,10 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:21:30
- * @LastEditTime: 2023-11-22 14:25:05
+ * @LastEditTime: 2024-04-23 10:10:37
  * @Description: 
 -->
+
 <script lang="ts" setup>
 import { computed, nextTick, onActivated, ref, watchEffect } from 'vue';
 import { ElMessage, ElTable, ElTableColumn, ElMessageBox, ElTooltip } from 'element-plus';
@@ -169,13 +170,13 @@ defineExpose({
         <ElTableColumn v-for="(head, index) in filterHeader" :key="head.prop.toString() + index + randomKey"
           :prop="head.prop as string" :label="head.label" :width="head.width || ''" :sortable="head.sortable || false"
           :fixed="head.fixed || false" :align="head.align || 'left'"
-          :show-overflow-tooltip="head.showOverflowTooltip ?? true">
+          :show-overflow-tooltip="head.show_overflow_tooltip ?? true">
           <template #header="scope">
             <div v-if="tableHead_1[index].tool_content" :style="{
-              display: head.sortable ? 'inline-block' : 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }">
+      display: head.sortable ? 'inline-block' : 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }">
               <span class='nowarp' :title="head.label">{{ head.label }}</span>
               <ElTooltip placement="bottom">
                 <template #content>
@@ -190,6 +191,7 @@ defineExpose({
             </div>
             <span v-else class='nowarp' :title="head.label">{{ head.label }}</span>
           </template>
+
           <template #default="scope">
             <component v-if="isFunction(head.render)" :is="head.render(scope.row, scope.$index)" />
             <span v-else>{{ scope.row[head.prop] }}</span>

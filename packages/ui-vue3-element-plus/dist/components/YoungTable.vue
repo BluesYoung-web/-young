@@ -1,9 +1,10 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 14:53:43
- * @LastEditTime: 2023-09-20 16:23:14
+ * @LastEditTime: 2024-04-23 10:10:31
  * @Description: 
 -->
+
 <script lang="ts" setup>
 import { nextTick, onActivated, ref, watchEffect, onMounted } from 'vue';
 import { deepClone, isFunction } from '@bluesyoung/utils';
@@ -112,13 +113,13 @@ onMounted(async () => {
     <ElTableColumn v-if="selectable" type="selection" width="55" />
     <ElTableColumn v-for="(head, index) in tableHead_1" :key="index" :prop="head.prop as string" :label="head.label"
       :width="head.width || ''" :sortable="head.sortable || false" :fixed="head.fixed || false"
-      :align="head.align || 'left'" :show-overflow-tooltip="head.showOverflowTooltip ?? true">
+      :align="head.align || 'left'" :show-overflow-tooltip="head.show_overflow_tooltip ?? true">
       <template #header="scope">
         <div v-if="tableHead_1[index].tool_content" :style="{
-          display: head.sortable ? 'inline-block' : 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }">
+    display: head.sortable ? 'inline-block' : 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }">
           <span class='nowarp' :title="head.label">{{ head.label }}</span>
           <ElTooltip placement="bottom">
             <template #content>
@@ -133,6 +134,7 @@ onMounted(async () => {
         </div>
         <span v-else>{{ scope.column.label }}</span>
       </template>
+
       <template #default="scope">
         <component v-if="isFunction(head.render)" :is="head.render(scope.row, scope.$index)" />
         <span v-else>{{ scope.row[head.prop] }}</span>
