@@ -43,7 +43,7 @@ var DEFAULT_CONFIG = {
   tag: "young_logger",
   reporter: ({ level, type, tag, args, date }, __log) => {
     __log(
-      `${Math.floor(date.getTime() / 1e3)} ${type} ${tag} - - - - - - - ${JSON.stringify(args)}`
+      `${Math.floor(date.getTime() / 1e3)} ${type}  ${tag} - - - - - - - ${JSON.stringify(args)}`
     );
   }
 };

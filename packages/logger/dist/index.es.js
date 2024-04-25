@@ -372,7 +372,7 @@ const k = $(), I = {
   tag: "young_logger",
   reporter: ({ level: s, type: t, tag: o, args: r, date: e }, i) => {
     i(
-      `${Math.floor(e.getTime() / 1e3)} ${t} ${o} - - - - - - - ${JSON.stringify(r)}`
+      `${Math.floor(e.getTime() / 1e3)} ${t}  ${o} - - - - - - - ${JSON.stringify(r)}`
     );
   }
 }, N = (s = {}) => {
