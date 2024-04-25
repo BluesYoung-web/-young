@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/BluesYoung-web/young#readme",
   "dependencies": {
-    "consola": "^3.1.0",
+    "consola": "^3.2.3",
     "defu": "^6.1.2"
   }
 }

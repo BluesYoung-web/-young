@@ -41,9 +41,9 @@ var DEFAULT_CONFIG = {
   },
   wrapConsole: true,
   tag: "young_logger",
-  reporter: ({ level, type, tag, args, date }, __log) => {
+  reporter({ level, type, tag, args, date }, __log) {
     __log(
-      `${Math.floor(date.getTime() / 1e3)} ${type}  ${tag} - - - - - - - ${JSON.stringify(args)}`
+      `${Math.floor(date.getTime() / 1e3)} ${type} ${tag || this.tag} - - - - - - - ${JSON.stringify(args)}`
     );
   }
 };
@@ -68,10 +68,9 @@ var useYoungLogger = (conf = {}) => {
       }
     ]
   });
-  logger.withTag(config.tag);
   config.wrapConsole && logger.wrapConsole();
   return {
-    logger,
+    logger: logger.withTag(config.tag),
     consola: import_consola.default
   };
 };

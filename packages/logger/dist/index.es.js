@@ -9,10 +9,11 @@ const c = {
   fail: 3,
   ready: 3,
   start: 3,
+  box: 3,
   debug: 4,
   trace: 5,
   verbose: Number.POSITIVE_INFINITY
-}, w = {
+}, v = {
   // Silent
   silent: {
     level: -1
@@ -48,6 +49,9 @@ const c = {
   start: {
     level: c.info
   },
+  box: {
+    level: c.info
+  },
   // Level 4
   debug: {
     level: c.debug
@@ -61,44 +65,44 @@ const c = {
     level: c.verbose
   }
 };
-function u(s) {
-  return s !== null && typeof s == "object";
+function u(r) {
+  return r !== null && typeof r == "object";
 }
-function _(s, t, o = ".", r) {
+function _(r, t, o = ".", s) {
   if (!u(t))
-    return _(s, {}, o, r);
+    return _(r, {}, o, s);
   const e = Object.assign({}, t);
-  for (const i in s) {
+  for (const i in r) {
     if (i === "__proto__" || i === "constructor")
       continue;
-    const n = s[i];
-    n != null && (r && r(e, i, n, o) || (Array.isArray(n) && Array.isArray(e[i]) ? e[i] = [...n, ...e[i]] : u(n) && u(e[i]) ? e[i] = _(
+    const n = r[i];
+    n != null && (s && s(e, i, n, o) || (Array.isArray(n) && Array.isArray(e[i]) ? e[i] = [...n, ...e[i]] : u(n) && u(e[i]) ? e[i] = _(
       n,
       e[i],
       (o ? `${o}.` : "") + i.toString(),
-      r
+      s
     ) : e[i] = n));
   }
   return e;
 }
-function m(s) {
+function L(r) {
   return (...t) => (
     // eslint-disable-next-line unicorn/no-array-reduce
-    t.reduce((o, r) => _(o, r, "", s), {})
+    t.reduce((o, s) => _(o, s, "", r), {})
   );
 }
-const S = m();
-function C(s) {
-  return Object.prototype.toString.call(s) === "[object Object]";
+const S = L();
+function F(r) {
+  return Object.prototype.toString.call(r) === "[object Object]";
 }
-function T(s) {
-  return !(!C(s) || !s.message && !s.args || s.stack);
+function T(r) {
+  return !(!F(r) || !r.message && !r.args || r.stack);
 }
 let f = !1;
-const v = [];
+const w = [];
 class l {
   constructor(t = {}) {
-    const o = t.types || w;
+    const o = t.types || v;
     this.options = S(
       {
         ...t,
@@ -107,7 +111,7 @@ class l {
         reporters: [...t.reporters || []]
       },
       {
-        types: w,
+        types: v,
         throttle: 1e3,
         throttleMin: 5,
         formatOptions: {
@@ -117,13 +121,13 @@ class l {
         }
       }
     );
-    for (const r in o) {
+    for (const s in o) {
       const e = {
-        type: r,
+        type: s,
         ...this.options.defaults,
-        ...o[r]
+        ...o[s]
       };
-      this[r] = this._wrapLogFn(e), this[r].raw = this._wrapLogFn(
+      this[s] = this._wrapLogFn(e), this[s].raw = this._wrapLogFn(
         e,
         !0
       );
@@ -146,10 +150,11 @@ class l {
     return this.options.prompt(t, o);
   }
   create(t) {
-    return new l({
+    const o = new l({
       ...this.options,
       ...t
     });
+    return this._mockFn && o.mockTypes(this._mockFn), o;
   }
   withDefaults(t) {
     return this.create({
@@ -198,8 +203,8 @@ class l {
     this._wrapStream(this.options.stdout, "log"), this._wrapStream(this.options.stderr, "log");
   }
   _wrapStream(t, o) {
-    t && (t.__write || (t.__write = t.write), t.write = (r) => {
-      this[o].raw(String(r).trim());
+    t && (t.__write || (t.__write = t.write), t.write = (s) => {
+      this[o].raw(String(s).trim());
     });
   }
   restoreStd() {
@@ -213,26 +218,26 @@ class l {
   }
   resumeLogs() {
     f = !1;
-    const t = v.splice(0);
+    const t = w.splice(0);
     for (const o of t)
       o[0]._logFn(o[1], o[2]);
   }
   mockTypes(t) {
     const o = t || this.options.mockFn;
-    if (typeof o == "function")
-      for (const r in this.options.types)
-        this[r] = o(r, this.options.types[r]) || this[r], this[r].raw = this[r];
+    if (this._mockFn = o, typeof o == "function")
+      for (const s in this.options.types)
+        this[s] = o(s, this.options.types[s]) || this[s], this[s].raw = this[s];
   }
   _wrapLogFn(t, o) {
-    return (...r) => {
+    return (...s) => {
       if (f) {
-        v.push([this, t, r, o]);
+        w.push([this, t, s, o]);
         return;
       }
-      return this._logFn(t, r, o);
+      return this._logFn(t, s, o);
     };
   }
-  _logFn(t, o, r) {
+  _logFn(t, o, s) {
     if ((t.level || 0) > this.level)
       return !1;
     const e = {
@@ -241,10 +246,10 @@ class l {
       ...t,
       level: h(t.level, this.options.types)
     };
-    !r && o.length === 1 && T(o[0]) ? Object.assign(e, o[0]) : e.args = [...o], e.message && (e.args.unshift(e.message), delete e.message), e.additional && (Array.isArray(e.additional) || (e.additional = e.additional.split(`
+    !s && o.length === 1 && T(o[0]) ? Object.assign(e, o[0]) : e.args = [...o], e.message && (e.args.unshift(e.message), delete e.message), e.additional && (Array.isArray(e.additional) || (e.additional = e.additional.split(`
 `)), e.args.push(`
 ` + e.additional.join(`
-`)), delete e.additional), e.type = typeof e.type == "string" ? e.type.toLowerCase() : "log", e.tag = typeof e.tag == "string" ? e.tag.toLowerCase() : "";
+`)), delete e.additional), e.type = typeof e.type == "string" ? e.type.toLowerCase() : "log", e.tag = typeof e.tag == "string" ? e.tag : "";
     const i = (p = !1) => {
       const a = (this._lastLog.count || 0) - this.options.throttleMin;
       if (this._lastLog.object && a > 0) {
@@ -280,8 +285,8 @@ class l {
       });
   }
 }
-function h(s, t = {}, o = 3) {
-  return s === void 0 ? o : typeof s == "number" ? s : t[s] && t[s].level !== void 0 ? t[s].level : o;
+function h(r, t = {}, o = 3) {
+  return r === void 0 ? o : typeof r == "number" ? r : t[r] && t[r].level !== void 0 ? t[r].level : o;
 }
 l.prototype.add = l.prototype.addReporter;
 l.prototype.remove = l.prototype.removeReporter;
@@ -290,10 +295,10 @@ l.prototype.withScope = l.prototype.withTag;
 l.prototype.mock = l.prototype.mockTypes;
 l.prototype.pause = l.prototype.pauseLogs;
 l.prototype.resume = l.prototype.resumeLogs;
-function b(s = {}) {
-  return new l(s);
+function b(r = {}) {
+  return new l(r);
 }
-class A {
+class C {
   constructor(t) {
     this.options = { ...t }, this.defaultColor = "#7f8c8d", this.levelColorMap = {
       0: "#c0392b",
@@ -311,13 +316,13 @@ class A {
     return t < 1 ? console.__error || console.error : t === 1 ? console.__warn || console.warn : console.__log || console.log;
   }
   log(t) {
-    const o = this._getLogFn(t.level), r = t.type !== "log" ? t.type : "", e = t.tag || "", n = `
+    const o = this._getLogFn(t.level), s = t.type === "log" ? "" : t.type, e = t.tag || "", n = `
       background: ${this.typeColorMap[t.type] || this.levelColorMap[t.level] || this.defaultColor};
       border-radius: 0.5em;
       color: white;
       font-weight: bold;
       padding: 2px 0.5em;
-    `, p = `%c${[e, r].filter(Boolean).join(":")}`;
+    `, p = `%c${[e, s].filter(Boolean).join(":")}`;
     typeof t.args[0] == "string" ? o(
       `${p}%c ${t.args[0]}`,
       n,
@@ -327,62 +332,62 @@ class A {
     ) : o(p, n, ...t.args);
   }
 }
-function F(s = {}) {
+function A(r = {}) {
   return b({
-    reporters: s.reporters || [new A({})],
-    prompt(o, r = {}) {
-      return r.type === "confirm" ? Promise.resolve(confirm(o)) : Promise.resolve(prompt(o));
+    reporters: r.reporters || [new C({})],
+    prompt(o, s = {}) {
+      return s.type === "confirm" ? Promise.resolve(confirm(o)) : Promise.resolve(prompt(o));
     },
-    ...s
+    ...r
   });
 }
-const L = F();
-function g(s) {
-  return s !== null && typeof s == "object";
+const m = A();
+function g(r) {
+  return r !== null && typeof r == "object";
 }
-function y(s, t, o = ".", r) {
+function y(r, t, o = ".", s) {
   if (!g(t))
-    return y(s, {}, o, r);
+    return y(r, {}, o, s);
   const e = Object.assign({}, t);
-  for (const i in s) {
+  for (const i in r) {
     if (i === "__proto__" || i === "constructor")
       continue;
-    const n = s[i];
-    n != null && (r && r(e, i, n, o) || (Array.isArray(n) && Array.isArray(e[i]) ? e[i] = [...n, ...e[i]] : g(n) && g(e[i]) ? e[i] = y(
+    const n = r[i];
+    n != null && (s && s(e, i, n, o) || (Array.isArray(n) && Array.isArray(e[i]) ? e[i] = [...n, ...e[i]] : g(n) && g(e[i]) ? e[i] = y(
       n,
       e[i],
       (o ? `${o}.` : "") + i.toString(),
-      r
+      s
     ) : e[i] = n));
   }
   return e;
 }
-function $(s) {
+function $(r) {
   return (...t) => (
     // eslint-disable-next-line unicorn/no-array-reduce
-    t.reduce((o, r) => y(o, r, "", s), {})
+    t.reduce((o, s) => y(o, s, "", r), {})
   );
 }
-const k = $(), I = {
+const k = $(), x = {
   forceExit: {
     sync: !0,
     async: !1
   },
   wrapConsole: !0,
   tag: "young_logger",
-  reporter: ({ level: s, type: t, tag: o, args: r, date: e }, i) => {
+  reporter({ level: r, type: t, tag: o, args: s, date: e }, i) {
     i(
-      `${Math.floor(e.getTime() / 1e3)} ${t}  ${o} - - - - - - - ${JSON.stringify(r)}`
+      `${Math.floor(e.getTime() / 1e3)} ${t} ${o || this.tag} - - - - - - - ${JSON.stringify(s)}`
     );
   }
-}, N = (s = {}) => {
-  const t = k(s, I), o = console.log;
+}, I = (r = {}) => {
+  const t = k(r, x), o = console.log;
   process.on("uncaughtException", (e) => {
     console.error("sync error: ", e.toString()), t.forceExit.sync && process.exit(1);
   }), process.on("unhandledRejection", (e) => {
     console.error("async error: ", e.toString()), t.forceExit.async && process.exit(1);
   });
-  const r = L.create({
+  const s = m.create({
     formatOptions: {
       compact: !0
     },
@@ -392,12 +397,12 @@ const k = $(), I = {
       }
     ]
   });
-  return r.withTag(t.tag), t.wrapConsole && r.wrapConsole(), {
-    logger: r,
-    consola: L
+  return t.wrapConsole && s.wrapConsole(), {
+    logger: s.withTag(t.tag),
+    consola: m
   };
 };
 export {
-  N as useYoungLogger
+  I as useYoungLogger
 };
 //# sourceMappingURL=index.es.js.map

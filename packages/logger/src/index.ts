@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-05-09 12:03:55
- * @LastEditTime: 2024-04-25 17:13:27
+ * @LastEditTime: 2024-04-25 17:41:43
  * @Description:
  */
 import consola, { type LogObject } from 'consola';
@@ -47,9 +47,9 @@ const DEFAULT_CONFIG: Required<YoungLoggerConfig> = {
   },
   wrapConsole: true,
   tag: 'young_logger',
-  reporter: ({ level, type, tag, args, date }, __log) => {
+  reporter({ level, type, tag, args, date }, __log) {
     __log(
-      `${Math.floor(date.getTime() / 1000)} ${type}  ${tag} - - - - - - - ${JSON.stringify(args)}`,
+      `${Math.floor(date.getTime() / 1000)} ${type} ${tag || this.tag} - - - - - - - ${JSON.stringify(args)}`,
     );
   },
 };
@@ -79,12 +79,10 @@ export const useYoungLogger = (conf: YoungLoggerConfig = {}) => {
     ],
   });
 
-  logger.withTag(config.tag);
-
   config.wrapConsole && logger.wrapConsole();
 
   return {
-    logger,
+    logger: logger.withTag(config.tag),
     consola,
   };
 };
