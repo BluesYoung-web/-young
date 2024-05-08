@@ -1,9 +1,10 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:10:28
- * @LastEditTime: 2023-11-23 10:14:35
+ * @LastEditTime: 2024-05-08 14:14:33
  * @Description: 
 -->
+
 <script lang="tsx" setup>
 import { ref, watch } from 'vue';
 import type { YoungSearchScheme } from '.';
@@ -52,7 +53,7 @@ const randomSeed = randomId();
 <template>
   <div v-bind="$attrs" style="max-width: 100%; margin: auto; padding: 20px;">
     <ElForm :model="modelValue">
-      <div style="display: flex; flex-wrap: wrap; gap: 10px 20px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px 20px;">
         <div v-for="(item, index) in Object.keys(searchScheme)" :key="index + randomSeed">
           <ElFormItem :label="searchScheme[item].tip">
             <ElInput v-if="searchScheme[item].type === 'input'" v-model.trim="form[item]"
