@@ -1,13 +1,14 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-03-21 16:28:09
- * @LastEditTime: 2024-03-22 14:42:22
+ * @LastEditTime: 2024-05-22 10:02:46
  * @Description: 地址选择组件
 -->
+
 <script lang="ts" setup>
 import { ElCascader } from 'element-plus'
 import type { CascaderProps } from 'element-plus'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { initAMapSDK } from '..'
 
 interface Props {
@@ -94,6 +95,11 @@ function parseArea(status: string, result: any, resolve: Function) {
 
     resolve(arr)
   } else {
+    console.warn('----------------------------高德地图行政区搜索失败----------------------------');
+    console.log('status: ', status);
+    console.log('result: ', result);
+    console.warn('----------------------------高德地图行政区搜索失败----------------------------');
+
     resolve([])
   }
 }

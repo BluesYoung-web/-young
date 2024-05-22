@@ -1,9 +1,10 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-03-21 16:13:59
- * @LastEditTime: 2024-03-22 08:33:37
+ * @LastEditTime: 2024-05-22 09:57:21
  * @Description: 
 -->
+
 <script lang="ts" setup>
 import { ElTag, ElSelect, ElOption } from 'element-plus'
 import { initAMapSDK, useRemoteSearch } from '..'
@@ -154,6 +155,11 @@ async function initMap() {
             lat: e.lnglat.getLat(),
             address,
           })
+        } else {
+          console.warn('--------------------------高德地图获取地址失败--------------------------');
+          console.log('status: ', status);
+          console.log('result: ', result);
+          console.warn('----------------------------------------------------------------------');
         }
       },
     )
@@ -204,8 +210,15 @@ const {
 
         options.value = arr
         mapList.value = obj
+      } else {
+        console.warn('--------------------------高德地图搜索结果为空--------------------------');
+        console.log('status: ', status);
+        console.log('result: ', result);
+        console.warn('----------------------------------------------------------------------');
       }
     })
+  } else {
+    options.value = []
   }
 })
 
