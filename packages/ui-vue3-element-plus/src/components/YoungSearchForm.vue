@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:10:28
- * @LastEditTime: 2024-05-08 14:14:33
+ * @LastEditTime: 2024-05-22 15:23:06
  * @Description: 
 -->
 
@@ -53,7 +53,7 @@ const randomSeed = randomId();
 <template>
   <div v-bind="$attrs" style="max-width: 100%; margin: auto; padding: 20px;">
     <ElForm :model="modelValue">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px 20px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, max-content)); gap: 10px 20px;">
         <div v-for="(item, index) in Object.keys(searchScheme)" :key="index + randomSeed">
           <ElFormItem :label="searchScheme[item].tip">
             <ElInput v-if="searchScheme[item].type === 'input'" v-model.trim="form[item]"
