@@ -1,15 +1,16 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 14:33:13
- * @LastEditTime: 2023-09-21 09:46:22
+ * @LastEditTime: 2024-05-31 09:55:16
  * @Description: 
 -->
-<script lang="ts" setup>
+
+<script lang="ts" setup generic="T">
 import { ElSelect, ElOption } from 'element-plus';
 import { randomId } from '@bluesyoung/utils';
 import type { SelectOptionItem } from '.';
 
-interface Props<T extends any = string | number> {
+interface Props {
   modelValue?: T | T[];
   options: SelectOptionItem<T>[];
 }
