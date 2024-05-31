@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:10:28
- * @LastEditTime: 2024-05-31 10:07:23
+ * @LastEditTime: 2024-05-31 10:18:30
  * @Description: 
 -->
 
@@ -16,16 +16,23 @@ interface Props {
   modelValue: Record<string, any>;
   searchScheme: YoungSearchScheme;
   fastSearch?: boolean;
+  beforeSearch?: () => void;
   onSearch?: () => void;
   onReset?: () => void;
   dateTimeKey?: [string, string];
+  pageKey?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   fastSearch: true,
+  beforeSearch: () => {
+    console.log('---表单元素触发请求前，重置分页---', props.pageKey)
+    props.modelValue[props.pageKey] = 1;
+  },
   onSearch: () => console.log('---表单元素触发请求---'),
   onReset: () => console.log('---触发重置请求---'),
   dateTimeKey: () => ['startcreatetime', 'endcreatetime'],
+  pageKey: 'pageNum',
 });
 
 const emit = defineEmits<{
@@ -43,7 +50,10 @@ watch(
 
 const update = (up = true) => {
   emit('update:modelValue', { ...form.value });
-  props.fastSearch && up && props.onSearch();
+  if (props.fastSearch && up) {
+    props.beforeSearch();
+    props.onSearch();
+  };
 };
 
 // !直接在界面上调用，会导致频繁刷新引起意外的 bug，比如：输入框输入一个字符之后就会失去焦点
