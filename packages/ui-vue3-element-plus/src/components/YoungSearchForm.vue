@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:10:28
- * @LastEditTime: 2024-05-22 15:23:06
+ * @LastEditTime: 2024-05-31 10:07:23
  * @Description: 
 -->
 
@@ -57,13 +57,16 @@ const randomSeed = randomId();
         <div v-for="(item, index) in Object.keys(searchScheme)" :key="index + randomSeed">
           <ElFormItem :label="searchScheme[item].tip">
             <ElInput v-if="searchScheme[item].type === 'input'" v-model.trim="form[item]"
-              v-bind="searchScheme[item].attrs" @change="update(false)" @keyup.enter="update()" />
+              v-bind="searchScheme[item].attrs" @change="update(false)"
+              @keyup.enter="[searchScheme[item]?.effect?.(form[item]), update()]" />
             <ElInputNumber v-if="searchScheme[item].type === 'number'" v-bind="searchScheme[item].attrs"
-              v-model.number="form[item]" @change="update()" />
+              v-model.number="form[item]" @change="[searchScheme[item]?.effect?.(form[item]), update()]" />
             <YoungSelect v-if="searchScheme[item].type === 'select'" v-model="form[item]"
-              v-bind="searchScheme[item].attrs" :options="searchScheme[item].options" @change="update()" />
+              v-bind="searchScheme[item].attrs" :options="searchScheme[item].options"
+              @change="[searchScheme[item]?.effect?.(form[item]), update()]" />
             <YoungDateRange v-if="searchScheme[item].type === 'datetimerange'" v-model:start="form[dateTimeKey[0]]"
-              v-model:end="form[dateTimeKey[1]]" v-bind="searchScheme[item].attrs" @change="update()" />
+              v-model:end="form[dateTimeKey[1]]" v-bind="searchScheme[item].attrs"
+              @change="[searchScheme[item]?.effect?.([form[dateTimeKey[0]], form[dateTimeKey[1]]]), update()]" />
             <component v-if="searchScheme[item].type === 'custom'" :is="searchScheme[item].render?.()" />
           </ElFormItem>
         </div>

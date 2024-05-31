@@ -94,6 +94,11 @@ export type YoungSearchFormItem = {
    */
   render?: () => JSX.Element;
   /**
+   * 值变更后的副作用函数
+   * @param value 值
+   */
+  effect?: (value: any) => void;
+  /**
    * 透传给元素的其他属性
    */
   attrs?: {
