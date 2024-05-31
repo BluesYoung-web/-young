@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:10:28
- * @LastEditTime: 2024-05-31 10:32:16
+ * @LastEditTime: 2024-05-31 10:49:29
  * @Description: 
 -->
 
@@ -44,18 +44,22 @@ watch(
   { immediate: true, deep: true },
 );
 
+function search() {
+  console.log('---表单元素触发请求前---');
+  if (props.beforeSearch) {
+    props.beforeSearch();
+  } else {
+    console.log('---默认逻辑，重置分页---', props.pageKey)
+    form.value[props.pageKey] = 1;
+    emit('update:modelValue', { ...form.value });
+  }
+  props.onSearch();
+}
+
 const update = (up = true) => {
   emit('update:modelValue', { ...form.value });
   if (props.fastSearch && up) {
-    console.log('---表单元素触发请求前---');
-    if (props.beforeSearch) {
-      props.beforeSearch();
-    } else {
-      console.log('---默认逻辑，重置分页---', props.pageKey)
-      props.modelValue[props.pageKey] = 1;
-      emit('update:modelValue', { ...form.value });
-    }
-    props.onSearch();
+    search();
   };
 };
 
@@ -86,7 +90,7 @@ const randomSeed = randomId();
         <slot name="custom" />
       </div>
       <div style="display: flex;">
-        <ElButton type="primary" @click="onSearch">
+        <ElButton type="primary" @click="search">
           搜索
         </ElButton>
         <ElButton @click="onReset">重置</ElButton>
