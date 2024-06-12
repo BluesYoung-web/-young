@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-03-21 16:28:09
- * @LastEditTime: 2024-06-12 16:29:00
+ * @LastEditTime: 2024-06-12 19:00:51
  * @Description: 地址选择组件
 -->
 
@@ -221,6 +221,29 @@ const propsObj: CascaderProps = {
   },
 }
 
+async function getAllData() {
+  await initMap()
+  const arr: SelectOptionItem[] = await new Promise(resolve => {
+    district.value?.search('中国', (status, result) => parseArea(status, result, resolve))
+  })
+
+  for (const a of arr) {
+    if (a.children) {
+      for (const b of a.children) {
+        if (b.children) {
+          for (const c of b.children) {
+            c.children = await new Promise(resolve => {
+              district.value?.search(c.value.toString(), (status, result) => parseArea(status, result, resolve))
+            })
+          }
+        }
+      }
+    }
+  }
+
+  return arr
+}
+
 const options = ref<SelectOptionItem[]>([])
 
 function update(args: string[][] | string[] | null) {
@@ -248,6 +271,7 @@ function update(args: string[][] | string[] | null) {
 
 defineExpose({
   initMap,
+  getAllData
 })
 </script>
 
