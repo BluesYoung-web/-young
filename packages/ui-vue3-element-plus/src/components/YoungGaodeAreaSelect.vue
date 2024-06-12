@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-03-21 16:28:09
- * @LastEditTime: 2024-06-12 14:21:56
+ * @LastEditTime: 2024-06-12 16:29:00
  * @Description: 地址选择组件
 -->
 
@@ -9,7 +9,8 @@
 import { ElCascader } from 'element-plus'
 import type { CascaderProps } from 'element-plus'
 import { ref, watch } from 'vue'
-import { SelectOptionItem, initAMapSDK } from '..'
+import type { SelectOptionItem } from '..'
+import { initAMapSDK } from '..'
 import { isArray, isString } from '@bluesyoung/utils'
 
 interface Props {
