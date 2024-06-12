@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-03-21 16:28:09
- * @LastEditTime: 2024-06-12 19:00:51
+ * @LastEditTime: 2024-06-12 19:13:11
  * @Description: 地址选择组件
 -->
 
@@ -34,7 +34,6 @@ interface Props {
    */
   sdkUrl?: string
 
-  placeholder?: string | string[] | string[][]
   /**
    * 是否允许多选
    * ! 街道无法多选，故 multiple 设置为 true 时，level 至少会被设置为 district
