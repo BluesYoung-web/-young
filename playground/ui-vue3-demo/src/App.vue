@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2024-04-09 09:19:15
+ * @LastEditTime: 2024-06-12 16:10:52
  * @Description:
 -->
 
@@ -9,7 +9,7 @@
 import { ref, h, watchEffect } from 'vue';
 import 'element-plus/dist/index.css';
 import { ElButton } from 'element-plus'
-import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange, YoungTable } from '../../../packages/ui-vue3-element-plus/src';
+import { YoungSearchForm, type YoungSearchScheme, YoungTimeRange, YoungTable, YoungGaodeAreaSelect } from '../../../packages/ui-vue3-element-plus/src';
 import type { TableHeadItem, TableDataItem } from '@bluesyoung/ui-vue3-element-plus';
 
 import { YoungTab, YoungCmdPopup, YoungContextMenu, YoungSlideVerify } from '../../../packages/ui-vue3/src'
@@ -131,10 +131,22 @@ watchEffect(() => {
 })
 
 const showContextMenu = ref(false)
+
+const address = ref([
+  "420902",
+  "420981",
+  "420923",
+  "420984",
+  "420982",
+  "420921",
+  "420922"
+])
 </script>
 
 <template>
   <div style="width: 90vw; overflow: auto;">
+    <!-- <YoungGaodeAreaSelect v-model="address" multiple sk="your amap key"
+      secret="your amap secret" @change="log" /> -->
     <!-- <YoungTimeRange v-model:start="start" v-model:end="end" second />
     <YoungSearchForm v-model="query" :search-scheme="scheme" :on-search="() => log(query)">
       <template #btns>
