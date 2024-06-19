@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-20 09:03:04
- * @LastEditTime: 2024-03-22 08:31:29
+ * @LastEditTime: 2024-06-19 16:49:17
  * @Description: 生成 nuxt 模块
  */
 import { readFile, writeFile } from 'node:fs/promises';
@@ -22,6 +22,7 @@ const FNS = [
   'useExport2Excel',
   'useVerifyCode',
   'useImagePreview',
+  'useVideoPreview',
   'useKeyUp',
   'useQuery',
   'useRemoteSearch',
