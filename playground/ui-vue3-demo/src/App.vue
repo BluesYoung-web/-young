@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2024-06-12 16:10:52
+ * @LastEditTime: 2024-06-19 09:20:40
  * @Description:
 -->
 
@@ -181,9 +181,10 @@ const address = ref([
     <YoungCmdPopup>
       这是快捷面板
     </YoungCmdPopup>
+    <YoungUpload v-model="imgToUpload" :upload-fn="upload" :size="100" cropper :aspt="[16, 9]" />
     <YoungUpload v-model="imgToUpload" :upload-fn="upload" cropper :aspt="[16, 9]" />
-    <YoungUpload v-model="imgToUpload" v-model:names="uploadNames" type="file" :upload-fn="upload" cropper
-      :aspt="[16, 9]" />
+    <YoungUpload v-model="imgToUpload" v-model:names="uploadNames" :file-size="10" type="file" :upload-fn="upload"
+      cropper :aspt="[16, 9]" />
 
     <YoungTablePro ref="YoungTableProRef" :table-head="tableHead" :table-data="tableData" />
 
