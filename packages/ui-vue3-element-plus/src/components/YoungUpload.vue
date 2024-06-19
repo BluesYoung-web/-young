@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 14:09:31
- * @LastEditTime: 2024-04-09 09:15:56
+ * @LastEditTime: 2024-06-19 09:20:23
  * @Description: 
 -->
 
@@ -24,6 +24,14 @@ interface Props {
   aspt?: [number, number];
   outputType?: string;
   cropperAttrs?: Record<string, any>;
+  /**
+   * 边长
+   */
+  size?: number;
+  /**
+   * 文件大小限制 单位 M
+   */
+  fileSize?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -33,7 +41,8 @@ const props = withDefaults(defineProps<Props>(), {
   outputType: 'webp',
   cropper: false,
   aspt: () => [1, 1],
-  cropperAttrs: () => ({})
+  cropperAttrs: () => ({}),
+  size: 148
 });
 
 const emit = defineEmits<{
@@ -64,6 +73,15 @@ const del = (_: UploadUserFile, all: UploadUserFile[]) => {
 
 const upload = async (file: UploadUserFile) => {
   if (file) {
+    if (props.fileSize && (file.size || 0) > props.fileSize * 1024 * 1024) {
+      ElMessage.error(`文件大小不能超过${props.fileSize}M`);
+      const arr = files.value.filter(item => item.status === 'success').map(item => item.url!)
+      emit('update:modelValue', arr)
+      emit('change', arr)
+
+      return;
+    }
+
     if (props.type === 'image' && props.cropper) {
       showClipPopup.value = true;
       await nextTick();
@@ -95,6 +113,8 @@ const preView = (url: string) => {
 const limitStyle = computed(() =>
   props.modelValue.length < props.limit ? 'inline-flex' : 'none',
 );
+
+const cardSize = computed(() => `${props.size}px`);
 
 const cropper = ref();
 const coverFile = ref<string>();
@@ -157,5 +177,12 @@ const cancelClip = () => {
 <style lang="scss" scoped>
 :deep(.el-upload--picture-card) {
   display: v-bind('limitStyle');
+  --el-upload-picture-card-size: v-bind('cardSize');
+  --el-upload-list-picture-card-size: v-bind('cardSize');
+}
+
+:deep(.el-upload-list--picture-card .el-upload-list__item) {
+  width: v-bind('cardSize');
+  height: v-bind('cardSize');
 }
 </style>
