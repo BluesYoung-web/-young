@@ -50,9 +50,16 @@
   },
   "homepage": "https://github.com/BluesYoung-web/young#readme",
   "dependencies": {
+    "@uppy/compressor": "^1.1.4",
+    "@uppy/core": "^3.13.0",
+    "@uppy/dashboard": "^3.9.0",
+    "@uppy/image-editor": "^2.4.6",
+    "@uppy/locales": "^3.5.4",
+    "@uppy/xhr-upload": "^3.6.7",
     "defu": "^6.1.2",
     "file-saver": "^2.0.5",
     "sortablejs": "^1.15.0",
+    "video-metadata-thumbnails": "^1.0.22",
     "vue-cropper": "1.0.9",
     "xlsx": "^0.18.5"
   },

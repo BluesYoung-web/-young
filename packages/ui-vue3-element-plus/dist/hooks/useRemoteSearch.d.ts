@@ -7,7 +7,12 @@ export declare const useRemoteSearch: (cbk: (key: string) => Promise<SelectOptio
         label: string;
         value: any;
         disabled?: boolean | undefined;
-        children?: any[] | undefined;
+        children?: {
+            label: string;
+            value: any;
+            disabled?: boolean | undefined;
+            children?: any[] | undefined;
+        }[] | undefined;
     }[]>;
     init: import("vue").Ref<boolean>;
 };

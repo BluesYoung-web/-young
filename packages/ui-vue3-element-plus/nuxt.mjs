@@ -10,7 +10,7 @@ export default defineNuxtModule({
   },
   setup(options, nuxt) {
     // 工具函数自动导入 & 组件导入(供 tsx 及 h 使用)
-    ["useAutoLoad","useFormMode","useExport2Excel","useVerifyCode","useImagePreview","useVideoPreview","useKeyUp","useQuery","useRemoteSearch","initAMapSDK","YoungTable","YoungPagination","YoungDialog","YoungSelect","YoungWeekday","YoungTimeRange","YoungDateRange","YoungImageViewer","YoungSearchForm","YoungTablePro","YoungUpload","YoungGaodeMap","YoungGaodeAreaSelect"].forEach(fn => {
+    ["useAutoLoad","useFormMode","useExport2Excel","useVerifyCode","useImagePreview","useVideoPreview","useKeyUp","useQuery","useRemoteSearch","initAMapSDK","YoungTable","YoungPagination","YoungDialog","YoungSelect","YoungWeekday","YoungTimeRange","YoungDateRange","YoungImageViewer","YoungSearchForm","YoungTablePro","YoungUpload","YoungGaodeMap","YoungGaodeAreaSelect","YoungPureUpload"].forEach(fn => {
       addImports({
         name: fn,
         from: '@bluesyoung/ui-vue3-element-plus'
@@ -18,7 +18,7 @@ export default defineNuxtModule({
     });
 
     // 组件自动导入
-    ["YoungTable","YoungPagination","YoungDialog","YoungSelect","YoungWeekday","YoungTimeRange","YoungDateRange","YoungImageViewer","YoungSearchForm","YoungTablePro","YoungUpload","YoungGaodeMap","YoungGaodeAreaSelect"].forEach(name => {
+    ["YoungTable","YoungPagination","YoungDialog","YoungSelect","YoungWeekday","YoungTimeRange","YoungDateRange","YoungImageViewer","YoungSearchForm","YoungTablePro","YoungUpload","YoungGaodeMap","YoungGaodeAreaSelect","YoungPureUpload"].forEach(name => {
       addComponent({
         export: name,
         name,

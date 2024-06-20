@@ -36,7 +36,8 @@ export function useVideoPreview(src, zIndex = 9999) {
       style: {
         width: "100%",
         height: "100%",
-        objectFit: "contain"
+        objectFit: "contain",
+        background: "rgba(0,0,0)"
       },
       src,
       controls: true,

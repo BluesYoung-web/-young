@@ -39,6 +39,12 @@ Object.defineProperty(exports, "YoungPagination", {
     return _YoungPagination.default;
   }
 });
+Object.defineProperty(exports, "YoungPureUpload", {
+  enumerable: true,
+  get: function () {
+    return _YoungPureUpload.default;
+  }
+});
 Object.defineProperty(exports, "YoungSearchForm", {
   enumerable: true,
   get: function () {
@@ -94,4 +100,5 @@ var _YoungTablePro = _interopRequireDefault(require("./YoungTablePro.vue"));
 var _YoungUpload = _interopRequireDefault(require("./YoungUpload.vue"));
 var _YoungGaodeMap = _interopRequireDefault(require("./YoungGaodeMap.vue"));
 var _YoungGaodeAreaSelect = _interopRequireDefault(require("./YoungGaodeAreaSelect.vue"));
+var _YoungPureUpload = _interopRequireDefault(require("./YoungPureUpload.vue"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

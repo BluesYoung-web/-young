@@ -12,3 +12,4 @@ export { default as YoungTablePro } from './YoungTablePro.vue';
 export { default as YoungUpload } from './YoungUpload.vue';
 export { default as YoungGaodeMap } from './YoungGaodeMap.vue';
 export { default as YoungGaodeAreaSelect } from './YoungGaodeAreaSelect.vue';
+export { default as YoungPureUpload } from './YoungPureUpload.vue';

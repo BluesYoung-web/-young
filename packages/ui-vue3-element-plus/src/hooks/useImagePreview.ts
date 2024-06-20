@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-17 21:45:54
- * @LastEditTime: 2024-06-19 15:23:42
+ * @LastEditTime: 2024-06-19 17:40:29
  * @Description:
  */
 import { YoungImageViewer, type YoungImageViewerConf } from '..';
@@ -61,6 +61,7 @@ export function useVideoPreview(src: string, zIndex = 9999) {
         width: '100%',
         height: '100%',
         objectFit: 'contain',
+        background: 'rgba(0,0,0)',
       },
       src,
       controls: true,
