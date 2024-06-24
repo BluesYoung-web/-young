@@ -47,3 +47,34 @@ export function useVideoPreview(src, zIndex = 9999) {
   render(vnode, appendTo);
   document.body.appendChild(appendTo);
 }
+export function useAudioPreview(src, zIndex = 9999) {
+  const appendTo = document.createElement("div");
+  const vnode = createVNode(ElOverlay, {
+    zIndex,
+    style: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "0 10rem"
+    },
+    onClick: () => {
+      document.body.removeChild(appendTo);
+      URL.revokeObjectURL(src);
+    }
+  }, {
+    default: () => h("audio", {
+      style: {
+        width: "100%",
+        // height: '100%',
+        padding: "10rem",
+        objectFit: "contain",
+        background: "rgba(0,0,0)"
+      },
+      src,
+      controls: true,
+      autoplay: true
+    })
+  });
+  render(vnode, appendTo);
+  document.body.appendChild(appendTo);
+}

@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.useAudioPreview = useAudioPreview;
 exports.useImagePreview = useImagePreview;
 exports.useVideoPreview = useVideoPreview;
 var _ = require("..");
@@ -43,6 +44,37 @@ function useVideoPreview(src, zIndex = 9999) {
       style: {
         width: "100%",
         height: "100%",
+        objectFit: "contain",
+        background: "rgba(0,0,0)"
+      },
+      src,
+      controls: true,
+      autoplay: true
+    })
+  });
+  (0, _vue.render)(vnode, appendTo);
+  document.body.appendChild(appendTo);
+}
+function useAudioPreview(src, zIndex = 9999) {
+  const appendTo = document.createElement("div");
+  const vnode = (0, _vue.createVNode)(_elementPlus.ElOverlay, {
+    zIndex,
+    style: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "0 10rem"
+    },
+    onClick: () => {
+      document.body.removeChild(appendTo);
+      URL.revokeObjectURL(src);
+    }
+  }, {
+    default: () => (0, _vue.h)("audio", {
+      style: {
+        width: "100%",
+        // height: '100%',
+        padding: "10rem",
         objectFit: "contain",
         background: "rgba(0,0,0)"
       },
