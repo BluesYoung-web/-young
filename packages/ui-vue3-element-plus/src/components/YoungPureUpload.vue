@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-06-19 09:33:24
- * @LastEditTime: 2024-06-24 09:31:34
+ * @LastEditTime: 2024-06-24 15:14:10
  * @Description: 基于 uppy 封装的上传组件，无二次编辑的回显功能
  * @LastEditors: zhangyang
  * Copyright (c) 2024 to current by BluesYoung-web, All Rights Reserved. 
@@ -271,6 +271,14 @@ defineExpose({
 
     .uppy-Dashboard-Item-previewIconWrap {
       pointer-events: none;
+    }
+  }
+}
+
+.uppy-Dashboard-progressindicators {
+  .uppy-StatusBar {
+    .uppy-StatusBar-actions {
+      justify-content: end;
     }
   }
 }
