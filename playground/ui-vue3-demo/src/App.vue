@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-03-19 14:13:46
- * @LastEditTime: 2024-06-20 14:56:54
+ * @LastEditTime: 2024-06-24 09:28:05
  * @Description:
 -->
 
@@ -164,7 +164,7 @@ const address = ref([
         { id: 'name', name: '文件名', placeholder: '请输入文件名' },
       ]
     }" :xhr-config="{
-      endpoint: 'http://192.168.20.52:9000/v1/upload'
+      endpoint: 'http://192.168.10.168:9000/v1/upload'
     }" @finish="log" />
 
     <YoungTab :titles="['全部菜单', '门店菜单']" @contextmenu.prevent="showContextMenu = true">
