@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-06-19 09:33:24
- * @LastEditTime: 2024-06-20 12:15:14
+ * @LastEditTime: 2024-06-24 09:31:34
  * @Description: 基于 uppy 封装的上传组件，无二次编辑的回显功能
  * @LastEditors: zhangyang
  * Copyright (c) 2024 to current by BluesYoung-web, All Rights Reserved. 
@@ -152,6 +152,14 @@ uppy.on('complete', ({ successful }) => {
   })
 })
 
+uppy.on('dashboard:modal-closed', () => {
+  emits('finish', uploaded.value)
+
+  // @ts-ignore
+  uppy.clearUploadedFiles()
+  uploaded.value = [];
+})
+
 function installPlugin() {
   uppy.use(DashboardPlugin, {
     id: dashboardId,
@@ -162,12 +170,6 @@ function installPlugin() {
     // autoOpen: 'imageEditor',
     ...props.dashboardConfig,
     doneButtonHandler: () => {
-      emits('finish', uploaded.value)
-
-      // @ts-ignore
-      uppy.clearUploadedFiles()
-      uploaded.value = [];
-
       (uppy.getPlugin(dashboardId) as DashboardPlugin).closeModal()
     }
   })
