@@ -1,4 +1,4 @@
-const x = (t, e) => Object.prototype.toString.call(t) === `[object ${e.name}]`, M = (t) => x(t, Array), B = (t) => x(t, Object), J = (t) => x(t, Number), H = (t) => x(t, String), Y = (t) => x(t, Boolean), K = (t) => x(t, Map), X = (t) => x(t, WeakMap), j = (t) => x(t, Set), V = (t) => x(t, WeakSet), Q = (t) => x(t, ArrayBuffer), tt = (t) => x(t, RegExp), et = (t) => x(t, Function), nt = (t) => x(t, Symbol), rt = (t) => t === null, ot = (t) => t === void 0, st = (t) => {
+const x = (t, e) => Object.prototype.toString.call(t) === `[object ${e.name}]`, M = (t) => x(t, Array), B = (t) => x(t, Object), J = (t) => x(t, Number), H = (t) => x(t, String), Y = (t) => x(t, Boolean), X = (t) => x(t, Map), K = (t) => x(t, WeakMap), j = (t) => x(t, Set), V = (t) => x(t, WeakSet), Q = (t) => x(t, ArrayBuffer), tt = (t) => x(t, RegExp), et = (t) => x(t, Function), nt = (t) => x(t, Symbol), rt = (t) => t === null, ot = (t) => t === void 0, st = (t) => {
   if ([null, void 0, NaN, !1].includes(t) || typeof t != "object")
     return t;
   const e = M(t) ? [] : {}, n = [
@@ -369,26 +369,26 @@ const Ht = (t) => /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-
       return !1;
     }
   return !1;
-}, Zt = (t) => /^-?\d{1,3}(,\d{3})*(\.\d+)?$/.test(t), Pt = () => /MicroMessenger/gim.test(navigator.userAgent), qt = () => !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), zt = () => {
+}, Zt = (t) => /^-?\d{1,3}(,\d{3})*(\.\d+)?$/.test(t), Pt = () => /MicroMessenger/gim.test(navigator.userAgent), qt = () => !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/i), zt = () => /Mac OS X/i.test(navigator.userAgent), Gt = () => {
   const t = navigator.userAgent;
   return t.indexOf("Android") > -1 || t.indexOf("Adr") > -1;
 }, z = () => {
   const t = document.documentElement.scrollTop || document.body.scrollTop;
   t > 0 && (window.requestAnimationFrame(z), window.scrollTo(0, t - t / 8));
-}, Gt = () => {
+}, Jt = () => {
   window.scrollTo(0, document.documentElement.clientHeight);
-}, Jt = (t) => {
+}, Yt = (t) => {
   var e;
   (e = document.querySelector(t)) == null || e.scrollIntoView({
     behavior: "smooth"
   });
-}, Yt = () => {
+}, Xt = () => {
   let t = 0, e = 0;
   return t = (document.compatMode == "BackCompat" ? document.body : document.documentElement).clientWidth, document.body.clientHeight && document.documentElement.clientHeight ? e = document.body.clientHeight < document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight : e = document.body.clientHeight > document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight, [t, e];
 }, Kt = async () => {
   let t = document.body;
   t.requestFullscreen ? await t.requestFullscreen() : t.mozRequestFullScreen ? await t.mozRequestFullScreen() : t.msRequestFullscreen ? await t.msRequestFullscreen() : t.webkitRequestFullscreen && await t.webkitRequestFullScreen();
-}, Xt = async () => {
+}, jt = async () => {
   document.exitFullscreen ? document.exitFullscreen() : document.msExitFullscreen ? document.msExitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
 };
 function S(t) {
@@ -397,29 +397,29 @@ function S(t) {
 function b(t) {
   t.preventDefault();
 }
-const jt = (t = window) => {
+const Vt = (t = window) => {
   t.addEventListener("wheel", b, { passive: !1 }), t.addEventListener("keyup", S), t.addEventListener("keydown", S), t.addEventListener("keypress", S);
-}, Vt = (t = window) => {
+}, Qt = (t = window) => {
   t.removeEventListener("wheel", b), t.removeEventListener("keyup", S), t.removeEventListener("keydown", S), t.removeEventListener("keypress", S);
-}, Qt = () => "#" + (Math.random() * 1048575 * 1e6).toString(16).slice(0, 6), te = (t, e, n) => ((t << 16) + (e << 8) + n).toString(16).padStart(6, "0"), ee = (t) => {
+}, te = () => "#" + (Math.random() * 1048575 * 1e6).toString(16).slice(0, 6), ee = (t, e, n) => ((t << 16) + (e << 8) + n).toString(16).padStart(6, "0"), ne = (t) => {
   let e = !1, n = t.slice(t.startsWith("#") ? 1 : 0);
   return n.length === 3 ? n = [...n].map((r) => r + r).join("") : n.length === 8 && (e = !0), n = parseInt(n, 16), `rgb${e ? "a" : ""}(${n >>> (e ? 24 : 16)}, ${(n & (e ? 16711680 : 65280)) >>> (e ? 16 : 8)}, ${(n & (e ? 65280 : 255)) >>> (e ? 8 : 0)}${e ? `, ${n & 255}` : ""})`;
-}, ne = (t) => "#" + t.slice(t.length === 4 ? 1 : 0).split("").map((e) => e + e).join(""), re = (t) => {
+}, re = (t) => "#" + t.slice(t.length === 4 ? 1 : 0).split("").map((e) => e + e).join(""), oe = (t) => {
   var o;
   const [e, n, r] = ((o = t.match(/\d+/g)) == null ? void 0 : o.map((u) => +u)) ?? [0, 0, 0];
   return { red: e, green: n, blue: r };
-}, oe = (t) => {
+}, se = (t) => {
   var e;
   return ((e = t.match(/\d+/g)) == null ? void 0 : e.map((n) => +n)) ?? [0, 0, 0];
-}, se = (t, e, n) => {
+}, ce = (t, e, n) => {
   t /= 255, e /= 255, n /= 255;
   const r = Math.max(t, e, n), o = r - Math.min(t, e, n), u = o === 0 ? 0 : o && r === t ? (e - n) / o : r === e ? 2 + (n - t) / o : 4 + (t - e) / o;
   return [60 * (u < 0 ? u + 6 : u), r && o / r * 100, r * 100];
-}, ce = (t, e, n) => {
+}, ae = (t, e, n) => {
   e /= 100, n /= 100;
   const r = (u) => (u + t / 60) % 6, o = (u) => n * (1 - e * Math.max(0, Math.min(r(u), 4 - r(u), 1)));
   return [255 * o(5), 255 * o(3), 255 * o(1)];
-}, ae = (t, e, n) => {
+}, ie = (t, e, n) => {
   t /= 255, e /= 255, n /= 255;
   const r = Math.max(t, e, n), o = r - Math.min(t, e, n), u = o ? r === t ? (e - n) / o : r === e ? 2 + (n - t) / o : 4 + (t - e) / o : 0;
   return [
@@ -427,14 +427,14 @@ const jt = (t = window) => {
     100 * (o ? r <= 0.5 ? o / (2 * r - o) : o / (2 - (2 * r - o)) : 0),
     100 * (2 * r - o) / 2
   ];
-}, ie = (t, e, n) => {
+}, le = (t, e, n) => {
   e /= 100, n /= 100;
   const r = (f) => (f + t / 30) % 12, o = e * Math.min(n, 1 - n), u = (f) => n - o * Math.max(-1, Math.min(r(f) - 3, Math.min(9 - r(f), 1)));
   return [255 * u(0), 255 * u(8), 255 * u(4)];
 };
 class G {
 }
-class le extends G {
+class ue extends G {
   /**
    * 存储
    * @param key 键名
@@ -469,30 +469,30 @@ class le extends G {
   }
 }
 export {
-  ce as HSBToRGB,
-  ie as HSLToRGB,
-  se as RGBToHSB,
-  ae as RGBToHSL,
-  te as RGBToHex,
-  le as YoungLocalStorage,
+  ae as HSBToRGB,
+  le as HSLToRGB,
+  ce as RGBToHSB,
+  ie as RGBToHSL,
+  ee as RGBToHex,
+  ue as YoungLocalStorage,
   G as YoungStorage,
   st as deepClone,
-  jt as disableScroll,
-  Vt as enableScroll,
+  Vt as disableScroll,
+  Qt as enableScroll,
   vt as encodedStrParse,
-  Xt as exitFullscreen,
-  ne as extendHex,
+  jt as exitFullscreen,
+  re as extendHex,
   I as fen2yuan,
   at as fen2yuanWithCurrency,
   L as formatCurrency,
   dt as formatDate,
   Mt as formatUrl,
-  Yt as getClientHeight,
+  Xt as getClientHeight,
   xt as getDateRange,
   Bt as getFingerprint,
-  ee as hexToRGB,
+  ne as hexToRGB,
   ut as idMasaike,
-  zt as isAndroid,
+  Gt as isAndroid,
   M as isArray,
   Q as isArrayBuffer,
   Y as isBoolean,
@@ -511,7 +511,8 @@ export {
   Wt as isLandline,
   Ut as isLetter,
   It as isLicensePlate,
-  K as isMap,
+  zt as isMacOS,
+  X as isMap,
   Et as isMobile,
   rt as isNull,
   J as isNumber,
@@ -522,7 +523,7 @@ export {
   nt as isSymbol,
   ot as isUndefined,
   Pt as isWeChat,
-  X as isWeakMap,
+  K as isWeakMap,
   V as isWeakSet,
   Ct as isWebSocketUrl,
   qt as isiOS,
@@ -531,25 +532,25 @@ export {
   lt as nameMasaike,
   pt as nextDay,
   E as polyfillNumber,
-  Qt as randomHexColorCode,
+  te as randomHexColorCode,
   Tt as randomId,
   At as randomUUID,
   k as recentDay,
   ft as recentMonth,
   Ft as safeJsonParse,
-  Gt as scrollToBottom,
+  Jt as scrollToBottom,
   z as scrollToTop,
   St as secondsToTime,
   mt as shortcuts,
   Dt as sleep,
-  Jt as smoothScroll,
+  Yt as smoothScroll,
   it as telMasaike,
   ht as thisMonth,
   W as thisMonthDay,
   wt as timeToSeconds,
   Kt as toFullScreen,
-  oe as toRGBArray,
-  re as toRGBObject,
+  se as toRGBArray,
+  oe as toRGBObject,
   gt as ymdParse,
   ct as yuan2fen
 };

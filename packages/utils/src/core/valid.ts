@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2020-11-12 10:59:58
- * @LastEditTime: 2022-11-23 14:48:11
+ * @LastEditTime: 2024-06-25 20:05:25
  * @Description: 常用的正则验证函数
  */
 import { isString, isObject } from './isType';
@@ -122,7 +122,11 @@ export const isWeChat = () => /MicroMessenger/gim.test(navigator.userAgent);
 /**
  * 判断是否为 iOS 浏览器
  */
-export const isiOS = () => !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+export const isiOS = () => !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/i);
+/**
+ * 判断是否为 macOS 浏览器
+ */
+export const isMacOS = () => /Mac OS X/i.test(navigator.userAgent);
 /**
  * 判断是否为安卓浏览器
  */

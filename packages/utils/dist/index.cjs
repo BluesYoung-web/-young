@@ -71,6 +71,7 @@ __export(src_exports, {
   isLandline: () => isLandline,
   isLetter: () => isLetter,
   isLicensePlate: () => isLicensePlate,
+  isMacOS: () => isMacOS,
   isMap: () => isMap,
   isMobile: () => isMobile,
   isNull: () => isNull,
@@ -536,7 +537,8 @@ var isJsonStr = (str) => {
 };
 var isCurrencyStr = (str) => /^-?\d{1,3}(,\d{3})*(\.\d+)?$/.test(str);
 var isWeChat = () => /MicroMessenger/gim.test(navigator.userAgent);
-var isiOS = () => !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+var isiOS = () => !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/i);
+var isMacOS = () => /Mac OS X/i.test(navigator.userAgent);
 var isAndroid = () => {
   const u = navigator.userAgent;
   return u.indexOf("Android") > -1 || u.indexOf("Adr") > -1;
@@ -761,6 +763,7 @@ var YoungLocalStorage = class extends YoungStorage {
   isLandline,
   isLetter,
   isLicensePlate,
+  isMacOS,
   isMap,
   isMobile,
   isNull,
