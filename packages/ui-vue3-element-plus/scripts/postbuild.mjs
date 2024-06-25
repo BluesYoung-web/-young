@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-20 09:03:04
- * @LastEditTime: 2024-06-24 15:31:45
+ * @LastEditTime: 2024-06-25 20:21:28
  * @Description: 生成 nuxt 模块
  */
 import { readFile, writeFile } from 'node:fs/promises';
@@ -27,7 +27,8 @@ const FNS = [
   'useKeyUp',
   'useQuery',
   'useRemoteSearch',
-  'initAMapSDK'
+  'initAMapSDK',
+  'getVideoCover'
 ];
 
 /**

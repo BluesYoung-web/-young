@@ -1,9 +1,9 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-06-19 09:33:24
- * @LastEditTime: 2024-06-24 15:27:59
+ * @LastEditTime: 2024-06-25 19:51:46
  * @Description: 基于 uppy 封装的上传组件，无二次编辑的回显功能
- * @LastEditors: zhangyang
+ * @LastEditors: Please set LastEditors
  * Copyright (c) 2024 to current by BluesYoung-web, All Rights Reserved. 
 -->
 
@@ -15,13 +15,12 @@ import ImageEditorPlugin, { type ImageEditorOptions } from '@uppy/image-editor';
 import CompressorPlugin, { type CompressorOptions } from '@uppy/compressor';
 import zhCn from '@uppy/locales/lib/zh_CN';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import { getThumbnails } from 'video-metadata-thumbnails';
 
 import '@uppy/core/dist/style.min.css';
 import '@uppy/dashboard/dist/style.min.css';
 import '@uppy/image-editor/dist/style.min.css';
 import { useEventListener } from '@vueuse/core';
-import { useImagePreview, useVideoPreview, useAudioPreview } from '..';
+import { useImagePreview, useVideoPreview, useAudioPreview, getVideoCover } from '..';
 
 const dashboardId = 'vue:dashboard'
 const xhrId = 'vue:xhr'
@@ -132,7 +131,7 @@ const uppy = new Uppy({
 // video 抽帧，生成封面图
 uppy.on('file-added', (file) => {
   if (/video\//i.test(file.type!)) {
-    getThumbnails(file.data, {
+    getVideoCover(file.data, {
       start: 0,
       end: 0,
     }).then((image) => {
