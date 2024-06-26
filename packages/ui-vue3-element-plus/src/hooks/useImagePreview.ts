@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-17 21:45:54
- * @LastEditTime: 2024-06-26 14:35:27
+ * @LastEditTime: 2024-06-26 16:01:40
  * @Description:
  */
 import { YoungImageViewer, type YoungImageViewerConf } from '..';
@@ -100,7 +100,6 @@ export function useAudioPreview(src: string, zIndex = 9999) {
         width: '100%',
         // height: '100%',
         padding: '10rem',
-        objectFit: 'contain',
         background: 'rgba(0,0,0)',
       },
       src,

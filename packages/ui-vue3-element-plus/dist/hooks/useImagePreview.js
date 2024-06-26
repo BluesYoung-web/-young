@@ -77,7 +77,6 @@ function useAudioPreview(src, zIndex = 9999) {
         width: "100%",
         // height: '100%',
         padding: "10rem",
-        objectFit: "contain",
         background: "rgba(0,0,0)"
       },
       src,
