@@ -38,7 +38,8 @@ export function useVideoPreview(src, zIndex = 9999) {
         width: "100%",
         height: "100%",
         objectFit: "contain",
-        background: "rgba(0,0,0)"
+        background: "rgba(0,0,0)",
+        boxSizing: "content-box"
       },
       src,
       controls: true,
@@ -68,7 +69,8 @@ export function useAudioPreview(src, zIndex = 9999) {
         width: "100%",
         // height: '100%',
         padding: "10rem",
-        background: "rgba(0,0,0)"
+        background: "rgba(0,0,0)",
+        boxSizing: "content-box"
       },
       src,
       controls: true,

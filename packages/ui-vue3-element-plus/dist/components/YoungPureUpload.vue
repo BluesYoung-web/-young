@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-06-19 09:33:24
- * @LastEditTime: 2024-06-26 14:36:04
+ * @LastEditTime: 2024-06-26 16:54:09
  * @Description: 基于 uppy 封装的上传组件，无二次编辑的回显功能
  * @LastEditors: zhangyang
  * Copyright (c) 2024 to current by BluesYoung-web, All Rights Reserved. 
@@ -83,6 +83,11 @@ interface Props {
    * @url https://uppy.io/docs/compressor/#options
    */
   compressorConfig?: CompressorOptions;
+
+  /**
+   * 上传之前的处理
+   */
+  beforeUpload?: (uppy: any, args: any) => void | Promise<void>;
 }
 
 type Uploaded = {
@@ -95,7 +100,10 @@ const uploaded = ref<Uploaded>([])
 
 const props = withDefaults(defineProps<Props>(), {
   autoProceed: false,
-  compressImage: true
+  compressImage: true,
+  beforeUpload: async (uppy, args) => {
+    console.log("🚀 ~ props ~ before uppy upload:", uppy, args)
+  }
 })
 
 const emits = defineEmits<{
@@ -125,6 +133,14 @@ const uppy = new Uppy({
 
   ...props.extraConfig
 })
+
+// hack upload
+uppy._upload = uppy.upload
+
+uppy.upload = async (...args) => {
+  await props.beforeUpload(uppy, args)
+  uppy._upload(...args)
+}
 
 // video 抽帧，生成封面图
 uppy.on('file-added', (file) => {
