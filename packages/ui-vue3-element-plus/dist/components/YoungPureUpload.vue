@@ -1,24 +1,25 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-06-19 09:33:24
- * @LastEditTime: 2024-06-25 19:51:46
+ * @LastEditTime: 2024-06-26 09:51:50
  * @Description: 基于 uppy 封装的上传组件，无二次编辑的回显功能
- * @LastEditors: Please set LastEditors
+ * @LastEditors: zhangyang
  * Copyright (c) 2024 to current by BluesYoung-web, All Rights Reserved. 
 -->
 
 <script lang="ts" setup>
-import Uppy, { type UppyOptions } from '@uppy/core';
-import DashboardPlugin, { type DashboardOptions } from '@uppy/dashboard';
-import XHRPlugin, { type XHRUploadOptions } from '@uppy/xhr-upload';
-import ImageEditorPlugin, { type ImageEditorOptions } from '@uppy/image-editor';
-import CompressorPlugin, { type CompressorOptions } from '@uppy/compressor';
-import zhCn from '@uppy/locales/lib/zh_CN';
+import { Uppy, Dashboard as DashboardPlugin, XHRUpload as XHRPlugin, ImageEditor as ImageEditorPlugin, Compressor as CompressorPlugin, } from '../assets/js/uppy.min.mjs'
+import zhCn from '../assets/js/uppy-zh_CN.mjs';
+
+import { type UppyOptions } from '@uppy/core';
+import { type DashboardOptions } from '@uppy/dashboard';
+import { type XHRUploadOptions } from '@uppy/xhr-upload';
+import { type ImageEditorOptions } from '@uppy/image-editor';
+import { type CompressorOptions } from '@uppy/compressor';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
-import '@uppy/core/dist/style.min.css';
-import '@uppy/dashboard/dist/style.min.css';
-import '@uppy/image-editor/dist/style.min.css';
+import '../assets/css/uppy.min.css';
+
 import { useEventListener } from '@vueuse/core';
 import { useImagePreview, useVideoPreview, useAudioPreview, getVideoCover } from '..';
 

@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-09-19 15:24:26
- * @LastEditTime: 2023-09-28 12:24:07
+ * @LastEditTime: 2024-06-26 09:12:55
  * @Description: 
  */
 import { defineBuildConfig } from "unbuild";
@@ -27,6 +27,12 @@ export default defineBuildConfig({
     'element-plus',
     '@bluesyoung/utils',
     '@vue/shared',
+    '@uppy/compressor',
+    '@uppy/core',
+    '@uppy/dashboard',
+    '@uppy/image-editor',
+    '@uppy/xhr-upload',
+    '@uppy/locales',
   ],
   declaration: true
 })
