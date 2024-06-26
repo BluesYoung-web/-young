@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-06-19 09:33:24
- * @LastEditTime: 2024-06-26 09:51:50
+ * @LastEditTime: 2024-06-26 10:25:03
  * @Description: 基于 uppy 封装的上传组件，无二次编辑的回显功能
  * @LastEditors: zhangyang
  * Copyright (c) 2024 to current by BluesYoung-web, All Rights Reserved. 
@@ -11,17 +11,13 @@
 import { Uppy, Dashboard as DashboardPlugin, XHRUpload as XHRPlugin, ImageEditor as ImageEditorPlugin, Compressor as CompressorPlugin, } from '../assets/js/uppy.min.mjs'
 import zhCn from '../assets/js/uppy-zh_CN.mjs';
 
-import { type UppyOptions } from '@uppy/core';
-import { type DashboardOptions } from '@uppy/dashboard';
-import { type XHRUploadOptions } from '@uppy/xhr-upload';
-import { type ImageEditorOptions } from '@uppy/image-editor';
-import { type CompressorOptions } from '@uppy/compressor';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 import '../assets/css/uppy.min.css';
 
 import { useEventListener } from '@vueuse/core';
 import { useImagePreview, useVideoPreview, useAudioPreview, getVideoCover } from '..';
+import type { UppyOptions, DashboardOptions, XHRUploadOptions, ImageEditorOptions, CompressorOptions } from '..';
 
 const dashboardId = 'vue:dashboard'
 const xhrId = 'vue:xhr'

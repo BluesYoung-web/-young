@@ -119,3 +119,207 @@ export type YoungSearchScheme<T extends any = any> = {
 export type TableHeadItemPro = TableHeadItem & {
   check?: boolean;
 };
+
+export interface Restrictions {
+  maxFileSize?: number | null
+  minFileSize?: number | null
+  maxTotalFileSize?: number | null
+  maxNumberOfFiles?: number | null
+  minNumberOfFiles?: number | null
+  allowedFileTypes?: string[] | null
+  requiredMetaFields?: string[]
+}
+
+export type InternalMetadata = { name: string; type?: string }
+export interface FileProgress {
+  uploadStarted: number | null
+  uploadComplete: boolean
+  percentage: number
+  bytesUploaded: number
+  bytesTotal: number
+}
+
+export type UppyFile<TMeta extends any = any> = {
+  data: Blob | File
+  extension: string
+  id: string
+  isPaused?: boolean
+  isRemote: boolean
+  meta: InternalMetadata & TMeta
+  name: string
+  preview?: string
+  progress?: FileProgress
+  remote?: {
+    host: string
+    url: string
+    body?: Record<string, unknown>
+  }
+  size: number
+  source?: string
+  type?: string
+  response?: {
+    body: any
+    status: number
+    uploadURL: string | undefined
+  }
+}
+
+export interface UppyOptions<
+  TMeta extends any = Record<string, unknown>,
+> {
+  id?: string
+  autoProceed?: boolean
+  allowMultipleUploadBatches?: boolean
+  logger?: any
+  debug?: boolean
+  restrictions?: Restrictions
+  meta?: TMeta
+  onBeforeFileAdded?: (
+    currentFile: UppyFile<TMeta>,
+    files: { [key: string]: UppyFile<TMeta> },
+  ) => UppyFile<TMeta> | boolean | undefined
+  onBeforeUpload?: (files: {
+    [key: string]: UppyFile<TMeta>
+  }) => { [key: string]: UppyFile<TMeta> } | boolean
+  locale?: any
+  store?: any
+  infoTimeout?: number
+}
+
+export interface PluginOptions {
+  id?: string
+}
+
+export interface UIPluginOptions extends PluginOptions {
+  replaceTargetContent?: boolean
+}
+
+export interface DefaultPluginOptions extends PluginOptions {
+  [prop: string]: any
+}
+
+export interface ThumbnailOptions extends UIPluginOptions {
+  thumbnailWidth?: number
+  thumbnailHeight?: number
+  thumbnailType?: string
+  waitForThumbnailsBeforeUpload?: boolean
+  lazy?: boolean
+}
+
+type Options = UIPluginOptions & ThumbnailOptions
+
+export interface DashboardOptions extends Options {
+  animateOpenClose?: boolean
+  browserBackButtonClose?: boolean
+  closeAfterFinish?: boolean
+  singleFileFullScreen?: boolean
+  closeModalOnClickOutside?: boolean
+  disableInformer?: boolean
+  disablePageScrollWhenModalOpen?: boolean
+  disableStatusBar?: boolean
+  disableThumbnailGenerator?: boolean
+  height?: string | number
+  hideCancelButton?: boolean
+  hidePauseResumeButton?: boolean
+  hideProgressAfterFinish?: boolean
+  hideRetryButton?: boolean
+  hideUploadButton?: boolean
+  inline?: boolean
+  locale?: any
+  metaFields?: MetaField[] | ((file: UppyFile) => MetaField[])
+  note?: string | null
+  plugins?: string[]
+  fileManagerSelectionType?: 'files' | 'folders' | 'both'
+  proudlyDisplayPoweredByUppy?: boolean
+  showLinkToFileUploadResult?: boolean
+  showProgressDetails?: boolean
+  showSelectedFiles?: boolean
+  showRemoveButtonAfterComplete?: boolean
+  showNativePhotoCameraButton?: boolean
+  showNativeVideoCameraButton?: boolean
+  target?: any
+  theme?: 'auto' | 'dark' | 'light'
+  trigger?: string
+  width?: string | number
+  autoOpen?: 'metaEditor' | 'imageEditor' | null
+  /** @deprecated use option autoOpen instead */
+  autoOpenFileEditor?: boolean
+  disabled?: boolean
+  disableLocalFiles?: boolean
+  onRequestCloseModal?: () => void
+  doneButtonHandler?: () => void
+  onDragOver?: (event: DragEvent) => void
+  onDragLeave?: (event: DragEvent) => void
+  onDrop?: (event: DragEvent) => void
+}
+
+type FieldRenderOptions = {
+  value: string
+  onChange: (newVal: string) => void
+  fieldCSSClasses: { text: string }
+  required: boolean
+  form: string
+}
+
+type PreactRender = (
+  node: any,
+  params: Record<string, unknown> | null,
+  ...children: any[]
+) => any
+
+interface MetaField {
+  id: string
+  name: string
+  placeholder?: string
+  render?: (field: FieldRenderOptions, h: PreactRender) => any
+}
+
+export interface XHRUploadOptions extends PluginOptions {
+  limit?: number
+  bundle?: boolean
+  formData?: boolean
+  headers?: Headers | ((file: UppyFile) => Headers)
+  allowedMetaFields?: string[] | null
+  fieldName?: string
+  timeout?: number
+  responseUrlFieldName?: string
+  endpoint: string
+  method?: 'GET' | 'POST' | 'PUT' | 'HEAD' | 'get' | 'post' | 'put' | 'head'
+  locale?: any
+  responseType?: string
+  withCredentials?: boolean
+  validateStatus?: (
+    statusCode: number,
+    responseText: string,
+    response: unknown,
+  ) => boolean
+  getResponseData?: (responseText: string, response: unknown) => any
+  getResponseError?: (responseText: string, xhr: unknown) => Error
+}
+
+type Actions = {
+  revert: boolean
+  rotate: boolean
+  granularRotate: boolean
+  flip: boolean
+  zoomIn: boolean
+  zoomOut: boolean
+  cropSquare: boolean
+  cropWidescreen: boolean
+  cropWidescreenVertical: boolean
+}
+
+
+export interface ImageEditorOptions extends UIPluginOptions {
+  cropperOptions?: any
+  actions?: Actions
+  quality?: number
+  target?: any
+  locale?: any
+}
+
+export interface CompressorOptions extends PluginOptions {
+  quality?: number
+  limit?: number
+  locale?: any
+}
