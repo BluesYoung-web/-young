@@ -1,15 +1,13 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-17 21:45:54
- * @LastEditTime: 2024-06-26 10:30:40
+ * @LastEditTime: 2024-06-26 14:35:27
  * @Description:
  */
 import { YoungImageViewer, type YoungImageViewerConf } from '..';
 import { createVNode, render, h } from 'vue';
 import { ElOverlay } from 'element-plus';
-import { getThumbnails } from 'video-metadata-thumbnails';
-import { isString, isiOS } from '@bluesyoung/utils';
-import { isMacOS } from '@bluesyoung/utils';
+import { isString } from '@bluesyoung/utils';
 
 /**
  * 基于 ElImageViewer 的命令式图片预览
@@ -118,47 +116,36 @@ export function useAudioPreview(src: string, zIndex = 9999) {
 /**
  * 获取视频封面
  * @param v 视频地址 or File
- * @param args 透传
- * @returns Promise<{
-    blob: Blob | null;
-    currentTime: number;
-}[]>
+ * @param seek 取第几秒的
+ * @param w 图片宽度
+ * @param h 图片高度
+ * @returns Promise<string>
  */
-export async function getVideoCover(v: string | Blob, args: Parameters<typeof getThumbnails>['1'] = {
-  start: 0,
-  end: 0,
-}) {
-  return new Promise<{
-    blob: Blob | null;
-    currentTime: number;
-  }[]>((resolve) => {
-    if (!(isiOS() || isMacOS()) && !isString(v)) {
-      getThumbnails(v, args).then(resolve)
-    } else {
-      const video = document.createElement('video')
-      video.src = isString(v) ? v as string : URL.createObjectURL(v as Blob)
+export async function getVideoCover(v: string | Blob, seek = 1, w = 320, h = 240) {
+  return new Promise<string>((resolve) => {
+    const video = document.createElement('video')
+    video.src = isString(v) ? v as string : URL.createObjectURL(v as Blob)
 
-      video.src = 'https://file.kiloseeds.com/dev_qianzi/2024/1adae90402d7415aa1a9e46dba78f865/1c7584752b01451ca2bdff123c81883c/6ae3e7e0c21e4215a9cff549b1744cc0.mp4'
+    video.crossOrigin = 'anonymous'
+    video.currentTime = seek
 
-      video.crossOrigin = 'anonymous'
-      video.currentTime = 1
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
 
-      const canvas = document.createElement('canvas')
-      const ctx = canvas.getContext('2d')
+    video.oncanplay = () => {
+      canvas.width = w
+      canvas.height = h
 
-      video.oncanplay = () => {
-        canvas.width = video.clientWidth || 320
-        canvas.height = video.clientHeight || 240
+      ctx?.drawImage(video, 0, 0, canvas.width, canvas.height)
 
-        ctx?.drawImage(video, 0, 0, canvas.width, canvas.height)
-
-        canvas.toBlob((b) => {
-          resolve([{ blob: b, currentTime: 1 }])
-
-          URL.revokeObjectURL(video.src)
-          video.remove()
-          canvas.remove()
-        })
+      try {
+        resolve(canvas.toDataURL('image/png', 0.75))
+      } catch (error) {
+        console.log("🚀 ~ getVideoCover ~ error:", error)
+      } finally {
+        URL.revokeObjectURL(video.src)
+        video.remove()
+        canvas.remove()
       }
     }
   })

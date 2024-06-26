@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-06-19 09:33:24
- * @LastEditTime: 2024-06-26 11:31:20
+ * @LastEditTime: 2024-06-26 14:36:04
  * @Description: 基于 uppy 封装的上传组件，无二次编辑的回显功能
  * @LastEditors: zhangyang
  * Copyright (c) 2024 to current by BluesYoung-web, All Rights Reserved. 
@@ -129,12 +129,8 @@ const uppy = new Uppy({
 // video 抽帧，生成封面图
 uppy.on('file-added', (file) => {
   if (/video\//i.test(file.type!)) {
-    getVideoCover(file.data, {
-      start: 0,
-      end: 0,
-    }).then((image) => {
-      const [shot] = image
-      shot.blob && uppy.setFileState(file.id, { preview: URL.createObjectURL(shot.blob) })
+    getVideoCover(file.data).then((image) => {
+      uppy.setFileState(file.id, { preview: image })
     }).catch(console.warn)
   }
 })
