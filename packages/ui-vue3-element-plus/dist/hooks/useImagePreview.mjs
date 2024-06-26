@@ -81,7 +81,10 @@ export function useAudioPreview(src, zIndex = 9999) {
   render(vnode, appendTo);
   document.body.appendChild(appendTo);
 }
-export async function getVideoCover(v, args) {
+export async function getVideoCover(v, args = {
+  start: 0,
+  end: 0
+}) {
   return new Promise((resolve) => {
     if (!(isiOS() || isMacOS()) && !isString(v)) {
       getThumbnails(v, args).then(resolve);

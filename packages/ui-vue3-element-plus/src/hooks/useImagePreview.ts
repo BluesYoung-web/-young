@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-17 21:45:54
- * @LastEditTime: 2024-06-25 20:19:01
+ * @LastEditTime: 2024-06-26 10:30:40
  * @Description:
  */
 import { YoungImageViewer, type YoungImageViewerConf } from '..';
@@ -124,39 +124,42 @@ export function useAudioPreview(src: string, zIndex = 9999) {
     currentTime: number;
 }[]>
  */
-export async function getVideoCover(v: string | Blob, args: Parameters<typeof getThumbnails>['1']) {
+export async function getVideoCover(v: string | Blob, args: Parameters<typeof getThumbnails>['1'] = {
+  start: 0,
+  end: 0,
+}) {
   return new Promise<{
     blob: Blob | null;
     currentTime: number;
   }[]>((resolve) => {
-      if (!(isiOS() || isMacOS()) && !isString(v)) {
-        getThumbnails(v, args).then(resolve)
-      } else {
-        const video = document.createElement('video')
-        video.src = isString(v) ? v as string : URL.createObjectURL(v as Blob)
-        
-        video.src = 'https://file.kiloseeds.com/dev_qianzi/2024/1adae90402d7415aa1a9e46dba78f865/1c7584752b01451ca2bdff123c81883c/6ae3e7e0c21e4215a9cff549b1744cc0.mp4'
-        
-        video.crossOrigin = 'anonymous'
-        video.currentTime = 1
+    if (!(isiOS() || isMacOS()) && !isString(v)) {
+      getThumbnails(v, args).then(resolve)
+    } else {
+      const video = document.createElement('video')
+      video.src = isString(v) ? v as string : URL.createObjectURL(v as Blob)
 
-        const canvas = document.createElement('canvas')
-        const ctx = canvas.getContext('2d')
+      video.src = 'https://file.kiloseeds.com/dev_qianzi/2024/1adae90402d7415aa1a9e46dba78f865/1c7584752b01451ca2bdff123c81883c/6ae3e7e0c21e4215a9cff549b1744cc0.mp4'
 
-        video.oncanplay = () => {
-          canvas.width = video.clientWidth || 320
-          canvas.height = video.clientHeight || 240
+      video.crossOrigin = 'anonymous'
+      video.currentTime = 1
 
-          ctx?.drawImage(video, 0, 0, canvas.width, canvas.height)
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
 
-          canvas.toBlob((b) => {
-            resolve([{ blob: b, currentTime: 1 }])
+      video.oncanplay = () => {
+        canvas.width = video.clientWidth || 320
+        canvas.height = video.clientHeight || 240
 
-            URL.revokeObjectURL(video.src)
-            video.remove()
-            canvas.remove()
-          })
-        }
+        ctx?.drawImage(video, 0, 0, canvas.width, canvas.height)
+
+        canvas.toBlob((b) => {
+          resolve([{ blob: b, currentTime: 1 }])
+
+          URL.revokeObjectURL(video.src)
+          video.remove()
+          canvas.remove()
+        })
       }
+    }
   })
 }

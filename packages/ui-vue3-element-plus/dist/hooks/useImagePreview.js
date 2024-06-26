@@ -89,7 +89,10 @@ function useAudioPreview(src, zIndex = 9999) {
   (0, _vue.render)(vnode, appendTo);
   document.body.appendChild(appendTo);
 }
-async function getVideoCover(v, args) {
+async function getVideoCover(v, args = {
+  start: 0,
+  end: 0
+}) {
   return new Promise(resolve => {
     if (!((0, _utils.isiOS)() || (0, _utils.isMacOS)()) && !(0, _utils.isString)(v)) {
       (0, _videoMetadataThumbnails.getThumbnails)(v, args).then(resolve);

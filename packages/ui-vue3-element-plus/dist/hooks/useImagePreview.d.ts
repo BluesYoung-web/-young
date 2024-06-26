@@ -23,7 +23,7 @@ export declare function useAudioPreview(src: string, zIndex?: number): void;
     currentTime: number;
 }[]>
  */
-export declare function getVideoCover(v: string | Blob, args: Parameters<typeof getThumbnails>['1']): Promise<{
+export declare function getVideoCover(v: string | Blob, args?: Parameters<typeof getThumbnails>['1']): Promise<{
     blob: Blob | null;
     currentTime: number;
 }[]>;
