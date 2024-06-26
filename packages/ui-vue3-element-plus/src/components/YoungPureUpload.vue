@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-06-19 09:33:24
- * @LastEditTime: 2024-06-26 10:32:12
+ * @LastEditTime: 2024-06-26 11:31:20
  * @Description: 基于 uppy 封装的上传组件，无二次编辑的回显功能
  * @LastEditors: zhangyang
  * Copyright (c) 2024 to current by BluesYoung-web, All Rights Reserved. 
@@ -88,6 +88,7 @@ interface Props {
 type Uploaded = {
   name: string
   uploadURL: string
+  meta: Record<string, any>
 }[]
 
 const uploaded = ref<Uploaded>([])
@@ -143,7 +144,8 @@ uppy.on('complete', ({ successful }) => {
   successful.forEach((item) => {
     uploaded.value.push({
       name: item.name,
-      uploadURL: item.uploadURL
+      uploadURL: item.uploadURL,
+      meta: item.meta ?? {}
     })
   })
 })
