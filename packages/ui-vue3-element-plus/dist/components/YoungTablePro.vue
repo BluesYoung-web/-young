@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 15:21:30
- * @LastEditTime: 2024-04-23 10:10:37
+ * @LastEditTime: 2024-07-09 12:17:11
  * @Description: 
 -->
 
@@ -154,7 +154,8 @@ const randomKey = randomId();
 
 defineExpose({
   saveTableHead,
-  resetTableHead
+  resetTableHead,
+  tableRef
 });
 </script>
 

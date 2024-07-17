@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2023-09-20 14:53:43
- * @LastEditTime: 2024-04-23 10:10:31
+ * @LastEditTime: 2024-07-09 12:17:29
  * @Description: 
 -->
 
@@ -106,6 +106,10 @@ onMounted(async () => {
     }
   }
 });
+
+defineExpose({
+  tableRef
+})
 </script>
 
 <template>

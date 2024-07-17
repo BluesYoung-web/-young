@@ -31,8 +31,9 @@ export type TableHeadItem<T extends any = any> = {
     width?: string;
     /**
      * 是否可排序
+     * !!! 后端排序需要传 'custom'
      */
-    sortable?: boolean;
+    sortable?: boolean | 'custom';
     /**
      * 是否固定表头
      */
