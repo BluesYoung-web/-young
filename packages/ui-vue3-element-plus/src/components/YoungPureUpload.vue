@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-06-19 09:33:24
- * @LastEditTime: 2024-06-26 16:54:09
+ * @LastEditTime: 2024-07-19 17:46:57
  * @Description: 基于 uppy 封装的上传组件，无二次编辑的回显功能
  * @LastEditors: zhangyang
  * Copyright (c) 2024 to current by BluesYoung-web, All Rights Reserved. 
@@ -17,7 +17,7 @@ import '../assets/css/uppy.min.css';
 
 import { useEventListener } from '@vueuse/core';
 import { useImagePreview, useVideoPreview, useAudioPreview, getVideoCover } from '..';
-import type { UppyOptions, DashboardOptions, XHRUploadOptions, ImageEditorOptions, CompressorOptions } from '..';
+import type { UppyOptions, DashboardOptions, XHRUploadOptions, ImageEditorOptions, CompressorOptions, PureUploaded } from '..';
 
 const dashboardId = 'vue:dashboard'
 const xhrId = 'vue:xhr'
@@ -90,13 +90,7 @@ interface Props {
   beforeUpload?: (uppy: any, args: any) => void | Promise<void>;
 }
 
-type Uploaded = {
-  name: string
-  uploadURL: string
-  meta: Record<string, any>
-}[]
-
-const uploaded = ref<Uploaded>([])
+const uploaded = ref<PureUploaded>([])
 
 const props = withDefaults(defineProps<Props>(), {
   autoProceed: false,
@@ -110,7 +104,7 @@ const emits = defineEmits<{
   /**
    * 本次操作上传的文件
    */
-  (e: 'finish', arr: Uploaded): void
+  (e: 'finish', arr: PureUploaded): void
 }>()
 
 const ONE_MB = 1024 * 1024
@@ -157,7 +151,8 @@ uppy.on('complete', ({ successful }) => {
     uploaded.value.push({
       name: item.name,
       uploadURL: item.uploadURL,
-      meta: item.meta ?? {}
+      meta: item.meta ?? {},
+      $raw: item
     })
   })
 })

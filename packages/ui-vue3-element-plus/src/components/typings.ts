@@ -324,3 +324,22 @@ export interface CompressorOptions extends PluginOptions {
   limit?: number
   locale?: any
 }
+
+export type PureUploaded = {
+  /**
+   * 文件名
+   */
+  name: string
+  /**
+   * 上传成功后的地址
+   */
+  uploadURL: string
+  /**
+   * meta data
+   */
+  meta: Record<string, any>
+  /**
+   * 上传成功的原始 uppy 文件对象
+   */
+  $raw: any
+}[]
