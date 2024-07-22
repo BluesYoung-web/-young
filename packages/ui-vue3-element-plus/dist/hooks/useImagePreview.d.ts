@@ -17,8 +17,13 @@ export declare function useAudioPreview(src: string, zIndex?: number): void;
  * 获取视频封面
  * @param v 视频地址 or File
  * @param seek 取第几秒的
- * @param w 图片宽度
- * @param h 图片高度
  * @returns Promise<string>
  */
-export declare function getVideoCover(v: string | Blob, seek?: number, w?: number, h?: number): Promise<string>;
+export declare function getVideoCover(v: string | Blob, seek?: number): Promise<string>;
+/**
+ * base64 转 file
+ * @param dataurl base64
+ * @param filename 文件名
+ * @returns File
+ */
+export declare function dataURLtoFile(dataurl: string, filename: string): File;

@@ -80,7 +80,7 @@ export function useAudioPreview(src, zIndex = 9999) {
   render(vnode, appendTo);
   document.body.appendChild(appendTo);
 }
-export async function getVideoCover(v, seek = 1, w = 320, h2 = 240) {
+export async function getVideoCover(v, seek = 1) {
   return new Promise((resolve) => {
     const video = document.createElement("video");
     video.src = isString(v) ? v : URL.createObjectURL(v);
@@ -89,9 +89,11 @@ export async function getVideoCover(v, seek = 1, w = 320, h2 = 240) {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
     video.oncanplay = () => {
-      canvas.width = w;
-      canvas.height = h2;
-      ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const videoWidth = video.videoWidth;
+      const videoHeight = video.videoHeight;
+      canvas.width = videoWidth;
+      canvas.height = videoHeight;
+      ctx?.drawImage(video, 0, 0, videoWidth, videoHeight);
       try {
         resolve(canvas.toDataURL("image/png", 0.75));
       } catch (error) {
@@ -103,4 +105,14 @@ export async function getVideoCover(v, seek = 1, w = 320, h2 = 240) {
       }
     };
   });
+}
+export function dataURLtoFile(dataurl, filename) {
+  const arr = dataurl.split(",");
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = window.atob(arr[arr.length - 1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--)
+    u8arr[n] = bstr.charCodeAt(n);
+  return new File([u8arr], filename, { type: mime });
 }

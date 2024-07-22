@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-17 21:45:54
- * @LastEditTime: 2024-06-26 16:38:16
+ * @LastEditTime: 2024-07-22 11:42:30
  * @Description:
  */
 import { YoungImageViewer, type YoungImageViewerConf } from '..';
@@ -118,11 +118,9 @@ export function useAudioPreview(src: string, zIndex = 9999) {
  * 获取视频封面
  * @param v 视频地址 or File
  * @param seek 取第几秒的
- * @param w 图片宽度
- * @param h 图片高度
  * @returns Promise<string>
  */
-export async function getVideoCover(v: string | Blob, seek = 1, w = 320, h = 240) {
+export async function getVideoCover(v: string | Blob, seek = 1) {
   return new Promise<string>((resolve) => {
     const video = document.createElement('video')
     video.src = isString(v) ? v as string : URL.createObjectURL(v as Blob)
@@ -134,10 +132,13 @@ export async function getVideoCover(v: string | Blob, seek = 1, w = 320, h = 240
     const ctx = canvas.getContext('2d')
 
     video.oncanplay = () => {
-      canvas.width = w
-      canvas.height = h
+      const videoWidth = video.videoWidth
+      const videoHeight = video.videoHeight
 
-      ctx?.drawImage(video, 0, 0, canvas.width, canvas.height)
+      canvas.width = videoWidth
+      canvas.height = videoHeight
+
+      ctx?.drawImage(video, 0, 0, videoWidth, videoHeight)
 
       try {
         resolve(canvas.toDataURL('image/png', 0.75))
@@ -150,4 +151,25 @@ export async function getVideoCover(v: string | Blob, seek = 1, w = 320, h = 240
       }
     }
   })
+}
+
+/**
+ * base64 转 file
+ * @param dataurl base64
+ * @param filename 文件名
+ * @returns File
+ */
+export function dataURLtoFile(dataurl: string, filename: string) {
+  const arr = dataurl.split(',')
+  const mime = arr[0].match(/:(.*?);/)![1]
+
+  const bstr = window.atob(arr[arr.length - 1])
+
+  let n = bstr.length
+  const u8arr = new Uint8Array(n)
+
+  while (n--)
+    u8arr[n] = bstr.charCodeAt(n)
+
+  return new File([u8arr], filename, { type: mime })
 }
