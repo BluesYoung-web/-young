@@ -1,6 +1,6 @@
 {
   "name": "@bluesyoung/ui-vue3-element-plus",
-  "version": "1.9.9",
+  "version": "1.9.10",
   "description": "vue3 + element-plus ui components",
   "type": "module",
   "main": "dist/index.js",
