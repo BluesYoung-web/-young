@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-03-21 16:28:09
- * @LastEditTime: 2024-06-12 19:13:11
+ * @LastEditTime: 2024-08-02 09:55:56
  * @Description: 地址选择组件
 -->
 
@@ -132,15 +132,14 @@ function parseArea(status: string, result: any, resolve: Function) {
       })
     }
 
-
-    const arr = result.districtList[0].districtList.map((item: AMapResultItem) => {
+    const arr = result.districtList?.[0]?.districtList?.map((item: AMapResultItem) => {
       return {
         value: item.adcode,
         label: item.name,
         leaf: isLeaf(item.level),
         children: _parseDistrict(item.districtList)
       }
-    })
+    }) ?? []
 
     resolve(arr)
   } else {
