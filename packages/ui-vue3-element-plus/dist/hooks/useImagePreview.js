@@ -90,7 +90,7 @@ function useAudioPreview(src, zIndex = 9999) {
   (0, _vue.render)(vnode, appendTo);
   document.body.appendChild(appendTo);
 }
-async function getVideoCover(v, seek = 1) {
+async function getVideoCover(v, seek = 0.1) {
   return new Promise(resolve => {
     const video = document.createElement("video");
     video.src = (0, _utils.isString)(v) ? v : URL.createObjectURL(v);

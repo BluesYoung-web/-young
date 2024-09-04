@@ -80,7 +80,7 @@ export function useAudioPreview(src, zIndex = 9999) {
   render(vnode, appendTo);
   document.body.appendChild(appendTo);
 }
-export async function getVideoCover(v, seek = 1) {
+export async function getVideoCover(v, seek = 0.1) {
   return new Promise((resolve) => {
     const video = document.createElement("video");
     video.src = isString(v) ? v : URL.createObjectURL(v);

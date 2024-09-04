@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-17 21:45:54
- * @LastEditTime: 2024-07-22 11:42:30
+ * @LastEditTime: 2024-09-04 16:14:16
  * @Description:
  */
 import { YoungImageViewer, type YoungImageViewerConf } from '..';
@@ -120,7 +120,7 @@ export function useAudioPreview(src: string, zIndex = 9999) {
  * @param seek 取第几秒的
  * @returns Promise<string>
  */
-export async function getVideoCover(v: string | Blob, seek = 1) {
+export async function getVideoCover(v: string | Blob, seek = 0.1) {
   return new Promise<string>((resolve) => {
     const video = document.createElement('video')
     video.src = isString(v) ? v as string : URL.createObjectURL(v as Blob)
