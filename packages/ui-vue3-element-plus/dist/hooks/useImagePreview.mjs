@@ -95,7 +95,7 @@ export async function getVideoCover(v, seek = 0.1) {
       canvas.height = videoHeight;
       ctx?.drawImage(video, 0, 0, videoWidth, videoHeight);
       try {
-        resolve(canvas.toDataURL("image/png", 0.75));
+        resolve(canvas.toDataURL("image/webp", 0.75));
       } catch (error) {
         console.log("\u{1F680} ~ getVideoCover ~ error:", error);
       } finally {

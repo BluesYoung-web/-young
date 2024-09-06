@@ -1,7 +1,7 @@
 /*
  * @Author: zhangyang
  * @Date: 2023-03-17 21:45:54
- * @LastEditTime: 2024-09-04 16:14:16
+ * @LastEditTime: 2024-09-06 16:01:02
  * @Description:
  */
 import { YoungImageViewer, type YoungImageViewerConf } from '..';
@@ -141,7 +141,7 @@ export async function getVideoCover(v: string | Blob, seek = 0.1) {
       ctx?.drawImage(video, 0, 0, videoWidth, videoHeight)
 
       try {
-        resolve(canvas.toDataURL('image/png', 0.75))
+        resolve(canvas.toDataURL('image/webp', 0.75))
       } catch (error) {
         console.log("🚀 ~ getVideoCover ~ error:", error)
       } finally {
