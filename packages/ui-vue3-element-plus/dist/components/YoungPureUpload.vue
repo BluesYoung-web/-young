@@ -1,7 +1,7 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-06-19 09:33:24
- * @LastEditTime: 2024-07-19 17:46:57
+ * @LastEditTime: 2024-09-14 11:53:56
  * @Description: 基于 uppy 封装的上传组件，无二次编辑的回显功能
  * @LastEditors: zhangyang
  * Copyright (c) 2024 to current by BluesYoung-web, All Rights Reserved. 
@@ -119,7 +119,7 @@ const uppy = new Uppy({
     }
   },
   restrictions: {
-    maxNumberOfFiles: props.limit,
+    // maxNumberOfFiles: props.limit,
     minFileSize: ONE_MB * props.maxTotalFileSize,
     maxFileSize: ONE_MB * props.maxFileSize,
     allowedFileTypes: props.allowedFileTypes
@@ -135,6 +135,24 @@ uppy.upload = async (...args) => {
   await props.beforeUpload(uppy, args)
   uppy._upload(...args)
 }
+
+uppy.on('files-added', (files) => {
+  let arr = uppy.getFiles()
+  if (props.limit) {
+    if (arr.length > props.limit) {
+      uppy.info(`文件数量超过限制，已自动留取前 ${props.limit} 个文件`, 'warning')
+    }
+
+    while (arr.length > props.limit) {
+      const f = arr.pop()
+      if (f) {
+        uppy.removeFile(f.id)
+      }
+
+      arr = uppy.getFiles()
+    }
+  }
+})
 
 // video 抽帧，生成封面图
 uppy.on('file-added', (file) => {
