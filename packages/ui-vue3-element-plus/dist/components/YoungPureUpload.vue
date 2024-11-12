@@ -1,13 +1,15 @@
 <!--
  * @Author: zhangyang
  * @Date: 2024-06-19 09:33:24
- * @LastEditTime: 2024-09-14 11:53:56
+ * @LastEditTime: 2024-11-12 16:48:25
  * @Description: 基于 uppy 封装的上传组件，无二次编辑的回显功能
- * @LastEditors: zhangyang
+ * @LastEditors: Please set LastEditors
  * Copyright (c) 2024 to current by BluesYoung-web, All Rights Reserved. 
 -->
 
 <script lang="ts" setup>
+import '../assets/js/polyfill.min.mjs'
+
 import { Uppy, Dashboard as DashboardPlugin, XHRUpload as XHRPlugin, ImageEditor as ImageEditorPlugin, Compressor as CompressorPlugin, } from '../assets/js/uppy.min.mjs'
 import zhCn from '../assets/js/uppy-zh_CN.mjs';
 
